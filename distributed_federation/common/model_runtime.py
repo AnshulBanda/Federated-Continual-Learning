@@ -1,5 +1,7 @@
 from __future__ import annotations
 
+from distributed_federation.common.control import check_control
+
 import hashlib
 import json
 import sys
@@ -8,6 +10,7 @@ from pathlib import Path
 from typing import Any
 
 from .config import FederationConfig, REPO_ROOT
+from .events import emit
 
 GNN_DIR = REPO_ROOT / "src" / "gnn"
 if str(GNN_DIR) not in sys.path:
@@ -135,9 +138,10 @@ def train_local(runtime: RuntimeData, config: FederationConfig, round_id: int, c
     )
     generator = torch.Generator().manual_seed(seed)
     losses: list[float] = []
-    for _ in range(config.local_epochs):
+    for epoch in range(config.local_epochs):
         state = model.initial_state(static)
         for batch in batches(train, config.batch_size):
+            check_control()
             optimizer.zero_grad(set_to_none=True)
             logits, state = model.score_and_update(state, batch)
             loss = sampled_loss(logits, batch.labels, config.negative_ratio, 1.0, generator)
@@ -151,6 +155,8 @@ def train_local(runtime: RuntimeData, config: FederationConfig, round_id: int, c
             optimizer.step()
             state = state.detached()
             losses.append(float(loss.detach()))
+        emit('epoch_completed', round_id, epoch=epoch + 1, total_epochs=config.local_epochs,
+             mean_train_loss=sum(losses) / max(1, len(losses)))
     return sum(losses) / max(1, len(losses))
 
 
@@ -178,11 +184,8 @@ def fedavg(states: list[dict[str, Any]], weights: list[int]) -> dict[str, Any]:
 def save_state_and_manifest(
     state: dict[str, Any], output_dir: Path, round_id: int, manifest: dict[str, Any]
 ) -> tuple[Path, Path]:
-    from safetensors.torch import save_file
+    from .checkpoints import save_checkpoint, verify_checkpoint
 
-    output_dir.mkdir(parents=True, exist_ok=True)
-    weights_path = output_dir / f"global_round_{round_id:03d}.safetensors"
-    manifest_path = output_dir / f"global_round_{round_id:03d}.json"
-    save_file({k: v.detach().cpu().contiguous() for k, v in state.items()}, str(weights_path))
-    manifest_path.write_text(json.dumps(manifest, indent=2, sort_keys=True) + "\n", encoding="utf-8")
-    return weights_path, manifest_path
+    paths = save_checkpoint(serialize_state(state), output_dir, round_id, manifest)
+    verify_checkpoint(output_dir, round_id)
+    return paths
