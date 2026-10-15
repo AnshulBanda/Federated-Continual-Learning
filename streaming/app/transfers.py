@@ -78,7 +78,7 @@ class Transfers:
             raise ValueError('Choose send or receive.')
         for key in ('transfer_id', 'sender', 'recipient'):
             if not ID.fullmatch(str(settings.get(key, ''))):
-                raise ValueError('Transfer and participant IDs need 1–64 letters, numbers, dots, underscores or hyphens.')
+                raise ValueError('Transfer and participant IDs need 1â€“64 letters, numbers, dots, underscores or hyphens.')
         broker = str(settings.get('broker', '')).strip()
         if not broker or len(broker) > 250 or ':' not in broker or any(c.isspace() for c in broker):
             raise ValueError('Enter a Kafka broker address as host:port.')
@@ -194,6 +194,19 @@ class Transfers:
                     raise RuntimeError('broker error')
                 raw = message.value()
                 if raw is None or len(raw) > 1_000_000:
+                    continue
+                # Retained topic records may belong to other transfers/secrets.
+                # Untrusted routing fields only decide what to skip; matching
+                # records must still pass the full signature and payload checks.
+                try:
+                    envelope = json.loads(raw)
+                except (ValueError, UnicodeDecodeError):
+                    continue
+                if not isinstance(envelope, dict):
+                    continue
+                if tuple(envelope.get(key) for key in (
+                        'message_type', 'run_id', 'sender_id', 'recipient_id')) != (
+                        'weight_file', job['transfer_id'], job['sender'], job['recipient']):
                     continue
                 try:
                     chunk = verify_chunk(raw, secret)

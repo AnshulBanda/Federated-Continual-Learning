@@ -55,6 +55,40 @@ transfer runs at a time. Receiving is bounded to two minutes; the sender also ha
 two-minute deadline. The checklist reports local prerequisites; it does not claim
 broker or peer connectivity has been tested.
 
+## Real local 2 MB transfer check
+
+Start Docker Desktop and wait until its engine is running. Reuse the existing
+local Kafka container and provision the topic (these commands are for the local
+`capstone-kafka` setup):
+
+```powershell
+docker start capstone-kafka
+docker exec capstone-kafka /opt/kafka/bin/kafka-topics.sh --bootstrap-server localhost:9092 --create --if-not-exists --topic fcl.weight-files.v1 --partitions 1 --replication-factor 1
+.\.venv\Scripts\python.exe -m streaming.test_local_transfer
+```
+
+Run from the repository root after installing `streaming/requirements.txt` in
+that virtual environment. If the Kafka container does not exist, create it once:
+
+```powershell
+docker run -d --name capstone-kafka -p 127.0.0.1:9092:9092 apache/kafka:4.1.2
+```
+
+Then provision the topic and run the check above. For a different broker, pass
+`--broker host:port`. The script checks Kafka metadata, starts two temporary local
+dashboard instances on free ports, generates exactly 2,000,000 random bytes,
+uploads and transfers four signed chunks through real Kafka, downloads the
+verified result, and compares the bytes, hashes, and dashboard byte counts.
+It uses a temporary shared secret without changing your saved configuration.
+Existing dashboard instances can remain open.
+
+A successful run prints `PASS` and saves source, downloaded file, transfer history,
+and `result.json` under ignored `streaming/.local/local-2mb-*`. It stops its own
+dashboards afterward and leaves Kafka running. Failure exits with a nonzero code;
+local state remains available for diagnosis. Each run uses a unique transfer ID.
+This verifies local transport only; teammate networking and failure recovery
+still require separate checks.
+
 ## Validation
 
 ```powershell

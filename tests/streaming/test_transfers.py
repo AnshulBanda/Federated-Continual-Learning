@@ -58,6 +58,32 @@ class TransferTests(unittest.TestCase):
         self.assertEqual((Path(self.tmp.name) / (job['id'] + '.weights')).read_bytes(), payload)
         self.assertEqual(closed, [True])
 
+    def test_receive_ignores_unrelated_retained_messages_with_other_secrets(self):
+        payload = b'new transfer' * 100
+        metadata = dict(message_type='weight_file', run_id='test', round_id=0,
+                        sender_id='central', recipient_id='bank-1',
+                        schema_sha256='opaque-file', base_model_sha256='', file_size=len(payload))
+        retained = []
+        for field, value in [('run_id', 'old'), ('sender_id', 'other'),
+                             ('recipient_id', 'other'), ('message_type', 'other')]:
+            retained.extend(create_chunks(payload, dict(metadata, **{field: value}), 'z' * 32, 500))
+        current = create_chunks(payload, metadata, 'x' * 32, 500)
+        messages = iter([b'not json', b'[]', b'\xff'] + retained + current)
+        closed = []
+        def poll(timeout):
+            raw = next(messages)
+            return SimpleNamespace(error=lambda: None, value=lambda: raw)
+        consumer = SimpleNamespace(subscribe=lambda topics: None, poll=poll,
+                                   close=lambda: closed.append(True))
+        job = dict(id='c' * 32, mode='receive', transfer_id='test', sender='central',
+                   recipient='bank-1', bytes=0)
+        with patch.dict('sys.modules', {'confluent_kafka': SimpleNamespace(Consumer=lambda config: consumer)}):
+            self.transfers.receive(job, 'local:9092', 'x' * 32)
+        self.assertEqual(job['status'], 'Verified')
+        self.assertEqual(job['bytes'], len(payload))
+        self.assertEqual((Path(self.tmp.name) / (job['id'] + '.weights')).read_bytes(), payload)
+        self.assertEqual(closed, [True])
+
     def test_wrong_signature_never_saves(self):
         metadata = dict(message_type='weight_file', run_id='test', round_id=0, sender_id='central',
                         recipient_id='bank-1', schema_sha256='opaque-file', base_model_sha256='', file_size=1)
