@@ -20,7 +20,9 @@ ID = re.compile(r'^[A-Za-z0-9][A-Za-z0-9_.-]{0,63}$')
 
 def safe_filename(value):
     """Download label only. Storage always uses application-generated IDs."""
-    name = str(value)
+    if not isinstance(value, str):
+        return None
+    name = value
     if not re.fullmatch(r'[A-Za-z0-9][A-Za-z0-9._ -]{0,179}', name) or name.endswith(('.', ' ')):
         return None
     if name.split('.')[0].upper() in {'CON', 'PRN', 'AUX', 'NUL', *(f'COM{i}' for i in range(1, 10)), *(f'LPT{i}' for i in range(1, 10))}:
@@ -35,13 +37,26 @@ class Transfers:
         self.db = self.root / 'transfers.sqlite3'
         self.lock = threading.Lock()
         self.active = None
+        self.worker = None
         self.cancelled = threading.Event()
         with self.connect() as db:
             db.execute('CREATE TABLE IF NOT EXISTS jobs (id TEXT PRIMARY KEY, data TEXT NOT NULL)')
             for key, raw in db.execute('SELECT id,data FROM jobs').fetchall():
                 data = json.loads(raw)
+                if data.get('receipt_pending'):
+                    data.update(receipt_pending=False, detail='Verified file retained after restart. Resend its receipt if the sender needs confirmation.')
+                    db.execute('UPDATE jobs SET data=? WHERE id=?', (json.dumps(data), key))
                 if data['status'] in ('Queued', 'Sending', 'Receiving') or data.get('awaiting_receipt'):
-                    data.update(status='Interrupted', awaiting_receipt=False, detail='Application closed before completion; any prior publication remains unconfirmed.')
+                    data.update(status='Interrupted', awaiting_receipt=False, detail='Application closed before completion. Check delivery again if published, or coordinate a retry with a fresh transfer ID.')
+                    saved_file = self.root / (key + '.weights')
+                    if data.get('mode') == 'receive' and data.get('expected_sha256') and saved_file.is_file() and saved_file.stat().st_size <= MAX_BYTES:
+                        try:
+                            saved = saved_file.read_bytes()
+                        except OSError:
+                            saved = b''
+                        if len(saved) == data.get('total') and hashlib.sha256(saved).hexdigest() == data['expected_sha256']:
+                            data.update(status='Verified', sha256=data['expected_sha256'], bytes=len(saved),
+                                        detail='Recovered and hash-verified the saved file after restart. Resend receipt to confirm delivery.')
                     db.execute('UPDATE jobs SET data=? WHERE id=?', (json.dumps(data), key))
 
     @contextmanager
@@ -107,19 +122,106 @@ class Transfers:
             if not path.is_file() or not 0 < path.stat().st_size <= MAX_BYTES:
                 raise ValueError('Uploaded file is unavailable or too large.')
             payload = path.read_bytes()
+            expected = settings.get('expected_sha256')
+            if expected and hashlib.sha256(payload).hexdigest() != expected:
+                raise ValueError('Saved upload changed. Retry refused; select the original checkpoint for a new transfer.')
         with self.lock:
             if self.active is not None:
                 raise ValueError('A local transfer is already active.')
+            with self.connect() as db:
+                previous = [json.loads(row[0]) for row in db.execute('SELECT data FROM jobs')]
+            if any((old.get('transfer_id'), old.get('sender'), old.get('recipient')) == (settings['transfer_id'], settings['sender'], settings['recipient']) for old in previous):
+                raise ValueError('This transfer ID was already used locally. Agree on a fresh ID on both laptops.')
             self.cancelled.clear()
             job = {'id': uuid.uuid4().hex, 'mode': mode, 'transfer_id': settings['transfer_id'],
                    'sender': settings['sender'], 'recipient': settings['recipient'],
                    'file_name': safe_filename(settings.get('file_name', '')) if mode == 'send' else None,
+                   'broker': broker, 'file_id': settings.get('file_id') if mode == 'send' else None,
+                   'source_sha256': hashlib.sha256(payload).hexdigest() if payload else None,
+                   'expected_sha256': settings.get('expected_sha256'),
+                   'retry_of': settings.get('retry_of'), 'retry_transfer_id': settings.get('retry_transfer_id'),
                    'status': 'Queued', 'bytes': 0, 'total': len(payload) if payload else None,
                    'detail': 'Waiting for Kafka connection.'}
             self.active = job['id']
             self.update(job)
-            threading.Thread(target=self.run, args=(job, broker, secret, payload), daemon=True).start()
+            self.worker = threading.Thread(target=self.run, args=(job, broker, secret, payload), daemon=True)
+            self.worker.start()
         return job['id']
+
+    def get_job(self, key):
+        with self.connect() as db:
+            row = db.execute('SELECT data FROM jobs WHERE id=?', (str(key),)).fetchone()
+        if row is None:
+            raise ValueError('Transfer not found.')
+        return json.loads(row[0])
+
+    def retry(self, key, transfer_id):
+        old = self.get_job(key)
+        if old.get('status') not in ('Failed', 'Cancelled', 'Interrupted', 'Published'):
+            raise ValueError('Only failed, cancelled, interrupted or unconfirmed transfers can be retried.')
+        if not old.get('broker'):
+            raise ValueError('This older transfer has no saved connection. Set up a new transfer manually.')
+        if str(transfer_id).strip() == old['transfer_id']:
+            raise ValueError('Agree on a NEW transfer ID on both laptops before retrying.')
+        values = {key: old.get(key) for key in ('mode', 'broker', 'sender', 'recipient', 'file_id', 'file_name')}
+        values.update(transfer_id=transfer_id, retry_of=old['id'], retry_transfer_id=old['transfer_id'],
+                      expected_sha256=old.get('source_sha256') or old.get('expected_sha256') or old.get('sha256'))
+        if old['mode'] == 'send' and not values['expected_sha256']:
+            raise ValueError('Original file hash unavailable. Start a new transfer manually.')
+        return self.start(values)
+
+    def recover(self, key):
+        job = self.get_job(key)
+        if not job.get('broker') or not job.get('receipt_token') or not job.get('sha256'):
+            raise ValueError('Receipt recovery data unavailable. Coordinate a new transfer instead.')
+        if job['mode'] == 'receive':
+            if job['status'] != 'Verified':
+                raise ValueError('Only a verified saved file can send a receipt again.')
+            path = self.root / (job['id'] + '.weights')
+            if not path.is_file() or path.stat().st_size > MAX_BYTES:
+                raise ValueError('Verified file is missing or too large. Coordinate a new transfer.')
+            data = path.read_bytes()
+            if len(data) != job['total'] or hashlib.sha256(data).hexdigest() != job['sha256']:
+                raise ValueError('Saved file changed. Receipt refused; coordinate a new transfer.')
+        elif not job.get('publication_acked') or job['status'] not in ('Published', 'Interrupted', 'Cancelled', 'Failed'):
+            raise ValueError('Only broker-acknowledged, unconfirmed sends can recheck delivery.')
+        secret = os.environ.get('FCL_TRANSFER_SECRET', '')
+        if len(secret) < 32:
+            raise ValueError('Set the shared secret before recovering delivery.')
+        with self.lock:
+            if self.active is not None:
+                raise ValueError('A local transfer is already active.')
+            self.cancelled.clear()
+            self.active = job['id']
+            if job['mode'] == 'send':
+                self.update(job, status='Published', awaiting_receipt=True,
+                            detail='Rechecking retained signed receipts without sending the file again.')
+            else:
+                self.update(job, receipt_pending=True, detail='Verified file retained; resending its signed receipt.')
+            self.worker = threading.Thread(target=self.recover_receipt, args=(job, secret), daemon=True)
+            self.worker.start()
+        return job['id']
+
+    def recover_receipt(self, job, secret):
+        try:
+            if job['mode'] == 'send':
+                self.wait_receipt(job, job['broker'], secret, job['receipt_token'])
+            else:
+                self.publish_receipt(job, job['broker'], secret, job['receipt_token'])
+                self.update(job, receipt_sent=True, detail='Verified saved file retained; signed receipt published again.')
+        except Exception:
+            self.update(job, detail='Delivery receipt recovery did not complete. File/publication evidence retained; retry the receipt check or coordinate a new transfer.')
+        finally:
+            self.update(job, awaiting_receipt=False, receipt_pending=False)
+            with self.lock:
+                self.active = None
+
+    def close(self):
+        self.cancelled.set()
+        if self.worker:
+            self.worker.join(timeout=30)
+            if self.worker.is_alive():
+                raise RuntimeError('Transfer still stopping. State lock is retained until process exit.')
 
     def cancel(self, key):
         with self.lock:
@@ -185,6 +287,7 @@ class Transfers:
                     'schema_sha256': 'opaque-file', 'base_model_sha256': '', 'file_size': len(payload)}
         if job.get('file_name'):
             metadata['file_name'] = job['file_name']
+        self.update(job, receipt_token=receipt_token, sha256=hashlib.sha256(payload).hexdigest())
         chunks = create_chunks(payload, metadata, secret, 500_000)
         self.update(job, status='Sending', detail='Publishing signed chunks. Progress counts broker acknowledgments.')
         errors = []
@@ -215,7 +318,7 @@ class Transfers:
             producer.poll(.2)
         if errors:
             raise RuntimeError('delivery failed')
-        self.update(job, status='Published', awaiting_receipt=True, sha256=hashlib.sha256(payload).hexdigest(),
+        self.update(job, status='Published', publication_acked=True, awaiting_receipt=True, sha256=hashlib.sha256(payload).hexdigest(),
                     detail='Broker acknowledged all chunks. Waiting up to two minutes for a signed receiver receipt.')
         self.wait_receipt(job, broker, secret, receipt_token)
 
@@ -319,7 +422,11 @@ class Transfers:
                         raise ValueError('invalid transfer size')
                     if selected_hash is not None and selected_hash != chunk['payload_sha256']:
                         raise ValueError('conflicting transfer')
+                    if job.get('expected_sha256') and job['expected_sha256'] != chunk['payload_sha256']:
+                        raise ValueError('retry payload changed')
                     selected_hash = chunk['payload_sha256']
+                    self.update(job, expected_sha256=selected_hash, receipt_token=chunk.get('receipt_token'),
+                                file_name=safe_filename(chunk.get('file_name', '')))
                     result = assembler.add(chunk)
                     index = int(chunk['chunk_index'])
                     if index not in seen:
@@ -338,9 +445,9 @@ class Transfers:
                         if token:
                             try:
                                 self.publish_receipt(job, broker, secret, token)
-                                self.update(job, detail='Signature and SHA-256 verified; file saved and signed receipt published.')
+                                self.update(job, receipt_sent=True, detail='Signature and SHA-256 verified; file saved and signed receipt published.')
                             except Exception:
-                                self.update(job, detail='File verified and saved, but receipt publication failed. Sender delivery may remain unconfirmed.')
+                                self.update(job, receipt_sent=False, detail='File verified and saved, but receipt publication failed. Sender delivery may remain unconfirmed.')
                         return
                 except (ValueError, TypeError, KeyError):
                     # Invalid messages never become downloadable results.

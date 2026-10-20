@@ -386,7 +386,7 @@ Sender ID describes the sender even on the receiving dashboard. The reverse dire
 | Interrupted | Application ended before the transfer finished; automatic resume is absent |
 | Check connection | Reports broker/topic result separately from signed peer result, with the checked address and time. Rerun after changing settings |
 
-Older versions show receiver verification is not yet confirmed indefinitely. Updated versions wait for a signed receipt. If the receiver is old, closed, or cannot publish its receipt, the file may be Verified there while the sender remains Published and unconfirmed. A failed receipt does not delete the verified file. Receipt retries and automatic recovery are not implemented. Cancellation cannot undo a saved file.
+Older versions show receiver verification is not yet confirmed indefinitely. Updated versions wait for a signed receipt. If the receiver is old, closed, or cannot publish its receipt, the file may be Verified there while the sender remains Published and unconfirmed. A failed receipt does not delete the verified file. Use Resend receipt on the receiver and Check delivery again on the sender for explicit receipt recovery. Cancellation cannot undo a saved file.
 
 A .txt file is valid for transport testing. Files remain opaque bytes; successful transport does not prove model compatibility or training correctness. New transfers preserve the original safe filename and extension, such as global_model.pt. Legacy transfers or unsupported names use the transfer ID plus .weights.
 
@@ -498,7 +498,7 @@ Do not regenerate the source during a transfer; regeneration creates different b
 | Old Failed entries remain | History is persistent; judge the current unique transfer ID |
 | One Windows teammate still fails | Capture their exact step, terminal error, port result, Git version, and transfer status; this issue remains open |
 
-Only one transfer runs at a time per dashboard. Files must be nonempty and at most 100,000,000 bytes. Receive/send deadlines are two minutes. Cancel is local and cannot retract Kafka records. Reusing IDs can pick up retained messages. Automatic retries, interrupted-transfer resume, and storage cleanup remain unfinished. Peer checks are opt-in through Check connection; rerun them after settings/network changes. New receipt and peer messages use the existing file topic, so no additional topic provisioning is needed.
+Only one transfer runs at a time per dashboard. Files must be nonempty and at most 100,000,000 bytes. Receive/send deadlines are two minutes. Cancel is local and cannot retract Kafka records. Reusing IDs can pick up retained messages. Explicit full-file retries and restart/receipt recovery are available as described below. Automatic file retry, partial-byte resume and storage cleanup remain unfinished. Peer checks are opt-in through Check connection; rerun them after settings/network changes. New receipt and peer messages use the existing file topic, so no additional topic provisioning is needed.
 
 If a problem persists, collect:
 - OS version (and Mac CPU type), branch and git log -1 --oneline.
@@ -506,7 +506,45 @@ If a problem persists, collect:
 - Both transfer statuses and exact errors; relevant terminal output.
 - Secret length/fingerprint privately if diagnosing mismatch; NEVER the secret itself.
 
-## 13. Stop and return next session
+## 13. Retry and recover a transfer
+
+Update BOTH teammates to this version and restart their dashboards. Source uploads, broker/participant labels, hashes and attempt history persist in the ignored state folder. Secrets are still supplied at launch and never stored in recovery records. Keep the same state directory when restarting.
+
+### File saved, sender not confirmed: recover the receipt first
+
+If the receiver shows Verified but the sender is Published/unconfirmed or Interrupted:
+1. Restore ZeroTier and Kafka connectivity and relaunch both dashboards with the shared secret.
+2. On the receiver's original history row, click **Resend receipt**. It checks the saved file's hash and size before signing again.
+3. On the sender's original row, click **Check delivery again**. It reads retained signed receipts for that original attempt for up to two minutes.
+4. Expect sender Delivered and receiver Verified. These actions do not send file chunks again, change transfer ID, or create a second downloaded result. Either button can be used first.
+5. If receipt recovery fails, the verified file and publication evidence remain available. Retry the receipt action after fixing the network/secret. A missing or changed saved file cannot authorize a receipt.
+
+### Failed or interrupted file: full retry with a NEW shared ID
+
+1. Fix the cause (network, broker or shared-secret mismatch) and run Check connection.
+2. Agree on a fresh transfer ID, such as retrymac1a, on BOTH laptops. Do not reuse the failed attempt's ID.
+3. RECEIVER clicks **Retry with new ID** on the failed/interrupted history row, types the agreed ID, and starts first.
+4. SENDER clicks **Retry with new ID** on its corresponding failed/interrupted/unconfirmed row and enters that SAME new ID within two minutes.
+5. The sender uses its retained upload; you do not select or upload a new file. Its stored SHA-256 must still match the original. Missing/changed uploads are refused. If the receiver previously saw a signed file hash, it pins that hash for the retry too.
+6. Expect a separate history row linked to the old transfer, with sender Delivered, receiver Verified and unchanged file hash. Old evidence is retained. Completed Delivered or Verified jobs cannot be restarted as a file retry; use receipt recovery or explicitly create a new transfer instead.
+
+A retry starts from byte zero, using a new transfer ID and receipt token. It does not resume partially assembled chunks. File retry is explicit, not an automatic loop: this prevents silent repeated deliveries while someone is offline. Reusing a transfer ID with the same sender/recipient is now rejected locally, including after restart.
+
+### What happens after a restart?
+
+Unfinished jobs become Interrupted. A receiver file atomically saved just before a crash can be restored to Verified only if its saved byte count and SHA-256 match the recorded signed metadata. Partial or mismatching files remain Interrupted. Receipt publication interrupted after verification keeps the file available. Nothing is automatically resent at startup.
+
+Older history rows without recovery metadata require a new manual transfer. Do not delete databases/locks or change state directories to simulate recovery.
+
+### Automated checkpoint recovery check (host/developer)
+
+```powershell
+.\.venv\Scripts\python.exe -m streaming.test_recovery --broker 10.30.127.124:9092
+```
+
+This uses a real checkpoint and Kafka, simulates initial transfer failure, recreates both local applications, retries the retained upload, deliberately loses the receipt, recreates applications again, and recovers delivery without resending file chunks. It compares downloaded bytes/hashes and confirms the source checkpoint is unchanged. It tests same-laptop application restarts, not an OS power-loss or multi-laptop outage. Evidence is saved under ignored streaming/.local/recovery-*.
+
+## 14. Stop and return next session
 
 Everyone: press Ctrl+C in the dashboard terminal. Do not close terminals during an active transfer.
 
@@ -525,7 +563,7 @@ Next session:
 
 Do not rerun docker run for an existing container, delete Kafka volumes, or generate new credentials simply to restart. Dashboard history and files remain under ignored streaming/.local/transfers. Uploaded files are retained.
 
-## 14. Acceptance record
+## 15. Acceptance record
 
 Complete one row per attempt; keep secrets out of evidence.
 

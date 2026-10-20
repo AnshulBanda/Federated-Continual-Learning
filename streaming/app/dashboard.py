@@ -102,6 +102,10 @@ def server(root, port=8765):
                         result = settings.save(data)
                     elif self.path == '/api/start':
                         result = {'id': transfers.start(data)}
+                    elif self.path == '/api/retry':
+                        result = {'id': transfers.retry(data.get('id'), data.get('transfer_id', ''))}
+                    elif self.path == '/api/recover':
+                        result = {'id': transfers.recover(data.get('id'))}
                     elif self.path == '/api/check':
                         if not check_lock.acquire(blocking=False):
                             raise ValueError('A connection check is already running. Wait for its result.')
@@ -127,6 +131,7 @@ def server(root, port=8765):
 
     class Server(ThreadingHTTPServer):
         def server_close(self):
+            transfers.close()
             peers.close()
             super().server_close()
             runtime_lock.__exit__()

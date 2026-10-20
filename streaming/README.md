@@ -42,7 +42,7 @@ Both machines must reach its advertised listeners. Broker provisioning remains a
 Choose send or receive, enter the same transfer ID, sender and recipient on both
 sides, and select a file on the sender. Use a unique transfer ID per file. Start the
 receiver and sender within two minutes of each other. Published means Kafka delivery;
-Verified means the receiver checked HMAC and SHA-256 and saved the file. Updated receivers publish a signed receipt after saving. Updated senders wait up to two minutes after publication and report Delivered only when attempt token, participants, hash and byte count match. A timeout leaves Published explicitly unconfirmed; receipt failure does not remove a verified file. Both participants need the updated code. New transfers preserve a safe original filename and extension in history and browser downloads. Original names are signed metadata, never storage paths. Legacy transfers or unsupported names fall back to the transfer ID with a `.weights` extension.
+Verified means the receiver checked HMAC and SHA-256 and saved the file. Updated receivers publish a signed receipt after saving. Updated senders wait up to two minutes after publication and report Delivered only when attempt token, participants, hash and byte count match. A timeout leaves Published explicitly unconfirmed; receipt failure does not remove a verified file. Resend receipt and Check delivery again recover the original signed receipt without retransmitting file chunks. Both participants need the updated code. New transfers preserve a safe original filename and extension in history and browser downloads. Original names are signed metadata, never storage paths. Legacy transfers or unsupported names fall back to the transfer ID with a `.weights` extension.
 
 Files are opaque bytes, limited to 100 MB. They are never deserialized or trained.
 Signatures establish shared-secret membership, not independent sender identity or
@@ -51,7 +51,7 @@ encryption. Recipient IDs filter delivery logically; they are not Kafka ACLs.
 History and files persist under ignored `streaming/.local/transfers`. Uploads are
 retained locally, including uploads from failed starts; automatic storage cleanup is
 pending. Refreshing the browser does not restart transfers. Interrupted jobs are
-marked after application restart; automatic resume is not implemented. Cancel is
+marked after application restart; unfinished attempts offer explicit full-file retry with a new shared ID; partial-byte resume is not implemented. Cancel is
 local, retains prior evidence, and cannot retract broker messages. Receivers use a
 fresh group and replay retained messages to find the requested ID. Late or replayed
 files are possible when IDs are reused. No exactly-once delivery claim is made.
@@ -60,6 +60,20 @@ The loopback API enforces Host checks and a session token plus same-origin check
 for mutations. It is a local prototype, not an internet-facing service. One local
 transfer runs at a time. Receiving is bounded to two minutes; the sender also has a
 two-minute deadline. The checklist reports local prerequisites. Check connection separately reports the checked broker/topic and a fresh signed peer response. It is a point-in-time check, not a guarantee of later delivery. Peer responders use the last identity chosen by Check connection until reconfigured or shutdown. Authentication proves shared-secret membership, not independent device identity.
+
+## Explicit retries and restart recovery
+
+History offers Retry with new ID for Failed, Cancelled, Interrupted and unconfirmed Published attempts that have recovery metadata. Coordinate the SAME fresh ID on both dashboards and start receiver first. Retry creates a linked history row and reuses the retained upload only if its hash matches the original. Receiver retries pin an already observed signed hash. Original history is preserved, and locally reused participant/transfer IDs are rejected.
+
+After broker acknowledgment, sender stores its attempt token and publication evidence. Check delivery again reads the original retained signed receipt; Verified receivers can Resend receipt after revalidating the saved file. No file chunks are resent by these recovery actions. Receipt failure preserves Verified files and unconfirmed publication. One local operation runs at a time.
+
+Startup marks active work Interrupted. If an atomic receiver file exists at the final path, it is promoted back to Verified only when its size and hash match recorded signed metadata. Receipt tasks interrupted after verification retain the download. Nothing automatically retries at startup; byte-level partial resume and automatic file retries are deferred. Legacy jobs without broker/upload/hash/token metadata use the manual new-transfer workflow.
+
+```powershell
+.\.venv\Scripts\python.exe -m streaming.test_recovery --broker 10.30.127.124:9092
+```
+
+This real-Kafka checkpoint check injects initial failure and lost receipt, restarts both local application instances between phases, verifies full retry from the frozen upload and signed receipt recovery without resending chunks, and compares final downloaded bytes/hash. Original checkpoint remains unchanged. Multi-laptop and OS power-loss acceptance remain pending.
 
 ## Real local checkpoint transfer check
 
