@@ -3,6 +3,16 @@
 Current work focuses on moving weight files, not running model training. The existing
 training supervisor remains available separately; the dashboard never calls it.
 
+## Launch with saved setup
+
+Open Start-Weights-Windows.cmd on Windows. On macOS, run chmod +x Start-Weights-macOS.command once, then open it (or use bash Start-Weights-macOS.command). Native macOS verification is pending.
+
+The root launch_weights.py bootstraps a missing project .venv. The app launcher checks local storage and Kafka dependencies, offers installation if needed, prompts for the shared secret, and opens the browser after binding the server. --check-only performs local checks without prompts/install/server startup; --no-browser suppresses browser opening. Existing dashboard locks or occupied ports produce an actionable error rather than replacing running processes.
+
+Save setup persists only broker, mode, sender and recipient in the current state directory's settings.json. Writes are atomic; invalid or corrupted settings fall back to manual entry with a warning. Secrets, transfer IDs and file selections are excluded. The settings API has the same session/origin protection as other mutations. Fresh transfer IDs are generated on every page load. Saved settings do not prove connectivity: use Check connection each session.
+
+The launcher does not manage Docker, ZeroTier membership or host firewall rules. See instructions.md for team startup and prerequisites.
+
 ## Launch locally
 
 From the repository root in PowerShell, with your virtual environment active:

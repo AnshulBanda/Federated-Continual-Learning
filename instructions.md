@@ -10,6 +10,57 @@ Application update (local implementation; teammates need the updated commit):
 
 This guide covers setup, daily startup, sending, receiving, verification, and troubleshooting on Windows and macOS. Files travel as bytes; the dashboard does not load models or run training.
 
+## Quick start with the application launcher
+
+After the one-time Python/Git/ZeroTier setup, use the launcher in the repository root:
+
+- **Windows:** double-click Start-Weights-Windows.cmd.
+- **macOS:** one-time setup in the project folder:
+
+```bash
+chmod +x Start-Weights-macOS.command
+```
+
+Then double-click Start-Weights-macOS.command. If macOS asks which application opens it, use Terminal. OS trust prompts still require your action. If opening from Finder is blocked, run this from Terminal:
+
+```bash
+bash Start-Weights-macOS.command
+```
+
+The launcher creates .venv on first use if absent. If the Kafka package is missing, it asks before installing streaming/requirements.txt (internet access required). It checks writable local storage, prompts for the shared secret with hidden input if not already set in its environment, starts the dashboard and opens your browser. Keep the launcher terminal open. Press Ctrl+C there to stop. The secret stays in process memory/environment and is not written to settings.json.
+
+In the dashboard:
+1. Enter broker, action, sender ID and recipient ID.
+2. Click **Save setup**. Only these four fields are saved on this laptop under ignored streaming/.local/transfers/settings.json.
+3. Next launch restores them. Transfer IDs are freshly generated; selected files and secrets are not saved.
+4. Both teammates click **Check connection**, then receive first and send as described below.
+
+Kafka and ZeroTier remain separate host/network prerequisites. The launcher does not start containers, authorize network members, or change firewall rules. A local ready check is not a broker/peer connection check.
+
+If another dashboard owns the state directory, use its existing terminal/browser or stop it before launching again. The launcher will not delete locks or overwrite history. A corrupted settings file shows a warning; enter and save the settings again.
+
+To check local prerequisites without prompting, installing or starting the dashboard:
+
+Windows PowerShell:
+
+```powershell
+.\Start-Weights-Windows.cmd --check-only
+```
+
+macOS Terminal:
+
+```bash
+bash Start-Weights-macOS.command --check-only
+```
+
+For a separate local instance, choose BOTH another port and state folder. For example on Windows:
+
+```powershell
+.\Start-Weights-Windows.cmd --port 8766 --state-dir streaming/.local/second-instance
+```
+
+The manual commands below remain available for diagnosis. Windows launcher and settings HTTP persistence have been checked locally. Native macOS execution remains a teammate acceptance step.
+
 ## 1. Team settings and current results
 
 | Setting | Current value |
@@ -469,7 +520,7 @@ Next session:
 1. Host starts Docker Desktop and connects ZeroTier.
 2. Host starts capstone-kafka-team using section 5.
 3. Everyone connects ZeroTier and checks the port/Kafka using section 6.
-4. Everyone sets the shared secret in their current terminal and launches using section 7.
+4. Everyone opens their platform launcher (or uses the manual commands in section 7), entering the shared secret when prompted.
 5. Open each local dashboard and choose NEW transfer IDs.
 
 Do not rerun docker run for an existing container, delete Kafka volumes, or generate new credentials simply to restart. Dashboard history and files remain under ignored streaming/.local/transfers. Uploaded files are retained.

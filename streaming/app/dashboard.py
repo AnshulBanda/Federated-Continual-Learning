@@ -12,6 +12,7 @@ from urllib.parse import urlparse
 from .transfers import Transfers, MAX_BYTES
 from .locking import RuntimeLock
 from .peer_checks import PeerChecks
+from .settings import Settings
 
 WEB = Path(__file__).resolve().parents[1] / 'web' / 'index.html'
 
@@ -19,8 +20,13 @@ WEB = Path(__file__).resolve().parents[1] / 'web' / 'index.html'
 def server(root, port=8765):
     runtime_lock = RuntimeLock(Path(root) / "dashboard.lock")
     runtime_lock.__enter__()
-    transfers = Transfers(root)
+    try:
+        transfers = Transfers(root)
+    except BaseException:
+        runtime_lock.__exit__()
+        raise
     peers = PeerChecks()
+    settings = Settings(root)
     check_lock = threading.Lock()
     token = secrets.token_urlsafe(32)
 
@@ -57,6 +63,8 @@ def server(root, port=8765):
             path = urlparse(self.path).path
             if path == '/':
                 self.respond(200, WEB.read_text(encoding='utf-8').replace('__TOKEN__', token).encode(), 'text/html; charset=utf-8')
+            elif path == '/api/settings':
+                self.respond(200, settings.load())
             elif path == '/api/status':
                 self.respond(200, {'jobs': transfers.history(),
                                   'kafka_client': importlib.util.find_spec('confluent_kafka') is not None,
@@ -90,7 +98,9 @@ def server(root, port=8765):
                     data = json.loads(body)
                     if not isinstance(data, dict):
                         raise ValueError('Expected a JSON object.')
-                    if self.path == '/api/start':
+                    if self.path == '/api/settings':
+                        result = settings.save(data)
+                    elif self.path == '/api/start':
                         result = {'id': transfers.start(data)}
                     elif self.path == '/api/check':
                         if not check_lock.acquire(blocking=False):
