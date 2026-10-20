@@ -27,15 +27,12 @@ python -m streaming.app.dashboard
 Use the same securely shared secret on both machines; do not commit it. PyTorch,
 safetensors and training datasets are not required. Provision the Kafka topic
 `fcl.weight-files.v1` on a reachable broker, with retention suitable for your files.
-Both machines must reach its advertised listeners. Broker provisioning and network
-readiness checks are not automated by this increment.
+Both machines must reach its advertised listeners. Broker provisioning remains a host task. The Check connection button checks metadata/topic access and a signed peer challenge/response. Both participants select their action and matching IDs, click it, and leave their dashboards running; retry the first check if the other responder was not yet started.
 
 Choose send or receive, enter the same transfer ID, sender and recipient on both
 sides, and select a file on the sender. Use a unique transfer ID per file. Start the
 receiver and sender within two minutes of each other. Published means Kafka delivery;
-Verified means the receiver checked HMAC and SHA-256 and saved the file. No automatic
-receipt is sent back to the sender yet. Downloaded files use a generic `.weights`
-extension; preserve the original format/extension separately when needed.
+Verified means the receiver checked HMAC and SHA-256 and saved the file. Updated receivers publish a signed receipt after saving. Updated senders wait up to two minutes after publication and report Delivered only when attempt token, participants, hash and byte count match. A timeout leaves Published explicitly unconfirmed; receipt failure does not remove a verified file. Both participants need the updated code. New transfers preserve a safe original filename and extension in history and browser downloads. Original names are signed metadata, never storage paths. Legacy transfers or unsupported names fall back to the transfer ID with a `.weights` extension.
 
 Files are opaque bytes, limited to 100 MB. They are never deserialized or trained.
 Signatures establish shared-secret membership, not independent sender identity or
@@ -52,10 +49,9 @@ files are possible when IDs are reused. No exactly-once delivery claim is made.
 The loopback API enforces Host checks and a session token plus same-origin checks
 for mutations. It is a local prototype, not an internet-facing service. One local
 transfer runs at a time. Receiving is bounded to two minutes; the sender also has a
-two-minute deadline. The checklist reports local prerequisites; it does not claim
-broker or peer connectivity has been tested.
+two-minute deadline. The checklist reports local prerequisites. Check connection separately reports the checked broker/topic and a fresh signed peer response. It is a point-in-time check, not a guarantee of later delivery. Peer responders use the last identity chosen by Check connection until reconfigured or shutdown. Authentication proves shared-secret membership, not independent device identity.
 
-## Real local 2 MB transfer check
+## Real local checkpoint transfer check
 
 Start Docker Desktop and wait until its engine is running. Reuse the existing
 local Kafka container and provision the topic (these commands are for the local
@@ -76,18 +72,26 @@ docker run -d --name capstone-kafka -p 127.0.0.1:9092:9092 apache/kafka:4.1.2
 
 Then provision the topic and run the check above. For a different broker, pass
 `--broker host:port`. The script checks Kafka metadata, starts two temporary local
-dashboard instances on free ports, generates exactly 2,000,000 random bytes,
-uploads and transfers four signed chunks through real Kafka, downloads the
+dashboard instances on free ports, reads the existing `artifacts/final_evaluation/corrected_fedavg/seed_42/global_model.pt` checkpoint by default, uploads and transfers its signed chunks through real Kafka, downloads the
 verified result, and compares the bytes, hashes, and dashboard byte counts.
 It uses a temporary shared secret without changing your saved configuration.
 Existing dashboard instances can remain open.
 
-A successful run prints `PASS` and saves source, downloaded file, transfer history,
-and `result.json` under ignored `streaming/.local/local-2mb-*`. It stops its own
+The script also checks signed peer challenges in both directions and requires sender Delivered. A successful run prints `PASS` and saves source, downloaded file, transfer history,
+and `result.json` under ignored `streaming/.local/local-checkpoint-*` (or `local-synthetic-*`). It stops its own
 dashboards afterward and leaves Kafka running. Failure exits with a nonzero code;
 local state remains available for diagnosis. Each run uses a unique transfer ID.
 This verifies local transport only; teammate networking and failure recovery
 still require separate checks.
+
+To use another existing checkpoint, pass `--file path/to/model.pt`. The source is never loaded as a model or modified; the test compares its final SHA-256 again. Missing/empty files and Git LFS pointers fail rather than silently generating dummy bytes. Use `--synthetic` only for a separate 2 MB random-byte stress check.
+
+The checkpoint-backed check passed on 21 October: 976,865 bytes in two chunks, signed peer checks in both directions, sender Delivered, receiver Verified, original filename retained, and byte-identical downloaded checkpoint. Cross-laptop verification of this version remains pending.
+
+```powershell
+.\.venv\Scripts\python.exe -m streaming.test_local_transfer --broker 10.30.127.124:9092
+.\.venv\Scripts\python.exe -m streaming.test_local_transfer --broker 10.30.127.124:9092 --file artifacts/final_evaluation/local/seed_42/Key_Bank_causal_temporal_graphsage.pt
+```
 
 ## Validation
 
@@ -96,8 +100,7 @@ python -m unittest discover -s tests/streaming -v
 ```
 
 Transfer tests use Kafka doubles for signed, duplicate and out-of-order chunks,
-wrong signatures, cancellation, durable history and HTTP session protection. Actual
-Kafka, multi-laptop connectivity and large-file performance remain unverified.
+wrong signatures, cancellation, durable history and HTTP session protection. The receipt/peer implementation passed a real local Kafka 2 MB integration run on 21 October 2026, including verified downloaded bytes. Cross-laptop validation of these new features and large-file performance remain pending. Earlier small-file Windows-to-Mac transfers used the previous implementation.
 
 ---
 

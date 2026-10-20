@@ -18,7 +18,7 @@ class TransferTests(unittest.TestCase):
         self.addCleanup(self.tmp.cleanup)
         self.transfers = Transfers(self.tmp.name)
 
-    def test_sender_waits_for_delivery_and_reports_publication_only(self):
+    def test_sender_waits_for_broker_acknowledgments_before_receipt_wait(self):
         sent = []
         callbacks = []
         class Producer:
@@ -32,12 +32,12 @@ class TransferTests(unittest.TestCase):
                 return len(callbacks)
         job = dict(id='send', transfer_id='unique', sender='central', recipient='bank-1', bytes=0)
         payload = b'x' * 500001
-        with patch.dict('sys.modules', {'confluent_kafka': SimpleNamespace(Producer=lambda config: Producer())}):
+        with patch.object(self.transfers, 'wait_receipt'), patch.dict('sys.modules', {'confluent_kafka': SimpleNamespace(Producer=lambda config: Producer())}):
             self.transfers.send(job, 'local:9092', 'x' * 32, payload)
         self.assertEqual(len(sent), 2)
         self.assertEqual(job['status'], 'Published')
         self.assertEqual(job['bytes'], len(payload))
-        self.assertIn('not yet confirmed', job['detail'])
+        self.assertIn('signed receiver receipt', job['detail'])
 
     def test_receive_signed_out_of_order_duplicates(self):
         payload = b'opaque model weights' * 100

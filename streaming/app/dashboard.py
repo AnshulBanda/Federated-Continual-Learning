@@ -4,12 +4,14 @@ import importlib.util
 import json
 import os
 import secrets
+import threading
 from http.server import BaseHTTPRequestHandler, ThreadingHTTPServer
 from pathlib import Path
 from urllib.parse import urlparse
 
 from .transfers import Transfers, MAX_BYTES
 from .locking import RuntimeLock
+from .peer_checks import PeerChecks
 
 WEB = Path(__file__).resolve().parents[1] / 'web' / 'index.html'
 
@@ -18,6 +20,8 @@ def server(root, port=8765):
     runtime_lock = RuntimeLock(Path(root) / "dashboard.lock")
     runtime_lock.__enter__()
     transfers = Transfers(root)
+    peers = PeerChecks()
+    check_lock = threading.Lock()
     token = secrets.token_urlsafe(32)
 
     class Handler(BaseHTTPRequestHandler):
@@ -88,6 +92,17 @@ def server(root, port=8765):
                         raise ValueError('Expected a JSON object.')
                     if self.path == '/api/start':
                         result = {'id': transfers.start(data)}
+                    elif self.path == '/api/check':
+                        if not check_lock.acquire(blocking=False):
+                            raise ValueError('A connection check is already running. Wait for its result.')
+                        try:
+                            result = transfers.check_connection(data.get('broker', ''))
+                            if result['ready']:
+                                local_id, peer_id = (str(data.get(k, '')).strip() for k in (
+                                    ('recipient', 'sender') if data.get('mode') == 'receive' else ('sender', 'recipient')))
+                                result['peer'] = peers.check(result['broker'], os.environ.get('FCL_TRANSFER_SECRET', ''), local_id, peer_id)
+                        finally:
+                            check_lock.release()
                     elif self.path == '/api/cancel':
                         transfers.cancel(data.get('id'))
                         result = {'requested': True}
@@ -102,6 +117,7 @@ def server(root, port=8765):
 
     class Server(ThreadingHTTPServer):
         def server_close(self):
+            peers.close()
             super().server_close()
             runtime_lock.__exit__()
 
