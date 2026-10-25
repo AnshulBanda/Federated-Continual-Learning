@@ -8,3 +8,8 @@ distributed_federation/.env
 distributed_federation/.env.backup
 distributed_federation/config.json
 distributed_federation/kafka/.env
+# Local privacy reservations and operational logs; never publish secret-bearing runtime state.
+artifacts/dp_level3_secagg/**/*.sqlite3
+artifacts/dp_level3_secagg/**/*.sqlite3-*
+artifacts/dp_level3_secagg/**/*.log
+artifacts/dp_level3_secagg/**/*.reserved

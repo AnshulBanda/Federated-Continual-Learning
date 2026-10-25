@@ -151,9 +151,14 @@ class Collaboration:
         verify_checkpoint(checkpoint.parent,round_id)
         digest=hashlib.sha256(checkpoint.read_bytes()).hexdigest()
         if digest!=event['details']['payload_sha256']:raise ValueError('Shared checkpoint changed; selection refused.')
+        configuration=json.loads(run['config'])
+        mode=configuration.get('privacy',{}).get('mode','none')
+        weighting=configuration.get('aggregation','samples')
+        kind='Federated sample-weighted FedAvg' if weighting=='samples' else 'Federated equal mean'
+        if mode!='none':kind+='; '+mode
         model=dict(bank=bank,version=f"fed-{run['run_id']}-r{round_id}",sha256=digest,
             checkpoint=str(checkpoint),trained_at=event['time'],selected_at=now(),
-            model_kind='Federated sample-weighted FedAvg',validation=None,job='federation:'+str(run_id))
+            model_kind=kind,validation=None,job='federation:'+str(run_id))
         write_json(self.root.parent/'local-training'/('active-'+bank+'.json'),model)
         return model
     def status(self, bank):
@@ -187,7 +192,12 @@ class Collaboration:
         launch_error=None
         if self.process is not None and self.process.poll() not in (None,0):
             launch_error='Local federation worker exited with an error. Check the saved setup, broker, schema, dependencies and terminal log.'
-        return dict(profile=profile,roster=roster,current_round=latest_round,rounds=config['rounds'],runs=runs[:5],
+        privacy=config.get('privacy',{})
+        budget=next((e['details'] for e in reversed(events) if e['kind']=='round_completed'),{})
+        privacy_status=dict(mode=privacy.get('mode','none'),secagg=privacy.get('mode') in ('secure_central_dp','distributed_dp'),
+            required_cohort=len(config['clients']),multiplier=privacy.get('multiplier',0),
+            epsilon=budget.get('epsilon'),delta=privacy.get('delta'),phase=events[-1]['kind'] if events else 'idle')
+        return dict(privacy=privacy_status,profile=profile,roster=roster,current_round=latest_round,rounds=config['rounds'],runs=runs[:5],
             process_running=busy,launch_pending=busy and (not active or active['status']!='Running'),launch_error=launch_error,
             checked=self.checked[3] if self.checked else None,bank=bank,local_client_id=CLIENTS.get(bank),
             feature_schema_sha256=hashlib.sha256(SCHEMA.read_bytes()).hexdigest() if SCHEMA.is_file() else None,

@@ -1,3 +1,4 @@
+import os
 import hashlib
 import json
 import tempfile
@@ -44,6 +45,19 @@ class CollaborationTests(unittest.TestCase):
         with self.assertRaises(ValueError):self.manager.select_model(run,1,'Wells_Fargo')
         with self.assertRaises(ValueError):self.manager.select_model(run,1,'Key_Bank')
 
+    def test_private_status_exposes_only_budget_configuration(self):
+        profile=self.manager.save(self.profile)
+        config=self.manager.config(profile)
+        config['privacy']=dict(mode='distributed_dp',multiplier=.1,delta=1e-6)
+        config['aggregation']='equal'
+        run=self.manager.controller.store.begin(profile['run_id'],'central',config)
+        self.manager.controller.store.emit(run,'round_completed',1,epsilon=782.,privacy_mode='distributed_dp')
+        status=self.manager.status(None)['privacy']
+        self.assertEqual(status['mode'],'distributed_dp')
+        self.assertTrue(status['secagg'])
+        self.assertEqual(status['epsilon'],782.)
+        self.assertEqual(set(status),{'mode','secagg','required_cohort','multiplier','epsilon','delta','phase'})
+
 class SharedFeatureSchemaTests(unittest.TestCase):
     def test_coordinator_builds_model_without_reading_any_bank_data(self):
         from distributed_federation.common.config import load_config
@@ -64,9 +78,10 @@ class SharedFeatureSchemaTests(unittest.TestCase):
         import pandas as pd
         from src.gnn.causal_temporal_graphsage import BANKS,fit_shared_feature_encoders
         from distributed_federation.common.model_runtime import FrozenEncoder
-        nodes,edges=fit_shared_feature_encoders(REPO/'data/final_temporal_dataset',BANKS)
+        dataset=Path(os.environ.get('CAPSTONE_DATASET_DIR',str(REPO/'data/final_temporal_dataset')))
+        nodes,edges=fit_shared_feature_encoders(dataset,BANKS)
         contract=json.loads(SCHEMA.read_text())
-        base=REPO/'data/final_temporal_dataset/training/Key_Bank'
+        base=dataset/'training/Key_Bank'
         for reference,key,file in ((nodes,'nodes','node_features.csv.gz'),(edges,'edges','edge_list.csv.gz')):
             frame=pd.read_csv(base/file,nrows=100)
             np.testing.assert_allclose(FrozenEncoder(contract[key]).transform(frame),reference.transform(frame),rtol=1e-6,atol=1e-6)

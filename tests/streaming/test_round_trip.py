@@ -1,3 +1,4 @@
+from distributed_federation.privacy import transport
 """Exercise real loops/protocol/FedAvg with deterministic tensor and network doubles.
 
 This is not a PyTorch training or real Kafka integration test.
@@ -129,17 +130,17 @@ class RoundTripTests(unittest.TestCase):
             secrets = {'FCL_CENTRAL_SECRET': 'c' * 32, 'FCL_CLIENT_SECRET': 'b' * 32}
             secrets.update({secret_env_name(c.client_id): 'b' * 32 for c in config.clients})
             stack.enter_context(patch.dict('os.environ', secrets))
-            for module in (aggregator, bank_worker):
+            for module in (transport,):
                 for name, replacement in {
                     'make_consumer': consumer, 'make_producer': lambda broker: Producer(),
                     'prepare_runtime': prepare, 'serialize_state': serialize,
                     'deserialize_state': deserialize, 'validate_state': lambda *args: None,
                 }.items():
                     stack.enter_context(patch.object(module, name, replacement))
-            stack.enter_context(patch.object(aggregator, 'load_initial_checkpoint', return_value=False))
-            stack.enter_context(patch.object(aggregator, 'save_state_and_manifest', side_effect=save))
-            stack.enter_context(patch.object(bank_worker, 'train_local', side_effect=train))
-            stack.enter_context(patch.object(bank_worker, 'save_state_and_manifest', side_effect=save))
+            stack.enter_context(patch.object(transport, 'load_initial_checkpoint', return_value=False))
+            stack.enter_context(patch.object(transport, 'save_state_and_manifest', side_effect=save))
+            stack.enter_context(patch.object(transport, 'train_local', side_effect=train))
+            stack.enter_context(patch.object(transport, 'save_state_and_manifest', side_effect=save))
 
             from distributed_federation.common.control import control_source, RunStopped
 
@@ -194,24 +195,26 @@ class RoundTripTests(unittest.TestCase):
             secrets = {'FCL_CENTRAL_SECRET': 'c' * 32}
             secrets.update({secret_env_name(c.client_id): 'b' * 32 for c in config.clients})
             stack.enter_context(patch.dict('os.environ', secrets))
-            stack.enter_context(patch.object(aggregator, 'prepare_runtime', return_value=
+            stack.enter_context(patch.object(transport, 'prepare_runtime', return_value=
                 SimpleNamespace(model=Model(), schema_sha256='schema')))
             for name in ('load_initial_checkpoint', 'make_producer', 'publish_payload'):
-                stack.enter_context(patch.object(aggregator, name))
-            consumer = stack.enter_context(patch.object(aggregator, 'make_consumer')).return_value
+                stack.enter_context(patch.object(transport, name))
+            consumer = stack.enter_context(patch.object(transport, 'make_consumer')).return_value
             requested = []
             def poll(timeout):
                 requested.append('cancel')
                 return None
             consumer.poll.side_effect = poll
-            stack.enter_context(patch.object(aggregator, 'serialize_state', return_value=b'weights'))
-            average = stack.enter_context(patch.object(aggregator, 'fedavg'))
+            stack.enter_context(patch.object(transport, 'serialize_state', return_value=b'weights'))
+            average = stack.enter_context(patch.object(transport, 'fedavg'))
             with control_source(lambda: requested[0] if requested else None):
                 with self.assertRaises(RunCancelled):
                     aggregator.run(config)
             consumer.close.assert_called_once()
             average.assert_not_called()
-            self.assertFalse(config.output_dir.exists())
+            # Spend-before-send reservations are durable even on cancellation/dropout.
+            self.assertFalse((config.output_dir / config.run_id).exists())
+            self.assertTrue((config.output_dir / 'privacy-ledgers' / 'central.sqlite3').exists())
 
     def test_missing_bank_prevents_aggregation(self):
         # The round times out before any aggregate or checkpoint can be produced.
@@ -226,16 +229,18 @@ class RoundTripTests(unittest.TestCase):
             secrets = {'FCL_CENTRAL_SECRET': 'c' * 32}
             secrets.update({secret_env_name(c.client_id): 'b' * 32 for c in config.clients})
             stack.enter_context(patch.dict('os.environ', secrets))
-            stack.enter_context(patch.object(aggregator, 'prepare_runtime', return_value=
+            stack.enter_context(patch.object(transport, 'prepare_runtime', return_value=
                 SimpleNamespace(model=Model(), schema_sha256='schema')))
             for name in ('load_initial_checkpoint', 'make_producer', 'make_consumer', 'publish_payload'):
-                stack.enter_context(patch.object(aggregator, name))
-            stack.enter_context(patch.object(aggregator, 'serialize_state', return_value=b'weights'))
-            average = stack.enter_context(patch.object(aggregator, 'fedavg'))
+                stack.enter_context(patch.object(transport, name))
+            stack.enter_context(patch.object(transport, 'serialize_state', return_value=b'weights'))
+            average = stack.enter_context(patch.object(transport, 'fedavg'))
             with self.assertRaises(TimeoutError):
                 aggregator.run(config)
             average.assert_not_called()
-            self.assertFalse(config.output_dir.exists())
+            # Spend-before-send reservations are durable even on cancellation/dropout.
+            self.assertFalse((config.output_dir / config.run_id).exists())
+            self.assertTrue((config.output_dir / 'privacy-ledgers' / 'central.sqlite3').exists())
 
 
 if __name__ == '__main__':

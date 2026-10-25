@@ -5,6 +5,7 @@ import re
 from dataclasses import dataclass
 from pathlib import Path
 from typing import Any
+from distributed_federation.privacy.mechanism import Privacy
 
 
 REPO_ROOT = Path(__file__).resolve().parents[2]
@@ -48,6 +49,11 @@ class FederationConfig:
     initial_checkpoint: Path | None
     feature_schema: Path | None = None
     return_aggregate: bool = False
+    aggregation: str = "samples"
+    replay_size: int = 2000
+    replay: str = "risk_context"
+    rng_policy: str = "per_client"
+    privacy: Privacy = Privacy()
 
     def client(self, client_id: str) -> ClientConfig:
         for client in self.clients:
@@ -132,6 +138,19 @@ def load_config(path: str | Path, broker_override: str | None = None) -> Federat
     if not dataset_dir.is_dir():
         raise ValueError(f"Dataset directory does not exist: {dataset_dir}")
 
+    privacy = Privacy(**raw.get("privacy", {}))
+    aggregation = raw.get("aggregation", "samples")
+    if aggregation not in ("equal", "samples") or (privacy.mode != "none" and aggregation != "equal"):
+        raise ValueError("Private aggregation supports equal weights only")
+    if privacy.mode != "none" and privacy.expected_clients != len(clients):
+        raise ValueError("Privacy requires the complete configured cohort")
+    if raw.get("rng_policy", "per_client") != "per_client":
+        raise ValueError("Distributed training requires reproducible per_client RNG; global is simulator-only")
+    if raw.get("replay", "risk_context") not in ("risk_context", "uniform") or int(raw.get("replay_size", 2000)) < 0:
+        raise ValueError("Invalid replay configuration")
+    if float(raw["weight_decay"]) != 1e-4 or int(raw["negative_ratio"]) != 20:
+        raise ValueError("Accepted adaptive trainer uses weight_decay=1e-4 and negative_ratio=20")
+
     return FederationConfig(
         broker=broker,
         run_id=run_id,
@@ -155,6 +174,8 @@ def load_config(path: str | Path, broker_override: str | None = None) -> Federat
         initial_checkpoint=_repo_path(raw.get("initial_checkpoint")),
         feature_schema=_repo_path(raw.get("feature_schema")),
         return_aggregate=raw.get("return_aggregate", False) is True,
+        aggregation=aggregation, replay_size=int(raw.get("replay_size", 2000)), replay=raw.get("replay", "risk_context"),
+        rng_policy="per_client", privacy=privacy,
     )
 
 
