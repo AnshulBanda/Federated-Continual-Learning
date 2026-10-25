@@ -1,0 +1,195 @@
+{
+  "note": "Long-lived screening processes loaded code before later additive cancellation/safety/metadata edits. Some original per-run source_hashes capture on-disk files at the next seed, rather than the modules already loaded. They are retained unchanged, including all frozen selection hashes. The initial capture and first-run captures below preserve the loaded computational source for each process group. Later follow-up processes cache source bytes at startup. None of the listed edits changed model arithmetic or the tested private mechanism in the experiment parameter range.",
+  "groups": {
+    "initial": {
+      "source_capture": "/Users/pj/Desktop/college/capstone/Capstone-DP-SecAgg/artifacts/dp_level3_secagg/experiment_source",
+      "sha256": {
+        "src/gnn/adaptive_continual_federated.py": "56bd2a0d62ef2d761eee0daab6e10d7a2b184694cf0d9fe8eee498d93d28006f",
+        "src/gnn/causal_temporal_graphsage.py": "77ec113dd6b16ed0bf6956d1ce9fa7d9da5b300b672f085c76830b203ea2e2eb",
+        "src/gnn/continual_temporal_graphsage.py": "3ab7bc55e8b14f6dc69cc8d1188fc4daaf806e3010e00764b13bedeecea721d5",
+        "distributed_federation/privacy/mechanism.py": "562e47ecd59840af78a52655d2a0d9c3502f59c6408453a7237e97b45cf322ee",
+        "distributed_federation/privacy/secagg.py": "31d5604ed074d5508fb7e4d652b3137937d9073450ca54807066dfbc888aeb86"
+      }
+    },
+    "ddp_confirmation": {
+      "source_capture": "/Users/pj/Desktop/college/capstone/Capstone-DP-SecAgg/artifacts/dp_level3_secagg/experiments/warm_distributed_dp_m1e-05_s52/source_snapshot",
+      "sha256": {
+        "src/gnn/adaptive_continual_federated.py": "56bd2a0d62ef2d761eee0daab6e10d7a2b184694cf0d9fe8eee498d93d28006f",
+        "src/gnn/causal_temporal_graphsage.py": "77ec113dd6b16ed0bf6956d1ce9fa7d9da5b300b672f085c76830b203ea2e2eb",
+        "src/gnn/continual_temporal_graphsage.py": "3ab7bc55e8b14f6dc69cc8d1188fc4daaf806e3010e00764b13bedeecea721d5",
+        "distributed_federation/privacy/mechanism.py": "da8a9da6f5415156dbb98926266679a36447a9aa68737067b22a79832ce769ef",
+        "distributed_federation/privacy/secagg.py": "31d5604ed074d5508fb7e4d652b3137937d9073450ca54807066dfbc888aeb86"
+      }
+    },
+    "scratch_ddp": {
+      "source_capture": "/Users/pj/Desktop/college/capstone/Capstone-DP-SecAgg/artifacts/dp_level3_secagg/experiments/scratch_distributed_dp_m0.001_s42/source_snapshot",
+      "sha256": {
+        "src/gnn/adaptive_continual_federated.py": "56bd2a0d62ef2d761eee0daab6e10d7a2b184694cf0d9fe8eee498d93d28006f",
+        "src/gnn/causal_temporal_graphsage.py": "77ec113dd6b16ed0bf6956d1ce9fa7d9da5b300b672f085c76830b203ea2e2eb",
+        "src/gnn/continual_temporal_graphsage.py": "3ab7bc55e8b14f6dc69cc8d1188fc4daaf806e3010e00764b13bedeecea721d5",
+        "distributed_federation/privacy/mechanism.py": "da8a9da6f5415156dbb98926266679a36447a9aa68737067b22a79832ce769ef",
+        "distributed_federation/privacy/secagg.py": "31d5604ed074d5508fb7e4d652b3137937d9073450ca54807066dfbc888aeb86"
+      }
+    },
+    "option_a": {
+      "source_capture": "/Users/pj/Desktop/college/capstone/Capstone-DP-SecAgg/artifacts/dp_level3_secagg/experiments/warm_option_a_m0.001_s42/source_snapshot",
+      "sha256": {
+        "src/gnn/adaptive_continual_federated.py": "f0a1dc4972e76077cc10827c99f584d292951aa870d8cf983b74889c55b38bb0",
+        "src/gnn/causal_temporal_graphsage.py": "77ec113dd6b16ed0bf6956d1ce9fa7d9da5b300b672f085c76830b203ea2e2eb",
+        "src/gnn/continual_temporal_graphsage.py": "3ab7bc55e8b14f6dc69cc8d1188fc4daaf806e3010e00764b13bedeecea721d5",
+        "distributed_federation/privacy/mechanism.py": "da8a9da6f5415156dbb98926266679a36447a9aa68737067b22a79832ce769ef",
+        "distributed_federation/privacy/secagg.py": "31d5604ed074d5508fb7e4d652b3137937d9073450ca54807066dfbc888aeb86"
+      }
+    }
+  },
+  "runs": {
+    "warm_option_a_m0.001_s62": {
+      "loaded_source_group": "option_a",
+      "result_sha256": "00b93704416a93b45ae85446f4e5e0d3f62199bfbad144527b5902f996ed5d0b"
+    },
+    "scratch_none_m0_s52": {
+      "loaded_source_group": "initial",
+      "result_sha256": "b813357531dd5f7eeef6bf78b7b900b90a2bdcf34b0d56ff9526032c3889fc58"
+    },
+    "warm_option_a_m0.001_s52": {
+      "loaded_source_group": "option_a",
+      "result_sha256": "eb77c67055aa13edd4948d21e70a203617802e92e32eae999bd29f5ccd5a2527"
+    },
+    "warm_distributed_dp_m0.001_s42": {
+      "loaded_source_group": "initial",
+      "result_sha256": "64ec8bf21293de1434b0ba1f62ccf84ee8d011d9fe5bf19ee3a61a297bf79ab2"
+    },
+    "scratch_none_m0_s62": {
+      "loaded_source_group": "initial",
+      "result_sha256": "7ebf4b0a7345f1c56dc7472b4edc3789339a686f60f254aa9248f6f73ea75f3d"
+    },
+    "warm_distributed_dp_m1e-05_s42_best_validation": {
+      "loaded_source_group": "per_run_cached_source",
+      "result_sha256": "ed39ed02aff4fce094e3eae24f0c27f96bb800631d708ccc92108608cfe13640"
+    },
+    "warm_distributed_dp_m0.0001_s52": {
+      "loaded_source_group": "ddp_confirmation",
+      "result_sha256": "5fb00cb136505d2dc1ad46b8cd2797210d8bdc554d4472f0f68e93e1f3c72134"
+    },
+    "warm_distributed_dp_m0.01_s42": {
+      "loaded_source_group": "initial",
+      "result_sha256": "bb8ef4609091bac9fd71fc29973c970c60bfdfc3caafd7a490ea442a3c0c0802"
+    },
+    "warm_distributed_dp_m0.0001_s62": {
+      "loaded_source_group": "ddp_confirmation",
+      "result_sha256": "06210fa150472e9dcc2fb97fbdb0e443cdd856190f5c0f71810d96d0f0dcbb1c"
+    },
+    "warm_distributed_dp_m1e-05_s52": {
+      "loaded_source_group": "ddp_confirmation",
+      "result_sha256": "5356435a205b2438660a251ae5bd5764397ef17585d55531abce0aef9c5a336e"
+    },
+    "warm_reference_m0_s62": {
+      "loaded_source_group": "initial",
+      "result_sha256": "3fa599cfaf92aa4dff29d62a423ba73dc57f67e3321de8b633938f32f58b6ecb"
+    },
+    "scratch_distributed_dp_m0.001_s62": {
+      "loaded_source_group": "scratch_ddp",
+      "result_sha256": "5c7932cda25e7e5d162ddcf0e8e4542cce02e246de72933c5e1dbc51cbf7fc2d"
+    },
+    "warm_distributed_dp_m1e-05_s62": {
+      "loaded_source_group": "ddp_confirmation",
+      "result_sha256": "7b5e8299cd71e80d98dddf2b84ab1c0982fa3e5cc163471af6e451316ef70263"
+    },
+    "warm_secure_central_dp_m0_s42": {
+      "loaded_source_group": "initial",
+      "result_sha256": "2b6383509a62f56efca85f657229880ecea7a94726f1109051734c3e664c53f2"
+    },
+    "warm_distributed_dp_m0.1_s42": {
+      "loaded_source_group": "initial",
+      "result_sha256": "1a08068917d127891349f34d183da41949ac18e8f2159a66d370b5e3167435a8"
+    },
+    "scratch_distributed_dp_m0.001_s52": {
+      "loaded_source_group": "scratch_ddp",
+      "result_sha256": "119884c09dda380caec354ac1d9004a2be2b314d26167b68cbc110d686421dfa"
+    },
+    "warm_reference_m0_s52": {
+      "loaded_source_group": "initial",
+      "result_sha256": "6e7878a23e2bb1840e8e97780a17a390464eb1842c0bcda8a8e75b4bcc7addf0"
+    },
+    "warm_none_m0_s52": {
+      "loaded_source_group": "initial",
+      "result_sha256": "6b0f112a08eaa38daa7eb3a00e04f2c2347802d20e5645427bcbbe20c923f5a1"
+    },
+    "warm_distributed_dp_m1e-05_s52_best_validation": {
+      "loaded_source_group": "per_run_cached_source",
+      "result_sha256": "e81a1abba86ec6abb6582ca67f55184ebbd82139f04fe4d28ea6a3bd79a88af9"
+    },
+    "warm_secure_central_dp_m0.001_s42": {
+      "loaded_source_group": "initial",
+      "result_sha256": "d1fc10737a20de3245ca8f07a1a949dc78f5e56189ce4ff71f0ddfeac3817f56"
+    },
+    "warm_none_m0_s62": {
+      "loaded_source_group": "initial",
+      "result_sha256": "6a0c7e9cd0c248bc9100135756bf71ea80cc0c91ce7890253f14514e00d1767d"
+    },
+    "warm_secure_central_dp_m0.001_s52": {
+      "loaded_source_group": "initial",
+      "result_sha256": "9360e5422a6030c7d686f25ce00d9cbce5e81b54ff6874c287b515f7cd751258"
+    },
+    "warm_secure_central_dp_m0.001_s62": {
+      "loaded_source_group": "initial",
+      "result_sha256": "98557d5ba4430511142fd25fa7b9924549498040b9e56c8bc5a4776798cd2dff"
+    },
+    "warm_none_m0_s42": {
+      "loaded_source_group": "initial",
+      "result_sha256": "38393ff7254f261d4f41931dcccb9d44fefadddf6658715c1a14059ec1447d84"
+    },
+    "warm_secure_central_dp_m0_s52": {
+      "loaded_source_group": "initial",
+      "result_sha256": "7b6e47f159ba3c32e070272c55d2392ec54acd9986c3462b6fd2ff66c7f5c6e0"
+    },
+    "scratch_distributed_dp_m0.001_s42": {
+      "loaded_source_group": "scratch_ddp",
+      "result_sha256": "4727f13db9674890445ca90508b2356aa712758d5ca4cc6f1845c7b2465c7716"
+    },
+    "warm_reference_m0_s42": {
+      "loaded_source_group": "initial",
+      "result_sha256": "270e8e9dd39604569367057c8e0ed193e5ffbc2f098646c0ec7c1eb5e3532d49"
+    },
+    "warm_distributed_dp_m1e-05_s42": {
+      "loaded_source_group": "initial",
+      "result_sha256": "003b9d92a2a1368d4faa569aba64a5c86ac1b91d0ff9811f888aa6d2ed43f8c3"
+    },
+    "warm_secure_central_dp_m0_s62": {
+      "loaded_source_group": "initial",
+      "result_sha256": "d1b4ef08ae63442bb2f09e6362d15696059f187444f658148532be4c520246f0"
+    },
+    "warm_distributed_dp_m1e-05_s62_best_validation": {
+      "loaded_source_group": "per_run_cached_source",
+      "result_sha256": "472927221a6bb00b84359261ee71a44205162090f125b8d1db05c2bd5d667ef6"
+    },
+    "warm_distributed_dp_m0.01_s62": {
+      "loaded_source_group": "ddp_confirmation",
+      "result_sha256": "1e0f22b7eef2f44a4d776ae213109a67dc34454e49b0891383f9c22261f6115c"
+    },
+    "warm_distributed_dp_m0.0001_s42": {
+      "loaded_source_group": "initial",
+      "result_sha256": "5a5f318ff8ebc80ed4826392d2552e81da394e0780788cc239bd48a8cbe3f772"
+    },
+    "warm_distributed_dp_m0.01_s52": {
+      "loaded_source_group": "ddp_confirmation",
+      "result_sha256": "14efff9cbb939c5a74dbc3223992e35aa01457f0e3e93b74a25a452720bc23bf"
+    },
+    "warm_option_a_m0.001_s42": {
+      "loaded_source_group": "option_a",
+      "result_sha256": "77bf9cd79dba89e33c6c1e2a5354a5a18d4cae07a5fcb5efc9f9cde51689dc59"
+    },
+    "warm_distributed_dp_m0.001_s52": {
+      "loaded_source_group": "ddp_confirmation",
+      "result_sha256": "8842f899bbf73457b8cd7439eee4fa2180be79710842587779630705b02d4d7b"
+    },
+    "warm_distributed_dp_m0.001_s62": {
+      "loaded_source_group": "ddp_confirmation",
+      "result_sha256": "333526dc2b835c08d45bc1c1cd69c5c7fd3cb11883d64a1a50a4fce625cc3529"
+    },
+    "scratch_none_m0_s42": {
+      "loaded_source_group": "initial",
+      "result_sha256": "4630f08e8f76a4e5d01422e773b89502519e793dc87123c682ff67cbe1038741"
+    }
+  }
+}

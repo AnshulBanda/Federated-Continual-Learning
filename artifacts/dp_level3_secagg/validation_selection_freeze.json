@@ -1,0 +1,74 @@
+{
+  "rule": "largest multiplier whose three-seed mean best intermediate August score >=0.85; otherwise highest three-seed mean",
+  "chosen": {
+    "multiplier": 1e-05,
+    "mean_best_august": 0.8630074150866149,
+    "seed_best_scores": [
+      0.8871985349706871,
+      0.8962943866120003,
+      0.8055293236771576
+    ]
+  },
+  "all_screen_points": [
+    {
+      "multiplier": 1e-05,
+      "mean_best_august": 0.8630074150866149,
+      "seed_best_scores": [
+        0.8871985349706871,
+        0.8962943866120003,
+        0.8055293236771576
+      ]
+    },
+    {
+      "multiplier": 0.0001,
+      "mean_best_august": 0.8449467736955453,
+      "seed_best_scores": [
+        0.9154460429807388,
+        0.8405157465661729,
+        0.7788785315397243
+      ]
+    },
+    {
+      "multiplier": 0.001,
+      "mean_best_august": 0.8085153107049976,
+      "seed_best_scores": [
+        0.8476292856765518,
+        0.8651321647974628,
+        0.7127844816409783
+      ]
+    },
+    {
+      "multiplier": 0.01,
+      "mean_best_august": 0.7506438526289032,
+      "seed_best_scores": [
+        0.847671425824798,
+        0.8163253005236406,
+        0.5879348315382709
+      ]
+    }
+  ],
+  "screen_hashes": {
+    "artifacts/dp_level3_secagg/experiments/warm_distributed_dp_m1e-05_s42/results.json": "003b9d92a2a1368d4faa569aba64a5c86ac1b91d0ff9811f888aa6d2ed43f8c3",
+    "artifacts/dp_level3_secagg/experiments/warm_distributed_dp_m1e-05_s52/results.json": "5356435a205b2438660a251ae5bd5764397ef17585d55531abce0aef9c5a336e",
+    "artifacts/dp_level3_secagg/experiments/warm_distributed_dp_m1e-05_s62/results.json": "7b5e8299cd71e80d98dddf2b84ab1c0982fa3e5cc163471af6e451316ef70263",
+    "artifacts/dp_level3_secagg/experiments/warm_distributed_dp_m0.0001_s42/results.json": "5a5f318ff8ebc80ed4826392d2552e81da394e0780788cc239bd48a8cbe3f772",
+    "artifacts/dp_level3_secagg/experiments/warm_distributed_dp_m0.0001_s52/results.json": "5fb00cb136505d2dc1ad46b8cd2797210d8bdc554d4472f0f68e93e1f3c72134",
+    "artifacts/dp_level3_secagg/experiments/warm_distributed_dp_m0.0001_s62/results.json": "06210fa150472e9dcc2fb97fbdb0e443cdd856190f5c0f71810d96d0f0dcbb1c",
+    "artifacts/dp_level3_secagg/experiments/warm_distributed_dp_m0.001_s42/results.json": "64ec8bf21293de1434b0ba1f62ccf84ee8d011d9fe5bf19ee3a61a297bf79ab2",
+    "artifacts/dp_level3_secagg/experiments/warm_distributed_dp_m0.001_s52/results.json": "8842f899bbf73457b8cd7439eee4fa2180be79710842587779630705b02d4d7b",
+    "artifacts/dp_level3_secagg/experiments/warm_distributed_dp_m0.001_s62/results.json": "333526dc2b835c08d45bc1c1cd69c5c7fd3cb11883d64a1a50a4fce625cc3529",
+    "artifacts/dp_level3_secagg/experiments/warm_distributed_dp_m0.01_s42/results.json": "bb8ef4609091bac9fd71fc29973c970c60bfdfc3caafd7a490ea442a3c0c0802",
+    "artifacts/dp_level3_secagg/experiments/warm_distributed_dp_m0.01_s52/results.json": "14efff9cbb939c5a74dbc3223992e35aa01457f0e3e93b74a25a452720bc23bf",
+    "artifacts/dp_level3_secagg/experiments/warm_distributed_dp_m0.01_s62/results.json": "1e0f22b7eef2f44a4d776ae213109a67dc34454e49b0891383f9c22261f6115c"
+  },
+  "seeds": [
+    42,
+    52,
+    62
+  ],
+  "rounds": 4,
+  "C": 6.5,
+  "selection": "best_validation",
+  "test_loaded": false,
+  "confirmation_repeats": 1
+}

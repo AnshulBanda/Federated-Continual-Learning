@@ -1,0 +1,52 @@
+{
+  "seed": 62,
+  "rounds": 4,
+  "track": "warm",
+  "privacy": {
+    "mode": "distributed_dp",
+    "clip": 6.5,
+    "multiplier": 1e-05,
+    "delta": 1e-06,
+    "expected_clients": 3,
+    "min_noise_contributors": 3,
+    "scale": 16777216,
+    "entropy": "production",
+    "research_seed": 42
+  },
+  "parameters": {
+    "C": 6.5,
+    "n": 3,
+    "dimension": 242561,
+    "quantization_l2_bound": 1.4677787492019431e-05,
+    "effective_clip": 6.500014677787492,
+    "ideal_sensitivity": 4.333333333333333,
+    "sensitivity": 4.333343118524994,
+    "accounting_sensitivity": 4.333343118524994,
+    "sigma_mean": 4.333343118524995e-05,
+    "sigma_share": 7.505570447914253e-05,
+    "expected_noise_l2": 0.02134192382603552
+  },
+  "training": {
+    "local_epochs": 3,
+    "batch_size": 1024,
+    "replay_size": 2000,
+    "learning_rate": 0.001,
+    "replay": "risk_context",
+    "distill": 0.0,
+    "rng_policy": "per_client"
+  },
+  "aggregation": "equal_mean",
+  "test_loaded": false,
+  "checkpoint": "/Users/pj/Desktop/college/capstone/Capstone/artifacts/final_evaluation/corrected_fedavg/seed_62/global_model.pt",
+  "checkpoint_sha256": "e725a614f4c7fe9a6adf1197a45131419b26c5b1dd4d8c5b532e557745f0f963",
+  "scope": "conditional_checkpoint",
+  "gaussian_sampler": "OS entropy production; no released noise seed",
+  "selection": "fixed final round primary; best public-validation round secondary",
+  "source_hashes": {
+    "src/gnn/adaptive_continual_federated.py": "f0a1dc4972e76077cc10827c99f584d292951aa870d8cf983b74889c55b38bb0",
+    "src/gnn/causal_temporal_graphsage.py": "77ec113dd6b16ed0bf6956d1ce9fa7d9da5b300b672f085c76830b203ea2e2eb",
+    "src/gnn/continual_temporal_graphsage.py": "3ab7bc55e8b14f6dc69cc8d1188fc4daaf806e3010e00764b13bedeecea721d5",
+    "distributed_federation/privacy/mechanism.py": "da8a9da6f5415156dbb98926266679a36447a9aa68737067b22a79832ce769ef",
+    "distributed_federation/privacy/secagg.py": "31d5604ed074d5508fb7e4d652b3137937d9073450ca54807066dfbc888aeb86"
+  }
+}

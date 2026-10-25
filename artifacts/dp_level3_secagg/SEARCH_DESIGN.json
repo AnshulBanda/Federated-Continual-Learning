@@ -1,0 +1,22 @@
+{
+  "dataset": "Existing local IBM AML reference; no download/copy/regeneration",
+  "selection_data": "August only; September dataset never loaded",
+  "model_seeds": [42,52,62],
+  "cohort": ["JPMorgan_Chase","Wells_Fargo","Key_Bank"],
+  "training": {"local_epochs_per_task":3,"replay":"risk_context","replay_size":2000,"rng_policy":"per_client","aggregation":"equal"},
+  "clip": 6.5,
+  "clip_selection": "Nonprivate training-only max rounded up to half unit; fixed before private screening",
+  "warm_rounds":4,
+  "scratch_rounds":16,
+  "primary_selection": "Fixed final scheduled round; never round zero. Do not relabel a favorable intermediate result as primary.",
+  "secondary": "Best intermediate August round is descriptive, with all scheduled rounds charged. Old screening checkpoints were final-only; a reported best intermediate metric does not imply its checkpoint was retained.",
+  "warm_ddp_log_sweep": [0.00001,0.0001,0.001,0.01,0.1],
+  "screen_seed":42,
+  "confirmation_seeds":[52,62],
+  "confirmation_rule":"Confirm every warm point from near-zero through the useful boundary on both other seeds; clear degradation at m=0.1 does not require three-seed confirmation",
+  "from_scratch":"Nonprivate baseline and m=0.001 distributed DP, full 16 rounds and all three model seeds",
+  "comparators":"Global-RNG harmonized research reference; per-client nonprivate mean; secure mean m=0; central DP m=0.001; Option A m=0.001",
+  "noise_entropy":"Independent production OS entropy; no Gaussian seed is released. Each seed/candidate gets one noise draw sequence; no rerunning to select a favorable noise realization.",
+  "accounting":"Every private candidate and model seed composes on the same data. Per-run epsilon and total private-search composition are both reported. Nonprivate references/calibration invalidate a finite-DP guarantee for the complete research bundle.",
+  "limitations":"A finite bounded sweep can establish failure to reach 0.85 within that sweep; it cannot prove that all possible noise levels/trainers/configurations are mathematically incapable of reaching it. No such universal claim will be made."
+}

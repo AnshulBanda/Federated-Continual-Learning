@@ -1,0 +1,6 @@
+{
+  "reason":"The initial screening protocol retains only final-round checkpoints, whereas Sia's accepted warm-start method selects a best August round. Best intermediate screening metrics can indicate a passing mean without a retained checkpoint. This distinct follow-up retains the selected checkpoint and measures the accepted selection rule rather than relabeling the screening results.",
+  "choice_rule":"After complete three-seed screening, among multipliers with mean best-intermediate August AP >=0.85, choose the largest multiplier (smallest encoded-mechanism epsilon). If none qualify, choose the multiplier with the highest three-seed mean best-intermediate AP. Freeze that one multiplier before the follow-up.",
+  "confirmation":"Exactly one independent production-noise sequence per seed 42,52,62; four rounds, same C=6.5 and trainer. Select best August round from 1..4, retain selected_model.pt, charge all four rounds. Do not choose noise seeds or repeat if this confirmation fails.",
+  "scope":"Development/validation adaptive follow-up, not an untouched confirmatory test. September remains unloaded. Preserve and report every initial final-round and intermediate result, plus this follow-up, with full private-subset composition."
+}

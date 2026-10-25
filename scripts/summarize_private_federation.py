@@ -29,7 +29,7 @@ def main():
         rows.append(row);groups[(row['track'],row['mode'],m,row['selection_protocol'])].append(row)
         if mode!='none' and m>0:private_rho+=float(d['accounting']['rho'])
     with (root/'seed_results.csv').open('w') as out:
-        writer=csv.DictWriter(out,fieldnames=list(rows[0]));writer.writeheader();writer.writerows(rows)
+        writer=csv.DictWriter(out,fieldnames=list(rows[0]),lineterminator="\n");writer.writeheader();writer.writerows(rows)
     summaries=[]
     for (track,mode,m,protocol),members in sorted(groups.items()):
         summary=dict(track=track,mode=mode,selection_protocol=protocol,multiplier=m,seeds=[r['seed'] for r in members],count=len(members),epsilon_per_seed=members[0]['epsilon'],delta=members[0]['delta'],releases_per_seed=members[0]['releases'])

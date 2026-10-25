@@ -1,0 +1,7 @@
+{
+  "source_tree": "9ef68b634d95bcb121a439437e914761689b42c4",
+  "implementation_commit": "a274e885ca833c130fa1700adf4ef35436760a80",
+  "source_snapshot_sha256": "ded44d49641c28ac6b8cd601bb8134ced2f81927e523f816319736599a623fcf",
+  "contains": "code, configuration, tests, documentation, dependencies; no dataset/private keys",
+  "verified_current_sources": true
+}
