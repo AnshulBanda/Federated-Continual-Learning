@@ -3,6 +3,113 @@
 Current work focuses on moving weight files, not running model training. The existing
 training supervisor remains available separately; the dashboard never calls it.
 
+## Client Overview and Local Data & Training
+
+Overview saves a bank label for this laptop and shows connection-check results,
+the explicitly selected local checkpoint version/hash, last completed local training
+time, and the latest completed local validation metrics. If there is no local run,
+it displays the bank's saved frozen September 2025 research results, clearly labeled.
+The FedAvg seed-42 reference checkpoint is separate from the selected local model.
+
+To demonstrate the local client workflow:
+1. Save the bank on Overview.
+2. Open Local Data & Training. Connect the prepared dataset root (the included
+   data/final_temporal_dataset is the default). This is a folder connection;
+   arbitrary CSV upload and raw-to-graph conversion are not implemented.
+3. Click Check data quality. Checks cover required files/features, label joins,
+   unique IDs, endpoints, finite features, both label classes and chronological
+   training/validation separation. Missing feature values are counted and imputed
+   by the training-only encoder; entirely missing columns are rejected.
+4. Choose 1-25 epochs and click Train locally. A separate CPU process runs the
+   existing causal Temporal GraphSAGE model with validation-only evaluation.
+   Progress, loss, validation PR-AUC, worker logs and history are shown. A one-epoch
+   run checks operation but is not expected to match the final research model.
+5. Click Use this model on a completed run. Hash verification precedes selection;
+   Overview then shows its version. This registers a checkpoint for later scoring
+   integration; it does not start a transaction monitoring service.
+
+Raw data stays on this laptop. This tab never calls Kafka or shared feature fitting.
+Only the selected bank's training and validation files are read. September test
+files and frozen research artifacts are not modified. The dataset fingerprint is
+checked again after training; changing data during a run invalidates the result.
+Training does not resume automatically after interruption. Cancellation is observed
+between training/scoring batches and job phases; data loading/checks may delay it.
+Closing the dashboard requests cancellation and terminates its child if necessary.
+A worker-held OS lock prevents another training worker in the same state folder.
+
+Jobs/checkpoints, selected models and logs persist below the ignored dashboard
+state directory's local-training/. On reload, the bank's recent dataset path and
+history remain available. Dependencies are the root requirements.txt, installed in
+the same Python environment as the dashboard. Windows/macOS use the existing launcher;
+this client training workflow has been verified on Windows, not natively on macOS.
+
+## Federated Collaboration tab
+
+The tab supervises one real bank worker or coordinator per laptop. The same
+broker, fresh run ID, bank roster, rounds, epochs, timeout and privately shared
+secret must be used across participants. The default roster is Key Bank (bank-1),
+Wells Fargo (bank-2), JPMorgan Chase (bank-3). Dataset paths stay local.
+
+1. Save the client bank on Overview. In Federated Collaboration choose Bank/client
+   on bank laptops or Central coordinator on the coordinator laptop.
+2. Configure the matching team setup. Coordinator clicks Prepare topics once;
+   fcl.collaboration.global.v1 and fcl.collaboration.updates.v1 each require one
+   partition. Broker provisioning/ZeroTier/firewall setup remain external.
+3. Everyone clicks Check local readiness. This confirms local dependencies and
+   broker/topic access, not remote readiness. Compare the displayed schema hash.
+4. Enter the same secret (32+ characters), start bank workers, then start central.
+   The password field is cleared on start. Secrets are inherited only in process
+   environment and never saved in the setup, database, or API responses.
+5. Central broadcasts a common seeded model. Banks train their own transaction
+   graph, send signed updates, and wait for the signed aggregate. Central waits for
+   every configured bank, validates update schema/base/hash/tensors, performs
+   sample-weighted FedAvg, atomically saves, and publishes the aggregate.
+6. Each bank verifies the aggregate, loads it, and atomically saves weights and a
+   manifest/commit record. Use shared model selects a hash-verified checkpoint for
+   Overview and later scoring integration. It does not evaluate that model.
+
+The fixed JSON encoder contract was exported from the public simulated reference
+training data with scripts/export_federation_schema.py. Workers never fit schemas
+on other banks' data. Central needs the schema file, not bank transactions. Banks
+load only their own training split; validation/test data and paper artifacts are
+not touched by federation. A configuration/schema mismatch cannot pass the tensor
+and signed metadata checks. Retained traffic for other run IDs is ignored before
+HMAC validation; every accepted current-run message still requires valid HMAC.
+
+The participant table shows only locally observed evidence. Banks do not infer
+other banks are online. Coordinator update verified means an actual validated
+update, not a shared-model delivery receipt. Coordinator Completed means aggregation
+and broker publication completed. Bank Completed includes verified shared-model
+receipt for every configured round. The coordinator has no final recipient receipt
+collector yet; check bank dashboards to confirm all deliveries.
+
+Stop after this round and Cancel local run affect only this laptop. Stop is
+acknowledged at the next round boundary; a final round can finish Completed first.
+Cancellation is checked between training batches, publication/wait phases and
+checkpoint boundaries. Already published messages cannot be retracted. Keep the
+same state folder to retain runs/events/checkpoints. Workers retain their OS lock
+if the dashboard restarts; dashboard controls reconnect to persistent run state.
+There is no interrupted-round resume: coordinate a NEW run ID after a failed run.
+
+Manual Weight transfers are linked and summarized in this tab, with their actual
+Published/Delivered/Verified statuses. These manual files do not start federation.
+Tab 2 locally selected checkpoints are not automatically imported: all federation
+participants start from the same initialization and fixed encoder contract.
+This sample-weighted temporal training workflow is separate from the paper's
+frozen equal-client continual/replay model; its reported scores do not apply here.
+
+Acceptance check (real PyTorch, actual prepared training data, real Kafka, local
+processes for all three banks and central):
+
+```powershell
+.\.venv\Scripts\python.exe -m streaming.test_federation --broker 10.30.127.124:9092
+```
+
+The check validates two rounds, three accepted updates per round, byte-identical
+returned checkpoints on all banks, and shared-model selection. Evidence stays under
+ignored streaming/.local/accept-*. It is a same-machine transport/training check;
+Windows/macOS cross-laptop networking still requires teammate acceptance.
+
 ## Launch with saved setup
 
 Open Start-Weights-Windows.cmd on Windows. On macOS, run chmod +x Start-Weights-macOS.command once, then open it (or use bash Start-Weights-macOS.command). Native macOS verification is pending.
@@ -128,7 +235,7 @@ wrong signatures, cancellation, durable history and HTTP session protection. The
 
 ---
 
-# Training dashboard backend — first implementation
+# Training dashboard backend â€” first implementation
 
 This directory provides a process controller and persistent status for the existing
 federation pipeline. It does not yet provide a browser dashboard, Docker packaging,

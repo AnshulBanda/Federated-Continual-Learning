@@ -65,13 +65,16 @@ class RoundTripTests(unittest.TestCase):
     def test_three_banks_two_rounds_weighted_fedavg(self):
         self.run_round_trip()
 
-    def run_round_trip(self, stop=False):
+    def test_three_banks_receive_verified_aggregates(self):
+        self.run_round_trip(returned=True)
+
+    def run_round_trip(self, stop=False, returned=False):
         with tempfile.TemporaryDirectory() as directory, ExitStack() as stack:
             root = Path(directory)
             raw = json.loads((Path(__file__).resolve().parents[2] /
                               'distributed_federation/config.example.json').read_text())
             raw.update(broker='local:9092', dataset_dir=str(root), output_dir=str(root / 'out'),
-                       rounds=2, round_timeout_seconds=5, max_chunk_bytes=8)
+                       rounds=2, round_timeout_seconds=5, max_chunk_bytes=8, return_aggregate=returned)
             config_path = root / 'config.json'
             config_path.write_text(json.dumps(raw))
             config = load_config(config_path)
@@ -136,6 +139,7 @@ class RoundTripTests(unittest.TestCase):
             stack.enter_context(patch.object(aggregator, 'load_initial_checkpoint', return_value=False))
             stack.enter_context(patch.object(aggregator, 'save_state_and_manifest', side_effect=save))
             stack.enter_context(patch.object(bank_worker, 'train_local', side_effect=train))
+            stack.enter_context(patch.object(bank_worker, 'save_state_and_manifest', side_effect=save))
 
             from distributed_federation.common.control import control_source, RunStopped
 
@@ -170,6 +174,10 @@ class RoundTripTests(unittest.TestCase):
                 verify_checkpoint(output, round_id)
             result = json.loads((output / 'global_round_002.safetensors').read_bytes())
             self.assertEqual(result['weight'], 8.0)
+            if returned:
+                for client in config.clients:
+                    verify_checkpoint(output/client.client_id,2)
+                    self.assertEqual((output/client.client_id/'global_round_002.safetensors').read_bytes(), (output/'global_round_002.safetensors').read_bytes())
             self.assertEqual(sum(e[0] == 'update_validated' for e in events), 6)
             self.assertEqual(sum(e[0] == 'round_completed' for e in events), 2)
 

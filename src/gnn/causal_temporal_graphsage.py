@@ -168,6 +168,12 @@ def load_bank_frames(
             raise ValueError(f"{bank}/{split}: duplicate local node ID")
         if edges[split]["txn_id"].duplicated().any() or truth["txn_id"].duplicated().any():
             raise ValueError(f"{bank}/{split}: duplicate transaction ID")
+        if set(edges[split]["txn_id"]) != set(truth["txn_id"]):
+            raise ValueError(f"{bank}/{split}: transaction and label IDs must match exactly")
+        if not truth["y"].isin([0, 1]).all():
+            raise ValueError(f"{bank}/{split}: labels must be binary and non-missing")
+        if set(nodes[split]["node_id"]) != set(maps[split]["node_id"]) or maps[split]["account_id"].duplicated().any():
+            raise ValueError(f"{bank}/{split}: node features and account map must match one-to-one")
         edges[split] = edges[split].merge(truth[["txn_id", "y"]], on="txn_id", how="inner", validate="one_to_one")
         if len(edges[split]) != len(truth):
             raise ValueError(f"{bank}/{split}: edge/label join changed row count")
@@ -325,7 +331,7 @@ def masked_loss(logits: Tensor, labels: Tensor, mask: Tensor, pos_weight: float 
 
 def train_temporal_epoch(
     model: CausalTemporalGraphSAGE, static: Tensor, events: Events, optimizer: torch.optim.Optimizer,
-    sample_mask: Tensor, batch_size: int, tbptt_steps: int, pos_weight: float = 1.0,
+    sample_mask: Tensor, batch_size: int, tbptt_steps: int, pos_weight: float = 1.0, check_cancel=None,
 ) -> tuple[float, int]:
     """Train chronologically while retaining gradients across a bounded temporal window."""
     model.train()
@@ -339,6 +345,8 @@ def train_temporal_epoch(
     optimizer.zero_grad()
     event_batches = list(batches(events, batch_size))
     for batch_index, event_batch in enumerate(event_batches, start=1):
+        if check_cancel:
+            check_cancel()
         logits, state = model.score_and_update(state, event_batch)
         batch_mask = sample_mask[offset:offset + len(event_batch)]
         offset += len(event_batch)
@@ -366,10 +374,12 @@ def train_temporal_epoch(
 
 
 @torch.no_grad()
-def score_stream(model: CausalTemporalGraphSAGE, state: TemporalState, events: Events, batch_size: int) -> tuple[np.ndarray, np.ndarray, TemporalState]:
+def score_stream(model: CausalTemporalGraphSAGE, state: TemporalState, events: Events, batch_size: int, check_cancel=None) -> tuple[np.ndarray, np.ndarray, TemporalState]:
     model.eval()
     scores, labels = [], []
     for event_batch in batches(events, batch_size):
+        if check_cancel:
+            check_cancel()
         logits, state = model.score_and_update(state, event_batch)
         scores.append(torch.sigmoid(logits).cpu().numpy())
         labels.append(event_batch.labels.cpu().numpy())
@@ -420,6 +430,7 @@ def platt_calibrate(validation_labels: np.ndarray, validation_probabilities: np.
 def train_bank(
     args: argparse.Namespace, bank: str, device: torch.device,
     node_encoder: FeatureEncoder | None = None, edge_encoder: FeatureEncoder | None = None,
+    progress=None, check_cancel=None,
 ) -> dict[str, object]:
     bank_seed = args.seed + BANKS.index(bank) * 10_000
     set_seed(bank_seed)
@@ -447,7 +458,7 @@ def train_bank(
         epoch_mask = epoch_sample_mask(labels, ratio, generator)
         mean_loss, updates = train_temporal_epoch(
             model, static, event_sets["training"], optimizer, epoch_mask,
-            args.event_batch_size, args.tbptt_steps, weight,
+            args.event_batch_size, args.tbptt_steps, weight, check_cancel=check_cancel,
         )
         # Reconstruct memory with the frozen end-of-epoch parameters.  Reusing the
         # training-loop state would mix memories produced by many intermediate
@@ -455,10 +466,10 @@ def train_bank(
         # checkpoint is restored.
         selection_state = model.initial_state(static)
         _, _, selection_state = score_stream(
-            model, selection_state, event_sets["training"], args.event_batch_size,
+            model, selection_state, event_sets["training"], args.event_batch_size, check_cancel=check_cancel,
         )
         val_probs, val_labels, _ = score_stream(
-            model, selection_state, event_sets["validation"], args.event_batch_size,
+            model, selection_state, event_sets["validation"], args.event_batch_size, check_cancel=check_cancel,
         )
         val_pr_auc = float(average_precision_score(val_labels, val_probs))
         if val_pr_auc > best_score:
@@ -466,6 +477,8 @@ def train_bank(
             best_state = {name: value.detach().cpu().clone() for name, value in model.state_dict().items()}
         else:
             stale += 1
+        if progress:
+            progress(epoch, float(mean_loss), float(val_pr_auc))
         if epoch == 1 or epoch % 10 == 0:
             print(f"  epoch={epoch:03d} train_loss={mean_loss:.5f} optimizer_steps={updates} validation_pr_auc={val_pr_auc:.5f}")
         if stale >= args.patience:
@@ -477,8 +490,8 @@ def train_bank(
     # Final causal evaluation reconstructs state only from earlier events: train
     # warms validation; train+validation warm testing; no labels update memory.
     state = model.initial_state(static)
-    _, _, state = score_stream(model, state, event_sets["training"], args.event_batch_size)
-    val_probs, val_labels, state = score_stream(model, state, event_sets["validation"], args.event_batch_size)
+    _, _, state = score_stream(model, state, event_sets["training"], args.event_batch_size, check_cancel=check_cancel)
+    val_probs, val_labels, state = score_stream(model, state, event_sets["validation"], args.event_batch_size, check_cancel=check_cancel)
     if args.calibration == "platt":
         calibrated_val_probs = platt_calibrate(val_labels, val_probs, val_probs)
     else:

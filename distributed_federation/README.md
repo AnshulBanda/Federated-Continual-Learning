@@ -4,7 +4,21 @@ For the planned browser-operated training workflow, start with the
 [federated training and streaming blueprint](../docs/STREAMING_BLUEPRINT.md).
 For the implemented process controller, persistent events, developer commands,
 tests, and current limitations, see the [backend guide](../streaming/README.md).
-**The browser dashboard and platform launchers are not implemented yet.**
+**The browser workflow is implemented in the Federated Collaboration tab.**
+Use the Windows/macOS dashboard launcher, configure Bank/client or Central
+coordinator, compare the same fresh run ID/roster/settings, check local readiness,
+and start all banks before central. See streaming/README.md for the current guide.
+
+The browser configuration uses feature_schema.json, a JSON-only preprocessing
+contract exported once from the public simulated reference training data. Banks
+read only their own training graph at runtime; central reads no bank transactions.
+Every round returns the signed aggregate to each bank for verification and atomic
+checkpoint saving. This is sample-weighted local temporal FedAvg, separate from
+the paper's frozen equal-weight continual/replay evaluation.
+
+Legacy CLI configs without feature_schema retain the older shared-data preparation
+behavior. Use the browser-generated configuration for the bank-local workflow.
+Do not run legacy configs while claiming that clients need only their own data.
 
 Central broadcasts the same model to every bank. Banks train locally and return
 weights and example counts; central waits for all banks, applies sample-weighted
@@ -25,8 +39,11 @@ existing learning workflow and adds structured status and persistence.
   the received file or return a completion receipt to central.
 - `kafka/compose.yaml`: existing Kafka deployment, used as an implementation reference.
 
-The backend integration lives in `streaming/`. Remote readiness/receipts, durable
-update recovery, browser controls, and platform packaging remain planned work.
+The backend integration lives in `streaming/`. Readiness announcements and signed
+shared-model returns are available in the browser workflow. Coordinator-side
+final recipient receipts, durable update resume, and native macOS acceptance remain
+unfinished. A coordinator Completed status proves aggregation/publication, not
+receipt by every bank; each bank records its own verified receipt.
 See the blueprint for the full scope and acceptance criteria.
 
 ## Earlier operational documentation

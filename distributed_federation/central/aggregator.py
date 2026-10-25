@@ -17,6 +17,7 @@ from distributed_federation.common.model_runtime import (
     fedavg,
     load_initial_checkpoint,
     prepare_runtime,
+    prepare_frozen_runtime,
     save_state_and_manifest,
     serialize_state,
     validate_state,
@@ -55,7 +56,7 @@ def run(config) -> int:
     client_secrets = {client.client_id: required_secret(secret_env_name(client.client_id)) for client in config.clients}
 
     print(f"[central] Loading shared schema from {config.dataset_dir}", flush=True)
-    runtime = prepare_runtime(config, config.clients[0].bank)
+    runtime = prepare_frozen_runtime(config) if config.feature_schema else prepare_runtime(config, config.clients[0].bank)
     loaded = load_initial_checkpoint(runtime.model, config.initial_checkpoint)
     print(f"[central] Initial checkpoint: {'loaded' if loaded else 'random seeded initialization'}", flush=True)
     print(f"[central] Schema SHA-256: {runtime.schema_sha256}", flush=True)
@@ -106,12 +107,23 @@ def run(config) -> int:
                 if message.error():
                     raise RuntimeError(f"Kafka consumer error: {message.error()}")
                 raw = message.value()
+                sender = None
                 try:
+                    header=json.loads(raw)
+                    if not isinstance(header,dict) or header.get('run_id')!=config.run_id:
+                        continue
                     sender = peek_sender(raw)
                     secret = client_secrets.get(sender)
                     if secret is None:
                         continue
                     envelope = verify_chunk(raw, secret)
+                    if (envelope['message_type']=='client_ready' and envelope['run_id']==config.run_id
+                            and envelope['schema_sha256']==runtime.schema_sha256):
+                        ready = assembler.add(envelope)
+                        if ready is not None:
+                            emit('participant_ready', round_id, client_id=sender)
+                            consumer.commit(message=message, asynchronous=False)
+                        continue
                     if (
                         envelope["message_type"] != "client_update"
                         or envelope["run_id"] != config.run_id
@@ -145,6 +157,7 @@ def run(config) -> int:
                         flush=True,
                     )
                 except ValueError as exc:
+                    emit('update_rejected', round_id, client_id=sender, error_type=type(exc).__name__)
                     print(f"[central] Rejected Kafka message: {exc}", file=sys.stderr, flush=True)
 
             check_control()
@@ -177,6 +190,13 @@ def run(config) -> int:
             weights_path, manifest_path = save_state_and_manifest(global_state, run_output, round_id, manifest)
             emit('round_completed', round_id, output_global_sha256=final_payload_hash,
                  checkpoint=str(weights_path), manifest=str(manifest_path))
+            if config.return_aggregate:
+                returned = serialize_state(global_state)
+                returned_hash = publish_payload(producer, config.global_topic, returned,
+                    dict(message_type='aggregated_model', run_id=config.run_id, round_id=round_id,
+                         sender_id='central', schema_sha256=runtime.schema_sha256,
+                         base_model_sha256=base_hash), central_secret, config.max_chunk_bytes)
+                emit('aggregate_published', round_id, payload_sha256=returned_hash, bytes=len(returned))
             print(f"[central] Round {round_id}: aggregated and saved {weights_path}", flush=True)
     finally:
         consumer.close()

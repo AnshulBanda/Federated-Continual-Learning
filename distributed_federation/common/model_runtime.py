@@ -40,6 +40,8 @@ def _imports():
 
 def prepare_runtime(config: FederationConfig, bank: str) -> RuntimeData:
     torch, Model, build_bank_data, fit_encoders, set_seed = _imports()
+    if config.feature_schema:
+        return prepare_frozen_runtime(config, bank)
     set_seed(config.seed)
     node_encoder, edge_encoder = fit_encoders(config.dataset_dir, list(config.schema_banks))
     static, streams, node_columns, edge_columns = build_bank_data(
@@ -127,36 +129,21 @@ def load_initial_checkpoint(model: Any, path: Path | None) -> bool:
 
 def train_local(runtime: RuntimeData, config: FederationConfig, round_id: int, client_index: int) -> float:
     torch, _, _, _, set_seed = _imports()
-    from causal_temporal_graphsage import batches, sampled_loss
-
+    from causal_temporal_graphsage import epoch_sample_mask, train_temporal_epoch
     seed = config.seed + round_id * 100_000 + client_index
     set_seed(seed)
-    model, static, train = runtime.model, runtime.static, runtime.streams["training"]
-    model.train()
-    optimizer = torch.optim.AdamW(
-        model.parameters(), lr=config.learning_rate, weight_decay=config.weight_decay
-    )
+    model, static, train = runtime.model, runtime.static, runtime.streams['training']
+    optimizer = torch.optim.AdamW(model.parameters(), lr=config.learning_rate, weight_decay=config.weight_decay)
     generator = torch.Generator().manual_seed(seed)
-    losses: list[float] = []
+    losses = []
     for epoch in range(config.local_epochs):
-        state = model.initial_state(static)
-        for batch in batches(train, config.batch_size):
-            check_control()
-            optimizer.zero_grad(set_to_none=True)
-            logits, state = model.score_and_update(state, batch)
-            loss = sampled_loss(logits, batch.labels, config.negative_ratio, 1.0, generator)
-            if loss is None:
-                state = state.detached()
-                continue
-            if not torch.isfinite(loss):
-                raise RuntimeError("Local training produced a non-finite loss")
-            loss.backward()
-            torch.nn.utils.clip_grad_norm_(model.parameters(), 5.0)
-            optimizer.step()
-            state = state.detached()
-            losses.append(float(loss.detach()))
-        emit('epoch_completed', round_id, epoch=epoch + 1, total_epochs=config.local_epochs,
-             mean_train_loss=sum(losses) / max(1, len(losses)))
+        check_control()
+        mask = epoch_sample_mask(train.labels, config.negative_ratio, generator)
+        loss, steps = train_temporal_epoch(model, static, train, optimizer, mask,
+            config.batch_size, 2, 1.0, check_cancel=check_control)
+        losses.append(loss)
+        emit('epoch_completed', round_id, epoch=epoch+1, total_epochs=config.local_epochs,
+             mean_train_loss=loss, optimizer_steps=steps)
     return sum(losses) / max(1, len(losses))
 
 
@@ -189,3 +176,48 @@ def save_state_and_manifest(
     paths = save_checkpoint(serialize_state(state), output_dir, round_id, manifest)
     verify_checkpoint(output_dir, round_id)
     return paths
+
+
+class FrozenEncoder:
+    """Apply the shared demo preprocessing contract without reading other banks."""
+    def __init__(self, specification):
+        self.spec = specification
+    def transform(self, frame):
+        import numpy as np
+        import pandas as pd
+        blocks = []
+        for column in self.spec['numeric']:
+            values = pd.to_numeric(frame[column['name']], errors='raise').to_numpy(dtype=float)
+            values = np.where(np.isnan(values), column['median'], values)
+            blocks.append(((values-column['mean'])/column['scale']).reshape(-1,1))
+        for column in self.spec['categorical']:
+            values = frame[column['name']].fillna(column['fill']).to_numpy()
+            blocks.append(np.column_stack([values==category for category in column['categories']]))
+        result=np.concatenate(blocks, axis=1).astype(np.float32)
+        if not np.isfinite(result).all():
+            raise ValueError('Non-finite features after shared preprocessing')
+        return result
+
+
+def prepare_frozen_runtime(config, bank=None):
+    torch, Model, build_bank_data, _, set_seed = _imports()
+    contract = json.loads(config.feature_schema.read_text(encoding='utf-8'))
+    if contract.get('format') != 1:
+        raise ValueError('Unknown feature-schema format')
+    set_seed(config.seed)
+    nodes, edges = FrozenEncoder(contract['nodes']), FrozenEncoder(contract['edges'])
+    static, streams = None, {}
+    if bank is not None:
+        static, streams, node_columns, edge_columns = build_bank_data(config.dataset_dir, bank,
+            nodes, edges, splits=('training',))
+        if node_columns != contract['node_columns'] or edge_columns != contract['edge_columns']:
+            raise ValueError('Local approved feature columns differ from the shared schema')
+    model = Model(contract['node_feature_count'], contract['edge_feature_count'], config.hidden_channels, config.dropout).cpu()
+    schema = dict(model='CausalTemporalGraphSAGE', feature_contract=contract,
+                  training_protocol=dict(rounds=config.rounds,local_epochs=config.local_epochs,batch_size=config.batch_size,
+                      negative_ratio=config.negative_ratio,learning_rate=config.learning_rate,weight_decay=config.weight_decay,
+                      seed=config.seed,clients=[dict(client_id=c.client_id,bank=c.bank) for c in config.clients]),
+                  hidden_channels=config.hidden_channels, dropout=config.dropout,
+                  state={key:dict(shape=list(value.shape),dtype=str(value.dtype)) for key,value in model.state_dict().items()})
+    encoded=json.dumps(schema, sort_keys=True, separators=(',',':')).encode()
+    return RuntimeData(model, static, streams, schema, hashlib.sha256(encoded).hexdigest())
