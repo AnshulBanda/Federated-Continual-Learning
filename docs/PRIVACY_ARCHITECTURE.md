@@ -129,8 +129,9 @@ Mean deterministic rounding error is at most e. Gaussian-share rounding adds at
 most e to the mean error relative to its continuous counterpart. Noise is never
 clipped or data-dependently truncated. Modular wrapping is a postprocessing map
 and does not worsen DP. Useful decoding assumes the signed sum fits in int64;
-with these settings that limit is billions of standard deviations away. Treat
-any radically larger C/noise/scale configuration as a numerical validation task.
+with these settings that limit is billions of standard deviations away. The implementation rejects configurations whose conservative clipped-sum plus
+12-sigma-per-client range reaches 2^62 ring units. A union bound on ideal
+Gaussian tail wrapping is at most 2*n*d*Phi(-12), below 3e-27 here.
 The encoder handles large finite tails by modulo conversion, not rejection.
 
 ## Level 2: secure central Gaussian DP

@@ -13,3 +13,4 @@ artifacts/dp_level3_secagg/**/*.sqlite3
 artifacts/dp_level3_secagg/**/*.sqlite3-*
 artifacts/dp_level3_secagg/**/*.log
 artifacts/dp_level3_secagg/**/*.reserved
+artifacts/dp_level3_secagg/FINAL_GIT_STATE.json

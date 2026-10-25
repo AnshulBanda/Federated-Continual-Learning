@@ -161,6 +161,8 @@ class PrivacyMathTests(unittest.TestCase):
         np.testing.assert_array_equal(vector(a),vector(b));self.assertGreater(np.linalg.norm(vector(b)),1)
     def test_incomplete_noise_cohort_and_weighted_not_supported(self):
         with self.assertRaises(ValueError):Privacy(min_noise_contributors=2)
+        with self.assertRaisesRegex(ValueError,'Unsafe fixed-point'):
+            Privacy(mode='distributed_dp',clip=1e20,multiplier=1).parameters(242561)
         with self.assertRaises(ValueError):aggregate([np.zeros(1)],{'x':torch.zeros(1)},Privacy(mode='distributed_dp'),'r',1)
     def test_ledger_restart_and_duplicate_guard_no_secrets(self):
         with tempfile.TemporaryDirectory() as tmp:

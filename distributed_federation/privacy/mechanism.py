@@ -44,6 +44,11 @@ class Privacy:
         effective = self.clip + error
         sensitivity = 2*effective/self.expected_clients
         sigma = self.multiplier*sensitivity
+        share = sigma*math.sqrt(self.expected_clients)
+        # Ensure unique signed decoding on the useful range. Ideal Gaussian tails
+        # outside 12 sigma are wrapped (postprocessing), never silently truncated.
+        if self.secure and self.expected_clients*(effective+12*share)*self.scale >= 2**62:
+            raise ValueError('Unsafe fixed-point range: reduce C, multiplier, or scale')
         if self.mode == "option_a":
             sigma = 2*self.clip*self.multiplier/math.sqrt(self.expected_clients)
         return dict(C=self.clip, n=self.expected_clients, dimension=dimension,

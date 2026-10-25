@@ -142,6 +142,8 @@ def load_config(path: str | Path, broker_override: str | None = None) -> Federat
     aggregation = raw.get("aggregation", "samples")
     if aggregation not in ("equal", "samples") or (privacy.mode != "none" and aggregation != "equal"):
         raise ValueError("Private aggregation supports equal weights only")
+    if privacy.mode != "none" and len({c.bank for c in clients}) != len(clients):
+        raise ValueError("Private client adjacency requires distinct bank datasets")
     if privacy.mode != "none" and privacy.expected_clients != len(clients):
         raise ValueError("Privacy requires the complete configured cohort")
     if raw.get("rng_policy", "per_client") != "per_client":
