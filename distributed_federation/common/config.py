@@ -46,6 +46,8 @@ class FederationConfig:
     global_topic: str
     update_topic: str
     initial_checkpoint: Path | None
+    feature_schema: Path | None = None
+    return_aggregate: bool = False
 
     def client(self, client_id: str) -> ClientConfig:
         for client in self.clients:
@@ -151,6 +153,8 @@ def load_config(path: str | Path, broker_override: str | None = None) -> Federat
         global_topic=global_topic,
         update_topic=update_topic,
         initial_checkpoint=_repo_path(raw.get("initial_checkpoint")),
+        feature_schema=_repo_path(raw.get("feature_schema")),
+        return_aggregate=raw.get("return_aggregate", False) is True,
     )
 
 

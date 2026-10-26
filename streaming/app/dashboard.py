@@ -4,12 +4,20 @@ import importlib.util
 import json
 import os
 import secrets
+import threading
 from http.server import BaseHTTPRequestHandler, ThreadingHTTPServer
 from pathlib import Path
 from urllib.parse import urlparse
 
 from .transfers import Transfers, MAX_BYTES
 from .locking import RuntimeLock
+from .peer_checks import PeerChecks
+from .settings import Settings
+from .overview import Overview
+from .local_training import LocalTraining
+from .collaboration import Collaboration
+from .monitoring import Monitoring
+from .results import research_results
 
 WEB = Path(__file__).resolve().parents[1] / 'web' / 'index.html'
 
@@ -17,7 +25,18 @@ WEB = Path(__file__).resolve().parents[1] / 'web' / 'index.html'
 def server(root, port=8765):
     runtime_lock = RuntimeLock(Path(root) / "dashboard.lock")
     runtime_lock.__enter__()
-    transfers = Transfers(root)
+    try:
+        transfers = Transfers(root)
+    except BaseException:
+        runtime_lock.__exit__()
+        raise
+    peers = PeerChecks()
+    settings = Settings(root)
+    overview = Overview(root)
+    training = LocalTraining(root)
+    collaboration = Collaboration(root)
+    monitoring = Monitoring(root)
+    check_lock = threading.Lock()
     token = secrets.token_urlsafe(32)
 
     class Handler(BaseHTTPRequestHandler):
@@ -53,6 +72,24 @@ def server(root, port=8765):
             path = urlparse(self.path).path
             if path == '/':
                 self.respond(200, WEB.read_text(encoding='utf-8').replace('__TOKEN__', token).encode(), 'text/html; charset=utf-8')
+            elif path == '/api/monitoring':
+                self.respond(200, monitoring.status(overview.load()['bank']))
+            elif path.startswith('/api/monitoring/rows/'):
+                try:
+                    self.respond(200, monitoring.rows(path.rsplit('/',1)[-1],overview.load()['bank']))
+                except ValueError as exc:
+                    self.respond(400, {'error':str(exc)})
+            elif path == '/api/results':
+                bank=overview.load()['bank']
+                self.respond(200,dict(bank=bank,research=research_results(),training=[j for j in training.status()['jobs'] if j['bank']==bank],monitoring=monitoring.status(bank)['jobs'],federation=collaboration.status(bank)['runs'],transfers=transfers.history()))
+            elif path == '/api/collaboration':
+                self.respond(200, collaboration.status(overview.load()['bank']))
+            elif path == '/api/training':
+                self.respond(200, training.status())
+            elif path == '/api/overview':
+                self.respond(200, overview.load())
+            elif path == '/api/settings':
+                self.respond(200, settings.load())
             elif path == '/api/status':
                 self.respond(200, {'jobs': transfers.history(),
                                   'kafka_client': importlib.util.find_spec('confluent_kafka') is not None,
@@ -86,8 +123,51 @@ def server(root, port=8765):
                     data = json.loads(body)
                     if not isinstance(data, dict):
                         raise ValueError('Expected a JSON object.')
-                    if self.path == '/api/start':
+                    if self.path == '/api/monitoring/start':
+                        result = monitoring.start(data, overview.load()['bank'])
+                    elif self.path == '/api/monitoring/cancel':
+                        result = monitoring.cancel(data.get('id'), overview.load()['bank'])
+                    elif self.path == '/api/collaboration/save':
+                        result = collaboration.save(data)
+                    elif self.path == '/api/collaboration/check':
+                        result = collaboration.preflight(data.get('profile'), overview.load()['bank'], data.get('prepare') is True)
+                    elif self.path == '/api/collaboration/start':
+                        if any(j['status'] in ('Queued','Running') for j in training.status()['jobs']):
+                            raise ValueError('Finish or cancel local training before starting federation.')
+                        result = collaboration.start(data, overview.load()['bank'])
+                    elif self.path == '/api/collaboration/stop':
+                        result = collaboration.control(data.get('run'), cancel=data.get('cancel') is True)
+                    elif self.path == '/api/collaboration/select':
+                        result = collaboration.select_model(data.get('run'), data.get('round'), overview.load()['bank'])
+                    elif self.path == '/api/training/start':
+                        if collaboration.process and collaboration.process.poll() is None:
+                            raise ValueError('Finish or cancel federation before starting local training.')
+                        result = training.start(data, overview.load()['bank'])
+                    elif self.path == '/api/training/cancel':
+                        result = training.cancel(data.get('id'))
+                    elif self.path == '/api/training/activate':
+                        result = training.activate(data.get('id'), overview.load()['bank'])
+                    elif self.path == '/api/overview':
+                        result = overview.save(data)
+                    elif self.path == '/api/settings':
+                        result = settings.save(data)
+                    elif self.path == '/api/start':
                         result = {'id': transfers.start(data)}
+                    elif self.path == '/api/retry':
+                        result = {'id': transfers.retry(data.get('id'), data.get('transfer_id', ''))}
+                    elif self.path == '/api/recover':
+                        result = {'id': transfers.recover(data.get('id'))}
+                    elif self.path == '/api/check':
+                        if not check_lock.acquire(blocking=False):
+                            raise ValueError('A connection check is already running. Wait for its result.')
+                        try:
+                            result = transfers.check_connection(data.get('broker', ''))
+                            if result['ready']:
+                                local_id, peer_id = (str(data.get(k, '')).strip() for k in (
+                                    ('recipient', 'sender') if data.get('mode') == 'receive' else ('sender', 'recipient')))
+                                result['peer'] = peers.check(result['broker'], os.environ.get('FCL_TRANSFER_SECRET', ''), local_id, peer_id)
+                        finally:
+                            check_lock.release()
                     elif self.path == '/api/cancel':
                         transfers.cancel(data.get('id'))
                         result = {'requested': True}
@@ -102,6 +182,10 @@ def server(root, port=8765):
 
     class Server(ThreadingHTTPServer):
         def server_close(self):
+            monitoring.close()
+            training.close()
+            transfers.close()
+            peers.close()
             super().server_close()
             runtime_lock.__exit__()
 

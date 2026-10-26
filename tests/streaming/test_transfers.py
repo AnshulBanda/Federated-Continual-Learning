@@ -18,7 +18,7 @@ class TransferTests(unittest.TestCase):
         self.addCleanup(self.tmp.cleanup)
         self.transfers = Transfers(self.tmp.name)
 
-    def test_sender_waits_for_delivery_and_reports_publication_only(self):
+    def test_sender_waits_for_broker_acknowledgments_before_receipt_wait(self):
         sent = []
         callbacks = []
         class Producer:
@@ -32,12 +32,12 @@ class TransferTests(unittest.TestCase):
                 return len(callbacks)
         job = dict(id='send', transfer_id='unique', sender='central', recipient='bank-1', bytes=0)
         payload = b'x' * 500001
-        with patch.dict('sys.modules', {'confluent_kafka': SimpleNamespace(Producer=lambda config: Producer())}):
+        with patch.object(self.transfers, 'wait_receipt'), patch.dict('sys.modules', {'confluent_kafka': SimpleNamespace(Producer=lambda config: Producer())}):
             self.transfers.send(job, 'local:9092', 'x' * 32, payload)
         self.assertEqual(len(sent), 2)
         self.assertEqual(job['status'], 'Published')
         self.assertEqual(job['bytes'], len(payload))
-        self.assertIn('not yet confirmed', job['detail'])
+        self.assertIn('signed receiver receipt', job['detail'])
 
     def test_receive_signed_out_of_order_duplicates(self):
         payload = b'opaque model weights' * 100
@@ -51,6 +51,32 @@ class TransferTests(unittest.TestCase):
             return SimpleNamespace(error=lambda: None, value=lambda: raw)
         consumer = SimpleNamespace(subscribe=lambda topics: None, poll=poll, close=lambda: closed.append(True))
         job = dict(id='a' * 32, mode='receive', transfer_id='test', sender='central', recipient='bank-1', bytes=0)
+        with patch.dict('sys.modules', {'confluent_kafka': SimpleNamespace(Consumer=lambda config: consumer)}):
+            self.transfers.receive(job, 'local:9092', 'x' * 32)
+        self.assertEqual(job['status'], 'Verified')
+        self.assertEqual(job['bytes'], len(payload))
+        self.assertEqual((Path(self.tmp.name) / (job['id'] + '.weights')).read_bytes(), payload)
+        self.assertEqual(closed, [True])
+
+    def test_receive_ignores_unrelated_retained_messages_with_other_secrets(self):
+        payload = b'new transfer' * 100
+        metadata = dict(message_type='weight_file', run_id='test', round_id=0,
+                        sender_id='central', recipient_id='bank-1',
+                        schema_sha256='opaque-file', base_model_sha256='', file_size=len(payload))
+        retained = []
+        for field, value in [('run_id', 'old'), ('sender_id', 'other'),
+                             ('recipient_id', 'other'), ('message_type', 'other')]:
+            retained.extend(create_chunks(payload, dict(metadata, **{field: value}), 'z' * 32, 500))
+        current = create_chunks(payload, metadata, 'x' * 32, 500)
+        messages = iter([b'not json', b'[]', b'\xff'] + retained + current)
+        closed = []
+        def poll(timeout):
+            raw = next(messages)
+            return SimpleNamespace(error=lambda: None, value=lambda: raw)
+        consumer = SimpleNamespace(subscribe=lambda topics: None, poll=poll,
+                                   close=lambda: closed.append(True))
+        job = dict(id='c' * 32, mode='receive', transfer_id='test', sender='central',
+                   recipient='bank-1', bytes=0)
         with patch.dict('sys.modules', {'confluent_kafka': SimpleNamespace(Consumer=lambda config: consumer)}):
             self.transfers.receive(job, 'local:9092', 'x' * 32)
         self.assertEqual(job['status'], 'Verified')
