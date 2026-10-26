@@ -12,6 +12,9 @@ from pathlib import Path
 from .locking import RuntimeLock
 from .overview import BANKS, REPO
 
+MAX_TRAINING_EPOCHS = 25
+EARLY_STOPPING_PATIENCE = 5
+
 def now():
     return datetime.now(timezone.utc).isoformat()
 
@@ -133,9 +136,9 @@ class LocalTraining:
         dataset = Path(raw.strip()).expanduser().resolve()
         if not dataset.is_dir():
             raise ValueError('Dataset folder does not exist on this laptop.')
-        epochs = data.get('epochs', 3)
-        if isinstance(epochs, bool) or not isinstance(epochs, int) or not 1 <= epochs <= 25:
-            raise ValueError('Epochs must be an integer from 1 to 25.')
+        if 'epochs' in data:
+            raise ValueError('Epochs are managed automatically. Refresh the dashboard before training.')
+        epochs = MAX_TRAINING_EPOCHS
         with self.mutex:
             if self.process and self.process.poll() is None:
                 raise ValueError('A local data check or training job is already running.')
@@ -155,7 +158,7 @@ class LocalTraining:
                     raise ValueError('Run and pass Check data quality for this bank and folder first.')
             key = uuid.uuid4().hex
             folder = self.root / key
-            job = dict(id=key, bank=bank, dataset=str(dataset), kind=kind, epochs=epochs, epoch=0, status='Queued', started=now(), detail='Starting local worker')
+            job = dict(id=key, bank=bank, dataset=str(dataset), kind=kind, epochs=epochs, patience=EARLY_STOPPING_PATIENCE, epoch=0, status='Queued', started=now(), detail='Starting local worker')
             write_json(folder / 'job.json', job)
             try:
                 with (folder / 'output.log').open('wb') as output:
@@ -216,10 +219,10 @@ def worker(path):
                 from src.gnn import causal_temporal_graphsage as model
                 import argparse
                 torch.set_num_threads(min(4, os.cpu_count() or 1))
-                args = argparse.Namespace(dataset_dir=Path(job['dataset']), output_dir=folder, seed=42, validation_only=True, hidden_channels=128, dropout=0.25, learning_rate=0.001, weight_decay=0.0001, negative_ratio=20, full_training_weighted_bce=False, loss_pos_weight=1.0, event_batch_size=1024, tbptt_steps=2, epochs=job['epochs'], patience=5, calibration='none', alert_k='10,25,50')
+                args = argparse.Namespace(dataset_dir=Path(job['dataset']), output_dir=folder, seed=42, validation_only=True, hidden_channels=128, dropout=0.25, learning_rate=0.001, weight_decay=0.0001, negative_ratio=20, full_training_weighted_bce=False, loss_pos_weight=1.0, event_batch_size=1024, tbptt_steps=2, epochs=job['epochs'], patience=job.get('patience', EARLY_STOPPING_PATIENCE), calibration='none', alert_k='10,25,50')
                 def progress(epoch, loss, score):
                     cancelled()
-                    update(epoch=epoch, loss=loss, validation_pr_auc=score, detail=f'Epoch {epoch}/{job["epochs"]} completed')
+                    update(epoch=epoch, loss=loss, validation_pr_auc=score, detail=f'Epoch {epoch} completed; monitoring validation PR-AUC for early stopping')
                 update(detail='Training Temporal GraphSAGE locally on CPU')
                 metrics = model.train_bank(args, job['bank'], torch.device('cpu'), progress=progress, check_cancel=cancelled)
                 cancelled()
@@ -227,7 +230,7 @@ def worker(path):
                     raise ValueError('Dataset changed during training. This checkpoint cannot be selected; check data and run again.')
                 write_json(folder / 'metrics.json', metrics)
                 checkpoint = folder / (job['bank']+'_causal_temporal_graphsage.pt')
-                update(metrics=metrics, sha256=hashlib.sha256(checkpoint.read_bytes()).hexdigest())
+                update(stop_reason='Early stopping' if metrics.get('early_stopping_epoch') else 'Automatic epoch limit reached', metrics=metrics, sha256=hashlib.sha256(checkpoint.read_bytes()).hexdigest())
             update(status='Completed', ended=now(), detail='Data checks completed' if job['kind']=='check' else 'Local training and validation completed. Select this model to use it in the workspace.')
     except InterruptedError as exc:
         update(status='Cancelled', ended=now(), detail=str(exc))
