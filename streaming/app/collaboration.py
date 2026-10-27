@@ -27,7 +27,7 @@ class Collaboration:
         self.checked=None
     def defaults(self):
         return dict(role='bank',broker='10.30.127.124:9092',run_id='team-'+time.strftime('%Y%m%d-%H%M%S'),
-                    banks=list(CLIENTS),dataset=str(REPO/'data/final_temporal_dataset'),rounds=1,local_epochs=1,timeout=900)
+                    banks=list(CLIENTS),dataset=str(REPO/'data/final_temporal_dataset'),rounds=4,local_epochs=3,timeout=900)
     def profile(self):
         return read_json(self.root/'profile.json',self.defaults())
     def validate(self, data):
@@ -63,7 +63,7 @@ class Collaboration:
             clients=[dict(client_id=CLIENTS[b],bank=b) for b in profile['banks']],
             schema_banks=list(CLIENTS),dataset_dir=profile['dataset'],
             output_dir=str(self.root/'models'),initial_checkpoint=None,
-            feature_schema=str(SCHEMA),return_aggregate=True,
+            feature_schema=str(SCHEMA),return_aggregate=True,training_protocol="adaptive_ensemble",replay_size=2000,
             rounds=profile['rounds'],local_epochs=profile['local_epochs'],hidden_channels=128,
             dropout=.25,batch_size=1024,negative_ratio=20,learning_rate=.001,weight_decay=.0001,
             seed=42,round_timeout_seconds=profile['timeout'],max_chunk_bytes=524288,
@@ -151,9 +151,12 @@ class Collaboration:
         verify_checkpoint(checkpoint.parent,round_id)
         digest=hashlib.sha256(checkpoint.read_bytes()).hexdigest()
         if digest!=event['details']['payload_sha256']:raise ValueError('Shared checkpoint changed; selection refused.')
+        manifest=read_json(checkpoint.with_suffix('.json'),{})
+        if manifest.get('schema',{}).get('training_protocol',{}).get('protocol')!='adaptive_ensemble':
+            raise ValueError('This is a legacy federation model. Start a new ensemble collaboration run.')
         model=dict(bank=bank,version=f"fed-{run['run_id']}-r{round_id}",sha256=digest,
             checkpoint=str(checkpoint),trained_at=event['time'],selected_at=now(),
-            model_kind='Federated sample-weighted FedAvg',validation=None,job='federation:'+str(run_id))
+            model_kind='federated_ensemble',validation=None,job='federation:'+str(run_id))
         write_json(self.root.parent/'local-training'/('active-'+bank+'.json'),model)
         return model
     def status(self, bank):

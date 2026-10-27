@@ -48,6 +48,8 @@ class FederationConfig:
     initial_checkpoint: Path | None
     feature_schema: Path | None = None
     return_aggregate: bool = False
+    training_protocol: str = "legacy"
+    replay_size: int = 2000
 
     def client(self, client_id: str) -> ClientConfig:
         for client in self.clients:
@@ -132,6 +134,11 @@ def load_config(path: str | Path, broker_override: str | None = None) -> Federat
     if not dataset_dir.is_dir():
         raise ValueError(f"Dataset directory does not exist: {dataset_dir}")
 
+    if raw.get("training_protocol", "legacy") not in ("legacy", "adaptive_ensemble"):
+        raise ValueError("Unknown training protocol")
+    if not 1 <= int(raw.get("replay_size", 2000)) <= 10000:
+        raise ValueError("Replay size must be between 1 and 10000")
+
     return FederationConfig(
         broker=broker,
         run_id=run_id,
@@ -155,6 +162,8 @@ def load_config(path: str | Path, broker_override: str | None = None) -> Federat
         initial_checkpoint=_repo_path(raw.get("initial_checkpoint")),
         feature_schema=_repo_path(raw.get("feature_schema")),
         return_aggregate=raw.get("return_aggregate", False) is True,
+        training_protocol=raw.get("training_protocol", "legacy"),
+        replay_size=int(raw.get("replay_size", 2000)),
     )
 
 

@@ -69,7 +69,7 @@ def main():
             selected=actors[client_id].select_model(actors[client_id].controller.status()[0]['id'],args.rounds,bank)
             assert selected['sha256']==result['rounds_verified'][-1]['sha256']
         write_json(evidence/'result.json',result)
-        print('PASS: actual local training, signed Kafka updates, sample-weighted FedAvg, and byte-identical verified returns to every bank.',flush=True)
+        print('PASS: actual local training, signed Kafka updates, three-member temporal harmonization, and byte-identical verified returns to every bank.',flush=True)
         print('Evidence:',evidence,flush=True)
     finally:
         for manager in started:

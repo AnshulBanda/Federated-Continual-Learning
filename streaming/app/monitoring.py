@@ -23,7 +23,7 @@ class Monitoring:
                 write_json(path,job)
     def status(self,bank):
         jobs=[read_json(p,{}) for p in self.root.glob('*/job.json')]
-        return dict(jobs=sorted([j for j in jobs if j.get('bank')==bank],key=lambda j:j['started'],reverse=True)[:20])
+        return dict(jobs=sorted([j for j in jobs if j.get('bank')==bank],key=lambda j:j['started'],reverse=True)[:20], process_running=bool(self.process and self.process.poll() is None))
     def start(self,data,bank):
         with self.lock:
             if self.process and self.process.poll() is None:
@@ -68,38 +68,11 @@ def worker(path):
         from src.gnn import causal_temporal_graphsage as g
         torch.set_num_threads(min(4,os.cpu_count() or 1))
         update(status='Running',detail='Checking local data and checkpoint')
-        dataset=Path(job['dataset']);bank=job['bank'];selected=job['model'];checkpoint=Path(selected['checkpoint'])
+        dataset=Path(job['dataset']);bank=job['bank'];selected=job['model']
         report=check_dataset(dataset,bank);check()
-        payload=checkpoint.read_bytes()
-        if hashlib.sha256(payload).hexdigest()!=selected['sha256']:raise ValueError('Selected checkpoint changed.')
-        n=e=None
-        if selected.get('model_kind'):
-            from distributed_federation.common.model_runtime import FrozenEncoder, deserialize_state
-            from distributed_federation.common.checkpoints import verify_checkpoint
-            manifest=read_json(checkpoint.with_suffix('.json'))
-            verify_checkpoint(checkpoint.parent,manifest['round_id'])
-            schema=manifest['schema']['feature_contract']
-            n,e=FrozenEncoder(schema['nodes']),FrozenEncoder(schema['edges'])
-            state=deserialize_state(payload);hidden=manifest['schema']['hidden_channels'];dropout=manifest['schema']['dropout']
-        else:
-            import io
-            import pathlib
-            with torch.serialization.safe_globals([pathlib.WindowsPath,pathlib.PosixPath]):
-                saved=torch.load(io.BytesIO(payload),map_location='cpu',weights_only=True)
-            state=saved['state_dict'];hidden=saved['args']['hidden_channels'];dropout=saved['args']['dropout']
-        static,streams,ncols,ecols=g.build_bank_data(dataset,bank,n,e,splits=('training','validation'))
-        if not selected.get('model_kind') and (saved['node_columns']!=ncols or saved['edge_columns']!=ecols):raise ValueError('Checkpoint feature columns differ from dataset.')
-        if not selected.get('model_kind'):
-            origin=read_json(checkpoint.parent/'job.json',{})
-            if origin.get('quality',{}).get('fingerprint')!=report['fingerprint']:raise ValueError('Use the unchanged dataset used to train this local model.')
-        model=g.CausalTemporalGraphSAGE(static.shape[1],streams['training'].edge_attr.shape[1],hidden,dropout)
-        model.load_state_dict(state,strict=True);model.eval()
-        update(detail='Warming account memory on earlier training events');check()
-        with torch.no_grad():
-            memory=model.initial_state(static)
-            _,_,memory=g.score_stream(model,memory,streams['training'],1024,check_cancel=check)
-            update(detail='Scoring August validation transactions chronologically')
-            probs,labels,_=g.score_stream(model,memory,streams['validation'],1024,check_cancel=check)
+        from .final_model import load_runtime, score_models
+        models,static,streams,_=load_runtime(selected,dataset,bank)
+        probs,labels,members=score_models(models,static,streams,check,lambda text:update(detail=text))
         check()
         if check_dataset(dataset,bank)['fingerprint']!=report['fingerprint']:raise ValueError('Dataset changed during replay.')
         frame=pd.read_csv(dataset/'validation'/bank/'edge_list.csv.gz')
@@ -108,9 +81,10 @@ def worker(path):
         rows=[]
         for i,row in enumerate(frame.to_dict('records')):
             rows.append(dict(txn_id=str(row['txn_id']),timestamp=str(row['timestamp']),source=str(mapping[row['src_node']]),target=str(mapping[row['dst_node']]),score=float(probs[i])))
-        metrics=g.metric_block(labels,probs,.5)
-        write_json(path.parent/'transactions.json',dict(rows=rows,model=selected,bank=bank,split='August 2025 validation replay',threshold=.5))
-        update(status='Completed',ended=now(),detail='Validation replay scored; no training or test data scoring performed.',processed=len(rows),metrics=metrics,alerts=sum(r['score']>=.5 for r in rows),dataset_fingerprint=report['fingerprint'])
+        threshold=float(selected.get('threshold', .5))
+        metrics=g.metric_block(labels,probs,threshold)
+        write_json(path.parent/'transactions.json',dict(rows=rows,model=selected,bank=bank,split='August 2025 validation replay',threshold=threshold, member_count=len(models)))
+        update(status='Completed',ended=now(),detail='Validation replay scored; no training or test data scoring performed.',processed=len(rows),metrics=metrics,alerts=sum(r['score']>=threshold for r in rows),threshold=threshold,alert_metrics=g.alert_budget_metrics(labels,probs,[10,25,50]),dataset_fingerprint=report['fingerprint'])
     except InterruptedError as exc:update(status='Cancelled',ended=now(),detail=str(exc))
     except Exception as exc:
         import traceback

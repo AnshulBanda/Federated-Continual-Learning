@@ -58,7 +58,8 @@ def run(config) -> int:
     print(f"[central] Loading shared schema from {config.dataset_dir}", flush=True)
     runtime = prepare_frozen_runtime(config) if config.feature_schema else prepare_runtime(config, config.clients[0].bank)
     loaded = load_initial_checkpoint(runtime.model, config.initial_checkpoint)
-    print(f"[central] Initial checkpoint: {'loaded' if loaded else 'random seeded initialization'}", flush=True)
+    initial_status = 'three frozen adaptive members' if config.training_protocol == 'adaptive_ensemble' else ('loaded' if loaded else 'random seeded initialization')
+    print(f'[central] Initial checkpoint: {initial_status}', flush=True)
     print(f"[central] Schema SHA-256: {runtime.schema_sha256}", flush=True)
 
     producer = make_producer(config.broker)
@@ -163,7 +164,11 @@ def run(config) -> int:
             check_control()
             ordered = [received[client.client_id] for client in config.clients]
             emit('aggregating', round_id, training_examples={c.client_id: received[c.client_id][1] for c in config.clients})
-            global_state = fedavg([item[0] for item in ordered], [item[1] for item in ordered])
+            if config.training_protocol == 'adaptive_ensemble':
+                from distributed_federation.common.model_runtime import aggregate_adaptive
+                global_state = aggregate_adaptive([item[0] for item in ordered], global_state)
+            else:
+                global_state = fedavg([item[0] for item in ordered], [item[1] for item in ordered])
             runtime.model.load_state_dict(global_state, strict=True)
             final_payload_hash = sha256_bytes(serialize_state(global_state))
             manifest = {

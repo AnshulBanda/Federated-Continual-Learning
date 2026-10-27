@@ -1,3 +1,11 @@
+# Current integrated dashboard
+
+The dashboard now uses the final three-member adaptive ensemble for training, validation replay and local explanations. Start with the [current project README](../README.md), [implementation guide](../docs/IMPLEMENTATION_GUIDE.md) and [final review checklist](../docs/FINAL_REVIEW.md).
+
+The material below is preserved development history. Statements about single-model training, sample-weighted federation, missing browser integration or an unchanged model connection describe older versions and are superseded by the current guides. Transfer protocol details remain useful where unchanged.
+
+---
+
 # Model-weight transfer dashboard
 
 Current work focuses on moving weight files, not running model training. The existing

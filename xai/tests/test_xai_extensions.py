@@ -53,7 +53,7 @@ class XaiExtensionTests(unittest.TestCase):
         self.assertEqual(explanation["units"], "logit(mean member probability)")
 
     def test_checkpoint_comparison_only_uses_shared_cases(self):
-        with tempfile.TemporaryDirectory(dir=REPO_ROOT / "tmp") as temp:
+        with tempfile.TemporaryDirectory() as temp:
             base = Path(temp)
             roots = {"a": base / "a", "b": base / "b"}
             docs = {
@@ -83,7 +83,7 @@ class XaiExtensionTests(unittest.TestCase):
         self.assertNotIn("value", result["feature_explanation"]["features"][0])
 
     def test_dashboard_builds_from_report_json(self):
-        with tempfile.TemporaryDirectory(dir=REPO_ROOT / "tmp") as temp:
+        with tempfile.TemporaryDirectory() as temp:
             root = Path(temp) / "run"
             report = root / "local" / "BankA" / "reports" / "validation_1" / "explanation.json"
             report.parent.mkdir(parents=True)

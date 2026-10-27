@@ -12,7 +12,7 @@ from pathlib import Path
 from .locking import RuntimeLock
 from .overview import BANKS, REPO
 
-MAX_TRAINING_EPOCHS = 25
+MAX_TRAINING_EPOCHS = 18
 EARLY_STOPPING_PATIENCE = 5
 
 def now():
@@ -123,7 +123,7 @@ class LocalTraining:
                     job['log'] = stream.read().decode('utf-8', errors='replace')
             except OSError:
                 job['log'] = ''
-        return dict(jobs=jobs[:20], default_dataset=str(REPO / 'data/final_temporal_dataset'), dependencies={name:importlib.util.find_spec(name) is not None for name in ('torch','pandas','numpy','sklearn')})
+        return dict(jobs=jobs[:20], process_running=bool(self.process and self.process.poll() is None), default_dataset=str(REPO / 'data/final_temporal_dataset'), dependencies={name:importlib.util.find_spec(name) is not None for name in ('torch','pandas','numpy','sklearn')})
     def start(self, data, bank):
         if bank not in BANKS:
             raise ValueError('Save your bank on Overview first.')
@@ -180,10 +180,12 @@ class LocalTraining:
             job = next((j for j in self.jobs() if j['id']==key and j['bank']==bank), None)
             if not job or job['kind']!='train' or job['status']!='Completed':
                 raise ValueError('Select a completed training run for the saved bank.')
-            checkpoint = self.root / key / (bank+'_causal_temporal_graphsage.pt')
-            if not checkpoint.is_file() or hashlib.sha256(checkpoint.read_bytes()).hexdigest()!=job['sha256']:
-                raise ValueError('Checkpoint is missing or changed. Train a new model.')
-            model = dict(bank=bank, version='local-'+key[:12], sha256=job['sha256'], checkpoint=str(checkpoint), trained_at=job['ended'], selected_at=now(), validation=job['metrics']['validation'], job=key)
+            from .final_model import validate_selected
+            model = read_json(self.root / key / 'ensemble.json')
+            if not model:
+                raise ValueError('This is a legacy single-model run. Train or select the final ensemble.')
+            validate_selected(model)
+            model.update(trained_at=job['ended'], selected_at=now(), job=key)
             write_json(self.root / ('active-'+bank+'.json'), model)
             return model
     def close(self):
@@ -216,21 +218,16 @@ def worker(path):
             cancelled()
             if job['kind']=='train':
                 import torch
-                from src.gnn import causal_temporal_graphsage as model
-                import argparse
+                from .ensemble_training import train_ensemble
                 torch.set_num_threads(min(4, os.cpu_count() or 1))
-                args = argparse.Namespace(dataset_dir=Path(job['dataset']), output_dir=folder, seed=42, validation_only=True, hidden_channels=128, dropout=0.25, learning_rate=0.001, weight_decay=0.0001, negative_ratio=20, full_training_weighted_bce=False, loss_pos_weight=1.0, event_batch_size=1024, tbptt_steps=2, epochs=job['epochs'], patience=job.get('patience', EARLY_STOPPING_PATIENCE), calibration='none', alert_k='10,25,50')
-                def progress(epoch, loss, score):
-                    cancelled()
-                    update(epoch=epoch, loss=loss, validation_pr_auc=score, detail=f'Epoch {epoch} completed; monitoring validation PR-AUC for early stopping')
-                update(detail='Training Temporal GraphSAGE locally on CPU')
-                metrics = model.train_bank(args, job['bank'], torch.device('cpu'), progress=progress, check_cancel=cancelled)
+                update(detail='Adapting the three final models with June/July context replay')
+                metrics, selected = train_ensemble(job, folder, update, cancelled)
                 cancelled()
                 if check_dataset(Path(job['dataset']), job['bank'])['fingerprint'] != report['fingerprint']:
-                    raise ValueError('Dataset changed during training. This checkpoint cannot be selected; check data and run again.')
+                    raise ValueError('Dataset changed during training. Check data and run again.')
                 write_json(folder / 'metrics.json', metrics)
-                checkpoint = folder / (job['bank']+'_causal_temporal_graphsage.pt')
-                update(stop_reason='Early stopping' if metrics.get('early_stopping_epoch') else 'Automatic epoch limit reached', metrics=metrics, sha256=hashlib.sha256(checkpoint.read_bytes()).hexdigest())
+                update(stop_reason='Validation selects each member against its starting checkpoint',
+                       metrics=metrics, sha256=selected['sha256'])
             update(status='Completed', ended=now(), detail='Data checks completed' if job['kind']=='check' else 'Local training and validation completed. Select this model to use it in the workspace.')
     except InterruptedError as exc:
         update(status='Cancelled', ended=now(), detail=str(exc))
