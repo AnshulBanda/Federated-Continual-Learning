@@ -37,7 +37,8 @@ class CollaborationTests(unittest.TestCase):
         self.manager.controller.store.finish(run,'Completed')
         result=self.manager.status(None)
         self.assertEqual(result['current_round'],1)
-        self.assertEqual(result['roster'][0]['status'],'Update verified by coordinator')
+        self.assertEqual(result['roster'][0]['status'],'Masked update verified by coordinator')
+        self.assertNotIn('examples',result['roster'][0])
         self.assertEqual(result['roster'][1]['status'],'Not observed on this laptop')
     def test_shared_model_selection_refuses_wrong_bank_or_missing_receipt(self):
         p=self.manager.save(self.profile)

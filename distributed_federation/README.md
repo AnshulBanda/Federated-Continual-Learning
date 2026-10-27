@@ -9,21 +9,25 @@ Use the Windows/macOS dashboard launcher, configure Bank/client or Central
 coordinator, compare the same fresh run ID/roster/settings, check local readiness,
 and start all banks before central. See streaming/README.md for the current guide.
 
-The browser configuration uses feature_schema.json, a JSON-only preprocessing
+The browser configuration uses artifacts/dp_level3_secagg/feature_schema.json, a JSON-only preprocessing
 contract exported once from the public simulated reference training data. Banks
 read only their own training graph at runtime; central reads no bank transactions.
 Every round returns the signed aggregate to each bank for verification and atomic
-checkpoint saving. This is sample-weighted local temporal FedAvg, separate from
-the paper's frozen equal-weight continual/replay evaluation.
+checkpoint saving. The final browser path enforces Level-3 distributed DP and
+Secure Aggregation, the approved frozen warm checkpoint, three distinct banks,
+equal weights, one release and decoder-only adaptation. See the backend guide
+for exact settings, privacy scope and real Kafka acceptance evidence.
 
 Legacy CLI configs without feature_schema retain the older shared-data preparation
 behavior. Use the browser-generated configuration for the bank-local workflow.
 Do not run legacy configs while claiming that clients need only their own data.
 
-Central broadcasts the same model to every bank. Banks train locally and return
-weights and example counts; central waits for all banks, applies sample-weighted
-FedAvg, saves the result, and begins the next round. The application supervises this
-existing learning workflow and adds structured status and persistence.
+In the final private mode, banks clip and noise their decoder deltas before
+fixed-point encoding and pair masking. Kafka carries authenticated key exchange
+and masked bank contributions. Central receives no individual clean model update
+or clean aggregate; it reconstructs only the noisy equal aggregate after complete
+cohort mask cancellation. Missing participants abort with no plaintext fallback.
+Explicit lower-level research configurations retain their existing modes.
 
 ## Components
 

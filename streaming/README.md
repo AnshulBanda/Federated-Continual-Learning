@@ -47,8 +47,10 @@ this client training workflow has been verified on Windows, not natively on macO
 
 The tab supervises one real bank worker or coordinator per laptop. The same
 broker, fresh run ID, bank roster, rounds, epochs, timeout and privately shared
-secret must be used across participants. The default roster is Key Bank (bank-1),
-Wells Fargo (bank-2), JPMorgan Chase (bank-3). Dataset paths stay local.
+secret must be used across participants. The mandatory roster, in the retained
+public seed order, is JPMorgan Chase (bank-1), Wells Fargo (bank-2), Key Bank
+(bank-3). Dataset paths stay local. One private round and two local epochs per
+phase are fixed; one/two-bank runs and duplicate datasets are rejected.
 
 1. Save the client bank on Overview. In Federated Collaboration choose Bank/client
    on bank laptops or Central coordinator on the coordinator laptop.
@@ -56,14 +58,18 @@ Wells Fargo (bank-2), JPMorgan Chase (bank-3). Dataset paths stay local.
    fcl.collaboration.global.v1 and fcl.collaboration.updates.v1 each require one
    partition. Broker provisioning/ZeroTier/firewall setup remain external.
 3. Everyone clicks Check local readiness. This confirms local dependencies and
-   broker/topic access, not remote readiness. Compare the displayed schema hash.
+   broker/topic access, approved checkpoint/schema hashes and the 65,793-coordinate
+   decoder. Peer participation is checked during key exchange. Compare the schema hash.
 4. Enter the same secret (32+ characters), start bank workers, then start central.
    The password field is cleared on start. Secrets are inherited only in process
    environment and never saved in the setup, database, or API responses.
-5. Central broadcasts a common seeded model. Banks train their own transaction
-   graph, send signed updates, and wait for the signed aggregate. Central waits for
-   every configured bank, validates update schema/base/hash/tensors, performs
-   sample-weighted FedAvg, atomically saves, and publishes the aggregate.
+5. Central broadcasts the approved frozen Sia seed-42 August-selected warm model.
+   Each bank trains its decoder on its own graph with risk/context replay, clips
+   its delta at C=1.25, adds an independent production Gaussian share (m=0.15),
+   encodes at scale 2^24 and applies X25519/HKDF-SHA256/ChaCha20 pair masks before
+   publishing a signed masked contribution to Kafka. Central requires all three
+   contributions, cancels masks in the uint64 ring, takes the equal noisy mean,
+   reconstructs the decoder with frozen parameters, saves and publishes the model.
 6. Each bank verifies the aggregate, loads it, and atomically saves weights and a
    manifest/commit record. Use shared model selects a hash-verified checkpoint for
    Overview and later scoring integration. It does not evaluate that model.
@@ -94,21 +100,38 @@ There is no interrupted-round resume: coordinate a NEW run ID after a failed run
 Manual Weight transfers are linked and summarized in this tab, with their actual
 Published/Delivered/Verified statuses. These manual files do not start federation.
 Tab 2 locally selected checkpoints are not automatically imported: all federation
-participants start from the same initialization and fixed encoder contract.
-This sample-weighted temporal training workflow is separate from the paper's
-frozen equal-client continual/replay model; its reported scores do not apply here.
+participants start from the same approved warm model and fixed encoder contract.
+The deployment policy is checked before spawning and again in the child runner.
+Missing/changed assets, privacy blocks or cohort members fail closed. Explicit
+lower-level research CLI configurations remain available; the browser has no
+nonprivate downgrade. ZeroTier transports Kafka traffic and implements no DP logic.
+
+The status shows Level-3 Distributed DP + Secure Aggregation, required cohort,
+phase, m, epsilon and delta, without losses, example counts, norms, keys or seeds.
+The one-release bound is epsilon=127.363751842 at delta=1e-6 under conservative
+encoded-share accounting. Preserve all privacy ledgers; reserved runs/releases
+compose, including a coordinator reservation followed by a failed key exchange.
+This is conditional incremental privacy given a **nonprivate** warm start, with
+ideal Gaussian accounting and a finite-precision production sampler. It is not
+end-to-end DP pretraining. Retained validation evidence is unchanged at
+0.902810 ± 0.032415 macro August PR-AUC across private continuation seeds 42/52/62.
+Direct XAI explanations of DP checkpoints remain guarded by target-wrapper parity.
 
 Acceptance check (real PyTorch, actual prepared training data, real Kafka, local
 processes for all three banks and central):
 
 ```powershell
-.\.venv\Scripts\python.exe -m streaming.test_federation --broker 10.30.127.124:9092
+.\.venv\Scripts\python.exe scripts/operational_level3_acceptance.py --broker 10.30.127.124:9092 --dataset data/final_temporal_dataset --runtime-root streaming/.local/level3-acceptance-fresh --report streaming/.local/level3-acceptance.json
 ```
 
-The check validates two rounds, three accepted updates per round, byte-identical
-returned checkpoints on all banks, and shared-model selection. Evidence stays under
-ignored streaming/.local/accept-*. It is a same-machine transport/training check;
-Windows/macOS cross-laptop networking still requires teammate acceptance.
+Use a fresh runtime folder for every invocation and preserve old ledgers. The check
+uses the actual Collaboration.start/controller/runner path, verifies three masked
+wire payloads and identical returned checkpoints, then verifies that a missing bank
+aborts before training without a plaintext fallback. It does not evaluate PR-AUC
+or test ZeroTier cryptography. Evidence from the completed local Kafka acceptance
+is in artifacts/dp_level3_operational_integration/. Cross-laptop networking still
+requires teammate acceptance. The shorter `python -m streaming.test_federation`
+check also uses the final one-round/two-epoch policy and tests model selection.
 
 ## Launch with saved setup
 

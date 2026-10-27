@@ -10,8 +10,12 @@ from .locking import RuntimeLock
 from .state import StateStore
 
 
-def execute(config_path, role, state_dir, client_id=None):
+def execute(config_path, role, state_dir, client_id=None, operational=False):
     config = load_config(config_path)
+    raw = json.loads(Path(config_path).read_text(encoding='utf-8'))
+    if operational or 'operational_policy' in raw:
+        from .final_federation import validate_operational_config
+        validate_operational_config(raw, config)
     if role == 'bank':
         config.client(client_id)
     elif role != 'central' or client_id is not None:
@@ -52,8 +56,9 @@ def main():
     parser.add_argument('--role', choices=['central', 'bank'], required=True)
     parser.add_argument('--client-id')
     parser.add_argument('--state-dir', type=Path, required=True)
+    parser.add_argument('--operational-final', action='store_true')
     args = parser.parse_args()
-    return execute(args.config, args.role, args.state_dir, args.client_id)
+    return execute(args.config, args.role, args.state_dir, args.client_id, args.operational_final)
 
 
 if __name__ == '__main__':

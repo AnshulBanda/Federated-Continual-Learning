@@ -1,0 +1,5 @@
+$ CAPSTONE_DATASET_DIR=/Users/pj/Desktop/college/capstone/Capstone/data/final_temporal_dataset /Users/pj/Desktop/college/capstone/Capstone/.venv/bin/python -m pytest tests -q
+.................................................. [ 32%]
+........................................................................ [ 79%]
+................................                                   [100%]
+154 passed, 28 subtests passed in 6.68s

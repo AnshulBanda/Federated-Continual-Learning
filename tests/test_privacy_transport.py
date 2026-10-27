@@ -39,6 +39,11 @@ class PrivateRoundTrip(unittest.TestCase):
             path=Path(temp)/'config.json';path.write_text(json.dumps(raw));cfg=load_config(path)
             upstream=queue.Queue();queues={c.client_id:queue.Queue() for c in cfg.clients}
             barrier=threading.Barrier(4);messages=[];events=[]
+            actor=threading.local()
+            def private_deserialize(payload):
+                if getattr(actor,'central',False):
+                    raise AssertionError('Secure coordinator must never deserialize a bank model payload')
+                return deserialize_state(payload)
             def consumer(broker,group,topics):
                 q=upstream if topics==[cfg.update_topic] else queues[next(c for c in queues if group.endswith(c))]
                 barrier.wait(timeout=5);return Consumer(q)
@@ -60,8 +65,9 @@ class PrivateRoundTrip(unittest.TestCase):
                     for p in rt.model.parameters():p.add_((index+1)/100)
             secrets={'FCL_CENTRAL_SECRET':'c'*32,'FCL_CLIENT_SECRET':'s'*32}
             secrets.update({secret_env_name(c.client_id):'s'*32 for c in cfg.clients})
-            with patch.dict('os.environ',secrets),patch.object(transport,'make_consumer',side_effect=consumer),patch.object(transport,'make_producer',side_effect=lambda _:Producer()),patch.object(transport,'prepare_runtime',side_effect=runtime),patch.object(transport,'prepare_frozen_runtime',side_effect=runtime),patch.object(transport,'train_local',side_effect=train):
+            with patch.dict('os.environ',secrets),patch.object(transport,'make_consumer',side_effect=consumer),patch.object(transport,'make_producer',side_effect=lambda _:Producer()),patch.object(transport,'prepare_runtime',side_effect=runtime),patch.object(transport,'prepare_frozen_runtime',side_effect=runtime),patch.object(transport,'train_local',side_effect=train),patch.object(transport,'deserialize_state',side_effect=private_deserialize):
                 def central():
+                    actor.central=True
                     with event_sink(lambda kind,round_id=None,**data:events.append((kind,round_id,data))):return transport.central(cfg)
                 with ThreadPoolExecutor(4) as pool:
                     jobs=[pool.submit(transport.worker,cfg,c.client_id) for c in cfg.clients]+[pool.submit(central)]

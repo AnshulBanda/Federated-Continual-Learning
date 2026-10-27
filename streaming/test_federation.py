@@ -1,4 +1,4 @@
-"""Real Kafka + PyTorch, three-bank federation acceptance check (local processes)."""
+"""Real Kafka + PyTorch, final Level-3 three-bank acceptance (local processes)."""
 import argparse
 import hashlib
 import json
@@ -15,15 +15,15 @@ from distributed_federation.common.checkpoints import verify_checkpoint
 def main():
     parser=argparse.ArgumentParser(description=__doc__)
     parser.add_argument('--broker',default='10.30.127.124:9092')
-    parser.add_argument('--rounds',type=int,default=2)
+    parser.add_argument('--rounds',type=int,choices=[1],default=1)
     parser.add_argument('--client-state-dir',type=Path,help='Optional existing client dashboard state folder; records Key Bank acceptance run there.')
     parser.add_argument('--central-state-dir',type=Path,help='Optional existing coordinator dashboard state folder.')
     args=parser.parse_args()
     run_id='accept-'+uuid.uuid4().hex[:16]
     evidence=REPO/'streaming/.local'/run_id
-    actors={name:Collaboration(args.client_state_dir if name=='bank-1' and args.client_state_dir else args.central_state_dir if name=='central' and args.central_state_dir else evidence/name) for name in ('central',*CLIENTS.values())}
+    actors={name:Collaboration(args.client_state_dir if name==CLIENTS['Key_Bank'] and args.client_state_dir else args.central_state_dir if name=='central' and args.central_state_dir else evidence/name) for name in ('central',*CLIENTS.values())}
     secret=secrets.token_urlsafe(40)
-    shared=dict(broker=args.broker,run_id=run_id,banks=list(CLIENTS),dataset=str(REPO/'data/final_temporal_dataset'),rounds=args.rounds,local_epochs=1,timeout=240)
+    shared=dict(broker=args.broker,run_id=run_id,banks=list(CLIENTS),dataset=actors['central'].defaults()['dataset'],rounds=args.rounds,local_epochs=2,timeout=900)
     started=[]
     try:
         actors['central'].preflight(dict(shared,role='central'),None,prepare=True)
@@ -39,9 +39,9 @@ def main():
         central.start(dict(profile=profile,secret=secret),None)
         started.append(central)
         print('Started three real bank trainers and coordinator through Kafka:',run_id,flush=True)
-        deadline=time.monotonic()+420
+        deadline=time.monotonic()+1000
         while any(m.process.poll() is None for m in started):
-            if time.monotonic()>deadline:raise TimeoutError('Federation acceptance check exceeded seven minutes')
+            if time.monotonic()>deadline:raise TimeoutError('Federation acceptance check exceeded its deadline')
             for name,m in actors.items():
                 if m.process and m.process.poll() not in (None,0):
                     raise RuntimeError(f'{name} failed; inspect {m.root / "worker.log"}')
@@ -69,7 +69,7 @@ def main():
             selected=actors[client_id].select_model(actors[client_id].controller.status()[0]['id'],args.rounds,bank)
             assert selected['sha256']==result['rounds_verified'][-1]['sha256']
         write_json(evidence/'result.json',result)
-        print('PASS: actual local training, signed Kafka updates, sample-weighted FedAvg, and byte-identical verified returns to every bank.',flush=True)
+        print('PASS: actual Level-3 local training, signed masked Kafka contributions, noisy equal aggregate, and byte-identical verified returns to every bank.',flush=True)
         print('Evidence:',evidence,flush=True)
     finally:
         for manager in started:

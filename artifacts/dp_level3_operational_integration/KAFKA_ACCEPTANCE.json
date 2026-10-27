@@ -1,0 +1,810 @@
+{
+  "scope": "Actual Collaboration.start subprocesses, local Kafka; no remote ZeroTier cryptography test",
+  "runtime_root": "/Users/pj/Desktop/college/capstone/Capstone-DP-SecAgg/.local/operational-level3/acceptance-20261027",
+  "broker": "127.0.0.1:19092",
+  "complete_cohort": {
+    "run_id": "op-complete-cohort-bf21d636e9b74b0c",
+    "exit_codes": {
+      "bank-1": 0,
+      "bank-2": 0,
+      "bank-3": 0,
+      "central": 0
+    },
+    "status": {
+      "bank-1": {
+        "status": "Completed",
+        "privacy": {
+          "mode": "distributed_dp",
+          "secagg": true,
+          "required_cohort": 3,
+          "multiplier": 0.15,
+          "epsilon": 127.36375184207253,
+          "delta": 1e-06,
+          "phase": "worker_completed"
+        },
+        "label": "Level-3 Distributed DP + Secure Aggregation"
+      },
+      "bank-2": {
+        "status": "Completed",
+        "privacy": {
+          "mode": "distributed_dp",
+          "secagg": true,
+          "required_cohort": 3,
+          "multiplier": 0.15,
+          "epsilon": 127.36375184207253,
+          "delta": 1e-06,
+          "phase": "worker_completed"
+        },
+        "label": "Level-3 Distributed DP + Secure Aggregation"
+      },
+      "bank-3": {
+        "status": "Completed",
+        "privacy": {
+          "mode": "distributed_dp",
+          "secagg": true,
+          "required_cohort": 3,
+          "multiplier": 0.15,
+          "epsilon": 127.36375184207253,
+          "delta": 1e-06,
+          "phase": "worker_completed"
+        },
+        "label": "Level-3 Distributed DP + Secure Aggregation"
+      },
+      "central": {
+        "status": "Completed",
+        "privacy": {
+          "mode": "distributed_dp",
+          "secagg": true,
+          "required_cohort": 3,
+          "multiplier": 0.15,
+          "epsilon": 127.36375184207253,
+          "delta": 1e-06,
+          "phase": "run_completed"
+        },
+        "label": "Level-3 Distributed DP + Secure Aggregation"
+      }
+    },
+    "events": {
+      "bank-1": [
+        {
+          "kind": "process_started",
+          "round_id": null,
+          "details": {
+            "client_id": "bank-1",
+            "role": "bank"
+          }
+        },
+        {
+          "kind": "runtime_ready",
+          "round_id": null,
+          "details": {
+            "client_id": "bank-1",
+            "schema_sha256": "26010ec8e49e661c127557b21787b41dee6e790b09d98131853a11aa506e9631"
+          }
+        },
+        {
+          "kind": "waiting_for_model",
+          "round_id": 1,
+          "details": {
+            "privacy_mode": "distributed_dp"
+          }
+        },
+        {
+          "kind": "model_loaded",
+          "round_id": 1,
+          "details": {
+            "base_model_sha256": "209d8cac5242fd6e11bc4b7eea36e41e408cc7777d506b37f1d959d12487cbfb"
+          }
+        },
+        {
+          "kind": "secagg_ready",
+          "round_id": 1,
+          "details": {
+            "privacy_mode": "distributed_dp",
+            "required_cohort": 3
+          }
+        },
+        {
+          "kind": "training",
+          "round_id": 1,
+          "details": {}
+        },
+        {
+          "kind": "training_completed",
+          "round_id": 1,
+          "details": {}
+        },
+        {
+          "kind": "publishing_update",
+          "round_id": 1,
+          "details": {
+            "bytes": 526432
+          }
+        },
+        {
+          "kind": "update_published",
+          "round_id": 1,
+          "details": {
+            "payload_sha256": "e23462bd12af9a036231db05d8e2ff8b8fc5d3148c74e4604abaca3a0bd11489",
+            "privacy_mode": "distributed_dp"
+          }
+        },
+        {
+          "kind": "waiting_for_aggregate",
+          "round_id": 1,
+          "details": {}
+        },
+        {
+          "kind": "aggregate_received",
+          "round_id": 1,
+          "details": {
+            "checkpoint": "/Users/pj/Desktop/college/capstone/Capstone-DP-SecAgg/.local/operational-level3/acceptance-20261027/complete-cohort/bank-1/collaboration/models/op-complete-cohort-bf21d636e9b74b0c/bank-1/global_round_001.safetensors",
+            "manifest": "/Users/pj/Desktop/college/capstone/Capstone-DP-SecAgg/.local/operational-level3/acceptance-20261027/complete-cohort/bank-1/collaboration/models/op-complete-cohort-bf21d636e9b74b0c/bank-1/global_round_001.json",
+            "payload_sha256": "24a2d7de286a59abcd37c9d849bd56098024d00f0348c33945844e32e3dcb7d5"
+          }
+        },
+        {
+          "kind": "worker_completed",
+          "round_id": null,
+          "details": {
+            "rounds": 1
+          }
+        }
+      ],
+      "bank-2": [
+        {
+          "kind": "process_started",
+          "round_id": null,
+          "details": {
+            "client_id": "bank-2",
+            "role": "bank"
+          }
+        },
+        {
+          "kind": "runtime_ready",
+          "round_id": null,
+          "details": {
+            "client_id": "bank-2",
+            "schema_sha256": "26010ec8e49e661c127557b21787b41dee6e790b09d98131853a11aa506e9631"
+          }
+        },
+        {
+          "kind": "waiting_for_model",
+          "round_id": 1,
+          "details": {
+            "privacy_mode": "distributed_dp"
+          }
+        },
+        {
+          "kind": "model_loaded",
+          "round_id": 1,
+          "details": {
+            "base_model_sha256": "209d8cac5242fd6e11bc4b7eea36e41e408cc7777d506b37f1d959d12487cbfb"
+          }
+        },
+        {
+          "kind": "secagg_ready",
+          "round_id": 1,
+          "details": {
+            "privacy_mode": "distributed_dp",
+            "required_cohort": 3
+          }
+        },
+        {
+          "kind": "training",
+          "round_id": 1,
+          "details": {}
+        },
+        {
+          "kind": "training_completed",
+          "round_id": 1,
+          "details": {}
+        },
+        {
+          "kind": "publishing_update",
+          "round_id": 1,
+          "details": {
+            "bytes": 526432
+          }
+        },
+        {
+          "kind": "update_published",
+          "round_id": 1,
+          "details": {
+            "payload_sha256": "f2412e9eb2fbd84f638782638fb3a4aac7452a7d611e1a08f5448336acc762a3",
+            "privacy_mode": "distributed_dp"
+          }
+        },
+        {
+          "kind": "waiting_for_aggregate",
+          "round_id": 1,
+          "details": {}
+        },
+        {
+          "kind": "aggregate_received",
+          "round_id": 1,
+          "details": {
+            "checkpoint": "/Users/pj/Desktop/college/capstone/Capstone-DP-SecAgg/.local/operational-level3/acceptance-20261027/complete-cohort/bank-2/collaboration/models/op-complete-cohort-bf21d636e9b74b0c/bank-2/global_round_001.safetensors",
+            "manifest": "/Users/pj/Desktop/college/capstone/Capstone-DP-SecAgg/.local/operational-level3/acceptance-20261027/complete-cohort/bank-2/collaboration/models/op-complete-cohort-bf21d636e9b74b0c/bank-2/global_round_001.json",
+            "payload_sha256": "24a2d7de286a59abcd37c9d849bd56098024d00f0348c33945844e32e3dcb7d5"
+          }
+        },
+        {
+          "kind": "worker_completed",
+          "round_id": null,
+          "details": {
+            "rounds": 1
+          }
+        }
+      ],
+      "bank-3": [
+        {
+          "kind": "process_started",
+          "round_id": null,
+          "details": {
+            "client_id": "bank-3",
+            "role": "bank"
+          }
+        },
+        {
+          "kind": "runtime_ready",
+          "round_id": null,
+          "details": {
+            "client_id": "bank-3",
+            "schema_sha256": "26010ec8e49e661c127557b21787b41dee6e790b09d98131853a11aa506e9631"
+          }
+        },
+        {
+          "kind": "waiting_for_model",
+          "round_id": 1,
+          "details": {
+            "privacy_mode": "distributed_dp"
+          }
+        },
+        {
+          "kind": "model_loaded",
+          "round_id": 1,
+          "details": {
+            "base_model_sha256": "209d8cac5242fd6e11bc4b7eea36e41e408cc7777d506b37f1d959d12487cbfb"
+          }
+        },
+        {
+          "kind": "secagg_ready",
+          "round_id": 1,
+          "details": {
+            "privacy_mode": "distributed_dp",
+            "required_cohort": 3
+          }
+        },
+        {
+          "kind": "training",
+          "round_id": 1,
+          "details": {}
+        },
+        {
+          "kind": "training_completed",
+          "round_id": 1,
+          "details": {}
+        },
+        {
+          "kind": "publishing_update",
+          "round_id": 1,
+          "details": {
+            "bytes": 526432
+          }
+        },
+        {
+          "kind": "update_published",
+          "round_id": 1,
+          "details": {
+            "payload_sha256": "8059235041bfe97b5239447364e93c2b5a5b086c629284a01ea3e7cb89d72bc4",
+            "privacy_mode": "distributed_dp"
+          }
+        },
+        {
+          "kind": "waiting_for_aggregate",
+          "round_id": 1,
+          "details": {}
+        },
+        {
+          "kind": "aggregate_received",
+          "round_id": 1,
+          "details": {
+            "checkpoint": "/Users/pj/Desktop/college/capstone/Capstone-DP-SecAgg/.local/operational-level3/acceptance-20261027/complete-cohort/bank-3/collaboration/models/op-complete-cohort-bf21d636e9b74b0c/bank-3/global_round_001.safetensors",
+            "manifest": "/Users/pj/Desktop/college/capstone/Capstone-DP-SecAgg/.local/operational-level3/acceptance-20261027/complete-cohort/bank-3/collaboration/models/op-complete-cohort-bf21d636e9b74b0c/bank-3/global_round_001.json",
+            "payload_sha256": "24a2d7de286a59abcd37c9d849bd56098024d00f0348c33945844e32e3dcb7d5"
+          }
+        },
+        {
+          "kind": "worker_completed",
+          "round_id": null,
+          "details": {
+            "rounds": 1
+          }
+        }
+      ],
+      "central": [
+        {
+          "kind": "process_started",
+          "round_id": null,
+          "details": {
+            "client_id": null,
+            "role": "central"
+          }
+        },
+        {
+          "kind": "runtime_ready",
+          "round_id": null,
+          "details": {
+            "schema_sha256": "26010ec8e49e661c127557b21787b41dee6e790b09d98131853a11aa506e9631"
+          }
+        },
+        {
+          "kind": "secagg_key_exchange",
+          "round_id": 1,
+          "details": {
+            "privacy_mode": "distributed_dp",
+            "required_cohort": 3
+          }
+        },
+        {
+          "kind": "waiting_for_updates",
+          "round_id": 1,
+          "details": {
+            "privacy_mode": "distributed_dp",
+            "required_cohort": 3,
+            "secagg": true
+          }
+        },
+        {
+          "kind": "update_validated",
+          "round_id": 1,
+          "details": {
+            "client_id": "bank-3",
+            "payload_sha256": "8059235041bfe97b5239447364e93c2b5a5b086c629284a01ea3e7cb89d72bc4"
+          }
+        },
+        {
+          "kind": "update_validated",
+          "round_id": 1,
+          "details": {
+            "client_id": "bank-2",
+            "payload_sha256": "f2412e9eb2fbd84f638782638fb3a4aac7452a7d611e1a08f5448336acc762a3"
+          }
+        },
+        {
+          "kind": "update_validated",
+          "round_id": 1,
+          "details": {
+            "client_id": "bank-1",
+            "payload_sha256": "e23462bd12af9a036231db05d8e2ff8b8fc5d3148c74e4604abaca3a0bd11489"
+          }
+        },
+        {
+          "kind": "round_completed",
+          "round_id": 1,
+          "details": {
+            "checkpoint": "/Users/pj/Desktop/college/capstone/Capstone-DP-SecAgg/.local/operational-level3/acceptance-20261027/complete-cohort/central/collaboration/models/op-complete-cohort-bf21d636e9b74b0c/global_round_001.safetensors",
+            "delta": 1e-06,
+            "epsilon": 127.36375184207253,
+            "manifest": "/Users/pj/Desktop/college/capstone/Capstone-DP-SecAgg/.local/operational-level3/acceptance-20261027/complete-cohort/central/collaboration/models/op-complete-cohort-bf21d636e9b74b0c/global_round_001.json",
+            "privacy_mode": "distributed_dp",
+            "required_cohort": 3,
+            "secagg": true
+          }
+        },
+        {
+          "kind": "aggregate_published",
+          "round_id": 1,
+          "details": {
+            "payload_sha256": "24a2d7de286a59abcd37c9d849bd56098024d00f0348c33945844e32e3dcb7d5"
+          }
+        },
+        {
+          "kind": "run_completed",
+          "round_id": null,
+          "details": {
+            "rounds": 1
+          }
+        }
+      ]
+    },
+    "wire": [
+      {
+        "topic": "fcl.collaboration.global.v1",
+        "message_type": "global_model",
+        "sender_id": "central",
+        "payload_sha256": "209d8cac5242fd6e11bc4b7eea36e41e408cc7777d506b37f1d959d12487cbfb",
+        "bytes": 971628,
+        "hmac_verified": true
+      },
+      {
+        "topic": "fcl.collaboration.global.v1",
+        "message_type": "secagg_ready",
+        "sender_id": "central",
+        "payload_sha256": "6974a16b5689c87a47b170f1cc6e837611a443fb44549b56f219ab4277ede60a",
+        "bytes": 564,
+        "hmac_verified": true
+      },
+      {
+        "topic": "fcl.collaboration.global.v1",
+        "message_type": "aggregated_model",
+        "sender_id": "central",
+        "payload_sha256": "24a2d7de286a59abcd37c9d849bd56098024d00f0348c33945844e32e3dcb7d5",
+        "bytes": 971628,
+        "hmac_verified": true
+      },
+      {
+        "topic": "fcl.collaboration.updates.v1",
+        "message_type": "secagg_public_key",
+        "sender_id": "bank-3",
+        "payload_sha256": "0b09aa8fe6e0d8349f835f5b1c3d9be7579a03426f7bc72c164953829fb5b56a",
+        "bytes": 428,
+        "hmac_verified": true
+      },
+      {
+        "topic": "fcl.collaboration.updates.v1",
+        "message_type": "secagg_public_key",
+        "sender_id": "bank-2",
+        "payload_sha256": "26c6111222eaa2216f7a7858eadaf09d8b75aebbd140db27abf4d92932f3d531",
+        "bytes": 428,
+        "hmac_verified": true
+      },
+      {
+        "topic": "fcl.collaboration.updates.v1",
+        "message_type": "secagg_public_key",
+        "sender_id": "bank-1",
+        "payload_sha256": "56fc9bad866028428b99f0d86aec30e1f39d3d6783f22c2e9c22a48d2ffb95fc",
+        "bytes": 428,
+        "hmac_verified": true
+      },
+      {
+        "topic": "fcl.collaboration.updates.v1",
+        "message_type": "masked_client_update",
+        "sender_id": "bank-3",
+        "payload_sha256": "8059235041bfe97b5239447364e93c2b5a5b086c629284a01ea3e7cb89d72bc4",
+        "bytes": 526432,
+        "hmac_verified": true,
+        "tensor_keys": [
+          "masked_ring"
+        ],
+        "dimension": 65793,
+        "dtype": "int64"
+      },
+      {
+        "topic": "fcl.collaboration.updates.v1",
+        "message_type": "masked_client_update",
+        "sender_id": "bank-2",
+        "payload_sha256": "f2412e9eb2fbd84f638782638fb3a4aac7452a7d611e1a08f5448336acc762a3",
+        "bytes": 526432,
+        "hmac_verified": true,
+        "tensor_keys": [
+          "masked_ring"
+        ],
+        "dimension": 65793,
+        "dtype": "int64"
+      },
+      {
+        "topic": "fcl.collaboration.updates.v1",
+        "message_type": "masked_client_update",
+        "sender_id": "bank-1",
+        "payload_sha256": "e23462bd12af9a036231db05d8e2ff8b8fc5d3148c74e4604abaca3a0bd11489",
+        "bytes": 526432,
+        "hmac_verified": true,
+        "tensor_keys": [
+          "masked_ring"
+        ],
+        "dimension": 65793,
+        "dtype": "int64"
+      }
+    ],
+    "ledger_accounting": {
+      "bank-1": {
+        "reservations": 1,
+        "rho": 66.66666666666667,
+        "epsilon": 127.36375184207253,
+        "delta": 1e-06,
+        "scope": "all runs retained in this local ledger; deletion/rollback invalidates composition"
+      },
+      "bank-2": {
+        "reservations": 1,
+        "rho": 66.66666666666667,
+        "epsilon": 127.36375184207253,
+        "delta": 1e-06,
+        "scope": "all runs retained in this local ledger; deletion/rollback invalidates composition"
+      },
+      "bank-3": {
+        "reservations": 1,
+        "rho": 66.66666666666667,
+        "epsilon": 127.36375184207253,
+        "delta": 1e-06,
+        "scope": "all runs retained in this local ledger; deletion/rollback invalidates composition"
+      },
+      "central": {
+        "reservations": 1,
+        "rho": 66.66666666666667,
+        "epsilon": 127.36375184207253,
+        "delta": 1e-06,
+        "scope": "all runs retained in this local ledger; deletion/rollback invalidates composition"
+      }
+    },
+    "begin_offsets": {
+      "fcl.collaboration.global.v1": 0,
+      "fcl.collaboration.updates.v1": 0
+    },
+    "end_offsets": {
+      "fcl.collaboration.global.v1": 5,
+      "fcl.collaboration.updates.v1": 9
+    },
+    "checkpoints": {
+      "bank-1": {
+        "global_round_001.json": "c7a8be4bf3e560e10a9282f37edbc7ac9167f7cf1cc1c84402ebba3a9ff515ec",
+        "global_round_001.safetensors": "24a2d7de286a59abcd37c9d849bd56098024d00f0348c33945844e32e3dcb7d5"
+      },
+      "bank-2": {
+        "global_round_001.json": "c7a8be4bf3e560e10a9282f37edbc7ac9167f7cf1cc1c84402ebba3a9ff515ec",
+        "global_round_001.safetensors": "24a2d7de286a59abcd37c9d849bd56098024d00f0348c33945844e32e3dcb7d5"
+      },
+      "bank-3": {
+        "global_round_001.json": "c7a8be4bf3e560e10a9282f37edbc7ac9167f7cf1cc1c84402ebba3a9ff515ec",
+        "global_round_001.safetensors": "24a2d7de286a59abcd37c9d849bd56098024d00f0348c33945844e32e3dcb7d5"
+      },
+      "central": {
+        "global_round_001.json": "19180598275c531f2e451201bf35babe7f15a03be927a3312acd8123e7440593",
+        "global_round_001.safetensors": "24a2d7de286a59abcd37c9d849bd56098024d00f0348c33945844e32e3dcb7d5"
+      }
+    },
+    "frozen_tensors_unchanged": 12,
+    "aggregate_sha256": "24a2d7de286a59abcd37c9d849bd56098024d00f0348c33945844e32e3dcb7d5",
+    "accounting": {
+      "bound": "encoded_share_postprocessing",
+      "delta": 1e-06,
+      "epsilon": 127.36375184207253,
+      "releases": 1,
+      "research_only": false,
+      "rho": 66.66666666666667,
+      "sampler_assumption": "ideal Gaussian; finite-precision sampler is not exact-DP certified"
+    },
+    "result": "PASS: three masked contributions, aggregate returned and identical verified checkpoints on all four participants",
+    "model_selections": {
+      "JPMorgan_Chase": {
+        "sha256": "24a2d7de286a59abcd37c9d849bd56098024d00f0348c33945844e32e3dcb7d5",
+        "model_kind": "Federated equal mean; distributed_dp"
+      },
+      "Wells_Fargo": {
+        "sha256": "24a2d7de286a59abcd37c9d849bd56098024d00f0348c33945844e32e3dcb7d5",
+        "model_kind": "Federated equal mean; distributed_dp"
+      },
+      "Key_Bank": {
+        "sha256": "24a2d7de286a59abcd37c9d849bd56098024d00f0348c33945844e32e3dcb7d5",
+        "model_kind": "Federated equal mean; distributed_dp"
+      }
+    }
+  },
+  "missing_bank": {
+    "run_id": "op-missing-bank-884f3c3fdf404ce6",
+    "exit_codes": {
+      "bank-1": 1,
+      "bank-2": 1,
+      "central": 1
+    },
+    "status": {
+      "bank-1": {
+        "status": "Failed",
+        "privacy": {
+          "mode": "distributed_dp",
+          "secagg": true,
+          "required_cohort": 3,
+          "multiplier": 0.15,
+          "epsilon": 127.36375184207253,
+          "delta": 1e-06,
+          "phase": "process_failed"
+        },
+        "label": "Level-3 Distributed DP + Secure Aggregation"
+      },
+      "bank-2": {
+        "status": "Failed",
+        "privacy": {
+          "mode": "distributed_dp",
+          "secagg": true,
+          "required_cohort": 3,
+          "multiplier": 0.15,
+          "epsilon": 127.36375184207253,
+          "delta": 1e-06,
+          "phase": "process_failed"
+        },
+        "label": "Level-3 Distributed DP + Secure Aggregation"
+      },
+      "central": {
+        "status": "Failed",
+        "privacy": {
+          "mode": "distributed_dp",
+          "secagg": true,
+          "required_cohort": 3,
+          "multiplier": 0.15,
+          "epsilon": 127.36375184207253,
+          "delta": 1e-06,
+          "phase": "process_failed"
+        },
+        "label": "Level-3 Distributed DP + Secure Aggregation"
+      }
+    },
+    "events": {
+      "bank-1": [
+        {
+          "kind": "process_started",
+          "round_id": null,
+          "details": {
+            "client_id": "bank-1",
+            "role": "bank"
+          }
+        },
+        {
+          "kind": "runtime_ready",
+          "round_id": null,
+          "details": {
+            "client_id": "bank-1",
+            "schema_sha256": "26010ec8e49e661c127557b21787b41dee6e790b09d98131853a11aa506e9631"
+          }
+        },
+        {
+          "kind": "waiting_for_model",
+          "round_id": 1,
+          "details": {
+            "privacy_mode": "distributed_dp"
+          }
+        },
+        {
+          "kind": "model_loaded",
+          "round_id": 1,
+          "details": {
+            "base_model_sha256": "209d8cac5242fd6e11bc4b7eea36e41e408cc7777d506b37f1d959d12487cbfb"
+          }
+        },
+        {
+          "kind": "process_failed",
+          "round_id": null,
+          "details": {
+            "error_type": "TimeoutError"
+          }
+        }
+      ],
+      "bank-2": [
+        {
+          "kind": "process_started",
+          "round_id": null,
+          "details": {
+            "client_id": "bank-2",
+            "role": "bank"
+          }
+        },
+        {
+          "kind": "runtime_ready",
+          "round_id": null,
+          "details": {
+            "client_id": "bank-2",
+            "schema_sha256": "26010ec8e49e661c127557b21787b41dee6e790b09d98131853a11aa506e9631"
+          }
+        },
+        {
+          "kind": "waiting_for_model",
+          "round_id": 1,
+          "details": {
+            "privacy_mode": "distributed_dp"
+          }
+        },
+        {
+          "kind": "model_loaded",
+          "round_id": 1,
+          "details": {
+            "base_model_sha256": "209d8cac5242fd6e11bc4b7eea36e41e408cc7777d506b37f1d959d12487cbfb"
+          }
+        },
+        {
+          "kind": "process_failed",
+          "round_id": null,
+          "details": {
+            "error_type": "TimeoutError"
+          }
+        }
+      ],
+      "central": [
+        {
+          "kind": "process_started",
+          "round_id": null,
+          "details": {
+            "client_id": null,
+            "role": "central"
+          }
+        },
+        {
+          "kind": "runtime_ready",
+          "round_id": null,
+          "details": {
+            "schema_sha256": "26010ec8e49e661c127557b21787b41dee6e790b09d98131853a11aa506e9631"
+          }
+        },
+        {
+          "kind": "secagg_key_exchange",
+          "round_id": 1,
+          "details": {
+            "privacy_mode": "distributed_dp",
+            "required_cohort": 3
+          }
+        },
+        {
+          "kind": "process_failed",
+          "round_id": null,
+          "details": {
+            "error_type": "TimeoutError"
+          }
+        }
+      ]
+    },
+    "wire": [
+      {
+        "topic": "fcl.collaboration.global.v1",
+        "message_type": "global_model",
+        "sender_id": "central",
+        "payload_sha256": "209d8cac5242fd6e11bc4b7eea36e41e408cc7777d506b37f1d959d12487cbfb",
+        "bytes": 971628,
+        "hmac_verified": true
+      },
+      {
+        "topic": "fcl.collaboration.updates.v1",
+        "message_type": "secagg_public_key",
+        "sender_id": "bank-2",
+        "payload_sha256": "afa6984972a4030924881127c913e4dc9f79cd74f43bea478ed2a1afcec8db3a",
+        "bytes": 425,
+        "hmac_verified": true
+      },
+      {
+        "topic": "fcl.collaboration.updates.v1",
+        "message_type": "secagg_public_key",
+        "sender_id": "bank-1",
+        "payload_sha256": "dc80315ec9bc0fcdd276a2877d8810efbc027eaa751f72c846ba30403b49664d",
+        "bytes": 425,
+        "hmac_verified": true
+      }
+    ],
+    "ledger_accounting": {
+      "bank-1": {
+        "reservations": 0,
+        "rho": 0,
+        "epsilon": 0.0,
+        "delta": 1e-06,
+        "scope": "all runs retained in this local ledger; deletion/rollback invalidates composition"
+      },
+      "bank-2": {
+        "reservations": 0,
+        "rho": 0,
+        "epsilon": 0.0,
+        "delta": 1e-06,
+        "scope": "all runs retained in this local ledger; deletion/rollback invalidates composition"
+      },
+      "central": {
+        "reservations": 1,
+        "rho": 66.66666666666667,
+        "epsilon": 127.36375184207253,
+        "delta": 1e-06,
+        "scope": "all runs retained in this local ledger; deletion/rollback invalidates composition"
+      }
+    },
+    "begin_offsets": {
+      "fcl.collaboration.global.v1": 5,
+      "fcl.collaboration.updates.v1": 9
+    },
+    "end_offsets": {
+      "fcl.collaboration.global.v1": 7,
+      "fcl.collaboration.updates.v1": 11
+    },
+    "result": "PASS: missing third bank aborts before training; no update, aggregate, checkpoint or fallback"
+  },
+  "acceptance_central_reservations_composed": {
+    "reservations": 2,
+    "rho": 133.33333333333334,
+    "epsilon": 219.17197438490723,
+    "delta": 1e-06,
+    "scope": "Both acceptance roots combined, including failed key-exchange reservation; excludes prior development ledgers"
+  }
+}

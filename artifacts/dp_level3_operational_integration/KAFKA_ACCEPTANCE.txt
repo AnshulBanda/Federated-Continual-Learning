@@ -1,0 +1,4 @@
+complete-cohort: launched via Collaboration.start -> controller -> runner
+PASS: three masked contributions, aggregate returned and identical verified checkpoints on all four participants
+missing-bank: launched via Collaboration.start -> controller -> runner
+PASS: missing third bank aborts before training; no update, aggregate, checkpoint or fallback
