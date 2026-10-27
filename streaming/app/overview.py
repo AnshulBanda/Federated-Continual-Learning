@@ -5,7 +5,7 @@ import os
 import threading
 import uuid
 from pathlib import Path
-BANKS = {'JPMorgan_Chase': 'JPMorgan Chase', 'Wells_Fargo': 'Wells Fargo', 'Key_Bank': 'Key Bank'}
+BANKS = {'Key_Bank': 'Bank A', 'Wells_Fargo': 'Bank B', 'JPMorgan_Chase': 'Bank C'}
 REPO = Path(__file__).resolve().parents[2]
 class Overview:
     def __init__(self, root, repo=REPO):
