@@ -37,5 +37,43 @@ class DashboardCacheTests(unittest.TestCase):
             self.report, "current-key", "old-checkpoint"))
 
 
+class FullDashboardCacheTests(unittest.TestCase):
+    def setUp(self):
+        import json
+        path = Path(__file__).resolve().parents[1] / 'outputs/updated/adaptive_federated/seed_42/local/Wells_Fargo/reports/validation_2954161/explanation.json'
+        self.report = json.loads(path.read_text())
+        self.key = self.report['cache_key']
+        self.inputs = self.report['cache_key_inputs']
+        self.checkpoint = self.report['model']['checkpoint_sha256']
+        self.score = self.report['prediction']['probability']
+
+    def matches(self):
+        return cached_explanation_matches(self.report, self.key, self.checkpoint, self.inputs, self.score)
+
+    def test_identity_model_specific_cache_and_exact_guard(self):
+        self.assertTrue(self.matches())
+        for field, value in [('bank', 'OtherBank'), ('transaction_id', 'other')]:
+            original = self.report[field]
+            self.report[field] = value
+            self.assertFalse(self.matches())
+            self.report[field] = original
+        self.report['verification']['tolerance'] = 1e-5
+        self.assertFalse(self.matches())
+
+    def test_mismatched_preprocessing_score_and_decision_are_rejected(self):
+        import copy
+        valid = copy.deepcopy(self.report)
+        for section, field, value in [
+            ('xai_provenance', 'preprocessing_sha256', 'wrong'),
+            ('prediction', 'probability', self.score + 1.5e-6),
+            ('prediction', 'class', 'not_fraud'),
+            ('verification', 'direct_model_probability', self.score + 1.5e-6),
+            ('verification', 'passed', False),
+        ]:
+            self.report = copy.deepcopy(valid)
+            self.report[section][field] = value
+            self.assertFalse(self.matches(), (section, field))
+
+
 if __name__ == "__main__":
     unittest.main()

@@ -1,11 +1,10 @@
 'use strict';
 const $=selector=>document.querySelector(selector);
 const bank=$('#bank'),view=$('#view'),query=$('#query'),body=$('#rows');
-let currentPage=0,total=0,selected=null,requestSequence=0,catalogSequence=0,debounce;
+let currentPage=0,total=0,selected=null,requestSequence=0,catalogSequence=0,debounce,currentManifest=null;
 const pageSize=75;
 const esc=value=>String(value??'—').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
 const score=value=>Number(value).toFixed(4);
-const preciseScore=value=>Number(value).toFixed(8);
 const amount=event=>event.amount==null?'Amount unavailable':`${Number(event.amount).toLocaleString(undefined,{minimumFractionDigits:2,maximumFractionDigits:2})} ${esc(event.currency||'')}`;
 const time=value=>esc(String(value||'').replace('T',' '));
 async function json(url){const r=await fetch(url);const data=await r.json();if(!r.ok)throw Error(data.error||'The server could not complete this request.');return data}
@@ -39,13 +38,22 @@ function validateExplanation(x,expectedBank,expectedId){
  const fail=message=>{throw Error('Explanation consistency check failed: '+message)};
  if(x.bank!==expectedBank||String(x.transaction_id)!==String(expectedId))fail('requested transaction identity differs');
  const story=x.transaction_story,event=story?.selected_transfer,prediction=x.prediction,feature=x.feature_explanation;
+ const provenance=x.xai_provenance,key=x.cache_key_inputs,verification=x.verification;
+ if(!x.model?.checkpoint_sha256||x.model.checkpoint_sha256!==provenance?.checkpoint_sha256||x.model.checkpoint_sha256!==key?.checkpoint_sha256)fail('model fingerprint differs');
+ if(currentManifest&&['checkpoint_sha256','preprocessing_sha256','family','seed','model_count','privacy_mode'].some(k=>provenance[k]!==currentManifest[k]))fail('evidence differs from the active model');
+ if(key.bank!==expectedBank||String(key.transaction_id)!==String(expectedId)||key.preprocessing_sha256!==provenance.preprocessing_sha256||key.reference_prediction_sha256!==provenance.reference_prediction_sha256?.[expectedBank])fail('cache identity or preprocessing differs');
  if(!event||String(event.transaction_id)!==String(expectedId))fail('graph explains a different transaction');
  if(!prediction||![prediction.probability,prediction.threshold].every(value=>typeof value==='number'&&Number.isFinite(value)&&value>=0&&value<=1))fail('invalid score or threshold');
  const savedThreshold=x.xai_provenance?.banks?.[expectedBank]?.threshold;
  if(!Number.isFinite(savedThreshold)||Math.abs(prediction.threshold-savedThreshold)>1e-12)fail('threshold differs from the selected bank’s saved threshold');
  if(!['fraud','not_fraud'].includes(prediction.class)||(prediction.probability>=prediction.threshold)!==(prediction.class==='fraud'))fail('decision differs from score and threshold');
  if(!feature||!Number.isFinite(feature.target_probability)||Math.abs(feature.target_probability-prediction.probability)>1e-6)fail('SHAP targets a different score');
+ if(verification?.passed!==true||verification.tolerance!==1e-6||verification.explained_checkpoint_sha256!==x.model.checkpoint_sha256)fail('strict model verification missing or mismatched');
+ if(['existing_evaluation_probability','direct_model_probability','xai_probability'].some(k=>!Number.isFinite(verification[k])||Math.abs(verification[k]-prediction.probability)>1e-6))fail('model verification score differs');
+ if(key.threshold!==prediction.threshold||x.model.family!==provenance.family||x.model.seed!==provenance.seed||x.model.model_count!==provenance.model_count)fail('model or cutoff provenance differs');
  if(!feature.features?.length||feature.features.some(item=>!Number.isFinite(item.shap_logit)))fail('invalid feature contributions');
+ if(![feature.base_logit,feature.target_logit,feature.additivity_residual].every(Number.isFinite))fail('invalid attribution reconstruction');
+ if(Math.abs(1/(1+Math.exp(-Math.max(-40,Math.min(40,feature.target_logit))))-prediction.probability)>1e-6)fail('internal explanation output targets a different score');
  const payment=feature.features.find(item=>item.feature==='payment_method');
  if(payment&&String(payment.value).replace(/^payment_format:\s*/,'')!==String(event.payment_method))fail('payment feature differs from selected transfer');
  const terms=feature.features.find(item=>item.feature==='transfer_terms');
@@ -60,33 +68,10 @@ function validateExplanation(x,expectedBank,expectedId){
   if(!Number.isFinite(effect.original_model_score)||Math.abs(effect.original_model_score-prediction.probability)>1e-6)fail('history effect targets a different score');
   if(!Number.isFinite(effect.model_score_without_event)||!Number.isFinite(effect.score_support)||Math.abs(effect.score_support-(effect.original_model_score-effect.model_score_without_event))>1e-6)fail('history effect arithmetic differs');
  }
+ if((story.model_link_effects||[]).length!==ExplanationSummary.verifiedEffects(x).length)fail('history effect lacks verified replay evidence');
 }
 
-function observedPatterns(story){
- const key=(event,side)=>String(event[side+'_account_id']??event[side]);
- const selected=story.selected_transfer;
- const source=key(selected,'source'),target=key(selected,'target');
- const when=event=>Date.parse(String(event.timestamp).replace(' ','T'));
- const selectedTime=when(selected);
- const earlier=(story.transfers||[]).filter(event=>event.kind==='earlier'&&when(event)<selectedTime);
- const events=[...earlier,selected],patterns=[];
- const senders=new Set(events.filter(event=>key(event,'target')===target&&key(event,'source')!==target).map(event=>key(event,'source')));
- const recipients=new Set(events.filter(event=>key(event,'source')===source&&key(event,'target')!==source).map(event=>key(event,'target')));
- if(senders.size>=3)patterns.push({label:'Fan-in',description:`Account ${target} received transfers from ${senders.size} distinct accounts.`});
- if(recipients.size>=3)patterns.push({label:'Fan-out',description:`Account ${source} sent transfers to ${recipients.size} distinct accounts.`});
- // A chronological earlier path B -> ... -> A closes with the selected A -> B.
- function returnPath(node,lastTime,visited){
-  for(const event of earlier){
-   if(key(event,'source')!==node||when(event)<=lastTime)continue;
-   const next=key(event,'target');
-   if(next===source)return true;
-   if(!visited.has(next)&&returnPath(next,when(event),new Set([...visited,next])))return true;
-  }
-  return false;
- }
- if(source!==target&&returnPath(target,-Infinity,new Set([target])))patterns.push({label:'Cycle',description:'Earlier transfers form a time-ordered return path that closes with the selected transfer.'});
- return patterns;
-}
+function observedPatterns(story){return ExplanationSummary.observedPatterns(story)}
 function patternLabels(story){
  const patterns=observedPatterns(story);
  return `<div class="observed-patterns"><span class="muted">Observed transaction patterns:</span> ${patterns.length?patterns.map(pattern=>`<span class="pattern-chip" title="${esc(pattern.description)}">${pattern.label}</span>`).join(' '):'<span class="muted">No fan-in, fan-out or cycle found in the displayed transfers.</span>'}<small>Based only on the transfers shown, including the selected transfer. Fan-in/out requires at least 3 distinct counterpart accounts. These labels describe connections, not confirmed fraud or measured score effects.</small></div>`;
@@ -120,84 +105,79 @@ function observedFeature(feature){
  const received=amount({amount:fields.Amount_Received,currency:fields.Receiving_Currency});
  return sent===received?sent:`Sent ${sent}; received ${received}`;
 }
-function historyEffectCard(effect,story,prediction){
- const event=story.transfers.find(event=>String(event.transaction_id)===String(effect.transaction_id));
- const support=Number(effect.score_support),neutral=Math.abs(support)<=1e-6;
- const date=event?String(event.timestamp).slice(0,10):'';
- const direction=neutral?'The tested change was too small to count as a clear effect.':support>0?'This earlier transfer helped push the score higher.':'This earlier transfer helped keep the score lower.';
- const delta=Math.abs(support),displayDelta=delta>0&&delta<.0001?'less than 0.0001':score(delta);
- const outcome=effect.model_score_without_event>=prediction.threshold;
- return `<div class="history-effect"><p class="muted">Earlier transfer <strong>TX ${esc(effect.transaction_id)}</strong>${date?' · '+esc(date):''}</p><div class="score-comparison"><div><span>With this earlier transfer</span><strong>${score(effect.original_model_score)}</strong></div><span class="comparison-arrow" aria-hidden="true">→</span><div><span>Without its history update</span><strong>${score(effect.model_score_without_event)}</strong></div></div><p><strong>${neutral?'No clear score change':`Score ${support>0?'decreased':'increased'} by ${displayDelta} in the test.`}</strong> ${direction}</p></div>`;
+function displayScore(value){return value!==0&&Math.abs(value)<.0001?Number(value).toExponential(3):Number(value).toFixed(4)}
+function exact(value){return value==null?'Not recorded':esc(String(value))}
+function renderSimpleExplanation(x,s){
+ const d=s.decision,h=s.history_summary,cf=s.counterfactual_summary,event=x.transaction_story.selected_transfer;
+ const margin=d.margin===0?'At the review cutoff':`${displayScore(Math.abs(d.margin))} ${d.margin>0?'above':'below'} the review cutoff`;
+ const factorCards=s.top_factors.map(f=>`<li class="factor-card"><div class="factor-heading"><strong>${f.direction==='up'?'↑':f.direction==='down'?'↓':'•'} ${esc(f.label)}</strong><span class="chip ${f.direction==='up'?'alert':f.direction==='down'?'known':''}">${esc(f.effect)}</span></div><p class="factor-value"><span class="observed-label">Observed:</span> ${esc(f.observed)}</p><div class="factor-track" aria-hidden="true"><span class="factor-bar ${f.direction==='down'?'lower':''}" style="width:${100*f.relative_size}%"></span></div></li>`).join('');
+ const history=h.strongest?`<div class="score-comparison"><div><span>With this history</span><strong>${displayScore(h.strongest.original_model_score)}</strong></div><span class="comparison-arrow" aria-hidden="true">→</span><div><span>Without this history update</span><strong>${displayScore(h.strongest.model_score_without_event)}</strong></div></div><p class="muted">${h.tested_count} earlier transfer${h.tested_count===1?' has':'s have'} a verified score test. The strongest effect is shown.</p>`:'';
+ const c=cf.alternative;
+ const alternative=c?`<div class="score-comparison"><div><span>Current amount / score / decision</span><strong>${amount(event)}</strong><p>${displayScore(d.score)} · ${d.flagged?'Flagged':'Not flagged'}</p></div><span class="comparison-arrow" aria-hidden="true">→</span><div><span>Tested alternative / score / decision</span><strong>${amount({amount:c.changed_features.amount??c.changed_features.Amount_Received,currency:event.currency})}</strong><p>${displayScore(c.counterfactual_probability)} · ${c.counterfactual_probability>=d.threshold?'Flagged':'Not flagged'}</p></div></div>`:'';
+ return `<div class="investigator-summary" data-view="simple">
+ <div class="decision-banner ${d.flagged?'flagged':'not-flagged'}"><div><p class="eyebrow">MODEL DECISION</p><h3>${d.flagged?'Flagged for review':'Not flagged'}</h3><p>Score ${displayScore(d.score)} — ${margin.toLowerCase()}${d.margin===0?'':` of ${displayScore(d.threshold)}`}</p></div><span class="model-scope">${esc(s.model_scope)}</span></div>
+ <div class="facts"><div class="fact"><span>MODEL SCORE</span><strong>${displayScore(d.score)}</strong></div><div class="fact"><span>BANK REVIEW CUTOFF</span><strong>${displayScore(d.threshold)}</strong></div><div class="fact"><span>MARGIN ${d.margin>=0?'ABOVE':'BELOW'} CUTOFF</span><strong>${d.margin>0?'+':d.margin<0?'−':''}${displayScore(Math.abs(d.margin))}</strong></div></div>
+ <section aria-labelledby="decision-question"><h3 id="decision-question">${d.flagged?'Why was this flagged?':'Why was this not flagged?'}</h3><div class="reason"><span class="eyebrow">MAIN REASON</span><p class="primary-reason">${esc(s.primary_reason.sentence)}</p></div><div class="quick-context"><p><strong>Earlier activity</strong><br>${esc(h.sentence)}</p><p><strong>Account activity</strong><br>${s.patterns.length?s.patterns.map(p=>esc(p.label)).join(' · ')+' observed in the displayed transfers. Score effects of these patterns were not measured.':'No fan-in, fan-out or cycle in the displayed transfers.'}</p></div></section>
+ <section class="section" aria-labelledby="feature-question"><h3 id="feature-question">Top factors</h3><ol class="factor-list">${factorCards}</ol><p class="muted relative-help" title="Strong: at least 67% of the largest absolute contribution; Moderate: at least 33%; Small: smaller non-negligible contributions.">Compared with training examples, with earlier account activity held fixed. Strength and bar lengths are relative to this explanation’s largest measured feature effect; they are visual comparisons, not probabilities.</p></section>
+ <section class="section" aria-labelledby="history-question"><h3 id="history-question">Earlier activity</h3><p>${esc(h.sentence)}</p>${history}${h.tested_count?'<button type="button" id="see-history" class="text-button">See all tested earlier transfers</button>':''}</section>
+ <section class="section" aria-labelledby="patterns-question"><h3 id="patterns-question">Account activity patterns</h3>${s.patterns.length?s.patterns.map(p=>`<p><strong>${esc(p.label)}</strong><br>${esc(p.description)}</p>`).join(''):'<p>No fan-in, fan-out or chronological cycle found in the displayed transfers.</p>'}<p class="muted">These describe observed account relationships. They do not prove fraud and do not automatically mean they affected the model score.</p></section>
+ <section class="section"><h3>What would have changed the result?</h3><p>${esc(cf.sentence)}</p>${alternative}<p class="muted">${cf.note}</p></section>
+ <p class="label-comparison">Dataset label: <strong>${s.evaluation.label}</strong> · ${s.evaluation.status}. Dataset labels are evaluation evidence, separate from the model decision.</p>
+ <p class="muted">The score is not a calibrated probability of fraud. This explanation describes measured model behavior.</p></div>`;
 }
-function render(x){
- const story=x.transaction_story;
- if(!story){$('#detail').innerHTML='<p class="error">The transfer map is unavailable. Restart the updated dashboard server.</p>';return}
- const event=story.selected_transfer,flagged=x.prediction.class==='fraud',known=x.evaluation_label==='fraud';
- const features=[...(x.feature_explanation?.features||[])].sort((a,b)=>Math.abs(b.shap_logit)-Math.abs(a.shap_logit));
- const earlier=(story.transfers||[]).filter(transfer=>transfer.kind==='earlier');
- const hasHistory=Number(story.earlier_related_transfers_considered||0)>0||earlier.length>0;
- const noHistory='No earlier transfers involving either account were available in the model’s eligible history before this prediction.';
- const effects=[...(story.model_link_effects||[])].sort((a,b)=>Math.abs(b.score_support)-Math.abs(a.score_support));
- const strongest=features.filter(f=>flagged?f.shap_logit>1e-8:f.shap_logit< -1e-8).sort((a,b)=>flagged?b.shap_logit-a.shap_logit:a.shap_logit-b.shap_logit)[0];
- const featureReason=strongest?`<strong>${esc(strongest.label||strongest.feature)}${strongest.feature==='payment_method'?' ('+observedFeature(strongest)+')':''}</strong> had the largest measured feature contribution toward a ${flagged?'higher':'lower'} score in this explanation.`:'The feature check did not find a clear contribution toward this decision.';
- const meaning=flagged&&!known?'This alert is a false positive against that label.':!flagged&&known?'The model missed this transaction against that label.':`The model result agrees with the dataset label (${known?'Fraud':'Not fraud'}).`;
- const maxContribution=Math.max(1e-8,...features.map(f=>Math.abs(f.shap_logit)));
- const featureCards=features.map((feature,index)=>{
-  const value=Number(feature.shap_logit),neutral=Math.abs(value)<1e-8;
-  const direction=neutral?'No clear measured effect':value>0?'Pushed the score higher':'Pushed the score lower';
-  return `<li class="factor-card"><div class="factor-heading"><strong>${esc(feature.feature==='transfer_terms'?'Amount and currencies':feature.label||feature.feature)}</strong><span class="chip ${neutral?'':value>0?'alert':'known'}">${direction}</span></div><p class="factor-value"><span class="observed-label">${feature.feature==='transfer_terms'?'Observed amount / currencies':'Observed value'}:</span> ${observedFeature(feature)}</p><div class="factor-track" aria-hidden="true"><span class="factor-bar ${value<0?'lower':''}" style="width:${neutral?0:Math.max(1,100*Math.abs(value)/maxContribution)}%"></span></div><small>${!neutral&&index===0?'Largest feature effect in this comparison. ':''}${feature.feature==='transfer_terms'?'Amount and currencies were checked together.':''}</small></li>`;
- }).join('');
- const faithfulness=x.evaluation_checks?.faithfulness;
- const faithfulnessSummary=faithfulness&&!faithfulness.groups.every(group=>group.direction_agrees)?'<p class="plain-warning">Changing one feature group alone did not always match its average contribution. Details are available below.</p>':'';
- const historySummary=!hasHistory?noHistory:!effects.length?'Earlier transfers are available, but no verified score test is available for them. The connections provide context only.':effects.some(effect=>effect.score_support>1e-6)?'At least one tested earlier transfer helped push the score higher.':'The tested earlier transfers did not help push the score higher.';
- const historyCards=effects.length?historyEffectCard(effects[0],story,x.prediction)+(effects.length>1?`<details class="more-history"><summary>See ${effects.length-1} more tested transfer${effects.length===2?'':'s'}</summary>${effects.slice(1).map(effect=>historyEffectCard(effect,story,x.prediction)).join('')}</details>`:''):`<p>${historySummary}</p>`;
- const transferRows=earlier.map(transfer=>`<tr><td>TX ${esc(transfer.transaction_id)}<br>Account ${esc(transfer.source_account_id)} → ${esc(transfer.target_account_id)}<br><small>${transfer.kind==='selected'?'Selected transaction':'Earlier transaction'}</small></td><td>${amount(transfer)}<br>${esc(transfer.payment_method)}</td><td>${time(transfer.timestamp)}</td></tr>`).join('');
- $('#detail').innerHTML=`
- <p class="eyebrow bank">${esc(x.bank.replaceAll('_',' '))}</p>
- <h2>Transaction ${esc(x.transaction_id)}</h2>
- <p class="intro">Account <strong>${esc(event.source_account_id)}</strong> sent <strong>${amount(event)}</strong> to account <strong>${esc(event.target_account_id)}</strong> using <strong>${esc(event.payment_method)}</strong>.</p>
- <p class="muted">${time(x.timestamp)} · Score from one saved global model</p>
- <div class="facts"><div class="fact"><span>MODEL RESULT</span><strong>${flagged?'Flagged for review':'Not flagged'}</strong></div><div class="fact"><span>MODEL SCORE / CONFIGURED THRESHOLD</span><strong>${score(x.prediction.probability)} / ${score(x.prediction.threshold)}</strong></div><div class="fact"><span>TRANSACTION AMOUNT</span><strong>${amount(event)}</strong></div></div>
- <section class="section" aria-labelledby="decision-question"><h3 id="decision-question">Why did the model ${flagged?'flag':'not flag'} this transaction?</h3><div class="reason"><p><strong>The model ${flagged?'flagged':'did not flag'} this transaction because its score (${score(x.prediction.probability)}) ${flagged?'met or exceeded':'was below'} the configured review threshold (${score(x.prediction.threshold)}).</strong></p><p>${featureReason}</p><p>${historySummary}</p></div><p class="muted">This explains the model’s decision. It does not prove fraud, and the score is not a confirmed probability of fraud.</p></section>
- <section class="section" aria-labelledby="feature-question"><h3 id="feature-question">Main factors influencing the score</h3><p class="muted">These details were compared with examples from the training data, keeping earlier account activity the same.</p><ol class="factor-list">${featureCards}</ol><p class="muted">Bar lengths compare the size of these feature contributions. They are not percentages of the score.</p>${faithfulnessSummary}</section>
- <section class="section" aria-labelledby="history-question"><h3 id="history-question">Effect of earlier transfers</h3>${historyCards}</section>
- <section class="section" aria-labelledby="graph-question"><h3 id="graph-question">Explore the account connections</h3>${patternLabels(story)}<p>${hasHistory?esc(story.observation):noHistory}</p><div class="graph-layout">${flowDiagram(story)}<aside id="graph-inspector" class="graph-inspector" aria-live="polite"><h4>Select an account or transfer</h4><p>View its details and any tested effect on the score.</p></aside></div>${earlier.length?`<details class="recorded-history"><summary>View earlier transaction history</summary><table class="flow-table"><thead><tr><th>Earlier transaction / accounts</th><th>Observed amount / method</th><th>Time</th></tr></thead><tbody>${transferRows}</tbody></table></details>`:hasHistory?'<p class="history-empty">Earlier history exists, but no earlier transfers fit the current graph display.</p>':''}</section>
- ${readableTechnicalDetails(x)}`;
- attachGraphInteractions(story,x.prediction);
+function renderNetwork(x){
+ const story=x.transaction_story,earlier=story.transfers.filter(t=>t.kind==='earlier');
+ return `<details class="network-details"><summary>View transaction network</summary>${patternLabels(story)}<div class="graph-legend"><span class="legend-selected">Selected transfer</span><span class="legend-context">Earlier observed transfer</span><span class="legend-up">Verified test: raised score</span><span class="legend-down">Verified test: lowered score</span><span class="legend-neutral">Verified test: negligible effect</span></div><div class="graph-layout">${flowDiagram(story)}<aside id="graph-inspector" class="graph-inspector" aria-live="polite"><h4>Select an account or transfer</h4><p>View its details and any tested effect on the score.</p></aside></div>${earlier.length?`<details class="recorded-history"><summary>View earlier transaction history</summary>${historyTable(earlier,story.model_link_effects||[])}</details>`:''}</details>`;
+}
+function historyTable(events,effects){
+ if(!events.length)return '<p>No earlier eligible transfers are recorded in this scope.</p>';
+ return `<div class="table-scroll"><table class="technical-table flow-table"><thead><tr><th>Transfer / accounts / model nodes</th><th>Time / observed amount / method</th><th>Verified replay: with / without / delta</th></tr></thead><tbody>${events.map(t=>{
+ const e=effects.find(e=>String(e.transaction_id)===String(t.transaction_id));
+ return `<tr><td>TX ${esc(t.transaction_id)}<br>${esc(t.source_account_id??t.source)} → ${esc(t.target_account_id??t.target)}<br>Nodes ${esc(t.source)} → ${esc(t.target)}</td><td>${time(t.timestamp)}<br>${amount(t)}<br>${esc(t.payment_method)}</td><td>${e?`${exact(e.original_model_score)} / ${exact(e.model_score_without_event)}<br>Support: ${exact(e.score_support)}<br>${esc(e.scope)}`:'Observed; effect not measured'}</td></tr>`;
+ }).join('')}</tbody></table></div>`;
+}
+// Structured, full-precision evidence without dumping JSON into the technical view.
+function evidence(value){
+ if(value==null)return '<p>Not recorded for this transaction. This does not mean the check passed.</p>';
+ if(typeof value!=='object')return exact(value);
+ const entries=Array.isArray(value)?value.map((v,i)=>[i+1,v]):Object.entries(value);
+ if(!entries.length)return '<p>No entries recorded.</p>';
+ return `<dl class="evidence-values">${entries.map(([k,v])=>`<div><dt>${esc(String(k).replaceAll('_',' '))}</dt><dd>${v!==null&&typeof v==='object'?evidence(v):exact(v)}</dd></div>`).join('')}</dl>`;
 }
 function readableTechnicalDetails(x){
- const feature=x.feature_explanation,story=x.transaction_story;
- const features=[...feature.features].sort((a,b)=>Math.abs(b.shap_logit)-Math.abs(a.shap_logit));
- const effects=story.model_link_effects||[];
- const hasHistory=Number(story.earlier_related_transfers_considered||0)>0||story.transfers.some(event=>event.kind==='earlier');
- const flagged=x.prediction.class==='fraud',faithfulness=x.evaluation_checks?.faithfulness;
- const label=f=>f.feature==='transfer_terms'?'Amount and currencies':f.label||f.feature;
- const signed=value=>(Number(value)>=0?'+':'')+Number(value).toFixed(4);
- const rows=features.map(f=>`<tr><td>${esc(label(f))}<br><small>Observed: ${observedFeature(f)}</small></td><td>${signed(f.shap_logit)}</td><td>${Math.abs(f.shap_logit)<1e-8?'No clear measured effect':f.shap_logit>0?'Contributed toward a higher output':'Contributed toward a lower output'}</td></tr>`).join('');
- const equation=[`Comparison starting point: ${Number(feature.base_logit).toFixed(4)}`,...features.map(f=>`${label(f)}: ${signed(f.shap_logit)}`),`Target internal output: ${Number(feature.target_logit).toFixed(4)}`,`Converted model score: ${preciseScore(x.prediction.probability)}`].join('\n');
- const historyText=effects.length?`${effects.length} earlier transfer${effects.length===1?' has':'s have'} a verified score test. Each test leaves out one transfer’s history update and recalculates this transaction’s score.`:hasHistory?'Earlier transfers are recorded, but no verified score-effect test is available for this transaction. Connections alone do not show that they influenced the prediction.':'No eligible earlier transfers involving either account were available, so there was no earlier transfer to remove and test.';
- const effectTable=effects.length?`<table class="technical-table"><thead><tr><th>Earlier transfer</th><th>Original score</th><th>Without its update</th></tr></thead><tbody>${effects.map(effect=>`<tr><td>TX ${esc(effect.transaction_id)}</td><td>${preciseScore(effect.original_model_score)}</td><td>${preciseScore(effect.model_score_without_event)}</td></tr>`).join('')}</tbody></table>`:'';
- const faithText=!faithfulness?'Not recorded for this transaction. This does not mean the check passed.':faithfulness.groups.every(group=>group.direction_agrees)?'The contribution directions agreed with the check that changes one group at a time.':'At least one contribution direction differed when that group was changed alone. The checks answer different questions.';
- const verification=x.verification||{};
- const numericalText=verification.passed===true?`Passed: the saved score, direct model score and explanation score agree within the allowed difference of ${verification.tolerance??0.000001}.`:'A passed numerical verification is not recorded for this transaction.';
- const alternatives=x.counterfactual_explanation?.counterfactuals||[];
- const whatIf=alternatives.length?`<ul>${alternatives.map(item=>`<li>Changing the amount to ${Number(item.changed_features?.amount??item.changed_features?.Amount_Received).toLocaleString()} gave a model score of ${preciseScore(item.counterfactual_probability)}.</li>`).join('')}</ul><p>These amounts can be unrealistic. This tests model sensitivity; it is not a recommendation. A displayed zero may be a rounded value.</p>`:'No alternative amount result is recorded for this transaction.';
- const raw={prediction:x.prediction,feature_explanation:feature,verification,model:x.model,evaluation_checks:x.evaluation_checks,graph_effects:effects,history_scope:story.history_scope,provenance:x.xai_provenance};
- return `<details class="technical-details"><summary>Technical methods and verification</summary>
- <h4>1. Which model made the prediction?</h4><p>One saved adaptive federated model: training seed <strong>${esc(x.model.seed)}</strong>, selected round <strong>${esc(x.model.best_round)}</strong>. No three-model ensemble. It reuses its learned weights; it is not training again.</p>
- <h4>2. Why was this transaction ${flagged?'flagged':'not flagged'}?</h4><p>Its score was <strong>${preciseScore(x.prediction.probability)}</strong>, ${flagged?'at or above':'below'} the configured threshold.</p><p>Saved configured threshold for <strong>${esc(x.bank.replaceAll('_',' '))}</strong> (validation-selected): <strong>${preciseScore(x.prediction.threshold)}</strong>.</p><p>The threshold was chosen using validation data and saved with the model’s results. The dashboard reuses it. Decisions use exact values; the main view rounds scores to four decimals.</p>
- <h4>3. How were the transaction details explained?</h4><p>We used <strong>${esc(feature.background_size)} training transactions as comparison examples</strong>. We temporarily replaced groups of details and asked the same model to calculate outputs, keeping earlier account memory unchanged. This method is called <strong>grouped SHAP</strong>.</p><p>These are comparison examples, not additional models or necessarily earlier transfers involving these accounts. Amounts and currencies move together from the same example.</p><table class="technical-table"><thead><tr><th>Feature group and observed value</th><th>Contribution</th><th>Meaning</th></tr></thead><tbody>${rows}</tbody></table>
- <h4>4. What do the contribution numbers mean?</h4><p>They use <strong>logit</strong>, the model’s internal scale before conversion to the displayed score. Positive values push the output higher; negative values push it lower. They are not percentages.</p><pre class="score-equation">${esc(equation)}</pre><p>The starting point comes from the comparison examples with account memory held fixed; it is not another transaction’s score. Values above are rounded. Changing one group alone can give a different effect because SHAP averages across feature combinations.</p>
- <h4>5. Did earlier transfers affect this score?</h4><p>${historyText}</p>${effectTable}
- <h4>6. How was the explanation checked?</h4><ul class="plain-checks"><li><strong>Numerical agreement — do the model and explanation reproduce the same score?</strong><br>${numericalText}</li><li><strong>Feature-change check — do targeted changes have the expected measured effect?</strong><br>${faithText}</li></ul><p>These are separate checks. Passing one does not prove that the others passed or that the transaction was fraudulent.</p>
- <h4>7. What are the other checks and IDs?</h4><p><strong>Model fingerprint (SHA-256):</strong> identifies the exact saved model file. <strong>Account → model node:</strong> links a dataset account ID to the model’s internal account number.</p><details><summary>Optional amount-change test</summary>${whatIf}</details><details><summary>Account lookup and model fingerprint</summary><p>Fingerprint: <code>${esc(x.model.checkpoint_sha256)}</code></p><p>${story.accounts.map(account=>`Account ${esc(account.account_id)} → internal node ${esc(account.node_id)}`).join('<br>')}</p></details><details><summary>Exact values and audit record</summary><p>This record includes full-precision contributions, the comparison transaction IDs, test results and shared metadata for all banks. This transaction uses only the ${esc(x.bank.replaceAll('_',' '))} threshold shown above.</p><pre>${esc(JSON.stringify(raw,null,2))}</pre></details>
- <p class="technical-conclusion"><strong>What this tells you:</strong> the model ${flagged?'flagged':'did not flag'} this transaction because its score ${flagged?'met or exceeded':'was below'} its configured threshold. The explanation describes the model’s behaviour; it does not establish actual fraud.</p></details>`;
+ const f=x.feature_explanation,story=x.transaction_story,p=x.prediction,v=x.verification||{},provenance=x.xai_provenance||{};
+ const allHistory=story.eligible_earlier_transfers||story.transfers.filter(t=>t.kind==='earlier');
+ const effects=ExplanationSummary.verifiedEffects(x),cf=x.counterfactual_explanation||{};
+ const tested=cf.tested_alternatives||cf.counterfactuals||[];
+ const reconstructed=f.base_logit+f.features.reduce((sum,g)=>sum+g.shap_logit,0);
+ const reconstructedScore=1/(1+Math.exp(-Math.max(-40,Math.min(40,reconstructed))));
+ const rows=f.features.map(g=>`<tr><td>${esc(g.label||g.feature)}<br>Observed: ${observedFeature(g)}<br>Columns: ${esc((g.columns||[]).join(', '))}</td><td>${exact(g.shap_logit)}</td><td>${exact(g.ablation_logit_drop)}</td></tr>`).join('');
+ const equation=`Base logit ${f.base_logit}\n+ grouped SHAP contributions (${f.features.map(g=>g.shap_logit).join(' + ')})\n= reconstructed logit ${reconstructed}\nTarget logit: ${f.target_logit}\nAdditivity residual: ${f.additivity_residual}\nsigmoid(reconstructed logit) = ${reconstructedScore}\nExplanation target score: ${f.target_probability}`;
+ return `<details class="technical-details" id="technical-explanation"><summary>View in-depth explanation</summary>
+ <h3>A. Exact decision</h3><p>Full-precision model score: <strong>${exact(p.probability)}</strong><br>Bank-specific threshold: <strong>${exact(p.threshold)}</strong><br>Exact margin: <strong>${exact(p.probability-p.threshold)}</strong><br>Model decision: ${p.probability>=p.threshold?'Flagged for review':'Not flagged'} (${esc(p.class)})<br>Evaluation label: ${esc(x.evaluation_label)}</p><p>Saved threshold source: ${esc(p.threshold_selection||provenance.threshold_policy||'Not recorded')}</p>
+ <h3>B. Feature attribution</h3><p>Grouped empirical/interventional SHAP averages contributions across feature combinations using ${esc(f.background_size)} training comparison examples. Earlier account memory and target account metadata stay fixed. Amount sent, amount received and both currencies form a joint group; they cannot be assigned separate effects.</p><p>Method: ${esc(f.method)} · scope: ${esc(f.scope)} · units: ${esc(f.units)}</p><div class="table-scroll"><table class="technical-table"><thead><tr><th>Every feature group / observed value</th><th>Exact SHAP (logit)</th><th>One-group perturbation (logit drop)</th></tr></thead><tbody>${rows}</tbody></table></div><pre class="score-equation">${esc(equation)}</pre><details><summary>Comparison background and feature grouping</summary>${evidence({seed:f.seed,background_transaction_ids:f.background_txn_ids,groups:f.groups,limitations:f.limitations})}</details>
+ <h3>C. Feature faithfulness</h3><p>SHAP is an average contribution over feature combinations. A one-group perturbation changes that group alone while holding other observed groups fixed. Differences do not by themselves invalidate either method.</p>${evidence(x.evaluation_checks?.faithfulness)}${evidence(x.evaluation?.feature_fidelity)}
+ <h3 id="technical-history">D. Historical replay</h3><p>This is a model replay/intervention test, not GNNExplainer and not proof of transaction purpose or fraud. Each verified test suppresses one earlier history update and retains pre-window account memory.</p><p>${esc(story.history_scope)}</p><p>${effects.length} verified earlier-transfer test(s); ${esc(story.earlier_related_transfers_considered)} eligible earlier transfers considered. ${story.eligible_earlier_transfers?'Every eligible transfer in that bounded scope is listed below.':'This older report retained only the displayed earlier transfers; the remaining eligible records were not saved.'}</p>${historyTable(allHistory,effects)}${evidence({window_batches:x.graph_explanation?.window_batches,window_event_count:x.graph_explanation?.window_event_count,selection:x.graph_explanation?.selection,fidelity:x.graph_explanation?.fidelity,temporal_evidence:x.temporal_explanation})}
+ <h3>E. Graph / network details</h3><p>Account IDs identify dataset accounts; model node IDs identify internal nodes. Patterns describe observed relationships and do not establish a measured model effect.</p>${historyTable([story.selected_transfer,...allHistory],effects)}${evidence(story.accounts)}${evidence(observedPatterns(story))}${evidence({important_nodes:x.graph_explanation?.important_nodes,important_edges:x.graph_explanation?.important_edges,limitations:x.graph_explanation?.limitations})}
+ <h3>F. Constrained counterfactuals</h3><p>All retained tested amount alternatives and exact scores follow. This is a model-sensitivity test, not a recommendation for transaction behavior. Account memory and event history stay fixed.</p>${!cf.tested_alternatives?'<p>Legacy report: only threshold-crossing alternatives were retained. Other tested candidate values were not saved.</p>':''}${evidence({method:cf.method,status:cf.status,threshold:cf.threshold,candidates_evaluated:cf.candidates_evaluated,tested_alternatives:tested,limitations:cf.limitations})}
+ <h3>G. Verification</h3><p>Strict XAI parity guard: 1e-6. Saved, direct and explanation scores must agree within this tolerance. Missing checks are not passes. Reference stability, feature faithfulness and numerical agreement answer different questions.</p>${evidence(v)}${evidence({grouped_explanation_target_score:f.target_probability,saved_catalog_score:p.probability,stability:x.evaluation_checks?.stability,temporal_replay:x.evaluation_checks?.temporal_replay,coverage:x.evaluation_checks?.coverage,engine_evaluation:x.evaluation,configuration:x.config})}
+ <h3>H. Model provenance</h3><p>${esc(ExplanationSummary.modelScope(x))}. Local explanations do not inherit a model’s DP guarantee. The selected catalog supports only the model identified here.</p>${evidence({model:x.model,source:provenance,engine_provenance:x.provenance,limitations:x.limitations})}
+ <h3>I. Raw audit record</h3><details class="raw-audit"><summary>View raw audit record</summary><pre>${esc(JSON.stringify(x,null,2))}</pre></details></details>`;
+}
+function render(x){
+ const s=ExplanationSummary.summarize(x),event=x.transaction_story.selected_transfer;
+ $('#detail').innerHTML=`<div class="transaction-heading"><div><p class="eyebrow bank">${esc(x.bank.replaceAll('_',' '))}</p><h2>Transaction ${esc(x.transaction_id)}</h2></div><a class="picker-link" href="#bank">Find another transaction</a><a class="depth-link" href="#technical-explanation" id="open-technical">In-depth explanation ↗</a></div><p class="intro">Account ${esc(event.source_account_id)} sent ${amount(event)} to account ${esc(event.target_account_id)} using ${esc(event.payment_method)}.</p>${renderSimpleExplanation(x,s)}${renderNetwork(x)}${readableTechnicalDetails(x)}`;
+ attachGraphInteractions(x.transaction_story,x.prediction);
+ if(typeof matchMedia==='function'&&matchMedia('(max-width:1000px)').matches)$('#detail').scrollIntoView({block:'start'});
+ const open=()=>{$('#technical-explanation').open=true};
+ $('#open-technical').addEventListener('click',open);
+ $('#see-history')?.addEventListener('click',()=>{open();$('#technical-history').scrollIntoView({behavior:'smooth',block:'start'})});
 }
 function graphEdgeDetails(event,effect,prediction){
  const tested=event.kind==='earlier'&&effect;
  const status=tested?(effect.score_support>1e-6?'Helped raise the score':effect.score_support< -1e-6?'Helped lower the score':'Tested change was too small to measure clearly'):'';
  const scoreLabel=event.kind==='selected'?'Model score':'Selected transaction’s model score';
- return `<h4>Transaction ${esc(event.transaction_id)}</h4><p>Account ${esc(event.source_account_id)} → ${esc(event.target_account_id)}</p><p>${time(event.timestamp)}<br>${amount(event)}<br>${esc(event.payment_method)}</p>${status?`<p><strong>${status}</strong></p>`:''}<p>${scoreLabel}: ${score(prediction.probability)}</p>${tested?`<p>Without its history update: ${score(effect.model_score_without_event)}</p><p class="muted">Earlier account memory is retained. Full replay scope and exact scores are in Technical methods and verification.</p>`:''}`;
+ return `<h4>Transaction ${esc(event.transaction_id)}</h4><p>Account ${esc(event.source_account_id)} → ${esc(event.target_account_id)}</p><p>${time(event.timestamp)}<br>${amount(event)}<br>${esc(event.payment_method)}</p>${status?`<p><strong>${status}</strong></p>`:''}<p>${scoreLabel}: ${score(prediction.probability)}</p>${tested?`<p>Without its history update: ${score(effect.model_score_without_event)}</p><p class="muted">Earlier account memory is retained. Full replay scope and exact scores are in the in-depth explanation.</p>`:''}`;
 }
 function attachGraphInteractions(story,prediction){
  const panel=$('#graph-inspector');
@@ -227,5 +207,5 @@ bank.addEventListener('change',()=>{requestSequence++;selected=null;query.value=
 query.addEventListener('input',()=>{clearTimeout(debounce);debounce=setTimeout(reset,220)});
 $('#prev').addEventListener('click',()=>{if(currentPage){currentPage--;loadRows()}});
 $('#next').addEventListener('click',()=>{if((currentPage+1)*pageSize<total){currentPage++;loadRows()}});
-async function init(){try{const data=await json('/api/meta');bank.innerHTML=data.banks.map(value=>`<option value="${esc(value)}">${esc(value.replaceAll('_',' '))}</option>`).join('');const params=new URLSearchParams(location.search);if(params.has('bank')&&!data.banks.includes(params.get('bank')))throw Error('Unknown bank in transaction link.');if(data.banks.includes(params.get('bank')))bank.value=params.get('bank');const id=params.get('transaction_id');if(id){query.value=id}await loadRows();if(id)await loadExplanation(id)}catch(error){$('#detail').innerHTML=`<p class="error">${esc(error.message)}</p>`}}
+async function init(){try{const data=await json('/api/meta');currentManifest=data.manifest;bank.innerHTML=data.banks.map(value=>`<option value="${esc(value)}">${esc(value.replaceAll('_',' '))}</option>`).join('');const params=new URLSearchParams(location.search);if(params.has('bank')&&!data.banks.includes(params.get('bank')))throw Error('Unknown bank in transaction link.');if(data.banks.includes(params.get('bank')))bank.value=params.get('bank');const id=params.get('transaction_id');if(id){query.value=id;view.value='all'}await loadRows();if(id)await loadExplanation(id)}catch(error){$('#detail').innerHTML=`<p class="error">${esc(error.message)}</p>`}}
 init();

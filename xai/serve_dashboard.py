@@ -25,11 +25,12 @@ if str(XAI_ROOT) not in sys.path:
 from run_updated import BANKS, DATASET, REPO_ROOT, ENGINE_ROOT, git_blob, load_cached_engine, normalize_checkpoint_for_engine, sha256
 from src.model_catalog import filter_catalog, model_catalog_rows, verify_saved_metrics
 from src.transaction_story import build_transaction_story, canonical_frames, completed_history
+from src.dataset_view import verified_dataset_view
 
 SCHEMA = "adaptive-federated-single-model-group-shap-v2"
 
 
-def cached_explanation_matches(report, cache_key, checkpoint_hash):
+def cached_explanation_matches(report, cache_key, checkpoint_hash, expected_inputs=None, expected_score=None):
     """Return whether a cached explanation is safe to serve for this model and score."""
     if not isinstance(report, dict):
         return False
@@ -40,12 +41,30 @@ def cached_explanation_matches(report, cache_key, checkpoint_hash):
     if not all(isinstance(value, dict) for value in (feature, prediction, verification, model)):
         return False
     target, score = feature.get("target_probability"), prediction.get("probability")
-    return (report.get("cache_key") == cache_key
+    matches = (report.get("cache_key") == cache_key
             and verification.get("passed") is True
             and model.get("checkpoint_sha256") == checkpoint_hash
             and isinstance(target, (int, float)) and np.isfinite(target)
             and isinstance(score, (int, float)) and np.isfinite(score)
             and abs(target - score) <= 1e-6)
+    if not matches or expected_inputs is None:
+        return matches
+    provenance = report.get("xai_provenance", {})
+    if not isinstance(provenance, dict):
+        return False
+    return (report.get("cache_key_inputs") == expected_inputs
+            and report.get("bank") == expected_inputs["bank"]
+            and str(report.get("transaction_id")) == expected_inputs["transaction_id"]
+            and provenance.get("checkpoint_sha256") == checkpoint_hash
+            and provenance.get("preprocessing_sha256") == expected_inputs["preprocessing_sha256"]
+            and prediction.get("threshold") == expected_inputs["threshold"]
+            and prediction.get("class") == ("fraud" if score >= prediction["threshold"] else "not_fraud")
+            and verification.get("tolerance") == 1e-6
+            and verification.get("explained_checkpoint_sha256") == checkpoint_hash
+            and expected_score is not None and abs(score - expected_score) <= 1e-6
+            and all(isinstance(verification.get(name), (int, float))
+                    and np.isfinite(verification[name]) and abs(verification[name] - score) <= 1e-6
+                    for name in ("existing_evaluation_probability", "direct_model_probability", "xai_probability")))
 
 
 def json_default(value):
@@ -72,6 +91,7 @@ class AdaptiveFederatedDashboard:
         self.temp_context = tempfile.TemporaryDirectory(prefix="xai_adaptive_model_", dir=REPO_ROOT / "tmp")
         self.checkpoint = Path(self.temp_context.name) / "global_model.pt"
         self.preprocessing = self.prepared / "preprocessing.json"
+        self.dataset = verified_dataset_view(DATASET, self.preprocessing, Path(self.temp_context.name))
         self.preprocessing_hash = sha256(self.preprocessing.read_bytes())
         self.rows, self.adapters, self.probabilities, self.thresholds = {}, {}, {}, {}
         self.story_frames, self.story_cache, self.account_ids = {}, {}, {}
@@ -109,7 +129,7 @@ class AdaptiveFederatedDashboard:
                 probabilities = np.asarray(arrays["validation"], dtype=np.float64)
                 if len(arrays.get("testing", [])):
                     raise ValueError("the validation dashboard requires test-free prediction artifacts")
-            adapter = self.temporal.TemporalAdapter(DATASET, self.checkpoint, bank, "federated",
+            adapter = self.temporal.TemporalAdapter(self.dataset, self.checkpoint, bank, "federated",
                                                     self.preprocessing, reference)
             frame = adapter.frames["validation"]
             threshold = float(expected_banks[bank]["threshold"])
@@ -140,6 +160,7 @@ class AdaptiveFederatedDashboard:
                 XAI_ROOT / "serve_dashboard.py", XAI_ROOT / "src/model_catalog.py",
                 XAI_ROOT / "src/counterfactuals.py", XAI_ROOT / "src/transaction_story.py",
                 XAI_ROOT / "src/grouped_features.py",
+                XAI_ROOT / "src/dataset_view.py",
                 ENGINE_ROOT / "explanation_engine.cpython-312.pyc",
                 ENGINE_ROOT / "temporal.cpython-312.pyc",
                 ENGINE_ROOT / "graph_explainer.cpython-312.pyc")},
@@ -192,7 +213,7 @@ class AdaptiveFederatedDashboard:
             index = int(adapter.index("validation", transaction_id))
             if bank not in self.story_frames:
                 self.story_frames[bank] = canonical_frames(adapter)
-                maps = [pd.read_csv(DATASET / split / bank / "node_map.csv.gz") for split in ("training", "validation")]
+                maps = [pd.read_csv(self.dataset / split / bank / "node_map.csv.gz") for split in ("training", "validation")]
                 account_values = pd.concat([mapping["account_id"] for mapping in maps], ignore_index=True).drop_duplicates().tolist()
                 self.account_ids[bank] = {index: str(value) for index, value in enumerate(account_values)}
                 for split, mapping in zip(("training", "validation"), maps):
@@ -233,7 +254,7 @@ class AdaptiveFederatedDashboard:
         with self.lock:
             if path.is_file():
                 report = json.loads(path.read_text(encoding="utf-8"))
-                if cached_explanation_matches(report, key, self.checkpoint_hash):
+                if cached_explanation_matches(report, key, self.checkpoint_hash, key_inputs, row["probability"]):
                     return self._attach_story(bank, transaction_id, report)
             adapter = self.adapters[bank]
             index = int(adapter.index("validation", transaction_id))
@@ -301,9 +322,9 @@ def handler_for(app):
             url = urlparse(self.path)
             params = parse_qs(url.query)
             try:
-                if url.path in {"/", "/dashboard.js", "/dashboard.css"}:
+                if url.path in {"/", "/dashboard.js", "/explanation_summary.js", "/dashboard.css"}:
                     name = "dashboard.html" if url.path == "/" else url.path.lstrip("/")
-                    content_type = {"dashboard.html": "text/html", "dashboard.js": "text/javascript", "dashboard.css": "text/css"}[name]
+                    content_type = {"dashboard.html": "text/html", "dashboard.js": "text/javascript", "explanation_summary.js": "text/javascript", "dashboard.css": "text/css"}[name]
                     self.send_data((XAI_ROOT / "static" / name).read_bytes(), content_type + "; charset=utf-8")
                 elif url.path == "/api/meta":
                     self.send_data({"banks": BANKS, "manifest": app.manifest})

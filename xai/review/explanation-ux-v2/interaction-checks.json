@@ -1,0 +1,37 @@
+{
+  "browser": "Chrome and in-app browser",
+  "desktop": {
+    "width": 1230,
+    "height": 832
+  },
+  "narrow_view_width": 319,
+  "cases": 8,
+  "all_required_scenarios_covered": true,
+  "default_network_collapsed": true,
+  "default_technical_collapsed": true,
+  "default_raw_collapsed": true,
+  "technical_link_opens_full_evidence": true,
+  "technical_sections": [
+    "A. Exact decision",
+    "B. Feature attribution",
+    "C. Feature faithfulness",
+    "D. Historical replay",
+    "E. Graph / network details",
+    "F. Constrained counterfactuals",
+    "G. Verification",
+    "H. Model provenance",
+    "I. Raw audit record"
+  ],
+  "keyboard_graph_test": {
+    "selected_transaction": "66943",
+    "inspected_earlier_transaction": "66942",
+    "activation": "Enter",
+    "observed_result": "Helped raise the score; without history update 0.0006"
+  },
+  "all_tested_history_control_opens_technical_history": true,
+  "raw_record_opens_only_on_nested_disclosure": true,
+  "default_document_horizontal_overflow": false,
+  "expanded_technical_horizontal_overflow": false,
+  "console_warnings_or_errors": [],
+  "review_type": "qualitative investigator-style review; no independent timed user study"
+}

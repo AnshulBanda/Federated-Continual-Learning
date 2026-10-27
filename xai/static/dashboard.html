@@ -5,6 +5,7 @@
   <meta name="viewport" content="width=device-width,initial-scale=1">
   <title>XAI · Transaction explanation</title>
   <link rel="stylesheet" href="/dashboard.css">
+  <script src="/explanation_summary.js" defer></script>
   <script src="/dashboard.js" defer></script>
 </head>
 <body>
@@ -15,6 +16,7 @@
       <label for="bank">Bank</label><select id="bank"></select>
       <label for="view">Show</label><select id="view">
         <option value="flagged">Flagged by model</option>
+        <option value="all">All transactions</option>
         <option value="known_fraud">Known fraud labels</option>
         <option value="missed_fraud">Missed fraud</option>
       </select>
@@ -25,7 +27,7 @@
       <div class="pager"><button id="prev">Previous</button><span id="page"></span><button id="next">Next</button></div>
       <p class="muted legend">Dataset label: the classification recorded in the data.<br>Model result: whether the score reached the configured review threshold selected using validation data.</p>
     </aside>
-    <article id="detail" class="panel detail" aria-live="polite"><div class="empty"><h2>Select a transaction</h2><p>Its transfer map, actual transaction IDs and a short explanation will appear here. The first explanation can take longer to generate.</p></div></article>
+    <article id="detail" class="panel detail" aria-live="polite"><div class="empty"><h2>Select a transaction</h2><p>See the decision, its main measured factor and any verified earlier activity. The first explanation can take longer to generate.</p></div></article>
   </main>
 </body>
 </html>

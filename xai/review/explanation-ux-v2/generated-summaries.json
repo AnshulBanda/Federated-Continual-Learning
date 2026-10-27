@@ -1,0 +1,647 @@
+[
+  {
+    "bank": "Wells_Fargo",
+    "transaction_id": "2954161",
+    "summary": {
+      "decision": {
+        "flagged": true,
+        "score": 0.20514991879463196,
+        "threshold": 0.1868941614329799,
+        "margin": 0.018255757361652053
+      },
+      "primary_reason": {
+        "feature": "payment_method",
+        "label": "Payment method",
+        "observed": "ACH",
+        "contribution": 1.411813334969338,
+        "direction": "up",
+        "strength": "Strong",
+        "relative_size": 1,
+        "effect": "Strong upward effect",
+        "sentence": "The payment method was the strongest measured factor pushing the model score higher."
+      },
+      "top_factors": [
+        {
+          "feature": "payment_method",
+          "label": "Payment method",
+          "observed": "ACH",
+          "contribution": 1.411813334969338,
+          "direction": "up",
+          "strength": "Strong",
+          "relative_size": 1,
+          "effect": "Strong upward effect"
+        },
+        {
+          "feature": "transfer_terms",
+          "label": "Amount and currencies",
+          "observed": "Sent 522.7 USD; received 522.7 USD",
+          "contribution": -0.034908865636680275,
+          "direction": "down",
+          "strength": "Small",
+          "relative_size": 0.024726261448322722,
+          "effect": "Small downward effect"
+        }
+      ],
+      "history_summary": {
+        "status": "none",
+        "strongest": null,
+        "tested_count": 0,
+        "sentence": "No earlier eligible transfers involving these accounts were available to the model before this prediction."
+      },
+      "patterns": [],
+      "counterfactual_summary": {
+        "alternative": {
+          "changed_features": {
+            "amount": 3134976.03,
+            "Amount_Received": 3134976.03
+          },
+          "original_probability": 0.20514994805494127,
+          "counterfactual_probability": 4.248354255291589e-18,
+          "score_change": -0.20514994805494127,
+          "valid": true,
+          "constraint_notes": [
+            "candidate amounts come from training rows only",
+            "matched known categorical context",
+            "amount aliases changed together"
+          ],
+          "amount_change_absolute": 3134453.3299999996,
+          "threshold_crossed": true
+        },
+        "crossed": true,
+        "available_count": 9,
+        "sentence": "In the tested model-sensitivity check, changing the transfer amount to approximately 3,134,976.03 USD moved the score below the review cutoff.",
+        "note": "This is a model-sensitivity test, not a recommendation for transaction behavior."
+      },
+      "model_scope": "Non-private reference model",
+      "evaluation": {
+        "label": "Not fraud",
+        "status": "False positive"
+      }
+    }
+  },
+  {
+    "bank": "JPMorgan_Chase",
+    "transaction_id": "2580817",
+    "summary": {
+      "decision": {
+        "flagged": true,
+        "score": 0.9307717084884644,
+        "threshold": 0.017805186897516156,
+        "margin": 0.9129665215909482
+      },
+      "primary_reason": {
+        "feature": "payment_method",
+        "label": "Payment method",
+        "observed": "ACH",
+        "contribution": 1.9673664383590221,
+        "direction": "up",
+        "strength": "Strong",
+        "relative_size": 1,
+        "effect": "Strong upward effect",
+        "sentence": "The payment method was the strongest measured factor pushing the model score higher."
+      },
+      "top_factors": [
+        {
+          "feature": "payment_method",
+          "label": "Payment method",
+          "observed": "ACH",
+          "contribution": 1.9673664383590221,
+          "direction": "up",
+          "strength": "Strong",
+          "relative_size": 1,
+          "effect": "Strong upward effect"
+        },
+        {
+          "feature": "transfer_terms",
+          "label": "Amount and currencies",
+          "observed": "Sent 0.47 USD; received 0.47 USD",
+          "contribution": -0.06002693250775337,
+          "direction": "down",
+          "strength": "Small",
+          "relative_size": 0.03051131265501396,
+          "effect": "Small downward effect"
+        }
+      ],
+      "history_summary": {
+        "status": "untested",
+        "strongest": null,
+        "tested_count": 0,
+        "sentence": "Earlier transfers were observed, but their effect on this prediction was not measured."
+      },
+      "patterns": [
+        {
+          "label": "Fan-out",
+          "description": "The sending account transferred to 4 different counterparties in the displayed history, including this transaction."
+        }
+      ],
+      "counterfactual_summary": {
+        "alternative": {
+          "changed_features": {
+            "amount": 9255068.58,
+            "Amount_Received": 9255068.58
+          },
+          "original_probability": 0.9307717866228309,
+          "counterfactual_probability": 4.248354255291589e-18,
+          "score_change": -0.9307717866228309,
+          "valid": true,
+          "constraint_notes": [
+            "candidate amounts come from training rows only",
+            "matched known categorical context",
+            "amount aliases changed together"
+          ],
+          "amount_change_absolute": 9255068.11,
+          "threshold_crossed": true
+        },
+        "crossed": true,
+        "available_count": 9,
+        "sentence": "In the tested model-sensitivity check, changing the transfer amount to approximately 9,255,068.58 USD moved the score below the review cutoff.",
+        "note": "This is a model-sensitivity test, not a recommendation for transaction behavior."
+      },
+      "model_scope": "Non-private reference model",
+      "evaluation": {
+        "label": "Fraud",
+        "status": "True positive"
+      }
+    }
+  },
+  {
+    "bank": "JPMorgan_Chase",
+    "transaction_id": "3008974",
+    "summary": {
+      "decision": {
+        "flagged": true,
+        "score": 0.532108724117279,
+        "threshold": 0.017805186897516156,
+        "margin": 0.5143035372197629
+      },
+      "primary_reason": {
+        "feature": "payment_method",
+        "label": "Payment method",
+        "observed": "ACH",
+        "contribution": 1.5314450012519956,
+        "direction": "up",
+        "strength": "Strong",
+        "relative_size": 1,
+        "effect": "Strong upward effect",
+        "sentence": "The payment method was the strongest measured factor pushing the model score higher."
+      },
+      "top_factors": [
+        {
+          "feature": "payment_method",
+          "label": "Payment method",
+          "observed": "ACH",
+          "contribution": 1.5314450012519956,
+          "direction": "up",
+          "strength": "Strong",
+          "relative_size": 1,
+          "effect": "Strong upward effect"
+        },
+        {
+          "feature": "transfer_terms",
+          "label": "Amount and currencies",
+          "observed": "Sent 86,122.71 USD; received 86,122.71 USD",
+          "contribution": 1.0609385838033631,
+          "direction": "up",
+          "strength": "Strong",
+          "relative_size": 0.6927696279892641,
+          "effect": "Strong upward effect"
+        }
+      ],
+      "history_summary": {
+        "status": "untested",
+        "strongest": null,
+        "tested_count": 0,
+        "sentence": "Earlier transfers were observed, but their effect on this prediction was not measured."
+      },
+      "patterns": [
+        {
+          "label": "Fan-in",
+          "description": "The receiving account received transfers from 5 different counterparties in the displayed history, including this transaction."
+        }
+      ],
+      "counterfactual_summary": {
+        "alternative": {
+          "changed_features": {
+            "amount": 9255068.58,
+            "Amount_Received": 9255068.58
+          },
+          "original_probability": 0.5321087483180899,
+          "counterfactual_probability": 4.248354255291589e-18,
+          "score_change": -0.5321087483180899,
+          "valid": true,
+          "constraint_notes": [
+            "candidate amounts come from training rows only",
+            "matched known categorical context",
+            "amount aliases changed together"
+          ],
+          "amount_change_absolute": 9168945.87,
+          "threshold_crossed": true
+        },
+        "crossed": true,
+        "available_count": 9,
+        "sentence": "In the tested model-sensitivity check, changing the transfer amount to approximately 9,255,068.58 USD moved the score below the review cutoff.",
+        "note": "This is a model-sensitivity test, not a recommendation for transaction behavior."
+      },
+      "model_scope": "Non-private reference model",
+      "evaluation": {
+        "label": "Fraud",
+        "status": "True positive"
+      }
+    }
+  },
+  {
+    "bank": "Wells_Fargo",
+    "transaction_id": "2965480",
+    "summary": {
+      "decision": {
+        "flagged": false,
+        "score": 2.116388841955086e-9,
+        "threshold": 0.1868941614329799,
+        "margin": -0.18689415931659106
+      },
+      "primary_reason": {
+        "feature": "transfer_terms",
+        "label": "Amount and currencies",
+        "observed": "Sent 21.7 USD; received 21.7 USD",
+        "contribution": -0.16432645916938782,
+        "direction": "down",
+        "strength": "Small",
+        "relative_size": 0.09599283586209581,
+        "effect": "Small downward effect",
+        "sentence": "The amount and currency combination was the strongest measured factor pushing the model score lower."
+      },
+      "top_factors": [
+        {
+          "feature": "payment_method",
+          "label": "Payment method",
+          "observed": "ACH",
+          "contribution": 1.7118616998195648,
+          "direction": "up",
+          "strength": "Strong",
+          "relative_size": 1,
+          "effect": "Strong upward effect"
+        },
+        {
+          "feature": "transfer_terms",
+          "label": "Amount and currencies",
+          "observed": "Sent 21.7 USD; received 21.7 USD",
+          "contribution": -0.16432645916938782,
+          "direction": "down",
+          "strength": "Small",
+          "relative_size": 0.09599283586209581,
+          "effect": "Small downward effect"
+        }
+      ],
+      "history_summary": {
+        "status": "tested",
+        "strongest": {
+          "transaction_id": "2865351",
+          "original_model_score": 2.116388841955086e-9,
+          "model_score_without_event": 2.0941871713556884e-9,
+          "score_support": 2.2201670599397386e-11,
+          "verified_model_count": 1,
+          "scope": "one historical update suppressed in the selected global model's bounded replay; pre-window account memory retained"
+        },
+        "tested_count": 10,
+        "sentence": "TX 2865351: this earlier transfer helped push the current score higher."
+      },
+      "patterns": [
+        {
+          "label": "Fan-out",
+          "description": "The sending account transferred to 7 different counterparties in the displayed history, including this transaction."
+        }
+      ],
+      "counterfactual_summary": {
+        "alternative": null,
+        "crossed": false,
+        "available_count": 9,
+        "sentence": "None of the tested amount changes moved the model across the review cutoff.",
+        "note": "This is a model-sensitivity test, not a recommendation for transaction behavior."
+      },
+      "model_scope": "Non-private reference model",
+      "evaluation": {
+        "label": "Not fraud",
+        "status": "True negative"
+      }
+    }
+  },
+  {
+    "bank": "Wells_Fargo",
+    "transaction_id": "2794670",
+    "summary": {
+      "decision": {
+        "flagged": false,
+        "score": 0.0339721143245697,
+        "threshold": 0.1868941614329799,
+        "margin": -0.1529220471084102
+      },
+      "primary_reason": {
+        "feature": "transfer_terms",
+        "label": "Amount and currencies",
+        "observed": "Sent 664.94 USD; received 664.94 USD",
+        "contribution": -0.03276331350207329,
+        "direction": "down",
+        "strength": "Small",
+        "relative_size": 0.01943354834871721,
+        "effect": "Small downward effect",
+        "sentence": "The amount and currency combination was the strongest measured factor pushing the model score lower."
+      },
+      "top_factors": [
+        {
+          "feature": "payment_method",
+          "label": "Payment method",
+          "observed": "ACH",
+          "contribution": 1.685915146023035,
+          "direction": "up",
+          "strength": "Strong",
+          "relative_size": 1,
+          "effect": "Strong upward effect"
+        },
+        {
+          "feature": "transfer_terms",
+          "label": "Amount and currencies",
+          "observed": "Sent 664.94 USD; received 664.94 USD",
+          "contribution": -0.03276331350207329,
+          "direction": "down",
+          "strength": "Small",
+          "relative_size": 0.01943354834871721,
+          "effect": "Small downward effect"
+        }
+      ],
+      "history_summary": {
+        "status": "none",
+        "strongest": null,
+        "tested_count": 0,
+        "sentence": "No earlier eligible transfers involving these accounts were available to the model before this prediction."
+      },
+      "patterns": [],
+      "counterfactual_summary": {
+        "alternative": null,
+        "crossed": false,
+        "available_count": 9,
+        "sentence": "None of the tested amount changes moved the model across the review cutoff.",
+        "note": "This is a model-sensitivity test, not a recommendation for transaction behavior."
+      },
+      "model_scope": "Non-private reference model",
+      "evaluation": {
+        "label": "Fraud",
+        "status": "Missed fraud (false negative)"
+      }
+    }
+  },
+  {
+    "bank": "Key_Bank",
+    "transaction_id": "2974317",
+    "summary": {
+      "decision": {
+        "flagged": true,
+        "score": 0.41010209918022156,
+        "threshold": 0.3759195153712922,
+        "margin": 0.03418258380892936
+      },
+      "primary_reason": {
+        "feature": "payment_method",
+        "label": "Payment method",
+        "observed": "ACH",
+        "contribution": 3.0229208161472343,
+        "direction": "up",
+        "strength": "Strong",
+        "relative_size": 1,
+        "effect": "Strong upward effect",
+        "sentence": "The payment method was the strongest measured factor pushing the model score higher."
+      },
+      "top_factors": [
+        {
+          "feature": "payment_method",
+          "label": "Payment method",
+          "observed": "ACH",
+          "contribution": 3.0229208161472343,
+          "direction": "up",
+          "strength": "Strong",
+          "relative_size": 1,
+          "effect": "Strong upward effect"
+        },
+        {
+          "feature": "transfer_terms",
+          "label": "Amount and currencies",
+          "observed": "Sent 66,528.69 USD; received 66,528.69 USD",
+          "contribution": 2.7855856115347706,
+          "direction": "up",
+          "strength": "Strong",
+          "relative_size": 0.9214881172723037,
+          "effect": "Strong upward effect"
+        }
+      ],
+      "history_summary": {
+        "status": "tested",
+        "strongest": {
+          "transaction_id": "2627867",
+          "original_model_score": 0.41010209918022156,
+          "model_score_without_event": 0.27039177493231203,
+          "score_support": 0.13971032424790952,
+          "verified_model_count": 1,
+          "scope": "one historical update suppressed in the selected global model's bounded replay; pre-window account memory retained"
+        },
+        "tested_count": 1,
+        "sentence": "TX 2627867: this earlier transfer helped push the current score higher."
+      },
+      "patterns": [],
+      "counterfactual_summary": {
+        "alternative": {
+          "changed_features": {
+            "amount": 5165.7675,
+            "Amount_Received": 5165.7675
+          },
+          "original_probability": 0.4101021471700402,
+          "counterfactual_probability": 0.1561405806518358,
+          "score_change": -0.25396156651820434,
+          "valid": true,
+          "constraint_notes": [
+            "candidate amounts come from training rows only",
+            "matched known categorical context",
+            "amount aliases changed together"
+          ],
+          "amount_change_absolute": 61362.9225,
+          "threshold_crossed": true
+        },
+        "crossed": true,
+        "available_count": 9,
+        "sentence": "In the tested model-sensitivity check, changing the transfer amount to approximately 5,165.77 USD moved the score below the review cutoff.",
+        "note": "This is a model-sensitivity test, not a recommendation for transaction behavior."
+      },
+      "model_scope": "Non-private reference model",
+      "evaluation": {
+        "label": "Not fraud",
+        "status": "False positive"
+      }
+    }
+  },
+  {
+    "bank": "JPMorgan_Chase",
+    "transaction_id": "180245",
+    "summary": {
+      "decision": {
+        "flagged": true,
+        "score": 0.08616923540830612,
+        "threshold": 0.017805186897516156,
+        "margin": 0.06836404851078996
+      },
+      "primary_reason": {
+        "feature": "payment_method",
+        "label": "Payment method",
+        "observed": "ACH",
+        "contribution": 2.158666353672743,
+        "direction": "up",
+        "strength": "Strong",
+        "relative_size": 1,
+        "effect": "Strong upward effect",
+        "sentence": "The payment method was the strongest measured factor pushing the model score higher."
+      },
+      "top_factors": [
+        {
+          "feature": "payment_method",
+          "label": "Payment method",
+          "observed": "ACH",
+          "contribution": 2.158666353672743,
+          "direction": "up",
+          "strength": "Strong",
+          "relative_size": 1,
+          "effect": "Strong upward effect"
+        },
+        {
+          "feature": "transfer_terms",
+          "label": "Amount and currencies",
+          "observed": "Sent 31.36 USD; received 31.36 USD",
+          "contribution": -0.07377719506621361,
+          "direction": "down",
+          "strength": "Small",
+          "relative_size": 0.03417721082310358,
+          "effect": "Small downward effect"
+        }
+      ],
+      "history_summary": {
+        "status": "tested",
+        "strongest": {
+          "transaction_id": "180238",
+          "original_model_score": 0.08616923540830612,
+          "model_score_without_event": 0.27852288997280567,
+          "score_support": -0.19235365456449954,
+          "verified_model_count": 1,
+          "scope": "one historical update suppressed in the selected global model's bounded replay; pre-window account memory retained"
+        },
+        "tested_count": 1,
+        "sentence": "TX 180238: this earlier transfer helped keep the current score lower."
+      },
+      "patterns": [
+        {
+          "label": "Fan-out",
+          "description": "The sending account transferred to 4 different counterparties in the displayed history, including this transaction."
+        }
+      ],
+      "counterfactual_summary": {
+        "alternative": {
+          "changed_features": {
+            "amount": 9255068.58,
+            "Amount_Received": 9255068.58
+          },
+          "original_probability": 0.0861692542574232,
+          "counterfactual_probability": 4.248354255291589e-18,
+          "score_change": -0.0861692542574232,
+          "valid": true,
+          "constraint_notes": [
+            "candidate amounts come from training rows only",
+            "matched known categorical context",
+            "amount aliases changed together"
+          ],
+          "amount_change_absolute": 9255037.22,
+          "threshold_crossed": true
+        },
+        "crossed": true,
+        "available_count": 9,
+        "sentence": "In the tested model-sensitivity check, changing the transfer amount to approximately 9,255,068.58 USD moved the score below the review cutoff.",
+        "note": "This is a model-sensitivity test, not a recommendation for transaction behavior."
+      },
+      "model_scope": "Non-private reference model",
+      "evaluation": {
+        "label": "Not fraud",
+        "status": "False positive"
+      }
+    }
+  },
+  {
+    "bank": "JPMorgan_Chase",
+    "transaction_id": "66943",
+    "summary": {
+      "decision": {
+        "flagged": false,
+        "score": 0.0009983087657019496,
+        "threshold": 0.017805186897516156,
+        "margin": -0.016806878131814206
+      },
+      "primary_reason": {
+        "feature": "transfer_terms",
+        "label": "Amount and currencies",
+        "observed": "Sent 89.78 USD; received 89.78 USD",
+        "contribution": -0.07883013784885406,
+        "direction": "down",
+        "strength": "Small",
+        "relative_size": 0.03544701218770727,
+        "effect": "Small downward effect",
+        "sentence": "The amount and currency combination was the strongest measured factor pushing the model score lower."
+      },
+      "top_factors": [
+        {
+          "feature": "payment_method",
+          "label": "Payment method",
+          "observed": "ACH",
+          "contribution": 2.2238866686820984,
+          "direction": "up",
+          "strength": "Strong",
+          "relative_size": 1,
+          "effect": "Strong upward effect"
+        },
+        {
+          "feature": "transfer_terms",
+          "label": "Amount and currencies",
+          "observed": "Sent 89.78 USD; received 89.78 USD",
+          "contribution": -0.07883013784885406,
+          "direction": "down",
+          "strength": "Small",
+          "relative_size": 0.03544701218770727,
+          "effect": "Small downward effect"
+        }
+      ],
+      "history_summary": {
+        "status": "tested",
+        "strongest": {
+          "transaction_id": "66942",
+          "original_model_score": 0.0009983087657019496,
+          "model_score_without_event": 0.0005975873483856968,
+          "score_support": 0.0004007214173162528,
+          "verified_model_count": 1,
+          "scope": "one historical update suppressed in the selected global model's bounded replay; pre-window account memory retained"
+        },
+        "tested_count": 3,
+        "sentence": "TX 66942: this earlier transfer helped push the current score higher."
+      },
+      "patterns": [
+        {
+          "label": "Cycle",
+          "description": "Earlier transfers form a chronological return path that closes with this transaction."
+        }
+      ],
+      "counterfactual_summary": {
+        "alternative": null,
+        "crossed": false,
+        "available_count": 9,
+        "sentence": "None of the tested amount changes moved the model across the review cutoff.",
+        "note": "This is a model-sensitivity test, not a recommendation for transaction behavior."
+      },
+      "model_scope": "Non-private reference model",
+      "evaluation": {
+        "label": "Not fraud",
+        "status": "True negative"
+      }
+    }
+  }
+]

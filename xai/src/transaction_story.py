@@ -11,7 +11,7 @@ from typing import Any
 import pandas as pd
 
 
-STORY_VERSION = 1
+STORY_VERSION = 2
 
 
 def canonical_frames(adapter: Any) -> dict[str, pd.DataFrame]:
@@ -228,6 +228,9 @@ def build_transaction_story(row: pd.Series, history: pd.DataFrame,
                       "role": "sender and receiver" if source == target else ("sender" if node == source else ("receiver" if node == target else "connected account"))}
                      for node, alias in aliases.items()],
         "transfers": visible + [selected],
+        "eligible_earlier_transfers": [dict(event, kind="earlier",
+            source_account_id=account_label(event["source"]),
+            target_account_id=account_label(event["target"])) for event in observed],
         "observation": observation,
         "pattern": pattern,
         "known_labels_explain_paths": False,

@@ -251,3 +251,19 @@ does not claim that the cached target wrapper explains the optimized DP finalist
 the existing per-target `1e-6` parity preflight and fail-closed behavior remain
 unchanged. No model parameters, thresholds, DP accounting or explanation
 attribution calculations were changed by this integration.
+
+## Investigator explanation UX v2
+
+The interactive dashboard now leads with a deterministic plain-language reason,
+score/cutoff/margin, up to three measured feature groups and verified history
+status. **View transaction network** and **View in-depth explanation** start
+collapsed; the full raw audit record has a further nested disclosure. The
+translation lives in `static/explanation_summary.js`, independently of scoring.
+See [EXPLANATION_UX_V2.md](EXPLANATION_UX_V2.md) for the exact structures, model
+scope, screenshots, examples and regression evidence.
+
+The engine still requires CPython 3.12 and compatible scientific dependencies.
+On LF checkouts of the Windows-produced reference artifacts, the dashboard can
+restore the exact originally hashed manifest line endings in a temporary dataset
+view. Saved hashes and strict `1e-6` score parity remain enforced; canonical data
+and preprocessing artifacts are not modified.

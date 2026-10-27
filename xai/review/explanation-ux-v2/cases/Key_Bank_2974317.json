@@ -1,0 +1,906 @@
+{
+  "schema_version": 3,
+  "transaction_id": "2974317",
+  "bank": "Key_Bank",
+  "split": "validation",
+  "chronological_index": 706,
+  "timestamp": "2025-08-01 15:05:37.400",
+  "prediction": {
+    "probability": 0.41010209918022156,
+    "threshold": 0.3759195153712922,
+    "class": "fraud",
+    "score_type": "saved adaptive federated global model probability",
+    "threshold_selection": "saved per-bank threshold from the selected adaptive federated model's metrics.json; no dashboard threshold fitting"
+  },
+  "feature_explanation": {
+    "method": "exact_empirical_group_interventional_shap_v1",
+    "units": "raw_logit",
+    "scope": "transaction_groups_given_fixed_account_memory",
+    "base_logit": -6.172049401677214,
+    "target_logit": -0.3635431230068207,
+    "target_probability": 0.4101021471700402,
+    "additivity_residual": -1.4901161193847656e-07,
+    "features": [
+      {
+        "feature": "payment_method",
+        "label": "Payment method",
+        "columns": [
+          "payment_format"
+        ],
+        "value": "ACH",
+        "shap_logit": 3.0229208161472343,
+        "ablation_logit_drop": 2.4128492693416774
+      },
+      {
+        "feature": "transfer_terms",
+        "label": "Amount and currencies (joint)",
+        "columns": [
+          "amount",
+          "Amount_Received",
+          "currency",
+          "Receiving_Currency"
+        ],
+        "value": "amount: 66528.69 / Amount_Received: 66528.69 / currency: USD / Receiving_Currency: USD",
+        "shap_logit": 2.7855856115347706,
+        "ablation_logit_drop": 2.1755140647292137
+      }
+    ],
+    "groups": {
+      "payment_method": [
+        "payment_format"
+      ],
+      "transfer_terms": [
+        "amount",
+        "Amount_Received",
+        "currency",
+        "Receiving_Currency"
+      ]
+    },
+    "seed": 42,
+    "background_size": 32,
+    "background_txn_ids": [
+      "2781820",
+      "2805033",
+      "2516086",
+      "1781254",
+      "1599748",
+      "2531896",
+      "1921332",
+      "1671602",
+      "2825075",
+      "1778006",
+      "2439081",
+      "1723127",
+      "2569421",
+      "1657601",
+      "2036716",
+      "1655649",
+      "2010645",
+      "2650040",
+      "1736114",
+      "2592413",
+      "2705287",
+      "2393544",
+      "1787287",
+      "1853284",
+      "1576680",
+      "2853247",
+      "1582036",
+      "2502422",
+      "2006558",
+      "2158019",
+      "2742477",
+      "2781691"
+    ],
+    "limitations": [
+      "Joint transfer attribution cannot be split into separate amount and currency effects.",
+      "Other dependencies between groups and reference sensitivity remain; this is not causal evidence."
+    ]
+  },
+  "graph_explanation": {
+    "method": "temporal_graph_perturbation",
+    "target": {
+      "source": 4299,
+      "target": 1403
+    },
+    "window_batches": 8,
+    "window_event_count": 8076,
+    "selection": "bounded most-recent k-hop undirected neighborhood; influence measured by chronological replay",
+    "hops": 2,
+    "candidate_count": 1,
+    "important_nodes": [
+      {
+        "node_id": 1403,
+        "role": "receiver",
+        "delta_probability": -0.1397103722377282,
+        "importance": 0.1397103722377282,
+        "removed_event_count": 1
+      },
+      {
+        "node_id": 4299,
+        "role": "sender",
+        "delta_probability": -0.1397103722377282,
+        "importance": 0.1397103722377282,
+        "removed_event_count": 1
+      }
+    ],
+    "important_edges": [
+      {
+        "key": [
+          2,
+          847
+        ],
+        "split": "training",
+        "index": 17231,
+        "source": 4299,
+        "target": 1403,
+        "transaction_id": "2627867",
+        "timestamp": "2025-07-18 08:22:13.600",
+        "probability_without": 0.27039177493231203,
+        "delta_probability": -0.1397103722377282,
+        "importance": 0.1397103722377282
+      }
+    ],
+    "fidelity": {
+      "original_probability": 0.41010214717004023,
+      "unperturbed_replay_error": 0.0,
+      "retained_top_events_probability": 0.4101021039116643,
+      "sufficiency_absolute_error": 4.32583759368832e-08,
+      "removed_top_events_probability": 0.27039177493231203,
+      "comprehensiveness_signed_drop": 0.1397103722377282,
+      "removed_low_events_probability": 0.27039177493231203,
+      "low_removal_absolute_change": 0.1397103722377282,
+      "top_removal_absolute_change": 0.1397103722377282,
+      "retained_event_count": 1,
+      "formula": "sufficiency=abs(p_full-p_only_top); comprehensiveness=p_full-p_without_top",
+      "scope": "Only selected updates retained inside bounded window; pre-window account memory remains intact.",
+      "applicable": true
+    },
+    "delta_definition": "p_after_suppressing_update - p_original; negative means event supported the original fraud score",
+    "limitations": "Not GNNExplainer; approximate bounded search; node effects remove candidate incident updates; not node-feature attribution or causal proof."
+  },
+  "temporal_explanation": {
+    "observation_window_batches": 8,
+    "target_endpoint_event_count": 1,
+    "transaction_volume_by_currency": {
+      "USD": 34684.2
+    },
+    "time_since_last_seen_seconds": {
+      "sender": 1233803.75,
+      "receiver": 1233803.75
+    },
+    "window_start_seconds_from_origin": 3344807.75,
+    "window_end_seconds_from_origin": 5270145.5,
+    "endpoint_activity_span_seconds": 0.0,
+    "evidence_type": "descriptive observed history; counts/volumes are not extra model inputs or independent attributions",
+    "timing_semantics": "The current decoder does not directly use time deltas. Earlier deltas enter recurrent memory updates. A zero last_seen sentinel is reported as unknown.",
+    "ordering": "only completed original micro-batches; no target-batch transactions included"
+  },
+  "verification": {
+    "existing_evaluation_probability": 0.41010209918022156,
+    "direct_model_probability": 0.41010212898254395,
+    "xai_probability": 0.4101021832186879,
+    "absolute_errors": {
+      "original_vs_direct": 2.9802322387695312e-08,
+      "original_vs_xai": 8.403846635252066e-08
+    },
+    "tolerance": 1e-06,
+    "passed": true,
+    "known_leakage_features_excluded": true,
+    "model_saved_catalog_error": 8.403846635252066e-08,
+    "explained_checkpoint_sha256": "d650af6959d1da46888f30fb79bbfd888a6ec20743d14d447ea078dc351536f5",
+    "saved_threshold_used": true,
+    "model_count": 1
+  },
+  "evaluation": {
+    "feature_fidelity": {
+      "k": 2,
+      "original_probability": 0.4101021832186879,
+      "formula": "signed_drop = p(original) - mean_background p(masked); absolute_change = abs(signed_drop)",
+      "top": {
+        "features": [
+          "payment_format",
+          "amount"
+        ],
+        "mean_logit": -3.52614164352417,
+        "mean_probability": 0.3413109500553475,
+        "signed_drop": 0.0687912331633404,
+        "absolute_change": 0.0687912331633404
+      },
+      "low": {
+        "features": [
+          "Receiving_Currency",
+          "currency"
+        ],
+        "mean_logit": -0.36354297399520874,
+        "mean_probability": 0.4101021832186879,
+        "signed_drop": 0.0,
+        "absolute_change": 0.0
+      },
+      "random": {
+        "features": [
+          "amount",
+          "Receiving_Currency"
+        ],
+        "mean_logit": -0.2714727222919464,
+        "mean_probability": 0.43254582322728863,
+        "signed_drop": -0.022443640008600718,
+        "absolute_change": 0.022443640008600718
+      },
+      "top_exceeds_low_absolute_change": true
+    },
+    "feature_stability": {
+      "runs": 3,
+      "top_k": 3,
+      "nonzero_top_features": [
+        [
+          "Amount_Received",
+          "amount",
+          "payment_format"
+        ],
+        [
+          "Amount_Received",
+          "amount",
+          "payment_format"
+        ],
+        [
+          "Amount_Received",
+          "amount",
+          "payment_format"
+        ]
+      ],
+      "pairwise_jaccard": [
+        1.0,
+        1.0,
+        1.0
+      ],
+      "mean_jaccard": 1.0,
+      "formula": "|nonzero_top_k(A) intersection nonzero_top_k(B)| / |union|; empty/empty = 1",
+      "scope": "training-background resampling, not a general robustness guarantee"
+    }
+  },
+  "config": {
+    "background_size": 32,
+    "seed": 42,
+    "history_batches": 8,
+    "hops": 2,
+    "max_events": 12,
+    "max_nodes": 12,
+    "top_k": 3,
+    "stability_runs": 3,
+    "probability_tolerance": 1e-06
+  },
+  "runtime_seconds": 0.3048168329987675,
+  "provenance": {
+    "checkpoint": "/Users/pj/Desktop/college/capstone/Capstone/tmp/xai_adaptive_model_6t6wxqdl/global_model.pt",
+    "checkpoint_sha256": "d650af6959d1da46888f30fb79bbfd888a6ec20743d14d447ea078dc351536f5",
+    "mode": "federated",
+    "batch_size": 1024,
+    "encoder_source": "verified JSON artifact; no runtime fitting",
+    "preprocessing_sha256": "6a755fd826b76a6a0fd2a751d90080d170ad1cac2aa2e727412686505fc93858",
+    "legacy_verification": {
+      "validation": {
+        "metrics": {
+          "pr_auc": 0.9199227981071854,
+          "roc_auc": 0.998742359100348,
+          "precision": 0.782608695652174,
+          "recall": 0.8571428571428571,
+          "f1": 0.8181818181818182
+        },
+        "saved_metric_absolute_errors": {
+          "pr_auc": 2.220446049250313e-16,
+          "roc_auc": 0.0,
+          "precision": 0.0,
+          "recall": 0.0,
+          "f1": 0.0
+        },
+        "max_probability_error": 0.0
+      }
+    },
+    "calibration": "none",
+    "input_sha256": {
+      "configuration/model_feature_columns.json": "6e3f3bfc52667427398844255f82a35473d3740564ac4085e6514422b507d87b",
+      "training/Key_Bank/edge_list.csv.gz": "244ea646f28ce91519c3dbbaffc163dc20023d046a34c51ae1c1eb8363b6931c",
+      "training/Key_Bank/ground_truth.csv.gz": "67432db20c50ca999a4b65e4d126a17b64cdec146eb028bb62e9282fa05a3cca",
+      "training/Key_Bank/node_features.csv.gz": "96ae6600175056bde806b76bc1b4ee33db3c415dbbfcfbc3e1dbbfbfc6e1ccda",
+      "training/Key_Bank/node_map.csv.gz": "3294ae9b270092b250f4430acd2be8404664ac80ba2ab5b3be1c73e1aca59943",
+      "validation/Key_Bank/edge_list.csv.gz": "8ceef1da961eb5b293668f533dd2b3358ab418fd08353787a7c3bbb9fa58520d",
+      "validation/Key_Bank/ground_truth.csv.gz": "92cebff95cfaaa5f236c567c292e954745b54d5cf872ae4719ce73e7e0fddcd6",
+      "validation/Key_Bank/node_features.csv.gz": "309a47ae25ead1cbf2cabfdde3e3dfba170e5ca754d9261e26fe74c78f31ecb2",
+      "validation/Key_Bank/node_map.csv.gz": "94e08ef84a4ae4c4ddd1719084455dbbea7536c4b2433051af5087dcf5ec1c2c"
+    }
+  },
+  "limitations": [
+    "Model explanations do not establish fraud or causality; scores are uncalibrated.",
+    "Feature SHAP holds account memory fixed; static node-feature attribution is not implemented.",
+    "Temporal graph perturbation is a bounded replay intervention, not GNNExplainer. Earlier anchor memory remains intact.",
+    "Interventional SHAP hybrids can be unrealistic for correlated fields; exactness is relative to the sampled background.",
+    "Legacy preprocessing reproduces current original evaluation and saved metrics; original fitted objects were not preserved.",
+    "The original fixed-size batching and timestamp-tie behavior are preserved.",
+    "This is the selected adaptive federated continual model checkpoint; it was trained without formal differential privacy."
+  ],
+  "legacy_feature_explanation": {
+    "base_logit": -6.172049401677214,
+    "target_logit": -0.36354297399520874,
+    "additivity_residual": 0.0,
+    "coalitions": 32,
+    "features": [
+      {
+        "feature": "payment_format",
+        "shap_logit": 3.094401443571163,
+        "ablation_logit_drop": 2.4128494183532894,
+        "value": "ACH"
+      },
+      {
+        "feature": "amount",
+        "shap_logit": 1.4307756337414808,
+        "ablation_logit_drop": -0.0920702526345849,
+        "value": 66528.69
+      },
+      {
+        "feature": "Amount_Received",
+        "shap_logit": 1.2833293503693612,
+        "ablation_logit_drop": -0.22221005335450172,
+        "value": 66528.69
+      },
+      {
+        "feature": "Receiving_Currency",
+        "shap_logit": 0.0,
+        "ablation_logit_drop": 0.0,
+        "value": "USD"
+      },
+      {
+        "feature": "currency",
+        "shap_logit": 0.0,
+        "ablation_logit_drop": 0.0,
+        "value": "USD"
+      }
+    ],
+    "method": "exact_empirical_interventional_shap",
+    "units": "raw_logit",
+    "scope": "transaction_features_given_fixed_account_memory",
+    "seed": 42,
+    "background_size": 32,
+    "background_txn_ids": [
+      "2781820",
+      "2805033",
+      "2516086",
+      "1781254",
+      "1599748",
+      "2531896",
+      "1921332",
+      "1671602",
+      "2825075",
+      "1778006",
+      "2439081",
+      "1723127",
+      "2569421",
+      "1657601",
+      "2036716",
+      "1655649",
+      "2010645",
+      "2650040",
+      "1736114",
+      "2592413",
+      "2705287",
+      "2393544",
+      "1787287",
+      "1853284",
+      "1576680",
+      "2853247",
+      "1582036",
+      "2502422",
+      "2006558",
+      "2158019",
+      "2742477",
+      "2781691"
+    ]
+  },
+  "evaluation_label": "not_fraud",
+  "model": {
+    "family": "adaptive_federated_global_model",
+    "seed": 42,
+    "best_round": 4,
+    "model_count": 1,
+    "checkpoint_sha256": "d650af6959d1da46888f30fb79bbfd888a6ec20743d14d447ea078dc351536f5"
+  },
+  "counterfactual_explanation": {
+    "method": "training_supported_constrained_amount_search",
+    "status": "found",
+    "threshold": 0.3759195153712922,
+    "original_class": "fraud",
+    "original_probability": 0.4101021471700402,
+    "candidates_evaluated": 9,
+    "counterfactuals": [
+      {
+        "changed_features": {
+          "amount": 5165.7675,
+          "Amount_Received": 5165.7675
+        },
+        "original_probability": 0.4101021471700402,
+        "counterfactual_probability": 0.1561405806518358,
+        "score_change": -0.25396156651820434,
+        "valid": true,
+        "constraint_notes": [
+          "candidate amounts come from training rows only",
+          "matched known categorical context",
+          "amount aliases changed together"
+        ],
+        "amount_change_absolute": 61362.9225,
+        "threshold_crossed": true
+      },
+      {
+        "changed_features": {
+          "amount": 2270.61,
+          "Amount_Received": 2270.61
+        },
+        "original_probability": 0.4101021471700402,
+        "counterfactual_probability": 0.0993508091077162,
+        "score_change": -0.31075133806232397,
+        "valid": true,
+        "constraint_notes": [
+          "candidate amounts come from training rows only",
+          "matched known categorical context",
+          "amount aliases changed together"
+        ],
+        "amount_change_absolute": 64258.08,
+        "threshold_crossed": true
+      },
+      {
+        "changed_features": {
+          "amount": 610.4225,
+          "Amount_Received": 610.4225
+        },
+        "original_probability": 0.4101021471700402,
+        "counterfactual_probability": 0.07549611414570337,
+        "score_change": -0.3346060330243368,
+        "valid": true,
+        "constraint_notes": [
+          "candidate amounts come from training rows only",
+          "matched known categorical context",
+          "amount aliases changed together"
+        ],
+        "amount_change_absolute": 65918.2675,
+        "threshold_crossed": true
+      },
+      {
+        "changed_features": {
+          "amount": 144.63,
+          "Amount_Received": 144.63
+        },
+        "original_probability": 0.4101021471700402,
+        "counterfactual_probability": 0.06982878665483827,
+        "score_change": -0.3402733605152019,
+        "valid": true,
+        "constraint_notes": [
+          "candidate amounts come from training rows only",
+          "matched known categorical context",
+          "amount aliases changed together"
+        ],
+        "amount_change_absolute": 66384.06,
+        "threshold_crossed": true
+      },
+      {
+        "changed_features": {
+          "amount": 35.2725,
+          "Amount_Received": 35.2725
+        },
+        "original_probability": 0.4101021471700402,
+        "counterfactual_probability": 0.06856086044558858,
+        "score_change": -0.3415412867244516,
+        "valid": true,
+        "constraint_notes": [
+          "candidate amounts come from training rows only",
+          "matched known categorical context",
+          "amount aliases changed together"
+        ],
+        "amount_change_absolute": 66493.4175,
+        "threshold_crossed": true
+      }
+    ],
+    "tested_alternatives": [
+      {
+        "changed_features": {
+          "amount": 5165.7675,
+          "Amount_Received": 5165.7675
+        },
+        "original_probability": 0.4101021471700402,
+        "counterfactual_probability": 0.1561405806518358,
+        "score_change": -0.25396156651820434,
+        "valid": true,
+        "constraint_notes": [
+          "candidate amounts come from training rows only",
+          "matched known categorical context",
+          "amount aliases changed together"
+        ],
+        "amount_change_absolute": 61362.9225,
+        "threshold_crossed": true
+      },
+      {
+        "changed_features": {
+          "amount": 2270.61,
+          "Amount_Received": 2270.61
+        },
+        "original_probability": 0.4101021471700402,
+        "counterfactual_probability": 0.0993508091077162,
+        "score_change": -0.31075133806232397,
+        "valid": true,
+        "constraint_notes": [
+          "candidate amounts come from training rows only",
+          "matched known categorical context",
+          "amount aliases changed together"
+        ],
+        "amount_change_absolute": 64258.08,
+        "threshold_crossed": true
+      },
+      {
+        "changed_features": {
+          "amount": 610.4225,
+          "Amount_Received": 610.4225
+        },
+        "original_probability": 0.4101021471700402,
+        "counterfactual_probability": 0.07549611414570337,
+        "score_change": -0.3346060330243368,
+        "valid": true,
+        "constraint_notes": [
+          "candidate amounts come from training rows only",
+          "matched known categorical context",
+          "amount aliases changed together"
+        ],
+        "amount_change_absolute": 65918.2675,
+        "threshold_crossed": true
+      },
+      {
+        "changed_features": {
+          "amount": 144.63,
+          "Amount_Received": 144.63
+        },
+        "original_probability": 0.4101021471700402,
+        "counterfactual_probability": 0.06982878665483827,
+        "score_change": -0.3402733605152019,
+        "valid": true,
+        "constraint_notes": [
+          "candidate amounts come from training rows only",
+          "matched known categorical context",
+          "amount aliases changed together"
+        ],
+        "amount_change_absolute": 66384.06,
+        "threshold_crossed": true
+      },
+      {
+        "changed_features": {
+          "amount": 35.2725,
+          "Amount_Received": 35.2725
+        },
+        "original_probability": 0.4101021471700402,
+        "counterfactual_probability": 0.06856086044558858,
+        "score_change": -0.3415412867244516,
+        "valid": true,
+        "constraint_notes": [
+          "candidate amounts come from training rows only",
+          "matched known categorical context",
+          "amount aliases changed together"
+        ],
+        "amount_change_absolute": 66493.4175,
+        "threshold_crossed": true
+      },
+      {
+        "changed_features": {
+          "amount": 12.58,
+          "Amount_Received": 12.58
+        },
+        "original_probability": 0.4101021471700402,
+        "counterfactual_probability": 0.06830043132294264,
+        "score_change": -0.3418017158470975,
+        "valid": true,
+        "constraint_notes": [
+          "candidate amounts come from training rows only",
+          "matched known categorical context",
+          "amount aliases changed together"
+        ],
+        "amount_change_absolute": 66516.11,
+        "threshold_crossed": true
+      },
+      {
+        "changed_features": {
+          "amount": 8.4,
+          "Amount_Received": 8.4
+        },
+        "original_probability": 0.4101021471700402,
+        "counterfactual_probability": 0.06825254925450693,
+        "score_change": -0.34184959791553327,
+        "valid": true,
+        "constraint_notes": [
+          "candidate amounts come from training rows only",
+          "matched known categorical context",
+          "amount aliases changed together"
+        ],
+        "amount_change_absolute": 66520.29000000001,
+        "threshold_crossed": true
+      },
+      {
+        "changed_features": {
+          "amount": 0.05,
+          "Amount_Received": 0.05
+        },
+        "original_probability": 0.4101021471700402,
+        "counterfactual_probability": 0.06815702985561813,
+        "score_change": -0.34194511731442206,
+        "valid": true,
+        "constraint_notes": [
+          "candidate amounts come from training rows only",
+          "matched known categorical context",
+          "amount aliases changed together"
+        ],
+        "amount_change_absolute": 66528.64,
+        "threshold_crossed": true
+      },
+      {
+        "changed_features": {
+          "amount": 8626566.37,
+          "Amount_Received": 8626566.37
+        },
+        "original_probability": 0.4101021471700402,
+        "counterfactual_probability": 4.248354255291589e-18,
+        "score_change": -0.4101021471700402,
+        "valid": true,
+        "constraint_notes": [
+          "candidate amounts come from training rows only",
+          "matched known categorical context",
+          "amount aliases changed together"
+        ],
+        "amount_change_absolute": 8560037.68,
+        "threshold_crossed": true
+      }
+    ],
+    "interpretation": "Model sensitivity only; not advice to evade controls or evidence of real-world intent.",
+    "limitations": [
+      "only amount fields were varied",
+      "account memory and event history were held fixed",
+      "training-supported values do not guarantee real-world plausibility"
+    ]
+  },
+  "xai_provenance": {
+    "schema": "adaptive-federated-single-model-group-shap-v2",
+    "family": "adaptive_federated_global_model",
+    "seed": 42,
+    "model_count": 1,
+    "ensemble": false,
+    "best_round": 4,
+    "training_rounds": 4,
+    "source_ref": "origin/sia",
+    "checkpoint_path": "origin/sia:artifacts/research_adaptive_fcl/warm_start/federated/context_harmonized/seed_42/global_model.pt",
+    "checkpoint_sha256": "d650af6959d1da46888f30fb79bbfd888a6ec20743d14d447ea078dc351536f5",
+    "inference_checkpoint_sha256": "d650af6959d1da46888f30fb79bbfd888a6ec20743d14d447ea078dc351536f5",
+    "metrics_path": "origin/sia:artifacts/research_adaptive_fcl/warm_start/federated/context_harmonized/seed_42/metrics.json",
+    "metrics_sha256": "ba6c6e33b87d6d7b4c95f2e45e3db25786d9cbdceb43232a3d0bcc4a22086778",
+    "preprocessing_sha256": "6a755fd826b76a6a0fd2a751d90080d170ad1cac2aa2e727412686505fc93858",
+    "reference_prediction_sha256": {
+      "JPMorgan_Chase": "ec0b955d2f22af812d776754fa0e5d5176391c8019e5b03c9462c337b7dc5b22",
+      "Wells_Fargo": "2a906ff65a040b39be4f638e937487c13d5a8d8b32a63e5789c8bd9a6c8a4fb0",
+      "Key_Bank": "ad1f69233706f3a407d66e778078e361305fc8acd76419fd62361a0550bed781"
+    },
+    "evaluation_split": "validation",
+    "test_loaded": false,
+    "privacy_mode": "none",
+    "threshold_policy": "saved per-bank threshold from the selected adaptive federated model's metrics.json; no dashboard threshold fitting",
+    "banks": {
+      "JPMorgan_Chase": {
+        "validation_transactions": 64487,
+        "known_fraud": 16,
+        "flagged": 129,
+        "missed_fraud": 0,
+        "threshold": 0.017805186897516156,
+        "validation_parity": {
+          "passed": true,
+          "metric_absolute_errors": {
+            "pr_auc": 1.1102230246251565e-16,
+            "roc_auc": 1.1102230246251565e-16,
+            "precision": 0.0,
+            "recall": 0.0,
+            "f1": 0.0
+          },
+          "metrics": {
+            "pr_auc": 0.8903013804800092,
+            "roc_auc": 0.9999389260287571,
+            "precision": 0.12403100775193798,
+            "recall": 1.0,
+            "f1": 0.2206896551724138
+          }
+        }
+      },
+      "Wells_Fargo": {
+        "validation_transactions": 25592,
+        "known_fraud": 22,
+        "flagged": 52,
+        "missed_fraud": 1,
+        "threshold": 0.1868941614329799,
+        "validation_parity": {
+          "passed": true,
+          "metric_absolute_errors": {
+            "pr_auc": 1.1102230246251565e-16,
+            "roc_auc": 0.0,
+            "precision": 0.0,
+            "recall": 0.0,
+            "f1": 0.0
+          },
+          "metrics": {
+            "pr_auc": 0.9599386797680174,
+            "roc_auc": 0.9998453443310698,
+            "precision": 0.40384615384615385,
+            "recall": 0.9545454545454546,
+            "f1": 0.5675675675675675
+          }
+        }
+      },
+      "Key_Bank": {
+        "validation_transactions": 11418,
+        "known_fraud": 21,
+        "flagged": 23,
+        "missed_fraud": 3,
+        "threshold": 0.3759195153712922,
+        "validation_parity": {
+          "passed": true,
+          "metric_absolute_errors": {
+            "pr_auc": 2.220446049250313e-16,
+            "roc_auc": 0.0,
+            "precision": 0.0,
+            "recall": 0.0,
+            "f1": 0.0
+          },
+          "metrics": {
+            "pr_auc": 0.9199227981071854,
+            "roc_auc": 0.998742359100348,
+            "precision": 0.782608695652174,
+            "recall": 0.8571428571428571,
+            "f1": 0.8181818181818182
+          }
+        }
+      }
+    },
+    "implementation_sha256": {
+      "serve_dashboard.py": "1808a6b614d8511d4d36c45aa3939e8ef25dede2d253fe5d01a0b0a5322d9962",
+      "src/model_catalog.py": "44f41c7eb1f5ab45b17110a65d45ad4cdcfb8539e77bbe7ae96aceb94c0ab2c6",
+      "src/counterfactuals.py": "f8bdb7d6fbec0454149ddb221caa3bd317eff88b31b88c867af34914f1bfc0f9",
+      "src/transaction_story.py": "4fa35cc28c31e1c8463c17bb4a1aad8e1672eaab9d1d066d82cb4b15a2ab9253",
+      "src/grouped_features.py": "9c3d43476355b8e810ab66051d15f9ddec136088815fc335b27e7898c5a3611c",
+      "src/dataset_view.py": "04c04c0fb2fc4a2a6abc9f6fc1ca73d261fc9ca463d16b580c07e59da1b3ff7b",
+      "engine_py312/explanation_engine.cpython-312.pyc": "3f4fb1294ef22ce77225d019d13929812b404b3c772e8af94f628f2c41cf0680",
+      "engine_py312/temporal.cpython-312.pyc": "994a1a367933775f4db9c98d99eb879b70c1ba4dfddb68cd5234eae1e1e1dc6c",
+      "engine_py312/graph_explainer.cpython-312.pyc": "6c049ed4919a704639bcd592249719e78bb028f6eac17b9816b3800512f85f02"
+    }
+  },
+  "cache_key": "33b6b2c0b021f37def21468073421e31deb2d596a4ed2af78a466fce709ac1b2",
+  "cache_key_inputs": {
+    "schema": "adaptive-federated-single-model-group-shap-v2",
+    "bank": "Key_Bank",
+    "transaction_id": "2974317",
+    "seed": 42,
+    "checkpoint_sha256": "d650af6959d1da46888f30fb79bbfd888a6ec20743d14d447ea078dc351536f5",
+    "preprocessing_sha256": "6a755fd826b76a6a0fd2a751d90080d170ad1cac2aa2e727412686505fc93858",
+    "reference_prediction_sha256": "ad1f69233706f3a407d66e778078e361305fc8acd76419fd62361a0550bed781",
+    "threshold": 0.3759195153712922,
+    "background_size": 32,
+    "implementation_sha256": {
+      "serve_dashboard.py": "1808a6b614d8511d4d36c45aa3939e8ef25dede2d253fe5d01a0b0a5322d9962",
+      "src/model_catalog.py": "44f41c7eb1f5ab45b17110a65d45ad4cdcfb8539e77bbe7ae96aceb94c0ab2c6",
+      "src/counterfactuals.py": "f8bdb7d6fbec0454149ddb221caa3bd317eff88b31b88c867af34914f1bfc0f9",
+      "src/transaction_story.py": "4fa35cc28c31e1c8463c17bb4a1aad8e1672eaab9d1d066d82cb4b15a2ab9253",
+      "src/grouped_features.py": "9c3d43476355b8e810ab66051d15f9ddec136088815fc335b27e7898c5a3611c",
+      "src/dataset_view.py": "04c04c0fb2fc4a2a6abc9f6fc1ca73d261fc9ca463d16b580c07e59da1b3ff7b",
+      "engine_py312/explanation_engine.cpython-312.pyc": "3f4fb1294ef22ce77225d019d13929812b404b3c772e8af94f628f2c41cf0680",
+      "engine_py312/temporal.cpython-312.pyc": "994a1a367933775f4db9c98d99eb879b70c1ba4dfddb68cd5234eae1e1e1dc6c",
+      "engine_py312/graph_explainer.cpython-312.pyc": "6c049ed4919a704639bcd592249719e78bb028f6eac17b9816b3800512f85f02"
+    }
+  },
+  "transaction_story": {
+    "schema_version": 2,
+    "selected_transfer": {
+      "transaction_id": "2974317",
+      "source": 4299,
+      "target": 1403,
+      "timestamp": "2025-08-01 15:05:37.400",
+      "amount": 66528.69,
+      "currency": "USD",
+      "payment_method": "ACH",
+      "source_alias": "A",
+      "target_alias": "B",
+      "source_account_id": "2416316746",
+      "target_account_id": "1342574918",
+      "kind": "selected"
+    },
+    "accounts": [
+      {
+        "alias": "A",
+        "node_id": 4299,
+        "account_id": "2416316746",
+        "role": "sender"
+      },
+      {
+        "alias": "B",
+        "node_id": 1403,
+        "account_id": "1342574918",
+        "role": "receiver"
+      }
+    ],
+    "transfers": [
+      {
+        "transaction_id": "2627867",
+        "source": 4299,
+        "target": 1403,
+        "timestamp": "2025-07-18 08:22:13.600000",
+        "amount": 34684.2,
+        "currency": "USD",
+        "payment_method": "ACH",
+        "kind": "earlier",
+        "ensemble_effect": {
+          "original_model_score": 0.41010209918022156,
+          "model_score_without_event": 0.27039177493231203,
+          "score_support": 0.13971032424790952,
+          "verified_model_count": 1,
+          "scope": "one historical update suppressed in the selected global model's bounded replay; pre-window account memory retained"
+        },
+        "source_alias": "A",
+        "target_alias": "B",
+        "source_account_id": "2416316746",
+        "target_account_id": "1342574918"
+      },
+      {
+        "transaction_id": "2974317",
+        "source": 4299,
+        "target": 1403,
+        "timestamp": "2025-08-01 15:05:37.400",
+        "amount": 66528.69,
+        "currency": "USD",
+        "payment_method": "ACH",
+        "source_alias": "A",
+        "target_alias": "B",
+        "source_account_id": "2416316746",
+        "target_account_id": "1342574918",
+        "kind": "selected"
+      }
+    ],
+    "eligible_earlier_transfers": [
+      {
+        "transaction_id": "2627867",
+        "source": 4299,
+        "target": 1403,
+        "timestamp": "2025-07-18 08:22:13.600000",
+        "amount": 34684.2,
+        "currency": "USD",
+        "payment_method": "ACH",
+        "kind": "earlier",
+        "source_account_id": "2416316746",
+        "target_account_id": "1342574918"
+      }
+    ],
+    "observation": "The map shows earlier transfers involving the sender or receiver, followed by the selected transfer.",
+    "pattern": "connected_history",
+    "known_labels_explain_paths": false,
+    "path_is_not_a_fraud_classification": true,
+    "earlier_related_transfers_considered": 1,
+    "model_link_effects": [
+      {
+        "transaction_id": "2627867",
+        "original_model_score": 0.41010209918022156,
+        "model_score_without_event": 0.27039177493231203,
+        "score_support": 0.13971032424790952,
+        "verified_model_count": 1,
+        "scope": "one historical update suppressed in the selected global model's bounded replay; pre-window account memory retained"
+      }
+    ],
+    "strongest_feature": {
+      "label": "payment method",
+      "value": "ACH",
+      "contribution": 3.0229208161472343
+    },
+    "history_scope": "training history and completed validation batches before the selected prediction; current-batch and later transactions excluded; up to 256 recent endpoint-related transfers considered",
+    "display_limit": 9
+  },
+  "evaluation_checks": {
+    "stability": null,
+    "faithfulness": null,
+    "coverage": null,
+    "temporal_replay": null
+  }
+}
