@@ -42,3 +42,7 @@ training.lock
 *.swp
 *.swo
 *~
+
+# Optimization evidence keeps runtime locks and the final self-referential Git record local.
+artifacts/dp_level3_utility_optimization/**/*.reserved
+artifacts/dp_level3_utility_optimization/FINAL_GIT_STATE.json

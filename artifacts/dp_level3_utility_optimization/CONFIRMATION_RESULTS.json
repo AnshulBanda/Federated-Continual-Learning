@@ -1,0 +1,22 @@
+{
+  "attempts": [
+    {
+      "id": "confirm_calibrated_decoder_m0p15",
+      "seeds": [
+        42,
+        52,
+        62
+      ],
+      "scores": [
+        0.875532822229926,
+        0.8942499539142802,
+        0.9386458723037786
+      ],
+      "mean": 0.9028095494826616,
+      "sample_sd": 0.03241549443748849,
+      "epsilon": 127.36375184207253,
+      "passed": true
+    }
+  ],
+  "selected": "confirm_calibrated_decoder_m0p15"
+}

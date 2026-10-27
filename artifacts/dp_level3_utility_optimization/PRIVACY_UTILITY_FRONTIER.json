@@ -1,0 +1,1045 @@
+[
+  {
+    "id": "calibrated_decoder_m0p03",
+    "kind": "research",
+    "seeds": [
+      42
+    ],
+    "mean": 0.9210177977557557,
+    "sample_sd": null,
+    "epsilon": 1970.152092543696,
+    "config": {
+      "rounds": 1,
+      "checkpoint_template": "/Users/pj/Desktop/college/capstone/Capstone-DP-SecAgg/artifacts/dp_level3_utility_optimization/frozen_warm_starts/seed_42/global_model.pt",
+      "subset": "decoder",
+      "learning_rate": 0.0003,
+      "local_epochs": 2,
+      "clip": 1.25,
+      "multiplier": 0.03
+    },
+    "complete": false
+  },
+  {
+    "id": "calibrated_decoder_m0p15",
+    "kind": "research",
+    "seeds": [
+      42,
+      52,
+      62
+    ],
+    "mean": 0.8935127827535013,
+    "sample_sd": 0.016720461211004345,
+    "epsilon": 127.36375184207253,
+    "config": {
+      "rounds": 1,
+      "checkpoint_template": "/Users/pj/Desktop/college/capstone/Capstone-DP-SecAgg/artifacts/dp_level3_utility_optimization/frozen_warm_starts/seed_42/global_model.pt",
+      "subset": "decoder",
+      "learning_rate": 0.0003,
+      "local_epochs": 2,
+      "clip": 1.25,
+      "multiplier": 0.15
+    },
+    "complete": true
+  },
+  {
+    "id": "calibrated_decoder_m0p1",
+    "kind": "research",
+    "seeds": [
+      42,
+      52,
+      62
+    ],
+    "mean": 0.9172004827851936,
+    "sample_sd": 0.011586660195982057,
+    "epsilon": 241.04562776310874,
+    "config": {
+      "rounds": 1,
+      "checkpoint_template": "/Users/pj/Desktop/college/capstone/Capstone-DP-SecAgg/artifacts/dp_level3_utility_optimization/frozen_warm_starts/seed_42/global_model.pt",
+      "subset": "decoder",
+      "learning_rate": 0.0003,
+      "local_epochs": 2,
+      "clip": 1.25,
+      "multiplier": 0.1
+    },
+    "complete": true
+  },
+  {
+    "id": "calibrated_decoder_m0p25",
+    "kind": "research",
+    "seeds": [
+      42,
+      52
+    ],
+    "mean": 0.8368906681451426,
+    "sample_sd": 0.05227617490572663,
+    "epsilon": 60.41825110524351,
+    "config": {
+      "rounds": 1,
+      "checkpoint_template": "/Users/pj/Desktop/college/capstone/Capstone-DP-SecAgg/artifacts/dp_level3_utility_optimization/frozen_warm_starts/seed_42/global_model.pt",
+      "subset": "decoder",
+      "learning_rate": 0.0003,
+      "local_epochs": 2,
+      "clip": 1.25,
+      "multiplier": 0.25
+    },
+    "complete": false
+  },
+  {
+    "id": "calibrated_decoder_m0p2",
+    "kind": "research",
+    "seeds": [
+      42,
+      52,
+      62
+    ],
+    "mean": 0.7571524992516165,
+    "sample_sd": 0.20279206031042096,
+    "epsilon": 83.02281388155438,
+    "config": {
+      "rounds": 1,
+      "checkpoint_template": "/Users/pj/Desktop/college/capstone/Capstone-DP-SecAgg/artifacts/dp_level3_utility_optimization/frozen_warm_starts/seed_42/global_model.pt",
+      "subset": "decoder",
+      "learning_rate": 0.0003,
+      "local_epochs": 2,
+      "clip": 1.25,
+      "multiplier": 0.2
+    },
+    "complete": true
+  },
+  {
+    "id": "calibrated_decoder_m0p3",
+    "kind": "research",
+    "seeds": [
+      42
+    ],
+    "mean": 0.7315074758561737,
+    "sample_sd": null,
+    "epsilon": 47.015209254369594,
+    "config": {
+      "rounds": 1,
+      "checkpoint_template": "/Users/pj/Desktop/college/capstone/Capstone-DP-SecAgg/artifacts/dp_level3_utility_optimization/frozen_warm_starts/seed_42/global_model.pt",
+      "subset": "decoder",
+      "learning_rate": 0.0003,
+      "local_epochs": 2,
+      "clip": 1.25,
+      "multiplier": 0.3
+    },
+    "complete": false
+  },
+  {
+    "id": "fixed_warm_decoder_m0p0001",
+    "kind": "research",
+    "seeds": [
+      42
+    ],
+    "mean": 0.9217107743564927,
+    "sample_sd": null,
+    "epsilon": 150091045.62776312,
+    "config": {
+      "rounds": 1,
+      "checkpoint_template": "/Users/pj/Desktop/college/capstone/Capstone-DP-SecAgg/artifacts/dp_level3_utility_optimization/frozen_warm_starts/seed_42/global_model.pt",
+      "subset": "decoder",
+      "learning_rate": 0.0003,
+      "local_epochs": 2,
+      "multiplier": 0.0001
+    },
+    "complete": false
+  },
+  {
+    "id": "fixed_warm_decoder_m0p001",
+    "kind": "research",
+    "seeds": [
+      42
+    ],
+    "mean": 0.9210064624096373,
+    "sample_sd": null,
+    "epsilon": 1509104.5627763108,
+    "config": {
+      "rounds": 1,
+      "checkpoint_template": "/Users/pj/Desktop/college/capstone/Capstone-DP-SecAgg/artifacts/dp_level3_utility_optimization/frozen_warm_starts/seed_42/global_model.pt",
+      "subset": "decoder",
+      "learning_rate": 0.0003,
+      "local_epochs": 2,
+      "multiplier": 0.001
+    },
+    "complete": false
+  },
+  {
+    "id": "fixed_warm_decoder_m0p01",
+    "kind": "research",
+    "seeds": [
+      42,
+      52,
+      62
+    ],
+    "mean": 0.9220247686740497,
+    "sample_sd": 0.0029706158470655768,
+    "epsilon": 15910.456277631089,
+    "config": {
+      "rounds": 1,
+      "checkpoint_template": "/Users/pj/Desktop/college/capstone/Capstone-DP-SecAgg/artifacts/dp_level3_utility_optimization/frozen_warm_starts/seed_42/global_model.pt",
+      "subset": "decoder",
+      "learning_rate": 0.0003,
+      "local_epochs": 2,
+      "multiplier": 0.01
+    },
+    "complete": true
+  },
+  {
+    "id": "fixed_warm_decoder_m0p03",
+    "kind": "research",
+    "seeds": [
+      42,
+      52
+    ],
+    "mean": 0.894868734228895,
+    "sample_sd": 0.023256758683336872,
+    "epsilon": 1970.152092543696,
+    "config": {
+      "rounds": 1,
+      "checkpoint_template": "/Users/pj/Desktop/college/capstone/Capstone-DP-SecAgg/artifacts/dp_level3_utility_optimization/frozen_warm_starts/seed_42/global_model.pt",
+      "subset": "decoder",
+      "learning_rate": 0.0003,
+      "local_epochs": 2,
+      "multiplier": 0.03
+    },
+    "complete": false
+  },
+  {
+    "id": "fixed_warm_decoder_m0p1",
+    "kind": "research",
+    "seeds": [
+      42
+    ],
+    "mean": 0.3068266085392039,
+    "sample_sd": null,
+    "epsilon": 241.04562776310874,
+    "config": {
+      "rounds": 1,
+      "checkpoint_template": "/Users/pj/Desktop/college/capstone/Capstone-DP-SecAgg/artifacts/dp_level3_utility_optimization/frozen_warm_starts/seed_42/global_model.pt",
+      "subset": "decoder",
+      "learning_rate": 0.0003,
+      "local_epochs": 2,
+      "multiplier": 0.1
+    },
+    "complete": false
+  },
+  {
+    "id": "refine_one_epochs4",
+    "kind": "research",
+    "seeds": [
+      42
+    ],
+    "mean": 0.801925235599399,
+    "sample_sd": null,
+    "epsilon": 15000910456.27763,
+    "config": {
+      "rounds": 1,
+      "local_epochs": 4
+    },
+    "complete": false
+  },
+  {
+    "id": "refine_one_lr0015_neg10",
+    "kind": "research",
+    "seeds": [
+      42,
+      52,
+      62
+    ],
+    "mean": 0.8217771966854427,
+    "sample_sd": 0.07333547756755249,
+    "epsilon": 15000910456.27763,
+    "config": {
+      "rounds": 1,
+      "learning_rate": 0.0015,
+      "negative_ratio": 10
+    },
+    "complete": true
+  },
+  {
+    "id": "refine_one_lr002",
+    "kind": "research",
+    "seeds": [
+      42
+    ],
+    "mean": 0.7242888860276736,
+    "sample_sd": null,
+    "epsilon": 15000910456.27763,
+    "config": {
+      "rounds": 1,
+      "learning_rate": 0.002
+    },
+    "complete": false
+  },
+  {
+    "id": "stage1_selection",
+    "kind": "research",
+    "seeds": [
+      42,
+      52,
+      62
+    ],
+    "mean": 0.8038207488481244,
+    "sample_sd": 0.14060442141772608,
+    "epsilon": 60001820912.55525,
+    "config": {},
+    "complete": true
+  },
+  {
+    "id": "stage2_0_fedavg",
+    "kind": "research",
+    "seeds": [
+      42
+    ],
+    "mean": 0.8369716415231524,
+    "sample_sd": null,
+    "epsilon": 60001820912.55525,
+    "config": {
+      "server": {
+        "name": "fedavg",
+        "learning_rate": 0.5
+      }
+    },
+    "complete": false
+  },
+  {
+    "id": "stage2_1_fedavgm",
+    "kind": "research",
+    "seeds": [
+      42,
+      52,
+      62
+    ],
+    "mean": 0.7822579899358757,
+    "sample_sd": 0.1493528647859157,
+    "epsilon": 60001820912.55525,
+    "config": {
+      "server": {
+        "name": "fedavgm",
+        "learning_rate": 0.5,
+        "beta1": 0.5
+      }
+    },
+    "complete": true
+  },
+  {
+    "id": "stage2_2_fedavgm",
+    "kind": "research",
+    "seeds": [
+      42
+    ],
+    "mean": 0.8623304172077387,
+    "sample_sd": null,
+    "epsilon": 60001820912.55525,
+    "config": {
+      "server": {
+        "name": "fedavgm",
+        "learning_rate": 0.5,
+        "beta1": 0.9
+      }
+    },
+    "complete": false
+  },
+  {
+    "id": "stage2_3_fedadam",
+    "kind": "research",
+    "seeds": [
+      42
+    ],
+    "mean": 0.84309773181501,
+    "sample_sd": null,
+    "epsilon": 60001820912.55525,
+    "config": {
+      "server": {
+        "name": "fedadam",
+        "learning_rate": 0.01
+      }
+    },
+    "complete": false
+  },
+  {
+    "id": "stage2_4_fedadam",
+    "kind": "research",
+    "seeds": [
+      42
+    ],
+    "mean": 0.8536965991257035,
+    "sample_sd": null,
+    "epsilon": 60001820912.55525,
+    "config": {
+      "server": {
+        "name": "fedadam",
+        "learning_rate": 0.03
+      }
+    },
+    "complete": false
+  },
+  {
+    "id": "stage2_5_fedyogi",
+    "kind": "research",
+    "seeds": [
+      42
+    ],
+    "mean": 0.8114167761233088,
+    "sample_sd": null,
+    "epsilon": 60001820912.55525,
+    "config": {
+      "server": {
+        "name": "fedyogi",
+        "learning_rate": 0.01
+      }
+    },
+    "complete": false
+  },
+  {
+    "id": "stage3_epochs2",
+    "kind": "research",
+    "seeds": [
+      42,
+      52,
+      62
+    ],
+    "mean": 0.7603326395214032,
+    "sample_sd": 0.17918335533975438,
+    "epsilon": 60001820912.55525,
+    "config": {
+      "local_epochs": 2
+    },
+    "complete": true
+  },
+  {
+    "id": "stage3_lr0003",
+    "kind": "research",
+    "seeds": [
+      42
+    ],
+    "mean": 0.7988812257084067,
+    "sample_sd": null,
+    "epsilon": 60001820912.55525,
+    "config": {
+      "learning_rate": 0.0003
+    },
+    "complete": false
+  },
+  {
+    "id": "stage3_lr0005",
+    "kind": "research",
+    "seeds": [
+      42
+    ],
+    "mean": 0.7843420437167667,
+    "sample_sd": null,
+    "epsilon": 60001820912.55525,
+    "config": {
+      "learning_rate": 0.0005
+    },
+    "complete": false
+  },
+  {
+    "id": "stage3_lr00075",
+    "kind": "research",
+    "seeds": [
+      42
+    ],
+    "mean": 0.832985027498439,
+    "sample_sd": null,
+    "epsilon": 60001820912.55525,
+    "config": {
+      "learning_rate": 0.00075
+    },
+    "complete": false
+  },
+  {
+    "id": "stage3_lr0015",
+    "kind": "research",
+    "seeds": [
+      42
+    ],
+    "mean": 0.8465193590714789,
+    "sample_sd": null,
+    "epsilon": 60001820912.55525,
+    "config": {
+      "learning_rate": 0.0015
+    },
+    "complete": false
+  },
+  {
+    "id": "stage3_replay4000",
+    "kind": "research",
+    "seeds": [
+      42
+    ],
+    "mean": 0.8520625387648675,
+    "sample_sd": null,
+    "epsilon": 60001820912.55525,
+    "config": {
+      "replay_size": 4000
+    },
+    "complete": false
+  },
+  {
+    "id": "stage4_counter",
+    "kind": "research",
+    "seeds": [
+      42,
+      52,
+      62
+    ],
+    "mean": 0.7663444073927252,
+    "sample_sd": 0.17368412735719055,
+    "epsilon": 60001820912.55525,
+    "config": {
+      "rng_policy": "counter"
+    },
+    "complete": true
+  },
+  {
+    "id": "stage5_C3p5",
+    "kind": "research",
+    "seeds": [
+      42
+    ],
+    "mean": 0.8454508366802047,
+    "sample_sd": null,
+    "epsilon": 60001820912.55525,
+    "config": {
+      "clip": 3.5,
+      "server": {
+        "name": "fedavgm",
+        "learning_rate": 0.5,
+        "beta1": 0.5
+      }
+    },
+    "complete": false
+  },
+  {
+    "id": "stage5_C5p5",
+    "kind": "research",
+    "seeds": [
+      42,
+      52,
+      62
+    ],
+    "mean": 0.7964538007350865,
+    "sample_sd": 0.16066862331769802,
+    "epsilon": 60001820912.55525,
+    "config": {
+      "clip": 5.5,
+      "server": {
+        "name": "fedavgm",
+        "learning_rate": 0.5,
+        "beta1": 0.5
+      }
+    },
+    "complete": true
+  },
+  {
+    "id": "stage7_decoder",
+    "kind": "research",
+    "seeds": [
+      42
+    ],
+    "mean": 0.8308368867526651,
+    "sample_sd": null,
+    "epsilon": 60001820912.55525,
+    "config": {
+      "subset": "decoder"
+    },
+    "complete": false
+  },
+  {
+    "id": "stage7_message_decoder",
+    "kind": "research",
+    "seeds": [
+      42,
+      52,
+      62
+    ],
+    "mean": 0.7909000639146018,
+    "sample_sd": 0.16243034340001902,
+    "epsilon": 60001820912.55525,
+    "config": {
+      "subset": "message_decoder"
+    },
+    "complete": true
+  },
+  {
+    "id": "stage7_temporal_decoder",
+    "kind": "research",
+    "seeds": [
+      42
+    ],
+    "mean": 0.8512061716609107,
+    "sample_sd": null,
+    "epsilon": 60001820912.55525,
+    "config": {
+      "subset": "temporal_decoder"
+    },
+    "complete": false
+  },
+  {
+    "id": "stage8_frozen_warm",
+    "kind": "research",
+    "seeds": [
+      42
+    ],
+    "mean": 0.8710012260710615,
+    "sample_sd": null,
+    "epsilon": 60001820912.55525,
+    "config": {
+      "checkpoint_template": "/Users/pj/Desktop/college/capstone/Capstone-DP-SecAgg/artifacts/dp_level3_utility_optimization/frozen_warm_starts/seed_{seed}/global_model.pt"
+    },
+    "complete": false
+  },
+  {
+    "id": "stage8_global_one",
+    "kind": "research",
+    "seeds": [
+      42
+    ],
+    "mean": 0.5433721706122385,
+    "sample_sd": null,
+    "epsilon": 15000910456.27763,
+    "config": {
+      "rounds": 1,
+      "checkpoint_template": "/Users/pj/Desktop/college/capstone/Capstone-DP-SecAgg/artifacts/dp_level3_utility_optimization/frozen_global_rng_starts/seed_{seed}/global_model.pt",
+      "learning_rate": 0.0015
+    },
+    "complete": false
+  },
+  {
+    "id": "confirm_calibrated_decoder_m0p15",
+    "kind": "production",
+    "seeds": [
+      42,
+      52,
+      62
+    ],
+    "mean": 0.9028095494826616,
+    "sample_sd": 0.03241549443748849,
+    "epsilon": 127.36375184207253,
+    "config": {
+      "rounds": 1,
+      "checkpoint_template": "/Users/pj/Desktop/college/capstone/Capstone-DP-SecAgg/artifacts/dp_level3_utility_optimization/frozen_warm_starts/seed_42/global_model.pt",
+      "subset": "decoder",
+      "learning_rate": 0.0003,
+      "local_epochs": 2,
+      "clip": 1.25,
+      "entropy": "production",
+      "pretraining_seed": 42,
+      "seed_scope": "private_continuation",
+      "starting_checkpoint_policy": "fixed_shared_nonprivate_August_selected",
+      "multiplier": 0.15
+    },
+    "complete": true
+  },
+  {
+    "id": "stage1_selection_mean_last2",
+    "kind": "research_postprocessing",
+    "seeds": [
+      42,
+      52,
+      62
+    ],
+    "mean": 0.7690436014625672,
+    "sample_sd": 0.1856206671320352,
+    "epsilon": 60001820912.55525,
+    "config": {
+      "source_run": "stage1_selection",
+      "terminal_postprocessing": "mean_last2"
+    },
+    "complete": true
+  },
+  {
+    "id": "stage1_selection_mean_last3",
+    "kind": "research_postprocessing",
+    "seeds": [
+      42,
+      52,
+      62
+    ],
+    "mean": 0.7397719834714493,
+    "sample_sd": 0.2189138940826038,
+    "epsilon": 60001820912.55525,
+    "config": {
+      "source_run": "stage1_selection",
+      "terminal_postprocessing": "mean_last3"
+    },
+    "complete": true
+  },
+  {
+    "id": "stage1_selection_mean_all",
+    "kind": "research_postprocessing",
+    "seeds": [
+      42,
+      52,
+      62
+    ],
+    "mean": 0.7429688981418773,
+    "sample_sd": 0.19319173728478908,
+    "epsilon": 60001820912.55525,
+    "config": {
+      "source_run": "stage1_selection",
+      "terminal_postprocessing": "mean_all"
+    },
+    "complete": true
+  },
+  {
+    "id": "stage1_selection_ema_half",
+    "kind": "research_postprocessing",
+    "seeds": [
+      42,
+      52,
+      62
+    ],
+    "mean": 0.7677128222147365,
+    "sample_sd": 0.18750552982019122,
+    "epsilon": 60001820912.55525,
+    "config": {
+      "source_run": "stage1_selection",
+      "terminal_postprocessing": "ema_half"
+    },
+    "complete": true
+  },
+  {
+    "id": "stage2_1_fedavgm_mean_last2",
+    "kind": "research_postprocessing",
+    "seeds": [
+      42,
+      52,
+      62
+    ],
+    "mean": 0.7111489843025813,
+    "sample_sd": 0.24706435391862153,
+    "epsilon": 60001820912.55525,
+    "config": {
+      "source_run": "stage2_1_fedavgm",
+      "terminal_postprocessing": "mean_last2"
+    },
+    "complete": true
+  },
+  {
+    "id": "stage2_1_fedavgm_mean_last3",
+    "kind": "research_postprocessing",
+    "seeds": [
+      42,
+      52,
+      62
+    ],
+    "mean": 0.7173995066417245,
+    "sample_sd": 0.22978955773024495,
+    "epsilon": 60001820912.55525,
+    "config": {
+      "source_run": "stage2_1_fedavgm",
+      "terminal_postprocessing": "mean_last3"
+    },
+    "complete": true
+  },
+  {
+    "id": "stage2_1_fedavgm_mean_all",
+    "kind": "research_postprocessing",
+    "seeds": [
+      42,
+      52,
+      62
+    ],
+    "mean": 0.7277529745993722,
+    "sample_sd": 0.20017641345063228,
+    "epsilon": 60001820912.55525,
+    "config": {
+      "source_run": "stage2_1_fedavgm",
+      "terminal_postprocessing": "mean_all"
+    },
+    "complete": true
+  },
+  {
+    "id": "stage2_1_fedavgm_ema_half",
+    "kind": "research_postprocessing",
+    "seeds": [
+      42,
+      52,
+      62
+    ],
+    "mean": 0.7233541480503142,
+    "sample_sd": 0.23427725153648868,
+    "epsilon": 60001820912.55525,
+    "config": {
+      "source_run": "stage2_1_fedavgm",
+      "terminal_postprocessing": "ema_half"
+    },
+    "complete": true
+  },
+  {
+    "id": "stage3_epochs2_mean_last2",
+    "kind": "research_postprocessing",
+    "seeds": [
+      42,
+      52,
+      62
+    ],
+    "mean": 0.5815739852271701,
+    "sample_sd": 0.15249333068158621,
+    "epsilon": 60001820912.55525,
+    "config": {
+      "source_run": "stage3_epochs2",
+      "terminal_postprocessing": "mean_last2"
+    },
+    "complete": true
+  },
+  {
+    "id": "stage3_epochs2_mean_last3",
+    "kind": "research_postprocessing",
+    "seeds": [
+      42,
+      52,
+      62
+    ],
+    "mean": 0.6456918617724196,
+    "sample_sd": 0.19895637647505235,
+    "epsilon": 60001820912.55525,
+    "config": {
+      "source_run": "stage3_epochs2",
+      "terminal_postprocessing": "mean_last3"
+    },
+    "complete": true
+  },
+  {
+    "id": "stage3_epochs2_mean_all",
+    "kind": "research_postprocessing",
+    "seeds": [
+      42,
+      52,
+      62
+    ],
+    "mean": 0.6498221188232777,
+    "sample_sd": 0.15146708709760198,
+    "epsilon": 60001820912.55525,
+    "config": {
+      "source_run": "stage3_epochs2",
+      "terminal_postprocessing": "mean_all"
+    },
+    "complete": true
+  },
+  {
+    "id": "stage3_epochs2_ema_half",
+    "kind": "research_postprocessing",
+    "seeds": [
+      42,
+      52,
+      62
+    ],
+    "mean": 0.5669305675362151,
+    "sample_sd": 0.12417211188940903,
+    "epsilon": 60001820912.55525,
+    "config": {
+      "source_run": "stage3_epochs2",
+      "terminal_postprocessing": "ema_half"
+    },
+    "complete": true
+  },
+  {
+    "id": "stage4_counter_mean_last2",
+    "kind": "research_postprocessing",
+    "seeds": [
+      42,
+      52,
+      62
+    ],
+    "mean": 0.6701430554418539,
+    "sample_sd": 0.19761461802850344,
+    "epsilon": 60001820912.55525,
+    "config": {
+      "source_run": "stage4_counter",
+      "terminal_postprocessing": "mean_last2"
+    },
+    "complete": true
+  },
+  {
+    "id": "stage4_counter_mean_last3",
+    "kind": "research_postprocessing",
+    "seeds": [
+      42,
+      52,
+      62
+    ],
+    "mean": 0.6750623704408313,
+    "sample_sd": 0.16242505689190112,
+    "epsilon": 60001820912.55525,
+    "config": {
+      "source_run": "stage4_counter",
+      "terminal_postprocessing": "mean_last3"
+    },
+    "complete": true
+  },
+  {
+    "id": "stage4_counter_mean_all",
+    "kind": "research_postprocessing",
+    "seeds": [
+      42,
+      52,
+      62
+    ],
+    "mean": 0.6938341973485782,
+    "sample_sd": 0.21145496647536285,
+    "epsilon": 60001820912.55525,
+    "config": {
+      "source_run": "stage4_counter",
+      "terminal_postprocessing": "mean_all"
+    },
+    "complete": true
+  },
+  {
+    "id": "stage4_counter_ema_half",
+    "kind": "research_postprocessing",
+    "seeds": [
+      42,
+      52,
+      62
+    ],
+    "mean": 0.6526596066094488,
+    "sample_sd": 0.18964857732996118,
+    "epsilon": 60001820912.55525,
+    "config": {
+      "source_run": "stage4_counter",
+      "terminal_postprocessing": "ema_half"
+    },
+    "complete": true
+  },
+  {
+    "id": "stage5_C5p5_mean_last2",
+    "kind": "research_postprocessing",
+    "seeds": [
+      42,
+      52,
+      62
+    ],
+    "mean": 0.7661396957036825,
+    "sample_sd": 0.19653881472205206,
+    "epsilon": 60001820912.55525,
+    "config": {
+      "source_run": "stage5_C5p5",
+      "terminal_postprocessing": "mean_last2"
+    },
+    "complete": true
+  },
+  {
+    "id": "stage5_C5p5_mean_last3",
+    "kind": "research_postprocessing",
+    "seeds": [
+      42,
+      52,
+      62
+    ],
+    "mean": 0.7508373121280321,
+    "sample_sd": 0.156371866074265,
+    "epsilon": 60001820912.55525,
+    "config": {
+      "source_run": "stage5_C5p5",
+      "terminal_postprocessing": "mean_last3"
+    },
+    "complete": true
+  },
+  {
+    "id": "stage5_C5p5_mean_all",
+    "kind": "research_postprocessing",
+    "seeds": [
+      42,
+      52,
+      62
+    ],
+    "mean": 0.744496881344225,
+    "sample_sd": 0.14244797344548074,
+    "epsilon": 60001820912.55525,
+    "config": {
+      "source_run": "stage5_C5p5",
+      "terminal_postprocessing": "mean_all"
+    },
+    "complete": true
+  },
+  {
+    "id": "stage5_C5p5_ema_half",
+    "kind": "research_postprocessing",
+    "seeds": [
+      42,
+      52,
+      62
+    ],
+    "mean": 0.7563344748978763,
+    "sample_sd": 0.17635712943778506,
+    "epsilon": 60001820912.55525,
+    "config": {
+      "source_run": "stage5_C5p5",
+      "terminal_postprocessing": "ema_half"
+    },
+    "complete": true
+  },
+  {
+    "id": "stage7_message_decoder_mean_last2",
+    "kind": "research_postprocessing",
+    "seeds": [
+      42,
+      52,
+      62
+    ],
+    "mean": 0.7183668194237196,
+    "sample_sd": 0.2022178705754378,
+    "epsilon": 60001820912.55525,
+    "config": {
+      "source_run": "stage7_message_decoder",
+      "terminal_postprocessing": "mean_last2"
+    },
+    "complete": true
+  },
+  {
+    "id": "stage7_message_decoder_mean_last3",
+    "kind": "research_postprocessing",
+    "seeds": [
+      42,
+      52,
+      62
+    ],
+    "mean": 0.7345217428752673,
+    "sample_sd": 0.1802631331388769,
+    "epsilon": 60001820912.55525,
+    "config": {
+      "source_run": "stage7_message_decoder",
+      "terminal_postprocessing": "mean_last3"
+    },
+    "complete": true
+  },
+  {
+    "id": "stage7_message_decoder_mean_all",
+    "kind": "research_postprocessing",
+    "seeds": [
+      42,
+      52,
+      62
+    ],
+    "mean": 0.7313892945745691,
+    "sample_sd": 0.1816246205267304,
+    "epsilon": 60001820912.55525,
+    "config": {
+      "source_run": "stage7_message_decoder",
+      "terminal_postprocessing": "mean_all"
+    },
+    "complete": true
+  },
+  {
+    "id": "stage7_message_decoder_ema_half",
+    "kind": "research_postprocessing",
+    "seeds": [
+      42,
+      52,
+      62
+    ],
+    "mean": 0.7255606813361233,
+    "sample_sd": 0.1820195289508827,
+    "epsilon": 60001820912.55525,
+    "config": {
+      "source_run": "stage7_message_decoder",
+      "terminal_postprocessing": "ema_half"
+    },
+    "complete": true
+  }
+]

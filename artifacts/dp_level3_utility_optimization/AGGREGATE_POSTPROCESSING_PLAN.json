@@ -1,0 +1,23 @@
+{
+  "candidates": [
+    "stage1_selection",
+    "stage2_1_fedavgm",
+    "stage3_epochs2",
+    "stage4_counter",
+    "stage5_C5p5",
+    "stage7_message_decoder"
+  ],
+  "strategies": [
+    "mean_last2",
+    "mean_last3",
+    "mean_all",
+    "ema_half"
+  ],
+  "seeds": [
+    42,
+    52,
+    62
+  ],
+  "privacy": "Postprocess checkpoints within ONE run only. All four original releases remain charged. Never mix independent private runs.",
+  "selection": "Choose highest three-seed August mean; then fresh production confirmation once per seed for the fixed selected strategy/config."
+}

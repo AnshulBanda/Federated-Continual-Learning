@@ -1,0 +1,11 @@
+[
+  {
+    "id": "stage4_counter",
+    "seeds": [
+      62
+    ],
+    "config": {
+      "rng_policy": "counter"
+    }
+  }
+]

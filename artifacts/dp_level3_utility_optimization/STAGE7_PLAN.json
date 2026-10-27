@@ -1,0 +1,29 @@
+[
+  {
+    "id": "stage7_decoder",
+    "seeds": [
+      42
+    ],
+    "config": {
+      "subset": "decoder"
+    }
+  },
+  {
+    "id": "stage7_temporal_decoder",
+    "seeds": [
+      42
+    ],
+    "config": {
+      "subset": "temporal_decoder"
+    }
+  },
+  {
+    "id": "stage7_message_decoder",
+    "seeds": [
+      42
+    ],
+    "config": {
+      "subset": "message_decoder"
+    }
+  }
+]

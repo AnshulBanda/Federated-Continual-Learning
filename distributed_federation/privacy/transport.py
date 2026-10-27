@@ -20,6 +20,8 @@ from distributed_federation.common.config import secret_env_name
 from .mechanism import vector,restore,client_contribution,aggregate
 from .secagg import ClientKey,Round,context,canonical,pack,accept_roster
 from .ledger import Ledger
+from .server_optimizer import ServerOptimizer
+from .subset import extract,reconstruct
 
 
 def secret(name):
@@ -71,7 +73,7 @@ def _guard(cfg):
         raise ValueError('Secure mode requires a frozen public feature schema and complete cohort')
     if cfg.privacy.mode != "none" and cfg.aggregation != "equal":
         raise ValueError("Private modes require equal weights")
-    if cfg.rng_policy!='per_client': raise ValueError('Global simulator RNG cannot be shared across workers')
+    if cfg.rng_policy not in ('per_client','counter'): raise ValueError('Global simulator RNG cannot be shared across workers')
 
 
 def worker(cfg,client_id):
@@ -100,7 +102,7 @@ def worker(cfg,client_id):
             emit('model_loaded',rid,base_model_sha256=base_hash)
             key,roster,ctx=None,None,None
             if cfg.privacy.secure:
-                ctx=context(cfg.run_id,rid,[c.client_id for c in cfg.clients],runtime.schema_sha256,base_hash,len(vector(base)))
+                ctx=context(cfg.run_id,rid,[c.client_id for c in cfg.clients],runtime.schema_sha256,base_hash,len(vector(extract(base,cfg.private_subset))))
                 key=ClientKey(client_id,ctx)
                 publish(producer,cfg,runtime,rid,base_hash,'secagg_public_key',client_id,key.hello(),client_key)
                 _,payload,roster_meta=receive(consumer,assembler,cfg,{'central':central_key},rid,{'secagg_ready'},time.monotonic()+cfg.round_timeout_seconds)
@@ -119,7 +121,7 @@ def worker(cfg,client_id):
             if cfg.privacy.mode=='none':
                 outgoing=serialize_state(runtime.model.state_dict());kind='client_update'
             else:
-                contribution=client_contribution(runtime.model.state_dict(),base,cfg.privacy,cfg.run_id,rid,client_id)
+                contribution=client_contribution(extract(runtime.model.state_dict(),cfg.private_subset),extract(base,cfg.private_subset),cfg.privacy,cfg.run_id,rid,client_id)
                 if cfg.privacy.secure:
                     outgoing=pack(key.mask(contribution,roster));kind='masked_client_update'
                     extras=dict(secagg_context_sha256=hashlib.sha256(canonical(ctx)).hexdigest(),roster_sha256=roster_hash)
@@ -151,6 +153,7 @@ def central(cfg):
     runtime=prepare_frozen_runtime(cfg) if cfg.feature_schema else prepare_runtime(cfg,cfg.clients[0].bank)
     load_initial_checkpoint(runtime.model,cfg.initial_checkpoint)
     base={k:v.detach().clone() for k,v in runtime.model.state_dict().items()}
+    server_optimizer=ServerOptimizer(cfg.server_optimizer)
     output=cfg.output_dir/cfg.run_id
     ledger=Ledger(cfg.output_dir/'privacy-ledgers'/'central.sqlite3')
     ledger.reserve(cfg.run_id,0,'central',asdict(cfg.privacy))
@@ -168,7 +171,7 @@ def central(cfg):
             secure=None
             exchange_metadata=None
             if cfg.privacy.secure:
-                ctx=context(cfg.run_id,rid,keys,runtime.schema_sha256,base_hash,len(vector(base)))
+                ctx=context(cfg.run_id,rid,keys,runtime.schema_sha256,base_hash,len(vector(extract(base,cfg.private_subset))))
                 secure=Round(ctx)
                 emit('secagg_key_exchange',rid,privacy_mode=cfg.privacy.mode,required_cohort=len(keys))
                 while len(secure.keys)<len(keys):
@@ -202,7 +205,10 @@ def central(cfg):
             # The round was reserved before broadcasting, covering a crash after
             # all distributed shares arrive but before checkpoint persistence.
             if secure:
-                base=aggregate(secure.complete(),base,cfg.privacy,cfg.run_id,rid)
+                private_base=extract(base,cfg.private_subset)
+                noisy_aggregate=aggregate(secure.complete(),private_base,cfg.privacy,cfg.run_id,rid)
+                base=reconstruct(base,server_optimizer.apply(private_base,noisy_aggregate),cfg.private_subset)
+                del noisy_aggregate
                 secure=None  # clean L2 aggregate exists only inside aggregate(), transiently
             else:
                 base=fedavg([states[c.client_id] for c in cfg.clients],[counts[c.client_id] for c in cfg.clients] if cfg.aggregation=='samples' else [1]*len(keys))
@@ -216,7 +222,7 @@ def central(cfg):
             manifest=dict(run_id=cfg.run_id,round_id=rid,schema_sha256=runtime.schema_sha256,
                 input_global_sha256=base_hash,output_global_sha256=digest,schema=runtime.schema,
                 clients=[dict(client_id=c.client_id,bank=c.bank,update_sha256=hashes[c.client_id]) for c in cfg.clients],
-                aggregation=cfg.aggregation,secagg_exchange=exchange_metadata,privacy=asdict(cfg.privacy),accounting=account,cumulative_ledger_accounting=cumulative,
+                aggregation=cfg.aggregation,secagg_exchange=exchange_metadata,privacy=asdict(cfg.privacy),mechanism_parameters=cfg.privacy.parameters(len(vector(extract(base,cfg.private_subset)))) if cfg.privacy.mode!="none" else None,accounting=account,cumulative_ledger_accounting=cumulative,
                 starting_checkpoint_scope='conditional_fixed_checkpoint' if cfg.initial_checkpoint else 'random_initialization_public_schema')
             path,manifest_path=save_state_and_manifest(base,output,rid,manifest)
             emit('round_completed',rid,checkpoint=str(path),manifest=str(manifest_path),privacy_mode=cfg.privacy.mode,

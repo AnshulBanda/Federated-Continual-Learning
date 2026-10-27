@@ -1,0 +1,13 @@
+[
+  {
+    "id": "refine_one_lr0015_neg10",
+    "seeds": [
+      52
+    ],
+    "config": {
+      "rounds": 1,
+      "learning_rate": 0.0015,
+      "negative_ratio": 10
+    }
+  }
+]

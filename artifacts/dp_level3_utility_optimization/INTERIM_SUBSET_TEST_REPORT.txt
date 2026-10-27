@@ -1,0 +1,168 @@
+........................................................FFF........... [ 51%]
+.................................................................. [ 99%]
+.                                                                        [100%]
+=================================== FAILURES ===================================
+_________ RoundTripTests.test_three_banks_receive_verified_aggregates __________
+
+self = <test_round_trip.RoundTripTests testMethod=test_three_banks_receive_verified_aggregates>
+
+    def test_three_banks_receive_verified_aggregates(self):
+>       self.run_round_trip(returned=True)
+
+tests/streaming/test_round_trip.py:70:
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+tests/streaming/test_round_trip.py:164: in run_round_trip
+    self.assertEqual([f.result(timeout=15) for f in futures], [0, 0, 0, 0])
+                      ^^^^^^^^^^^^^^^^^^^^
+/Users/pj/miniconda3/lib/python3.13/concurrent/futures/_base.py:456: in result
+    return self.__get_result()
+           ^^^^^^^^^^^^^^^^^^^
+/Users/pj/miniconda3/lib/python3.13/concurrent/futures/_base.py:401: in __get_result
+    raise self._exception
+/Users/pj/miniconda3/lib/python3.13/concurrent/futures/thread.py:59: in run
+    result = self.fn(*self.args, **self.kwargs)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+tests/streaming/test_round_trip.py:150: in worker
+    return bank_worker.run(config, client_id)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+distributed_federation/client/bank_worker.py:47: in run
+    return worker(config, client_id)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^
+distributed_federation/privacy/transport.py:137: in worker
+    _,returned,meta=receive(consumer,assembler,cfg,{'central':central_key},rid,{'aggregated_model'},time.monotonic()+cfg.round_timeout_seconds)
+                    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+consumer = <test_round_trip.Consumer object at 0x16210cb00>
+assembler = <distributed_federation.common.protocol.ChunkAssembler object at 0x155fec650>
+cfg = FederationConfig(broker='local:9092', run_id='demo-001', clients=(ClientConfig(client_id='bank-1', bank='Key_Bank'), C...r_optimizer=ServerConfig(name='fedavg', learning_rate=1.0, beta1=0.9, beta2=0.99, epsilon=0.001), private_subset='all')
+secrets = {'central': 'cccccccccccccccccccccccccccccccc'}, round_id = 1
+kinds = {'aggregated_model'}, deadline = 159496.397328833
+
+    def receive(consumer,assembler,cfg,secrets,round_id,kinds,deadline):
+        while time.monotonic()<deadline:
+            check_control()
+            message=consumer.poll(min(1.,max(.01,deadline-time.monotonic())))
+            if message is None: continue
+            if message.error(): raise RuntimeError(str(message.error()))
+            try:
+                sender=peek_sender(message.value())
+                if sender not in secrets: continue
+                envelope=verify_for_run(message.value(),secrets[sender],cfg.run_id)
+                if envelope is None or envelope['round_id']!=round_id or envelope['message_type'] not in kinds: continue
+                assembled=assembler.add(envelope)
+                if assembled is None: continue
+                payload,meta=assembled
+                consumer.commit(message=message,asynchronous=False)
+                return sender,payload,meta
+            except (ValueError,KeyError,TypeError):
+                emit('message_rejected',round_id)
+>       raise TimeoutError('Incomplete required cohort/round; failing closed, no plaintext fallback')
+E       TimeoutError: Incomplete required cohort/round; failing closed, no plaintext fallback
+
+distributed_federation/privacy/transport.py:56: TimeoutError
+________ RoundTripTests.test_three_banks_stop_after_one_complete_round _________
+
+self = <test_round_trip.RoundTripTests testMethod=test_three_banks_stop_after_one_complete_round>
+
+    def test_three_banks_stop_after_one_complete_round(self):
+>       self.run_round_trip(stop=True)
+
+tests/streaming/test_round_trip.py:64:
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+tests/streaming/test_round_trip.py:164: in run_round_trip
+    self.assertEqual([f.result(timeout=15) for f in futures], [0, 0, 0, 0])
+                      ^^^^^^^^^^^^^^^^^^^^
+/Users/pj/miniconda3/lib/python3.13/concurrent/futures/_base.py:456: in result
+    return self.__get_result()
+           ^^^^^^^^^^^^^^^^^^^
+/Users/pj/miniconda3/lib/python3.13/concurrent/futures/_base.py:401: in __get_result
+    raise self._exception
+/Users/pj/miniconda3/lib/python3.13/concurrent/futures/thread.py:59: in run
+    result = self.fn(*self.args, **self.kwargs)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+tests/streaming/test_round_trip.py:157: in central
+    return aggregator.run(config)
+           ^^^^^^^^^^^^^^^^^^^^^^
+distributed_federation/central/aggregator.py:54: in run
+    return central(config)
+           ^^^^^^^^^^^^^^^
+distributed_federation/privacy/transport.py:225: in central
+    aggregation=cfg.aggregation,secagg_exchange=exchange_metadata,privacy=asdict(cfg.privacy),mechanism_parameters=cfg.privacy.parameters(len(vector(extract(base,cfg.private_subset)))),accounting=account,cumulative_ledger_accounting=cumulative,
+                                                                                                                                              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+distributed_federation/privacy/mechanism.py:78: in vector
+    if any(not torch.isfinite(t).all() for t in state.values()): raise ValueError('Nonfinite model')
+       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+.0 = <dict_valueiterator object at 0x162183f10>
+
+>   if any(not torch.isfinite(t).all() for t in state.values()): raise ValueError('Nonfinite model')
+               ^^^^^^^^^^^^^^^^^
+E   TypeError: isfinite(): argument 'input' (position 1) must be Tensor, not Scalar
+
+distributed_federation/privacy/mechanism.py:78: TypeError
+__________ RoundTripTests.test_three_banks_two_rounds_weighted_fedavg __________
+
+self = <test_round_trip.RoundTripTests testMethod=test_three_banks_two_rounds_weighted_fedavg>
+
+    def test_three_banks_two_rounds_weighted_fedavg(self):
+>       self.run_round_trip()
+
+tests/streaming/test_round_trip.py:67:
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+tests/streaming/test_round_trip.py:164: in run_round_trip
+    self.assertEqual([f.result(timeout=15) for f in futures], [0, 0, 0, 0])
+                      ^^^^^^^^^^^^^^^^^^^^
+/Users/pj/miniconda3/lib/python3.13/concurrent/futures/_base.py:456: in result
+    return self.__get_result()
+           ^^^^^^^^^^^^^^^^^^^
+/Users/pj/miniconda3/lib/python3.13/concurrent/futures/_base.py:401: in __get_result
+    raise self._exception
+/Users/pj/miniconda3/lib/python3.13/concurrent/futures/thread.py:59: in run
+    result = self.fn(*self.args, **self.kwargs)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+tests/streaming/test_round_trip.py:150: in worker
+    return bank_worker.run(config, client_id)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+distributed_federation/client/bank_worker.py:47: in run
+    return worker(config, client_id)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^
+distributed_federation/privacy/transport.py:97: in worker
+    _,payload,meta=receive(consumer,assembler,cfg,{'central':central_key},rid,{'global_model'},time.monotonic()+cfg.round_timeout_seconds)
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+consumer = <test_round_trip.Consumer object at 0x1621dd130>
+assembler = <distributed_federation.common.protocol.ChunkAssembler object at 0x155fb6750>
+cfg = FederationConfig(broker='local:9092', run_id='demo-001', clients=(ClientConfig(client_id='bank-1', bank='Key_Bank'), C...r_optimizer=ServerConfig(name='fedavg', learning_rate=1.0, beta1=0.9, beta2=0.99, epsilon=0.001), private_subset='all')
+secrets = {'central': 'cccccccccccccccccccccccccccccccc'}, round_id = 2
+kinds = {'global_model'}, deadline = 159501.49779875
+
+    def receive(consumer,assembler,cfg,secrets,round_id,kinds,deadline):
+        while time.monotonic()<deadline:
+            check_control()
+            message=consumer.poll(min(1.,max(.01,deadline-time.monotonic())))
+            if message is None: continue
+            if message.error(): raise RuntimeError(str(message.error()))
+            try:
+                sender=peek_sender(message.value())
+                if sender not in secrets: continue
+                envelope=verify_for_run(message.value(),secrets[sender],cfg.run_id)
+                if envelope is None or envelope['round_id']!=round_id or envelope['message_type'] not in kinds: continue
+                assembled=assembler.add(envelope)
+                if assembled is None: continue
+                payload,meta=assembled
+                consumer.commit(message=message,asynchronous=False)
+                return sender,payload,meta
+            except (ValueError,KeyError,TypeError):
+                emit('message_rejected',round_id)
+>       raise TimeoutError('Incomplete required cohort/round; failing closed, no plaintext fallback')
+E       TimeoutError: Incomplete required cohort/round; failing closed, no plaintext fallback
+
+distributed_federation/privacy/transport.py:56: TimeoutError
+=========================== short test summary info ============================
+FAILED tests/streaming/test_round_trip.py::RoundTripTests::test_three_banks_receive_verified_aggregates
+FAILED tests/streaming/test_round_trip.py::RoundTripTests::test_three_banks_stop_after_one_complete_round
+FAILED tests/streaming/test_round_trip.py::RoundTripTests::test_three_banks_two_rounds_weighted_fedavg
+3 failed, 134 passed, 8 subtests passed in 17.58s

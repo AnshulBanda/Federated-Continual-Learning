@@ -1,0 +1,2769 @@
+{
+  "branch": "philip-dp-secagg-ddp",
+  "head": "e2b49fc8ac3ac9e27cb1eed723570e2a1ed6781a",
+  "status": "",
+  "commits": "e2b49fc docs: finalize secure aggregation and distributed DP results\n4ca1e07 Record complete multiseed privacy frontier and independent QA evidence\na274e88 Harden numeric range and freeze validation checkpoint selection\n1d70608 Integrate adaptive training with fixed-cohort secure aggregation and aggregate DP\na432d42 feat: add client overview, local training, and federated collaboration dashboard with verified model exchange\ne9a7d30 feat: add safe transfer retries and restart recovery\n2499f7d feat: add saved dashboard setup and cross-platform launchers\n89284e7 feat: add saved dashboard setup and cross-platform launchers\n8772c09 feat: add peer checks and verified weight delivery receipts\nb60b024 feat: add verified 2 MB transfer check and teammate setup guide\n1f764a1 Merge branch 'Anshul-feat/training-dashboard' of https://github.com/siaa1308/Capstone into Anshul-feat/training-dashboard\ncbb34cb fix: ignore unrelated Kafka records and add 2 MB transfer check\n",
+  "historical_evidence_hashes": {
+    "artifacts/dp_level3_secagg/FINAL_REPORT.md": "f1f9125a2027d3116947e34a76a5922c53649e5eeea98b6a0ef6f12eafa221a7",
+    "artifacts/dp_level3_secagg/secagg_smoke.json": "83f59c64981700db116ffe0168877965d9ab85db13105156ffc6e126a4f54375",
+    "artifacts/dp_level3_secagg/FILES_CHANGED.txt": "d72a020f44d5c670cad39984ce2a01269a48ac7eabdcc3404292858f457888b8",
+    "artifacts/dp_level3_secagg/validation_selection_freeze.json": "26a503ca1ecfecbff2b6c4b596fdf7da1d5b434babf78d77a813018ee0659a10",
+    "artifacts/dp_level3_secagg/aggregate_results.json": "531d47b6d337aed03bc5e5475a39e3e44f12a4326cb33a31482cb697d723c5f2",
+    "artifacts/dp_level3_secagg/source_manifest.json": "64576a4e56a30613141fcd62b03fada09cca4c1f029b268eba0b60250254360b",
+    "artifacts/dp_level3_secagg/LOADED_SOURCE_PROVENANCE.json": "1591d78635854b705266938626b5aa97253bdccd1e380e146a2a55c9fa878151",
+    "artifacts/dp_level3_secagg/checkpoint_reload_qa.json": "bfb21c3c22ec7b0f527a0a962e9b72827e13c985fa5ef2fed4357aefa785809b",
+    "artifacts/dp_level3_secagg/checkpoint_provenance.json": "8b6d80ee6939ed91ae5740c79f0e130ac7bf486652465981c84d0f330b236f2e",
+    "artifacts/dp_level3_secagg/SECURITY_QA.md": "b55c698f95e64834410c90376bde63a2ce1a06cf2bb0f4443b4b203d1de35f0e",
+    "artifacts/dp_level3_secagg/seed_results.csv": "319ba033a66eca325834529c9656007a70d663ecccf2a120fa5c4c1d009a59a2",
+    "artifacts/dp_level3_secagg/PUSH_HYGIENE_AUDIT.json": "44d0087680b66cf3b665dfd695176df769ffd89dc323c225e276094a6565d7c3",
+    "artifacts/dp_level3_secagg/FRONTIER.md": "e0b03dd895be1d51a4799fcd1e1a4a971dccf073f9e2b71caa9472c1090adbf2",
+    "artifacts/dp_level3_secagg/PUSH_FINALIZATION.md": "132d1b15b615b154507f2f30160e9ab8dae9c5056efb102b157fca52b82dbd7d",
+    "artifacts/dp_level3_secagg/reload_selected_seed_42.json": "8198d406f77a337c939122f1762174aa84d6da76619795505672fae03923637f",
+    "artifacts/dp_level3_secagg/test_report.txt": "772141a47d8a3aeb63e56a1157647d4a36db6f43e32002b07efc7132e6c94b1d",
+    "artifacts/dp_level3_secagg/source_snapshot.tar.gz": "ded44d49641c28ac6b8cd601bb8134ced2f81927e523f816319736599a623fcf",
+    "artifacts/dp_level3_secagg/development_data_fingerprint.json": "4c4ed9e52b8d70274b683cb5bcf3eb602a43e67eb04d9d8bb9cef7be0704feab",
+    "artifacts/dp_level3_secagg/reload_selected_seed_62.json": "545d4ee3d084bf6ef8f43bc70ff40d0b672483b2bd59e641e41c2a7b6442381a",
+    "artifacts/dp_level3_secagg/ARTIFACT_MANIFEST.json": "2ff0dbf3b43ad9de2cba39af2fc14b6017172db643c61ba939e8cbd8b2b29bfc",
+    "artifacts/dp_level3_secagg/SEARCH_DESIGN.json": "9443ba626273f4d950e7a97565d7ebfa163e04026a24004e0f42c491749e48a7",
+    "artifacts/dp_level3_secagg/VALIDATION_SELECTION_FOLLOWUP.json": "a97850d99a891e20641815d36b1a9a8e664ac5d3d4dc8282403632f82cce9d34",
+    "artifacts/dp_level3_secagg/reloaded_final_validation.json": "8e2a4b3b992c7f2d42dce7e1ea73240e8665902a9837b1ad138cff6c2a6d1417",
+    "artifacts/dp_level3_secagg/clipping_calibration.json": "b1db04c17cd4622647c4a6a4045c22a1edabb50eac40b8bcc2262a90f3755768",
+    "artifacts/dp_level3_secagg/reload_selected_seed_52.json": "c44b2d337b1dfe9e5141d7321f016ba8a420306887b9dad1d8f7234a53952117",
+    "artifacts/dp_level3_secagg/REPRODUCTION.md": "75cfa7651a2526057c2960dc4231d8ca8d301a0ff2239100c21484faf62bfdd6",
+    "artifacts/dp_level3_secagg/environment.json": "043afee359007513d3b1a8c193fd8a1fd89a06f9211c4de9d146ead12d85b1c6",
+    "artifacts/dp_level3_secagg/privacy_utility_frontier.json": "2e9cb4d0993e03c9116152e64af47940c49e13200194b4b0c21bcecf1b516cbb",
+    "artifacts/dp_level3_secagg/feature_schema.json": "ae6fabba8641da6f835b6ea9eb946f6ec9dc2713f50e3bf82446740b0f07dd35",
+    "artifacts/dp_level3_secagg/SOURCE_SNAPSHOT.json": "f3289effc5bb0b021e56e3d0f02a914dca90c628d9ffd829dbd40a04c34b5766",
+    "artifacts/dp_level3_secagg/FINAL_GIT_STATE.json": "6f266b42e4ec7aae3e791c5adc5cde989fb79845143157f94d8cc802217d66c9",
+    "artifacts/dp_level3_secagg/visualization/Key_Bank_validation.html": "df2012566a86370b670bfa1cdaa79697957b153c11c47221363b685cdbe8bd78",
+    "artifacts/dp_level3_secagg/visualization/combined_validation.html": "24f6b0a06e58296fb002f81357ec33c84b2ea5914c054feef2088820e2e7f920",
+    "artifacts/dp_level3_secagg/experiment_source/hashes.json": "b277b9600858c651b82fd0cca4079ab2dff579767183e1b01b7e8f62ef03c759",
+    "artifacts/dp_level3_secagg/best_utility_configs/seed_52.json": "eb649c5c8145fb80f2b9c244ed52c3955aa5a296605e62d33de484854a13b157",
+    "artifacts/dp_level3_secagg/best_utility_configs/seed_42.json": "478384bc9dd8f589a4f1470608aab9590e60233c2fac9d32cd73ccffd32cc1ba",
+    "artifacts/dp_level3_secagg/best_utility_configs/seed_62.json": "3e71e621dbe0490b949e5648db71c68a829ad267401f86cabd228a156ed86744",
+    "artifacts/dp_level3_secagg/experiment_source/scripts/run_private_federation.py": "8f8f1d43fab915699d4a4fa6c62bbe7444071ef24eeaada0b6123db724a91bc2",
+    "artifacts/dp_level3_secagg/experiment_source/src/gnn/adaptive_continual_federated.py": "56bd2a0d62ef2d761eee0daab6e10d7a2b184694cf0d9fe8eee498d93d28006f",
+    "artifacts/dp_level3_secagg/experiment_source/src/gnn/causal_temporal_graphsage.py": "77ec113dd6b16ed0bf6956d1ce9fa7d9da5b300b672f085c76830b203ea2e2eb",
+    "artifacts/dp_level3_secagg/experiment_source/src/gnn/continual_temporal_graphsage.py": "3ab7bc55e8b14f6dc69cc8d1188fc4daaf806e3010e00764b13bedeecea721d5",
+    "artifacts/dp_level3_secagg/experiment_source/distributed_federation/privacy/transport.py": "b0e0e2b0001ccaea08ffcce644724187a7527a0c63c6c86b5cabc8807f873c6e",
+    "artifacts/dp_level3_secagg/experiment_source/distributed_federation/privacy/ledger.py": "f6650ae9f8f1af111c795a4900439c31568749ac474dd1d3037ce8d4ee679010",
+    "artifacts/dp_level3_secagg/experiment_source/distributed_federation/privacy/__init__.py": "adf2dca181ca48d146f7d63792f64f0b321c80c2fd074ac6fc9521118b3611d9",
+    "artifacts/dp_level3_secagg/experiment_source/distributed_federation/privacy/mechanism.py": "562e47ecd59840af78a52655d2a0d9c3502f59c6408453a7237e97b45cf322ee",
+    "artifacts/dp_level3_secagg/experiment_source/distributed_federation/privacy/secagg.py": "31d5604ed074d5508fb7e4d652b3137937d9073450ca54807066dfbc888aeb86",
+    "artifacts/dp_level3_secagg/experiment_source/distributed_federation/common/model_runtime.py": "34848f1fae5454953361f8c789882fdba5df07f5016e78d5ff6c5ab0ecb99047",
+    "artifacts/dp_level3_secagg/experiments/warm_option_a_m0.001_s62/results.json": "00b93704416a93b45ae85446f4e5e0d3f62199bfbad144527b5902f996ed5d0b",
+    "artifacts/dp_level3_secagg/experiments/warm_option_a_m0.001_s62/global_model.pt": "9ddf4dc783328255e506f48bac67e23c6dc75db91481618906fe95bf7ade3664",
+    "artifacts/dp_level3_secagg/experiments/warm_option_a_m0.001_s62/manifest.json": "e785a95a43d260e5eb61b2af39dc26c3f437595528d1730b9888d422528c9ab4",
+    "artifacts/dp_level3_secagg/experiments/warm_option_a_m0.001_s62/progress.json": "89fc62ccc875d42a0cc6821f4a31a6d1fdf23c223d2c13933c66c0310dd94e0d",
+    "artifacts/dp_level3_secagg/experiments/warm_option_a_m0.001_s62/local-ledger.sqlite3": "5972dde0080bdb018fc85403391ab83494475c8a2f4a031b6a3621ab398b5669",
+    "artifacts/dp_level3_secagg/experiments/scratch_none_m0_s52/results.json": "b813357531dd5f7eeef6bf78b7b900b90a2bdcf34b0d56ff9526032c3889fc58",
+    "artifacts/dp_level3_secagg/experiments/scratch_none_m0_s52/global_model.pt": "d93c39173e4f892cb9ae473d5dfe6e660a9d2dffb5bafebf28f1c570ebb78b97",
+    "artifacts/dp_level3_secagg/experiments/scratch_none_m0_s52/manifest.json": "e3748dd9526fe886aa94cf4eb65b785fcb5c48c3e1b06c0dcba27c2f33d5b021",
+    "artifacts/dp_level3_secagg/experiments/scratch_none_m0_s52/progress.json": "aa33065d3a06461d00f64cd99e90d5e15feeeaa85a8475403e828f84a0d90357",
+    "artifacts/dp_level3_secagg/experiments/scratch_none_m0_s52/local-ledger.sqlite3": "baad1a1c49d29b2dce3f933213a72f189311a9e0043c26b7105a8c29d6a25f51",
+    "artifacts/dp_level3_secagg/experiments/warm_option_a_m0.001_s52/results.json": "eb77c67055aa13edd4948d21e70a203617802e92e32eae999bd29f5ccd5a2527",
+    "artifacts/dp_level3_secagg/experiments/warm_option_a_m0.001_s52/global_model.pt": "ce10a1b6ae2c8034e436d67f7cb7f3abf0b83134fcf10ae18fe1a0d94b161cef",
+    "artifacts/dp_level3_secagg/experiments/warm_option_a_m0.001_s52/manifest.json": "73a6279ca2667b4904bcdeb51684b90f11a2744550f0ca12ab6e19584f475db0",
+    "artifacts/dp_level3_secagg/experiments/warm_option_a_m0.001_s52/progress.json": "21c1fcc4477493d0b82755b2f45aecf5d740c0b1bce387ddfb4c9b86d44e6701",
+    "artifacts/dp_level3_secagg/experiments/warm_option_a_m0.001_s52/local-ledger.sqlite3": "3277eb8669e299a7d23aae63f3598b48d979573dce6c47d38064bba328ef125f",
+    "artifacts/dp_level3_secagg/experiments/warm_distributed_dp_m0.001_s42/results.json": "64ec8bf21293de1434b0ba1f62ccf84ee8d011d9fe5bf19ee3a61a297bf79ab2",
+    "artifacts/dp_level3_secagg/experiments/warm_distributed_dp_m0.001_s42/global_model.pt": "a8f59ff8ad9d1c8048e71ed7befd7eeccf1ea70155c4e9608aeab43c3f3fffd5",
+    "artifacts/dp_level3_secagg/experiments/warm_distributed_dp_m0.001_s42/manifest.json": "39689a05e62f0d216cd0d6f6bc865899114de120189dc98de616506427195162",
+    "artifacts/dp_level3_secagg/experiments/warm_distributed_dp_m0.001_s42/progress.json": "5790ef4a137e09403800e41713a343c7c1d596edff8739c7e2542125c86189fe",
+    "artifacts/dp_level3_secagg/experiments/warm_distributed_dp_m0.001_s42/local-ledger.sqlite3": "7eae32ae276aac3a977fbe1456d3ded764a3812732c3e7394a30e97ce5c1f325",
+    "artifacts/dp_level3_secagg/experiments/scratch_none_m0_s62/results.json": "7ebf4b0a7345f1c56dc7472b4edc3789339a686f60f254aa9248f6f73ea75f3d",
+    "artifacts/dp_level3_secagg/experiments/scratch_none_m0_s62/global_model.pt": "ad52710e1f3847d09b7d1159eaa93c9c4e69e8a49e2f644bb0ec6948210a5f16",
+    "artifacts/dp_level3_secagg/experiments/scratch_none_m0_s62/manifest.json": "7dcdc064f5361937673896a88e474dca2ba82cbfc9c87f0a08a17fbe43d72ee4",
+    "artifacts/dp_level3_secagg/experiments/scratch_none_m0_s62/progress.json": "fb9a7226c35589e174ca193c5a5fc1ea7c77620eb0f0167cb81d0b4b19852ef3",
+    "artifacts/dp_level3_secagg/experiments/scratch_none_m0_s62/local-ledger.sqlite3": "102ec38b189a6253588ae420c2f187c075628d3add1b107106ad8979095c102b",
+    "artifacts/dp_level3_secagg/experiments/warm_distributed_dp_m1e-05_s42_best_validation/selected_model.pt": "55e57d124a820474c8f156ba40d7adf524c587ce7c004054714cfa721714f351",
+    "artifacts/dp_level3_secagg/experiments/warm_distributed_dp_m1e-05_s42_best_validation/results.json": "ed39ed02aff4fce094e3eae24f0c27f96bb800631d708ccc92108608cfe13640",
+    "artifacts/dp_level3_secagg/experiments/warm_distributed_dp_m1e-05_s42_best_validation/global_model.pt": "4265b880086d00a8680afaeb8ee8ed3ccbacca8c490cefb8401b58b468bf9211",
+    "artifacts/dp_level3_secagg/experiments/warm_distributed_dp_m1e-05_s42_best_validation/manifest.json": "5d5d02e24466e48f30f9a106ce0542ba79c392259638f16e2bac922610b0d190",
+    "artifacts/dp_level3_secagg/experiments/warm_distributed_dp_m1e-05_s42_best_validation/progress.json": "c8c5c072766b6e47b07d55226c24f7e320d5e68d7fdee47daa872b88c6f37c2c",
+    "artifacts/dp_level3_secagg/experiments/warm_distributed_dp_m1e-05_s42_best_validation/local-ledger.sqlite3": "4c63b14e44726429d6ab6d8afe1310a61243a8cf816611f8febeb5d76172674c",
+    "artifacts/dp_level3_secagg/experiments/warm_distributed_dp_m0.0001_s52/results.json": "5fb00cb136505d2dc1ad46b8cd2797210d8bdc554d4472f0f68e93e1f3c72134",
+    "artifacts/dp_level3_secagg/experiments/warm_distributed_dp_m0.0001_s52/global_model.pt": "0b793fde67977adec7daaa6c9b263ec5d96123474eab78ff42be9bd1ed03e323",
+    "artifacts/dp_level3_secagg/experiments/warm_distributed_dp_m0.0001_s52/manifest.json": "e69026b3c4210a1c2361eacaaa3e734a86427e8e5fb10498bce631d385691ed5",
+    "artifacts/dp_level3_secagg/experiments/warm_distributed_dp_m0.0001_s52/progress.json": "484e0aff394c74f02a70eb7b6f1a5c510218154b8582ec697e3981f3adba4e70",
+    "artifacts/dp_level3_secagg/experiments/warm_distributed_dp_m0.0001_s52/local-ledger.sqlite3": "6044aacbeda876c98340aa43ce0fde687942e1c6bf7f7b9e250bdef649f19ca6",
+    "artifacts/dp_level3_secagg/experiments/warm_distributed_dp_m0.01_s42/results.json": "bb8ef4609091bac9fd71fc29973c970c60bfdfc3caafd7a490ea442a3c0c0802",
+    "artifacts/dp_level3_secagg/experiments/warm_distributed_dp_m0.01_s42/global_model.pt": "337d38887b9d85faa51d6fd24df4e93ebc18a5831bf1d87f835730c051e78f0a",
+    "artifacts/dp_level3_secagg/experiments/warm_distributed_dp_m0.01_s42/manifest.json": "4e3969e69570efe295b5d648e45e056f1c7b62b833f3e68955da7fcb49c04bed",
+    "artifacts/dp_level3_secagg/experiments/warm_distributed_dp_m0.01_s42/progress.json": "6f2fb7dd26cbd1823ae43596aeb826829ad1124102cbc9d31729f10e35b49975",
+    "artifacts/dp_level3_secagg/experiments/warm_distributed_dp_m0.01_s42/local-ledger.sqlite3": "0ac20ff862eacc884a3a5813ff94332e3f6160534f3849a59091bc0c6475fbc7",
+    "artifacts/dp_level3_secagg/experiments/warm_distributed_dp_m0.0001_s62/results.json": "06210fa150472e9dcc2fb97fbdb0e443cdd856190f5c0f71810d96d0f0dcbb1c",
+    "artifacts/dp_level3_secagg/experiments/warm_distributed_dp_m0.0001_s62/global_model.pt": "1c659652948727d10f8c9a17e5c6197ec9e295fccf51496dfffaea617536c1d5",
+    "artifacts/dp_level3_secagg/experiments/warm_distributed_dp_m0.0001_s62/manifest.json": "ca844f8c939e7360474c378875bb586da6f859d4ae22ee5c902ec492a3f249b4",
+    "artifacts/dp_level3_secagg/experiments/warm_distributed_dp_m0.0001_s62/progress.json": "c9f7c828d61bf2d84c1aa98a37d2eca73ff9aba94ecb22d51855b463bc593068",
+    "artifacts/dp_level3_secagg/experiments/warm_distributed_dp_m0.0001_s62/local-ledger.sqlite3": "8a04e73b5dae8f540a89d15ece1f13142b621bf1b22a1a0dbd808a15e431d5cb",
+    "artifacts/dp_level3_secagg/experiments/warm_distributed_dp_m1e-05_s52/results.json": "5356435a205b2438660a251ae5bd5764397ef17585d55531abce0aef9c5a336e",
+    "artifacts/dp_level3_secagg/experiments/warm_distributed_dp_m1e-05_s52/global_model.pt": "07d205c48da34b014323f077c7a3ee1adc9eeb065ba581584076bce37e1ab98e",
+    "artifacts/dp_level3_secagg/experiments/warm_distributed_dp_m1e-05_s52/manifest.json": "494d61b30fa8f518e14ef7fbc04522828592667831b449f678b087c8317608ef",
+    "artifacts/dp_level3_secagg/experiments/warm_distributed_dp_m1e-05_s52/progress.json": "4a2434535b184a997f0a4333d45ea56e1f9f9db2203cd64f5edc259b4a6e35a0",
+    "artifacts/dp_level3_secagg/experiments/warm_distributed_dp_m1e-05_s52/local-ledger.sqlite3": "619caa18bd2121d68f7711d3f11141302b2614ad780518841abce031914d33d7",
+    "artifacts/dp_level3_secagg/experiments/warm_reference_m0_s62/results.json": "3fa599cfaf92aa4dff29d62a423ba73dc57f67e3321de8b633938f32f58b6ecb",
+    "artifacts/dp_level3_secagg/experiments/warm_reference_m0_s62/global_model.pt": "792aa74c4111ccf33a6fe90cb7a1937f3f51ffdae60cfce63cc9fd892373d59f",
+    "artifacts/dp_level3_secagg/experiments/warm_reference_m0_s62/manifest.json": "89a9cca56ecf9ddaea1637ddde07497073146970e21c4813be8acfb7839f29e1",
+    "artifacts/dp_level3_secagg/experiments/warm_reference_m0_s62/progress.json": "fd5acac8295ff6e5958bad747b130ef79839d274da5007c010650f93bc9ac030",
+    "artifacts/dp_level3_secagg/experiments/warm_reference_m0_s62/local-ledger.sqlite3": "10f03ee637e8180d9172b2382bc6ef20814063eafa9b03f7de2cc57706257a75",
+    "artifacts/dp_level3_secagg/experiments/scratch_distributed_dp_m0.001_s62/results.json": "5c7932cda25e7e5d162ddcf0e8e4542cce02e246de72933c5e1dbc51cbf7fc2d",
+    "artifacts/dp_level3_secagg/experiments/scratch_distributed_dp_m0.001_s62/global_model.pt": "698548947953722f7d544e0a7e25aad21e3efbf4cdee1433bff10f6c8e31ca9c",
+    "artifacts/dp_level3_secagg/experiments/scratch_distributed_dp_m0.001_s62/manifest.json": "49247f7656b0a62f2462bcd89447a6d60c271a9a275b7b142a8314d2682bc938",
+    "artifacts/dp_level3_secagg/experiments/scratch_distributed_dp_m0.001_s62/progress.json": "f82ee88277068635d8d0d0f6f10dc19c7c40b4e113064963679b0efa049ce5e0",
+    "artifacts/dp_level3_secagg/experiments/scratch_distributed_dp_m0.001_s62/local-ledger.sqlite3": "1a0fceeeb4fefb7f83bae30f16a92729842750ba1cbc13a62009e9b20de14776",
+    "artifacts/dp_level3_secagg/experiments/warm_distributed_dp_m1e-05_s62/results.json": "7b5e8299cd71e80d98dddf2b84ab1c0982fa3e5cc163471af6e451316ef70263",
+    "artifacts/dp_level3_secagg/experiments/warm_distributed_dp_m1e-05_s62/global_model.pt": "9f0419a92ba8147c7875fb7392923a97c46dcdedefa786f442c7dda6abf1ad02",
+    "artifacts/dp_level3_secagg/experiments/warm_distributed_dp_m1e-05_s62/manifest.json": "3012e9951ab26927271bff26524fffed8981c81ffec060cd20d08bb3984c919e",
+    "artifacts/dp_level3_secagg/experiments/warm_distributed_dp_m1e-05_s62/progress.json": "dfc5f9284c9a8aafd9b091aa5c756fd23783e71ad305b860b5536e39a8456e53",
+    "artifacts/dp_level3_secagg/experiments/warm_distributed_dp_m1e-05_s62/local-ledger.sqlite3": "ba03e216c357d5a81c63b4eacb182d402c92606020996f9db8bcfaf26bc30af3",
+    "artifacts/dp_level3_secagg/experiments/warm_secure_central_dp_m0_s42/results.json": "2b6383509a62f56efca85f657229880ecea7a94726f1109051734c3e664c53f2",
+    "artifacts/dp_level3_secagg/experiments/warm_secure_central_dp_m0_s42/global_model.pt": "61d338656879a1de287c88216752eecce05f26d393273dfabbcdc8a68f12d54a",
+    "artifacts/dp_level3_secagg/experiments/warm_secure_central_dp_m0_s42/manifest.json": "69c2edb2fc1f37596c407a517e41cf190cbc963ceeb12699b575d820e4b7d9f5",
+    "artifacts/dp_level3_secagg/experiments/warm_secure_central_dp_m0_s42/progress.json": "6e6ffe3e0237423a18182ec31307cdb9c4f5a2f9f0eb6f04ca452089cc43b0db",
+    "artifacts/dp_level3_secagg/experiments/warm_secure_central_dp_m0_s42/local-ledger.sqlite3": "5fef598e3c61f26f87c35b61f15d66faa7f2b8c21fbec456c73310d280988cea",
+    "artifacts/dp_level3_secagg/experiments/warm_distributed_dp_m0.1_s42/results.json": "1a08068917d127891349f34d183da41949ac18e8f2159a66d370b5e3167435a8",
+    "artifacts/dp_level3_secagg/experiments/warm_distributed_dp_m0.1_s42/global_model.pt": "149cfda721ebe4bb02169084d6592e73cc3a395be3a19c44aeab3c94adb1db31",
+    "artifacts/dp_level3_secagg/experiments/warm_distributed_dp_m0.1_s42/manifest.json": "7372e22a4ea730e295e2fe5c7376c6b8553c39e1d64158cc1cb016d2087e3519",
+    "artifacts/dp_level3_secagg/experiments/warm_distributed_dp_m0.1_s42/progress.json": "e8a1ae7adf7574b196a66629758be1ade4054a058eb956a48b8daa3fe25658f7",
+    "artifacts/dp_level3_secagg/experiments/warm_distributed_dp_m0.1_s42/local-ledger.sqlite3": "a91f3adef899d334b5d74841dd122e7898b7d8bfe85ad57cca54940e47f95ad6",
+    "artifacts/dp_level3_secagg/experiments/scratch_distributed_dp_m0.001_s52/results.json": "119884c09dda380caec354ac1d9004a2be2b314d26167b68cbc110d686421dfa",
+    "artifacts/dp_level3_secagg/experiments/scratch_distributed_dp_m0.001_s52/global_model.pt": "b7ec480654fd4e2e56063407c19acd07b96b7c7f73dfbba5fc150c5116d4f16c",
+    "artifacts/dp_level3_secagg/experiments/scratch_distributed_dp_m0.001_s52/manifest.json": "0ed3afd6d1f75658d43abd7c4183ce6925972afd397aead8f9e339d6365afd45",
+    "artifacts/dp_level3_secagg/experiments/scratch_distributed_dp_m0.001_s52/progress.json": "7295fe42058ee5380844600471d05f2c623e34cf473de4bf433e5a5cd7611804",
+    "artifacts/dp_level3_secagg/experiments/scratch_distributed_dp_m0.001_s52/local-ledger.sqlite3": "3514e5fc54a32c02a34999b7dcdfe0cf34397450a9c6fb83b886f8432c280ade",
+    "artifacts/dp_level3_secagg/experiments/warm_reference_m0_s52/results.json": "6e7878a23e2bb1840e8e97780a17a390464eb1842c0bcda8a8e75b4bcc7addf0",
+    "artifacts/dp_level3_secagg/experiments/warm_reference_m0_s52/global_model.pt": "d3d17ca5b432a6e861b8e0db8461e99401d4964d5874388b98e6e705d753d59c",
+    "artifacts/dp_level3_secagg/experiments/warm_reference_m0_s52/manifest.json": "412375d490f623974814fc8ef530085678eb329e1adff6ad602c66c0f8bec98b",
+    "artifacts/dp_level3_secagg/experiments/warm_reference_m0_s52/progress.json": "58a058ba49a3cdb02ecb2efcbc88f6ebb557760026d9eb981ea28c5597052cda",
+    "artifacts/dp_level3_secagg/experiments/warm_reference_m0_s52/local-ledger.sqlite3": "0c28d1396bc79d6c31e3fda9960b4e9d82e47be7882d1d1a2085f2ee7ad11f1a",
+    "artifacts/dp_level3_secagg/experiments/warm_none_m0_s52/results.json": "6b0f112a08eaa38daa7eb3a00e04f2c2347802d20e5645427bcbbe20c923f5a1",
+    "artifacts/dp_level3_secagg/experiments/warm_none_m0_s52/global_model.pt": "8d32f5ad6c8600fa422fb3ad694f5be628fd1d5f7b985ee7f9ab2b467af3b4b4",
+    "artifacts/dp_level3_secagg/experiments/warm_none_m0_s52/manifest.json": "c6a931afed997e9895bfc317b70e48f06eb3582fff7d1b7f632371e0a5a44929",
+    "artifacts/dp_level3_secagg/experiments/warm_none_m0_s52/progress.json": "78bace05c950f691cf9a662f8d941ef16af76912fe10e671504da51f3dddc339",
+    "artifacts/dp_level3_secagg/experiments/warm_none_m0_s52/local-ledger.sqlite3": "bae3cd6e3949162d564cfe753d1c1a7adfd531541906d2a44f23389c55ab6bce",
+    "artifacts/dp_level3_secagg/experiments/warm_distributed_dp_m1e-05_s52_best_validation/selected_model.pt": "5f56938a4e2833c6168eeb4ccb1f678be494a974c432df479bcc53122292cd4a",
+    "artifacts/dp_level3_secagg/experiments/warm_distributed_dp_m1e-05_s52_best_validation/results.json": "e81a1abba86ec6abb6582ca67f55184ebbd82139f04fe4d28ea6a3bd79a88af9",
+    "artifacts/dp_level3_secagg/experiments/warm_distributed_dp_m1e-05_s52_best_validation/global_model.pt": "ea088aa2bb3b4ed576ac862364b7b2a9fc3fc7a4b395818354daeebfba16e623",
+    "artifacts/dp_level3_secagg/experiments/warm_distributed_dp_m1e-05_s52_best_validation/manifest.json": "aed64b65cbcef85997742e10108433ed2f7da87fb98a3aaf2c8db1888d9ba539",
+    "artifacts/dp_level3_secagg/experiments/warm_distributed_dp_m1e-05_s52_best_validation/progress.json": "c32c08a554bb3a1127e9fc63975de5370d9d4800783d1714607a51a0aede40bb",
+    "artifacts/dp_level3_secagg/experiments/warm_distributed_dp_m1e-05_s52_best_validation/local-ledger.sqlite3": "855871ee633341e2002b17b3a43760a2367235f18fe60164ebca4879c695a876",
+    "artifacts/dp_level3_secagg/experiments/warm_secure_central_dp_m0.001_s42/results.json": "d1fc10737a20de3245ca8f07a1a949dc78f5e56189ce4ff71f0ddfeac3817f56",
+    "artifacts/dp_level3_secagg/experiments/warm_secure_central_dp_m0.001_s42/global_model.pt": "744d020d433425704a37b0b20a94212ed846db318aceb1c3f60d3cb35d345cad",
+    "artifacts/dp_level3_secagg/experiments/warm_secure_central_dp_m0.001_s42/manifest.json": "c3676b607bc40ef1719deec0e46f01559addc053b26481deaf8642c5640a5254",
+    "artifacts/dp_level3_secagg/experiments/warm_secure_central_dp_m0.001_s42/progress.json": "bb4ea2ae122fe0b3c89e91ea4388b5df74eaed084868ebc458c13e1526471e0d",
+    "artifacts/dp_level3_secagg/experiments/warm_secure_central_dp_m0.001_s42/local-ledger.sqlite3": "fb3c09cd77dd14a40057b47a21aa9a665439db282e5994fe05fbee34b1c83139",
+    "artifacts/dp_level3_secagg/experiments/warm_none_m0_s62/results.json": "6a0c7e9cd0c248bc9100135756bf71ea80cc0c91ce7890253f14514e00d1767d",
+    "artifacts/dp_level3_secagg/experiments/warm_none_m0_s62/global_model.pt": "bc18c897e2bc3d6adc448103d48f24d16fd4602bc95c094674534509ec3b04e7",
+    "artifacts/dp_level3_secagg/experiments/warm_none_m0_s62/manifest.json": "bbc023cfade6584ee96487839a77b26dd07506e5a80c0b9f6dac39750881d2c7",
+    "artifacts/dp_level3_secagg/experiments/warm_none_m0_s62/progress.json": "4b935ba1914dd98f487d558c45f1ec6c5106a4c2e28830e5297d01d0366850f3",
+    "artifacts/dp_level3_secagg/experiments/warm_none_m0_s62/local-ledger.sqlite3": "fef3947f395ae60fefbfe1436ea86abcb5391f110cb7db490c7aac0c7788b266",
+    "artifacts/dp_level3_secagg/experiments/warm_secure_central_dp_m0.001_s52/results.json": "9360e5422a6030c7d686f25ce00d9cbce5e81b54ff6874c287b515f7cd751258",
+    "artifacts/dp_level3_secagg/experiments/warm_secure_central_dp_m0.001_s52/global_model.pt": "7b2fa3ec6e9c7ff879f3e4d65223033814ef3f6a40ff615044d6f1aae39dea6b",
+    "artifacts/dp_level3_secagg/experiments/warm_secure_central_dp_m0.001_s52/manifest.json": "8e5d91e7f15d05599960f8612adbe4a900aaa23af3600e558b03d0e3c8ef7136",
+    "artifacts/dp_level3_secagg/experiments/warm_secure_central_dp_m0.001_s52/progress.json": "15c70e3cb506a5e83f5d7a236faf687d401f38aab1dc44450300fc9b4c803609",
+    "artifacts/dp_level3_secagg/experiments/warm_secure_central_dp_m0.001_s52/local-ledger.sqlite3": "2483dc347a0c6de9faf638c1d9acbeda183ba41b079506e3e4c16cffeca34a72",
+    "artifacts/dp_level3_secagg/experiments/warm_secure_central_dp_m0.001_s62/results.json": "98557d5ba4430511142fd25fa7b9924549498040b9e56c8bc5a4776798cd2dff",
+    "artifacts/dp_level3_secagg/experiments/warm_secure_central_dp_m0.001_s62/global_model.pt": "eeb13251a294f89175bc1f9ded55e4f349da4a6e45ce735065f6c64814f63413",
+    "artifacts/dp_level3_secagg/experiments/warm_secure_central_dp_m0.001_s62/manifest.json": "c7e4658fd8c063dd8862f30b343cb7acf366c22a9513160c68113babff237a82",
+    "artifacts/dp_level3_secagg/experiments/warm_secure_central_dp_m0.001_s62/progress.json": "da61638d24696150d9e1799272de9b72c38c538fc4ff3edb0ada9b2f22670e32",
+    "artifacts/dp_level3_secagg/experiments/warm_secure_central_dp_m0.001_s62/local-ledger.sqlite3": "783234427e36021cf10cf3ce01331ec0f39b050637c79a1e85a41fd5f31b3a43",
+    "artifacts/dp_level3_secagg/experiments/warm_none_m0_s42/results.json": "38393ff7254f261d4f41931dcccb9d44fefadddf6658715c1a14059ec1447d84",
+    "artifacts/dp_level3_secagg/experiments/warm_none_m0_s42/global_model.pt": "353a293c68154857545c404176b78f87490d957cb761d146a4e90ffe755c49fe",
+    "artifacts/dp_level3_secagg/experiments/warm_none_m0_s42/manifest.json": "96c696eaa259bbbb091e67da86cb97dab6dd7835e1a0e1878cd98918bfc55158",
+    "artifacts/dp_level3_secagg/experiments/warm_none_m0_s42/progress.json": "2da80c9fc97ed62bef2d7fa6ba9c82ad5e8d5ba2fa75cd8c1fffc312cf5ab245",
+    "artifacts/dp_level3_secagg/experiments/warm_none_m0_s42/local-ledger.sqlite3": "7e350edea48ee936353ca39e30089bbcab58848be606164ea3097932188f072c",
+    "artifacts/dp_level3_secagg/experiments/warm_secure_central_dp_m0_s52/results.json": "7b6e47f159ba3c32e070272c55d2392ec54acd9986c3462b6fd2ff66c7f5c6e0",
+    "artifacts/dp_level3_secagg/experiments/warm_secure_central_dp_m0_s52/global_model.pt": "069411ad42bc797d48a3b5cfc32d91cf556481a8bf755f8de47e4cee745bfc31",
+    "artifacts/dp_level3_secagg/experiments/warm_secure_central_dp_m0_s52/manifest.json": "3ca982bf280c01def924c4658602f987c3e10cb4ad91b212ba19d8deb0efcf1b",
+    "artifacts/dp_level3_secagg/experiments/warm_secure_central_dp_m0_s52/progress.json": "c7ecb9f503e98643186c29e1612776c35e4ec5063f75ae3e6e56544577a21b93",
+    "artifacts/dp_level3_secagg/experiments/warm_secure_central_dp_m0_s52/local-ledger.sqlite3": "f47ca6eac5e1ef73eb618443190929254237f3162480a8e4384aa4463f00540d",
+    "artifacts/dp_level3_secagg/experiments/scratch_distributed_dp_m0.001_s42/results.json": "4727f13db9674890445ca90508b2356aa712758d5ca4cc6f1845c7b2465c7716",
+    "artifacts/dp_level3_secagg/experiments/scratch_distributed_dp_m0.001_s42/global_model.pt": "2b7c35875f7c9f1ac5dec7d8bf1c0c54b652abcdee0298fe84cece4e6dcd1982",
+    "artifacts/dp_level3_secagg/experiments/scratch_distributed_dp_m0.001_s42/manifest.json": "6d4a8222ac738cd9573c4a0bf5f7af438d548229796946d9f1897fb53446187c",
+    "artifacts/dp_level3_secagg/experiments/scratch_distributed_dp_m0.001_s42/progress.json": "ed6cd707959310c61d677bf6f221ffeab8777dc3a0f8d2408dae6dd8bf9b7c64",
+    "artifacts/dp_level3_secagg/experiments/scratch_distributed_dp_m0.001_s42/local-ledger.sqlite3": "88aced5e045e607100d16317ff63ef158ec03f58193402a1687c7cb9acb7ded0",
+    "artifacts/dp_level3_secagg/experiments/warm_reference_m0_s42/results.json": "270e8e9dd39604569367057c8e0ed193e5ffbc2f098646c0ec7c1eb5e3532d49",
+    "artifacts/dp_level3_secagg/experiments/warm_reference_m0_s42/global_model.pt": "ea898f7783c54ac32cd194d73ff4868c67da0f758152a9e78943f388a556294d",
+    "artifacts/dp_level3_secagg/experiments/warm_reference_m0_s42/manifest.json": "3acfc3aaa2ad0b5370421bb93f1b1fae1a0c846e0f26fcec89feae5306ed2e54",
+    "artifacts/dp_level3_secagg/experiments/warm_reference_m0_s42/progress.json": "17da889272ec5d8f093f05bda80e2cd14c64293c647c925f7f76335151d7ed81",
+    "artifacts/dp_level3_secagg/experiments/warm_reference_m0_s42/local-ledger.sqlite3": "da4a2a91ef182a36b83f6c65e1ffbb745a6382865e9c1ac93c1e4b01f78000a1",
+    "artifacts/dp_level3_secagg/experiments/warm_distributed_dp_m1e-05_s42/results.json": "003b9d92a2a1368d4faa569aba64a5c86ac1b91d0ff9811f888aa6d2ed43f8c3",
+    "artifacts/dp_level3_secagg/experiments/warm_distributed_dp_m1e-05_s42/global_model.pt": "4efa8a691d6a0252c74396863c4dff3316c658e37dedfd3f083b4055cad100dd",
+    "artifacts/dp_level3_secagg/experiments/warm_distributed_dp_m1e-05_s42/manifest.json": "857b0ace9f62bfe0487e737f21eb2bfb3b691877696daaabd72d8a02105402d7",
+    "artifacts/dp_level3_secagg/experiments/warm_distributed_dp_m1e-05_s42/progress.json": "0a2796370a3b813c15a4f5038e94be2971400f1ad401f6f02f0f7c6a26627b2b",
+    "artifacts/dp_level3_secagg/experiments/warm_distributed_dp_m1e-05_s42/local-ledger.sqlite3": "e6004b909b10b0fa54a68a11dd6d3ac34e6b9ed9613391dfd4c865e07a9ea4dc",
+    "artifacts/dp_level3_secagg/experiments/warm_secure_central_dp_m0_s62/results.json": "d1b4ef08ae63442bb2f09e6362d15696059f187444f658148532be4c520246f0",
+    "artifacts/dp_level3_secagg/experiments/warm_secure_central_dp_m0_s62/global_model.pt": "10e4bb966c1eaf1ea30cf7486c7f351f8b6a1eef011697794ecf86a7e90c34f9",
+    "artifacts/dp_level3_secagg/experiments/warm_secure_central_dp_m0_s62/manifest.json": "bf8e9fafa3d32fc3753767017d866cd0c46d2be647d2305491feb360027b450a",
+    "artifacts/dp_level3_secagg/experiments/warm_secure_central_dp_m0_s62/progress.json": "a2150c9ceea5046571c8d4d8d6200ba61648b1a310f128d063f3f1b24e0987f4",
+    "artifacts/dp_level3_secagg/experiments/warm_secure_central_dp_m0_s62/local-ledger.sqlite3": "3fc9eddce29aa12e5aca874f7edc19409a0bf615a6878b1fb8f4c487e6ccc836",
+    "artifacts/dp_level3_secagg/experiments/warm_distributed_dp_m1e-05_s62_best_validation/selected_model.pt": "26b185d96d90f6111292a04dce8d4760c44b18657546ceeaea6503833f526b93",
+    "artifacts/dp_level3_secagg/experiments/warm_distributed_dp_m1e-05_s62_best_validation/results.json": "472927221a6bb00b84359261ee71a44205162090f125b8d1db05c2bd5d667ef6",
+    "artifacts/dp_level3_secagg/experiments/warm_distributed_dp_m1e-05_s62_best_validation/global_model.pt": "9f1069589f0a45768fafbfaffb5ca36dceb2f919927e29a288058decf0b171ef",
+    "artifacts/dp_level3_secagg/experiments/warm_distributed_dp_m1e-05_s62_best_validation/manifest.json": "41448626a068ac6a708a149cdd1d71e3b8c56cae979d9b14900b7bfb3f06bba5",
+    "artifacts/dp_level3_secagg/experiments/warm_distributed_dp_m1e-05_s62_best_validation/progress.json": "24050b8317f353a03dbb0416448f6be2438aad5d01306a59e9df8da964b3cd58",
+    "artifacts/dp_level3_secagg/experiments/warm_distributed_dp_m1e-05_s62_best_validation/local-ledger.sqlite3": "9c1998c2d9cf0cd805c109e1380621e8b0e19b8ca90b32cfc3482ff99f152b06",
+    "artifacts/dp_level3_secagg/experiments/warm_distributed_dp_m0.01_s62/results.json": "1e0f22b7eef2f44a4d776ae213109a67dc34454e49b0891383f9c22261f6115c",
+    "artifacts/dp_level3_secagg/experiments/warm_distributed_dp_m0.01_s62/global_model.pt": "88695ca8fd078fce8cbc8ce4fef929db590afd1325d36883463496ee8d8bba0f",
+    "artifacts/dp_level3_secagg/experiments/warm_distributed_dp_m0.01_s62/manifest.json": "7c23835026ce912cee4d9e46e4837d5dc1ae10a726803d971386288905eb2869",
+    "artifacts/dp_level3_secagg/experiments/warm_distributed_dp_m0.01_s62/progress.json": "8f3ae5510116890f8da2255f95e39d219bd28f22bf80892e3f0e8a899e3d91fa",
+    "artifacts/dp_level3_secagg/experiments/warm_distributed_dp_m0.01_s62/local-ledger.sqlite3": "ed26483372250c612b519680b6814056e22b309eb9164318656f18fb6e133500",
+    "artifacts/dp_level3_secagg/experiments/warm_distributed_dp_m0.0001_s42/results.json": "5a5f318ff8ebc80ed4826392d2552e81da394e0780788cc239bd48a8cbe3f772",
+    "artifacts/dp_level3_secagg/experiments/warm_distributed_dp_m0.0001_s42/global_model.pt": "a7108a3118b754026e4d84e691752fa3683392473c3958dd4cb839480f8d6d94",
+    "artifacts/dp_level3_secagg/experiments/warm_distributed_dp_m0.0001_s42/manifest.json": "011df05bc04fa9aad9d55c35647554bb2b6febdd6f13338f12134ca3ae33025b",
+    "artifacts/dp_level3_secagg/experiments/warm_distributed_dp_m0.0001_s42/progress.json": "aec3d97c65b6b0cd982e8801c3cd8ece32ba43dfccb78bde812b6e3081675839",
+    "artifacts/dp_level3_secagg/experiments/warm_distributed_dp_m0.0001_s42/local-ledger.sqlite3": "a769c87e79cebc908a1621ba26bafa6b6c633e2f649fb801e6f22c27ee361ef7",
+    "artifacts/dp_level3_secagg/experiments/warm_distributed_dp_m0.01_s52/results.json": "14efff9cbb939c5a74dbc3223992e35aa01457f0e3e93b74a25a452720bc23bf",
+    "artifacts/dp_level3_secagg/experiments/warm_distributed_dp_m0.01_s52/global_model.pt": "1be8248bea703082f3df911a67410d5453c2cc436997128b6c8dbd20d0171d82",
+    "artifacts/dp_level3_secagg/experiments/warm_distributed_dp_m0.01_s52/manifest.json": "5e6f87cb10bec439ab9e5376c26db52ec38d98e6e68800b2119201ee7191b3f1",
+    "artifacts/dp_level3_secagg/experiments/warm_distributed_dp_m0.01_s52/progress.json": "b3ddc9492274ef940f396008e063a17def8911acbc4baa4507c2bc72d7d153e1",
+    "artifacts/dp_level3_secagg/experiments/warm_distributed_dp_m0.01_s52/local-ledger.sqlite3": "bb117d68c2a03698f1d40c71d21c0fb1c1f985fa4e4ed6e484060b0668cd2c63",
+    "artifacts/dp_level3_secagg/experiments/warm_option_a_m0.001_s42/results.json": "77bf9cd79dba89e33c6c1e2a5354a5a18d4cae07a5fcb5efc9f9cde51689dc59",
+    "artifacts/dp_level3_secagg/experiments/warm_option_a_m0.001_s42/global_model.pt": "dd87a1b0aa6bb9c0a4cbfe9dcacbd3def09b30d38ddb508a720972232960d207",
+    "artifacts/dp_level3_secagg/experiments/warm_option_a_m0.001_s42/manifest.json": "f234a87682ac9d2f199aa8399fb9803d4eb21a369b1f91dbd3e9b5a3e3287dba",
+    "artifacts/dp_level3_secagg/experiments/warm_option_a_m0.001_s42/progress.json": "c4417aed5ac436a13ea7c936b9f227c068a23d5d949e7fbc74e047e1e4100705",
+    "artifacts/dp_level3_secagg/experiments/warm_option_a_m0.001_s42/local-ledger.sqlite3": "bea114808e51e4f9411cd00c040fcf677565d844081a9fdb876ca36dae2dcbbd",
+    "artifacts/dp_level3_secagg/experiments/warm_distributed_dp_m0.001_s52/results.json": "8842f899bbf73457b8cd7439eee4fa2180be79710842587779630705b02d4d7b",
+    "artifacts/dp_level3_secagg/experiments/warm_distributed_dp_m0.001_s52/global_model.pt": "fc262594f7feab55cd80d9f034df0fe14b0ba706e66407e7e72dfe2d5c33c8b2",
+    "artifacts/dp_level3_secagg/experiments/warm_distributed_dp_m0.001_s52/manifest.json": "313fa9beafcabdd9c45b911d6e7d92a56c4c48bfb2d66cad418606770c8bc14b",
+    "artifacts/dp_level3_secagg/experiments/warm_distributed_dp_m0.001_s52/progress.json": "a6bccb7df489828cf8e044c61679f13f619059e604e7cd9fba9088a805805167",
+    "artifacts/dp_level3_secagg/experiments/warm_distributed_dp_m0.001_s52/local-ledger.sqlite3": "4d685f7eef065e1b54a6a7822d98194e683a607525d1717c694d5394bec625b0",
+    "artifacts/dp_level3_secagg/experiments/warm_distributed_dp_m0.001_s62/results.json": "333526dc2b835c08d45bc1c1cd69c5c7fd3cb11883d64a1a50a4fce625cc3529",
+    "artifacts/dp_level3_secagg/experiments/warm_distributed_dp_m0.001_s62/global_model.pt": "071a5a57b125f67edd938f4ca8d413490c78144d0b4b5a69e1da378610158258",
+    "artifacts/dp_level3_secagg/experiments/warm_distributed_dp_m0.001_s62/manifest.json": "7d3882e441792be897cccbb86a337616f187f46b178288f3db36d18dc867bb71",
+    "artifacts/dp_level3_secagg/experiments/warm_distributed_dp_m0.001_s62/progress.json": "2b173f393344c362172ba98298231a77cf63d1b9bf5e062b28f92cbbbe0547c5",
+    "artifacts/dp_level3_secagg/experiments/warm_distributed_dp_m0.001_s62/local-ledger.sqlite3": "53a161ddaaf0b3b0190c03e2e0380fb17c4f1e328969c326631988fda1a71945",
+    "artifacts/dp_level3_secagg/experiments/scratch_none_m0_s42/results.json": "4630f08e8f76a4e5d01422e773b89502519e793dc87123c682ff67cbe1038741",
+    "artifacts/dp_level3_secagg/experiments/scratch_none_m0_s42/global_model.pt": "79c1eb660a26e0d22aedb45cabf1a9ddb83a8503b598846ce609d62a1a2b5290",
+    "artifacts/dp_level3_secagg/experiments/scratch_none_m0_s42/manifest.json": "c6bd83ff5d5b44e8fbc27e4c54d3a8a507e8ffe5f97141e16e59e8c50768dc97",
+    "artifacts/dp_level3_secagg/experiments/scratch_none_m0_s42/progress.json": "101529e776b619cdeb820ed9c2d0ad9624f10b4309ae26b23f97899c830185cf",
+    "artifacts/dp_level3_secagg/experiments/scratch_none_m0_s42/local-ledger.sqlite3": "6bd0fc824ef722262a795319450739991a92bb1cd56c2b84d90215974c0492a0",
+    "artifacts/dp_level3_secagg/experiments/warm_distributed_dp_m0.001_s62/source_snapshot/src/gnn/adaptive_continual_federated.py": "f0a1dc4972e76077cc10827c99f584d292951aa870d8cf983b74889c55b38bb0",
+    "artifacts/dp_level3_secagg/experiments/warm_distributed_dp_m0.001_s62/source_snapshot/src/gnn/causal_temporal_graphsage.py": "77ec113dd6b16ed0bf6956d1ce9fa7d9da5b300b672f085c76830b203ea2e2eb",
+    "artifacts/dp_level3_secagg/experiments/warm_distributed_dp_m0.001_s62/source_snapshot/src/gnn/continual_temporal_graphsage.py": "3ab7bc55e8b14f6dc69cc8d1188fc4daaf806e3010e00764b13bedeecea721d5",
+    "artifacts/dp_level3_secagg/experiments/warm_distributed_dp_m0.001_s62/source_snapshot/distributed_federation/privacy/mechanism.py": "e9eab2338dcc5f05fafdd2b344ec638afbe59de3e9d9b366220bedd464d735d8",
+    "artifacts/dp_level3_secagg/experiments/warm_distributed_dp_m0.001_s62/source_snapshot/distributed_federation/privacy/secagg.py": "31d5604ed074d5508fb7e4d652b3137937d9073450ca54807066dfbc888aeb86",
+    "artifacts/dp_level3_secagg/experiments/warm_distributed_dp_m0.001_s52/source_snapshot/src/gnn/adaptive_continual_federated.py": "f0a1dc4972e76077cc10827c99f584d292951aa870d8cf983b74889c55b38bb0",
+    "artifacts/dp_level3_secagg/experiments/warm_distributed_dp_m0.001_s52/source_snapshot/src/gnn/causal_temporal_graphsage.py": "77ec113dd6b16ed0bf6956d1ce9fa7d9da5b300b672f085c76830b203ea2e2eb",
+    "artifacts/dp_level3_secagg/experiments/warm_distributed_dp_m0.001_s52/source_snapshot/src/gnn/continual_temporal_graphsage.py": "3ab7bc55e8b14f6dc69cc8d1188fc4daaf806e3010e00764b13bedeecea721d5",
+    "artifacts/dp_level3_secagg/experiments/warm_distributed_dp_m0.001_s52/source_snapshot/distributed_federation/privacy/mechanism.py": "da8a9da6f5415156dbb98926266679a36447a9aa68737067b22a79832ce769ef",
+    "artifacts/dp_level3_secagg/experiments/warm_distributed_dp_m0.001_s52/source_snapshot/distributed_federation/privacy/secagg.py": "31d5604ed074d5508fb7e4d652b3137937d9073450ca54807066dfbc888aeb86",
+    "artifacts/dp_level3_secagg/experiments/warm_option_a_m0.001_s42/source_snapshot/src/gnn/adaptive_continual_federated.py": "f0a1dc4972e76077cc10827c99f584d292951aa870d8cf983b74889c55b38bb0",
+    "artifacts/dp_level3_secagg/experiments/warm_option_a_m0.001_s42/source_snapshot/src/gnn/causal_temporal_graphsage.py": "77ec113dd6b16ed0bf6956d1ce9fa7d9da5b300b672f085c76830b203ea2e2eb",
+    "artifacts/dp_level3_secagg/experiments/warm_option_a_m0.001_s42/source_snapshot/src/gnn/continual_temporal_graphsage.py": "3ab7bc55e8b14f6dc69cc8d1188fc4daaf806e3010e00764b13bedeecea721d5",
+    "artifacts/dp_level3_secagg/experiments/warm_option_a_m0.001_s42/source_snapshot/distributed_federation/privacy/mechanism.py": "da8a9da6f5415156dbb98926266679a36447a9aa68737067b22a79832ce769ef",
+    "artifacts/dp_level3_secagg/experiments/warm_option_a_m0.001_s42/source_snapshot/distributed_federation/privacy/secagg.py": "31d5604ed074d5508fb7e4d652b3137937d9073450ca54807066dfbc888aeb86",
+    "artifacts/dp_level3_secagg/experiments/warm_distributed_dp_m0.01_s52/source_snapshot/src/gnn/adaptive_continual_federated.py": "f0a1dc4972e76077cc10827c99f584d292951aa870d8cf983b74889c55b38bb0",
+    "artifacts/dp_level3_secagg/experiments/warm_distributed_dp_m0.01_s52/source_snapshot/src/gnn/causal_temporal_graphsage.py": "77ec113dd6b16ed0bf6956d1ce9fa7d9da5b300b672f085c76830b203ea2e2eb",
+    "artifacts/dp_level3_secagg/experiments/warm_distributed_dp_m0.01_s52/source_snapshot/src/gnn/continual_temporal_graphsage.py": "3ab7bc55e8b14f6dc69cc8d1188fc4daaf806e3010e00764b13bedeecea721d5",
+    "artifacts/dp_level3_secagg/experiments/warm_distributed_dp_m0.01_s52/source_snapshot/distributed_federation/privacy/mechanism.py": "e9eab2338dcc5f05fafdd2b344ec638afbe59de3e9d9b366220bedd464d735d8",
+    "artifacts/dp_level3_secagg/experiments/warm_distributed_dp_m0.01_s52/source_snapshot/distributed_federation/privacy/secagg.py": "31d5604ed074d5508fb7e4d652b3137937d9073450ca54807066dfbc888aeb86",
+    "artifacts/dp_level3_secagg/experiments/warm_distributed_dp_m0.01_s62/source_snapshot/src/gnn/adaptive_continual_federated.py": "f0a1dc4972e76077cc10827c99f584d292951aa870d8cf983b74889c55b38bb0",
+    "artifacts/dp_level3_secagg/experiments/warm_distributed_dp_m0.01_s62/source_snapshot/src/gnn/causal_temporal_graphsage.py": "77ec113dd6b16ed0bf6956d1ce9fa7d9da5b300b672f085c76830b203ea2e2eb",
+    "artifacts/dp_level3_secagg/experiments/warm_distributed_dp_m0.01_s62/source_snapshot/src/gnn/continual_temporal_graphsage.py": "3ab7bc55e8b14f6dc69cc8d1188fc4daaf806e3010e00764b13bedeecea721d5",
+    "artifacts/dp_level3_secagg/experiments/warm_distributed_dp_m0.01_s62/source_snapshot/distributed_federation/privacy/mechanism.py": "e9eab2338dcc5f05fafdd2b344ec638afbe59de3e9d9b366220bedd464d735d8",
+    "artifacts/dp_level3_secagg/experiments/warm_distributed_dp_m0.01_s62/source_snapshot/distributed_federation/privacy/secagg.py": "31d5604ed074d5508fb7e4d652b3137937d9073450ca54807066dfbc888aeb86",
+    "artifacts/dp_level3_secagg/experiments/warm_distributed_dp_m1e-05_s62_best_validation/source_snapshot/src/gnn/adaptive_continual_federated.py": "f0a1dc4972e76077cc10827c99f584d292951aa870d8cf983b74889c55b38bb0",
+    "artifacts/dp_level3_secagg/experiments/warm_distributed_dp_m1e-05_s62_best_validation/source_snapshot/src/gnn/causal_temporal_graphsage.py": "77ec113dd6b16ed0bf6956d1ce9fa7d9da5b300b672f085c76830b203ea2e2eb",
+    "artifacts/dp_level3_secagg/experiments/warm_distributed_dp_m1e-05_s62_best_validation/source_snapshot/src/gnn/continual_temporal_graphsage.py": "3ab7bc55e8b14f6dc69cc8d1188fc4daaf806e3010e00764b13bedeecea721d5",
+    "artifacts/dp_level3_secagg/experiments/warm_distributed_dp_m1e-05_s62_best_validation/source_snapshot/distributed_federation/privacy/mechanism.py": "6ed1d4c70e4a984d70131b9bcb0a61332b92d3f4ad290f9bb5cf36b8dd133bff",
+    "artifacts/dp_level3_secagg/experiments/warm_distributed_dp_m1e-05_s62_best_validation/source_snapshot/distributed_federation/privacy/secagg.py": "31d5604ed074d5508fb7e4d652b3137937d9073450ca54807066dfbc888aeb86",
+    "artifacts/dp_level3_secagg/experiments/scratch_distributed_dp_m0.001_s42/source_snapshot/src/gnn/adaptive_continual_federated.py": "56bd2a0d62ef2d761eee0daab6e10d7a2b184694cf0d9fe8eee498d93d28006f",
+    "artifacts/dp_level3_secagg/experiments/scratch_distributed_dp_m0.001_s42/source_snapshot/src/gnn/causal_temporal_graphsage.py": "77ec113dd6b16ed0bf6956d1ce9fa7d9da5b300b672f085c76830b203ea2e2eb",
+    "artifacts/dp_level3_secagg/experiments/scratch_distributed_dp_m0.001_s42/source_snapshot/src/gnn/continual_temporal_graphsage.py": "3ab7bc55e8b14f6dc69cc8d1188fc4daaf806e3010e00764b13bedeecea721d5",
+    "artifacts/dp_level3_secagg/experiments/scratch_distributed_dp_m0.001_s42/source_snapshot/distributed_federation/privacy/mechanism.py": "da8a9da6f5415156dbb98926266679a36447a9aa68737067b22a79832ce769ef",
+    "artifacts/dp_level3_secagg/experiments/scratch_distributed_dp_m0.001_s42/source_snapshot/distributed_federation/privacy/secagg.py": "31d5604ed074d5508fb7e4d652b3137937d9073450ca54807066dfbc888aeb86",
+    "artifacts/dp_level3_secagg/experiments/warm_distributed_dp_m1e-05_s52_best_validation/source_snapshot/src/gnn/adaptive_continual_federated.py": "f0a1dc4972e76077cc10827c99f584d292951aa870d8cf983b74889c55b38bb0",
+    "artifacts/dp_level3_secagg/experiments/warm_distributed_dp_m1e-05_s52_best_validation/source_snapshot/src/gnn/causal_temporal_graphsage.py": "77ec113dd6b16ed0bf6956d1ce9fa7d9da5b300b672f085c76830b203ea2e2eb",
+    "artifacts/dp_level3_secagg/experiments/warm_distributed_dp_m1e-05_s52_best_validation/source_snapshot/src/gnn/continual_temporal_graphsage.py": "3ab7bc55e8b14f6dc69cc8d1188fc4daaf806e3010e00764b13bedeecea721d5",
+    "artifacts/dp_level3_secagg/experiments/warm_distributed_dp_m1e-05_s52_best_validation/source_snapshot/distributed_federation/privacy/mechanism.py": "6ed1d4c70e4a984d70131b9bcb0a61332b92d3f4ad290f9bb5cf36b8dd133bff",
+    "artifacts/dp_level3_secagg/experiments/warm_distributed_dp_m1e-05_s52_best_validation/source_snapshot/distributed_federation/privacy/secagg.py": "31d5604ed074d5508fb7e4d652b3137937d9073450ca54807066dfbc888aeb86",
+    "artifacts/dp_level3_secagg/experiments/scratch_distributed_dp_m0.001_s52/source_snapshot/src/gnn/adaptive_continual_federated.py": "f0a1dc4972e76077cc10827c99f584d292951aa870d8cf983b74889c55b38bb0",
+    "artifacts/dp_level3_secagg/experiments/scratch_distributed_dp_m0.001_s52/source_snapshot/src/gnn/causal_temporal_graphsage.py": "77ec113dd6b16ed0bf6956d1ce9fa7d9da5b300b672f085c76830b203ea2e2eb",
+    "artifacts/dp_level3_secagg/experiments/scratch_distributed_dp_m0.001_s52/source_snapshot/src/gnn/continual_temporal_graphsage.py": "3ab7bc55e8b14f6dc69cc8d1188fc4daaf806e3010e00764b13bedeecea721d5",
+    "artifacts/dp_level3_secagg/experiments/scratch_distributed_dp_m0.001_s52/source_snapshot/distributed_federation/privacy/mechanism.py": "da8a9da6f5415156dbb98926266679a36447a9aa68737067b22a79832ce769ef",
+    "artifacts/dp_level3_secagg/experiments/scratch_distributed_dp_m0.001_s52/source_snapshot/distributed_federation/privacy/secagg.py": "31d5604ed074d5508fb7e4d652b3137937d9073450ca54807066dfbc888aeb86",
+    "artifacts/dp_level3_secagg/experiments/warm_distributed_dp_m1e-05_s62/source_snapshot/src/gnn/adaptive_continual_federated.py": "f0a1dc4972e76077cc10827c99f584d292951aa870d8cf983b74889c55b38bb0",
+    "artifacts/dp_level3_secagg/experiments/warm_distributed_dp_m1e-05_s62/source_snapshot/src/gnn/causal_temporal_graphsage.py": "77ec113dd6b16ed0bf6956d1ce9fa7d9da5b300b672f085c76830b203ea2e2eb",
+    "artifacts/dp_level3_secagg/experiments/warm_distributed_dp_m1e-05_s62/source_snapshot/src/gnn/continual_temporal_graphsage.py": "3ab7bc55e8b14f6dc69cc8d1188fc4daaf806e3010e00764b13bedeecea721d5",
+    "artifacts/dp_level3_secagg/experiments/warm_distributed_dp_m1e-05_s62/source_snapshot/distributed_federation/privacy/mechanism.py": "da8a9da6f5415156dbb98926266679a36447a9aa68737067b22a79832ce769ef",
+    "artifacts/dp_level3_secagg/experiments/warm_distributed_dp_m1e-05_s62/source_snapshot/distributed_federation/privacy/secagg.py": "31d5604ed074d5508fb7e4d652b3137937d9073450ca54807066dfbc888aeb86",
+    "artifacts/dp_level3_secagg/experiments/scratch_distributed_dp_m0.001_s62/source_snapshot/src/gnn/adaptive_continual_federated.py": "f0a1dc4972e76077cc10827c99f584d292951aa870d8cf983b74889c55b38bb0",
+    "artifacts/dp_level3_secagg/experiments/scratch_distributed_dp_m0.001_s62/source_snapshot/src/gnn/causal_temporal_graphsage.py": "77ec113dd6b16ed0bf6956d1ce9fa7d9da5b300b672f085c76830b203ea2e2eb",
+    "artifacts/dp_level3_secagg/experiments/scratch_distributed_dp_m0.001_s62/source_snapshot/src/gnn/continual_temporal_graphsage.py": "3ab7bc55e8b14f6dc69cc8d1188fc4daaf806e3010e00764b13bedeecea721d5",
+    "artifacts/dp_level3_secagg/experiments/scratch_distributed_dp_m0.001_s62/source_snapshot/distributed_federation/privacy/mechanism.py": "6ed1d4c70e4a984d70131b9bcb0a61332b92d3f4ad290f9bb5cf36b8dd133bff",
+    "artifacts/dp_level3_secagg/experiments/scratch_distributed_dp_m0.001_s62/source_snapshot/distributed_federation/privacy/secagg.py": "31d5604ed074d5508fb7e4d652b3137937d9073450ca54807066dfbc888aeb86",
+    "artifacts/dp_level3_secagg/experiments/warm_distributed_dp_m1e-05_s52/source_snapshot/src/gnn/adaptive_continual_federated.py": "56bd2a0d62ef2d761eee0daab6e10d7a2b184694cf0d9fe8eee498d93d28006f",
+    "artifacts/dp_level3_secagg/experiments/warm_distributed_dp_m1e-05_s52/source_snapshot/src/gnn/causal_temporal_graphsage.py": "77ec113dd6b16ed0bf6956d1ce9fa7d9da5b300b672f085c76830b203ea2e2eb",
+    "artifacts/dp_level3_secagg/experiments/warm_distributed_dp_m1e-05_s52/source_snapshot/src/gnn/continual_temporal_graphsage.py": "3ab7bc55e8b14f6dc69cc8d1188fc4daaf806e3010e00764b13bedeecea721d5",
+    "artifacts/dp_level3_secagg/experiments/warm_distributed_dp_m1e-05_s52/source_snapshot/distributed_federation/privacy/mechanism.py": "da8a9da6f5415156dbb98926266679a36447a9aa68737067b22a79832ce769ef",
+    "artifacts/dp_level3_secagg/experiments/warm_distributed_dp_m1e-05_s52/source_snapshot/distributed_federation/privacy/secagg.py": "31d5604ed074d5508fb7e4d652b3137937d9073450ca54807066dfbc888aeb86",
+    "artifacts/dp_level3_secagg/experiments/warm_distributed_dp_m0.0001_s62/source_snapshot/src/gnn/adaptive_continual_federated.py": "f0a1dc4972e76077cc10827c99f584d292951aa870d8cf983b74889c55b38bb0",
+    "artifacts/dp_level3_secagg/experiments/warm_distributed_dp_m0.0001_s62/source_snapshot/src/gnn/causal_temporal_graphsage.py": "77ec113dd6b16ed0bf6956d1ce9fa7d9da5b300b672f085c76830b203ea2e2eb",
+    "artifacts/dp_level3_secagg/experiments/warm_distributed_dp_m0.0001_s62/source_snapshot/src/gnn/continual_temporal_graphsage.py": "3ab7bc55e8b14f6dc69cc8d1188fc4daaf806e3010e00764b13bedeecea721d5",
+    "artifacts/dp_level3_secagg/experiments/warm_distributed_dp_m0.0001_s62/source_snapshot/distributed_federation/privacy/mechanism.py": "da8a9da6f5415156dbb98926266679a36447a9aa68737067b22a79832ce769ef",
+    "artifacts/dp_level3_secagg/experiments/warm_distributed_dp_m0.0001_s62/source_snapshot/distributed_federation/privacy/secagg.py": "31d5604ed074d5508fb7e4d652b3137937d9073450ca54807066dfbc888aeb86",
+    "artifacts/dp_level3_secagg/experiments/warm_distributed_dp_m0.0001_s52/source_snapshot/src/gnn/adaptive_continual_federated.py": "f0a1dc4972e76077cc10827c99f584d292951aa870d8cf983b74889c55b38bb0",
+    "artifacts/dp_level3_secagg/experiments/warm_distributed_dp_m0.0001_s52/source_snapshot/src/gnn/causal_temporal_graphsage.py": "77ec113dd6b16ed0bf6956d1ce9fa7d9da5b300b672f085c76830b203ea2e2eb",
+    "artifacts/dp_level3_secagg/experiments/warm_distributed_dp_m0.0001_s52/source_snapshot/src/gnn/continual_temporal_graphsage.py": "3ab7bc55e8b14f6dc69cc8d1188fc4daaf806e3010e00764b13bedeecea721d5",
+    "artifacts/dp_level3_secagg/experiments/warm_distributed_dp_m0.0001_s52/source_snapshot/distributed_federation/privacy/mechanism.py": "da8a9da6f5415156dbb98926266679a36447a9aa68737067b22a79832ce769ef",
+    "artifacts/dp_level3_secagg/experiments/warm_distributed_dp_m0.0001_s52/source_snapshot/distributed_federation/privacy/secagg.py": "31d5604ed074d5508fb7e4d652b3137937d9073450ca54807066dfbc888aeb86",
+    "artifacts/dp_level3_secagg/experiments/warm_distributed_dp_m1e-05_s42_best_validation/source_snapshot/src/gnn/adaptive_continual_federated.py": "f0a1dc4972e76077cc10827c99f584d292951aa870d8cf983b74889c55b38bb0",
+    "artifacts/dp_level3_secagg/experiments/warm_distributed_dp_m1e-05_s42_best_validation/source_snapshot/src/gnn/causal_temporal_graphsage.py": "77ec113dd6b16ed0bf6956d1ce9fa7d9da5b300b672f085c76830b203ea2e2eb",
+    "artifacts/dp_level3_secagg/experiments/warm_distributed_dp_m1e-05_s42_best_validation/source_snapshot/src/gnn/continual_temporal_graphsage.py": "3ab7bc55e8b14f6dc69cc8d1188fc4daaf806e3010e00764b13bedeecea721d5",
+    "artifacts/dp_level3_secagg/experiments/warm_distributed_dp_m1e-05_s42_best_validation/source_snapshot/distributed_federation/privacy/mechanism.py": "6ed1d4c70e4a984d70131b9bcb0a61332b92d3f4ad290f9bb5cf36b8dd133bff",
+    "artifacts/dp_level3_secagg/experiments/warm_distributed_dp_m1e-05_s42_best_validation/source_snapshot/distributed_federation/privacy/secagg.py": "31d5604ed074d5508fb7e4d652b3137937d9073450ca54807066dfbc888aeb86",
+    "artifacts/dp_level3_secagg/experiments/warm_option_a_m0.001_s52/source_snapshot/src/gnn/adaptive_continual_federated.py": "f0a1dc4972e76077cc10827c99f584d292951aa870d8cf983b74889c55b38bb0",
+    "artifacts/dp_level3_secagg/experiments/warm_option_a_m0.001_s52/source_snapshot/src/gnn/causal_temporal_graphsage.py": "77ec113dd6b16ed0bf6956d1ce9fa7d9da5b300b672f085c76830b203ea2e2eb",
+    "artifacts/dp_level3_secagg/experiments/warm_option_a_m0.001_s52/source_snapshot/src/gnn/continual_temporal_graphsage.py": "3ab7bc55e8b14f6dc69cc8d1188fc4daaf806e3010e00764b13bedeecea721d5",
+    "artifacts/dp_level3_secagg/experiments/warm_option_a_m0.001_s52/source_snapshot/distributed_federation/privacy/mechanism.py": "da8a9da6f5415156dbb98926266679a36447a9aa68737067b22a79832ce769ef",
+    "artifacts/dp_level3_secagg/experiments/warm_option_a_m0.001_s52/source_snapshot/distributed_federation/privacy/secagg.py": "31d5604ed074d5508fb7e4d652b3137937d9073450ca54807066dfbc888aeb86",
+    "artifacts/dp_level3_secagg/experiments/warm_option_a_m0.001_s62/source_snapshot/src/gnn/adaptive_continual_federated.py": "f0a1dc4972e76077cc10827c99f584d292951aa870d8cf983b74889c55b38bb0",
+    "artifacts/dp_level3_secagg/experiments/warm_option_a_m0.001_s62/source_snapshot/src/gnn/causal_temporal_graphsage.py": "77ec113dd6b16ed0bf6956d1ce9fa7d9da5b300b672f085c76830b203ea2e2eb",
+    "artifacts/dp_level3_secagg/experiments/warm_option_a_m0.001_s62/source_snapshot/src/gnn/continual_temporal_graphsage.py": "3ab7bc55e8b14f6dc69cc8d1188fc4daaf806e3010e00764b13bedeecea721d5",
+    "artifacts/dp_level3_secagg/experiments/warm_option_a_m0.001_s62/source_snapshot/distributed_federation/privacy/mechanism.py": "da8a9da6f5415156dbb98926266679a36447a9aa68737067b22a79832ce769ef",
+    "artifacts/dp_level3_secagg/experiments/warm_option_a_m0.001_s62/source_snapshot/distributed_federation/privacy/secagg.py": "31d5604ed074d5508fb7e4d652b3137937d9073450ca54807066dfbc888aeb86",
+    "artifacts/dp_level3_secagg/kafka_acceptance/distributed/result.json": "268337fbf7b6f7a88ad3998e9b762d5d4e78f66548eeb51d7ad442a10c826608",
+    "artifacts/dp_level3_secagg/kafka_acceptance/distributed/central.log": "ca1c2cbec36378f0fed22e70bef56ef58c62fa5af65738f36cb69c564c0c5565",
+    "artifacts/dp_level3_secagg/kafka_acceptance/distributed/bank-2.log": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "artifacts/dp_level3_secagg/kafka_acceptance/distributed/bank-3.log": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "artifacts/dp_level3_secagg/kafka_acceptance/distributed/bank-1.log": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "artifacts/dp_level3_secagg/kafka_acceptance/distributed/run.json": "97837ede2407bb945ea6043a1e2c3e38c4948dae40677cb216535e29fc32927c",
+    "artifacts/dp_level3_secagg/kafka_acceptance/distributed_final/result.json": "e9b5d0fae4357944e8057cac26f6fc0de155686a3374a6664fd8158991f1263f",
+    "artifacts/dp_level3_secagg/kafka_acceptance/distributed_final/central.log": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "artifacts/dp_level3_secagg/kafka_acceptance/distributed_final/bank-2.log": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "artifacts/dp_level3_secagg/kafka_acceptance/distributed_final/bank-3.log": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "artifacts/dp_level3_secagg/kafka_acceptance/distributed_final/bank-1.log": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "artifacts/dp_level3_secagg/kafka_acceptance/distributed_final/run.json": "9473a73ffde5c1aa1a9606dbba0b47d8f956b234de3d20cc040c2fdeafc9bbdb",
+    "artifacts/dp_level3_secagg/kafka_acceptance/central/result.json": "63e02054539e0bd41f4978c7a2829640e2f68d254d40cab3b40da3335a2d2001",
+    "artifacts/dp_level3_secagg/kafka_acceptance/central/central.log": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "artifacts/dp_level3_secagg/kafka_acceptance/central/bank-2.log": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "artifacts/dp_level3_secagg/kafka_acceptance/central/bank-3.log": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "artifacts/dp_level3_secagg/kafka_acceptance/central/bank-1.log": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "artifacts/dp_level3_secagg/kafka_acceptance/central/run.json": "e7ca78fb9e5ee8e8275de5cee353f696ef106368827ebb367624944f47b09512",
+    "artifacts/dp_level3_secagg/kafka_acceptance/central/models/qa-2985ba7ac1c34aed/global_round_001.commit.json": "f13e89b5976a05b5f0fbf89d660c1a3cafbc81d2497e6b10db8b97b20d8bb22a",
+    "artifacts/dp_level3_secagg/kafka_acceptance/central/models/qa-2985ba7ac1c34aed/global_round_001.safetensors": "2853e0f72e52580d45294643c93bb5d3b17e7f5db08a653a338debb542b45d8a",
+    "artifacts/dp_level3_secagg/kafka_acceptance/central/models/qa-2985ba7ac1c34aed/global_round_002.safetensors": "e20bb984a4444cda571677dba2be305a649383bb56454668f64c2aff381acc35",
+    "artifacts/dp_level3_secagg/kafka_acceptance/central/models/qa-2985ba7ac1c34aed/global_round_002.json": "e74cccd51d904482f6a901c477277c8be331c5a2c70bc8e595a70f337e56fcc9",
+    "artifacts/dp_level3_secagg/kafka_acceptance/central/models/qa-2985ba7ac1c34aed/global_round_002.commit.json": "7c03dddca399561effd77e0490e5d87ad18922e697ca3d7687b0bcf36e1bcef9",
+    "artifacts/dp_level3_secagg/kafka_acceptance/central/models/qa-2985ba7ac1c34aed/global_round_002.reserved": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "artifacts/dp_level3_secagg/kafka_acceptance/central/models/qa-2985ba7ac1c34aed/global_round_001.json": "29f7fbec7dff34ac0f9ea5dd383e66c4819f2160f4ae18e5ffc19ff85c389212",
+    "artifacts/dp_level3_secagg/kafka_acceptance/central/models/qa-2985ba7ac1c34aed/global_round_001.reserved": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "artifacts/dp_level3_secagg/kafka_acceptance/central/models/privacy-ledgers/bank-3.sqlite3": "1dc72aeaf3207fedeb5908027b51db36c78f3615249925ca7d08b8eba41a6e8d",
+    "artifacts/dp_level3_secagg/kafka_acceptance/central/models/privacy-ledgers/bank-2.sqlite3": "ed231467a341db57dbdf9ec26008d1e5bee95d3535f38409a734fd567fbd652d",
+    "artifacts/dp_level3_secagg/kafka_acceptance/central/models/privacy-ledgers/bank-1.sqlite3": "0e12d61d84f36923babfc21ae175d8a8203bf77918a1b2fc7637707eb9202331",
+    "artifacts/dp_level3_secagg/kafka_acceptance/central/models/privacy-ledgers/central.sqlite3": "15994c2b94ee8d1c155c0875399cc384127ecdd3b815080ada87247949f33aaa",
+    "artifacts/dp_level3_secagg/kafka_acceptance/central/models/qa-2985ba7ac1c34aed/bank-3/global_round_001.commit.json": "5ce0056404016231c085db95f97a2f7c29a96bb930394ea3799e761eebb53d4e",
+    "artifacts/dp_level3_secagg/kafka_acceptance/central/models/qa-2985ba7ac1c34aed/bank-3/global_round_001.safetensors": "2853e0f72e52580d45294643c93bb5d3b17e7f5db08a653a338debb542b45d8a",
+    "artifacts/dp_level3_secagg/kafka_acceptance/central/models/qa-2985ba7ac1c34aed/bank-3/global_round_002.safetensors": "e20bb984a4444cda571677dba2be305a649383bb56454668f64c2aff381acc35",
+    "artifacts/dp_level3_secagg/kafka_acceptance/central/models/qa-2985ba7ac1c34aed/bank-3/global_round_002.json": "1da14321b69dfb8b0a3be207aa1b3b110c5f63a47a502c9ed4609638208df95a",
+    "artifacts/dp_level3_secagg/kafka_acceptance/central/models/qa-2985ba7ac1c34aed/bank-3/global_round_002.commit.json": "a961c92cc3f2ec564fdf0e47ba685e548fe659df216d689e14e1ee5f6c35c507",
+    "artifacts/dp_level3_secagg/kafka_acceptance/central/models/qa-2985ba7ac1c34aed/bank-3/global_round_002.reserved": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "artifacts/dp_level3_secagg/kafka_acceptance/central/models/qa-2985ba7ac1c34aed/bank-3/global_round_001.json": "9ab5745e8de13b68d2c662945c91c7d6ccec3347d11e1ddd8ecb0ca5bd8c1e40",
+    "artifacts/dp_level3_secagg/kafka_acceptance/central/models/qa-2985ba7ac1c34aed/bank-3/global_round_001.reserved": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "artifacts/dp_level3_secagg/kafka_acceptance/central/models/qa-2985ba7ac1c34aed/bank-2/global_round_001.commit.json": "5ce0056404016231c085db95f97a2f7c29a96bb930394ea3799e761eebb53d4e",
+    "artifacts/dp_level3_secagg/kafka_acceptance/central/models/qa-2985ba7ac1c34aed/bank-2/global_round_001.safetensors": "2853e0f72e52580d45294643c93bb5d3b17e7f5db08a653a338debb542b45d8a",
+    "artifacts/dp_level3_secagg/kafka_acceptance/central/models/qa-2985ba7ac1c34aed/bank-2/global_round_002.safetensors": "e20bb984a4444cda571677dba2be305a649383bb56454668f64c2aff381acc35",
+    "artifacts/dp_level3_secagg/kafka_acceptance/central/models/qa-2985ba7ac1c34aed/bank-2/global_round_002.json": "1da14321b69dfb8b0a3be207aa1b3b110c5f63a47a502c9ed4609638208df95a",
+    "artifacts/dp_level3_secagg/kafka_acceptance/central/models/qa-2985ba7ac1c34aed/bank-2/global_round_002.commit.json": "a961c92cc3f2ec564fdf0e47ba685e548fe659df216d689e14e1ee5f6c35c507",
+    "artifacts/dp_level3_secagg/kafka_acceptance/central/models/qa-2985ba7ac1c34aed/bank-2/global_round_002.reserved": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "artifacts/dp_level3_secagg/kafka_acceptance/central/models/qa-2985ba7ac1c34aed/bank-2/global_round_001.json": "9ab5745e8de13b68d2c662945c91c7d6ccec3347d11e1ddd8ecb0ca5bd8c1e40",
+    "artifacts/dp_level3_secagg/kafka_acceptance/central/models/qa-2985ba7ac1c34aed/bank-2/global_round_001.reserved": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "artifacts/dp_level3_secagg/kafka_acceptance/central/models/qa-2985ba7ac1c34aed/bank-1/global_round_001.commit.json": "5ce0056404016231c085db95f97a2f7c29a96bb930394ea3799e761eebb53d4e",
+    "artifacts/dp_level3_secagg/kafka_acceptance/central/models/qa-2985ba7ac1c34aed/bank-1/global_round_001.safetensors": "2853e0f72e52580d45294643c93bb5d3b17e7f5db08a653a338debb542b45d8a",
+    "artifacts/dp_level3_secagg/kafka_acceptance/central/models/qa-2985ba7ac1c34aed/bank-1/global_round_002.safetensors": "e20bb984a4444cda571677dba2be305a649383bb56454668f64c2aff381acc35",
+    "artifacts/dp_level3_secagg/kafka_acceptance/central/models/qa-2985ba7ac1c34aed/bank-1/global_round_002.json": "1da14321b69dfb8b0a3be207aa1b3b110c5f63a47a502c9ed4609638208df95a",
+    "artifacts/dp_level3_secagg/kafka_acceptance/central/models/qa-2985ba7ac1c34aed/bank-1/global_round_002.commit.json": "a961c92cc3f2ec564fdf0e47ba685e548fe659df216d689e14e1ee5f6c35c507",
+    "artifacts/dp_level3_secagg/kafka_acceptance/central/models/qa-2985ba7ac1c34aed/bank-1/global_round_002.reserved": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "artifacts/dp_level3_secagg/kafka_acceptance/central/models/qa-2985ba7ac1c34aed/bank-1/global_round_001.json": "9ab5745e8de13b68d2c662945c91c7d6ccec3347d11e1ddd8ecb0ca5bd8c1e40",
+    "artifacts/dp_level3_secagg/kafka_acceptance/central/models/qa-2985ba7ac1c34aed/bank-1/global_round_001.reserved": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "artifacts/dp_level3_secagg/kafka_acceptance/distributed_final/models/qa-bc4c2ad6358c4335/global_round_001.commit.json": "a16cc45e3d742d4f350b54e38dcce262b4841b84ad9b266e7574eb122db2169c",
+    "artifacts/dp_level3_secagg/kafka_acceptance/distributed_final/models/qa-bc4c2ad6358c4335/global_round_001.safetensors": "3ff6a17a5cb116da42e9b54eeb8d405fb265068d656611a1888e10dea58d6791",
+    "artifacts/dp_level3_secagg/kafka_acceptance/distributed_final/models/qa-bc4c2ad6358c4335/global_round_002.safetensors": "780afd6f0557bbcf398f6105fedb3ce1e453dc884e88ff6eea616535fc8a5e4b",
+    "artifacts/dp_level3_secagg/kafka_acceptance/distributed_final/models/qa-bc4c2ad6358c4335/global_round_002.json": "59824be2dd5641488c6c3524cb050cf64f1dce8fad43f5dcfbc1a61e54d2b292",
+    "artifacts/dp_level3_secagg/kafka_acceptance/distributed_final/models/qa-bc4c2ad6358c4335/global_round_002.commit.json": "f001269a712aef1df4f846480076473bf37c6299d5fb4b8f5b246543ff55970a",
+    "artifacts/dp_level3_secagg/kafka_acceptance/distributed_final/models/qa-bc4c2ad6358c4335/global_round_002.reserved": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "artifacts/dp_level3_secagg/kafka_acceptance/distributed_final/models/qa-bc4c2ad6358c4335/global_round_001.json": "1a920455f72847314b5198543f49fdc230d8ec31cb87dd3e14a00dc80dc16a94",
+    "artifacts/dp_level3_secagg/kafka_acceptance/distributed_final/models/qa-bc4c2ad6358c4335/global_round_001.reserved": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "artifacts/dp_level3_secagg/kafka_acceptance/distributed_final/models/privacy-ledgers/bank-3.sqlite3": "2d5920dcda32de11b4675f77958363b7b2ec15224a0e140143ad66546ba332bc",
+    "artifacts/dp_level3_secagg/kafka_acceptance/distributed_final/models/privacy-ledgers/bank-2.sqlite3": "ed8f3017913d57f3fdcb0440f23e0179f016cd0477893bb968202b5fbc39dc91",
+    "artifacts/dp_level3_secagg/kafka_acceptance/distributed_final/models/privacy-ledgers/bank-1.sqlite3": "40c69cf19a4d83bb2e9a932551367c9cd9a4f3d680a9fa19c7305deec3df0c8a",
+    "artifacts/dp_level3_secagg/kafka_acceptance/distributed_final/models/privacy-ledgers/central.sqlite3": "7c47b56bc45b13e71781eb331852c622cf9dcb74cdfaba6c37d042ddd6c678f2",
+    "artifacts/dp_level3_secagg/kafka_acceptance/distributed_final/models/qa-bc4c2ad6358c4335/bank-3/global_round_001.commit.json": "5e7c8c7131bcca69d393c372fa0bba973210e5711af27988fd838d65fe8edee9",
+    "artifacts/dp_level3_secagg/kafka_acceptance/distributed_final/models/qa-bc4c2ad6358c4335/bank-3/global_round_001.safetensors": "3ff6a17a5cb116da42e9b54eeb8d405fb265068d656611a1888e10dea58d6791",
+    "artifacts/dp_level3_secagg/kafka_acceptance/distributed_final/models/qa-bc4c2ad6358c4335/bank-3/global_round_002.safetensors": "780afd6f0557bbcf398f6105fedb3ce1e453dc884e88ff6eea616535fc8a5e4b",
+    "artifacts/dp_level3_secagg/kafka_acceptance/distributed_final/models/qa-bc4c2ad6358c4335/bank-3/global_round_002.json": "c1e00f7a63f10b580e9d12a5d8c92ed3d6a65e5529b3ce2689ca7feb639a8673",
+    "artifacts/dp_level3_secagg/kafka_acceptance/distributed_final/models/qa-bc4c2ad6358c4335/bank-3/global_round_002.commit.json": "69d2b48720bf79397ba935d3df41220d78ee1716853c06270cb94c0988881b56",
+    "artifacts/dp_level3_secagg/kafka_acceptance/distributed_final/models/qa-bc4c2ad6358c4335/bank-3/global_round_002.reserved": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "artifacts/dp_level3_secagg/kafka_acceptance/distributed_final/models/qa-bc4c2ad6358c4335/bank-3/global_round_001.json": "51065c266a270b7d47aa4eb6e0dc5d8488b17f14c85c8fe237206d42f9789d3b",
+    "artifacts/dp_level3_secagg/kafka_acceptance/distributed_final/models/qa-bc4c2ad6358c4335/bank-3/global_round_001.reserved": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "artifacts/dp_level3_secagg/kafka_acceptance/distributed_final/models/qa-bc4c2ad6358c4335/bank-2/global_round_001.commit.json": "5e7c8c7131bcca69d393c372fa0bba973210e5711af27988fd838d65fe8edee9",
+    "artifacts/dp_level3_secagg/kafka_acceptance/distributed_final/models/qa-bc4c2ad6358c4335/bank-2/global_round_001.safetensors": "3ff6a17a5cb116da42e9b54eeb8d405fb265068d656611a1888e10dea58d6791",
+    "artifacts/dp_level3_secagg/kafka_acceptance/distributed_final/models/qa-bc4c2ad6358c4335/bank-2/global_round_002.safetensors": "780afd6f0557bbcf398f6105fedb3ce1e453dc884e88ff6eea616535fc8a5e4b",
+    "artifacts/dp_level3_secagg/kafka_acceptance/distributed_final/models/qa-bc4c2ad6358c4335/bank-2/global_round_002.json": "c1e00f7a63f10b580e9d12a5d8c92ed3d6a65e5529b3ce2689ca7feb639a8673",
+    "artifacts/dp_level3_secagg/kafka_acceptance/distributed_final/models/qa-bc4c2ad6358c4335/bank-2/global_round_002.commit.json": "69d2b48720bf79397ba935d3df41220d78ee1716853c06270cb94c0988881b56",
+    "artifacts/dp_level3_secagg/kafka_acceptance/distributed_final/models/qa-bc4c2ad6358c4335/bank-2/global_round_002.reserved": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "artifacts/dp_level3_secagg/kafka_acceptance/distributed_final/models/qa-bc4c2ad6358c4335/bank-2/global_round_001.json": "51065c266a270b7d47aa4eb6e0dc5d8488b17f14c85c8fe237206d42f9789d3b",
+    "artifacts/dp_level3_secagg/kafka_acceptance/distributed_final/models/qa-bc4c2ad6358c4335/bank-2/global_round_001.reserved": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "artifacts/dp_level3_secagg/kafka_acceptance/distributed_final/models/qa-bc4c2ad6358c4335/bank-1/global_round_001.commit.json": "5e7c8c7131bcca69d393c372fa0bba973210e5711af27988fd838d65fe8edee9",
+    "artifacts/dp_level3_secagg/kafka_acceptance/distributed_final/models/qa-bc4c2ad6358c4335/bank-1/global_round_001.safetensors": "3ff6a17a5cb116da42e9b54eeb8d405fb265068d656611a1888e10dea58d6791",
+    "artifacts/dp_level3_secagg/kafka_acceptance/distributed_final/models/qa-bc4c2ad6358c4335/bank-1/global_round_002.safetensors": "780afd6f0557bbcf398f6105fedb3ce1e453dc884e88ff6eea616535fc8a5e4b",
+    "artifacts/dp_level3_secagg/kafka_acceptance/distributed_final/models/qa-bc4c2ad6358c4335/bank-1/global_round_002.json": "c1e00f7a63f10b580e9d12a5d8c92ed3d6a65e5529b3ce2689ca7feb639a8673",
+    "artifacts/dp_level3_secagg/kafka_acceptance/distributed_final/models/qa-bc4c2ad6358c4335/bank-1/global_round_002.commit.json": "69d2b48720bf79397ba935d3df41220d78ee1716853c06270cb94c0988881b56",
+    "artifacts/dp_level3_secagg/kafka_acceptance/distributed_final/models/qa-bc4c2ad6358c4335/bank-1/global_round_002.reserved": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "artifacts/dp_level3_secagg/kafka_acceptance/distributed_final/models/qa-bc4c2ad6358c4335/bank-1/global_round_001.json": "51065c266a270b7d47aa4eb6e0dc5d8488b17f14c85c8fe237206d42f9789d3b",
+    "artifacts/dp_level3_secagg/kafka_acceptance/distributed_final/models/qa-bc4c2ad6358c4335/bank-1/global_round_001.reserved": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "artifacts/dp_level3_secagg/kafka_acceptance/distributed/models/privacy-ledgers/bank-3.sqlite3": "b6e44828f2ee77acc726d6c8607c6952b42ca40e36449756b6678a148ac6d22a",
+    "artifacts/dp_level3_secagg/kafka_acceptance/distributed/models/privacy-ledgers/bank-2.sqlite3": "510b2dafbc800a5c07a1cb915d291c8e76b6d594bffefcabe21b10312462686b",
+    "artifacts/dp_level3_secagg/kafka_acceptance/distributed/models/privacy-ledgers/bank-1.sqlite3": "a4c802d802f016f250ffb2bdcefc3ecdc352bf2657e858198cb4c6f00b7971db",
+    "artifacts/dp_level3_secagg/kafka_acceptance/distributed/models/privacy-ledgers/central.sqlite3": "b66c0b6fd5bad49d4ea1811238959af1927dbba6f44b033724b1cb11bf4566bb",
+    "artifacts/dp_level3_secagg/kafka_acceptance/distributed/models/qa-4e29cd61c4964ae5/global_round_001.commit.json": "8472117a854c38e87f2c4902f2664adeeea2d4aa1523875ef405ccca3d3960c0",
+    "artifacts/dp_level3_secagg/kafka_acceptance/distributed/models/qa-4e29cd61c4964ae5/global_round_001.safetensors": "842b81f26357be4acd77e9135a1f8fdf656b6ee93d491185edc51b71757e8344",
+    "artifacts/dp_level3_secagg/kafka_acceptance/distributed/models/qa-4e29cd61c4964ae5/global_round_002.safetensors": "b4f401efd386fd43ec1f3fd636dce1009e97c35245f54783bfa1196a3fec99a4",
+    "artifacts/dp_level3_secagg/kafka_acceptance/distributed/models/qa-4e29cd61c4964ae5/global_round_002.json": "e353efdd0be2ccacda624abb49299d74c62d7e2f2c1e2bce644bdfbb1e258520",
+    "artifacts/dp_level3_secagg/kafka_acceptance/distributed/models/qa-4e29cd61c4964ae5/global_round_002.commit.json": "0a41f54f5d32e3071eddb4bbf0f6865b672db6c701afd22a33fa57b92a776ab7",
+    "artifacts/dp_level3_secagg/kafka_acceptance/distributed/models/qa-4e29cd61c4964ae5/global_round_002.reserved": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "artifacts/dp_level3_secagg/kafka_acceptance/distributed/models/qa-4e29cd61c4964ae5/global_round_001.json": "bdd801454749fbd4c6e1b05817f142355af68b92e5137ffea82296f96ea8dbb2",
+    "artifacts/dp_level3_secagg/kafka_acceptance/distributed/models/qa-4e29cd61c4964ae5/global_round_001.reserved": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "artifacts/dp_level3_secagg/kafka_acceptance/distributed/models/qa-4e29cd61c4964ae5/bank-3/global_round_001.commit.json": "57384635d56ff1094815b3621c22d522570fd7ac68b04d25b5f57372fc274052",
+    "artifacts/dp_level3_secagg/kafka_acceptance/distributed/models/qa-4e29cd61c4964ae5/bank-3/global_round_001.safetensors": "842b81f26357be4acd77e9135a1f8fdf656b6ee93d491185edc51b71757e8344",
+    "artifacts/dp_level3_secagg/kafka_acceptance/distributed/models/qa-4e29cd61c4964ae5/bank-3/global_round_002.safetensors": "b4f401efd386fd43ec1f3fd636dce1009e97c35245f54783bfa1196a3fec99a4",
+    "artifacts/dp_level3_secagg/kafka_acceptance/distributed/models/qa-4e29cd61c4964ae5/bank-3/global_round_002.json": "de1affb0e24a95369987fbf5ff3e42f8fe8c713295762e0c0bffe68843f0f763",
+    "artifacts/dp_level3_secagg/kafka_acceptance/distributed/models/qa-4e29cd61c4964ae5/bank-3/global_round_002.commit.json": "3f817ab970873e42b5794552486399c1fb1449438bec2862e91a44bf8770a8c7",
+    "artifacts/dp_level3_secagg/kafka_acceptance/distributed/models/qa-4e29cd61c4964ae5/bank-3/global_round_002.reserved": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "artifacts/dp_level3_secagg/kafka_acceptance/distributed/models/qa-4e29cd61c4964ae5/bank-3/global_round_001.json": "3252d6ce3c5ac991e809a9f31c1cc60243f0d41a26bcd3f8ebc3e6ccd3724782",
+    "artifacts/dp_level3_secagg/kafka_acceptance/distributed/models/qa-4e29cd61c4964ae5/bank-3/global_round_001.reserved": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "artifacts/dp_level3_secagg/kafka_acceptance/distributed/models/qa-4e29cd61c4964ae5/bank-2/global_round_001.commit.json": "57384635d56ff1094815b3621c22d522570fd7ac68b04d25b5f57372fc274052",
+    "artifacts/dp_level3_secagg/kafka_acceptance/distributed/models/qa-4e29cd61c4964ae5/bank-2/global_round_001.safetensors": "842b81f26357be4acd77e9135a1f8fdf656b6ee93d491185edc51b71757e8344",
+    "artifacts/dp_level3_secagg/kafka_acceptance/distributed/models/qa-4e29cd61c4964ae5/bank-2/global_round_002.safetensors": "b4f401efd386fd43ec1f3fd636dce1009e97c35245f54783bfa1196a3fec99a4",
+    "artifacts/dp_level3_secagg/kafka_acceptance/distributed/models/qa-4e29cd61c4964ae5/bank-2/global_round_002.json": "de1affb0e24a95369987fbf5ff3e42f8fe8c713295762e0c0bffe68843f0f763",
+    "artifacts/dp_level3_secagg/kafka_acceptance/distributed/models/qa-4e29cd61c4964ae5/bank-2/global_round_002.commit.json": "3f817ab970873e42b5794552486399c1fb1449438bec2862e91a44bf8770a8c7",
+    "artifacts/dp_level3_secagg/kafka_acceptance/distributed/models/qa-4e29cd61c4964ae5/bank-2/global_round_002.reserved": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "artifacts/dp_level3_secagg/kafka_acceptance/distributed/models/qa-4e29cd61c4964ae5/bank-2/global_round_001.json": "3252d6ce3c5ac991e809a9f31c1cc60243f0d41a26bcd3f8ebc3e6ccd3724782",
+    "artifacts/dp_level3_secagg/kafka_acceptance/distributed/models/qa-4e29cd61c4964ae5/bank-2/global_round_001.reserved": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "artifacts/dp_level3_secagg/kafka_acceptance/distributed/models/qa-4e29cd61c4964ae5/bank-1/global_round_001.commit.json": "57384635d56ff1094815b3621c22d522570fd7ac68b04d25b5f57372fc274052",
+    "artifacts/dp_level3_secagg/kafka_acceptance/distributed/models/qa-4e29cd61c4964ae5/bank-1/global_round_001.safetensors": "842b81f26357be4acd77e9135a1f8fdf656b6ee93d491185edc51b71757e8344",
+    "artifacts/dp_level3_secagg/kafka_acceptance/distributed/models/qa-4e29cd61c4964ae5/bank-1/global_round_002.safetensors": "b4f401efd386fd43ec1f3fd636dce1009e97c35245f54783bfa1196a3fec99a4",
+    "artifacts/dp_level3_secagg/kafka_acceptance/distributed/models/qa-4e29cd61c4964ae5/bank-1/global_round_002.json": "de1affb0e24a95369987fbf5ff3e42f8fe8c713295762e0c0bffe68843f0f763",
+    "artifacts/dp_level3_secagg/kafka_acceptance/distributed/models/qa-4e29cd61c4964ae5/bank-1/global_round_002.commit.json": "3f817ab970873e42b5794552486399c1fb1449438bec2862e91a44bf8770a8c7",
+    "artifacts/dp_level3_secagg/kafka_acceptance/distributed/models/qa-4e29cd61c4964ae5/bank-1/global_round_002.reserved": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "artifacts/dp_level3_secagg/kafka_acceptance/distributed/models/qa-4e29cd61c4964ae5/bank-1/global_round_001.json": "3252d6ce3c5ac991e809a9f31c1cc60243f0d41a26bcd3f8ebc3e6ccd3724782",
+    "artifacts/dp_level3_secagg/kafka_acceptance/distributed/models/qa-4e29cd61c4964ae5/bank-1/global_round_001.reserved": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "artifacts/dp_level3_secagg/loaded_source_groups/ddp_confirmation/src/gnn/adaptive_continual_federated.py": "56bd2a0d62ef2d761eee0daab6e10d7a2b184694cf0d9fe8eee498d93d28006f",
+    "artifacts/dp_level3_secagg/loaded_source_groups/ddp_confirmation/src/gnn/causal_temporal_graphsage.py": "77ec113dd6b16ed0bf6956d1ce9fa7d9da5b300b672f085c76830b203ea2e2eb",
+    "artifacts/dp_level3_secagg/loaded_source_groups/ddp_confirmation/src/gnn/continual_temporal_graphsage.py": "3ab7bc55e8b14f6dc69cc8d1188fc4daaf806e3010e00764b13bedeecea721d5",
+    "artifacts/dp_level3_secagg/loaded_source_groups/ddp_confirmation/distributed_federation/privacy/mechanism.py": "da8a9da6f5415156dbb98926266679a36447a9aa68737067b22a79832ce769ef",
+    "artifacts/dp_level3_secagg/loaded_source_groups/ddp_confirmation/distributed_federation/privacy/secagg.py": "31d5604ed074d5508fb7e4d652b3137937d9073450ca54807066dfbc888aeb86",
+    "artifacts/dp_level3_secagg/loaded_source_groups/option_a/src/gnn/adaptive_continual_federated.py": "f0a1dc4972e76077cc10827c99f584d292951aa870d8cf983b74889c55b38bb0",
+    "artifacts/dp_level3_secagg/loaded_source_groups/option_a/src/gnn/causal_temporal_graphsage.py": "77ec113dd6b16ed0bf6956d1ce9fa7d9da5b300b672f085c76830b203ea2e2eb",
+    "artifacts/dp_level3_secagg/loaded_source_groups/option_a/src/gnn/continual_temporal_graphsage.py": "3ab7bc55e8b14f6dc69cc8d1188fc4daaf806e3010e00764b13bedeecea721d5",
+    "artifacts/dp_level3_secagg/loaded_source_groups/option_a/distributed_federation/privacy/mechanism.py": "da8a9da6f5415156dbb98926266679a36447a9aa68737067b22a79832ce769ef",
+    "artifacts/dp_level3_secagg/loaded_source_groups/option_a/distributed_federation/privacy/secagg.py": "31d5604ed074d5508fb7e4d652b3137937d9073450ca54807066dfbc888aeb86",
+    "artifacts/dp_level3_secagg/loaded_source_groups/scratch_ddp/src/gnn/adaptive_continual_federated.py": "56bd2a0d62ef2d761eee0daab6e10d7a2b184694cf0d9fe8eee498d93d28006f",
+    "artifacts/dp_level3_secagg/loaded_source_groups/scratch_ddp/src/gnn/causal_temporal_graphsage.py": "77ec113dd6b16ed0bf6956d1ce9fa7d9da5b300b672f085c76830b203ea2e2eb",
+    "artifacts/dp_level3_secagg/loaded_source_groups/scratch_ddp/src/gnn/continual_temporal_graphsage.py": "3ab7bc55e8b14f6dc69cc8d1188fc4daaf806e3010e00764b13bedeecea721d5",
+    "artifacts/dp_level3_secagg/loaded_source_groups/scratch_ddp/distributed_federation/privacy/mechanism.py": "da8a9da6f5415156dbb98926266679a36447a9aa68737067b22a79832ce769ef",
+    "artifacts/dp_level3_secagg/loaded_source_groups/scratch_ddp/distributed_federation/privacy/secagg.py": "31d5604ed074d5508fb7e4d652b3137937d9073450ca54807066dfbc888aeb86",
+    "artifacts/dp_level3_secagg/loaded_source_groups/initial/src/gnn/adaptive_continual_federated.py": "56bd2a0d62ef2d761eee0daab6e10d7a2b184694cf0d9fe8eee498d93d28006f",
+    "artifacts/dp_level3_secagg/loaded_source_groups/initial/src/gnn/causal_temporal_graphsage.py": "77ec113dd6b16ed0bf6956d1ce9fa7d9da5b300b672f085c76830b203ea2e2eb",
+    "artifacts/dp_level3_secagg/loaded_source_groups/initial/src/gnn/continual_temporal_graphsage.py": "3ab7bc55e8b14f6dc69cc8d1188fc4daaf806e3010e00764b13bedeecea721d5",
+    "artifacts/dp_level3_secagg/loaded_source_groups/initial/distributed_federation/privacy/mechanism.py": "562e47ecd59840af78a52655d2a0d9c3502f59c6408453a7237e97b45cf322ee",
+    "artifacts/dp_level3_secagg/loaded_source_groups/initial/distributed_federation/privacy/secagg.py": "31d5604ed074d5508fb7e4d652b3137937d9073450ca54807066dfbc888aeb86"
+  },
+  "baseline_runs": [
+    {
+      "seed": 42,
+      "rounds": 4,
+      "track": "warm",
+      "privacy": {
+        "mode": "distributed_dp",
+        "clip": 6.5,
+        "multiplier": 1e-05,
+        "delta": 1e-06,
+        "expected_clients": 3,
+        "min_noise_contributors": 3,
+        "scale": 16777216,
+        "entropy": "production",
+        "research_seed": 42
+      },
+      "parameters": {
+        "C": 6.5,
+        "n": 3,
+        "dimension": 242561,
+        "quantization_l2_bound": 1.4677787492019431e-05,
+        "effective_clip": 6.500014677787492,
+        "ideal_sensitivity": 4.333333333333333,
+        "sensitivity": 4.333343118524994,
+        "sigma_mean": 4.333343118524995e-05,
+        "sigma_share": 7.505570447914253e-05,
+        "expected_noise_l2": 0.02134192382603552
+      },
+      "training": {
+        "local_epochs": 3,
+        "batch_size": 1024,
+        "replay_size": 2000,
+        "learning_rate": 0.001,
+        "replay": "risk_context",
+        "distill": 0.0,
+        "rng_policy": "per_client"
+      },
+      "aggregation": "equal_mean",
+      "test_loaded": false,
+      "checkpoint": "/Users/pj/Desktop/college/capstone/Capstone/artifacts/final_evaluation/corrected_fedavg/seed_42/global_model.pt",
+      "checkpoint_sha256": "976942a5e4924635b5e2fb5a6a52aba2f79cb61216cf8acb6a01b540ed68c2d3",
+      "scope": "conditional_checkpoint",
+      "gaussian_sampler": "OS entropy production; no released noise seed",
+      "selection": "fixed final round primary; best public-validation round secondary",
+      "history": [
+        {
+          "round": 1,
+          "metrics": {
+            "pr_auc": 0.7321326871548729,
+            "f1": 0.42523087350673555,
+            "precision": 0.34422234321122086,
+            "recall": 0.7771464646464646,
+            "roc_auc": 0.9967521714803214
+          },
+          "per_bank": [
+            {
+              "bank": "JPMorgan_Chase",
+              "validation": {
+                "pr_auc": 0.7302465122956358,
+                "roc_auc": 0.9996170758945883,
+                "precision": 0.11627906976744186,
+                "recall": 0.9375,
+                "f1": 0.20689655172413793
+              },
+              "threshold": 0.010013619218020844,
+              "validation_alert_metrics": {
+                "10": {
+                  "alerts": 10,
+                  "true_positives": 10,
+                  "precision_at_k": 1.0,
+                  "recall_at_k": 0.625
+                },
+                "25": {
+                  "alerts": 25,
+                  "true_positives": 11,
+                  "precision_at_k": 0.44,
+                  "recall_at_k": 0.6875
+                },
+                "50": {
+                  "alerts": 50,
+                  "true_positives": 11,
+                  "precision_at_k": 0.22,
+                  "recall_at_k": 0.6875
+                }
+              }
+            },
+            {
+              "bank": "Wells_Fargo",
+              "validation": {
+                "pr_auc": 0.7514514906093297,
+                "roc_auc": 0.9992089451416788,
+                "precision": 0.3076923076923077,
+                "recall": 0.7272727272727273,
+                "f1": 0.43243243243243246
+              },
+              "threshold": 0.25315133893488106,
+              "validation_alert_metrics": {
+                "10": {
+                  "alerts": 10,
+                  "true_positives": 10,
+                  "precision_at_k": 1.0,
+                  "recall_at_k": 0.45454545454545453
+                },
+                "25": {
+                  "alerts": 25,
+                  "true_positives": 15,
+                  "precision_at_k": 0.6,
+                  "recall_at_k": 0.6818181818181818
+                },
+                "50": {
+                  "alerts": 50,
+                  "true_positives": 15,
+                  "precision_at_k": 0.3,
+                  "recall_at_k": 0.6818181818181818
+                }
+              }
+            },
+            {
+              "bank": "Key_Bank",
+              "validation": {
+                "pr_auc": 0.7147000585596531,
+                "roc_auc": 0.9914304934046971,
+                "precision": 0.6086956521739131,
+                "recall": 0.6666666666666666,
+                "f1": 0.6363636363636364
+              },
+              "threshold": 0.3600405763983569,
+              "validation_alert_metrics": {
+                "10": {
+                  "alerts": 10,
+                  "true_positives": 10,
+                  "precision_at_k": 1.0,
+                  "recall_at_k": 0.47619047619047616
+                },
+                "25": {
+                  "alerts": 25,
+                  "true_positives": 14,
+                  "precision_at_k": 0.56,
+                  "recall_at_k": 0.6666666666666666
+                },
+                "50": {
+                  "alerts": 50,
+                  "true_positives": 14,
+                  "precision_at_k": 0.28,
+                  "recall_at_k": 0.6666666666666666
+                }
+              }
+            }
+          ],
+          "accounting": {
+            "releases": 1,
+            "rho": 14999999999.999998,
+            "epsilon": 15000910456.27763,
+            "delta": 1e-06,
+            "bound": "encoded_share_postprocessing",
+            "research_only": false
+          },
+          "seconds": 16.976530832995195
+        },
+        {
+          "round": 2,
+          "metrics": {
+            "pr_auc": 0.8871985349706871,
+            "f1": 0.5203281651557513,
+            "precision": 0.42233586546023344,
+            "recall": 0.9213564213564215,
+            "roc_auc": 0.9995306756698996
+          },
+          "per_bank": [
+            {
+              "bank": "JPMorgan_Chase",
+              "validation": {
+                "pr_auc": 0.8543532814808281,
+                "roc_auc": 0.9998923934792388,
+                "precision": 0.12403100775193798,
+                "recall": 1.0,
+                "f1": 0.2206896551724138
+              },
+              "threshold": 0.04311450222134518,
+              "validation_alert_metrics": {
+                "10": {
+                  "alerts": 10,
+                  "true_positives": 10,
+                  "precision_at_k": 1.0,
+                  "recall_at_k": 0.625
+                },
+                "25": {
+                  "alerts": 25,
+                  "true_positives": 14,
+                  "precision_at_k": 0.56,
+                  "recall_at_k": 0.875
+                },
+                "50": {
+                  "alerts": 50,
+                  "true_positives": 14,
+                  "precision_at_k": 0.28,
+                  "recall_at_k": 0.875
+                }
+              }
+            },
+            {
+              "bank": "Wells_Fargo",
+              "validation": {
+                "pr_auc": 0.9620642515379355,
+                "roc_auc": 0.9998026806982615,
+                "precision": 0.40384615384615385,
+                "recall": 0.9545454545454546,
+                "f1": 0.5675675675675675
+              },
+              "threshold": 0.3553996935486772,
+              "validation_alert_metrics": {
+                "10": {
+                  "alerts": 10,
+                  "true_positives": 10,
+                  "precision_at_k": 1.0,
+                  "recall_at_k": 0.45454545454545453
+                },
+                "25": {
+                  "alerts": 25,
+                  "true_positives": 21,
+                  "precision_at_k": 0.84,
+                  "recall_at_k": 0.9545454545454546
+                },
+                "50": {
+                  "alerts": 50,
+                  "true_positives": 21,
+                  "precision_at_k": 0.42,
+                  "recall_at_k": 0.9545454545454546
+                }
+              }
+            },
+            {
+              "bank": "Key_Bank",
+              "validation": {
+                "pr_auc": 0.8451780718932977,
+                "roc_auc": 0.9988969528321989,
+                "precision": 0.7391304347826086,
+                "recall": 0.8095238095238095,
+                "f1": 0.7727272727272727
+              },
+              "threshold": 0.4497892683744425,
+              "validation_alert_metrics": {
+                "10": {
+                  "alerts": 10,
+                  "true_positives": 10,
+                  "precision_at_k": 1.0,
+                  "recall_at_k": 0.47619047619047616
+                },
+                "25": {
+                  "alerts": 25,
+                  "true_positives": 17,
+                  "precision_at_k": 0.68,
+                  "recall_at_k": 0.8095238095238095
+                },
+                "50": {
+                  "alerts": 50,
+                  "true_positives": 17,
+                  "precision_at_k": 0.34,
+                  "recall_at_k": 0.8095238095238095
+                }
+              }
+            }
+          ],
+          "accounting": {
+            "releases": 2,
+            "rho": 29999999999.999996,
+            "epsilon": 30001287579.61577,
+            "delta": 1e-06,
+            "bound": "encoded_share_postprocessing",
+            "research_only": false
+          },
+          "seconds": 34.13618545800273
+        },
+        {
+          "round": 3,
+          "metrics": {
+            "pr_auc": 0.795266551138034,
+            "f1": 0.47200711683470303,
+            "precision": 0.3805298453933439,
+            "recall": 0.8593073593073594,
+            "roc_auc": 0.9989281498081097
+          },
+          "per_bank": [
+            {
+              "bank": "JPMorgan_Chase",
+              "validation": {
+                "pr_auc": 0.7722014407227822,
+                "roc_auc": 0.9997750926773277,
+                "precision": 0.12403100775193798,
+                "recall": 1.0,
+                "f1": 0.2206896551724138
+              },
+              "threshold": 0.009785983100533269,
+              "validation_alert_metrics": {
+                "10": {
+                  "alerts": 10,
+                  "true_positives": 10,
+                  "precision_at_k": 1.0,
+                  "recall_at_k": 0.625
+                },
+                "25": {
+                  "alerts": 25,
+                  "true_positives": 12,
+                  "precision_at_k": 0.48,
+                  "recall_at_k": 0.75
+                },
+                "50": {
+                  "alerts": 50,
+                  "true_positives": 14,
+                  "precision_at_k": 0.28,
+                  "recall_at_k": 0.875
+                }
+              }
+            },
+            {
+              "bank": "Wells_Fargo",
+              "validation": {
+                "pr_auc": 0.826904535220331,
+                "roc_auc": 0.9996249155615601,
+                "precision": 0.36538461538461536,
+                "recall": 0.8636363636363636,
+                "f1": 0.5135135135135135
+              },
+              "threshold": 0.24410149368642733,
+              "validation_alert_metrics": {
+                "10": {
+                  "alerts": 10,
+                  "true_positives": 10,
+                  "precision_at_k": 1.0,
+                  "recall_at_k": 0.45454545454545453
+                },
+                "25": {
+                  "alerts": 25,
+                  "true_positives": 16,
+                  "precision_at_k": 0.64,
+                  "recall_at_k": 0.7272727272727273
+                },
+                "50": {
+                  "alerts": 50,
+                  "true_positives": 19,
+                  "precision_at_k": 0.38,
+                  "recall_at_k": 0.8636363636363636
+                }
+              }
+            },
+            {
+              "bank": "Key_Bank",
+              "validation": {
+                "pr_auc": 0.7866936774709886,
+                "roc_auc": 0.9973844411854415,
+                "precision": 0.6521739130434783,
+                "recall": 0.7142857142857143,
+                "f1": 0.6818181818181818
+              },
+              "threshold": 0.34040740364789435,
+              "validation_alert_metrics": {
+                "10": {
+                  "alerts": 10,
+                  "true_positives": 10,
+                  "precision_at_k": 1.0,
+                  "recall_at_k": 0.47619047619047616
+                },
+                "25": {
+                  "alerts": 25,
+                  "true_positives": 15,
+                  "precision_at_k": 0.6,
+                  "recall_at_k": 0.7142857142857143
+                },
+                "50": {
+                  "alerts": 50,
+                  "true_positives": 17,
+                  "precision_at_k": 0.34,
+                  "recall_at_k": 0.8095238095238095
+                }
+              }
+            }
+          ],
+          "accounting": {
+            "releases": 3,
+            "rho": 44999999999.99999,
+            "epsilon": 45001576956.53092,
+            "delta": 1e-06,
+            "bound": "encoded_share_postprocessing",
+            "research_only": false
+          },
+          "seconds": 52.100727208002354
+        },
+        {
+          "round": 4,
+          "metrics": {
+            "pr_auc": 0.7958206151531254,
+            "f1": 0.47487361970120584,
+            "precision": 0.37885760459066836,
+            "recall": 0.8737373737373737,
+            "roc_auc": 0.9987663572060029
+          },
+          "per_bank": [
+            {
+              "bank": "JPMorgan_Chase",
+              "validation": {
+                "pr_auc": 0.7029120299850498,
+                "roc_auc": 0.9996781498658311,
+                "precision": 0.12403100775193798,
+                "recall": 1.0,
+                "f1": 0.2206896551724138
+              },
+              "threshold": 0.00579787923581882,
+              "validation_alert_metrics": {
+                "10": {
+                  "alerts": 10,
+                  "true_positives": 9,
+                  "precision_at_k": 0.9,
+                  "recall_at_k": 0.5625
+                },
+                "25": {
+                  "alerts": 25,
+                  "true_positives": 11,
+                  "precision_at_k": 0.44,
+                  "recall_at_k": 0.6875
+                },
+                "50": {
+                  "alerts": 50,
+                  "true_positives": 11,
+                  "precision_at_k": 0.22,
+                  "recall_at_k": 0.6875
+                }
+              }
+            },
+            {
+              "bank": "Wells_Fargo",
+              "validation": {
+                "pr_auc": 0.9454464813719692,
+                "roc_auc": 0.999850677285171,
+                "precision": 0.40384615384615385,
+                "recall": 0.9545454545454546,
+                "f1": 0.5675675675675675
+              },
+              "threshold": 0.4270582196115772,
+              "validation_alert_metrics": {
+                "10": {
+                  "alerts": 10,
+                  "true_positives": 10,
+                  "precision_at_k": 1.0,
+                  "recall_at_k": 0.45454545454545453
+                },
+                "25": {
+                  "alerts": 25,
+                  "true_positives": 20,
+                  "precision_at_k": 0.8,
+                  "recall_at_k": 0.9090909090909091
+                },
+                "50": {
+                  "alerts": 50,
+                  "true_positives": 21,
+                  "precision_at_k": 0.42,
+                  "recall_at_k": 0.9545454545454546
+                }
+              }
+            },
+            {
+              "bank": "Key_Bank",
+              "validation": {
+                "pr_auc": 0.7391033341023575,
+                "roc_auc": 0.9967702444670067,
+                "precision": 0.6086956521739131,
+                "recall": 0.6666666666666666,
+                "f1": 0.6363636363636364
+              },
+              "threshold": 0.6417539684772411,
+              "validation_alert_metrics": {
+                "10": {
+                  "alerts": 10,
+                  "true_positives": 10,
+                  "precision_at_k": 1.0,
+                  "recall_at_k": 0.47619047619047616
+                },
+                "25": {
+                  "alerts": 25,
+                  "true_positives": 14,
+                  "precision_at_k": 0.56,
+                  "recall_at_k": 0.6666666666666666
+                },
+                "50": {
+                  "alerts": 50,
+                  "true_positives": 16,
+                  "precision_at_k": 0.32,
+                  "recall_at_k": 0.7619047619047619
+                }
+              }
+            }
+          ],
+          "accounting": {
+            "releases": 4,
+            "rho": 59999999999.99999,
+            "epsilon": 60001820912.55525,
+            "delta": 1e-06,
+            "bound": "encoded_share_postprocessing",
+            "research_only": false
+          },
+          "seconds": 70.17807829099183
+        }
+      ],
+      "final": {
+        "round": 4,
+        "metrics": {
+          "pr_auc": 0.7958206151531254,
+          "f1": 0.47487361970120584,
+          "precision": 0.37885760459066836,
+          "recall": 0.8737373737373737,
+          "roc_auc": 0.9987663572060029
+        },
+        "per_bank": [
+          {
+            "bank": "JPMorgan_Chase",
+            "validation": {
+              "pr_auc": 0.7029120299850498,
+              "roc_auc": 0.9996781498658311,
+              "precision": 0.12403100775193798,
+              "recall": 1.0,
+              "f1": 0.2206896551724138
+            },
+            "threshold": 0.00579787923581882,
+            "validation_alert_metrics": {
+              "10": {
+                "alerts": 10,
+                "true_positives": 9,
+                "precision_at_k": 0.9,
+                "recall_at_k": 0.5625
+              },
+              "25": {
+                "alerts": 25,
+                "true_positives": 11,
+                "precision_at_k": 0.44,
+                "recall_at_k": 0.6875
+              },
+              "50": {
+                "alerts": 50,
+                "true_positives": 11,
+                "precision_at_k": 0.22,
+                "recall_at_k": 0.6875
+              }
+            }
+          },
+          {
+            "bank": "Wells_Fargo",
+            "validation": {
+              "pr_auc": 0.9454464813719692,
+              "roc_auc": 0.999850677285171,
+              "precision": 0.40384615384615385,
+              "recall": 0.9545454545454546,
+              "f1": 0.5675675675675675
+            },
+            "threshold": 0.4270582196115772,
+            "validation_alert_metrics": {
+              "10": {
+                "alerts": 10,
+                "true_positives": 10,
+                "precision_at_k": 1.0,
+                "recall_at_k": 0.45454545454545453
+              },
+              "25": {
+                "alerts": 25,
+                "true_positives": 20,
+                "precision_at_k": 0.8,
+                "recall_at_k": 0.9090909090909091
+              },
+              "50": {
+                "alerts": 50,
+                "true_positives": 21,
+                "precision_at_k": 0.42,
+                "recall_at_k": 0.9545454545454546
+              }
+            }
+          },
+          {
+            "bank": "Key_Bank",
+            "validation": {
+              "pr_auc": 0.7391033341023575,
+              "roc_auc": 0.9967702444670067,
+              "precision": 0.6086956521739131,
+              "recall": 0.6666666666666666,
+              "f1": 0.6363636363636364
+            },
+            "threshold": 0.6417539684772411,
+            "validation_alert_metrics": {
+              "10": {
+                "alerts": 10,
+                "true_positives": 10,
+                "precision_at_k": 1.0,
+                "recall_at_k": 0.47619047619047616
+              },
+              "25": {
+                "alerts": 25,
+                "true_positives": 14,
+                "precision_at_k": 0.56,
+                "recall_at_k": 0.6666666666666666
+              },
+              "50": {
+                "alerts": 50,
+                "true_positives": 16,
+                "precision_at_k": 0.32,
+                "recall_at_k": 0.7619047619047619
+              }
+            }
+          }
+        ],
+        "accounting": {
+          "releases": 4,
+          "rho": 59999999999.99999,
+          "epsilon": 60001820912.55525,
+          "delta": 1e-06,
+          "bound": "encoded_share_postprocessing",
+          "research_only": false
+        },
+        "seconds": 70.17807829099183
+      },
+      "best_validation_secondary": {
+        "round": 2,
+        "metrics": {
+          "pr_auc": 0.8871985349706871,
+          "f1": 0.5203281651557513,
+          "precision": 0.42233586546023344,
+          "recall": 0.9213564213564215,
+          "roc_auc": 0.9995306756698996
+        },
+        "per_bank": [
+          {
+            "bank": "JPMorgan_Chase",
+            "validation": {
+              "pr_auc": 0.8543532814808281,
+              "roc_auc": 0.9998923934792388,
+              "precision": 0.12403100775193798,
+              "recall": 1.0,
+              "f1": 0.2206896551724138
+            },
+            "threshold": 0.04311450222134518,
+            "validation_alert_metrics": {
+              "10": {
+                "alerts": 10,
+                "true_positives": 10,
+                "precision_at_k": 1.0,
+                "recall_at_k": 0.625
+              },
+              "25": {
+                "alerts": 25,
+                "true_positives": 14,
+                "precision_at_k": 0.56,
+                "recall_at_k": 0.875
+              },
+              "50": {
+                "alerts": 50,
+                "true_positives": 14,
+                "precision_at_k": 0.28,
+                "recall_at_k": 0.875
+              }
+            }
+          },
+          {
+            "bank": "Wells_Fargo",
+            "validation": {
+              "pr_auc": 0.9620642515379355,
+              "roc_auc": 0.9998026806982615,
+              "precision": 0.40384615384615385,
+              "recall": 0.9545454545454546,
+              "f1": 0.5675675675675675
+            },
+            "threshold": 0.3553996935486772,
+            "validation_alert_metrics": {
+              "10": {
+                "alerts": 10,
+                "true_positives": 10,
+                "precision_at_k": 1.0,
+                "recall_at_k": 0.45454545454545453
+              },
+              "25": {
+                "alerts": 25,
+                "true_positives": 21,
+                "precision_at_k": 0.84,
+                "recall_at_k": 0.9545454545454546
+              },
+              "50": {
+                "alerts": 50,
+                "true_positives": 21,
+                "precision_at_k": 0.42,
+                "recall_at_k": 0.9545454545454546
+              }
+            }
+          },
+          {
+            "bank": "Key_Bank",
+            "validation": {
+              "pr_auc": 0.8451780718932977,
+              "roc_auc": 0.9988969528321989,
+              "precision": 0.7391304347826086,
+              "recall": 0.8095238095238095,
+              "f1": 0.7727272727272727
+            },
+            "threshold": 0.4497892683744425,
+            "validation_alert_metrics": {
+              "10": {
+                "alerts": 10,
+                "true_positives": 10,
+                "precision_at_k": 1.0,
+                "recall_at_k": 0.47619047619047616
+              },
+              "25": {
+                "alerts": 25,
+                "true_positives": 17,
+                "precision_at_k": 0.68,
+                "recall_at_k": 0.8095238095238095
+              },
+              "50": {
+                "alerts": 50,
+                "true_positives": 17,
+                "precision_at_k": 0.34,
+                "recall_at_k": 0.8095238095238095
+              }
+            }
+          }
+        ],
+        "accounting": {
+          "releases": 2,
+          "rho": 29999999999.999996,
+          "epsilon": 30001287579.61577,
+          "delta": 1e-06,
+          "bound": "encoded_share_postprocessing",
+          "research_only": false
+        },
+        "seconds": 34.13618545800273
+      },
+      "accounting": {
+        "releases": 4,
+        "rho": 59999999999.99999,
+        "epsilon": 60001820912.55525,
+        "delta": 1e-06,
+        "bound": "encoded_share_postprocessing",
+        "research_only": false
+      },
+      "elapsed_seconds": 70.18150641600369
+    },
+    {
+      "seed": 52,
+      "rounds": 4,
+      "track": "warm",
+      "privacy": {
+        "mode": "distributed_dp",
+        "clip": 6.5,
+        "multiplier": 1e-05,
+        "delta": 1e-06,
+        "expected_clients": 3,
+        "min_noise_contributors": 3,
+        "scale": 16777216,
+        "entropy": "production",
+        "research_seed": 42
+      },
+      "parameters": {
+        "C": 6.5,
+        "n": 3,
+        "dimension": 242561,
+        "quantization_l2_bound": 1.4677787492019431e-05,
+        "effective_clip": 6.500014677787492,
+        "ideal_sensitivity": 4.333333333333333,
+        "sensitivity": 4.333343118524994,
+        "accounting_sensitivity": 4.333343118524994,
+        "sigma_mean": 4.333343118524995e-05,
+        "sigma_share": 7.505570447914253e-05,
+        "expected_noise_l2": 0.02134192382603552
+      },
+      "training": {
+        "local_epochs": 3,
+        "batch_size": 1024,
+        "replay_size": 2000,
+        "learning_rate": 0.001,
+        "replay": "risk_context",
+        "distill": 0.0,
+        "rng_policy": "per_client"
+      },
+      "aggregation": "equal_mean",
+      "test_loaded": false,
+      "checkpoint": "/Users/pj/Desktop/college/capstone/Capstone/artifacts/final_evaluation/corrected_fedavg/seed_52/global_model.pt",
+      "checkpoint_sha256": "7a8535d80f194cc1f6aeff8fa3189aefd0ffa158f28bfaf0fdb6c26dc76e7f0d",
+      "scope": "conditional_checkpoint",
+      "gaussian_sampler": "OS entropy production; no released noise seed",
+      "selection": "fixed final round primary; best public-validation round secondary",
+      "source_hashes": {
+        "src/gnn/adaptive_continual_federated.py": "56bd2a0d62ef2d761eee0daab6e10d7a2b184694cf0d9fe8eee498d93d28006f",
+        "src/gnn/causal_temporal_graphsage.py": "77ec113dd6b16ed0bf6956d1ce9fa7d9da5b300b672f085c76830b203ea2e2eb",
+        "src/gnn/continual_temporal_graphsage.py": "3ab7bc55e8b14f6dc69cc8d1188fc4daaf806e3010e00764b13bedeecea721d5",
+        "distributed_federation/privacy/mechanism.py": "da8a9da6f5415156dbb98926266679a36447a9aa68737067b22a79832ce769ef",
+        "distributed_federation/privacy/secagg.py": "31d5604ed074d5508fb7e4d652b3137937d9073450ca54807066dfbc888aeb86"
+      },
+      "history": [
+        {
+          "round": 1,
+          "metrics": {
+            "pr_auc": 0.5779653420529698,
+            "f1": 0.39187494704736087,
+            "precision": 0.31815137452144526,
+            "recall": 0.704455266955267,
+            "roc_auc": 0.9979201516754288
+          },
+          "per_bank": [
+            {
+              "bank": "JPMorgan_Chase",
+              "validation": {
+                "pr_auc": 0.6697440308731188,
+                "roc_auc": 0.9994503342588141,
+                "precision": 0.10077519379844961,
+                "recall": 0.8125,
+                "f1": 0.1793103448275862
+              },
+              "threshold": 0.004591915987431993,
+              "validation_alert_metrics": {
+                "10": {
+                  "alerts": 10,
+                  "true_positives": 9,
+                  "precision_at_k": 0.9,
+                  "recall_at_k": 0.5625
+                },
+                "25": {
+                  "alerts": 25,
+                  "true_positives": 10,
+                  "precision_at_k": 0.4,
+                  "recall_at_k": 0.625
+                },
+                "50": {
+                  "alerts": 50,
+                  "true_positives": 12,
+                  "precision_at_k": 0.24,
+                  "recall_at_k": 0.75
+                }
+              }
+            },
+            {
+              "bank": "Wells_Fargo",
+              "validation": {
+                "pr_auc": 0.3746756333291813,
+                "roc_auc": 0.9987432004835212,
+                "precision": 0.28846153846153844,
+                "recall": 0.6818181818181818,
+                "f1": 0.40540540540540543
+              },
+              "threshold": 0.03581310784816701,
+              "validation_alert_metrics": {
+                "10": {
+                  "alerts": 10,
+                  "true_positives": 3,
+                  "precision_at_k": 0.3,
+                  "recall_at_k": 0.13636363636363635
+                },
+                "25": {
+                  "alerts": 25,
+                  "true_positives": 6,
+                  "precision_at_k": 0.24,
+                  "recall_at_k": 0.2727272727272727
+                },
+                "50": {
+                  "alerts": 50,
+                  "true_positives": 14,
+                  "precision_at_k": 0.28,
+                  "recall_at_k": 0.6363636363636364
+                }
+              }
+            },
+            {
+              "bank": "Key_Bank",
+              "validation": {
+                "pr_auc": 0.6894763619566092,
+                "roc_auc": 0.9955669202839511,
+                "precision": 0.5652173913043478,
+                "recall": 0.6190476190476191,
+                "f1": 0.5909090909090909
+              },
+              "threshold": 0.41447724688052595,
+              "validation_alert_metrics": {
+                "10": {
+                  "alerts": 10,
+                  "true_positives": 10,
+                  "precision_at_k": 1.0,
+                  "recall_at_k": 0.47619047619047616
+                },
+                "25": {
+                  "alerts": 25,
+                  "true_positives": 14,
+                  "precision_at_k": 0.56,
+                  "recall_at_k": 0.6666666666666666
+                },
+                "50": {
+                  "alerts": 50,
+                  "true_positives": 14,
+                  "precision_at_k": 0.28,
+                  "recall_at_k": 0.6666666666666666
+                }
+              }
+            }
+          ],
+          "accounting": {
+            "releases": 1,
+            "rho": 14999999999.999998,
+            "epsilon": 15000910456.27763,
+            "delta": 1e-06,
+            "bound": "encoded_share_postprocessing",
+            "research_only": false
+          },
+          "seconds": 39.85847725000349
+        },
+        {
+          "round": 2,
+          "metrics": {
+            "pr_auc": 0.8541141107138154,
+            "f1": 0.5203281651557513,
+            "precision": 0.42233586546023344,
+            "recall": 0.9213564213564215,
+            "roc_auc": 0.9993747526975381
+          },
+          "per_bank": [
+            {
+              "bank": "JPMorgan_Chase",
+              "validation": {
+                "pr_auc": 0.7534481854508938,
+                "roc_auc": 0.9996655473003366,
+                "precision": 0.12403100775193798,
+                "recall": 1.0,
+                "f1": 0.2206896551724138
+              },
+              "threshold": 0.018892328910529454,
+              "validation_alert_metrics": {
+                "10": {
+                  "alerts": 10,
+                  "true_positives": 10,
+                  "precision_at_k": 1.0,
+                  "recall_at_k": 0.625
+                },
+                "25": {
+                  "alerts": 25,
+                  "true_positives": 11,
+                  "precision_at_k": 0.44,
+                  "recall_at_k": 0.6875
+                },
+                "50": {
+                  "alerts": 50,
+                  "true_positives": 12,
+                  "precision_at_k": 0.24,
+                  "recall_at_k": 0.75
+                }
+              }
+            },
+            {
+              "bank": "Wells_Fargo",
+              "validation": {
+                "pr_auc": 0.9556497649081379,
+                "roc_auc": 0.9998542325879048,
+                "precision": 0.40384615384615385,
+                "recall": 0.9545454545454546,
+                "f1": 0.5675675675675675
+              },
+              "threshold": 0.2585628690123546,
+              "validation_alert_metrics": {
+                "10": {
+                  "alerts": 10,
+                  "true_positives": 10,
+                  "precision_at_k": 1.0,
+                  "recall_at_k": 0.45454545454545453
+                },
+                "25": {
+                  "alerts": 25,
+                  "true_positives": 21,
+                  "precision_at_k": 0.84,
+                  "recall_at_k": 0.9545454545454546
+                },
+                "50": {
+                  "alerts": 50,
+                  "true_positives": 21,
+                  "precision_at_k": 0.42,
+                  "recall_at_k": 0.9545454545454546
+                }
+              }
+            },
+            {
+              "bank": "Key_Bank",
+              "validation": {
+                "pr_auc": 0.8532443817824141,
+                "roc_auc": 0.9986044782043729,
+                "precision": 0.7391304347826086,
+                "recall": 0.8095238095238095,
+                "f1": 0.7727272727272727
+              },
+              "threshold": 0.46737965774535783,
+              "validation_alert_metrics": {
+                "10": {
+                  "alerts": 10,
+                  "true_positives": 10,
+                  "precision_at_k": 1.0,
+                  "recall_at_k": 0.47619047619047616
+                },
+                "25": {
+                  "alerts": 25,
+                  "true_positives": 17,
+                  "precision_at_k": 0.68,
+                  "recall_at_k": 0.8095238095238095
+                },
+                "50": {
+                  "alerts": 50,
+                  "true_positives": 18,
+                  "precision_at_k": 0.36,
+                  "recall_at_k": 0.8571428571428571
+                }
+              }
+            }
+          ],
+          "accounting": {
+            "releases": 2,
+            "rho": 29999999999.999996,
+            "epsilon": 30001287579.61577,
+            "delta": 1e-06,
+            "bound": "encoded_share_postprocessing",
+            "research_only": false
+          },
+          "seconds": 77.82519125001272
+        },
+        {
+          "round": 3,
+          "metrics": {
+            "pr_auc": 0.808234603606382,
+            "f1": 0.490025134852721,
+            "precision": 0.39335035821385667,
+            "recall": 0.8896103896103896,
+            "roc_auc": 0.9996105424848244
+          },
+          "per_bank": [
+            {
+              "bank": "JPMorgan_Chase",
+              "validation": {
+                "pr_auc": 0.650057368288066,
+                "roc_auc": 0.9996480975942672,
+                "precision": 0.12403100775193798,
+                "recall": 1.0,
+                "f1": 0.2206896551724138
+              },
+              "threshold": 0.10773573461174736,
+              "validation_alert_metrics": {
+                "10": {
+                  "alerts": 10,
+                  "true_positives": 8,
+                  "precision_at_k": 0.8,
+                  "recall_at_k": 0.5
+                },
+                "25": {
+                  "alerts": 25,
+                  "true_positives": 9,
+                  "precision_at_k": 0.36,
+                  "recall_at_k": 0.5625
+                },
+                "50": {
+                  "alerts": 50,
+                  "true_positives": 12,
+                  "precision_at_k": 0.24,
+                  "recall_at_k": 0.75
+                }
+              }
+            },
+            {
+              "bank": "Wells_Fargo",
+              "validation": {
+                "pr_auc": 0.9209644709644709,
+                "roc_auc": 0.9996640238916343,
+                "precision": 0.40384615384615385,
+                "recall": 0.9545454545454546,
+                "f1": 0.5675675675675675
+              },
+              "threshold": 0.34087901663778775,
+              "validation_alert_metrics": {
+                "10": {
+                  "alerts": 10,
+                  "true_positives": 10,
+                  "precision_at_k": 1.0,
+                  "recall_at_k": 0.45454545454545453
+                },
+                "25": {
+                  "alerts": 25,
+                  "true_positives": 19,
+                  "precision_at_k": 0.76,
+                  "recall_at_k": 0.8636363636363636
+                },
+                "50": {
+                  "alerts": 50,
+                  "true_positives": 21,
+                  "precision_at_k": 0.42,
+                  "recall_at_k": 0.9545454545454546
+                }
+              }
+            },
+            {
+              "bank": "Key_Bank",
+              "validation": {
+                "pr_auc": 0.8536819715666095,
+                "roc_auc": 0.9995195059685715,
+                "precision": 0.6521739130434783,
+                "recall": 0.7142857142857143,
+                "f1": 0.6818181818181818
+              },
+              "threshold": 0.9670210176706314,
+              "validation_alert_metrics": {
+                "10": {
+                  "alerts": 10,
+                  "true_positives": 10,
+                  "precision_at_k": 1.0,
+                  "recall_at_k": 0.47619047619047616
+                },
+                "25": {
+                  "alerts": 25,
+                  "true_positives": 15,
+                  "precision_at_k": 0.6,
+                  "recall_at_k": 0.7142857142857143
+                },
+                "50": {
+                  "alerts": 50,
+                  "true_positives": 21,
+                  "precision_at_k": 0.42,
+                  "recall_at_k": 1.0
+                }
+              }
+            }
+          ],
+          "accounting": {
+            "releases": 3,
+            "rho": 44999999999.99999,
+            "epsilon": 45001576956.53092,
+            "delta": 1e-06,
+            "bound": "encoded_share_postprocessing",
+            "research_only": false
+          },
+          "seconds": 113.4355735410063
+        },
+        {
+          "round": 4,
+          "metrics": {
+            "pr_auc": 0.8962943866120003,
+            "f1": 0.5203281651557513,
+            "precision": 0.42233586546023344,
+            "recall": 0.9213564213564215,
+            "roc_auc": 0.9996793470021593
+          },
+          "per_bank": [
+            {
+              "bank": "JPMorgan_Chase",
+              "validation": {
+                "pr_auc": 0.8529866382036686,
+                "roc_auc": 0.9999195374664578,
+                "precision": 0.12403100775193798,
+                "recall": 1.0,
+                "f1": 0.2206896551724138
+              },
+              "threshold": 0.009552089020609767,
+              "validation_alert_metrics": {
+                "10": {
+                  "alerts": 10,
+                  "true_positives": 10,
+                  "precision_at_k": 1.0,
+                  "recall_at_k": 0.625
+                },
+                "25": {
+                  "alerts": 25,
+                  "true_positives": 12,
+                  "precision_at_k": 0.48,
+                  "recall_at_k": 0.75
+                },
+                "50": {
+                  "alerts": 50,
+                  "true_positives": 16,
+                  "precision_at_k": 0.32,
+                  "recall_at_k": 1.0
+                }
+              }
+            },
+            {
+              "bank": "Wells_Fargo",
+              "validation": {
+                "pr_auc": 0.9519995032290114,
+                "roc_auc": 0.9999040068261812,
+                "precision": 0.40384615384615385,
+                "recall": 0.9545454545454546,
+                "f1": 0.5675675675675675
+              },
+              "threshold": 0.06788822121918199,
+              "validation_alert_metrics": {
+                "10": {
+                  "alerts": 10,
+                  "true_positives": 10,
+                  "precision_at_k": 1.0,
+                  "recall_at_k": 0.45454545454545453
+                },
+                "25": {
+                  "alerts": 25,
+                  "true_positives": 20,
+                  "precision_at_k": 0.8,
+                  "recall_at_k": 0.9090909090909091
+                },
+                "50": {
+                  "alerts": 50,
+                  "true_positives": 21,
+                  "precision_at_k": 0.42,
+                  "recall_at_k": 0.9545454545454546
+                }
+              }
+            },
+            {
+              "bank": "Key_Bank",
+              "validation": {
+                "pr_auc": 0.8838970184033209,
+                "roc_auc": 0.9992144967138387,
+                "precision": 0.7391304347826086,
+                "recall": 0.8095238095238095,
+                "f1": 0.7727272727272727
+              },
+              "threshold": 0.20505687856672414,
+              "validation_alert_metrics": {
+                "10": {
+                  "alerts": 10,
+                  "true_positives": 10,
+                  "precision_at_k": 1.0,
+                  "recall_at_k": 0.47619047619047616
+                },
+                "25": {
+                  "alerts": 25,
+                  "true_positives": 17,
+                  "precision_at_k": 0.68,
+                  "recall_at_k": 0.8095238095238095
+                },
+                "50": {
+                  "alerts": 50,
+                  "true_positives": 20,
+                  "precision_at_k": 0.4,
+                  "recall_at_k": 0.9523809523809523
+                }
+              }
+            }
+          ],
+          "accounting": {
+            "releases": 4,
+            "rho": 59999999999.99999,
+            "epsilon": 60001820912.55525,
+            "delta": 1e-06,
+            "bound": "encoded_share_postprocessing",
+            "research_only": false
+          },
+          "seconds": 151.2288887080067
+        }
+      ],
+      "final": {
+        "round": 4,
+        "metrics": {
+          "pr_auc": 0.8962943866120003,
+          "f1": 0.5203281651557513,
+          "precision": 0.42233586546023344,
+          "recall": 0.9213564213564215,
+          "roc_auc": 0.9996793470021593
+        },
+        "per_bank": [
+          {
+            "bank": "JPMorgan_Chase",
+            "validation": {
+              "pr_auc": 0.8529866382036686,
+              "roc_auc": 0.9999195374664578,
+              "precision": 0.12403100775193798,
+              "recall": 1.0,
+              "f1": 0.2206896551724138
+            },
+            "threshold": 0.009552089020609767,
+            "validation_alert_metrics": {
+              "10": {
+                "alerts": 10,
+                "true_positives": 10,
+                "precision_at_k": 1.0,
+                "recall_at_k": 0.625
+              },
+              "25": {
+                "alerts": 25,
+                "true_positives": 12,
+                "precision_at_k": 0.48,
+                "recall_at_k": 0.75
+              },
+              "50": {
+                "alerts": 50,
+                "true_positives": 16,
+                "precision_at_k": 0.32,
+                "recall_at_k": 1.0
+              }
+            }
+          },
+          {
+            "bank": "Wells_Fargo",
+            "validation": {
+              "pr_auc": 0.9519995032290114,
+              "roc_auc": 0.9999040068261812,
+              "precision": 0.40384615384615385,
+              "recall": 0.9545454545454546,
+              "f1": 0.5675675675675675
+            },
+            "threshold": 0.06788822121918199,
+            "validation_alert_metrics": {
+              "10": {
+                "alerts": 10,
+                "true_positives": 10,
+                "precision_at_k": 1.0,
+                "recall_at_k": 0.45454545454545453
+              },
+              "25": {
+                "alerts": 25,
+                "true_positives": 20,
+                "precision_at_k": 0.8,
+                "recall_at_k": 0.9090909090909091
+              },
+              "50": {
+                "alerts": 50,
+                "true_positives": 21,
+                "precision_at_k": 0.42,
+                "recall_at_k": 0.9545454545454546
+              }
+            }
+          },
+          {
+            "bank": "Key_Bank",
+            "validation": {
+              "pr_auc": 0.8838970184033209,
+              "roc_auc": 0.9992144967138387,
+              "precision": 0.7391304347826086,
+              "recall": 0.8095238095238095,
+              "f1": 0.7727272727272727
+            },
+            "threshold": 0.20505687856672414,
+            "validation_alert_metrics": {
+              "10": {
+                "alerts": 10,
+                "true_positives": 10,
+                "precision_at_k": 1.0,
+                "recall_at_k": 0.47619047619047616
+              },
+              "25": {
+                "alerts": 25,
+                "true_positives": 17,
+                "precision_at_k": 0.68,
+                "recall_at_k": 0.8095238095238095
+              },
+              "50": {
+                "alerts": 50,
+                "true_positives": 20,
+                "precision_at_k": 0.4,
+                "recall_at_k": 0.9523809523809523
+              }
+            }
+          }
+        ],
+        "accounting": {
+          "releases": 4,
+          "rho": 59999999999.99999,
+          "epsilon": 60001820912.55525,
+          "delta": 1e-06,
+          "bound": "encoded_share_postprocessing",
+          "research_only": false
+        },
+        "seconds": 151.2288887080067
+      },
+      "best_validation_secondary": {
+        "round": 4,
+        "metrics": {
+          "pr_auc": 0.8962943866120003,
+          "f1": 0.5203281651557513,
+          "precision": 0.42233586546023344,
+          "recall": 0.9213564213564215,
+          "roc_auc": 0.9996793470021593
+        },
+        "per_bank": [
+          {
+            "bank": "JPMorgan_Chase",
+            "validation": {
+              "pr_auc": 0.8529866382036686,
+              "roc_auc": 0.9999195374664578,
+              "precision": 0.12403100775193798,
+              "recall": 1.0,
+              "f1": 0.2206896551724138
+            },
+            "threshold": 0.009552089020609767,
+            "validation_alert_metrics": {
+              "10": {
+                "alerts": 10,
+                "true_positives": 10,
+                "precision_at_k": 1.0,
+                "recall_at_k": 0.625
+              },
+              "25": {
+                "alerts": 25,
+                "true_positives": 12,
+                "precision_at_k": 0.48,
+                "recall_at_k": 0.75
+              },
+              "50": {
+                "alerts": 50,
+                "true_positives": 16,
+                "precision_at_k": 0.32,
+                "recall_at_k": 1.0
+              }
+            }
+          },
+          {
+            "bank": "Wells_Fargo",
+            "validation": {
+              "pr_auc": 0.9519995032290114,
+              "roc_auc": 0.9999040068261812,
+              "precision": 0.40384615384615385,
+              "recall": 0.9545454545454546,
+              "f1": 0.5675675675675675
+            },
+            "threshold": 0.06788822121918199,
+            "validation_alert_metrics": {
+              "10": {
+                "alerts": 10,
+                "true_positives": 10,
+                "precision_at_k": 1.0,
+                "recall_at_k": 0.45454545454545453
+              },
+              "25": {
+                "alerts": 25,
+                "true_positives": 20,
+                "precision_at_k": 0.8,
+                "recall_at_k": 0.9090909090909091
+              },
+              "50": {
+                "alerts": 50,
+                "true_positives": 21,
+                "precision_at_k": 0.42,
+                "recall_at_k": 0.9545454545454546
+              }
+            }
+          },
+          {
+            "bank": "Key_Bank",
+            "validation": {
+              "pr_auc": 0.8838970184033209,
+              "roc_auc": 0.9992144967138387,
+              "precision": 0.7391304347826086,
+              "recall": 0.8095238095238095,
+              "f1": 0.7727272727272727
+            },
+            "threshold": 0.20505687856672414,
+            "validation_alert_metrics": {
+              "10": {
+                "alerts": 10,
+                "true_positives": 10,
+                "precision_at_k": 1.0,
+                "recall_at_k": 0.47619047619047616
+              },
+              "25": {
+                "alerts": 25,
+                "true_positives": 17,
+                "precision_at_k": 0.68,
+                "recall_at_k": 0.8095238095238095
+              },
+              "50": {
+                "alerts": 50,
+                "true_positives": 20,
+                "precision_at_k": 0.4,
+                "recall_at_k": 0.9523809523809523
+              }
+            }
+          }
+        ],
+        "accounting": {
+          "releases": 4,
+          "rho": 59999999999.99999,
+          "epsilon": 60001820912.55525,
+          "delta": 1e-06,
+          "bound": "encoded_share_postprocessing",
+          "research_only": false
+        },
+        "seconds": 151.2288887080067
+      },
+      "accounting": {
+        "releases": 4,
+        "rho": 59999999999.99999,
+        "epsilon": 60001820912.55525,
+        "delta": 1e-06,
+        "bound": "encoded_share_postprocessing",
+        "research_only": false
+      },
+      "elapsed_seconds": 151.2370348750119
+    },
+    {
+      "seed": 62,
+      "rounds": 4,
+      "track": "warm",
+      "privacy": {
+        "mode": "distributed_dp",
+        "clip": 6.5,
+        "multiplier": 1e-05,
+        "delta": 1e-06,
+        "expected_clients": 3,
+        "min_noise_contributors": 3,
+        "scale": 16777216,
+        "entropy": "production",
+        "research_seed": 42
+      },
+      "parameters": {
+        "C": 6.5,
+        "n": 3,
+        "dimension": 242561,
+        "quantization_l2_bound": 1.4677787492019431e-05,
+        "effective_clip": 6.500014677787492,
+        "ideal_sensitivity": 4.333333333333333,
+        "sensitivity": 4.333343118524994,
+        "accounting_sensitivity": 4.333343118524994,
+        "sigma_mean": 4.333343118524995e-05,
+        "sigma_share": 7.505570447914253e-05,
+        "expected_noise_l2": 0.02134192382603552
+      },
+      "training": {
+        "local_epochs": 3,
+        "batch_size": 1024,
+        "replay_size": 2000,
+        "learning_rate": 0.001,
+        "replay": "risk_context",
+        "distill": 0.0,
+        "rng_policy": "per_client"
+      },
+      "aggregation": "equal_mean",
+      "test_loaded": false,
+      "checkpoint": "/Users/pj/Desktop/college/capstone/Capstone/artifacts/final_evaluation/corrected_fedavg/seed_62/global_model.pt",
+      "checkpoint_sha256": "e725a614f4c7fe9a6adf1197a45131419b26c5b1dd4d8c5b532e557745f0f963",
+      "scope": "conditional_checkpoint",
+      "gaussian_sampler": "OS entropy production; no released noise seed",
+      "selection": "fixed final round primary; best public-validation round secondary",
+      "source_hashes": {
+        "src/gnn/adaptive_continual_federated.py": "f0a1dc4972e76077cc10827c99f584d292951aa870d8cf983b74889c55b38bb0",
+        "src/gnn/causal_temporal_graphsage.py": "77ec113dd6b16ed0bf6956d1ce9fa7d9da5b300b672f085c76830b203ea2e2eb",
+        "src/gnn/continual_temporal_graphsage.py": "3ab7bc55e8b14f6dc69cc8d1188fc4daaf806e3010e00764b13bedeecea721d5",
+        "distributed_federation/privacy/mechanism.py": "da8a9da6f5415156dbb98926266679a36447a9aa68737067b22a79832ce769ef",
+        "distributed_federation/privacy/secagg.py": "31d5604ed074d5508fb7e4d652b3137937d9073450ca54807066dfbc888aeb86"
+      },
+      "history": [
+        {
+          "round": 1,
+          "metrics": {
+            "pr_auc": 0.5882479638910864,
+            "f1": 0.41908836736422944,
+            "precision": 0.3361398459982889,
+            "recall": 0.776424963924964,
+            "roc_auc": 0.9990019561556386
+          },
+          "per_bank": [
+            {
+              "bank": "JPMorgan_Chase",
+              "validation": {
+                "pr_auc": 0.6218850429024481,
+                "roc_auc": 0.9995831459105644,
+                "precision": 0.11627906976744186,
+                "recall": 0.9375,
+                "f1": 0.20689655172413793
+              },
+              "threshold": 0.009717815577983603,
+              "validation_alert_metrics": {
+                "10": {
+                  "alerts": 10,
+                  "true_positives": 8,
+                  "precision_at_k": 0.8,
+                  "recall_at_k": 0.5
+                },
+                "25": {
+                  "alerts": 25,
+                  "true_positives": 10,
+                  "precision_at_k": 0.4,
+                  "recall_at_k": 0.625
+                },
+                "50": {
+                  "alerts": 50,
+                  "true_positives": 11,
+                  "precision_at_k": 0.22,
+                  "recall_at_k": 0.6875
+                }
+              }
+            },
+            {
+              "bank": "Wells_Fargo",
+              "validation": {
+                "pr_auc": 0.4549508136362902,
+                "roc_auc": 0.9991733921143385,
+                "precision": 0.3269230769230769,
+                "recall": 0.7727272727272727,
+                "f1": 0.4594594594594595
+              },
+              "threshold": 0.7720629055500003,
+              "validation_alert_metrics": {
+                "10": {
+                  "alerts": 10,
+                  "true_positives": 5,
+                  "precision_at_k": 0.5,
+                  "recall_at_k": 0.22727272727272727
+                },
+                "25": {
+                  "alerts": 25,
+                  "true_positives": 9,
+                  "precision_at_k": 0.36,
+                  "recall_at_k": 0.4090909090909091
+                },
+                "50": {
+                  "alerts": 50,
+                  "true_positives": 16,
+                  "precision_at_k": 0.32,
+                  "recall_at_k": 0.7272727272727273
+                }
+              }
+            },
+            {
+              "bank": "Key_Bank",
+              "validation": {
+                "pr_auc": 0.687908035134521,
+                "roc_auc": 0.9982493304420127,
+                "precision": 0.5652173913043478,
+                "recall": 0.6190476190476191,
+                "f1": 0.5909090909090909
+              },
+              "threshold": 0.9744536212682694,
+              "validation_alert_metrics": {
+                "10": {
+                  "alerts": 10,
+                  "true_positives": 10,
+                  "precision_at_k": 1.0,
+                  "recall_at_k": 0.47619047619047616
+                },
+                "25": {
+                  "alerts": 25,
+                  "true_positives": 13,
+                  "precision_at_k": 0.52,
+                  "recall_at_k": 0.6190476190476191
+                },
+                "50": {
+                  "alerts": 50,
+                  "true_positives": 17,
+                  "precision_at_k": 0.34,
+                  "recall_at_k": 0.8095238095238095
+                }
+              }
+            }
+          ],
+          "accounting": {
+            "releases": 1,
+            "rho": 14999999999.999998,
+            "epsilon": 15000910456.27763,
+            "delta": 1e-06,
+            "bound": "encoded_share_postprocessing",
+            "research_only": false
+          },
+          "seconds": 46.423430041992106
+        },
+        {
+          "round": 2,
+          "metrics": {
+            "pr_auc": 0.5377947115031403,
+            "f1": 0.3681170323928944,
+            "precision": 0.28387014440397773,
+            "recall": 0.8363095238095237,
+            "roc_auc": 0.9984466161827575
+          },
+          "per_bank": [
+            {
+              "bank": "JPMorgan_Chase",
+              "validation": {
+                "pr_auc": 0.6253785319631601,
+                "roc_auc": 0.9995753904856447,
+                "precision": 0.11627906976744186,
+                "recall": 0.9375,
+                "f1": 0.20689655172413793
+              },
+              "threshold": 0.0024255027836188074,
+              "validation_alert_metrics": {
+                "10": {
+                  "alerts": 10,
+                  "true_positives": 8,
+                  "precision_at_k": 0.8,
+                  "recall_at_k": 0.5
+                },
+                "25": {
+                  "alerts": 25,
+                  "true_positives": 9,
+                  "precision_at_k": 0.36,
+                  "recall_at_k": 0.5625
+                },
+                "50": {
+                  "alerts": 50,
+                  "true_positives": 11,
+                  "precision_at_k": 0.22,
+                  "recall_at_k": 0.6875
+                }
+              }
+            },
+            {
+              "bank": "Wells_Fargo",
+              "validation": {
+                "pr_auc": 0.37359243878863196,
+                "roc_auc": 0.9989440750879938,
+                "precision": 0.21359223300970873,
+                "recall": 1.0,
+                "f1": 0.352
+              },
+              "threshold": 0.007759190162643589,
+              "validation_alert_metrics": {
+                "10": {
+                  "alerts": 10,
+                  "true_positives": 3,
+                  "precision_at_k": 0.3,
+                  "recall_at_k": 0.13636363636363635
+                },
+                "25": {
+                  "alerts": 25,
+                  "true_positives": 9,
+                  "precision_at_k": 0.36,
+                  "recall_at_k": 0.4090909090909091
+                },
+                "50": {
+                  "alerts": 50,
+                  "true_positives": 12,
+                  "precision_at_k": 0.24,
+                  "recall_at_k": 0.5454545454545454
+                }
+              }
+            },
+            {
+              "bank": "Key_Bank",
+              "validation": {
+                "pr_auc": 0.6144131637576288,
+                "roc_auc": 0.996820382974634,
+                "precision": 0.5217391304347826,
+                "recall": 0.5714285714285714,
+                "f1": 0.5454545454545454
+              },
+              "threshold": 0.9365242513418104,
+              "validation_alert_metrics": {
+                "10": {
+                  "alerts": 10,
+                  "true_positives": 8,
+                  "precision_at_k": 0.8,
+                  "recall_at_k": 0.38095238095238093
+                },
+                "25": {
+                  "alerts": 25,
+                  "true_positives": 13,
+                  "precision_at_k": 0.52,
+                  "recall_at_k": 0.6190476190476191
+                },
+                "50": {
+                  "alerts": 50,
+                  "true_positives": 16,
+                  "precision_at_k": 0.32,
+                  "recall_at_k": 0.7619047619047619
+                }
+              }
+            }
+          ],
+          "accounting": {
+            "releases": 2,
+            "rho": 29999999999.999996,
+            "epsilon": 30001287579.61577,
+            "delta": 1e-06,
+            "bound": "encoded_share_postprocessing",
+            "research_only": false
+          },
+          "seconds": 90.32110791699961
+        },
+        {
+          "round": 3,
+          "metrics": {
+            "pr_auc": 0.6984858976938826,
+            "f1": 0.46567821740235527,
+            "precision": 0.37368964593433757,
+            "recall": 0.8320707070707071,
+            "roc_auc": 0.9992101048030739
+          },
+          "per_bank": [
+            {
+              "bank": "JPMorgan_Chase",
+              "validation": {
+                "pr_auc": 0.6529397394861429,
+                "roc_auc": 0.9995114082300569,
+                "precision": 0.10852713178294573,
+                "recall": 0.875,
+                "f1": 0.19310344827586207
+              },
+              "threshold": 0.04058527900278297,
+              "validation_alert_metrics": {
+                "10": {
+                  "alerts": 10,
+                  "true_positives": 9,
+                  "precision_at_k": 0.9,
+                  "recall_at_k": 0.5625
+                },
+                "25": {
+                  "alerts": 25,
+                  "true_positives": 10,
+                  "precision_at_k": 0.4,
+                  "recall_at_k": 0.625
+                },
+                "50": {
+                  "alerts": 50,
+                  "true_positives": 10,
+                  "precision_at_k": 0.2,
+                  "recall_at_k": 0.625
+                }
+              }
+            },
+            {
+              "bank": "Wells_Fargo",
+              "validation": {
+                "pr_auc": 0.6923147654265916,
+                "roc_auc": 0.9995520318555126,
+                "precision": 0.40384615384615385,
+                "recall": 0.9545454545454546,
+                "f1": 0.5675675675675675
+              },
+              "threshold": 0.8584958866834627,
+              "validation_alert_metrics": {
+                "10": {
+                  "alerts": 10,
+                  "true_positives": 6,
+                  "precision_at_k": 0.6,
+                  "recall_at_k": 0.2727272727272727
+                },
+                "25": {
+                  "alerts": 25,
+                  "true_positives": 15,
+                  "precision_at_k": 0.6,
+                  "recall_at_k": 0.6818181818181818
+                },
+                "50": {
+                  "alerts": 50,
+                  "true_positives": 21,
+                  "precision_at_k": 0.42,
+                  "recall_at_k": 0.9545454545454546
+                }
+              }
+            },
+            {
+              "bank": "Key_Bank",
+              "validation": {
+                "pr_auc": 0.7502031881689135,
+                "roc_auc": 0.9985668743236524,
+                "precision": 0.6086956521739131,
+                "recall": 0.6666666666666666,
+                "f1": 0.6363636363636364
+              },
+              "threshold": 0.9816896164417228,
+              "validation_alert_metrics": {
+                "10": {
+                  "alerts": 10,
+                  "true_positives": 10,
+                  "precision_at_k": 1.0,
+                  "recall_at_k": 0.47619047619047616
+                },
+                "25": {
+                  "alerts": 25,
+                  "true_positives": 14,
+                  "precision_at_k": 0.56,
+                  "recall_at_k": 0.6666666666666666
+                },
+                "50": {
+                  "alerts": 50,
+                  "true_positives": 17,
+                  "precision_at_k": 0.34,
+                  "recall_at_k": 0.8095238095238095
+                }
+              }
+            }
+          ],
+          "accounting": {
+            "releases": 3,
+            "rho": 44999999999.99999,
+            "epsilon": 45001576956.53092,
+            "delta": 1e-06,
+            "bound": "encoded_share_postprocessing",
+            "research_only": false
+          },
+          "seconds": 120.8550089999917
+        },
+        {
+          "round": 4,
+          "metrics": {
+            "pr_auc": 0.8055293236771576,
+            "f1": 0.490025134852721,
+            "precision": 0.39335035821385667,
+            "recall": 0.8896103896103896,
+            "roc_auc": 0.99953374946131
+          },
+          "per_bank": [
+            {
+              "bank": "JPMorgan_Chase",
+              "validation": {
+                "pr_auc": 0.7289886626786637,
+                "roc_auc": 0.9997431015495339,
+                "precision": 0.12403100775193798,
+                "recall": 1.0,
+                "f1": 0.2206896551724138
+              },
+              "threshold": 0.018533400997519118,
+              "validation_alert_metrics": {
+                "10": {
+                  "alerts": 10,
+                  "true_positives": 10,
+                  "precision_at_k": 1.0,
+                  "recall_at_k": 0.625
+                },
+                "25": {
+                  "alerts": 25,
+                  "true_positives": 10,
+                  "precision_at_k": 0.4,
+                  "recall_at_k": 0.625
+                },
+                "50": {
+                  "alerts": 50,
+                  "true_positives": 13,
+                  "precision_at_k": 0.26,
+                  "recall_at_k": 0.8125
+                }
+              }
+            },
+            {
+              "bank": "Wells_Fargo",
+              "validation": {
+                "pr_auc": 0.8703002350027849,
+                "roc_auc": 0.999756461762719,
+                "precision": 0.40384615384615385,
+                "recall": 0.9545454545454546,
+                "f1": 0.5675675675675675
+              },
+              "threshold": 0.7786640522479991,
+              "validation_alert_metrics": {
+                "10": {
+                  "alerts": 10,
+                  "true_positives": 10,
+                  "precision_at_k": 1.0,
+                  "recall_at_k": 0.45454545454545453
+                },
+                "25": {
+                  "alerts": 25,
+                  "true_positives": 18,
+                  "precision_at_k": 0.72,
+                  "recall_at_k": 0.8181818181818182
+                },
+                "50": {
+                  "alerts": 50,
+                  "true_positives": 21,
+                  "precision_at_k": 0.42,
+                  "recall_at_k": 0.9545454545454546
+                }
+              }
+            },
+            {
+              "bank": "Key_Bank",
+              "validation": {
+                "pr_auc": 0.817299073350024,
+                "roc_auc": 0.9991016850716772,
+                "precision": 0.6521739130434783,
+                "recall": 0.7142857142857143,
+                "f1": 0.6818181818181818
+              },
+              "threshold": 0.972403414487834,
+              "validation_alert_metrics": {
+                "10": {
+                  "alerts": 10,
+                  "true_positives": 10,
+                  "precision_at_k": 1.0,
+                  "recall_at_k": 0.47619047619047616
+                },
+                "25": {
+                  "alerts": 25,
+                  "true_positives": 15,
+                  "precision_at_k": 0.6,
+                  "recall_at_k": 0.7142857142857143
+                },
+                "50": {
+                  "alerts": 50,
+                  "true_positives": 18,
+                  "precision_at_k": 0.36,
+                  "recall_at_k": 0.8571428571428571
+                }
+              }
+            }
+          ],
+          "accounting": {
+            "releases": 4,
+            "rho": 59999999999.99999,
+            "epsilon": 60001820912.55525,
+            "delta": 1e-06,
+            "bound": "encoded_share_postprocessing",
+            "research_only": false
+          },
+          "seconds": 170.9576514169894
+        }
+      ],
+      "final": {
+        "round": 4,
+        "metrics": {
+          "pr_auc": 0.8055293236771576,
+          "f1": 0.490025134852721,
+          "precision": 0.39335035821385667,
+          "recall": 0.8896103896103896,
+          "roc_auc": 0.99953374946131
+        },
+        "per_bank": [
+          {
+            "bank": "JPMorgan_Chase",
+            "validation": {
+              "pr_auc": 0.7289886626786637,
+              "roc_auc": 0.9997431015495339,
+              "precision": 0.12403100775193798,
+              "recall": 1.0,
+              "f1": 0.2206896551724138
+            },
+            "threshold": 0.018533400997519118,
+            "validation_alert_metrics": {
+              "10": {
+                "alerts": 10,
+                "true_positives": 10,
+                "precision_at_k": 1.0,
+                "recall_at_k": 0.625
+              },
+              "25": {
+                "alerts": 25,
+                "true_positives": 10,
+                "precision_at_k": 0.4,
+                "recall_at_k": 0.625
+              },
+              "50": {
+                "alerts": 50,
+                "true_positives": 13,
+                "precision_at_k": 0.26,
+                "recall_at_k": 0.8125
+              }
+            }
+          },
+          {
+            "bank": "Wells_Fargo",
+            "validation": {
+              "pr_auc": 0.8703002350027849,
+              "roc_auc": 0.999756461762719,
+              "precision": 0.40384615384615385,
+              "recall": 0.9545454545454546,
+              "f1": 0.5675675675675675
+            },
+            "threshold": 0.7786640522479991,
+            "validation_alert_metrics": {
+              "10": {
+                "alerts": 10,
+                "true_positives": 10,
+                "precision_at_k": 1.0,
+                "recall_at_k": 0.45454545454545453
+              },
+              "25": {
+                "alerts": 25,
+                "true_positives": 18,
+                "precision_at_k": 0.72,
+                "recall_at_k": 0.8181818181818182
+              },
+              "50": {
+                "alerts": 50,
+                "true_positives": 21,
+                "precision_at_k": 0.42,
+                "recall_at_k": 0.9545454545454546
+              }
+            }
+          },
+          {
+            "bank": "Key_Bank",
+            "validation": {
+              "pr_auc": 0.817299073350024,
+              "roc_auc": 0.9991016850716772,
+              "precision": 0.6521739130434783,
+              "recall": 0.7142857142857143,
+              "f1": 0.6818181818181818
+            },
+            "threshold": 0.972403414487834,
+            "validation_alert_metrics": {
+              "10": {
+                "alerts": 10,
+                "true_positives": 10,
+                "precision_at_k": 1.0,
+                "recall_at_k": 0.47619047619047616
+              },
+              "25": {
+                "alerts": 25,
+                "true_positives": 15,
+                "precision_at_k": 0.6,
+                "recall_at_k": 0.7142857142857143
+              },
+              "50": {
+                "alerts": 50,
+                "true_positives": 18,
+                "precision_at_k": 0.36,
+                "recall_at_k": 0.8571428571428571
+              }
+            }
+          }
+        ],
+        "accounting": {
+          "releases": 4,
+          "rho": 59999999999.99999,
+          "epsilon": 60001820912.55525,
+          "delta": 1e-06,
+          "bound": "encoded_share_postprocessing",
+          "research_only": false
+        },
+        "seconds": 170.9576514169894
+      },
+      "best_validation_secondary": {
+        "round": 4,
+        "metrics": {
+          "pr_auc": 0.8055293236771576,
+          "f1": 0.490025134852721,
+          "precision": 0.39335035821385667,
+          "recall": 0.8896103896103896,
+          "roc_auc": 0.99953374946131
+        },
+        "per_bank": [
+          {
+            "bank": "JPMorgan_Chase",
+            "validation": {
+              "pr_auc": 0.7289886626786637,
+              "roc_auc": 0.9997431015495339,
+              "precision": 0.12403100775193798,
+              "recall": 1.0,
+              "f1": 0.2206896551724138
+            },
+            "threshold": 0.018533400997519118,
+            "validation_alert_metrics": {
+              "10": {
+                "alerts": 10,
+                "true_positives": 10,
+                "precision_at_k": 1.0,
+                "recall_at_k": 0.625
+              },
+              "25": {
+                "alerts": 25,
+                "true_positives": 10,
+                "precision_at_k": 0.4,
+                "recall_at_k": 0.625
+              },
+              "50": {
+                "alerts": 50,
+                "true_positives": 13,
+                "precision_at_k": 0.26,
+                "recall_at_k": 0.8125
+              }
+            }
+          },
+          {
+            "bank": "Wells_Fargo",
+            "validation": {
+              "pr_auc": 0.8703002350027849,
+              "roc_auc": 0.999756461762719,
+              "precision": 0.40384615384615385,
+              "recall": 0.9545454545454546,
+              "f1": 0.5675675675675675
+            },
+            "threshold": 0.7786640522479991,
+            "validation_alert_metrics": {
+              "10": {
+                "alerts": 10,
+                "true_positives": 10,
+                "precision_at_k": 1.0,
+                "recall_at_k": 0.45454545454545453
+              },
+              "25": {
+                "alerts": 25,
+                "true_positives": 18,
+                "precision_at_k": 0.72,
+                "recall_at_k": 0.8181818181818182
+              },
+              "50": {
+                "alerts": 50,
+                "true_positives": 21,
+                "precision_at_k": 0.42,
+                "recall_at_k": 0.9545454545454546
+              }
+            }
+          },
+          {
+            "bank": "Key_Bank",
+            "validation": {
+              "pr_auc": 0.817299073350024,
+              "roc_auc": 0.9991016850716772,
+              "precision": 0.6521739130434783,
+              "recall": 0.7142857142857143,
+              "f1": 0.6818181818181818
+            },
+            "threshold": 0.972403414487834,
+            "validation_alert_metrics": {
+              "10": {
+                "alerts": 10,
+                "true_positives": 10,
+                "precision_at_k": 1.0,
+                "recall_at_k": 0.47619047619047616
+              },
+              "25": {
+                "alerts": 25,
+                "true_positives": 15,
+                "precision_at_k": 0.6,
+                "recall_at_k": 0.7142857142857143
+              },
+              "50": {
+                "alerts": 50,
+                "true_positives": 18,
+                "precision_at_k": 0.36,
+                "recall_at_k": 0.8571428571428571
+              }
+            }
+          }
+        ],
+        "accounting": {
+          "releases": 4,
+          "rho": 59999999999.99999,
+          "epsilon": 60001820912.55525,
+          "delta": 1e-06,
+          "bound": "encoded_share_postprocessing",
+          "research_only": false
+        },
+        "seconds": 170.9576514169894
+      },
+      "accounting": {
+        "releases": 4,
+        "rho": 59999999999.99999,
+        "epsilon": 60001820912.55525,
+        "delta": 1e-06,
+        "bound": "encoded_share_postprocessing",
+        "research_only": false
+      },
+      "elapsed_seconds": 170.9714923339925
+    }
+  ],
+  "baseline_mean": 0.8325481084807611,
+  "baseline_sample_sd": 0.05541891136597809,
+  "test_inventory": "tests/streaming/test_backend.py\ntests/streaming/test_collaboration.py\ntests/streaming/test_local_training.py\ntests/streaming/test_overview.py\ntests/streaming/test_peer_checks.py\ntests/streaming/test_receipts.py\ntests/streaming/test_recovery.py\ntests/streaming/test_round_trip.py\ntests/streaming/test_setup.py\ntests/streaming/test_transfers.py\ntests/test_adaptive_fcl.py\ntests/test_causal_tail_guard.py\ntests/test_privacy_architecture.py\ntests/test_privacy_transport.py\ntests/test_seed_ensemble.py\ntests/test_temporal_gnn_protocol.py\n",
+  "privacy_config": {
+    "broker": "127.0.0.1:19092",
+    "run_id": "private-new-run-id",
+    "clients": [
+      {
+        "client_id": "bank-1",
+        "bank": "JPMorgan_Chase"
+      },
+      {
+        "client_id": "bank-2",
+        "bank": "Wells_Fargo"
+      },
+      {
+        "client_id": "bank-3",
+        "bank": "Key_Bank"
+      }
+    ],
+    "schema_banks": [
+      "JPMorgan_Chase",
+      "Wells_Fargo",
+      "Key_Bank"
+    ],
+    "dataset_dir": "/Users/pj/Desktop/college/capstone/Capstone/data/final_temporal_dataset",
+    "output_dir": "artifacts/dp_level3_secagg/kafka",
+    "initial_checkpoint": null,
+    "rounds": 16,
+    "hidden_channels": 128,
+    "dropout": 0.25,
+    "local_epochs": 3,
+    "batch_size": 1024,
+    "negative_ratio": 20,
+    "learning_rate": 0.001,
+    "weight_decay": 0.0001,
+    "seed": 42,
+    "round_timeout_seconds": 900,
+    "max_chunk_bytes": 524288,
+    "topics": {
+      "global_model": "fcl.global-model",
+      "client_updates": "fcl.client-updates"
+    },
+    "feature_schema": "artifacts/dp_level3_secagg/feature_schema.json",
+    "return_aggregate": true,
+    "aggregation": "equal",
+    "rng_policy": "per_client",
+    "replay": "risk_context",
+    "replay_size": 2000,
+    "privacy": {
+      "mode": "distributed_dp",
+      "clip": 6.5,
+      "multiplier": 0.001,
+      "delta": 1e-06,
+      "expected_clients": 3,
+      "min_noise_contributors": 3,
+      "scale": 16777216,
+      "entropy": "production"
+    }
+  }
+}

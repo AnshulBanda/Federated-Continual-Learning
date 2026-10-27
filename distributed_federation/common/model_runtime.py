@@ -44,7 +44,8 @@ def implementation_sha256():
     """Bind the training/encoding implementation, not only parameter shapes."""
     files=("src/gnn/causal_temporal_graphsage.py", "src/gnn/adaptive_continual_federated.py",
         "src/gnn/continual_temporal_graphsage.py", "distributed_federation/common/model_runtime.py",
-        "distributed_federation/privacy/mechanism.py", "distributed_federation/privacy/secagg.py")
+        "distributed_federation/privacy/mechanism.py", "distributed_federation/privacy/secagg.py",
+        "distributed_federation/privacy/server_optimizer.py", "distributed_federation/privacy/subset.py")
     return hashlib.sha256(b"".join(name.encode()+b"\0"+(REPO_ROOT/name).read_bytes() for name in files)).hexdigest()
 
 
@@ -67,7 +68,7 @@ def prepare_runtime(config: FederationConfig, bank: str) -> RuntimeData:
             rng_policy=config.rng_policy,local_epochs=config.local_epochs,seed=config.seed,
             learning_rate=config.learning_rate,batch_size=config.batch_size,
             clients=[dict(client_id=c.client_id,bank=c.bank) for c in config.clients],
-            privacy=asdict(config.privacy)),
+            privacy=asdict(config.privacy),server_optimizer=asdict(config.server_optimizer),private_subset=config.private_subset),
         "model": "CausalTemporalGraphSAGE",
         "implementation_sha256": implementation_sha256(),
         "schema_banks": list(config.schema_banks),
@@ -146,9 +147,12 @@ def train_local(runtime: RuntimeData, config: FederationConfig, round_id: int, c
     from adaptive_continual_federated import train_client, calendar_boundary
     from types import SimpleNamespace
     check_control()
+    from distributed_federation.privacy.subset import configure_trainable
+    configure_trainable(runtime.model,getattr(config,"private_subset","all"))
     cfg = SimpleNamespace(local_epochs=config.local_epochs, learning_rate=config.learning_rate,
         batch_size=config.batch_size, replay_size=config.replay_size, replay=config.replay,
-        distill=0., rng_policy=config.rng_policy)
+        distill=0., rng_policy=config.rng_policy,
+        weight_decay=getattr(config,"weight_decay",1e-4),negative_ratio=getattr(config,"negative_ratio",20))
     # Same local seed rule as Sia's simulator. Per-client RNG is necessary for
     # independent processes; global simulator RNG is kept as a separate reference.
     train_client(runtime.model, runtime.static, runtime.streams['training'],
@@ -229,7 +233,7 @@ def prepare_frozen_runtime(config, bank=None):
                   training_protocol=dict(aggregation=config.aggregation,rounds=config.rounds,local_epochs=config.local_epochs,batch_size=config.batch_size,
                       negative_ratio=config.negative_ratio,learning_rate=config.learning_rate,weight_decay=config.weight_decay,
                       replay=config.replay,replay_size=config.replay_size,rng_policy=config.rng_policy,
-                      privacy=asdict(config.privacy),seed=config.seed,clients=[dict(client_id=c.client_id,bank=c.bank) for c in config.clients]),
+                      privacy=asdict(config.privacy),server_optimizer=asdict(config.server_optimizer),private_subset=config.private_subset,seed=config.seed,clients=[dict(client_id=c.client_id,bank=c.bank) for c in config.clients]),
                   hidden_channels=config.hidden_channels, dropout=config.dropout,
                   state={key:dict(shape=list(value.shape),dtype=str(value.dtype)) for key,value in model.state_dict().items()})
     encoded=json.dumps(schema, sort_keys=True, separators=(',',':')).encode()

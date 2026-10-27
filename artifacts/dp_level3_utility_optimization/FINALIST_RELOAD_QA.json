@@ -1,0 +1,32 @@
+{
+  "result": "PASS",
+  "checkpoints": [
+    {
+      "seed": 42,
+      "AP": 0.875532822229926,
+      "exact_per_bank_and_macro_reload": true,
+      "frozen_parameters_bitwise_unchanged": true,
+      "checkpoint_sha256": "53c818ae82d7ea745b480acbce8d959ec48e2cff813b2ef6baef9f3acf3f0adf",
+      "schema_matches_original": true
+    },
+    {
+      "seed": 52,
+      "AP": 0.8942499539142802,
+      "exact_per_bank_and_macro_reload": true,
+      "frozen_parameters_bitwise_unchanged": true,
+      "checkpoint_sha256": "1e56c4266eb02f822555bef964db7288f52ff8585e45daf2512b8e185f305113",
+      "schema_matches_original": true
+    },
+    {
+      "seed": 62,
+      "AP": 0.9386458723037786,
+      "exact_per_bank_and_macro_reload": true,
+      "frozen_parameters_bitwise_unchanged": true,
+      "checkpoint_sha256": "e6bd2709dd79f9f2fee7ed72d78cfd85800a6fd2543ab40e3d6b3d4d17af73dc",
+      "schema_matches_original": true
+    }
+  ],
+  "source_unchanged_since_freeze": true,
+  "September_loaded": false,
+  "verifier_correction": "Use the original numpy equal-bank mean, rather than Python sum; the initial QA assertion differed by 1.11e-16 in summation only. No checkpoint or training was changed."
+}

@@ -1,0 +1,11 @@
+[
+  {
+    "id": "stage7_message_decoder",
+    "seeds": [
+      52
+    ],
+    "config": {
+      "subset": "message_decoder"
+    }
+  }
+]

@@ -1,0 +1,20 @@
+[
+  {
+    "id": "stage3_epochs2",
+    "seeds": [
+      52
+    ],
+    "config": {
+      "local_epochs": 2
+    }
+  },
+  {
+    "id": "stage3_lr0015",
+    "seeds": [
+      42
+    ],
+    "config": {
+      "learning_rate": 0.0015
+    }
+  }
+]

@@ -1,0 +1,21 @@
+{
+  "result": "PASS",
+  "comparisons": [
+    {
+      "bank": "JPMorgan_Chase",
+      "bitwise_equal": true,
+      "raw_updates_persisted": false
+    },
+    {
+      "bank": "Wells_Fargo",
+      "bitwise_equal": true,
+      "raw_updates_persisted": false
+    },
+    {
+      "bank": "Key_Bank",
+      "bitwise_equal": true,
+      "raw_updates_persisted": false
+    }
+  ],
+  "September_loaded": false
+}

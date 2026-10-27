@@ -1,0 +1,19 @@
+[
+  {
+    "id": "calibrated_decoder_m0p15",
+    "seeds": [
+      42,
+      52,
+      62
+    ],
+    "config": {
+      "rounds": 1,
+      "checkpoint_template": "/Users/pj/Desktop/college/capstone/Capstone-DP-SecAgg/artifacts/dp_level3_utility_optimization/frozen_warm_starts/seed_42/global_model.pt",
+      "subset": "decoder",
+      "learning_rate": 0.0003,
+      "local_epochs": 2,
+      "clip": 1.25,
+      "multiplier": 0.15
+    }
+  }
+]

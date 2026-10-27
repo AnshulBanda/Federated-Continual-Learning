@@ -1,0 +1,11 @@
+[
+  {
+    "id": "stage1_selection",
+    "seeds": [
+      42,
+      52,
+      62
+    ],
+    "config": {}
+  }
+]

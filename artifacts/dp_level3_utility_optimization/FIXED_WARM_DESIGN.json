@@ -1,0 +1,23 @@
+{
+  "pretraining_seed": 42,
+  "continuation_seeds": [
+    42,
+    52,
+    62
+  ],
+  "checkpoint": {
+    "rounds": 1,
+    "checkpoint_template": "/Users/pj/Desktop/college/capstone/Capstone-DP-SecAgg/artifacts/dp_level3_utility_optimization/frozen_warm_starts/seed_42/global_model.pt",
+    "subset": "decoder",
+    "learning_rate": 0.0003,
+    "local_epochs": 2
+  },
+  "reason": "One previously frozen nonprivate August-selected pretrained model is fixed for all independent private continuations. This matches a deployment with one fixed starting model. It measures continuation variance, not variance over nonprivate pretraining. Original per-seed warm-start searches remain separately reported.",
+  "privacy_scope": "Same permitted incremental guarantee conditional on fixed nonprivate warm start. Decoder-only local private adaptation and one actual release. No pretraining privacy claim.",
+  "noise_grid": [
+    0.0001,
+    0.001,
+    0.01
+  ],
+  "promotion": "Highest multiplier with a plausible >=0.85 mean proceeds to seed52, then seed62; one production confirmation per finalist/seed."
+}

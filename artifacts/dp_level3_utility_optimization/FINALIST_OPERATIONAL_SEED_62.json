@@ -1,0 +1,75 @@
+{
+  "broker": "127.0.0.1:19092",
+  "run_id": "optimized-level3-seed-62-new-run",
+  "clients": [
+    {
+      "client_id": "bank-1",
+      "bank": "JPMorgan_Chase"
+    },
+    {
+      "client_id": "bank-2",
+      "bank": "Wells_Fargo"
+    },
+    {
+      "client_id": "bank-3",
+      "bank": "Key_Bank"
+    }
+  ],
+  "schema_banks": [
+    "JPMorgan_Chase",
+    "Wells_Fargo",
+    "Key_Bank"
+  ],
+  "dataset_dir": "/Users/pj/Desktop/college/capstone/Capstone/data/final_temporal_dataset",
+  "output_dir": "artifacts/dp_level3_utility_optimization/operational",
+  "initial_checkpoint": "artifacts/dp_level3_utility_optimization/frozen_warm_starts/seed_42/global_model.pt",
+  "rounds": 1,
+  "hidden_channels": 128,
+  "dropout": 0.25,
+  "local_epochs": 2,
+  "batch_size": 1024,
+  "negative_ratio": 20,
+  "learning_rate": 0.0003,
+  "weight_decay": 0.0001,
+  "seed": 62,
+  "round_timeout_seconds": 900,
+  "max_chunk_bytes": 524288,
+  "topics": {
+    "global_model": "fcl.global-model",
+    "client_updates": "fcl.client-updates"
+  },
+  "feature_schema": "artifacts/dp_level3_secagg/feature_schema.json",
+  "return_aggregate": true,
+  "aggregation": "equal",
+  "rng_policy": "per_client",
+  "replay": "risk_context",
+  "replay_size": 2000,
+  "privacy": {
+    "mode": "distributed_dp",
+    "clip": 1.25,
+    "multiplier": 0.15,
+    "delta": 1e-06,
+    "expected_clients": 3,
+    "min_noise_contributors": 3,
+    "scale": 16777216,
+    "entropy": "production"
+  },
+  "private_subset": "decoder",
+  "server_optimizer": {
+    "name": "fedavg",
+    "learning_rate": 1.0,
+    "beta1": 0.9,
+    "beta2": 0.99,
+    "epsilon": 0.001
+  },
+  "selection_rule": "highest_August_macro_AP_earliest_tie; only round 1; all actual releases accounted",
+  "confirmation_seeds": [
+    42,
+    52,
+    62
+  ],
+  "seed_scope": "private continuation RNG; fixed nonprivate pretraining seed 42",
+  "nonprivate_checkpoint_sha256": "d650af6959d1da46888f30fb79bbfd888a6ec20743d14d447ea078dc351536f5",
+  "retained_confirmation_id": "confirm_calibrated_decoder_m0p15",
+  "privacy_scope": "incremental DP conditional on nonprivate fixed warm start and public preprocessing/validation"
+}

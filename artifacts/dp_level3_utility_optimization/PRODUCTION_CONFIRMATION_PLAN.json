@@ -1,0 +1,44 @@
+[
+  {
+    "id": "confirm_calibrated_decoder_m0p15",
+    "seeds": [
+      42,
+      52,
+      62
+    ],
+    "config": {
+      "rounds": 1,
+      "checkpoint_template": "/Users/pj/Desktop/college/capstone/Capstone-DP-SecAgg/artifacts/dp_level3_utility_optimization/frozen_warm_starts/seed_42/global_model.pt",
+      "subset": "decoder",
+      "learning_rate": 0.0003,
+      "local_epochs": 2,
+      "clip": 1.25,
+      "entropy": "production",
+      "pretraining_seed": 42,
+      "seed_scope": "private_continuation",
+      "starting_checkpoint_policy": "fixed_shared_nonprivate_August_selected",
+      "multiplier": 0.15
+    }
+  },
+  {
+    "id": "confirm_calibrated_decoder_m0p1",
+    "seeds": [
+      42,
+      52,
+      62
+    ],
+    "config": {
+      "rounds": 1,
+      "checkpoint_template": "/Users/pj/Desktop/college/capstone/Capstone-DP-SecAgg/artifacts/dp_level3_utility_optimization/frozen_warm_starts/seed_42/global_model.pt",
+      "subset": "decoder",
+      "learning_rate": 0.0003,
+      "local_epochs": 2,
+      "clip": 1.25,
+      "entropy": "production",
+      "pretraining_seed": 42,
+      "seed_scope": "private_continuation",
+      "starting_checkpoint_policy": "fixed_shared_nonprivate_August_selected",
+      "multiplier": 0.1
+    }
+  }
+]

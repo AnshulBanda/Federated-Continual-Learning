@@ -1,0 +1,11 @@
+[
+  {
+    "id": "stage3_epochs2",
+    "seeds": [
+      62
+    ],
+    "config": {
+      "local_epochs": 2
+    }
+  }
+]

@@ -1,0 +1,35 @@
+{
+  "result": "PASS",
+  "mean": 0.8325481084807611,
+  "sample_sd": 0.05541891136597809,
+  "checkpoints": [
+    {
+      "seed": 42,
+      "AP": 0.7958206151531254,
+      "sha256": "4efa8a691d6a0252c74396863c4dff3316c658e37dedfd3f083b4055cad100dd",
+      "difference": 0
+    },
+    {
+      "seed": 52,
+      "AP": 0.8962943866120003,
+      "sha256": "07d205c48da34b014323f077c7a3ee1adc9eeb065ba581584076bce37e1ab98e",
+      "difference": 0
+    },
+    {
+      "seed": 62,
+      "AP": 0.8055293236771576,
+      "sha256": "9f0419a92ba8147c7875fb7392923a97c46dcdedefa786f442c7dda6abf1ad02",
+      "difference": 0
+    }
+  ],
+  "accounting": {
+    "releases": 4,
+    "rho": 59999999999.99999,
+    "epsilon": 60001820912.55525,
+    "delta": 1e-06,
+    "bound": "encoded_share_postprocessing",
+    "research_only": false
+  },
+  "provenance": "Original LOADED_SOURCE_PROVENANCE.json retained and hashed in INITIAL_AUDIT.json; all baseline files unchanged",
+  "training": "AdamW lr .001 wd .0001; June 3 epochs then July 3 epochs with risk_context replay 2000; ratio20; TBPTT2; dropout .25; per-client seed+100*round+index; equal secure mean; fixed final selection"
+}

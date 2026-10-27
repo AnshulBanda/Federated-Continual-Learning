@@ -1,0 +1,25 @@
+[
+  {
+    "id": "stage4_counter",
+    "seeds": [
+      52
+    ],
+    "config": {
+      "rng_policy": "counter"
+    }
+  },
+  {
+    "id": "stage5_C5p5",
+    "seeds": [
+      52
+    ],
+    "config": {
+      "clip": 5.5,
+      "server": {
+        "name": "fedavgm",
+        "learning_rate": 0.5,
+        "beta1": 0.5
+      }
+    }
+  }
+]

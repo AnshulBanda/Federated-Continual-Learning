@@ -1,0 +1,47 @@
+[
+  {
+    "id": "stage3_lr0003",
+    "seeds": [
+      42
+    ],
+    "config": {
+      "learning_rate": 0.0003
+    }
+  },
+  {
+    "id": "stage3_lr0005",
+    "seeds": [
+      42
+    ],
+    "config": {
+      "learning_rate": 0.0005
+    }
+  },
+  {
+    "id": "stage3_lr00075",
+    "seeds": [
+      42
+    ],
+    "config": {
+      "learning_rate": 0.00075
+    }
+  },
+  {
+    "id": "stage3_epochs2",
+    "seeds": [
+      42
+    ],
+    "config": {
+      "local_epochs": 2
+    }
+  },
+  {
+    "id": "stage3_replay4000",
+    "seeds": [
+      42
+    ],
+    "config": {
+      "replay_size": 4000
+    }
+  }
+]

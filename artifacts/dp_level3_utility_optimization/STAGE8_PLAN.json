@@ -1,0 +1,11 @@
+[
+  {
+    "id": "stage8_frozen_warm",
+    "seeds": [
+      42
+    ],
+    "config": {
+      "checkpoint_template": "/Users/pj/Desktop/college/capstone/Capstone-DP-SecAgg/artifacts/dp_level3_utility_optimization/frozen_warm_starts/seed_{seed}/global_model.pt"
+    }
+  }
+]

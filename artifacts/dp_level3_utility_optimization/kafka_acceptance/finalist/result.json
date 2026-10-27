@@ -1,0 +1,16 @@
+{
+  "result": "PASS",
+  "mode": "distributed_dp",
+  "run_id": "qa-d153475bca634f2c",
+  "rounds": [
+    {
+      "round": 1,
+      "sha256": "b5c9f0c04081b788f60f1189984e12f0ec0f0c3c211f667ea8b2113a697e9473",
+      "bytes": 971628,
+      "verified_clients": 3
+    }
+  ],
+  "real_kafka": true,
+  "separate_processes": 4,
+  "private_keys_persisted": false
+}
