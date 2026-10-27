@@ -1,0 +1,63 @@
+TECHNICAL XAI DETAILS
+Transaction: 4237694
+Bank: Wells_Fargo
+
+MODEL PREDICTION
+Fraud model score (uncalibrated): 0.000001368
+Prediction: LEGITIMATE
+Decision threshold: 0.563587199
+
+PREDICTION PARITY
+Existing evaluation score: 0.000001368
+XAI score: 0.000001368
+Absolute difference: 3.16646318e-14
+
+FEATURE ATTRIBUTION
+Method: exact_empirical_interventional_shap
+Units: raw_logit; account memory held fixed.
+- payment_format = ACH: +1.371571258 (increased)
+- amount = 5.17: -0.062090278 (decreased)
+- Amount_Received = 5.17: -0.053968266 (decreased)
+
+TEMPORAL EVIDENCE
+Window: 8 completed batches
+Relevant endpoint events: 52
+Volume by currency: {'USD': 14942.329999999998}
+Time since sender last seen: 1424599.0 seconds
+Time since receiver last seen: 39342.0 seconds
+The current decoder does not directly use time deltas. Earlier deltas enter recurrent memory updates. A zero last_seen sentinel is reported as unknown.
+
+TOP HISTORICAL INTERACTIONS
+1. Event 4165670
+   Score change on removal: +4.47705249e-08
+2. Event 4165561
+   Score change on removal: +1.60441428e-08
+3. Event 4154294
+   Score change on removal: -1.35170944e-08
+Showing 3 of 12 evaluated interactions.
+
+GRAPH EVIDENCE
+Evaluated historical edges: 12
+Nodes represented: 12
+Method: temporal graph perturbation
+Retained events for fidelity: 3
+Only selected updates retained inside bounded window; pre-window account memory remains intact.
+
+FIDELITY
+Retained-window-subgraph absolute score error: 5.34640435e-08
+Top feature ablation absolute score change: 6.07087235e-08
+Low feature ablation absolute score change: 0
+Random feature ablation absolute score change: 1.13830059e-07
+
+STABILITY
+Background-resampling top-feature Jaccard: 1.0
+Background runs: 3; top-k: 3
+
+LIMITATIONS
+- Model explanations do not establish fraud or causality; scores are uncalibrated.
+- Feature SHAP holds account memory fixed; static node-feature attribution is not implemented.
+- Temporal graph perturbation is a bounded replay intervention, not GNNExplainer. Earlier anchor memory remains intact.
+- Interventional SHAP hybrids can be unrealistic for correlated fields; exactness is relative to the sampled background.
+- Legacy preprocessing reproduces current original evaluation and saved metrics; original fitted objects were not preserved.
+- The original fixed-size batching and timestamp-tie behavior are preserved.
+- Explains the final saved model; does not attribute predictions to individual training rounds, replay samples, or client updates. No formal differential privacy is implemented.

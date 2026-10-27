@@ -1,0 +1,6 @@
+feature,value,shap_logit,ablation_logit_drop
+payment_format,Debit Non-Prepaid,-0.06643367139622569,-0.06649056449532509
+amount,4.12,-0.002233882900327444,-0.002344360575079918
+Amount_Received,4.12,-0.0020546689629554753,-0.002033144235610962
+Receiving_Currency,USD,0.0,0.0
+currency,USD,0.0,0.0

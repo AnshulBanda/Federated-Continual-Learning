@@ -1,0 +1,99 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Transaction 4237694 | XAI review</title>
+<style>
+:root{color-scheme:light}*{box-sizing:border-box}body{margin:0;background:#f1f5f9;color:#172033;font:16px/1.6 system-ui,sans-serif}
+main{max-width:1120px;margin:32px auto;padding:0 24px 40px}.eyebrow{color:#526178;font-size:12px;font-weight:700;letter-spacing:.12em}
+h1{font-size:30px;line-height:1.2;margin:8px 0}h2{font-size:19px;line-height:1.4;margin:0 0 12px}h3{font-size:14px;margin:0;color:#526178}
+.meta{color:#526178;overflow-wrap:anywhere}.panel{background:white;border:1px solid #dce3ec;border-radius:14px;padding:24px;margin-top:20px}
+.prediction{display:flex;gap:32px;flex-wrap:wrap;align-items:center}.score{font-size:32px;font-weight:700;line-height:1.3}
+.small{font-size:13px;color:#526178}.badge{display:inline-block;border-radius:30px;padding:6px 14px;background:#ede9fe;color:#5b21b6;font-weight:700}
+.features{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:16px}.feature{padding:16px;background:#f8fafc;border-radius:10px;overflow-wrap:anywhere}
+.value{font-size:21px;font-weight:650;margin:8px 0 14px}.direction{font-size:13px}.increased{color:#9a3412}.decreased{color:#0369a1}
+.evidence{display:grid;grid-template-columns:1fr 1fr;gap:20px}.evidence .panel{margin-top:20px}p{margin:8px 0}
+.disclaimer{border-left:3px solid #64748b;padding-left:14px;color:#526178;font-size:14px;margin-top:18px}
+details summary{font-weight:650;cursor:pointer}details[open] summary{margin-bottom:18px}pre{white-space:pre-wrap;overflow-wrap:anywhere;font:13px/1.7 ui-monospace,monospace}
+img{width:100%;height:auto;border:1px solid #e2e8f0;border-radius:8px;margin:12px 0}a{color:#3346a8}.downloads{display:flex;flex-wrap:wrap;gap:20px;margin-top:16px;font-size:14px}
+@media(max-width:720px){main{padding:0 16px 28px}.features,.evidence{grid-template-columns:1fr}.panel{padding:18px}h1{font-size:26px}}
+</style></head><body><main>
+<header><div class="eyebrow">LOCAL TRANSACTION REVIEW</div><h1>Fraud explanation</h1>
+<p class="meta">Transaction 4237694 &middot; Wells_Fargo</p></header>
+<section class="panel"><p><strong>Fraud model score: 1.36792e-06</strong><br>
+Decision threshold: 0.563587<br>Result: <strong>LEGITIMATE</strong></p>
+<h2>Why was it not flagged?</h2><p><strong>Top factor pushing toward fraud: Payment format: ACH</strong></p>
+<p>This was the strongest transaction feature pushing the score upward compared with the model’s reference transactions.</p><h3>Other contributing factors</h3><ul><li>Transaction amount: <strong>5.17 USD</strong> &rarr; decreased the fraud score</li><li>Amount received: <strong>5.17 USD</strong> &rarr; decreased the fraud score</li></ul>
+<h2>What about the transaction history?</h2><p>The historical interaction with the largest measured effect (event 4165670) lowered the original fraud score. Removing it changed the score from 1.36792e-06 to 1.4127e-06. Other tested interactions had mixed effects.</p>
+<h2>Final explanation</h2><blockquote>The transaction was not flagged because its score was below the alert threshold. Payment format: ACH was the strongest transaction feature pushing upward. The strongest tested historical interaction opposed that upward direction.</blockquote>
+<p class="muted small">Uncalibrated model score. This explanation describes model behavior and does not establish that the transaction is actually fraudulent.</p></section>
+<details class="panel"><summary>View technical XAI details</summary><pre>TECHNICAL XAI DETAILS
+Transaction: 4237694
+Bank: Wells_Fargo
+
+MODEL PREDICTION
+Fraud model score (uncalibrated): 0.000001368
+Prediction: LEGITIMATE
+Decision threshold: 0.563587199
+
+PREDICTION PARITY
+Existing evaluation score: 0.000001368
+XAI score: 0.000001368
+Absolute difference: 3.16646318e-14
+
+FEATURE ATTRIBUTION
+Method: exact_empirical_interventional_shap
+Units: raw_logit; account memory held fixed.
+- payment_format = ACH: +1.371571258 (increased)
+- amount = 5.17: -0.062090278 (decreased)
+- Amount_Received = 5.17: -0.053968266 (decreased)
+
+TEMPORAL EVIDENCE
+Window: 8 completed batches
+Relevant endpoint events: 52
+Volume by currency: {&#x27;USD&#x27;: 14942.329999999998}
+Time since sender last seen: 1424599.0 seconds
+Time since receiver last seen: 39342.0 seconds
+The current decoder does not directly use time deltas. Earlier deltas enter recurrent memory updates. A zero last_seen sentinel is reported as unknown.
+
+TOP HISTORICAL INTERACTIONS
+1. Event 4165670
+   Score change on removal: +4.47705249e-08
+2. Event 4165561
+   Score change on removal: +1.60441428e-08
+3. Event 4154294
+   Score change on removal: -1.35170944e-08
+Showing 3 of 12 evaluated interactions.
+
+GRAPH EVIDENCE
+Evaluated historical edges: 12
+Nodes represented: 12
+Method: temporal graph perturbation
+Retained events for fidelity: 3
+Only selected updates retained inside bounded window; pre-window account memory remains intact.
+
+FIDELITY
+Retained-window-subgraph absolute score error: 5.34640435e-08
+Top feature ablation absolute score change: 6.07087235e-08
+Low feature ablation absolute score change: 0
+Random feature ablation absolute score change: 1.13830059e-07
+
+STABILITY
+Background-resampling top-feature Jaccard: 1.0
+Background runs: 3; top-k: 3
+
+LIMITATIONS
+- Model explanations do not establish fraud or causality; scores are uncalibrated.
+- Feature SHAP holds account memory fixed; static node-feature attribution is not implemented.
+- Temporal graph perturbation is a bounded replay intervention, not GNNExplainer. Earlier anchor memory remains intact.
+- Interventional SHAP hybrids can be unrealistic for correlated fields; exactness is relative to the sampled background.
+- Legacy preprocessing reproduces current original evaluation and saved metrics; original fitted objects were not preserved.
+- The original fixed-size batching and timestamp-tie behavior are preserved.
+- Explains the final saved model; does not attribute predictions to individual training rounds, replay samples, or client updates. No formal differential privacy is implemented.
+</pre>
+<img src="features.svg" alt="Full transaction feature contributions in logit units">
+<img src="graph.svg" alt="Temporal graph perturbation of historical interactions"></details>
+<details class="panel"><summary>Research and debug outputs</summary>
+<p>All calculated features, interactions, evaluation results, limitations and provenance are preserved in the full engine output.</p>
+<div class="downloads"><a href="explanation.json">Full engine JSON</a><a href="debug.txt">Complete debug text</a>
+<a href="feature_contributions.csv">All feature contributions (CSV)</a><a href="historical_events.csv">All interactions (CSV)</a></div></details>
+<nav class="downloads" aria-label="Report downloads"><a href="summary.json">Summary JSON</a><a href="explanation.txt">Plain-language text</a><a href="technical.txt">Technical text</a></nav>
+</main></body></html>

@@ -1,0 +1,511 @@
+{
+  "version": 1,
+  "mode": "federated",
+  "checkpoint_sha256": "1ecac492f6bf5fc159e5c29de433da0ba3952cb6e64dadb572b317e69bd1476f",
+  "origin": "verified_legacy_reconstruction",
+  "original_fitted_object_available": false,
+  "node_encoder": {
+    "columns": [
+      "Account_Country",
+      "Account_Currency",
+      "Entity_Type",
+      "Does_Account_Have_Debit_Card",
+      "DebitCard_Index_in_EntityCards",
+      "MCC",
+      "Account_Type",
+      "Max_Overdraft",
+      "account_kind",
+      "hist_sent_count",
+      "hist_sent_amount_sum",
+      "hist_recv_count",
+      "hist_recv_amount_sum",
+      "hist_out_degree",
+      "hist_in_degree"
+    ],
+    "parts": [
+      {
+        "kind": "numeric",
+        "columns": [
+          "Does_Account_Have_Debit_Card",
+          "DebitCard_Index_in_EntityCards",
+          "MCC",
+          "Max_Overdraft",
+          "hist_sent_count",
+          "hist_sent_amount_sum",
+          "hist_recv_count",
+          "hist_recv_amount_sum",
+          "hist_out_degree",
+          "hist_in_degree"
+        ],
+        "impute": [
+          0.0,
+          0.0,
+          5411.0,
+          250.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        "valid": [
+          0,
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7,
+          8,
+          9
+        ],
+        "mean": [
+          0.005209049649291707,
+          0.0025615458671434466,
+          5137.836645578325,
+          524.6450797689452,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        "scale": [
+          0.07198552251003613,
+          0.06795567901234963,
+          2200.4572522382796,
+          5787.527843016383,
+          1.0,
+          1.0,
+          1.0,
+          1.0,
+          1.0,
+          1.0
+        ]
+      },
+      {
+        "kind": "categorical",
+        "columns": [
+          "Account_Country",
+          "Account_Currency",
+          "Entity_Type",
+          "Account_Type",
+          "account_kind"
+        ],
+        "impute": [
+          "United States",
+          "USD",
+          "Sole_Proprietorship",
+          "Checking",
+          "company"
+        ],
+        "valid": [
+          0,
+          1,
+          2,
+          3,
+          4
+        ],
+        "categories": [
+          [
+            "Argentina",
+            "Austria",
+            "Canada",
+            "China",
+            "Dominican Republic",
+            "Germany",
+            "Hungary",
+            "India",
+            "Japan",
+            "Mexico",
+            "Netherlands",
+            "New Zealand",
+            "South Korea",
+            "Switzerland",
+            "Togo",
+            "United Kingdom",
+            "United States",
+            "Unknown",
+            "Vatican City",
+            "Vietnam"
+          ],
+          [
+            "ARS",
+            "CAD",
+            "CHF",
+            "CNY",
+            "DOP",
+            "EUR",
+            "GBP",
+            "JPY",
+            "KRW",
+            "MXN",
+            "NZD",
+            "USD",
+            "Unknown",
+            "VND",
+            "XOF"
+          ],
+          [
+            "Large_Corporation",
+            "Local_Government",
+            "National_Government",
+            "Partnership",
+            "Person",
+            "Small_Corporation",
+            "Sole_Proprietorship",
+            "Unknown"
+          ],
+          [
+            "CD",
+            "Cash",
+            "Checking",
+            "Money Market",
+            "Savings",
+            "Unknown"
+          ],
+          [
+            "Unknown",
+            "company",
+            "person"
+          ]
+        ]
+      }
+    ],
+    "encoded_columns": [
+      "numeric__Does_Account_Have_Debit_Card",
+      "numeric__DebitCard_Index_in_EntityCards",
+      "numeric__MCC",
+      "numeric__Max_Overdraft",
+      "numeric__hist_sent_count",
+      "numeric__hist_sent_amount_sum",
+      "numeric__hist_recv_count",
+      "numeric__hist_recv_amount_sum",
+      "numeric__hist_out_degree",
+      "numeric__hist_in_degree",
+      "categorical__Account_Country_Argentina",
+      "categorical__Account_Country_Austria",
+      "categorical__Account_Country_Canada",
+      "categorical__Account_Country_China",
+      "categorical__Account_Country_Dominican Republic",
+      "categorical__Account_Country_Germany",
+      "categorical__Account_Country_Hungary",
+      "categorical__Account_Country_India",
+      "categorical__Account_Country_Japan",
+      "categorical__Account_Country_Mexico",
+      "categorical__Account_Country_Netherlands",
+      "categorical__Account_Country_New Zealand",
+      "categorical__Account_Country_South Korea",
+      "categorical__Account_Country_Switzerland",
+      "categorical__Account_Country_Togo",
+      "categorical__Account_Country_United Kingdom",
+      "categorical__Account_Country_United States",
+      "categorical__Account_Country_Unknown",
+      "categorical__Account_Country_Vatican City",
+      "categorical__Account_Country_Vietnam",
+      "categorical__Account_Currency_ARS",
+      "categorical__Account_Currency_CAD",
+      "categorical__Account_Currency_CHF",
+      "categorical__Account_Currency_CNY",
+      "categorical__Account_Currency_DOP",
+      "categorical__Account_Currency_EUR",
+      "categorical__Account_Currency_GBP",
+      "categorical__Account_Currency_JPY",
+      "categorical__Account_Currency_KRW",
+      "categorical__Account_Currency_MXN",
+      "categorical__Account_Currency_NZD",
+      "categorical__Account_Currency_USD",
+      "categorical__Account_Currency_Unknown",
+      "categorical__Account_Currency_VND",
+      "categorical__Account_Currency_XOF",
+      "categorical__Entity_Type_Large_Corporation",
+      "categorical__Entity_Type_Local_Government",
+      "categorical__Entity_Type_National_Government",
+      "categorical__Entity_Type_Partnership",
+      "categorical__Entity_Type_Person",
+      "categorical__Entity_Type_Small_Corporation",
+      "categorical__Entity_Type_Sole_Proprietorship",
+      "categorical__Entity_Type_Unknown",
+      "categorical__Account_Type_CD",
+      "categorical__Account_Type_Cash",
+      "categorical__Account_Type_Checking",
+      "categorical__Account_Type_Money Market",
+      "categorical__Account_Type_Savings",
+      "categorical__Account_Type_Unknown",
+      "categorical__account_kind_Unknown",
+      "categorical__account_kind_company",
+      "categorical__account_kind_person"
+    ]
+  },
+  "edge_encoder": {
+    "columns": [
+      "amount",
+      "currency",
+      "Amount_Received",
+      "Receiving_Currency",
+      "payment_format"
+    ],
+    "parts": [
+      {
+        "kind": "numeric",
+        "columns": [
+          "amount",
+          "Amount_Received"
+        ],
+        "impute": [
+          125.09,
+          125.14
+        ],
+        "valid": [
+          0,
+          1
+        ],
+        "mean": [
+          3708.0192029477034,
+          3756.1233063975046
+        ],
+        "scale": [
+          73887.48421956535,
+          78372.15427544492
+        ]
+      },
+      {
+        "kind": "categorical",
+        "columns": [
+          "currency",
+          "Receiving_Currency",
+          "payment_format"
+        ],
+        "impute": [
+          "USD",
+          "USD",
+          "ACH"
+        ],
+        "valid": [
+          0,
+          1,
+          2
+        ],
+        "categories": [
+          [
+            "CNY",
+            "EUR",
+            "GBP",
+            "JPY",
+            "KRW",
+            "NZD",
+            "USD"
+          ],
+          [
+            "ARS",
+            "CAD",
+            "CHF",
+            "CNY",
+            "DOP",
+            "EUR",
+            "GBP",
+            "JPY",
+            "MXN",
+            "USD",
+            "VND",
+            "XOF"
+          ],
+          [
+            "ACH",
+            "ApplePay",
+            "Bank Fee",
+            "Cash",
+            "Cash App",
+            "Cheque",
+            "Debit Non-Prepaid",
+            "Dividend",
+            "Interest",
+            "MetaPay",
+            "PayPal",
+            "Venmo",
+            "Wire",
+            "Zelle"
+          ]
+        ]
+      }
+    ],
+    "encoded_columns": [
+      "numeric__amount",
+      "numeric__Amount_Received",
+      "categorical__currency_CNY",
+      "categorical__currency_EUR",
+      "categorical__currency_GBP",
+      "categorical__currency_JPY",
+      "categorical__currency_KRW",
+      "categorical__currency_NZD",
+      "categorical__currency_USD",
+      "categorical__Receiving_Currency_ARS",
+      "categorical__Receiving_Currency_CAD",
+      "categorical__Receiving_Currency_CHF",
+      "categorical__Receiving_Currency_CNY",
+      "categorical__Receiving_Currency_DOP",
+      "categorical__Receiving_Currency_EUR",
+      "categorical__Receiving_Currency_GBP",
+      "categorical__Receiving_Currency_JPY",
+      "categorical__Receiving_Currency_MXN",
+      "categorical__Receiving_Currency_USD",
+      "categorical__Receiving_Currency_VND",
+      "categorical__Receiving_Currency_XOF",
+      "categorical__payment_format_ACH",
+      "categorical__payment_format_ApplePay",
+      "categorical__payment_format_Bank Fee",
+      "categorical__payment_format_Cash",
+      "categorical__payment_format_Cash App",
+      "categorical__payment_format_Cheque",
+      "categorical__payment_format_Debit Non-Prepaid",
+      "categorical__payment_format_Dividend",
+      "categorical__payment_format_Interest",
+      "categorical__payment_format_MetaPay",
+      "categorical__payment_format_PayPal",
+      "categorical__payment_format_Venmo",
+      "categorical__payment_format_Wire",
+      "categorical__payment_format_Zelle"
+    ]
+  },
+  "software": {
+    "torch": "2.13.0+cpu",
+    "numpy": "2.5.2",
+    "pandas": "3.0.5",
+    "sklearn": "1.9.0"
+  },
+  "banks": {
+    "Citi": {
+      "passed": true,
+      "threshold": 0.30930493831634703,
+      "batch_size": 512,
+      "encoded_tensors_bitwise_equal": true,
+      "evaluation": {
+        "validation": {
+          "metrics": {
+            "pr_auc": 0.23916072675259828,
+            "roc_auc": 0.9548902832429368,
+            "precision": 0.23684210526315788,
+            "recall": 0.3,
+            "f1": 0.2647058823529412
+          },
+          "saved_metric_absolute_errors": {
+            "pr_auc": 2.7755575615628914e-17,
+            "roc_auc": 1.1102230246251565e-16,
+            "precision": 0.0,
+            "recall": 0.0,
+            "f1": 0.0
+          },
+          "max_probability_error": 0.0
+        },
+        "testing": {
+          "metrics": {
+            "pr_auc": 0.013869559057674242,
+            "roc_auc": 0.8585219422129293,
+            "precision": 0.0,
+            "recall": 0.0,
+            "f1": 0.0
+          },
+          "saved_metric_absolute_errors": {
+            "pr_auc": 3.469446951953614e-18,
+            "roc_auc": 0.0,
+            "precision": 0.0,
+            "recall": 0.0,
+            "f1": 0.0
+          },
+          "max_probability_error": 0.0
+        }
+      },
+      "reference_sha256": "96f4fb830253a102d203632cf4d19cda8e30bd48e27e7efa11e1ca16b6367224",
+      "input_sha256": {
+        "configuration/model_feature_columns.json": "6e3f3bfc52667427398844255f82a35473d3740564ac4085e6514422b507d87b",
+        "training/Citi/node_features.csv.gz": "78f38c16a1fd5db0089e74d97747714c8d8430455e3ab72ed1ea07238d18d28a",
+        "training/Citi/node_map.csv.gz": "51b5632665eb47403d94ad4df81966fff7e266bd05d600eb7635aa60e29a034d",
+        "training/Citi/edge_list.csv.gz": "e2fb9f035c13710aea259d4fff0cfb706f82e6d6d397fe07d624e582f74d2342",
+        "training/Citi/ground_truth.csv.gz": "bc5580c131210c2c1c8930c24869f705e6bd6910dad79b52ae3148b85d0455ea",
+        "validation/Citi/node_features.csv.gz": "ef9b42d425dfdca7df73e5538806efb37c9f6de1428fd66b6bfaa81f3e5f90a2",
+        "validation/Citi/node_map.csv.gz": "fba53113e65d4f691954575054dc1dcab3793d1e59c59423a141f06916081a7f",
+        "validation/Citi/edge_list.csv.gz": "5e71c1cb7f2998171f57add607619bac91a8f4b3eb9cb9cac0fdda8ef3844b15",
+        "validation/Citi/ground_truth.csv.gz": "389e8f73fd7c4fca9824b093e8e3488678eb6ae2f3330c03fc3e3b95e34316b6",
+        "testing/Citi/node_features.csv.gz": "5d60b2f860082eef97735579c81d3ad469d06216733a6446b52df80521c78b80",
+        "testing/Citi/node_map.csv.gz": "6068b700349c025b9c62523a06f69d4ccfca1e4770a731210e89d456d6bdbf6f",
+        "testing/Citi/edge_list.csv.gz": "53968f519e3227fb2ac9225a5f0a20bc09311996cedd84cc5c334d85595e8e00",
+        "testing/Citi/ground_truth.csv.gz": "66cf633dcd6a1cf304d95d1c21cacc1d080e7e2805d094617a4b5da72689eee2"
+      }
+    },
+    "Key_Bank": {
+      "passed": true,
+      "threshold": 0.33038090717792035,
+      "batch_size": 512,
+      "encoded_tensors_bitwise_equal": true,
+      "evaluation": {
+        "validation": {
+          "metrics": {
+            "pr_auc": 0.2293792048431726,
+            "roc_auc": 0.919343854063517,
+            "precision": 0.30434782608695654,
+            "recall": 0.3333333333333333,
+            "f1": 0.3181818181818182
+          },
+          "saved_metric_absolute_errors": {
+            "pr_auc": 0.0,
+            "roc_auc": 0.0,
+            "precision": 0.0,
+            "recall": 0.0,
+            "f1": 0.0
+          },
+          "max_probability_error": 0.0
+        },
+        "testing": {
+          "metrics": {
+            "pr_auc": 0.27061732173579495,
+            "roc_auc": 0.7341465602296171,
+            "precision": 0.7058823529411765,
+            "recall": 0.26666666666666666,
+            "f1": 0.3870967741935484
+          },
+          "saved_metric_absolute_errors": {
+            "pr_auc": 0.0,
+            "roc_auc": 1.1102230246251565e-16,
+            "precision": 0.0,
+            "recall": 0.0,
+            "f1": 0.0
+          },
+          "max_probability_error": 0.0
+        }
+      },
+      "reference_sha256": "e254cd08f5d33c9fe8a182bbcb48d830699c97397766a75114f39f5081fe38fe",
+      "input_sha256": {
+        "configuration/model_feature_columns.json": "6e3f3bfc52667427398844255f82a35473d3740564ac4085e6514422b507d87b",
+        "training/Key_Bank/node_features.csv.gz": "96ae6600175056bde806b76bc1b4ee33db3c415dbbfcfbc3e1dbbfbfc6e1ccda",
+        "training/Key_Bank/node_map.csv.gz": "3294ae9b270092b250f4430acd2be8404664ac80ba2ab5b3be1c73e1aca59943",
+        "training/Key_Bank/edge_list.csv.gz": "244ea646f28ce91519c3dbbaffc163dc20023d046a34c51ae1c1eb8363b6931c",
+        "training/Key_Bank/ground_truth.csv.gz": "67432db20c50ca999a4b65e4d126a17b64cdec146eb028bb62e9282fa05a3cca",
+        "validation/Key_Bank/node_features.csv.gz": "309a47ae25ead1cbf2cabfdde3e3dfba170e5ca754d9261e26fe74c78f31ecb2",
+        "validation/Key_Bank/node_map.csv.gz": "94e08ef84a4ae4c4ddd1719084455dbbea7536c4b2433051af5087dcf5ec1c2c",
+        "validation/Key_Bank/edge_list.csv.gz": "8ceef1da961eb5b293668f533dd2b3358ab418fd08353787a7c3bbb9fa58520d",
+        "validation/Key_Bank/ground_truth.csv.gz": "92cebff95cfaaa5f236c567c292e954745b54d5cf872ae4719ce73e7e0fddcd6",
+        "testing/Key_Bank/node_features.csv.gz": "336d5e2bb2bbd38f4388cb54ce1966d3833407645b96c025dda1fb2b4608356b",
+        "testing/Key_Bank/node_map.csv.gz": "641e560a72b2872407c305433ed3b86d8af0e7cf72e96b880664d31abc2063f7",
+        "testing/Key_Bank/edge_list.csv.gz": "bf50d7fd385eac7bd5d829d62aefcf3262cb4136fa3b9417f468b9abfdfe4a9f",
+        "testing/Key_Bank/ground_truth.csv.gz": "602d7fd506681eb6fcec88c74fe67f971a0e4eb8891656f7267bbd73f3b2d0bf"
+      }
+    }
+  },
+  "training_inputs_sha256": {
+    "training/JPMorgan_Chase/node_features.csv.gz": "25767840096cf4699f43388d8380103e10736b1c9331ada99e998ce10a105a92",
+    "training/JPMorgan_Chase/edge_list.csv.gz": "f7221c49c01c01ee9e883f8642c11732b6419637e504bfe2062edbcc411caa3f",
+    "training/Wells_Fargo/node_features.csv.gz": "64ff1f4fc516cb0b269cb89b916519ac52699fb04efd1ec93e53442c8dc33e2d",
+    "training/Wells_Fargo/edge_list.csv.gz": "9ddf9936c6f5d5425a0bdc99aa71343ab52c4572777d55c7a363d219f5bcf5ee",
+    "training/Citi/node_features.csv.gz": "78f38c16a1fd5db0089e74d97747714c8d8430455e3ab72ed1ea07238d18d28a",
+    "training/Citi/edge_list.csv.gz": "e2fb9f035c13710aea259d4fff0cfb706f82e6d6d397fe07d624e582f74d2342",
+    "training/Fifth_Third_Bancorp/node_features.csv.gz": "537b9396a71f0f953915360a7c096b86c9c47a5dfbce636d97dc944bbf71cc1a",
+    "training/Fifth_Third_Bancorp/edge_list.csv.gz": "8d4d724a729b2bb12f8afb8f3b4d7128fc32539ca9df438472b59df5a79a1f09",
+    "training/Key_Bank/node_features.csv.gz": "96ae6600175056bde806b76bc1b4ee33db3c415dbbfcfbc3e1dbbfbfc6e1ccda",
+    "training/Key_Bank/edge_list.csv.gz": "244ea646f28ce91519c3dbbaffc163dc20023d046a34c51ae1c1eb8363b6931c"
+  },
+  "original_model_source_sha256": "288bf3fc7823ac58e286d8e52eac954338267c7bd1520dd06af6be895e403e41",
+  "metrics_sha256": "617d154be5fb150ce02f0825ff3f1b62c2240076c925d4efc45ca729a02f9c0f"
+}

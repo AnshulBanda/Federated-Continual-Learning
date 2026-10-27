@@ -1,0 +1,146 @@
+{
+  "bank": "Citi",
+  "split": "testing",
+  "txn_id": "3627275",
+  "timestamp": "2025-09-01 02:00:09.900",
+  "chronological_index": 100,
+  "raw_score": 0.0069023603573441505,
+  "threshold": 0.512018960118297,
+  "decision": "not flagged",
+  "feature_explanation": {
+    "base_logit": -5.7940545082092285,
+    "target_logit": -4.968964576721191,
+    "additivity_residual": 0.0,
+    "coalitions": 32,
+    "features": [
+      {
+        "feature": "payment_format",
+        "shap_logit": 0.830198327700297,
+        "ablation_logit_drop": 0.8299426734447479,
+        "value": "ACH"
+      },
+      {
+        "feature": "amount",
+        "shap_logit": -0.0027641107638676967,
+        "ablation_logit_drop": -0.0028841793537139893,
+        "value": "5.65"
+      },
+      {
+        "feature": "Amount_Received",
+        "shap_logit": -0.002344285448392232,
+        "ablation_logit_drop": -0.002536296844482422,
+        "value": "5.65"
+      },
+      {
+        "feature": "currency",
+        "shap_logit": 0.0,
+        "ablation_logit_drop": 0.0,
+        "value": "USD"
+      },
+      {
+        "feature": "Receiving_Currency",
+        "shap_logit": 0.0,
+        "ablation_logit_drop": 0.0,
+        "value": "USD"
+      }
+    ],
+    "method": "exact empirical interventional Shapley enumeration",
+    "background_txn_ids": [
+      "2557642",
+      "192381",
+      "1647035",
+      "1870773",
+      "2030581",
+      "2823657",
+      "2424164",
+      "2880848",
+      "1992551",
+      "2454422",
+      "1876542",
+      "2700341",
+      "2864450",
+      "2011535",
+      "1766401",
+      "2395133",
+      "2875665",
+      "1893165",
+      "2580735",
+      "2770000",
+      "2628081",
+      "2325975",
+      "1579532",
+      "2121645",
+      "2133636",
+      "2112942",
+      "2134638",
+      "2454521",
+      "2886747",
+      "2085880",
+      "2100195",
+      "2870421"
+    ],
+    "background_size": 32,
+    "seed": 42
+  },
+  "reason_codes": [
+    "payment_format increased the logit by 0.8302 relative to the sampled training reference, with account history fixed.",
+    "amount decreased the logit by 0.0028 relative to the sampled training reference, with account history fixed.",
+    "Amount_Received decreased the logit by 0.0023 relative to the sampled training reference, with account history fixed."
+  ],
+  "history": {
+    "candidate_count": 1,
+    "evaluated_count": 1,
+    "window_batches": 4,
+    "selection": "most recent direct endpoint transactions",
+    "events": [
+      {
+        "txn_id": "3581077",
+        "split": "validation",
+        "timestamp": "2025-08-31 10:37:05.000",
+        "logit_drop_when_removed": -0.18636322021484375,
+        "raw_score_without_event": 0.008304634131491184
+      }
+    ]
+  },
+  "prediction_parity_absolute_error": 9.5367431640625e-07,
+  "provenance": {
+    "checkpoint": "C:\\Users\\sange\\Downloads\\CapstoneFinal\\artifacts\\causal_temporal_graphsage\\Citi_causal_temporal_graphsage.pt",
+    "checkpoint_sha256": "e96adc0743127c78ca727da7a4255e25630f454b1eb751e59a349950be3fbeb1",
+    "mode": "local",
+    "batch_size": 512,
+    "encoder_source": "reconstructed from original training data",
+    "calibration": "none",
+    "input_sha256": {
+      "configuration\\model_feature_columns.json": "6e3f3bfc52667427398844255f82a35473d3740564ac4085e6514422b507d87b",
+      "testing\\Citi\\edge_list.csv.gz": "53968f519e3227fb2ac9225a5f0a20bc09311996cedd84cc5c334d85595e8e00",
+      "testing\\Citi\\ground_truth.csv.gz": "66cf633dcd6a1cf304d95d1c21cacc1d080e7e2805d094617a4b5da72689eee2",
+      "testing\\Citi\\node_features.csv.gz": "5d60b2f860082eef97735579c81d3ad469d06216733a6446b52df80521c78b80",
+      "testing\\Citi\\node_map.csv.gz": "6068b700349c025b9c62523a06f69d4ccfca1e4770a731210e89d456d6bdbf6f",
+      "training\\Citi\\edge_list.csv.gz": "e2fb9f035c13710aea259d4fff0cfb706f82e6d6d397fe07d624e582f74d2342",
+      "training\\Citi\\ground_truth.csv.gz": "bc5580c131210c2c1c8930c24869f705e6bd6910dad79b52ae3148b85d0455ea",
+      "training\\Citi\\node_features.csv.gz": "78f38c16a1fd5db0089e74d97747714c8d8430455e3ab72ed1ea07238d18d28a",
+      "training\\Citi\\node_map.csv.gz": "51b5632665eb47403d94ad4df81966fff7e266bd05d600eb7635aa60e29a034d",
+      "validation\\Citi\\edge_list.csv.gz": "5e71c1cb7f2998171f57add607619bac91a8f4b3eb9cb9cac0fdda8ef3844b15",
+      "validation\\Citi\\ground_truth.csv.gz": "389e8f73fd7c4fca9824b093e8e3488678eb6ae2f3330c03fc3e3b95e34316b6",
+      "validation\\Citi\\node_features.csv.gz": "ef9b42d425dfdca7df73e5538806efb37c9f6de1428fd66b6bfaa81f3e5f90a2",
+      "validation\\Citi\\node_map.csv.gz": "fba53113e65d4f691954575054dc1dcab3793d1e59c59423a141f06916081a7f"
+    },
+    "metrics_sha256": "f846ff6834115a6208f27c868f2bdb38b5377af20c516238ad7ad5c963363af8"
+  },
+  "software": {
+    "torch": "2.13.0+cpu",
+    "numpy": "2.5.2",
+    "pandas": "3.0.5",
+    "scikit_learn": "1.9.0"
+  },
+  "runtime_seconds": 2.050149400020018,
+  "limitations": [
+    "Feature SHAP explains the raw logit given fixed account memories, not all historical or static node features.",
+    "Exact values apply to the sampled training background. Correlated-feature hybrids may be unrealistic; these are model explanations, not causal findings.",
+    "Legacy encoders were reconstructed. The original dataset and software versions are required for original-run reproducibility; hashes record this run, not proof of training-data identity.",
+    "Historical effects cover only selected earlier direct-endpoint events in a bounded window; they are not additive and are not a complete graph explanation.",
+    "The original model's batch boundaries are preserved. Its timestamp ties can cross batch boundaries; this adapter does not change that behavior.",
+    "Explanations and transaction identifiers stay in local files. This does not provide a formal privacy guarantee.",
+    "A threshold, when available, is read from the checkpoint directory's metrics.json; keep matching artifacts together."
+  ]
+}

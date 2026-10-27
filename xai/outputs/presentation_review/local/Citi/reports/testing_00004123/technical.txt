@@ -1,0 +1,67 @@
+TECHNICAL XAI DETAILS
+Transaction: 89367
+Bank: Citi
+
+MODEL PREDICTION
+Fraud model score (uncalibrated): 0.333707543
+Prediction: FRAUD
+Decision threshold: 0.309304938
+
+PREDICTION PARITY
+Existing evaluation score: 0.333707541
+XAI score: 0.333707543
+Absolute difference: 1.83116738e-09
+
+FEATURE ATTRIBUTION
+Method: exact_empirical_interventional_shap
+Units: raw_logit; account memory held fixed.
+- payment_format = Debit Non-Prepaid: -0.066433671 (decreased)
+- amount = 4.12: -0.002233883 (decreased)
+- Amount_Received = 4.12: -0.002054669 (decreased)
+
+TEMPORAL EVIDENCE
+Window: 8 completed batches
+Relevant endpoint events: 15
+Volume by currency: {'USD': 1398.7099999999998}
+Time since sender last seen: 22510.0 seconds
+Time since receiver last seen: unknown
+The current decoder does not directly use time deltas. Earlier deltas enter recurrent memory updates. A zero last_seen sentinel is reported as unknown.
+
+TOP HISTORICAL INTERACTIONS
+1. Event 89366
+   Score change on removal: -0.0219007376
+2. Event 89363
+   Score change on removal: +0.00538981154
+3. Event 89364
+   Score change on removal: +0.00201284119
+4. Event 89354
+   Score change on removal: +0.000867712369
+5. Event 89355
+   Score change on removal: -0.000783157881
+Showing 5 of 11 evaluated interactions.
+
+GRAPH EVIDENCE
+Evaluated historical edges: 11
+Nodes represented: 12
+Method: temporal graph perturbation
+Retained events for fidelity: 3
+Only selected updates retained inside bounded window; pre-window account memory remains intact.
+
+FIDELITY
+Retained-window-subgraph absolute score error: 0.00143294869
+Top feature ablation absolute score change: 0.0158417632
+Low feature ablation absolute score change: 0
+Random feature ablation absolute score change: 0.00052255211
+
+STABILITY
+Background-resampling top-feature Jaccard: 1.0
+Background runs: 3; top-k: 3
+
+LIMITATIONS
+- Model explanations do not establish fraud or causality; scores are uncalibrated.
+- Feature SHAP holds account memory fixed; static node-feature attribution is not implemented.
+- Temporal graph perturbation is a bounded replay intervention, not GNNExplainer. Earlier anchor memory remains intact.
+- Interventional SHAP hybrids can be unrealistic for correlated fields; exactness is relative to the sampled background.
+- Legacy preprocessing reproduces current original evaluation and saved metrics; original fitted objects were not preserved.
+- The original fixed-size batching and timestamp-tie behavior are preserved.
+- No combined federated-continual checkpoint or formal differential privacy is implemented.

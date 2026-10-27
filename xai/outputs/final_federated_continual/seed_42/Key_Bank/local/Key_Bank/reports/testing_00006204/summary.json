@@ -1,0 +1,97 @@
+{
+  "schema_version": 1,
+  "transaction_id": "3956941",
+  "bank": "Key_Bank",
+  "brief": {
+    "top_factor": "Payment format: ACH",
+    "top_feature": "payment_format",
+    "why": "This was the strongest upward influence among the transaction features. Compared with the reference transactions, this value pushed the model toward a higher fraud score while account history was held fixed. It does not mean this value is inherently fraudulent.",
+    "scoring": "Score: 0.000942969. Alert threshold: 0.35282. The score was below the threshold, so the prediction is LEGITIMATE. This score is not a calibrated chance of fraud.",
+    "history": "The historical interaction with the largest measured effect (event 3780116) raised the original fraud score. Removing it changed the score from 0.000942969 to 0.000851034. Other tested interactions had mixed effects.",
+    "summary": "The transaction was not flagged because its score was below the alert threshold. Payment format: ACH was the strongest transaction feature pushing upward. The strongest tested historical interaction also pushed upward."
+  },
+  "prediction": "LEGITIMATE",
+  "fraud_score": 0.0009429690022942402,
+  "score_label": "Fraud model score",
+  "score_type": "uncalibrated sigmoid model score",
+  "threshold": 0.35281993997096733,
+  "top_features": [
+    {
+      "feature": "payment_format",
+      "label": "Payment format",
+      "value": "ACH",
+      "display_value": "ACH",
+      "contribution": 3.0253164395689964,
+      "direction": "increased",
+      "explanation": "Payment format (ACH) increased the fraud score relative to the reference transactions, with account history held fixed. It had the largest absolute feature contribution among the displayed factors."
+    },
+    {
+      "feature": "amount",
+      "label": "Transaction amount",
+      "value": 2503.97,
+      "display_value": "2,503.97 USD",
+      "contribution": 0.15330620855093002,
+      "direction": "increased",
+      "explanation": "Transaction amount (2,503.97 USD) increased the fraud score relative to the reference transactions, with account history held fixed. Its contribution pointed in the same direction as the largest displayed factor."
+    },
+    {
+      "feature": "Amount_Received",
+      "label": "Amount received",
+      "value": 2503.97,
+      "display_value": "2,503.97 USD",
+      "contribution": 0.14432282745838168,
+      "direction": "increased",
+      "explanation": "Amount received (2,503.97 USD) increased the fraud score relative to the reference transactions, with account history held fixed. Its contribution pointed in the same direction as the largest displayed factor."
+    }
+  ],
+  "prediction_summary": "The model classified this transaction as LEGITIMATE because its score of 0.000942969002 was below the decision threshold of 0.35281994. This is an uncalibrated model score, not a confirmed chance of fraud.",
+  "feature_reference": "Compared with reference transactions, with account history held fixed.",
+  "contribution_units": "raw_logit",
+  "temporal_evidence": {
+    "events_in_window": 7,
+    "summary": "7 earlier transactions involving the sender or receiver were examined in the configured history window. This describes the available temporal context, not its contribution direction. The historical interaction tests below replay account memory to measure whether selected events were supporting a higher or lower score. They are the contribution test for this temporal/graph context, not a separate additive temporal attribution."
+  },
+  "graph_evidence": {
+    "historical_edges_evaluated": 12,
+    "higher_score_supporting_events": 4,
+    "lower_score_supporting_events": 3,
+    "nodes_represented": 10,
+    "summary": "12 historical interactions were tested by temporarily removing them. Removing the most influential interaction lowered the model score by approximately 9.19348e-05. The strongest measured change was for event 3780116. The account history was replayed after removing this event, keeping the model weights fixed. The score changed from 0.000942969002 to 0.00085103425. This event was helping raise the original score. This is a measured model response within the examined history, not evidence that the event caused fraud. Across the individual removal tests, 4 interaction(s) supported a higher score and 3 supported a lower score; 5 had no effect above the display tolerance. These separate effects cannot be added to infer the effect of removing all history together."
+  },
+  "top_historical_interactions": [
+    {
+      "event_id": "3780116",
+      "score_change_on_removal": -9.19347525173091e-05
+    },
+    {
+      "event_id": "3875834",
+      "score_change_on_removal": -1.6037648350453832e-05
+    },
+    {
+      "event_id": "3763281",
+      "score_change_on_removal": 9.047677373401602e-06
+    },
+    {
+      "event_id": "3840744",
+      "score_change_on_removal": 6.958767642796819e-06
+    },
+    {
+      "event_id": "3799321",
+      "score_change_on_removal": -5.522645862189894e-06
+    }
+  ],
+  "overall_explanation": "The model score did not meet the alert threshold. Among the displayed features, Payment format (ACH), Transaction amount (2,503.97 USD), Amount received (2,503.97 USD) provided upward influences relative to the reference transactions. Historical event 3780116 provided an upward influence on the fraud score: removing it decreased the score by 9.19348e-05. The tested historical interactions had mixed directions of influence. This describes individual tested events, not the net contribution of the entire account history.",
+  "disclaimer": "This explanation describes model behavior and does not establish that the transaction is actually fraudulent.",
+  "technical": {
+    "fidelity_error": 3.7623244813719293e-06,
+    "fidelity_applicable": true,
+    "stability_jaccard": 1.0
+  },
+  "presentation": {
+    "feature_zero_tolerance": 1e-08,
+    "interaction_zero_tolerance": 1e-08,
+    "technical_top_features": 5,
+    "top_interactions": 5,
+    "show_all_interactions": false
+  }
+}

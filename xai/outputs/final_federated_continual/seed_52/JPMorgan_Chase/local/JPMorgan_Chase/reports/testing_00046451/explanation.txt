@@ -1,0 +1,29 @@
+FRAUD EXPLANATION
+Transaction: 4101490
+Bank: JPMorgan_Chase
+Prediction: LEGITIMATE
+Fraud model score: 4.06155953e-06
+Decision threshold: 0.00797743337
+The model classified this transaction as LEGITIMATE because its score of 4.06155953e-06 was below the decision threshold of 0.00797743337. This is an uncalibrated model score, not a confirmed chance of fraud.
+
+WHAT PUSHED THE MODEL SCORE UP OR DOWN?
+
+FEATURE EVIDENCE
+- Payment format: ACH
+  Payment format (ACH) increased the fraud score relative to the reference transactions, with account history held fixed. It had the largest absolute feature contribution among the displayed factors.
+- Transaction amount: 6.69 USD
+  Transaction amount (6.69 USD) decreased the fraud score relative to the reference transactions, with account history held fixed. Its contribution opposed the direction of the largest displayed factor.
+- Amount received: 6.69 USD
+  Amount received (6.69 USD) decreased the fraud score relative to the reference transactions, with account history held fixed. Its contribution opposed the direction of the largest displayed factor.
+Compared with reference transactions, with account history held fixed.
+
+TEMPORAL EVIDENCE
+12 earlier transactions involving the sender or receiver were examined in the configured history window. This describes the available temporal context, not its contribution direction. The historical interaction tests below replay account memory to measure whether selected events were supporting a higher or lower score. They are the contribution test for this temporal/graph context, not a separate additive temporal attribution.
+
+GRAPH EVIDENCE
+12 historical interactions were tested by temporarily removing them. Removing the most influential interaction raised the model score by approximately 1.6548e-06. The strongest measured change was for event 4030934. The account history was replayed after removing this event, keeping the model weights fixed. The score changed from 4.06155953e-06 to 5.71635705e-06. This event was helping lower the original score. This is a measured model response within the examined history, not evidence that the event caused fraud. Across the individual removal tests, 6 interaction(s) supported a higher score and 6 supported a lower score; 0 had no effect above the display tolerance. These separate effects cannot be added to infer the effect of removing all history together.
+
+OVERALL EXPLANATION
+The model score did not meet the alert threshold. Among the displayed features, Payment format (ACH) provided upward influences relative to the reference transactions. Among the displayed features, Transaction amount (6.69 USD), Amount received (6.69 USD) provided downward influences relative to the reference transactions. Historical event 4030934 provided an opposing influence on the fraud score: removing it increased the score by 1.6548e-06. The tested historical interactions had mixed directions of influence. This describes individual tested events, not the net contribution of the entire account history.
+
+This explanation describes model behavior and does not establish that the transaction is actually fraudulent.

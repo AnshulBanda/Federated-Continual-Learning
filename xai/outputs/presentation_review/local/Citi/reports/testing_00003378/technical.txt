@@ -1,0 +1,58 @@
+TECHNICAL XAI DETAILS
+Transaction: 3734548
+Bank: Citi
+
+MODEL PREDICTION
+Fraud model score (uncalibrated): 0.019772327
+Prediction: LEGITIMATE
+Decision threshold: 0.309304938
+
+PREDICTION PARITY
+Existing evaluation score: 0.019772327
+XAI score: 0.019772327
+Absolute difference: 8.0620341e-10
+
+FEATURE ATTRIBUTION
+Method: exact_empirical_interventional_shap
+Units: raw_logit; account memory held fixed.
+- payment_format = ACH: +0.016843081 (increased)
+- amount = 275.42: -0.002107181 (decreased)
+- Amount_Received = 275.42: -0.001989640 (decreased)
+
+TEMPORAL EVIDENCE
+Window: 8 completed batches
+Relevant endpoint events: 0
+Volume by currency: {}
+Time since sender last seen: 1193606.5 seconds
+Time since receiver last seen: 1193606.5 seconds
+The current decoder does not directly use time deltas. Earlier deltas enter recurrent memory updates. A zero last_seen sentinel is reported as unknown.
+
+TOP HISTORICAL INTERACTIONS
+No historical candidate events in the configured neighborhood/window.
+Showing 0 of 0 evaluated interactions.
+
+GRAPH EVIDENCE
+Evaluated historical edges: 0
+Nodes represented: 2
+Method: temporal graph perturbation
+Retained events for fidelity: 0
+Only selected updates retained inside bounded window; pre-window account memory remains intact.
+
+FIDELITY
+Graph fidelity: not applicable (no historical candidates).
+Top feature ablation absolute score change: 0.000121083422
+Low feature ablation absolute score change: 0
+Random feature ablation absolute score change: 4.27112126e-05
+
+STABILITY
+Background-resampling top-feature Jaccard: 1.0
+Background runs: 3; top-k: 3
+
+LIMITATIONS
+- Model explanations do not establish fraud or causality; scores are uncalibrated.
+- Feature SHAP holds account memory fixed; static node-feature attribution is not implemented.
+- Temporal graph perturbation is a bounded replay intervention, not GNNExplainer. Earlier anchor memory remains intact.
+- Interventional SHAP hybrids can be unrealistic for correlated fields; exactness is relative to the sampled background.
+- Legacy preprocessing reproduces current original evaluation and saved metrics; original fitted objects were not preserved.
+- The original fixed-size batching and timestamp-tie behavior are preserved.
+- No combined federated-continual checkpoint or formal differential privacy is implemented.

@@ -1,0 +1,3 @@
+transaction_id,prediction,fraud_score,top_factor,report
+3506283,FRAUD,0.9646905746101718,Payment format,reports\testing_00003043
+3954257,LEGITIMATE,2.007674021444155e-09,Payment format,reports\testing_00006205

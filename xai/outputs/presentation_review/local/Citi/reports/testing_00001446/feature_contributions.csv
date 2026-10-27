@@ -1,0 +1,6 @@
+feature,value,shap_logit,ablation_logit_drop
+payment_format,Wire,0.4514494426548481,0.4522754568606615
+amount,141.53,-0.002206026576459408,-0.002070823684334755
+Amount_Received,141.53,-0.001916802488267422,-0.0015767347067594528
+Receiving_Currency,USD,0.0,0.0
+currency,USD,0.0,0.0

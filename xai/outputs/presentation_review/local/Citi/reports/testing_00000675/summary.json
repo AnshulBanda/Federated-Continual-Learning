@@ -1,0 +1,83 @@
+{
+  "schema_version": 1,
+  "transaction_id": "117168",
+  "bank": "Citi",
+  "prediction": "LEGITIMATE",
+  "fraud_score": 0.02474895699131792,
+  "score_label": "Fraud model score",
+  "score_type": "uncalibrated sigmoid model score",
+  "threshold": 0.30930493831634703,
+  "top_features": [
+    {
+      "feature": "payment_format",
+      "label": "Payment format",
+      "value": "ACH",
+      "display_value": "ACH",
+      "contribution": 0.016744893044233322,
+      "direction": "increased"
+    },
+    {
+      "feature": "amount",
+      "label": "Transaction amount",
+      "value": 769.14,
+      "display_value": "769.14 USD",
+      "contribution": -0.0006694532930850984,
+      "direction": "decreased"
+    },
+    {
+      "feature": "Amount_Received",
+      "label": "Amount received",
+      "value": 769.14,
+      "display_value": "769.14 USD",
+      "contribution": -0.000605158507823944,
+      "direction": "decreased"
+    }
+  ],
+  "feature_reference": "Compared with reference transactions, with account history held fixed.",
+  "contribution_units": "raw_logit",
+  "temporal_evidence": {
+    "events_in_window": 12,
+    "summary": "12 earlier transactions involving the sender or receiver were examined in the configured history window."
+  },
+  "graph_evidence": {
+    "historical_edges_evaluated": 12,
+    "nodes_represented": 9,
+    "summary": "12 historical interactions were tested by temporarily removing them. Removing the most influential interaction lowered the model score by approximately 0.000663487."
+  },
+  "top_historical_interactions": [
+    {
+      "event_id": "117163",
+      "score_change_on_removal": -0.0006634868919560485
+    },
+    {
+      "event_id": "109024",
+      "score_change_on_removal": 0.0003574572844239482
+    },
+    {
+      "event_id": "32297",
+      "score_change_on_removal": -0.00033987731642475677
+    },
+    {
+      "event_id": "117153",
+      "score_change_on_removal": 0.0001490649927301281
+    },
+    {
+      "event_id": "117160",
+      "score_change_on_removal": -0.0001401729526776807
+    }
+  ],
+  "overall_explanation": "The model score did not meet the alert threshold. The transaction details shown above influenced the score in both directions relative to the reference transactions. Tested historical interactions also affected the score.",
+  "disclaimer": "This explanation describes model behavior and does not establish that the transaction is actually fraudulent.",
+  "technical": {
+    "fidelity_error": 0.00411314257198328,
+    "fidelity_applicable": true,
+    "stability_jaccard": 1.0
+  },
+  "presentation": {
+    "feature_zero_tolerance": 1e-08,
+    "interaction_zero_tolerance": 1e-08,
+    "technical_top_features": 5,
+    "top_interactions": 5,
+    "show_all_interactions": false
+  }
+}

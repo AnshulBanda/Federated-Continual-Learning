@@ -1,0 +1,68 @@
+============================================================
+TRANSACTION XAI
+============================================================
+Transaction: 3914977
+Bank: Citi
+
+MODEL PREDICTION
+Fraud model score (uncalibrated): 0.003424422
+Prediction: LEGITIMATE (threshold 0.512018960)
+
+PREDICTION PARITY
+Existing evaluation: 0.003424422
+XAI:                 0.003424422
+
+FEATURE CONTRIBUTIONS (raw logit units)
+1. payment_format = ACH    +0.830539
+2. amount = 654.71    -0.000797
+3. Amount_Received = 654.71    -0.000739
+4. Receiving_Currency = USD    +0.000000
+5. currency = USD    +0.000000
+
+TEMPORAL EVIDENCE
+Recent completed batches examined: 8
+Events involving sender/receiver in that window: 82
+Time since sender's last recorded event: 1182672.5 seconds
+Time since receiver's last recorded event: 53164.0 seconds
+Window volume by currency: {'USD': 111809.76999999997}
+
+IMPORTANT HISTORICAL INTERACTIONS
+Event 3886084: delta probability on removal = +0.000020814
+Event 3882884: delta probability on removal = -0.000015421
+Event 3888237: delta probability on removal = +0.000012605
+Event 3877266: delta probability on removal = -0.000011933
+Event 3883015: delta probability on removal = -0.000011700
+Event 3886716: delta probability on removal = +0.000008985
+Event 3889641: delta probability on removal = +0.000008512
+Event 3894286: delta probability on removal = +0.000007093
+Event 3894170: delta probability on removal = +0.000006108
+Event 3874509: delta probability on removal = -0.000005766
+Event 3886938: delta probability on removal = +0.000005156
+Event 3877094: delta probability on removal = +0.000002582
+
+GRAPH EVIDENCE
+Evaluated historical edges: 12
+Nodes represented, including target endpoints: 12
+Method: temporal graph perturbation (not GNNExplainer)
+
+INTERPRETATION
+payment_format contributed positively relative to the sampled training reference, with account memory fixed.
+amount contributed negatively relative to the sampled training reference, with account memory fixed.
+Amount_Received contributed negatively relative to the sampled training reference, with account memory fixed.
+Suppressing the most influential tested historical event changed the score by +0.000020814.
+Temporal counts and volumes describe observed history; they are not independently attributed model features.
+This explanation describes model behavior and does not establish that the transaction is actually fraudulent.
+
+FIDELITY / STABILITY
+Retained-window-subgraph absolute score error: 0.000104879
+Background-resampling top-feature Jaccard: 1.0
+
+LIMITATIONS
+Model explanations do not establish fraud or causality; scores are uncalibrated.
+Feature SHAP holds account memory fixed; static node-feature attribution is not implemented.
+Temporal graph perturbation is a bounded replay intervention, not GNNExplainer. Earlier anchor memory remains intact.
+Interventional SHAP hybrids can be unrealistic for correlated fields; exactness is relative to the sampled background.
+Legacy preprocessing reproduces current original evaluation and saved metrics; original fitted objects were not preserved.
+The original fixed-size batching and timestamp-tie behavior are preserved.
+No combined federated-continual checkpoint or formal differential privacy is implemented.
+============================================================

@@ -1,0 +1,76 @@
+{
+  "schema_version": 1,
+  "transaction_id": "3815878",
+  "bank": "Key_Bank",
+  "brief": {
+    "top_factor": "Payment format: Wire",
+    "top_feature": "payment_format",
+    "why": "This was the strongest upward influence among the transaction features. Compared with the reference transactions, this value pushed the model toward a higher fraud score while account history was held fixed. It does not mean this value is inherently fraudulent.",
+    "scoring": "Score: 0.998248. Alert threshold: 0.927827. The score met or exceeded the threshold, so the prediction is FRAUD. This score is not a calibrated chance of fraud.",
+    "history": "No relevant historical interactions were available for testing.",
+    "summary": "The transaction was flagged because its score met or exceeded the alert threshold. Payment format: Wire was the strongest transaction feature pushing upward. "
+  },
+  "prediction": "FRAUD",
+  "fraud_score": 0.9982480803742181,
+  "score_label": "Fraud model score",
+  "score_type": "uncalibrated sigmoid model score",
+  "threshold": 0.9278273272514335,
+  "top_features": [
+    {
+      "feature": "payment_format",
+      "label": "Payment format",
+      "value": "Wire",
+      "display_value": "Wire",
+      "contribution": 4.4290268917878475,
+      "direction": "increased",
+      "explanation": "Payment format (Wire) increased the fraud score relative to the reference transactions, with account history held fixed. It had the largest absolute feature contribution among the displayed factors."
+    },
+    {
+      "feature": "amount",
+      "label": "Transaction amount",
+      "value": 20881.11,
+      "display_value": "20,881.11 USD",
+      "contribution": 0.1545867373545965,
+      "direction": "increased",
+      "explanation": "Transaction amount (20,881.11 USD) increased the fraud score relative to the reference transactions, with account history held fixed. Its contribution pointed in the same direction as the largest displayed factor."
+    },
+    {
+      "feature": "Amount_Received",
+      "label": "Amount received",
+      "value": 20881.11,
+      "display_value": "20,881.11 USD",
+      "contribution": 0.14550169308980304,
+      "direction": "increased",
+      "explanation": "Amount received (20,881.11 USD) increased the fraud score relative to the reference transactions, with account history held fixed. Its contribution pointed in the same direction as the largest displayed factor."
+    }
+  ],
+  "prediction_summary": "The model classified this transaction as FRAUD because its score of 0.99824808 met or exceeded the decision threshold of 0.927827327. This is an uncalibrated model score, not a confirmed chance of fraud.",
+  "feature_reference": "Compared with reference transactions, with account history held fixed.",
+  "contribution_units": "raw_logit",
+  "temporal_evidence": {
+    "events_in_window": 0,
+    "summary": "No relevant historical activity was found in the configured temporal window."
+  },
+  "graph_evidence": {
+    "historical_edges_evaluated": 0,
+    "higher_score_supporting_events": 0,
+    "lower_score_supporting_events": 0,
+    "nodes_represented": 2,
+    "summary": "No relevant historical graph interactions were found in the configured neighborhood/window."
+  },
+  "top_historical_interactions": [],
+  "overall_explanation": "The model score met the alert threshold. Among the displayed features, Payment format (Wire), Transaction amount (20,881.11 USD), Amount received (20,881.11 USD) provided upward influences relative to the reference transactions. No historical interaction exceeded the display tolerance within the examined neighborhood/window.",
+  "disclaimer": "This explanation describes model behavior and does not establish that the transaction is actually fraudulent.",
+  "technical": {
+    "fidelity_error": 0.0,
+    "fidelity_applicable": false,
+    "stability_jaccard": 1.0
+  },
+  "presentation": {
+    "feature_zero_tolerance": 1e-08,
+    "interaction_zero_tolerance": 1e-08,
+    "technical_top_features": 5,
+    "top_interactions": 5,
+    "show_all_interactions": false
+  }
+}

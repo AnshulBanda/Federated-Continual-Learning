@@ -1,0 +1,46 @@
+{
+  "method": "exact_empirical_interventional_shap",
+  "units": "raw_logit",
+  "model_sha256": "976942a5e4924635b5e2fb5a6a52aba2f79cb61216cf8acb6a01b540ed68c2d3",
+  "sample_count": 6,
+  "class_counts": {
+    "fraud": 3,
+    "legitimate": 3
+  },
+  "bank_weights": {
+    "JPMorgan_Chase": 0.3333333333333333,
+    "Wells_Fargo": 0.3333333333333333,
+    "Key_Bank": 0.3333333333333333
+  },
+  "feature_importance": [
+    {
+      "feature": "payment_format",
+      "mean_absolute_attribution": 1.7995679617548983,
+      "mean_signed_attribution": 1.7995679617548983
+    },
+    {
+      "feature": "amount",
+      "mean_absolute_attribution": 0.05397454250810876,
+      "mean_signed_attribution": 0.04174852552306321
+    },
+    {
+      "feature": "Amount_Received",
+      "mean_absolute_attribution": 0.05163404749085506,
+      "mean_signed_attribution": 0.040096886352532446
+    },
+    {
+      "feature": "currency",
+      "mean_absolute_attribution": 0.0503117178256313,
+      "mean_signed_attribution": 0.0503117178256313
+    },
+    {
+      "feature": "Receiving_Currency",
+      "mean_absolute_attribution": 0.0,
+      "mean_signed_attribution": 0.0
+    }
+  ],
+  "formula": "sum_bank(sum_sample(abs(SHAP))) / sum_bank(explained_sample_count)",
+  "selection": "balanced",
+  "split": "testing",
+  "limitations": "Describes explained samples, not population importance. Bank-specific training backgrounds differ. Only summary statistics were read. No differential privacy or secure aggregation."
+}

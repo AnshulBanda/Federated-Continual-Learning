@@ -1,0 +1,62 @@
+{
+  "schema_version": 1,
+  "transaction_id": "3802308",
+  "bank": "Citi",
+  "prediction": "LEGITIMATE",
+  "fraud_score": 0.01347042938420794,
+  "score_label": "Fraud model score",
+  "score_type": "uncalibrated sigmoid model score",
+  "threshold": 0.30930493831634703,
+  "top_features": [
+    {
+      "feature": "payment_format",
+      "label": "Payment format",
+      "value": "Cheque",
+      "display_value": "Cheque",
+      "contribution": -0.417897197107474,
+      "direction": "decreased"
+    },
+    {
+      "feature": "Amount_Received",
+      "label": "Amount received",
+      "value": 20.92,
+      "display_value": "20.92 USD",
+      "contribution": -0.0027145842711130777,
+      "direction": "decreased"
+    },
+    {
+      "feature": "amount",
+      "label": "Transaction amount",
+      "value": 20.92,
+      "display_value": "20.92 USD",
+      "contribution": -0.0026493469874064126,
+      "direction": "decreased"
+    }
+  ],
+  "feature_reference": "Compared with reference transactions, with account history held fixed.",
+  "contribution_units": "raw_logit",
+  "temporal_evidence": {
+    "events_in_window": 0,
+    "summary": "No relevant historical activity was found in the configured temporal window."
+  },
+  "graph_evidence": {
+    "historical_edges_evaluated": 0,
+    "nodes_represented": 2,
+    "summary": "No relevant historical graph interactions were found in the configured neighborhood/window."
+  },
+  "top_historical_interactions": [],
+  "overall_explanation": "The model score did not meet the alert threshold. The transaction details shown above influenced the score downward relative to the reference transactions. No historical interaction exceeded the display tolerance within the examined neighborhood/window.",
+  "disclaimer": "This explanation describes model behavior and does not establish that the transaction is actually fraudulent.",
+  "technical": {
+    "fidelity_error": 0.0,
+    "fidelity_applicable": false,
+    "stability_jaccard": 1.0
+  },
+  "presentation": {
+    "feature_zero_tolerance": 1e-08,
+    "interaction_zero_tolerance": 1e-08,
+    "technical_top_features": 5,
+    "top_interactions": 5,
+    "show_all_interactions": false
+  }
+}

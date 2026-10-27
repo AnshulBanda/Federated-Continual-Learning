@@ -1,0 +1,28 @@
+{
+  "bank": "Citi",
+  "split": "testing",
+  "selection": "balanced",
+  "sample_count": 10,
+  "class_counts": {
+    "fraud": 5,
+    "legitimate": 5
+  },
+  "max_prediction_error": 3.56482999230856e-08,
+  "mean_top_ablation_absolute_change": 0.02561861139957,
+  "mean_low_ablation_absolute_change": 1.9255430583342558e-17,
+  "graph_explanations_with_candidates": 6,
+  "mean_graph_sufficiency_error": 0.0023146639134687063,
+  "reports": [
+    "reports\\testing_00000675",
+    "reports\\testing_00001446",
+    "reports\\testing_00003009",
+    "reports\\testing_00003378",
+    "reports\\testing_00003610",
+    "reports\\testing_00004123",
+    "reports\\testing_00005957",
+    "reports\\testing_00013873",
+    "reports\\testing_00015334",
+    "reports\\testing_00017531"
+  ],
+  "sampling_note": "Balanced predicted-class samples are illustrative, not population-representative. Missing classes are reported, not fabricated."
+}

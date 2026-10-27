@@ -1,0 +1,62 @@
+{
+  "cases": [
+    {
+      "id": "2954161",
+      "score": "0.2051",
+      "threshold": "0.1869",
+      "graphEdges": 1,
+      "historyTables": 0,
+      "passed": true
+    },
+    {
+      "id": "2961223",
+      "score": "0.3153",
+      "threshold": "0.1869",
+      "graphEdges": 1,
+      "historyTables": 0,
+      "passed": true
+    },
+    {
+      "id": "180245",
+      "score": "0.0862",
+      "threshold": "0.0178",
+      "graphEdges": 9,
+      "historyTables": 1,
+      "passed": true
+    },
+    {
+      "id": "2580817",
+      "score": "0.9308",
+      "threshold": "0.0178",
+      "graphEdges": 5,
+      "historyTables": 1,
+      "passed": true
+    },
+    {
+      "id": "2974317",
+      "score": "0.4101",
+      "threshold": "0.3759",
+      "graphEdges": 2,
+      "historyTables": 1,
+      "passed": true
+    },
+    {
+      "id": "3007764",
+      "score": "0.9753",
+      "threshold": "0.3759",
+      "graphEdges": 9,
+      "historyTables": 1,
+      "passed": true
+    }
+  ],
+  "consoleErrors": [],
+  "checks": [
+    "actual SHAP values and directions",
+    "score and configured threshold",
+    "matching transaction and bank",
+    "history presence versus untested history",
+    "matching graph edge counts and selected edge",
+    "graph inspector reset on selection",
+    "no history table or literal <br> placeholder for empty history"
+  ]
+}

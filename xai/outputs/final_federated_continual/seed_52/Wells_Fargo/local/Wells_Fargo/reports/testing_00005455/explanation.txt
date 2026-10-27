@@ -1,0 +1,29 @@
+FRAUD EXPLANATION
+Transaction: 3629634
+Bank: Wells_Fargo
+Prediction: FRAUD
+Fraud model score: 0.904215391
+Decision threshold: 0.0663171395
+The model classified this transaction as FRAUD because its score of 0.904215391 met or exceeded the decision threshold of 0.0663171395. This is an uncalibrated model score, not a confirmed chance of fraud.
+
+WHAT PUSHED THE MODEL SCORE UP OR DOWN?
+
+FEATURE EVIDENCE
+- Payment format: ACH
+  Payment format (ACH) increased the fraud score relative to the reference transactions, with account history held fixed. It had the largest absolute feature contribution among the displayed factors.
+- Amount received: 1.75 USD
+  Amount received (1.75 USD) decreased the fraud score relative to the reference transactions, with account history held fixed. Its contribution opposed the direction of the largest displayed factor.
+- Transaction amount: 1.75 USD
+  Transaction amount (1.75 USD) decreased the fraud score relative to the reference transactions, with account history held fixed. Its contribution opposed the direction of the largest displayed factor.
+Compared with reference transactions, with account history held fixed.
+
+TEMPORAL EVIDENCE
+3 earlier transactions involving the sender or receiver were examined in the configured history window. This describes the available temporal context, not its contribution direction. The historical interaction tests below replay account memory to measure whether selected events were supporting a higher or lower score. They are the contribution test for this temporal/graph context, not a separate additive temporal attribution.
+
+GRAPH EVIDENCE
+5 historical interactions were tested by temporarily removing them. Removing the most influential interaction raised the model score by approximately 0.0525601. The strongest measured change was for event 3379251. The account history was replayed after removing this event, keeping the model weights fixed. The score changed from 0.904215391 to 0.956775479. This event was helping lower the original score. This is a measured model response within the examined history, not evidence that the event caused fraud. Across the individual removal tests, 0 interaction(s) supported a higher score and 4 supported a lower score; 1 had no effect above the display tolerance. These separate effects cannot be added to infer the effect of removing all history together.
+
+OVERALL EXPLANATION
+The model score met the alert threshold. Among the displayed features, Payment format (ACH) provided upward influences relative to the reference transactions. Among the displayed features, Amount received (1.75 USD), Transaction amount (1.75 USD) provided downward influences relative to the reference transactions. Historical event 3379251 provided an opposing influence on the fraud score: removing it increased the score by 0.0525601. This describes individual tested events, not the net contribution of the entire account history.
+
+This explanation describes model behavior and does not establish that the transaction is actually fraudulent.
