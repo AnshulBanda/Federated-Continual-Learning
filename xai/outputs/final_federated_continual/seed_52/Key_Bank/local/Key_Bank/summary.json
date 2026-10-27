@@ -1,0 +1,20 @@
+{
+  "bank": "Key_Bank",
+  "split": "testing",
+  "selection": "balanced",
+  "sample_count": 2,
+  "class_counts": {
+    "fraud": 1,
+    "legitimate": 1
+  },
+  "max_prediction_error": 5.1057400196619085e-08,
+  "mean_top_ablation_absolute_change": 0.10802342438793014,
+  "mean_low_ablation_absolute_change": 5.551115123125783e-17,
+  "graph_explanations_with_candidates": 2,
+  "mean_graph_sufficiency_error": 5.200058102646035e-10,
+  "reports": [
+    "reports\\testing_00003043",
+    "reports\\testing_00006205"
+  ],
+  "sampling_note": "Balanced predicted-class samples are illustrative, not population-representative. Missing classes are reported, not fabricated."
+}

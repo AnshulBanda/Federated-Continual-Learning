@@ -1,0 +1,45 @@
+{
+  "method": "exact_empirical_interventional_shap",
+  "units": "raw_logit",
+  "model_sha256": "1ecac492f6bf5fc159e5c29de433da0ba3952cb6e64dadb572b317e69bd1476f",
+  "sample_count": 8,
+  "class_counts": {
+    "fraud": 4,
+    "legitimate": 4
+  },
+  "bank_weights": {
+    "Citi": 0.5,
+    "Key_Bank": 0.5
+  },
+  "feature_importance": [
+    {
+      "feature": "payment_format",
+      "mean_absolute_attribution": 0.24016163858080591,
+      "mean_signed_attribution": 0.1349753478522568
+    },
+    {
+      "feature": "amount",
+      "mean_absolute_attribution": 0.0062618125618125004,
+      "mean_signed_attribution": 0.003907367567686985
+    },
+    {
+      "feature": "Amount_Received",
+      "mean_absolute_attribution": 0.006018374590591217,
+      "mean_signed_attribution": 0.0038489900859228023
+    },
+    {
+      "feature": "Receiving_Currency",
+      "mean_absolute_attribution": 0.0,
+      "mean_signed_attribution": 0.0
+    },
+    {
+      "feature": "currency",
+      "mean_absolute_attribution": 0.0,
+      "mean_signed_attribution": 0.0
+    }
+  ],
+  "formula": "sum_bank(sum_sample(abs(SHAP))) / sum_bank(explained_sample_count)",
+  "selection": "balanced",
+  "split": "testing",
+  "limitations": "Describes explained samples, not population importance. Bank-specific training backgrounds differ. Only summary statistics were read. No differential privacy or secure aggregation."
+}

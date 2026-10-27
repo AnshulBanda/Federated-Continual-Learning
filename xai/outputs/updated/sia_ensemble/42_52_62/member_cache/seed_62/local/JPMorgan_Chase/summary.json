@@ -1,0 +1,19 @@
+{
+  "bank": "JPMorgan_Chase",
+  "split": "validation",
+  "selection": "explicit",
+  "sample_count": 1,
+  "class_counts": {
+    "fraud": 1,
+    "legitimate": 0
+  },
+  "max_prediction_error": 7.418105985035339e-08,
+  "mean_top_ablation_absolute_change": 0.08455836436712305,
+  "mean_low_ablation_absolute_change": 2.220446049250313e-16,
+  "graph_explanations_with_candidates": 0,
+  "mean_graph_sufficiency_error": null,
+  "reports": [
+    "reports\\validation_00048107"
+  ],
+  "sampling_note": "Balanced predicted-class samples are illustrative, not population-representative. Missing classes are reported, not fabricated."
+}

@@ -1,0 +1,422 @@
+{
+  "schema_version": 2,
+  "bank": "JPMorgan_Chase",
+  "transaction_id": "2951056",
+  "split": "validation",
+  "timestamp": "2025-08-01 03:54:17.100",
+  "evaluation_label": "not_fraud",
+  "prediction": {
+    "probability": 0.24707088867823282,
+    "threshold": 0.018216593549896885,
+    "class": "fraud",
+    "score_type": "arithmetic mean of three uncalibrated member probabilities",
+    "threshold_selection": "same 501-quantile maximum-F1 selection rule as Sia training, recalculated per bank on ensemble validation scores and labels"
+  },
+  "ensemble": {
+    "member_probabilities": [
+      0.17053592205047607,
+      0.0127946138381958,
+      0.5578821301460266
+    ],
+    "ensemble_probability": 0.24707088867823282,
+    "aggregation": "arithmetic mean of member probabilities"
+  },
+  "feature_explanation": {
+    "base_logit": -3.03455289052991,
+    "target_logit": -1.1142957728238476,
+    "additivity_residual": -2.280504696194896e-08,
+    "units": "logit(mean member probability)",
+    "method": "exact_empirical_interventional_shap",
+    "background_size": 32,
+    "features": [
+      {
+        "feature": "payment_format",
+        "shap_logit": 1.8018191682497333,
+        "value": "ACH"
+      },
+      {
+        "feature": "amount",
+        "shap_logit": 0.06278530858399001,
+        "value": 1954.31
+      },
+      {
+        "feature": "Amount_Received",
+        "shap_logit": 0.0556526636773862,
+        "value": 1954.31
+      },
+      {
+        "feature": "Receiving_Currency",
+        "shap_logit": 0.0,
+        "value": "USD"
+      },
+      {
+        "feature": "currency",
+        "shap_logit": 0.0,
+        "value": "USD"
+      }
+    ],
+    "background_transaction_ids": [
+      "2298329",
+      "2821858",
+      "2836988",
+      "2892684",
+      "2308257",
+      "2219945",
+      "2324099",
+      "2877533",
+      "2022866",
+      "1823973",
+      "1835800",
+      "1908444",
+      "2856059",
+      "2776030",
+      "2074543",
+      "2495997",
+      "2041081",
+      "2363625",
+      "2540477",
+      "2645704",
+      "2398357",
+      "2085998",
+      "1981898",
+      "2437723",
+      "2471333",
+      "2267216",
+      "1852532",
+      "2643305",
+      "1618083",
+      "2211547",
+      "2303647",
+      "2723143"
+    ]
+  },
+  "temporal_explanation": {
+    "observation_window_batches": 8,
+    "target_endpoint_event_count": 0,
+    "transaction_volume_by_currency": {},
+    "time_since_last_seen_seconds": {
+      "sender": null,
+      "receiver": null
+    },
+    "window_start_seconds_from_origin": 5118395.5,
+    "window_end_seconds_from_origin": 5270350.5,
+    "endpoint_activity_span_seconds": null,
+    "evidence_type": "descriptive observed history; counts/volumes are not extra model inputs or independent attributions",
+    "timing_semantics": "The current decoder does not directly use time deltas. Earlier deltas enter recurrent memory updates. A zero last_seen sentinel is reported as unknown.",
+    "ordering": "only completed original micro-batches; no target-batch transactions included"
+  },
+  "per_member_graph_evidence": [
+    {
+      "seed": 42,
+      "graph_explanation": {
+        "method": "temporal_graph_perturbation",
+        "target": {
+          "source": 25184,
+          "target": 24919
+        },
+        "window_batches": 8,
+        "window_event_count": 7639,
+        "selection": "bounded most-recent k-hop undirected neighborhood; influence measured by chronological replay",
+        "hops": 2,
+        "candidate_count": 0,
+        "important_nodes": [
+          {
+            "node_id": 24919,
+            "role": "receiver",
+            "delta_probability": 0.0,
+            "importance": 0.0,
+            "removed_event_count": 0
+          },
+          {
+            "node_id": 25184,
+            "role": "sender",
+            "delta_probability": 0.0,
+            "importance": 0.0,
+            "removed_event_count": 0
+          }
+        ],
+        "important_edges": [],
+        "fidelity": {
+          "original_probability": 0.17053592241320492,
+          "unperturbed_replay_error": 0.0,
+          "retained_top_events_probability": 0.17053592241320492,
+          "sufficiency_absolute_error": 0.0,
+          "removed_top_events_probability": 0.17053592241320492,
+          "comprehensiveness_signed_drop": 0.0,
+          "removed_low_events_probability": 0.17053592241320492,
+          "low_removal_absolute_change": 0.0,
+          "top_removal_absolute_change": 0.0,
+          "retained_event_count": 0,
+          "formula": "sufficiency=abs(p_full-p_only_top); comprehensiveness=p_full-p_without_top",
+          "scope": "Only selected updates retained inside bounded window; pre-window account memory remains intact.",
+          "applicable": false
+        },
+        "delta_definition": "p_after_suppressing_update - p_original; negative means event supported the original fraud score",
+        "limitations": "Not GNNExplainer; approximate bounded search; node effects remove candidate incident updates; not node-feature attribution or causal proof."
+      }
+    },
+    {
+      "seed": 52,
+      "graph_explanation": {
+        "method": "temporal_graph_perturbation",
+        "target": {
+          "source": 25184,
+          "target": 24919
+        },
+        "window_batches": 8,
+        "window_event_count": 7639,
+        "selection": "bounded most-recent k-hop undirected neighborhood; influence measured by chronological replay",
+        "hops": 2,
+        "candidate_count": 0,
+        "important_nodes": [
+          {
+            "node_id": 24919,
+            "role": "receiver",
+            "delta_probability": 0.0,
+            "importance": 0.0,
+            "removed_event_count": 0
+          },
+          {
+            "node_id": 25184,
+            "role": "sender",
+            "delta_probability": 0.0,
+            "importance": 0.0,
+            "removed_event_count": 0
+          }
+        ],
+        "important_edges": [],
+        "fidelity": {
+          "original_probability": 0.012794614029134876,
+          "unperturbed_replay_error": 0.0,
+          "retained_top_events_probability": 0.012794614029134876,
+          "sufficiency_absolute_error": 0.0,
+          "removed_top_events_probability": 0.012794614029134876,
+          "comprehensiveness_signed_drop": 0.0,
+          "removed_low_events_probability": 0.012794614029134876,
+          "low_removal_absolute_change": 0.0,
+          "top_removal_absolute_change": 0.0,
+          "retained_event_count": 0,
+          "formula": "sufficiency=abs(p_full-p_only_top); comprehensiveness=p_full-p_without_top",
+          "scope": "Only selected updates retained inside bounded window; pre-window account memory remains intact.",
+          "applicable": false
+        },
+        "delta_definition": "p_after_suppressing_update - p_original; negative means event supported the original fraud score",
+        "limitations": "Not GNNExplainer; approximate bounded search; node effects remove candidate incident updates; not node-feature attribution or causal proof."
+      }
+    },
+    {
+      "seed": 62,
+      "graph_explanation": {
+        "method": "temporal_graph_perturbation",
+        "target": {
+          "source": 25184,
+          "target": 24919
+        },
+        "window_batches": 8,
+        "window_event_count": 7639,
+        "selection": "bounded most-recent k-hop undirected neighborhood; influence measured by chronological replay",
+        "hops": 2,
+        "candidate_count": 0,
+        "important_nodes": [
+          {
+            "node_id": 24919,
+            "role": "receiver",
+            "delta_probability": 0.0,
+            "importance": 0.0,
+            "removed_event_count": 0
+          },
+          {
+            "node_id": 25184,
+            "role": "sender",
+            "delta_probability": 0.0,
+            "importance": 0.0,
+            "removed_event_count": 0
+          }
+        ],
+        "important_edges": [],
+        "fidelity": {
+          "original_probability": 0.5578821378097901,
+          "unperturbed_replay_error": 0.0,
+          "retained_top_events_probability": 0.5578821378097901,
+          "sufficiency_absolute_error": 0.0,
+          "removed_top_events_probability": 0.5578821378097901,
+          "comprehensiveness_signed_drop": 0.0,
+          "removed_low_events_probability": 0.5578821378097901,
+          "low_removal_absolute_change": 0.0,
+          "top_removal_absolute_change": 0.0,
+          "retained_event_count": 0,
+          "formula": "sufficiency=abs(p_full-p_only_top); comprehensiveness=p_full-p_without_top",
+          "scope": "Only selected updates retained inside bounded window; pre-window account memory remains intact.",
+          "applicable": false
+        },
+        "delta_definition": "p_after_suppressing_update - p_original; negative means event supported the original fraud score",
+        "limitations": "Not GNNExplainer; approximate bounded search; node effects remove candidate incident updates; not node-feature attribution or causal proof."
+      }
+    }
+  ],
+  "counterfactual_explanation": {
+    "method": "training_supported_constrained_amount_search",
+    "status": "found",
+    "threshold": 0.018216593549896885,
+    "original_class": "fraud",
+    "original_probability": 0.24707089141737662,
+    "candidates_evaluated": 9,
+    "counterfactuals": [
+      {
+        "changed_features": {
+          "amount": 9255068.58,
+          "Amount_Received": 9255068.58
+        },
+        "original_probability": 0.24707089141737662,
+        "counterfactual_probability": 9.999999999999992e-13,
+        "score_change": -0.24707089141637661,
+        "valid": true,
+        "constraint_notes": [
+          "candidate amounts come from training rows only",
+          "matched known categorical context",
+          "amount aliases changed together"
+        ],
+        "amount_change_absolute": 9253114.27
+      }
+    ],
+    "interpretation": "Model sensitivity only; not advice to evade controls or evidence of real-world intent.",
+    "limitations": [
+      "only amount fields were varied",
+      "account memory and event history were held fixed",
+      "training-supported values do not guarantee real-world plausibility"
+    ]
+  },
+  "verification": {
+    "passed": true,
+    "tolerance": 1e-06,
+    "member_report_errors": [
+      1.745091376958996e-09,
+      5.837397919206122e-09,
+      1.6852179207660356e-08
+    ],
+    "member_saved_full_stream_errors": [
+      0.0,
+      0.0,
+      5.960464477539063e-08
+    ],
+    "ensemble_saved_catalog_error": 1.986821490662649e-08,
+    "ensemble_probability_is_mean_of_members": true,
+    "feature_shap_additivity_residual": -2.280504696194896e-08,
+    "ground_truth_label_is_not_used_as_a_model_input": true
+  },
+  "limitations": [
+    "The ground-truth validation label is shown for evaluation and is not used by the predictor or explanation.",
+    "Feature SHAP explains the mean-probability ensemble in logit units with each member's pre-event memory fixed.",
+    "Account paths describe observed earlier transfers. Single-event ensemble effects are reported only when the same update was tested in all three members with replay parity; an entire path's effect is not asserted.",
+    "The alert threshold is selected on validation labels using the project's maximum-F1 rule; it is not independent test-set performance.",
+    "A model flag is an investigation signal, not a confirmed fraud determination."
+  ],
+  "xai_provenance": {
+    "schema": "sia-ensemble-on-demand-v1",
+    "family": "sia_three_member_probability_ensemble",
+    "seeds": [
+      42,
+      52,
+      62
+    ],
+    "checkpoint_sha256": {
+      "42": "d650af6959d1da46888f30fb79bbfd888a6ec20743d14d447ea078dc351536f5",
+      "52": "98b6c782a27013e4b1917669b2a5ae48d3a7e44ce6a9aa0149aef446473ab0e2",
+      "62": "4cd0854f6740f99a9f9ef7f1ba3360c06b5178846394feb73033da718ac715fe"
+    },
+    "reference_prediction_sha256": {
+      "JPMorgan_Chase": {
+        "42": "ec0b955d2f22af812d776754fa0e5d5176391c8019e5b03c9462c337b7dc5b22",
+        "52": "8e399768cd89fd23114af5f9f3653fde8c0e2b60c2c44245e36e86f2fdd1d863",
+        "62": "145718866e9b9f58d81f69e6b0ec4a9a5c06467bb7dfdb39a27d3b3176dfd399"
+      },
+      "Wells_Fargo": {
+        "42": "2a906ff65a040b39be4f638e937487c13d5a8d8b32a63e5789c8bd9a6c8a4fb0",
+        "52": "9ec8f3b7f1408da13ab90a9e5aff6a6a636b0629efd7c7309b291db1a3bc1b39",
+        "62": "b5dcf20568ff0fb6a70f29fa83c06d9168244638d49abe112ea4cfc1c2c9134c"
+      },
+      "Key_Bank": {
+        "42": "ad1f69233706f3a407d66e778078e361305fc8acd76419fd62361a0550bed781",
+        "52": "db53b53af2ee2123b2fc450dc3c4c373a6013962748492f2e70bc630b2fbb463",
+        "62": "430134abb6d8a4a8723a2c06b03e5c6b0fa0ae2966c256808983e8b2d8ba045c"
+      }
+    },
+    "implementation_sha256": {
+      "run_updated.py": "9782553f237fffd2d39c2dfaa7348abc0601f732ed19546d05886db831f18837",
+      "serve_ensemble_dashboard.py": "ecd1ccaf84fe49e6e45834dfb85d0ecd0ec6c36ad9246402460311bd0d09bd53",
+      "src\\ensemble_explainer.py": "4c5ac1dab12e8e36c22a634a658820a21eafeefe1ce2c16e3a261122be2a67e7",
+      "src\\ensemble_catalog.py": "e7971feaf3346d280931f54368c5c8f7996f69ec6f58be60b1ca0a4403919701",
+      "src\\counterfactuals.py": "ebe3edfbd31f684e6e6ace57f515d8edb574c8ab131244b2b0415cdd9c36168d",
+      "src\\transaction_story.py": "b80e5feab2c19c661169a251a19ad180962e29542758581cd19d7b69a949b6a0",
+      "__pycache__\\explanation_engine.cpython-312.pyc": "3f4fb1294ef22ce77225d019d13929812b404b3c772e8af94f628f2c41cf0680",
+      "__pycache__\\graph_explainer.cpython-312.pyc": "6c049ed4919a704639bcd592249719e78bb028f6eac17b9816b3800512f85f02"
+    },
+    "source_ref": "origin/sia",
+    "evaluation_split": "validation",
+    "test_loaded": false,
+    "aggregation": "arithmetic mean of member probabilities",
+    "threshold_policy": "same 501-quantile maximum-F1 selection rule as Sia training, recalculated per bank on ensemble validation scores and labels",
+    "threshold_split": "validation",
+    "banks": {
+      "JPMorgan_Chase": {
+        "validation_transactions": 64487,
+        "known_fraud": 16,
+        "flagged": 129,
+        "missed_fraud": 0,
+        "threshold": 0.018216593549896885
+      },
+      "Wells_Fargo": {
+        "validation_transactions": 25592,
+        "known_fraud": 22,
+        "flagged": 52,
+        "missed_fraud": 1,
+        "threshold": 0.26483771586293753
+      },
+      "Key_Bank": {
+        "validation_transactions": 11418,
+        "known_fraud": 21,
+        "flagged": 23,
+        "missed_fraud": 4,
+        "threshold": 0.4178731057743216
+      }
+    }
+  },
+  "cache_key": "0fa3442a0eb9e7e62182bb197fa2826233299d9f0f08ca7f26e756a8fb330ea8",
+  "cache_key_inputs": {
+    "schema": "sia-ensemble-on-demand-v1",
+    "bank": "JPMorgan_Chase",
+    "transaction_id": "2951056",
+    "seeds": [
+      42,
+      52,
+      62
+    ],
+    "checkpoint_sha256": {
+      "42": "d650af6959d1da46888f30fb79bbfd888a6ec20743d14d447ea078dc351536f5",
+      "52": "98b6c782a27013e4b1917669b2a5ae48d3a7e44ce6a9aa0149aef446473ab0e2",
+      "62": "4cd0854f6740f99a9f9ef7f1ba3360c06b5178846394feb73033da718ac715fe"
+    },
+    "reference_prediction_sha256": {
+      "42": "ec0b955d2f22af812d776754fa0e5d5176391c8019e5b03c9462c337b7dc5b22",
+      "52": "8e399768cd89fd23114af5f9f3653fde8c0e2b60c2c44245e36e86f2fdd1d863",
+      "62": "145718866e9b9f58d81f69e6b0ec4a9a5c06467bb7dfdb39a27d3b3176dfd399"
+    },
+    "implementation_sha256": {
+      "run_updated.py": "9782553f237fffd2d39c2dfaa7348abc0601f732ed19546d05886db831f18837",
+      "serve_ensemble_dashboard.py": "ecd1ccaf84fe49e6e45834dfb85d0ecd0ec6c36ad9246402460311bd0d09bd53",
+      "src\\ensemble_explainer.py": "4c5ac1dab12e8e36c22a634a658820a21eafeefe1ce2c16e3a261122be2a67e7",
+      "src\\ensemble_catalog.py": "e7971feaf3346d280931f54368c5c8f7996f69ec6f58be60b1ca0a4403919701",
+      "src\\counterfactuals.py": "ebe3edfbd31f684e6e6ace57f515d8edb574c8ab131244b2b0415cdd9c36168d",
+      "src\\transaction_story.py": "b80e5feab2c19c661169a251a19ad180962e29542758581cd19d7b69a949b6a0",
+      "__pycache__\\explanation_engine.cpython-312.pyc": "3f4fb1294ef22ce77225d019d13929812b404b3c772e8af94f628f2c41cf0680",
+      "__pycache__\\graph_explainer.cpython-312.pyc": "6c049ed4919a704639bcd592249719e78bb028f6eac17b9816b3800512f85f02"
+    },
+    "threshold": 0.018216593549896885,
+    "background_size": 32,
+    "methods": {
+      "feature": "exact_empirical_interventional_shap",
+      "graph": "cached_engine_member_perturbation",
+      "counterfactual": "training_supported_constrained_amount_search"
+    }
+  }
+}

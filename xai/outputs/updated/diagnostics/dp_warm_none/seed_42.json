@@ -1,0 +1,101 @@
+{
+  "family": "dp_warm_none",
+  "seed": 42,
+  "source_ref": "origin/philip-dp-secagg-ddp",
+  "checkpoint_sha256": "353a293c68154857545c404176b78f87490d957cb761d146a4e90ffe755c49fe",
+  "checkpoint_hash_in_results": "976942a5e4924635b5e2fb5a6a52aba2f79cb61216cf8acb6a01b540ed68c2d3",
+  "checkpoint_hash_matches_artifact_manifest": true,
+  "validation_metric_parity": {
+    "preprocessing_path": "C:\\Users\\sange\\Downloads\\CapstoneFinal\\xai\\outputs\\updated\\dp_warm_none\\seed_42\\preprocessing.json",
+    "bank_metric_errors": {
+      "JPMorgan_Chase": {
+        "pr_auc": 0.0,
+        "roc_auc": 0.0,
+        "precision": 0.0,
+        "recall": 0.0,
+        "f1": 0.0
+      },
+      "Wells_Fargo": {
+        "pr_auc": 3.3306690738754696e-16,
+        "roc_auc": 1.1102230246251565e-16,
+        "precision": 0.0,
+        "recall": 0.0,
+        "f1": 0.0
+      },
+      "Key_Bank": {
+        "pr_auc": 2.220446049250313e-16,
+        "roc_auc": 0.0,
+        "precision": 0.0,
+        "recall": 0.0,
+        "f1": 0.0
+      }
+    },
+    "test_loaded": false,
+    "checkpoint_sha256": "1eddba2b7adbe5f997ec0342b2a84b24c2efd578b25ca2676b47c62f8f09a7b4",
+    "feature_schema_source": "origin/philip-dp-secagg-ddp:artifacts/dp_level3_secagg/feature_schema.json"
+  },
+  "target_parity_preflight": {
+    "method": "pre-report target parity check",
+    "tolerance": 1e-06,
+    "passed": false,
+    "cases": [
+      {
+        "bank": "JPMorgan_Chase",
+        "transaction_id": "3592925",
+        "index": 59321,
+        "stream_probability": 0.32940244674682617,
+        "xai_probability": 0.32940247697014485,
+        "absolute_error": 3.0223318681077416e-08,
+        "passed": true
+      },
+      {
+        "bank": "JPMorgan_Chase",
+        "transaction_id": "3594822",
+        "index": 63654,
+        "stream_probability": 3.2052950700744987e-05,
+        "xai_probability": 4.8537213947903244e-05,
+        "absolute_error": 1.6484263247158257e-05,
+        "passed": false
+      },
+      {
+        "bank": "Wells_Fargo",
+        "transaction_id": "2965676",
+        "index": 2264,
+        "stream_probability": 0.48926037549972534,
+        "xai_probability": 0.4892603381595357,
+        "absolute_error": 3.734018966250474e-08,
+        "passed": true
+      },
+      {
+        "bank": "Wells_Fargo",
+        "transaction_id": "3445857",
+        "index": 19564,
+        "stream_probability": 2.662832775968127e-05,
+        "xai_probability": 2.7339865702013327e-05,
+        "absolute_error": 7.115379423320578e-07,
+        "passed": true
+      },
+      {
+        "bank": "Key_Bank",
+        "transaction_id": "3007750",
+        "index": 5743,
+        "stream_probability": 0.5457544326782227,
+        "xai_probability": 0.5379407052924802,
+        "absolute_error": 0.007813727385742486,
+        "passed": false
+      },
+      {
+        "bank": "Key_Bank",
+        "transaction_id": "3290172",
+        "index": 6204,
+        "stream_probability": 0.010255100205540657,
+        "xai_probability": 0.010255099823822073,
+        "absolute_error": 3.8171858382507473e-10,
+        "passed": true
+      }
+    ],
+    "test_loaded": false
+  },
+  "status": "blocked_by_target_prediction_parity",
+  "note": "The experiment validation metrics reproduce through its frozen schema and checkpoint, but at least one individual XAI target score does not match the full-stream score. No new transaction reports were generated."
+}

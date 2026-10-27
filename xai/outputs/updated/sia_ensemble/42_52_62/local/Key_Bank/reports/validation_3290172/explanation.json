@@ -1,0 +1,330 @@
+{
+  "schema_version": 1,
+  "bank": "Key_Bank",
+  "transaction_id": "3290172",
+  "split": "validation",
+  "timestamp": "2025-08-18 11:26:01.200",
+  "prediction": {
+    "probability": 0.002880135531692455,
+    "score_type": "uncalibrated arithmetic mean of member probabilities",
+    "decision": null,
+    "decision_note": "No independently calibrated ensemble threshold was available."
+  },
+  "ensemble": {
+    "member_probabilities": [
+      0.000942343904171139,
+      0.006144806742668152,
+      0.0015532559482380748
+    ],
+    "ensemble_probability": 0.002880135531692455,
+    "aggregation": "arithmetic mean of member probabilities"
+  },
+  "feature_explanation": {
+    "base_logit": -9.224222562318237,
+    "target_logit": -5.8470336445221,
+    "additivity_residual": -5.0957434716281114e-08,
+    "units": "logit(mean member probability)",
+    "method": "exact_empirical_interventional_shap",
+    "background_size": 32,
+    "features": [
+      {
+        "feature": "payment_format",
+        "shap_logit": 3.2594956556811234,
+        "value": "ACH"
+      },
+      {
+        "feature": "amount",
+        "shap_logit": 0.05936071655212151,
+        "value": 1128.88
+      },
+      {
+        "feature": "Amount_Received",
+        "shap_logit": 0.05833259652032741,
+        "value": 1128.88
+      },
+      {
+        "feature": "Receiving_Currency",
+        "shap_logit": 0.0,
+        "value": "USD"
+      },
+      {
+        "feature": "currency",
+        "shap_logit": 0.0,
+        "value": "USD"
+      }
+    ],
+    "background_transaction_ids": [
+      "2781820",
+      "2805033",
+      "2516086",
+      "1781254",
+      "1599748",
+      "2531896",
+      "1921332",
+      "1671602",
+      "2825075",
+      "1778006",
+      "2439081",
+      "1723127",
+      "2569421",
+      "1657601",
+      "2036716",
+      "1655649",
+      "2010645",
+      "2650040",
+      "1736114",
+      "2592413",
+      "2705287",
+      "2393544",
+      "1787287",
+      "1853284",
+      "1576680",
+      "2853247",
+      "1582036",
+      "2502422",
+      "2006558",
+      "2158019",
+      "2742477",
+      "2781691"
+    ]
+  },
+  "temporal_explanation": {
+    "observation_window_batches": 8,
+    "target_endpoint_event_count": 1,
+    "transaction_volume_by_currency": {
+      "USD": 1128.88
+    },
+    "time_since_last_seen_seconds": {
+      "sender": 1203020.5,
+      "receiver": 1203020.5
+    },
+    "window_start_seconds_from_origin": 4948114.5,
+    "window_end_seconds_from_origin": 6766117.0,
+    "endpoint_activity_span_seconds": 0.0,
+    "evidence_type": "descriptive observed history; counts/volumes are not extra model inputs or independent attributions",
+    "timing_semantics": "The current decoder does not directly use time deltas. Earlier deltas enter recurrent memory updates. A zero last_seen sentinel is reported as unknown.",
+    "ordering": "only completed original micro-batches; no target-batch transactions included"
+  },
+  "per_member_graph_evidence": [
+    {
+      "seed": 42,
+      "graph_explanation": {
+        "method": "temporal_graph_perturbation",
+        "target": {
+          "source": 4189,
+          "target": 5219
+        },
+        "window_batches": 8,
+        "window_event_count": 8076,
+        "selection": "bounded most-recent k-hop undirected neighborhood; influence measured by chronological replay",
+        "hops": 2,
+        "candidate_count": 1,
+        "important_nodes": [
+          {
+            "node_id": 4189,
+            "role": "sender",
+            "delta_probability": 0.0003910209909175399,
+            "importance": 0.0003910209909175399,
+            "removed_event_count": 1
+          },
+          {
+            "node_id": 5219,
+            "role": "receiver",
+            "delta_probability": 0.0003910209909175399,
+            "importance": 0.0003910209909175399,
+            "removed_event_count": 1
+          }
+        ],
+        "important_edges": [
+          {
+            "key": [
+              3,
+              593
+            ],
+            "split": "validation",
+            "index": 1617,
+            "source": 4189,
+            "target": 5219,
+            "transaction_id": "3014995",
+            "timestamp": "2025-08-04 13:15:40.900",
+            "probability_without": 0.0013333648879275295,
+            "delta_probability": 0.0003910209909175399,
+            "importance": 0.0003910209909175399
+          }
+        ],
+        "fidelity": {
+          "original_probability": 0.0009423438970099896,
+          "unperturbed_replay_error": 0.0,
+          "retained_top_events_probability": 0.0009423434480889478,
+          "sufficiency_absolute_error": 4.489210418331946e-10,
+          "removed_top_events_probability": 0.0013333648879275295,
+          "comprehensiveness_signed_drop": -0.0003910209909175399,
+          "removed_low_events_probability": 0.0013333648879275295,
+          "low_removal_absolute_change": 0.0003910209909175399,
+          "top_removal_absolute_change": 0.0003910209909175399,
+          "retained_event_count": 1,
+          "formula": "sufficiency=abs(p_full-p_only_top); comprehensiveness=p_full-p_without_top",
+          "scope": "Only selected updates retained inside bounded window; pre-window account memory remains intact.",
+          "applicable": true
+        },
+        "delta_definition": "p_after_suppressing_update - p_original; negative means event supported the original fraud score",
+        "limitations": "Not GNNExplainer; approximate bounded search; node effects remove candidate incident updates; not node-feature attribution or causal proof."
+      }
+    },
+    {
+      "seed": 52,
+      "graph_explanation": {
+        "method": "temporal_graph_perturbation",
+        "target": {
+          "source": 4189,
+          "target": 5219
+        },
+        "window_batches": 8,
+        "window_event_count": 8076,
+        "selection": "bounded most-recent k-hop undirected neighborhood; influence measured by chronological replay",
+        "hops": 2,
+        "candidate_count": 1,
+        "important_nodes": [
+          {
+            "node_id": 4189,
+            "role": "sender",
+            "delta_probability": 0.0025427643355879805,
+            "importance": 0.0025427643355879805,
+            "removed_event_count": 1
+          },
+          {
+            "node_id": 5219,
+            "role": "receiver",
+            "delta_probability": 0.0025427643355879805,
+            "importance": 0.0025427643355879805,
+            "removed_event_count": 1
+          }
+        ],
+        "important_edges": [
+          {
+            "key": [
+              3,
+              593
+            ],
+            "split": "validation",
+            "index": 1617,
+            "source": 4189,
+            "target": 5219,
+            "transaction_id": "3014995",
+            "timestamp": "2025-08-04 13:15:40.900",
+            "probability_without": 0.008687571030478373,
+            "delta_probability": 0.0025427643355879805,
+            "importance": 0.0025427643355879805
+          }
+        ],
+        "fidelity": {
+          "original_probability": 0.006144806694890393,
+          "unperturbed_replay_error": 0.0,
+          "retained_top_events_probability": 0.006144806694890393,
+          "sufficiency_absolute_error": 0.0,
+          "removed_top_events_probability": 0.008687571030478373,
+          "comprehensiveness_signed_drop": -0.0025427643355879805,
+          "removed_low_events_probability": 0.008687571030478373,
+          "low_removal_absolute_change": 0.0025427643355879805,
+          "top_removal_absolute_change": 0.0025427643355879805,
+          "retained_event_count": 1,
+          "formula": "sufficiency=abs(p_full-p_only_top); comprehensiveness=p_full-p_without_top",
+          "scope": "Only selected updates retained inside bounded window; pre-window account memory remains intact.",
+          "applicable": true
+        },
+        "delta_definition": "p_after_suppressing_update - p_original; negative means event supported the original fraud score",
+        "limitations": "Not GNNExplainer; approximate bounded search; node effects remove candidate incident updates; not node-feature attribution or causal proof."
+      }
+    },
+    {
+      "seed": 62,
+      "graph_explanation": {
+        "method": "temporal_graph_perturbation",
+        "target": {
+          "source": 4189,
+          "target": 5219
+        },
+        "window_batches": 8,
+        "window_event_count": 8076,
+        "selection": "bounded most-recent k-hop undirected neighborhood; influence measured by chronological replay",
+        "hops": 2,
+        "candidate_count": 1,
+        "important_nodes": [
+          {
+            "node_id": 4189,
+            "role": "sender",
+            "delta_probability": 0.0007697640335621561,
+            "importance": 0.0007697640335621561,
+            "removed_event_count": 1
+          },
+          {
+            "node_id": 5219,
+            "role": "receiver",
+            "delta_probability": 0.0007697640335621561,
+            "importance": 0.0007697640335621561,
+            "removed_event_count": 1
+          }
+        ],
+        "important_edges": [
+          {
+            "key": [
+              3,
+              593
+            ],
+            "split": "validation",
+            "index": 1617,
+            "source": 4189,
+            "target": 5219,
+            "transaction_id": "3014995",
+            "timestamp": "2025-08-04 13:15:40.900",
+            "probability_without": 0.002323019956623338,
+            "delta_probability": 0.0007697640335621561,
+            "importance": 0.0007697640335621561
+          }
+        ],
+        "fidelity": {
+          "original_probability": 0.0015532559230611817,
+          "unperturbed_replay_error": 0.0,
+          "retained_top_events_probability": 0.0015532566625610787,
+          "sufficiency_absolute_error": 7.394998970816635e-10,
+          "removed_top_events_probability": 0.002323019956623338,
+          "comprehensiveness_signed_drop": -0.0007697640335621561,
+          "removed_low_events_probability": 0.002323019956623338,
+          "low_removal_absolute_change": 0.0007697640335621561,
+          "top_removal_absolute_change": 0.0007697640335621561,
+          "retained_event_count": 1,
+          "formula": "sufficiency=abs(p_full-p_only_top); comprehensiveness=p_full-p_without_top",
+          "scope": "Only selected updates retained inside bounded window; pre-window account memory remains intact.",
+          "applicable": true
+        },
+        "delta_definition": "p_after_suppressing_update - p_original; negative means event supported the original fraud score",
+        "limitations": "Not GNNExplainer; approximate bounded search; node effects remove candidate incident updates; not node-feature attribution or causal proof."
+      }
+    }
+  ],
+  "limitations": [
+    "Feature SHAP targets the actual mean-probability ensemble with pre-event memory fixed for each member.",
+    "Graph perturbation evidence is not recomputed for the ensemble; stored graph evidence is from the seed-42 member only.",
+    "The mean probability has no independent ensemble alert threshold.",
+    "This is model behavior, not fraud, laundering typology, or causal evidence."
+  ],
+  "xai_provenance": {
+    "family": "sia_three_member_probability_ensemble",
+    "seeds": [
+      42,
+      52,
+      62
+    ],
+    "checkpoint_sha256": {
+      "42": "d650af6959d1da46888f30fb79bbfd888a6ec20743d14d447ea078dc351536f5",
+      "52": "98b6c782a27013e4b1917669b2a5ae48d3a7e44ce6a9aa0149aef446473ab0e2",
+      "62": "4cd0854f6740f99a9f9ef7f1ba3360c06b5178846394feb73033da718ac715fe"
+    },
+    "source_ref": "origin/sia",
+    "evaluation_split": "validation",
+    "test_loaded": false,
+    "privacy_mode": "none",
+    "aggregation": "mean of probabilities",
+    "explanation_scope": "exact empirical interventional feature SHAP for logit(mean member probability); per-member graph explanations only"
+  }
+}

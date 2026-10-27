@@ -1,0 +1,1149 @@
+{
+  "schema_version": 3,
+  "transaction_id": "2928144",
+  "bank": "Key_Bank",
+  "split": "validation",
+  "chronological_index": 0,
+  "timestamp": "2025-08-01 00:01:44.200",
+  "prediction": {
+    "probability": 3.1233228128257906e-06,
+    "threshold": 0.3759195153712922,
+    "class": "not_fraud",
+    "score_type": "saved adaptive federated global model probability",
+    "threshold_selection": "saved per-bank threshold from the selected adaptive federated model's metrics.json; no dashboard threshold fitting"
+  },
+  "feature_explanation": {
+    "method": "exact_empirical_group_interventional_shap_v1",
+    "units": "raw_logit",
+    "scope": "transaction_groups_given_fixed_account_memory",
+    "base_logit": -17.22008180618286,
+    "target_logit": -12.67660903930664,
+    "target_probability": 3.1233257990651448e-06,
+    "additivity_residual": 5.960464477539063e-08,
+    "features": [
+      {
+        "feature": "payment_method",
+        "label": "Payment method",
+        "columns": [
+          "payment_format"
+        ],
+        "value": "payment_format: ACH",
+        "shap_logit": 3.9944190233945847,
+        "ablation_logit_drop": 4.014915645122528
+      },
+      {
+        "feature": "transfer_terms",
+        "label": "Amount and currencies (joint)",
+        "columns": [
+          "amount",
+          "Amount_Received",
+          "currency",
+          "Receiving_Currency"
+        ],
+        "value": "amount: 3187.01 / Amount_Received: 3187.01 / currency: USD / Receiving_Currency: USD",
+        "shap_logit": 0.5490536838769913,
+        "ablation_logit_drop": 0.5695503056049347
+      }
+    ],
+    "groups": {
+      "payment_method": [
+        "payment_format"
+      ],
+      "transfer_terms": [
+        "amount",
+        "Amount_Received",
+        "currency",
+        "Receiving_Currency"
+      ]
+    },
+    "seed": 42,
+    "background_size": 32,
+    "background_txn_ids": [
+      "2781820",
+      "2805033",
+      "2516086",
+      "1781254",
+      "1599748",
+      "2531896",
+      "1921332",
+      "1671602",
+      "2825075",
+      "1778006",
+      "2439081",
+      "1723127",
+      "2569421",
+      "1657601",
+      "2036716",
+      "1655649",
+      "2010645",
+      "2650040",
+      "1736114",
+      "2592413",
+      "2705287",
+      "2393544",
+      "1787287",
+      "1853284",
+      "1576680",
+      "2853247",
+      "1582036",
+      "2502422",
+      "2006558",
+      "2158019",
+      "2742477",
+      "2781691"
+    ],
+    "limitations": [
+      "Joint transfer attribution cannot be split into separate amount and currency effects.",
+      "Other dependencies between groups and reference sensitivity remain; this is not causal evidence."
+    ]
+  },
+  "graph_explanation": {
+    "method": "temporal_graph_perturbation",
+    "target": {
+      "source": 2625,
+      "target": 1822
+    },
+    "window_batches": 8,
+    "window_event_count": 8076,
+    "selection": "bounded most-recent k-hop undirected neighborhood; influence measured by chronological replay",
+    "hops": 2,
+    "candidate_count": 12,
+    "important_nodes": [
+      {
+        "node_id": 1822,
+        "role": "receiver",
+        "delta_probability": -1.0160736953350078e-06,
+        "importance": 1.0160736953350078e-06,
+        "removed_event_count": 12
+      },
+      {
+        "node_id": 2625,
+        "role": "sender",
+        "delta_probability": -7.750733922573583e-07,
+        "importance": 7.750733922573583e-07,
+        "removed_event_count": 1
+      },
+      {
+        "node_id": 3131,
+        "role": "neighbor",
+        "delta_probability": 1.0177947371119639e-07,
+        "importance": 1.0177947371119639e-07,
+        "removed_event_count": 1
+      },
+      {
+        "node_id": 2663,
+        "role": "neighbor",
+        "delta_probability": -6.439207836423648e-08,
+        "importance": 6.439207836423648e-08,
+        "removed_event_count": 1
+      },
+      {
+        "node_id": 3689,
+        "role": "neighbor",
+        "delta_probability": -5.230556815718114e-08,
+        "importance": 5.230556815718114e-08,
+        "removed_event_count": 1
+      },
+      {
+        "node_id": 2876,
+        "role": "neighbor",
+        "delta_probability": -4.271362642631731e-08,
+        "importance": 4.271362642631731e-08,
+        "removed_event_count": 1
+      },
+      {
+        "node_id": 3669,
+        "role": "neighbor",
+        "delta_probability": -4.024186845661629e-08,
+        "importance": 4.024186845661629e-08,
+        "removed_event_count": 1
+      },
+      {
+        "node_id": 3123,
+        "role": "neighbor",
+        "delta_probability": -1.964455302680132e-08,
+        "importance": 1.964455302680132e-08,
+        "removed_event_count": 2
+      },
+      {
+        "node_id": 2630,
+        "role": "neighbor",
+        "delta_probability": -1.453750222142025e-08,
+        "importance": 1.453750222142025e-08,
+        "removed_event_count": 1
+      },
+      {
+        "node_id": 2476,
+        "role": "neighbor",
+        "delta_probability": 1.0042165394164103e-08,
+        "importance": 1.0042165394164103e-08,
+        "removed_event_count": 1
+      },
+      {
+        "node_id": 2709,
+        "role": "neighbor",
+        "delta_probability": 8.739579629982997e-09,
+        "importance": 8.739579629982997e-09,
+        "removed_event_count": 1
+      },
+      {
+        "node_id": 3661,
+        "role": "neighbor",
+        "delta_probability": -4.669969931320714e-09,
+        "importance": 4.669969931320714e-09,
+        "removed_event_count": 1
+      }
+    ],
+    "important_edges": [
+      {
+        "key": [
+          5,
+          380
+        ],
+        "split": "training",
+        "index": 19836,
+        "source": 2625,
+        "target": 1822,
+        "transaction_id": "2737282",
+        "timestamp": "2025-07-25 16:27:57.600",
+        "probability_without": 2.3482524068077865e-06,
+        "delta_probability": -7.750733922573583e-07,
+        "importance": 7.750733922573583e-07
+      },
+      {
+        "key": [
+          7,
+          720
+        ],
+        "split": "training",
+        "index": 22224,
+        "source": 3131,
+        "target": 1822,
+        "transaction_id": "2876577",
+        "timestamp": "2025-07-31 16:27:48.300",
+        "probability_without": 3.225105272776341e-06,
+        "delta_probability": 1.0177947371119639e-07,
+        "importance": 1.0177947371119639e-07
+      },
+      {
+        "key": [
+          7,
+          614
+        ],
+        "split": "training",
+        "index": 22118,
+        "source": 2663,
+        "target": 1822,
+        "transaction_id": "2864031",
+        "timestamp": "2025-07-31 15:14:16.100",
+        "probability_without": 3.0589337207009083e-06,
+        "delta_probability": -6.439207836423648e-08,
+        "importance": 6.439207836423648e-08
+      },
+      {
+        "key": [
+          7,
+          454
+        ],
+        "split": "training",
+        "index": 21958,
+        "source": 3689,
+        "target": 1822,
+        "transaction_id": "2892677",
+        "timestamp": "2025-07-31 12:48:47.900",
+        "probability_without": 3.0710202309079636e-06,
+        "delta_probability": -5.230556815718114e-08,
+        "importance": 5.230556815718114e-08
+      },
+      {
+        "key": [
+          7,
+          498
+        ],
+        "split": "training",
+        "index": 22002,
+        "source": 2876,
+        "target": 1822,
+        "transaction_id": "2869236",
+        "timestamp": "2025-07-31 13:46:48.400",
+        "probability_without": 3.0806121726388275e-06,
+        "delta_probability": -4.271362642631731e-08,
+        "importance": 4.271362642631731e-08
+      },
+      {
+        "key": [
+          7,
+          766
+        ],
+        "split": "training",
+        "index": 22270,
+        "source": 3669,
+        "target": 1822,
+        "transaction_id": "2892246",
+        "timestamp": "2025-07-31 17:05:07.500",
+        "probability_without": 3.0830839306085285e-06,
+        "delta_probability": -4.024186845661629e-08,
+        "importance": 4.024186845661629e-08
+      },
+      {
+        "key": [
+          7,
+          612
+        ],
+        "split": "training",
+        "index": 22116,
+        "source": 3123,
+        "target": 1822,
+        "transaction_id": "2876196",
+        "timestamp": "2025-07-31 15:12:50.600",
+        "probability_without": 3.096945931019696e-06,
+        "delta_probability": -2.637986804544893e-08,
+        "importance": 2.637986804544893e-08
+      },
+      {
+        "key": [
+          7,
+          699
+        ],
+        "split": "training",
+        "index": 22203,
+        "source": 2630,
+        "target": 1822,
+        "transaction_id": "2863008",
+        "timestamp": "2025-07-31 16:11:12.600",
+        "probability_without": 3.1087882968437245e-06,
+        "delta_probability": -1.453750222142025e-08,
+        "importance": 1.453750222142025e-08
+      },
+      {
+        "key": [
+          5,
+          155
+        ],
+        "split": "training",
+        "index": 19611,
+        "source": 3123,
+        "target": 1822,
+        "transaction_id": "2745100",
+        "timestamp": "2025-07-25 10:33:49.700",
+        "probability_without": 3.1371712652762374e-06,
+        "delta_probability": 1.3845466211092627e-08,
+        "importance": 1.3845466211092627e-08
+      },
+      {
+        "key": [
+          7,
+          714
+        ],
+        "split": "training",
+        "index": 22218,
+        "source": 2476,
+        "target": 1822,
+        "transaction_id": "2870350",
+        "timestamp": "2025-07-31 16:25:07.500",
+        "probability_without": 3.133367964459309e-06,
+        "delta_probability": 1.0042165394164103e-08,
+        "importance": 1.0042165394164103e-08
+      },
+      {
+        "key": [
+          7,
+          790
+        ],
+        "split": "training",
+        "index": 22294,
+        "source": 2709,
+        "target": 1822,
+        "transaction_id": "2865196",
+        "timestamp": "2025-07-31 17:26:49.800",
+        "probability_without": 3.1320653786951278e-06,
+        "delta_probability": 8.739579629982997e-09,
+        "importance": 8.739579629982997e-09
+      },
+      {
+        "key": [
+          7,
+          842
+        ],
+        "split": "training",
+        "index": 22346,
+        "source": 3661,
+        "target": 1822,
+        "transaction_id": "2892166",
+        "timestamp": "2025-07-31 18:17:19.100",
+        "probability_without": 3.118655829133824e-06,
+        "delta_probability": -4.669969931320714e-09,
+        "importance": 4.669969931320714e-09
+      }
+    ],
+    "fidelity": {
+      "original_probability": 3.1233257990651448e-06,
+      "unperturbed_replay_error": 0.0,
+      "retained_top_events_probability": 1.310716613441445e-06,
+      "sufficiency_absolute_error": 1.8126091856236998e-06,
+      "removed_top_events_probability": 2.3810659772059553e-06,
+      "comprehensiveness_signed_drop": 7.422598218591895e-07,
+      "removed_low_events_probability": 3.1366746607599333e-06,
+      "low_removal_absolute_change": 1.3348861694788563e-08,
+      "top_removal_absolute_change": 7.422598218591895e-07,
+      "retained_event_count": 3,
+      "formula": "sufficiency=abs(p_full-p_only_top); comprehensiveness=p_full-p_without_top",
+      "scope": "Only selected updates retained inside bounded window; pre-window account memory remains intact.",
+      "applicable": true
+    },
+    "delta_definition": "p_after_suppressing_update - p_original; negative means event supported the original fraud score",
+    "limitations": "Not GNNExplainer; approximate bounded search; node effects remove candidate incident updates; not node-feature attribution or causal proof."
+  },
+  "temporal_explanation": {
+    "observation_window_batches": 8,
+    "target_endpoint_event_count": 134,
+    "transaction_volume_by_currency": {
+      "USD": 267201.6
+    },
+    "time_since_last_seen_seconds": {
+      "sender": 545626.5,
+      "receiver": 20665.0
+    },
+    "window_start_seconds_from_origin": 3344807.75,
+    "window_end_seconds_from_origin": 5270145.5,
+    "endpoint_activity_span_seconds": 1902849.5,
+    "evidence_type": "descriptive observed history; counts/volumes are not extra model inputs or independent attributions",
+    "timing_semantics": "The current decoder does not directly use time deltas. Earlier deltas enter recurrent memory updates. A zero last_seen sentinel is reported as unknown.",
+    "ordering": "only completed original micro-batches; no target-batch transactions included"
+  },
+  "verification": {
+    "existing_evaluation_probability": 3.1233228128257906e-06,
+    "direct_model_probability": 3.1233257686835714e-06,
+    "xai_probability": 3.123325612901008e-06,
+    "absolute_errors": {
+      "original_vs_direct": 2.9558577807620168e-12,
+      "original_vs_xai": 2.800075217365336e-12
+    },
+    "tolerance": 1e-06,
+    "passed": true,
+    "known_leakage_features_excluded": true,
+    "model_saved_catalog_error": 2.800075217365336e-12,
+    "explained_checkpoint_sha256": "d650af6959d1da46888f30fb79bbfd888a6ec20743d14d447ea078dc351536f5",
+    "saved_threshold_used": true,
+    "model_count": 1
+  },
+  "evaluation": {
+    "feature_fidelity": {
+      "k": 2,
+      "original_probability": 3.123325612901008e-06,
+      "formula": "signed_drop = p(original) - mean_background p(masked); absolute_change = abs(signed_drop)",
+      "top": {
+        "features": [
+          "payment_format",
+          "amount"
+        ],
+        "mean_logit": -16.967626571655273,
+        "mean_probability": 1.8401739924069875e-06,
+        "signed_drop": 1.2831516204940204e-06,
+        "absolute_change": 1.2831516204940204e-06
+      },
+      "low": {
+        "features": [
+          "Receiving_Currency",
+          "currency"
+        ],
+        "mean_logit": -12.67660903930664,
+        "mean_probability": 3.12332561290109e-06,
+        "signed_drop": -8.216219588366713e-20,
+        "absolute_change": 8.216219588366713e-20
+      },
+      "random": {
+        "features": [
+          "amount",
+          "Receiving_Currency"
+        ],
+        "mean_logit": -12.975564956665039,
+        "mean_probability": 2.3193064116196157e-06,
+        "signed_drop": 8.040192012813923e-07,
+        "absolute_change": 8.040192012813923e-07
+      },
+      "top_exceeds_low_absolute_change": true
+    },
+    "feature_stability": {
+      "runs": 3,
+      "top_k": 3,
+      "nonzero_top_features": [
+        [
+          "Amount_Received",
+          "amount",
+          "payment_format"
+        ],
+        [
+          "Amount_Received",
+          "amount",
+          "payment_format"
+        ],
+        [
+          "Amount_Received",
+          "amount",
+          "payment_format"
+        ]
+      ],
+      "pairwise_jaccard": [
+        1.0,
+        1.0,
+        1.0
+      ],
+      "mean_jaccard": 1.0,
+      "formula": "|nonzero_top_k(A) intersection nonzero_top_k(B)| / |union|; empty/empty = 1",
+      "scope": "training-background resampling, not a general robustness guarantee"
+    }
+  },
+  "config": {
+    "background_size": 32,
+    "seed": 42,
+    "history_batches": 8,
+    "hops": 2,
+    "max_events": 12,
+    "max_nodes": 12,
+    "top_k": 3,
+    "stability_runs": 3,
+    "probability_tolerance": 1e-06
+  },
+  "runtime_seconds": 5.825708399999712,
+  "provenance": {
+    "checkpoint": "C:\\Users\\sange\\Downloads\\CapstoneFinal\\tmp\\xai_adaptive_model_0kgnsxbf\\global_model.pt",
+    "checkpoint_sha256": "d650af6959d1da46888f30fb79bbfd888a6ec20743d14d447ea078dc351536f5",
+    "mode": "federated",
+    "batch_size": 1024,
+    "encoder_source": "verified JSON artifact; no runtime fitting",
+    "preprocessing_sha256": "8f42764a7a22242bb2a879106cf9029cbb4b0247b875d26bfc4c0fb2e049c31f",
+    "legacy_verification": {
+      "validation": {
+        "metrics": {
+          "pr_auc": 0.9199227981071854,
+          "roc_auc": 0.998742359100348,
+          "precision": 0.782608695652174,
+          "recall": 0.8571428571428571,
+          "f1": 0.8181818181818182
+        },
+        "saved_metric_absolute_errors": {
+          "pr_auc": 2.220446049250313e-16,
+          "roc_auc": 0.0,
+          "precision": 0.0,
+          "recall": 0.0,
+          "f1": 0.0
+        },
+        "max_probability_error": 0.0
+      }
+    },
+    "calibration": "none",
+    "input_sha256": {
+      "configuration\\model_feature_columns.json": "6e3f3bfc52667427398844255f82a35473d3740564ac4085e6514422b507d87b",
+      "training\\Key_Bank\\edge_list.csv.gz": "244ea646f28ce91519c3dbbaffc163dc20023d046a34c51ae1c1eb8363b6931c",
+      "training\\Key_Bank\\ground_truth.csv.gz": "67432db20c50ca999a4b65e4d126a17b64cdec146eb028bb62e9282fa05a3cca",
+      "training\\Key_Bank\\node_features.csv.gz": "96ae6600175056bde806b76bc1b4ee33db3c415dbbfcfbc3e1dbbfbfc6e1ccda",
+      "training\\Key_Bank\\node_map.csv.gz": "3294ae9b270092b250f4430acd2be8404664ac80ba2ab5b3be1c73e1aca59943",
+      "validation\\Key_Bank\\edge_list.csv.gz": "8ceef1da961eb5b293668f533dd2b3358ab418fd08353787a7c3bbb9fa58520d",
+      "validation\\Key_Bank\\ground_truth.csv.gz": "92cebff95cfaaa5f236c567c292e954745b54d5cf872ae4719ce73e7e0fddcd6",
+      "validation\\Key_Bank\\node_features.csv.gz": "309a47ae25ead1cbf2cabfdde3e3dfba170e5ca754d9261e26fe74c78f31ecb2",
+      "validation\\Key_Bank\\node_map.csv.gz": "94e08ef84a4ae4c4ddd1719084455dbbea7536c4b2433051af5087dcf5ec1c2c"
+    }
+  },
+  "limitations": [
+    "Model explanations do not establish fraud or causality; scores are uncalibrated.",
+    "Feature SHAP holds account memory fixed; static node-feature attribution is not implemented.",
+    "Temporal graph perturbation is a bounded replay intervention, not GNNExplainer. Earlier anchor memory remains intact.",
+    "Interventional SHAP hybrids can be unrealistic for correlated fields; exactness is relative to the sampled background.",
+    "Legacy preprocessing reproduces current original evaluation and saved metrics; original fitted objects were not preserved.",
+    "The original fixed-size batching and timestamp-tie behavior are preserved.",
+    "This is the selected adaptive federated continual model checkpoint; it was trained without formal differential privacy."
+  ],
+  "legacy_feature_explanation": {
+    "base_logit": -17.22008180618286,
+    "target_logit": -12.676609098911285,
+    "additivity_residual": 0.0,
+    "coalitions": 32,
+    "features": [
+      {
+        "feature": "payment_format",
+        "shap_logit": 3.9941078027089434,
+        "ablation_logit_drop": 4.014915585517883,
+        "value": "ACH"
+      },
+      {
+        "feature": "amount",
+        "shap_logit": 0.287266140182813,
+        "ablation_logit_drop": 0.29895642399787903,
+        "value": 3187.01
+      },
+      {
+        "feature": "Amount_Received",
+        "shap_logit": 0.2620987643798192,
+        "ablation_logit_drop": 0.2723645567893982,
+        "value": 3187.01
+      },
+      {
+        "feature": "Receiving_Currency",
+        "shap_logit": 0.0,
+        "ablation_logit_drop": 0.0,
+        "value": "USD"
+      },
+      {
+        "feature": "currency",
+        "shap_logit": 0.0,
+        "ablation_logit_drop": 0.0,
+        "value": "USD"
+      }
+    ],
+    "method": "exact_empirical_interventional_shap",
+    "units": "raw_logit",
+    "scope": "transaction_features_given_fixed_account_memory",
+    "seed": 42,
+    "background_size": 32,
+    "background_txn_ids": [
+      "2781820",
+      "2805033",
+      "2516086",
+      "1781254",
+      "1599748",
+      "2531896",
+      "1921332",
+      "1671602",
+      "2825075",
+      "1778006",
+      "2439081",
+      "1723127",
+      "2569421",
+      "1657601",
+      "2036716",
+      "1655649",
+      "2010645",
+      "2650040",
+      "1736114",
+      "2592413",
+      "2705287",
+      "2393544",
+      "1787287",
+      "1853284",
+      "1576680",
+      "2853247",
+      "1582036",
+      "2502422",
+      "2006558",
+      "2158019",
+      "2742477",
+      "2781691"
+    ]
+  },
+  "evaluation_label": "not_fraud",
+  "model": {
+    "family": "adaptive_federated_global_model",
+    "seed": 42,
+    "best_round": 4,
+    "model_count": 1,
+    "checkpoint_sha256": "d650af6959d1da46888f30fb79bbfd888a6ec20743d14d447ea078dc351536f5"
+  },
+  "counterfactual_explanation": {
+    "method": "training_supported_constrained_amount_search",
+    "status": "no_threshold_flip_found",
+    "threshold": 0.3759195153712922,
+    "original_class": "non_fraud",
+    "original_probability": 3.1233257990651448e-06,
+    "candidates_evaluated": 9,
+    "counterfactuals": [],
+    "interpretation": "Model sensitivity only; not advice to evade controls or evidence of real-world intent.",
+    "limitations": [
+      "only amount fields were varied",
+      "account memory and event history were held fixed",
+      "training-supported values do not guarantee real-world plausibility"
+    ]
+  },
+  "xai_provenance": {
+    "schema": "adaptive-federated-single-model-group-shap-v2",
+    "family": "adaptive_federated_global_model",
+    "seed": 42,
+    "model_count": 1,
+    "ensemble": false,
+    "best_round": 4,
+    "training_rounds": 4,
+    "source_ref": "origin/sia",
+    "checkpoint_path": "origin/sia:artifacts/research_adaptive_fcl/warm_start/federated/context_harmonized/seed_42/global_model.pt",
+    "checkpoint_sha256": "d650af6959d1da46888f30fb79bbfd888a6ec20743d14d447ea078dc351536f5",
+    "inference_checkpoint_sha256": "d650af6959d1da46888f30fb79bbfd888a6ec20743d14d447ea078dc351536f5",
+    "metrics_path": "origin/sia:artifacts/research_adaptive_fcl/warm_start/federated/context_harmonized/seed_42/metrics.json",
+    "metrics_sha256": "ba6c6e33b87d6d7b4c95f2e45e3db25786d9cbdceb43232a3d0bcc4a22086778",
+    "preprocessing_sha256": "8f42764a7a22242bb2a879106cf9029cbb4b0247b875d26bfc4c0fb2e049c31f",
+    "reference_prediction_sha256": {
+      "JPMorgan_Chase": "ec0b955d2f22af812d776754fa0e5d5176391c8019e5b03c9462c337b7dc5b22",
+      "Wells_Fargo": "2a906ff65a040b39be4f638e937487c13d5a8d8b32a63e5789c8bd9a6c8a4fb0",
+      "Key_Bank": "ad1f69233706f3a407d66e778078e361305fc8acd76419fd62361a0550bed781"
+    },
+    "evaluation_split": "validation",
+    "test_loaded": false,
+    "privacy_mode": "none",
+    "threshold_policy": "saved per-bank threshold from the selected adaptive federated model's metrics.json; no dashboard threshold fitting",
+    "banks": {
+      "JPMorgan_Chase": {
+        "validation_transactions": 64487,
+        "known_fraud": 16,
+        "flagged": 129,
+        "missed_fraud": 0,
+        "threshold": 0.017805186897516156,
+        "validation_parity": {
+          "passed": true,
+          "metric_absolute_errors": {
+            "pr_auc": 1.1102230246251565e-16,
+            "roc_auc": 1.1102230246251565e-16,
+            "precision": 0.0,
+            "recall": 0.0,
+            "f1": 0.0
+          },
+          "metrics": {
+            "pr_auc": 0.8903013804800092,
+            "roc_auc": 0.9999389260287571,
+            "precision": 0.12403100775193798,
+            "recall": 1.0,
+            "f1": 0.2206896551724138
+          }
+        }
+      },
+      "Wells_Fargo": {
+        "validation_transactions": 25592,
+        "known_fraud": 22,
+        "flagged": 52,
+        "missed_fraud": 1,
+        "threshold": 0.1868941614329799,
+        "validation_parity": {
+          "passed": true,
+          "metric_absolute_errors": {
+            "pr_auc": 1.1102230246251565e-16,
+            "roc_auc": 0.0,
+            "precision": 0.0,
+            "recall": 0.0,
+            "f1": 0.0
+          },
+          "metrics": {
+            "pr_auc": 0.9599386797680174,
+            "roc_auc": 0.9998453443310698,
+            "precision": 0.40384615384615385,
+            "recall": 0.9545454545454546,
+            "f1": 0.5675675675675675
+          }
+        }
+      },
+      "Key_Bank": {
+        "validation_transactions": 11418,
+        "known_fraud": 21,
+        "flagged": 23,
+        "missed_fraud": 3,
+        "threshold": 0.3759195153712922,
+        "validation_parity": {
+          "passed": true,
+          "metric_absolute_errors": {
+            "pr_auc": 2.220446049250313e-16,
+            "roc_auc": 0.0,
+            "precision": 0.0,
+            "recall": 0.0,
+            "f1": 0.0
+          },
+          "metrics": {
+            "pr_auc": 0.9199227981071854,
+            "roc_auc": 0.998742359100348,
+            "precision": 0.782608695652174,
+            "recall": 0.8571428571428571,
+            "f1": 0.8181818181818182
+          }
+        }
+      }
+    },
+    "implementation_sha256": {
+      "serve_dashboard.py": "cf1397d0bb89161350aabc3dc5fbfafb7aa8671923a9e389a55979d6554e030c",
+      "src\\model_catalog.py": "44f41c7eb1f5ab45b17110a65d45ad4cdcfb8539e77bbe7ae96aceb94c0ab2c6",
+      "src\\counterfactuals.py": "ebe3edfbd31f684e6e6ace57f515d8edb574c8ab131244b2b0415cdd9c36168d",
+      "src\\transaction_story.py": "18ff2e5c972e5615955b776dfff94bd61fb134666dad04a16faf4edb1b0dc56a",
+      "src\\grouped_features.py": "748813ce105fb2217f99381edbc604c95babcb51d5d5b1a3f4c6f06e3dd5ee8e",
+      "__pycache__\\explanation_engine.cpython-312.pyc": "3f4fb1294ef22ce77225d019d13929812b404b3c772e8af94f628f2c41cf0680",
+      "__pycache__\\temporal.cpython-312.pyc": "994a1a367933775f4db9c98d99eb879b70c1ba4dfddb68cd5234eae1e1e1dc6c",
+      "__pycache__\\graph_explainer.cpython-312.pyc": "6c049ed4919a704639bcd592249719e78bb028f6eac17b9816b3800512f85f02"
+    }
+  },
+  "cache_key": "74698b83c601a618f6ba362eb955713155a782eafb7171f5126fa88cb25b7590",
+  "cache_key_inputs": {
+    "schema": "adaptive-federated-single-model-group-shap-v2",
+    "bank": "Key_Bank",
+    "transaction_id": "2928144",
+    "seed": 42,
+    "checkpoint_sha256": "d650af6959d1da46888f30fb79bbfd888a6ec20743d14d447ea078dc351536f5",
+    "preprocessing_sha256": "8f42764a7a22242bb2a879106cf9029cbb4b0247b875d26bfc4c0fb2e049c31f",
+    "reference_prediction_sha256": "ad1f69233706f3a407d66e778078e361305fc8acd76419fd62361a0550bed781",
+    "threshold": 0.3759195153712922,
+    "background_size": 32,
+    "implementation_sha256": {
+      "serve_dashboard.py": "cf1397d0bb89161350aabc3dc5fbfafb7aa8671923a9e389a55979d6554e030c",
+      "src\\model_catalog.py": "44f41c7eb1f5ab45b17110a65d45ad4cdcfb8539e77bbe7ae96aceb94c0ab2c6",
+      "src\\counterfactuals.py": "ebe3edfbd31f684e6e6ace57f515d8edb574c8ab131244b2b0415cdd9c36168d",
+      "src\\transaction_story.py": "18ff2e5c972e5615955b776dfff94bd61fb134666dad04a16faf4edb1b0dc56a",
+      "src\\grouped_features.py": "748813ce105fb2217f99381edbc604c95babcb51d5d5b1a3f4c6f06e3dd5ee8e",
+      "__pycache__\\explanation_engine.cpython-312.pyc": "3f4fb1294ef22ce77225d019d13929812b404b3c772e8af94f628f2c41cf0680",
+      "__pycache__\\temporal.cpython-312.pyc": "994a1a367933775f4db9c98d99eb879b70c1ba4dfddb68cd5234eae1e1e1dc6c",
+      "__pycache__\\graph_explainer.cpython-312.pyc": "6c049ed4919a704639bcd592249719e78bb028f6eac17b9816b3800512f85f02"
+    }
+  },
+  "transaction_story": {
+    "schema_version": 1,
+    "selected_transfer": {
+      "transaction_id": "2928144",
+      "source": 2625,
+      "target": 1822,
+      "timestamp": "2025-08-01 00:01:44.200",
+      "amount": 3187.01,
+      "currency": "USD",
+      "payment_method": "ACH",
+      "source_alias": "A",
+      "target_alias": "B",
+      "source_account_id": "2416154199",
+      "target_account_id": "2348984254",
+      "kind": "selected"
+    },
+    "accounts": [
+      {
+        "alias": "A",
+        "node_id": 2625,
+        "account_id": "2416154199",
+        "role": "sender"
+      },
+      {
+        "alias": "B",
+        "node_id": 1822,
+        "account_id": "2348984254",
+        "role": "receiver"
+      },
+      {
+        "alias": "C",
+        "node_id": 3123,
+        "account_id": "2416201159",
+        "role": "connected account"
+      },
+      {
+        "alias": "D",
+        "node_id": 3689,
+        "account_id": "2416254287",
+        "role": "connected account"
+      },
+      {
+        "alias": "E",
+        "node_id": 2876,
+        "account_id": "2416176172",
+        "role": "connected account"
+      },
+      {
+        "alias": "F",
+        "node_id": 2663,
+        "account_id": "2416158026",
+        "role": "connected account"
+      },
+      {
+        "alias": "G",
+        "node_id": 3131,
+        "account_id": "2416202324",
+        "role": "connected account"
+      },
+      {
+        "alias": "H",
+        "node_id": 3669,
+        "account_id": "2416252877",
+        "role": "connected account"
+      }
+    ],
+    "transfers": [
+      {
+        "transaction_id": "2745100",
+        "source": 3123,
+        "target": 1822,
+        "timestamp": "2025-07-25 10:33:49.700000",
+        "amount": 254.79,
+        "currency": "USD",
+        "payment_method": "ACH",
+        "kind": "earlier",
+        "ensemble_effect": {
+          "original_model_score": 3.1233228128257906e-06,
+          "model_score_without_event": 3.1371712652762374e-06,
+          "score_support": -1.3848452450446805e-08,
+          "verified_model_count": 1,
+          "scope": "one historical update suppressed in the selected global model's bounded replay; pre-window account memory retained"
+        },
+        "source_alias": "C",
+        "target_alias": "B",
+        "source_account_id": "2416201159",
+        "target_account_id": "2348984254"
+      },
+      {
+        "transaction_id": "2737282",
+        "source": 2625,
+        "target": 1822,
+        "timestamp": "2025-07-25 16:27:57.600000",
+        "amount": 8202.22,
+        "currency": "USD",
+        "payment_method": "ACH",
+        "kind": "earlier",
+        "ensemble_effect": {
+          "original_model_score": 3.1233228128257906e-06,
+          "model_score_without_event": 2.3482524068077865e-06,
+          "score_support": 7.750704060180041e-07,
+          "verified_model_count": 1,
+          "scope": "one historical update suppressed in the selected global model's bounded replay; pre-window account memory retained"
+        },
+        "source_alias": "A",
+        "target_alias": "B",
+        "source_account_id": "2416154199",
+        "target_account_id": "2348984254"
+      },
+      {
+        "transaction_id": "2892677",
+        "source": 3689,
+        "target": 1822,
+        "timestamp": "2025-07-31 12:48:47.900000",
+        "amount": 63.01,
+        "currency": "USD",
+        "payment_method": "ACH",
+        "kind": "earlier",
+        "ensemble_effect": {
+          "original_model_score": 3.1233228128257906e-06,
+          "model_score_without_event": 3.0710202309079636e-06,
+          "score_support": 5.230258191782696e-08,
+          "verified_model_count": 1,
+          "scope": "one historical update suppressed in the selected global model's bounded replay; pre-window account memory retained"
+        },
+        "source_alias": "D",
+        "target_alias": "B",
+        "source_account_id": "2416254287",
+        "target_account_id": "2348984254"
+      },
+      {
+        "transaction_id": "2869236",
+        "source": 2876,
+        "target": 1822,
+        "timestamp": "2025-07-31 13:46:48.400000",
+        "amount": 309.21,
+        "currency": "USD",
+        "payment_method": "ACH",
+        "kind": "earlier",
+        "ensemble_effect": {
+          "original_model_score": 3.1233228128257906e-06,
+          "model_score_without_event": 3.0806121726388275e-06,
+          "score_support": 4.271064018696313e-08,
+          "verified_model_count": 1,
+          "scope": "one historical update suppressed in the selected global model's bounded replay; pre-window account memory retained"
+        },
+        "source_alias": "E",
+        "target_alias": "B",
+        "source_account_id": "2416176172",
+        "target_account_id": "2348984254"
+      },
+      {
+        "transaction_id": "2876196",
+        "source": 3123,
+        "target": 1822,
+        "timestamp": "2025-07-31 15:12:50.600000",
+        "amount": 2980.22,
+        "currency": "USD",
+        "payment_method": "ACH",
+        "kind": "earlier",
+        "ensemble_effect": {
+          "original_model_score": 3.1233228128257906e-06,
+          "model_score_without_event": 3.096945931019696e-06,
+          "score_support": 2.637688180609475e-08,
+          "verified_model_count": 1,
+          "scope": "one historical update suppressed in the selected global model's bounded replay; pre-window account memory retained"
+        },
+        "source_alias": "C",
+        "target_alias": "B",
+        "source_account_id": "2416201159",
+        "target_account_id": "2348984254"
+      },
+      {
+        "transaction_id": "2864031",
+        "source": 2663,
+        "target": 1822,
+        "timestamp": "2025-07-31 15:14:16.100000",
+        "amount": 2586.31,
+        "currency": "USD",
+        "payment_method": "ACH",
+        "kind": "earlier",
+        "ensemble_effect": {
+          "original_model_score": 3.1233228128257906e-06,
+          "model_score_without_event": 3.0589337207009083e-06,
+          "score_support": 6.43890921248823e-08,
+          "verified_model_count": 1,
+          "scope": "one historical update suppressed in the selected global model's bounded replay; pre-window account memory retained"
+        },
+        "source_alias": "F",
+        "target_alias": "B",
+        "source_account_id": "2416158026",
+        "target_account_id": "2348984254"
+      },
+      {
+        "transaction_id": "2876577",
+        "source": 3131,
+        "target": 1822,
+        "timestamp": "2025-07-31 16:27:48.300000",
+        "amount": 6028.34,
+        "currency": "USD",
+        "payment_method": "Cheque",
+        "kind": "earlier",
+        "ensemble_effect": {
+          "original_model_score": 3.1233228128257906e-06,
+          "model_score_without_event": 3.225105272776341e-06,
+          "score_support": -1.0178245995055057e-07,
+          "verified_model_count": 1,
+          "scope": "one historical update suppressed in the selected global model's bounded replay; pre-window account memory retained"
+        },
+        "source_alias": "G",
+        "target_alias": "B",
+        "source_account_id": "2416202324",
+        "target_account_id": "2348984254"
+      },
+      {
+        "transaction_id": "2892246",
+        "source": 3669,
+        "target": 1822,
+        "timestamp": "2025-07-31 17:05:07.500000",
+        "amount": 1807.18,
+        "currency": "USD",
+        "payment_method": "ACH",
+        "kind": "earlier",
+        "ensemble_effect": {
+          "original_model_score": 3.1233228128257906e-06,
+          "model_score_without_event": 3.0830839306085285e-06,
+          "score_support": 4.0238882217262114e-08,
+          "verified_model_count": 1,
+          "scope": "one historical update suppressed in the selected global model's bounded replay; pre-window account memory retained"
+        },
+        "source_alias": "H",
+        "target_alias": "B",
+        "source_account_id": "2416252877",
+        "target_account_id": "2348984254"
+      },
+      {
+        "transaction_id": "2928144",
+        "source": 2625,
+        "target": 1822,
+        "timestamp": "2025-08-01 00:01:44.200",
+        "amount": 3187.01,
+        "currency": "USD",
+        "payment_method": "ACH",
+        "source_alias": "A",
+        "target_alias": "B",
+        "source_account_id": "2416154199",
+        "target_account_id": "2348984254",
+        "kind": "selected"
+      }
+    ],
+    "observation": "Account 2416154199 also sent money to other accounts before transaction 2928144. The map labels each transfer with its transaction ID.",
+    "pattern": "multiple_recipients",
+    "known_labels_explain_paths": false,
+    "path_is_not_a_fraud_classification": true,
+    "earlier_related_transfers_considered": 256,
+    "model_link_effects": [
+      {
+        "transaction_id": "2737282",
+        "original_model_score": 3.1233228128257906e-06,
+        "model_score_without_event": 2.3482524068077865e-06,
+        "score_support": 7.750704060180041e-07,
+        "verified_model_count": 1,
+        "scope": "one historical update suppressed in the selected global model's bounded replay; pre-window account memory retained"
+      },
+      {
+        "transaction_id": "2876577",
+        "original_model_score": 3.1233228128257906e-06,
+        "model_score_without_event": 3.225105272776341e-06,
+        "score_support": -1.0178245995055057e-07,
+        "verified_model_count": 1,
+        "scope": "one historical update suppressed in the selected global model's bounded replay; pre-window account memory retained"
+      },
+      {
+        "transaction_id": "2864031",
+        "original_model_score": 3.1233228128257906e-06,
+        "model_score_without_event": 3.0589337207009083e-06,
+        "score_support": 6.43890921248823e-08,
+        "verified_model_count": 1,
+        "scope": "one historical update suppressed in the selected global model's bounded replay; pre-window account memory retained"
+      },
+      {
+        "transaction_id": "2892677",
+        "original_model_score": 3.1233228128257906e-06,
+        "model_score_without_event": 3.0710202309079636e-06,
+        "score_support": 5.230258191782696e-08,
+        "verified_model_count": 1,
+        "scope": "one historical update suppressed in the selected global model's bounded replay; pre-window account memory retained"
+      },
+      {
+        "transaction_id": "2869236",
+        "original_model_score": 3.1233228128257906e-06,
+        "model_score_without_event": 3.0806121726388275e-06,
+        "score_support": 4.271064018696313e-08,
+        "verified_model_count": 1,
+        "scope": "one historical update suppressed in the selected global model's bounded replay; pre-window account memory retained"
+      },
+      {
+        "transaction_id": "2892246",
+        "original_model_score": 3.1233228128257906e-06,
+        "model_score_without_event": 3.0830839306085285e-06,
+        "score_support": 4.0238882217262114e-08,
+        "verified_model_count": 1,
+        "scope": "one historical update suppressed in the selected global model's bounded replay; pre-window account memory retained"
+      },
+      {
+        "transaction_id": "2876196",
+        "original_model_score": 3.1233228128257906e-06,
+        "model_score_without_event": 3.096945931019696e-06,
+        "score_support": 2.637688180609475e-08,
+        "verified_model_count": 1,
+        "scope": "one historical update suppressed in the selected global model's bounded replay; pre-window account memory retained"
+      },
+      {
+        "transaction_id": "2863008",
+        "original_model_score": 3.1233228128257906e-06,
+        "model_score_without_event": 3.1087882968437245e-06,
+        "score_support": 1.4534515982066071e-08,
+        "verified_model_count": 1,
+        "scope": "one historical update suppressed in the selected global model's bounded replay; pre-window account memory retained"
+      },
+      {
+        "transaction_id": "2745100",
+        "original_model_score": 3.1233228128257906e-06,
+        "model_score_without_event": 3.1371712652762374e-06,
+        "score_support": -1.3848452450446805e-08,
+        "verified_model_count": 1,
+        "scope": "one historical update suppressed in the selected global model's bounded replay; pre-window account memory retained"
+      },
+      {
+        "transaction_id": "2870350",
+        "original_model_score": 3.1233228128257906e-06,
+        "model_score_without_event": 3.133367964459309e-06,
+        "score_support": -1.0045151633518282e-08,
+        "verified_model_count": 1,
+        "scope": "one historical update suppressed in the selected global model's bounded replay; pre-window account memory retained"
+      },
+      {
+        "transaction_id": "2865196",
+        "original_model_score": 3.1233228128257906e-06,
+        "model_score_without_event": 3.1320653786951278e-06,
+        "score_support": -8.742565869337176e-09,
+        "verified_model_count": 1,
+        "scope": "one historical update suppressed in the selected global model's bounded replay; pre-window account memory retained"
+      },
+      {
+        "transaction_id": "2892166",
+        "original_model_score": 3.1233228128257906e-06,
+        "model_score_without_event": 3.118655829133824e-06,
+        "score_support": 4.6669836919665355e-09,
+        "verified_model_count": 1,
+        "scope": "one historical update suppressed in the selected global model's bounded replay; pre-window account memory retained"
+      }
+    ],
+    "strongest_feature": {
+      "label": "payment method",
+      "value": "payment_format: ACH",
+      "contribution": 3.9944190233945847
+    },
+    "history_scope": "training history and completed validation batches before the selected prediction; current-batch and later transactions excluded; up to 256 recent endpoint-related transfers considered",
+    "display_limit": 9
+  }
+}

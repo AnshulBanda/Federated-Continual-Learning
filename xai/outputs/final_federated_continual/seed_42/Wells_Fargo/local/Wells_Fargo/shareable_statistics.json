@@ -1,0 +1,51 @@
+{
+  "schema_version": 1,
+  "bank": "Wells_Fargo",
+  "model_sha256": "976942a5e4924635b5e2fb5a6a52aba2f79cb61216cf8acb6a01b540ed68c2d3",
+  "method": "exact_empirical_interventional_shap",
+  "units": "raw_logit",
+  "feature_names": [
+    "Amount_Received",
+    "Receiving_Currency",
+    "amount",
+    "currency",
+    "payment_format"
+  ],
+  "split": "testing",
+  "selection": "balanced",
+  "config": {
+    "background_size": 32,
+    "seed": 42,
+    "history_batches": 8,
+    "hops": 2,
+    "max_events": 12,
+    "max_nodes": 12,
+    "top_k": 3,
+    "stability_runs": 3,
+    "probability_tolerance": 1e-06
+  },
+  "sample_count": 2,
+  "class_counts": {
+    "fraud": 1,
+    "legitimate": 1
+  },
+  "sum_abs": {
+    "Amount_Received": 0.11310673272237182,
+    "Receiving_Currency": 0.0,
+    "amount": 0.11958806635811925,
+    "currency": 0.0,
+    "payment_format": 2.337942451238632
+  },
+  "sum_signed": {
+    "Amount_Received": 0.11310673272237182,
+    "Receiving_Currency": 0.0,
+    "amount": 0.11958806635811925,
+    "currency": 0.0,
+    "payment_format": 2.337942451238632
+  },
+  "top_features": [
+    "payment_format",
+    "amount",
+    "Amount_Received"
+  ]
+}

@@ -1,0 +1,34 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1"><title>XAI report Â· Wells_Fargo</title>
+<style>body{font:16px/1.6 system-ui,sans-serif;background:#f1f5f9;color:#172033;margin:0}
+main{max-width:900px;margin:40px auto;padding:0 20px}h1{margin-bottom:0}h2{font-size:18px;margin-bottom:4px}
+details{background:white;border:1px solid #dce3ec;border-radius:12px;padding:20px;margin:16px 0}
+summary{cursor:pointer;font-weight:650}.muted{color:#526178;font-size:14px}a{color:#3346a8}
+.validation{background:#f8fafc;font-size:14px}li{margin:8px 0}</style></head>
+<body><main><h1>Transaction explanations</h1><p>Wells_Fargo Â· 2 transaction(s)</p>
+<p>Select a transaction to read its explanation.</p><p class="muted">Scores describe model output, not calibrated fraud probabilities.</p>
+<details >
+<summary>Transaction 3629634 Â· FRAUD Â· Score 0.904</summary>
+<section class="panel"><p><strong>Fraud model score: 0.904215</strong><br>
+Decision threshold: 0.0663171<br>Result: <strong>FRAUD</strong></p>
+<h2>Why was it flagged?</h2><p><strong>Top factor pushing toward fraud: Payment format: ACH</strong></p>
+<p>This was the strongest transaction feature pushing the score upward compared with the model’s reference transactions.</p><h3>Other contributing factors</h3><ul><li>Amount received: <strong>1.75 USD</strong> &rarr; decreased the fraud score</li><li>Transaction amount: <strong>1.75 USD</strong> &rarr; decreased the fraud score</li></ul>
+<h2>What about the transaction history?</h2><p>The historical interaction with the largest measured effect (event 3379251) lowered the original fraud score. Removing it changed the score from 0.904215 to 0.956775. </p>
+<h2>Final explanation</h2><blockquote>The transaction was flagged because its score met or exceeded the alert threshold. Payment format: ACH was the strongest transaction feature pushing upward. The strongest tested historical interaction opposed that upward direction.</blockquote>
+<p class="muted small">Uncalibrated model score. This explanation describes model behavior and does not establish that the transaction is actually fraudulent.</p></section>
+<details class="validation"><summary>View technical XAI details</summary>
+<p>5 historical interactions were tested by temporarily removing them. Removing the most influential interaction raised the model score by approximately 0.0525601. The strongest measured change was for event 3379251. The account history was replayed after removing this event, keeping the model weights fixed. The score changed from 0.904215391 to 0.956775479. This event was helping lower the original score. This is a measured model response within the examined history, not evidence that the event caused fraud. Across the individual removal tests, 0 interaction(s) supported a higher score and 4 supported a lower score; 1 had no effect above the display tolerance. These separate effects cannot be added to infer the effect of removing all history together.</p>
+<p><a href="local/Wells_Fargo/reports/testing_00005455/explanation.html">Open full evidence, validation and downloads</a></p></details>
+</details><details >
+<summary>Transaction 4062418 Â· LEGITIMATE Â· Score 0.000</summary>
+<section class="panel"><p><strong>Fraud model score: 7.49059e-07</strong><br>
+Decision threshold: 0.0663171<br>Result: <strong>LEGITIMATE</strong></p>
+<h2>Why was it not flagged?</h2><p><strong>Top factor pushing toward fraud: Payment format: ACH</strong></p>
+<p>This was the strongest transaction feature pushing the score upward compared with the model’s reference transactions.</p><h3>Other contributing factors</h3><ul><li>Amount received: <strong>23.66 USD</strong> &rarr; decreased the fraud score</li><li>Transaction amount: <strong>23.66 USD</strong> &rarr; decreased the fraud score</li></ul>
+<h2>What about the transaction history?</h2><p>The historical interaction with the largest measured effect (event 4029745) lowered the original fraud score. Removing it changed the score from 7.49059e-07 to 1.13772e-06. Other tested interactions had mixed effects.</p>
+<h2>Final explanation</h2><blockquote>The transaction was not flagged because its score was below the alert threshold. Payment format: ACH was the strongest transaction feature pushing upward. The strongest tested historical interaction opposed that upward direction.</blockquote>
+<p class="muted small">Uncalibrated model score. This explanation describes model behavior and does not establish that the transaction is actually fraudulent.</p></section>
+<details class="validation"><summary>View technical XAI details</summary>
+<p>12 historical interactions were tested by temporarily removing them. Removing the most influential interaction raised the model score by approximately 3.88663e-07. The strongest measured change was for event 4029745. The account history was replayed after removing this event, keeping the model weights fixed. The score changed from 7.49058978e-07 to 1.13772083e-06. This event was helping lower the original score. This is a measured model response within the examined history, not evidence that the event caused fraud. Across the individual removal tests, 4 interaction(s) supported a higher score and 5 supported a lower score; 3 had no effect above the display tolerance. These separate effects cannot be added to infer the effect of removing all history together.</p>
+<p><a href="local/Wells_Fargo/reports/testing_00017621/explanation.html">Open full evidence, validation and downloads</a></p></details>
+</details></main></body></html>

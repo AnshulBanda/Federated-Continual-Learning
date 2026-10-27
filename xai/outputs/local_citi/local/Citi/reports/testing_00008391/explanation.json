@@ -1,0 +1,566 @@
+{
+  "schema_version": 2,
+  "transaction_id": "3914977",
+  "bank": "Citi",
+  "split": "testing",
+  "chronological_index": 8391,
+  "timestamp": "2025-09-15 07:52:11.000",
+  "prediction": {
+    "class": "legitimate",
+    "probability": 0.0034244219523686106,
+    "threshold": 0.512018960118297,
+    "score_type": "uncalibrated sigmoid model score"
+  },
+  "feature_explanation": {
+    "base_logit": -6.502395004034042,
+    "target_logit": -5.673392295837402,
+    "additivity_residual": 0.0,
+    "coalitions": 32,
+    "features": [
+      {
+        "feature": "payment_format",
+        "shap_logit": 0.8305389732122421,
+        "ablation_logit_drop": 0.8306239247322083,
+        "value": "ACH"
+      },
+      {
+        "feature": "amount",
+        "shap_logit": -0.0007970184087753296,
+        "ablation_logit_drop": -0.0008748173713684082,
+        "value": 654.71
+      },
+      {
+        "feature": "Amount_Received",
+        "shap_logit": -0.0007392466068267822,
+        "ablation_logit_drop": -0.0006670355796813965,
+        "value": 654.71
+      },
+      {
+        "feature": "Receiving_Currency",
+        "shap_logit": 0.0,
+        "ablation_logit_drop": 0.0,
+        "value": "USD"
+      },
+      {
+        "feature": "currency",
+        "shap_logit": 0.0,
+        "ablation_logit_drop": 0.0,
+        "value": "USD"
+      }
+    ],
+    "method": "exact_empirical_interventional_shap",
+    "units": "raw_logit",
+    "scope": "transaction_features_given_fixed_account_memory",
+    "seed": 42,
+    "background_size": 32,
+    "background_txn_ids": [
+      "2557642",
+      "192381",
+      "1647035",
+      "1870773",
+      "2030581",
+      "2823657",
+      "2424164",
+      "2880848",
+      "1992551",
+      "2454422",
+      "1876542",
+      "2700341",
+      "2864450",
+      "2011535",
+      "1766401",
+      "2395133",
+      "2875665",
+      "1893165",
+      "2580735",
+      "2770000",
+      "2628081",
+      "2325975",
+      "1579532",
+      "2121645",
+      "2133636",
+      "2112942",
+      "2134638",
+      "2454521",
+      "2886747",
+      "2085880",
+      "2100195",
+      "2870421"
+    ]
+  },
+  "graph_explanation": {
+    "method": "temporal_graph_perturbation",
+    "target": {
+      "source": 8262,
+      "target": 256
+    },
+    "window_batches": 8,
+    "window_event_count": 4096,
+    "selection": "bounded most-recent k-hop undirected neighborhood; influence measured by chronological replay",
+    "hops": 2,
+    "candidate_count": 12,
+    "important_nodes": [
+      {
+        "node_id": 256,
+        "role": "receiver",
+        "delta_probability": 0.00041213249238913896,
+        "importance": 0.00041213249238913896,
+        "removed_event_count": 12
+      },
+      {
+        "node_id": 8240,
+        "role": "neighbor",
+        "delta_probability": 2.0814112504646733e-05,
+        "importance": 2.0814112504646733e-05,
+        "removed_event_count": 1
+      },
+      {
+        "node_id": 7248,
+        "role": "neighbor",
+        "delta_probability": -1.5421385752551267e-05,
+        "importance": 1.5421385752551267e-05,
+        "removed_event_count": 1
+      },
+      {
+        "node_id": 5001,
+        "role": "neighbor",
+        "delta_probability": 1.2605346928962289e-05,
+        "importance": 1.2605346928962289e-05,
+        "removed_event_count": 1
+      },
+      {
+        "node_id": 7315,
+        "role": "neighbor",
+        "delta_probability": -1.1699850429795159e-05,
+        "importance": 1.1699850429795159e-05,
+        "removed_event_count": 1
+      },
+      {
+        "node_id": 4394,
+        "role": "neighbor",
+        "delta_probability": 8.984657290118242e-06,
+        "importance": 8.984657290118242e-06,
+        "removed_event_count": 1
+      },
+      {
+        "node_id": 6981,
+        "role": "neighbor",
+        "delta_probability": 7.0925735082823065e-06,
+        "importance": 7.0925735082823065e-06,
+        "removed_event_count": 1
+      },
+      {
+        "node_id": 6953,
+        "role": "neighbor",
+        "delta_probability": 6.107796476651547e-06,
+        "importance": 6.107796476651547e-06,
+        "removed_event_count": 1
+      },
+      {
+        "node_id": 5144,
+        "role": "neighbor",
+        "delta_probability": -3.7862666997156777e-06,
+        "importance": 3.7862666997156777e-06,
+        "removed_event_count": 2
+      },
+      {
+        "node_id": 5453,
+        "role": "neighbor",
+        "delta_probability": 2.5818671535340725e-06,
+        "importance": 2.5818671535340725e-06,
+        "removed_event_count": 1
+      },
+      {
+        "node_id": 4477,
+        "role": "neighbor",
+        "delta_probability": -6.931598449965749e-07,
+        "importance": 6.931598449965749e-07,
+        "removed_event_count": 2
+      },
+      {
+        "node_id": 8262,
+        "role": "sender",
+        "delta_probability": 0.0,
+        "importance": 0.0,
+        "removed_event_count": 0
+      }
+    ],
+    "important_edges": [
+      {
+        "key": [
+          7,
+          25
+        ],
+        "split": "testing",
+        "index": 7705,
+        "source": 8240,
+        "target": 256,
+        "transaction_id": "3886084",
+        "timestamp": "2025-09-13 10:25:37.700",
+        "probability_without": 0.0034452360648732573,
+        "delta_probability": 2.0814112504646733e-05,
+        "importance": 2.0814112504646733e-05
+      },
+      {
+        "key": [
+          7,
+          76
+        ],
+        "split": "testing",
+        "index": 7756,
+        "source": 7248,
+        "target": 256,
+        "transaction_id": "3882884",
+        "timestamp": "2025-09-13 13:30:10.900",
+        "probability_without": 0.0034090005666160593,
+        "delta_probability": -1.5421385752551267e-05,
+        "importance": 1.5421385752551267e-05
+      },
+      {
+        "key": [
+          7,
+          487
+        ],
+        "split": "testing",
+        "index": 8167,
+        "source": 5001,
+        "target": 256,
+        "transaction_id": "3888237",
+        "timestamp": "2025-09-14 17:06:07.000",
+        "probability_without": 0.003437027299297573,
+        "delta_probability": 1.2605346928962289e-05,
+        "importance": 1.2605346928962289e-05
+      },
+      {
+        "key": [
+          7,
+          81
+        ],
+        "split": "testing",
+        "index": 7761,
+        "source": 5144,
+        "target": 256,
+        "transaction_id": "3877266",
+        "timestamp": "2025-09-13 13:36:25.500",
+        "probability_without": 0.003412488576585082,
+        "delta_probability": -1.1933375783528422e-05,
+        "importance": 1.1933375783528422e-05
+      },
+      {
+        "key": [
+          7,
+          66
+        ],
+        "split": "testing",
+        "index": 7746,
+        "source": 7315,
+        "target": 256,
+        "transaction_id": "3883015",
+        "timestamp": "2025-09-13 12:51:28.300",
+        "probability_without": 0.0034127221019388154,
+        "delta_probability": -1.1699850429795159e-05,
+        "importance": 1.1699850429795159e-05
+      },
+      {
+        "key": [
+          7,
+          374
+        ],
+        "split": "testing",
+        "index": 8054,
+        "source": 4394,
+        "target": 256,
+        "transaction_id": "3886716",
+        "timestamp": "2025-09-14 10:47:33.800",
+        "probability_without": 0.003433406609658729,
+        "delta_probability": 8.984657290118242e-06,
+        "importance": 8.984657290118242e-06
+      },
+      {
+        "key": [
+          7,
+          417
+        ],
+        "split": "testing",
+        "index": 8097,
+        "source": 5144,
+        "target": 256,
+        "transaction_id": "3889641",
+        "timestamp": "2025-09-14 14:05:00.300",
+        "probability_without": 0.003432933491266426,
+        "delta_probability": 8.51153889781537e-06,
+        "importance": 8.51153889781537e-06
+      },
+      {
+        "key": [
+          7,
+          357
+        ],
+        "split": "testing",
+        "index": 8037,
+        "source": 6981,
+        "target": 256,
+        "transaction_id": "3894286",
+        "timestamp": "2025-09-14 10:25:11.200",
+        "probability_without": 0.003431514525876893,
+        "delta_probability": 7.0925735082823065e-06,
+        "importance": 7.0925735082823065e-06
+      },
+      {
+        "key": [
+          7,
+          412
+        ],
+        "split": "testing",
+        "index": 8092,
+        "source": 6953,
+        "target": 256,
+        "transaction_id": "3894170",
+        "timestamp": "2025-09-14 13:49:57.200",
+        "probability_without": 0.003430529748845262,
+        "delta_probability": 6.107796476651547e-06,
+        "importance": 6.107796476651547e-06
+      },
+      {
+        "key": [
+          7,
+          165
+        ],
+        "split": "testing",
+        "index": 7845,
+        "source": 4477,
+        "target": 256,
+        "transaction_id": "3874509",
+        "timestamp": "2025-09-13 17:37:11.300",
+        "probability_without": 0.0034186563892270178,
+        "delta_probability": -5.765563141592843e-06,
+        "importance": 5.765563141592843e-06
+      },
+      {
+        "key": [
+          7,
+          300
+        ],
+        "split": "testing",
+        "index": 7980,
+        "source": 4477,
+        "target": 256,
+        "transaction_id": "3886938",
+        "timestamp": "2025-09-14 06:59:15.800",
+        "probability_without": 0.003429577848130189,
+        "delta_probability": 5.1558957615783704e-06,
+        "importance": 5.1558957615783704e-06
+      },
+      {
+        "key": [
+          7,
+          187
+        ],
+        "split": "testing",
+        "index": 7867,
+        "source": 5453,
+        "target": 256,
+        "transaction_id": "3877094",
+        "timestamp": "2025-09-13 23:06:10.700",
+        "probability_without": 0.0034270038195221447,
+        "delta_probability": 2.5818671535340725e-06,
+        "importance": 2.5818671535340725e-06
+      }
+    ],
+    "fidelity": {
+      "original_probability": 0.0034244219523686106,
+      "unperturbed_replay_error": 0.0,
+      "retained_top_events_probability": 0.0033195426560262,
+      "sufficiency_absolute_error": 0.00010487929634241068,
+      "removed_top_events_probability": 0.0034444470454028063,
+      "comprehensiveness_signed_drop": -2.0025093034195703e-05,
+      "removed_low_events_probability": 0.0034268344573406013,
+      "low_removal_absolute_change": 2.412504971990685e-06,
+      "top_removal_absolute_change": 2.0025093034195703e-05,
+      "retained_event_count": 3,
+      "formula": "sufficiency=abs(p_full-p_only_top); comprehensiveness=p_full-p_without_top",
+      "scope": "Only selected updates retained inside bounded window; pre-window account memory remains intact.",
+      "applicable": true
+    },
+    "delta_definition": "p_after_suppressing_update - p_original; negative means event supported the original fraud score",
+    "limitations": "Not GNNExplainer; approximate bounded search; node effects remove candidate incident updates; not node-feature attribution or causal proof."
+  },
+  "temporal_explanation": {
+    "observation_window_batches": 8,
+    "target_endpoint_event_count": 82,
+    "transaction_volume_by_currency": {
+      "USD": 111809.76999999997
+    },
+    "time_since_last_seen_seconds": {
+      "sender": 1182672.5,
+      "receiver": 53164.0
+    },
+    "window_start_seconds_from_origin": 8442166.0,
+    "window_end_seconds_from_origin": 9136283.0,
+    "endpoint_activity_span_seconds": 663637.0,
+    "evidence_type": "descriptive observed history; counts/volumes are not extra model inputs or independent attributions",
+    "timing_semantics": "The current decoder does not directly use time deltas. Earlier deltas enter recurrent memory updates. A zero last_seen sentinel is reported as unknown.",
+    "ordering": "only completed original micro-batches; no target-batch transactions included"
+  },
+  "verification": {
+    "existing_evaluation_probability": 0.0034244221169501543,
+    "direct_model_probability": 0.0034244221169501543,
+    "xai_probability": 0.0034244219523686106,
+    "absolute_errors": {
+      "original_vs_direct": 0.0,
+      "original_vs_xai": 1.6458154370596612e-10
+    },
+    "tolerance": 1e-06,
+    "passed": true,
+    "known_leakage_features_excluded": true
+  },
+  "evaluation": {
+    "feature_fidelity": {
+      "k": 2,
+      "original_probability": 0.0034244219523686106,
+      "formula": "signed_drop = p(original) - mean_background p(masked); absolute_change = abs(signed_drop)",
+      "top": {
+        "features": [
+          "payment_format",
+          "amount"
+        ],
+        "mean_logit": -6.503206253051758,
+        "mean_probability": 0.0031739753920343745,
+        "signed_drop": 0.00025044656033423613,
+        "absolute_change": 0.00025044656033423613
+      },
+      "low": {
+        "features": [
+          "Receiving_Currency",
+          "currency"
+        ],
+        "mean_logit": -5.673392295837402,
+        "mean_probability": 0.0034244219523686106,
+        "signed_drop": 0.0,
+        "absolute_change": 0.0
+      },
+      "random": {
+        "features": [
+          "amount",
+          "Receiving_Currency"
+        ],
+        "mean_logit": -5.672517776489258,
+        "mean_probability": 0.003427481082436664,
+        "signed_drop": -3.0591300680532507e-06,
+        "absolute_change": 3.0591300680532507e-06
+      },
+      "top_exceeds_low_absolute_change": true
+    },
+    "feature_stability": {
+      "runs": 3,
+      "top_k": 3,
+      "nonzero_top_features": [
+        [
+          "Amount_Received",
+          "amount",
+          "payment_format"
+        ],
+        [
+          "Amount_Received",
+          "amount",
+          "payment_format"
+        ],
+        [
+          "Amount_Received",
+          "amount",
+          "payment_format"
+        ]
+      ],
+      "pairwise_jaccard": [
+        1.0,
+        1.0,
+        1.0
+      ],
+      "mean_jaccard": 1.0,
+      "formula": "|nonzero_top_k(A) intersection nonzero_top_k(B)| / |union|; empty/empty = 1",
+      "scope": "training-background resampling, not a general robustness guarantee"
+    }
+  },
+  "config": {
+    "background_size": 32,
+    "seed": 42,
+    "history_batches": 8,
+    "hops": 2,
+    "max_events": 12,
+    "max_nodes": 12,
+    "top_k": 3,
+    "stability_runs": 3,
+    "probability_tolerance": 1e-06
+  },
+  "runtime_seconds": 1.018486800021492,
+  "provenance": {
+    "checkpoint": "C:\\Users\\sange\\Downloads\\CapstoneFinal\\artifacts\\causal_temporal_graphsage\\Citi_causal_temporal_graphsage.pt",
+    "checkpoint_sha256": "e96adc0743127c78ca727da7a4255e25630f454b1eb751e59a349950be3fbeb1",
+    "mode": "local",
+    "batch_size": 512,
+    "encoder_source": "verified JSON artifact; no runtime fitting",
+    "preprocessing_sha256": "99567e405862bdcc38abb7b7afe9a337de69eb4f6bee6a32e60ba41b1dc38171",
+    "legacy_verification": {
+      "validation": {
+        "metrics": {
+          "pr_auc": 0.35109296308815185,
+          "roc_auc": 0.9649916693253926,
+          "precision": 0.3157894736842105,
+          "recall": 0.4,
+          "f1": 0.35294117647058826
+        },
+        "saved_metric_absolute_errors": {
+          "pr_auc": 0.0,
+          "roc_auc": 0.0,
+          "precision": 0.0,
+          "recall": 0.0,
+          "f1": 0.0
+        },
+        "max_probability_error": 0.0
+      },
+      "testing": {
+        "metrics": {
+          "pr_auc": 0.06516977645019702,
+          "roc_auc": 0.9306763019209372,
+          "precision": 0.08695652173913043,
+          "recall": 0.1111111111111111,
+          "f1": 0.0975609756097561
+        },
+        "saved_metric_absolute_errors": {
+          "pr_auc": 0.0,
+          "roc_auc": 0.0,
+          "precision": 0.0,
+          "recall": 0.0,
+          "f1": 0.0
+        },
+        "max_probability_error": 0.0
+      }
+    },
+    "calibration": "none",
+    "input_sha256": {
+      "configuration\\model_feature_columns.json": "6e3f3bfc52667427398844255f82a35473d3740564ac4085e6514422b507d87b",
+      "testing\\Citi\\edge_list.csv.gz": "53968f519e3227fb2ac9225a5f0a20bc09311996cedd84cc5c334d85595e8e00",
+      "testing\\Citi\\ground_truth.csv.gz": "66cf633dcd6a1cf304d95d1c21cacc1d080e7e2805d094617a4b5da72689eee2",
+      "testing\\Citi\\node_features.csv.gz": "5d60b2f860082eef97735579c81d3ad469d06216733a6446b52df80521c78b80",
+      "testing\\Citi\\node_map.csv.gz": "6068b700349c025b9c62523a06f69d4ccfca1e4770a731210e89d456d6bdbf6f",
+      "training\\Citi\\edge_list.csv.gz": "e2fb9f035c13710aea259d4fff0cfb706f82e6d6d397fe07d624e582f74d2342",
+      "training\\Citi\\ground_truth.csv.gz": "bc5580c131210c2c1c8930c24869f705e6bd6910dad79b52ae3148b85d0455ea",
+      "training\\Citi\\node_features.csv.gz": "78f38c16a1fd5db0089e74d97747714c8d8430455e3ab72ed1ea07238d18d28a",
+      "training\\Citi\\node_map.csv.gz": "51b5632665eb47403d94ad4df81966fff7e266bd05d600eb7635aa60e29a034d",
+      "validation\\Citi\\edge_list.csv.gz": "5e71c1cb7f2998171f57add607619bac91a8f4b3eb9cb9cac0fdda8ef3844b15",
+      "validation\\Citi\\ground_truth.csv.gz": "389e8f73fd7c4fca9824b093e8e3488678eb6ae2f3330c03fc3e3b95e34316b6",
+      "validation\\Citi\\node_features.csv.gz": "ef9b42d425dfdca7df73e5538806efb37c9f6de1428fd66b6bfaa81f3e5f90a2",
+      "validation\\Citi\\node_map.csv.gz": "fba53113e65d4f691954575054dc1dcab3793d1e59c59423a141f06916081a7f"
+    },
+    "metrics_sha256": "f846ff6834115a6208f27c868f2bdb38b5377af20c516238ad7ad5c963363af8"
+  },
+  "limitations": [
+    "Model explanations do not establish fraud or causality; scores are uncalibrated.",
+    "Feature SHAP holds account memory fixed; static node-feature attribution is not implemented.",
+    "Temporal graph perturbation is a bounded replay intervention, not GNNExplainer. Earlier anchor memory remains intact.",
+    "Interventional SHAP hybrids can be unrealistic for correlated fields; exactness is relative to the sampled background.",
+    "Legacy preprocessing reproduces current original evaluation and saved metrics; original fitted objects were not preserved.",
+    "The original fixed-size batching and timestamp-tie behavior are preserved.",
+    "No combined federated-continual checkpoint or formal differential privacy is implemented."
+  ]
+}

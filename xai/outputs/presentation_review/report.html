@@ -1,0 +1,100 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1"><title>XAI report · Citi</title>
+<style>body{font:16px/1.6 system-ui,sans-serif;background:#f1f5f9;color:#172033;margin:0}
+main{max-width:900px;margin:40px auto;padding:0 20px}h1{margin-bottom:0}h2{font-size:18px;margin-bottom:4px}
+details{background:white;border:1px solid #dce3ec;border-radius:12px;padding:20px;margin:16px 0}
+summary{cursor:pointer;font-weight:650}.muted{color:#526178;font-size:14px}a{color:#3346a8}
+.validation{background:#f8fafc;font-size:14px}li{margin:8px 0}</style></head>
+<body><main><h1>Transaction explanations</h1><p>Citi · 10 transaction(s)</p>
+<p>Select a transaction to read its explanation.</p><p class="muted">Scores describe model output, not calibrated fraud probabilities.</p>
+<details >
+<summary>Transaction 117168 · LEGITIMATE · Score 0.025</summary>
+<h2>Top factors</h2><ol><li>Payment format: ACH — increased the score</li><li>Transaction amount: 769.14 USD — decreased the score</li><li>Amount received: 769.14 USD — decreased the score</li></ol><p class="muted">Compared with reference transactions, with account history held fixed.</p>
+<h2>Temporal evidence</h2><p>12 earlier transactions involving the sender or receiver were examined in the configured history window.</p>
+<h2>Graph evidence</h2><p>12 historical interactions were tested by temporarily removing them. Removing the most influential interaction lowered the model score by approximately 0.000663487.</p>
+<h2>Overall explanation</h2><p>The model score did not meet the alert threshold. The transaction details shown above influenced the score in both directions relative to the reference transactions. Tested historical interactions also affected the score.</p>
+<p class="muted">This explanation describes model behavior and does not establish that the transaction is actually fraudulent.</p>
+<details class="validation"><summary>Validation and supporting data (optional)</summary>
+<p><a href="local/Citi/reports/testing_00000675/explanation.html">View supporting evidence and downloads</a></p></details>
+</details><details >
+<summary>Transaction 3651064 · FRAUD · Score 0.398</summary>
+<h2>Top factors</h2><ol><li>Payment format: Wire — increased the score</li><li>Transaction amount: 141.53 USD — decreased the score</li><li>Amount received: 141.53 USD — decreased the score</li></ol><p class="muted">Compared with reference transactions, with account history held fixed.</p>
+<h2>Temporal evidence</h2><p>No relevant historical activity was found in the configured temporal window.</p>
+<h2>Graph evidence</h2><p>No relevant historical graph interactions were found in the configured neighborhood/window.</p>
+<h2>Overall explanation</h2><p>The model score met the alert threshold. The transaction details shown above influenced the score in both directions relative to the reference transactions. No historical interaction exceeded the display tolerance within the examined neighborhood/window.</p>
+<p class="muted">This explanation describes model behavior and does not establish that the transaction is actually fraudulent.</p>
+<details class="validation"><summary>Validation and supporting data (optional)</summary>
+<p><a href="local/Citi/reports/testing_00001446/explanation.html">View supporting evidence and downloads</a></p></details>
+</details><details >
+<summary>Transaction 3697344 · FRAUD · Score 0.474</summary>
+<h2>Top factors</h2><ol><li>Transaction amount: 22,826.81 USD — increased the score</li><li>Amount received: 22,826.81 USD — increased the score</li><li>Payment format: ACH — increased the score</li></ol><p class="muted">Compared with reference transactions, with account history held fixed.</p>
+<h2>Temporal evidence</h2><p>No relevant historical activity was found in the configured temporal window.</p>
+<h2>Graph evidence</h2><p>No relevant historical graph interactions were found in the configured neighborhood/window.</p>
+<h2>Overall explanation</h2><p>The model score met the alert threshold. The transaction details shown above influenced the score upward relative to the reference transactions. No historical interaction exceeded the display tolerance within the examined neighborhood/window.</p>
+<p class="muted">This explanation describes model behavior and does not establish that the transaction is actually fraudulent.</p>
+<details class="validation"><summary>Validation and supporting data (optional)</summary>
+<p><a href="local/Citi/reports/testing_00003009/explanation.html">View supporting evidence and downloads</a></p></details>
+</details><details >
+<summary>Transaction 3734548 · LEGITIMATE · Score 0.020</summary>
+<h2>Top factors</h2><ol><li>Payment format: ACH — increased the score</li><li>Transaction amount: 275.42 USD — decreased the score</li><li>Amount received: 275.42 USD — decreased the score</li></ol><p class="muted">Compared with reference transactions, with account history held fixed.</p>
+<h2>Temporal evidence</h2><p>No relevant historical activity was found in the configured temporal window.</p>
+<h2>Graph evidence</h2><p>No relevant historical graph interactions were found in the configured neighborhood/window.</p>
+<h2>Overall explanation</h2><p>The model score did not meet the alert threshold. The transaction details shown above influenced the score in both directions relative to the reference transactions. No historical interaction exceeded the display tolerance within the examined neighborhood/window.</p>
+<p class="muted">This explanation describes model behavior and does not establish that the transaction is actually fraudulent.</p>
+<details class="validation"><summary>Validation and supporting data (optional)</summary>
+<p><a href="local/Citi/reports/testing_00003378/explanation.html">View supporting evidence and downloads</a></p></details>
+</details><details >
+<summary>Transaction 3724859 · LEGITIMATE · Score 0.022</summary>
+<h2>Top factors</h2><ol><li>Payment format: ACH — increased the score</li><li>Transaction amount: 90.05 USD — decreased the score</li><li>Amount received: 90.05 USD — decreased the score</li></ol><p class="muted">Compared with reference transactions, with account history held fixed.</p>
+<h2>Temporal evidence</h2><p>2 earlier transactions involving the sender or receiver were examined in the configured history window.</p>
+<h2>Graph evidence</h2><p>2 historical interactions were tested by temporarily removing them. Removing the most influential interaction raised the model score by approximately 0.000418414.</p>
+<h2>Overall explanation</h2><p>The model score did not meet the alert threshold. The transaction details shown above influenced the score in both directions relative to the reference transactions. Tested historical interactions also affected the score.</p>
+<p class="muted">This explanation describes model behavior and does not establish that the transaction is actually fraudulent.</p>
+<details class="validation"><summary>Validation and supporting data (optional)</summary>
+<p><a href="local/Citi/reports/testing_00003610/explanation.html">View supporting evidence and downloads</a></p></details>
+</details><details >
+<summary>Transaction 89367 · FRAUD · Score 0.334</summary>
+<h2>Top factors</h2><ol><li>Payment format: Debit Non-Prepaid — decreased the score</li><li>Transaction amount: 4.12 USD — decreased the score</li><li>Amount received: 4.12 USD — decreased the score</li></ol><p class="muted">Compared with reference transactions, with account history held fixed.</p>
+<h2>Temporal evidence</h2><p>15 earlier transactions involving the sender or receiver were examined in the configured history window.</p>
+<h2>Graph evidence</h2><p>11 historical interactions were tested by temporarily removing them. Removing the most influential interaction lowered the model score by approximately 0.0219007.</p>
+<h2>Overall explanation</h2><p>The model score met the alert threshold. The transaction details shown above influenced the score downward relative to the reference transactions. Tested historical interactions also affected the score.</p>
+<p class="muted">This explanation describes model behavior and does not establish that the transaction is actually fraudulent.</p>
+<details class="validation"><summary>Validation and supporting data (optional)</summary>
+<p><a href="local/Citi/reports/testing_00004123/explanation.html">View supporting evidence and downloads</a></p></details>
+</details><details >
+<summary>Transaction 3802308 · LEGITIMATE · Score 0.013</summary>
+<h2>Top factors</h2><ol><li>Payment format: Cheque — decreased the score</li><li>Amount received: 20.92 USD — decreased the score</li><li>Transaction amount: 20.92 USD — decreased the score</li></ol><p class="muted">Compared with reference transactions, with account history held fixed.</p>
+<h2>Temporal evidence</h2><p>No relevant historical activity was found in the configured temporal window.</p>
+<h2>Graph evidence</h2><p>No relevant historical graph interactions were found in the configured neighborhood/window.</p>
+<h2>Overall explanation</h2><p>The model score did not meet the alert threshold. The transaction details shown above influenced the score downward relative to the reference transactions. No historical interaction exceeded the display tolerance within the examined neighborhood/window.</p>
+<p class="muted">This explanation describes model behavior and does not establish that the transaction is actually fraudulent.</p>
+<details class="validation"><summary>Validation and supporting data (optional)</summary>
+<p><a href="local/Citi/reports/testing_00005957/explanation.html">View supporting evidence and downloads</a></p></details>
+</details><details >
+<summary>Transaction 4103366 · FRAUD · Score 0.347</summary>
+<h2>Top factors</h2><ol><li>Payment format: Wire — increased the score</li><li>Transaction amount: 5.01 USD — decreased the score</li><li>Amount received: 5.01 USD — decreased the score</li></ol><p class="muted">Compared with reference transactions, with account history held fixed.</p>
+<h2>Temporal evidence</h2><p>2 earlier transactions involving the sender or receiver were examined in the configured history window.</p>
+<h2>Graph evidence</h2><p>12 historical interactions were tested by temporarily removing them. Removing the most influential interaction raised the model score by approximately 0.00660585.</p>
+<h2>Overall explanation</h2><p>The model score met the alert threshold. The transaction details shown above influenced the score in both directions relative to the reference transactions. Tested historical interactions also affected the score.</p>
+<p class="muted">This explanation describes model behavior and does not establish that the transaction is actually fraudulent.</p>
+<details class="validation"><summary>Validation and supporting data (optional)</summary>
+<p><a href="local/Citi/reports/testing_00013873/explanation.html">View supporting evidence and downloads</a></p></details>
+</details><details >
+<summary>Transaction 4153607 · FRAUD · Score 0.319</summary>
+<h2>Top factors</h2><ol><li>Payment format: ACH — increased the score</li><li>Transaction amount: 261.03 USD — decreased the score</li><li>Amount received: 261.03 USD — decreased the score</li></ol><p class="muted">Compared with reference transactions, with account history held fixed.</p>
+<h2>Temporal evidence</h2><p>1 earlier transaction involving the sender or receiver was examined in the configured history window.</p>
+<h2>Graph evidence</h2><p>12 historical interactions were tested by temporarily removing them. Removing the most influential interaction raised the model score by approximately 0.00337794.</p>
+<h2>Overall explanation</h2><p>The model score met the alert threshold. The transaction details shown above influenced the score in both directions relative to the reference transactions. Tested historical interactions also affected the score.</p>
+<p class="muted">This explanation describes model behavior and does not establish that the transaction is actually fraudulent.</p>
+<details class="validation"><summary>Validation and supporting data (optional)</summary>
+<p><a href="local/Citi/reports/testing_00015334/explanation.html">View supporting evidence and downloads</a></p></details>
+</details><details >
+<summary>Transaction 4235615 · LEGITIMATE · Score 0.018</summary>
+<h2>Top factors</h2><ol><li>Payment format: Cheque — decreased the score</li><li>Transaction amount: 537.05 USD — decreased the score</li><li>Amount received: 537.05 USD — decreased the score</li></ol><p class="muted">Compared with reference transactions, with account history held fixed.</p>
+<h2>Temporal evidence</h2><p>3 earlier transactions involving the sender or receiver were examined in the configured history window.</p>
+<h2>Graph evidence</h2><p>3 historical interactions were tested by temporarily removing them. Removing the most influential interaction raised the model score by approximately 0.0001524.</p>
+<h2>Overall explanation</h2><p>The model score did not meet the alert threshold. The transaction details shown above influenced the score downward relative to the reference transactions. Tested historical interactions also affected the score.</p>
+<p class="muted">This explanation describes model behavior and does not establish that the transaction is actually fraudulent.</p>
+<details class="validation"><summary>Validation and supporting data (optional)</summary>
+<p><a href="local/Citi/reports/testing_00017531/explanation.html">View supporting evidence and downloads</a></p></details>
+</details></main></body></html>

@@ -1,0 +1,71 @@
+{
+  "schema_version": 1,
+  "transaction_id": "4103366",
+  "bank": "Citi",
+  "prediction": "FRAUD",
+  "fraud_score": 0.3466700479646948,
+  "score_label": "Fraud model score",
+  "score_type": "uncalibrated sigmoid model score",
+  "threshold": 0.30930493831634703,
+  "top_features": [
+    {
+      "feature": "payment_format",
+      "label": "Payment format",
+      "value": "Wire",
+      "display_value": "Wire",
+      "contribution": 0.4554918995127082,
+      "direction": "increased"
+    },
+    {
+      "feature": "amount",
+      "label": "Transaction amount",
+      "value": 5.01,
+      "display_value": "5.01 USD",
+      "contribution": -0.0026725921779870987,
+      "direction": "decreased"
+    },
+    {
+      "feature": "Amount_Received",
+      "label": "Amount received",
+      "value": 5.01,
+      "display_value": "5.01 USD",
+      "contribution": -0.002360156737267971,
+      "direction": "decreased"
+    }
+  ],
+  "feature_reference": "Compared with reference transactions, with account history held fixed.",
+  "contribution_units": "raw_logit",
+  "temporal_evidence": {
+    "events_in_window": 2,
+    "summary": "2 earlier transactions involving the sender or receiver were examined in the configured history window."
+  },
+  "graph_evidence": {
+    "historical_edges_evaluated": 12,
+    "nodes_represented": 12,
+    "summary": "12 historical interactions were tested by temporarily removing them. Removing the most influential interaction raised the model score by approximately 0.00660585."
+  },
+  "top_historical_interactions": [
+    {
+      "event_id": "3997061",
+      "score_change_on_removal": 0.00660584633265815
+    },
+    {
+      "event_id": "3997062",
+      "score_change_on_removal": 0.005968622046886418
+    }
+  ],
+  "overall_explanation": "The model score met the alert threshold. The transaction details shown above influenced the score in both directions relative to the reference transactions. Tested historical interactions also affected the score.",
+  "disclaimer": "This explanation describes model behavior and does not establish that the transaction is actually fraudulent.",
+  "technical": {
+    "fidelity_error": 0.00039935251517553283,
+    "fidelity_applicable": true,
+    "stability_jaccard": 1.0
+  },
+  "presentation": {
+    "feature_zero_tolerance": 1e-08,
+    "interaction_zero_tolerance": 1e-08,
+    "technical_top_features": 5,
+    "top_interactions": 5,
+    "show_all_interactions": false
+  }
+}

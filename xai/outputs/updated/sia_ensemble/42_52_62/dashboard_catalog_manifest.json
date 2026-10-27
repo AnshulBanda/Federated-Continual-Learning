@@ -1,0 +1,70 @@
+{
+  "schema": "sia-ensemble-on-demand-v1",
+  "family": "sia_three_member_probability_ensemble",
+  "seeds": [
+    42,
+    52,
+    62
+  ],
+  "checkpoint_sha256": {
+    "42": "d650af6959d1da46888f30fb79bbfd888a6ec20743d14d447ea078dc351536f5",
+    "52": "98b6c782a27013e4b1917669b2a5ae48d3a7e44ce6a9aa0149aef446473ab0e2",
+    "62": "4cd0854f6740f99a9f9ef7f1ba3360c06b5178846394feb73033da718ac715fe"
+  },
+  "reference_prediction_sha256": {
+    "JPMorgan_Chase": {
+      "42": "ec0b955d2f22af812d776754fa0e5d5176391c8019e5b03c9462c337b7dc5b22",
+      "52": "8e399768cd89fd23114af5f9f3653fde8c0e2b60c2c44245e36e86f2fdd1d863",
+      "62": "145718866e9b9f58d81f69e6b0ec4a9a5c06467bb7dfdb39a27d3b3176dfd399"
+    },
+    "Wells_Fargo": {
+      "42": "2a906ff65a040b39be4f638e937487c13d5a8d8b32a63e5789c8bd9a6c8a4fb0",
+      "52": "9ec8f3b7f1408da13ab90a9e5aff6a6a636b0629efd7c7309b291db1a3bc1b39",
+      "62": "b5dcf20568ff0fb6a70f29fa83c06d9168244638d49abe112ea4cfc1c2c9134c"
+    },
+    "Key_Bank": {
+      "42": "ad1f69233706f3a407d66e778078e361305fc8acd76419fd62361a0550bed781",
+      "52": "db53b53af2ee2123b2fc450dc3c4c373a6013962748492f2e70bc630b2fbb463",
+      "62": "430134abb6d8a4a8723a2c06b03e5c6b0fa0ae2966c256808983e8b2d8ba045c"
+    }
+  },
+  "implementation_sha256": {
+    "run_updated.py": "9782553f237fffd2d39c2dfaa7348abc0601f732ed19546d05886db831f18837",
+    "serve_ensemble_dashboard.py": "ecd1ccaf84fe49e6e45834dfb85d0ecd0ec6c36ad9246402460311bd0d09bd53",
+    "src\\ensemble_explainer.py": "4c5ac1dab12e8e36c22a634a658820a21eafeefe1ce2c16e3a261122be2a67e7",
+    "src\\ensemble_catalog.py": "e7971feaf3346d280931f54368c5c8f7996f69ec6f58be60b1ca0a4403919701",
+    "src\\counterfactuals.py": "ebe3edfbd31f684e6e6ace57f515d8edb574c8ab131244b2b0415cdd9c36168d",
+    "src\\transaction_story.py": "b80e5feab2c19c661169a251a19ad180962e29542758581cd19d7b69a949b6a0",
+    "__pycache__\\explanation_engine.cpython-312.pyc": "3f4fb1294ef22ce77225d019d13929812b404b3c772e8af94f628f2c41cf0680",
+    "__pycache__\\graph_explainer.cpython-312.pyc": "6c049ed4919a704639bcd592249719e78bb028f6eac17b9816b3800512f85f02"
+  },
+  "source_ref": "origin/sia",
+  "evaluation_split": "validation",
+  "test_loaded": false,
+  "aggregation": "arithmetic mean of member probabilities",
+  "threshold_policy": "same 501-quantile maximum-F1 selection rule as Sia training, recalculated per bank on ensemble validation scores and labels",
+  "threshold_split": "validation",
+  "banks": {
+    "JPMorgan_Chase": {
+      "validation_transactions": 64487,
+      "known_fraud": 16,
+      "flagged": 129,
+      "missed_fraud": 0,
+      "threshold": 0.018216593549896885
+    },
+    "Wells_Fargo": {
+      "validation_transactions": 25592,
+      "known_fraud": 22,
+      "flagged": 52,
+      "missed_fraud": 1,
+      "threshold": 0.26483771586293753
+    },
+    "Key_Bank": {
+      "validation_transactions": 11418,
+      "known_fraud": 21,
+      "flagged": 23,
+      "missed_fraud": 4,
+      "threshold": 0.4178731057743216
+    }
+  }
+}

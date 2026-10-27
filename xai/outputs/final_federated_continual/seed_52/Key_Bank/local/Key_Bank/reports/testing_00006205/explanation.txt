@@ -1,0 +1,29 @@
+FRAUD EXPLANATION
+Transaction: 3954257
+Bank: Key_Bank
+Prediction: LEGITIMATE
+Fraud model score: 2.00767402e-09
+Decision threshold: 0.110705014
+The model classified this transaction as LEGITIMATE because its score of 2.00767402e-09 was below the decision threshold of 0.110705014. This is an uncalibrated model score, not a confirmed chance of fraud.
+
+WHAT PUSHED THE MODEL SCORE UP OR DOWN?
+
+FEATURE EVIDENCE
+- Payment format: ACH
+  Payment format (ACH) increased the fraud score relative to the reference transactions, with account history held fixed. It had the largest absolute feature contribution among the displayed factors.
+- Transaction amount: 2,653.96 USD
+  Transaction amount (2,653.96 USD) increased the fraud score relative to the reference transactions, with account history held fixed. Its contribution pointed in the same direction as the largest displayed factor.
+- Amount received: 2,653.96 USD
+  Amount received (2,653.96 USD) increased the fraud score relative to the reference transactions, with account history held fixed. Its contribution pointed in the same direction as the largest displayed factor.
+Compared with reference transactions, with account history held fixed.
+
+TEMPORAL EVIDENCE
+25 earlier transactions involving the sender or receiver were examined in the configured history window. This describes the available temporal context, not its contribution direction. The historical interaction tests below replay account memory to measure whether selected events were supporting a higher or lower score. They are the contribution test for this temporal/graph context, not a separate additive temporal attribution.
+
+GRAPH EVIDENCE
+12 historical interactions were tested by temporarily removing them. None changed the model score beyond the display tolerance.
+
+OVERALL EXPLANATION
+The model score did not meet the alert threshold. Among the displayed features, Payment format (ACH), Transaction amount (2,653.96 USD), Amount received (2,653.96 USD) provided upward influences relative to the reference transactions. No historical interaction exceeded the display tolerance within the examined neighborhood/window.
+
+This explanation describes model behavior and does not establish that the transaction is actually fraudulent.

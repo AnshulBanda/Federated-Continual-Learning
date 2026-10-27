@@ -1,0 +1,576 @@
+{
+  "schema_version": 2,
+  "transaction_id": "4062418",
+  "bank": "Wells_Fargo",
+  "split": "testing",
+  "chronological_index": 17621,
+  "timestamp": "2025-09-23 15:35:53.300",
+  "prediction": {
+    "class": "legitimate",
+    "probability": 7.490589782544705e-07,
+    "threshold": 0.06631713953613952,
+    "score_type": "uncalibrated sigmoid model score"
+  },
+  "feature_explanation": {
+    "base_logit": -15.319394558668137,
+    "target_logit": -14.104447364807129,
+    "additivity_residual": 0.0,
+    "coalitions": 32,
+    "features": [
+      {
+        "feature": "payment_format",
+        "shap_logit": 1.3145350962877274,
+        "ablation_logit_drop": 1.3005553185939789,
+        "value": "ACH"
+      },
+      {
+        "feature": "Amount_Received",
+        "shap_logit": -0.05057197809219361,
+        "ablation_logit_drop": -0.05533456802368164,
+        "value": 23.66
+      },
+      {
+        "feature": "amount",
+        "shap_logit": -0.04901592433452607,
+        "ablation_logit_drop": -0.059097856283187866,
+        "value": 23.66
+      },
+      {
+        "feature": "Receiving_Currency",
+        "shap_logit": 0.0,
+        "ablation_logit_drop": 0.0,
+        "value": "USD"
+      },
+      {
+        "feature": "currency",
+        "shap_logit": 0.0,
+        "ablation_logit_drop": 0.0,
+        "value": "USD"
+      }
+    ],
+    "method": "exact_empirical_interventional_shap",
+    "units": "raw_logit",
+    "scope": "transaction_features_given_fixed_account_memory",
+    "seed": 42,
+    "background_size": 32,
+    "background_txn_ids": [
+      "2128077",
+      "2688773",
+      "1852070",
+      "1810243",
+      "1938817",
+      "2864541",
+      "2769007",
+      "2649313",
+      "1752968",
+      "2266973",
+      "1820266",
+      "1771926",
+      "2710913",
+      "2465942",
+      "2620914",
+      "1989843",
+      "1618756",
+      "2252632",
+      "2445932",
+      "2177959",
+      "2192445",
+      "2052881",
+      "2535041",
+      "2565270",
+      "1605999",
+      "2144506",
+      "2601332",
+      "1980109",
+      "2183600",
+      "2623416",
+      "1895948",
+      "1741322"
+    ]
+  },
+  "graph_explanation": {
+    "method": "temporal_graph_perturbation",
+    "target": {
+      "source": 6778,
+      "target": 326
+    },
+    "window_batches": 8,
+    "window_event_count": 8192,
+    "selection": "bounded most-recent k-hop undirected neighborhood; influence measured by chronological replay",
+    "hops": 2,
+    "candidate_count": 12,
+    "important_nodes": [
+      {
+        "node_id": 326,
+        "role": "receiver",
+        "delta_probability": 3.741451872769144e-07,
+        "importance": 3.741451872769144e-07,
+        "removed_event_count": 9
+      },
+      {
+        "node_id": 3615,
+        "role": "neighbor",
+        "delta_probability": -3.4895149544213165e-07,
+        "importance": 3.4895149544213165e-07,
+        "removed_event_count": 2
+      },
+      {
+        "node_id": 5531,
+        "role": "neighbor",
+        "delta_probability": 3.4867466321948936e-07,
+        "importance": 3.4867466321948936e-07,
+        "removed_event_count": 2
+      },
+      {
+        "node_id": 10142,
+        "role": "neighbor",
+        "delta_probability": 1.2599238527599134e-07,
+        "importance": 1.2599238527599134e-07,
+        "removed_event_count": 1
+      },
+      {
+        "node_id": 4782,
+        "role": "neighbor",
+        "delta_probability": 9.181512922673033e-08,
+        "importance": 9.181512922673033e-08,
+        "removed_event_count": 1
+      },
+      {
+        "node_id": 7520,
+        "role": "neighbor",
+        "delta_probability": -6.739640088353885e-08,
+        "importance": 6.739640088353885e-08,
+        "removed_event_count": 1
+      },
+      {
+        "node_id": 7481,
+        "role": "neighbor",
+        "delta_probability": -2.9480066913650604e-08,
+        "importance": 2.9480066913650604e-08,
+        "removed_event_count": 1
+      },
+      {
+        "node_id": 6778,
+        "role": "sender",
+        "delta_probability": 2.1225834419099e-08,
+        "importance": 2.1225834419099e-08,
+        "removed_event_count": 3
+      },
+      {
+        "node_id": 8403,
+        "role": "neighbor",
+        "delta_probability": 1.0255589664882298e-08,
+        "importance": 1.0255589664882298e-08,
+        "removed_event_count": 1
+      },
+      {
+        "node_id": 6774,
+        "role": "neighbor",
+        "delta_probability": 6.2306763023540624e-09,
+        "importance": 6.2306763023540624e-09,
+        "removed_event_count": 1
+      },
+      {
+        "node_id": 8429,
+        "role": "neighbor",
+        "delta_probability": 3.6937312505637643e-09,
+        "importance": 3.6937312505637643e-09,
+        "removed_event_count": 1
+      },
+      {
+        "node_id": 6667,
+        "role": "neighbor",
+        "delta_probability": 3.6941367893093164e-10,
+        "importance": 3.6941367893093164e-10,
+        "removed_event_count": 1
+      }
+    ],
+    "important_edges": [
+      {
+        "key": [
+          6,
+          1019
+        ],
+        "split": "testing",
+        "index": 16379,
+        "source": 5531,
+        "target": 326,
+        "transaction_id": "4029745",
+        "timestamp": "2025-09-21 16:32:47.600",
+        "probability_without": 1.1377208316766603e-06,
+        "delta_probability": 3.8866256777962335e-07,
+        "importance": 3.8866256777962335e-07
+      },
+      {
+        "key": [
+          4,
+          321
+        ],
+        "split": "testing",
+        "index": 13633,
+        "source": 6778,
+        "target": 10142,
+        "transaction_id": "3963177",
+        "timestamp": "2025-09-18 07:17:36.500",
+        "probability_without": 8.750506491730283e-07,
+        "delta_probability": 1.2599238527599134e-07,
+        "importance": 1.2599238527599134e-07
+      },
+      {
+        "key": [
+          7,
+          154
+        ],
+        "split": "testing",
+        "index": 16538,
+        "source": 4782,
+        "target": 326,
+        "transaction_id": "4038525",
+        "timestamp": "2025-09-22 02:04:36.800",
+        "probability_without": 8.408733931237673e-07,
+        "delta_probability": 9.181512922673033e-08,
+        "importance": 9.181512922673033e-08
+      },
+      {
+        "key": [
+          7,
+          630
+        ],
+        "split": "testing",
+        "index": 17014,
+        "source": 6778,
+        "target": 3615,
+        "transaction_id": "4044866",
+        "timestamp": "2025-09-22 17:38:52.600",
+        "probability_without": 8.256465805391972e-07,
+        "delta_probability": 7.658831664216025e-08,
+        "importance": 7.658831664216025e-08
+      },
+      {
+        "key": [
+          7,
+          609
+        ],
+        "split": "testing",
+        "index": 16993,
+        "source": 7520,
+        "target": 326,
+        "transaction_id": "4047408",
+        "timestamp": "2025-09-22 17:13:39.100",
+        "probability_without": 6.816618630134981e-07,
+        "delta_probability": -6.739640088353885e-08,
+        "importance": 6.739640088353885e-08
+      },
+      {
+        "key": [
+          6,
+          742
+        ],
+        "split": "testing",
+        "index": 16102,
+        "source": 6778,
+        "target": 3615,
+        "transaction_id": "4030516",
+        "timestamp": "2025-09-21 04:33:44.900",
+        "probability_without": 7.166368124716332e-07,
+        "delta_probability": -3.242145142540376e-08,
+        "importance": 3.242145142540376e-08
+      },
+      {
+        "key": [
+          7,
+          811
+        ],
+        "split": "testing",
+        "index": 17195,
+        "source": 7481,
+        "target": 326,
+        "transaction_id": "4072175",
+        "timestamp": "2025-09-23 02:59:53.100",
+        "probability_without": 7.195781969833864e-07,
+        "delta_probability": -2.9480066913650604e-08,
+        "importance": 2.9480066913650604e-08
+      },
+      {
+        "key": [
+          3,
+          240
+        ],
+        "split": "testing",
+        "index": 12528,
+        "source": 5531,
+        "target": 326,
+        "transaction_id": "3923230",
+        "timestamp": "2025-09-16 15:57:59.900",
+        "probability_without": 7.284027370243481e-07,
+        "delta_probability": -2.0655526872688832e-08,
+        "importance": 2.0655526872688832e-08
+      },
+      {
+        "key": [
+          3,
+          161
+        ],
+        "split": "testing",
+        "index": 12449,
+        "source": 8403,
+        "target": 326,
+        "transaction_id": "3931351",
+        "timestamp": "2025-09-16 14:34:18.300",
+        "probability_without": 7.593138535619193e-07,
+        "delta_probability": 1.0255589664882298e-08,
+        "importance": 1.0255589664882298e-08
+      },
+      {
+        "key": [
+          4,
+          790
+        ],
+        "split": "testing",
+        "index": 14102,
+        "source": 6774,
+        "target": 326,
+        "transaction_id": "3991765",
+        "timestamp": "2025-09-19 00:08:07.800",
+        "probability_without": 7.55288940199391e-07,
+        "delta_probability": 6.2306763023540624e-09,
+        "importance": 6.2306763023540624e-09
+      },
+      {
+        "key": [
+          4,
+          366
+        ],
+        "split": "testing",
+        "index": 13678,
+        "source": 8429,
+        "target": 326,
+        "transaction_id": "3970032",
+        "timestamp": "2025-09-18 08:46:12.800",
+        "probability_without": 7.527519951476007e-07,
+        "delta_probability": 3.6937312505637643e-09,
+        "importance": 3.6937312505637643e-09
+      },
+      {
+        "key": [
+          3,
+          309
+        ],
+        "split": "testing",
+        "index": 12597,
+        "source": 6667,
+        "target": 326,
+        "transaction_id": "3923985",
+        "timestamp": "2025-09-16 17:17:44.100",
+        "probability_without": 7.494276775759679e-07,
+        "delta_probability": 3.6941367893093164e-10,
+        "importance": 3.6941367893093164e-10
+      }
+    ],
+    "fidelity": {
+      "original_probability": 7.49058263897037e-07,
+      "unperturbed_replay_error": 0.0,
+      "retained_top_events_probability": 5.464399813138773e-07,
+      "sufficiency_absolute_error": 2.0261828258315964e-07,
+      "removed_top_events_probability": 1.412471535226325e-06,
+      "comprehensiveness_signed_drop": -6.634132713292881e-07,
+      "removed_low_events_probability": 7.816826499874213e-07,
+      "low_removal_absolute_change": 3.2624386090384304e-08,
+      "top_removal_absolute_change": 6.634132713292881e-07,
+      "retained_event_count": 3,
+      "formula": "sufficiency=abs(p_full-p_only_top); comprehensiveness=p_full-p_without_top",
+      "scope": "Only selected updates retained inside bounded window; pre-window account memory remains intact.",
+      "applicable": true
+    },
+    "delta_definition": "p_after_suppressing_update - p_original; negative means event supported the original fraud score",
+    "limitations": "Not GNNExplainer; approximate bounded search; node effects remove candidate incident updates; not node-feature attribution or causal proof."
+  },
+  "temporal_explanation": {
+    "observation_window_batches": 8,
+    "target_endpoint_event_count": 19,
+    "transaction_volume_by_currency": {
+      "USD": 3584.45
+    },
+    "time_since_last_seen_seconds": {
+      "sender": 79020.0,
+      "receiver": 45360.0
+    },
+    "window_start_seconds_from_origin": 8916719.0,
+    "window_end_seconds_from_origin": 9884608.0,
+    "endpoint_activity_span_seconds": 903418.0,
+    "evidence_type": "descriptive observed history; counts/volumes are not extra model inputs or independent attributions",
+    "timing_semantics": "The current decoder does not directly use time deltas. Earlier deltas enter recurrent memory updates. A zero last_seen sentinel is reported as unknown.",
+    "ordering": "only completed original micro-batches; no target-batch transactions included"
+  },
+  "verification": {
+    "existing_evaluation_probability": 7.490582447644556e-07,
+    "direct_model_probability": 7.490582447644556e-07,
+    "xai_probability": 7.490589782544705e-07,
+    "absolute_errors": {
+      "original_vs_direct": 0.0,
+      "original_vs_xai": 7.334900149247087e-13
+    },
+    "tolerance": 1e-06,
+    "passed": true,
+    "known_leakage_features_excluded": true
+  },
+  "evaluation": {
+    "feature_fidelity": {
+      "k": 2,
+      "original_probability": 7.490589782544705e-07,
+      "formula": "signed_drop = p(original) - mean_background p(masked); absolute_change = abs(signed_drop)",
+      "top": {
+        "features": [
+          "payment_format",
+          "Amount_Received"
+        ],
+        "mean_logit": -15.357685089111328,
+        "mean_probability": 7.139809479006758e-07,
+        "signed_drop": 3.507803035379467e-08,
+        "absolute_change": 3.507803035379467e-08
+      },
+      "low": {
+        "features": [
+          "Receiving_Currency",
+          "currency"
+        ],
+        "mean_logit": -14.104447364807129,
+        "mean_probability": 7.490589782544705e-07,
+        "signed_drop": 0.0,
+        "absolute_change": 0.0
+      },
+      "random": {
+        "features": [
+          "amount",
+          "Receiving_Currency"
+        ],
+        "mean_logit": -14.04534912109375,
+        "mean_probability": 8.006728417172673e-07,
+        "signed_drop": -5.1613863462796734e-08,
+        "absolute_change": 5.1613863462796734e-08
+      },
+      "top_exceeds_low_absolute_change": true
+    },
+    "feature_stability": {
+      "runs": 3,
+      "top_k": 3,
+      "nonzero_top_features": [
+        [
+          "Amount_Received",
+          "amount",
+          "payment_format"
+        ],
+        [
+          "Amount_Received",
+          "amount",
+          "payment_format"
+        ],
+        [
+          "Amount_Received",
+          "amount",
+          "payment_format"
+        ]
+      ],
+      "pairwise_jaccard": [
+        1.0,
+        1.0,
+        1.0
+      ],
+      "mean_jaccard": 1.0,
+      "formula": "|nonzero_top_k(A) intersection nonzero_top_k(B)| / |union|; empty/empty = 1",
+      "scope": "training-background resampling, not a general robustness guarantee"
+    }
+  },
+  "config": {
+    "background_size": 32,
+    "seed": 42,
+    "history_batches": 8,
+    "hops": 2,
+    "max_events": 12,
+    "max_nodes": 12,
+    "top_k": 3,
+    "stability_runs": 3,
+    "probability_tolerance": 1e-06
+  },
+  "runtime_seconds": 18.855217799980892,
+  "provenance": {
+    "checkpoint": "C:\\Users\\sange\\Downloads\\CapstoneFinal\\artifacts\\final_evaluation\\corrected_fedavg\\seed_52\\global_model.pt",
+    "checkpoint_sha256": "7a8535d80f194cc1f6aeff8fa3189aefd0ffa158f28bfaf0fdb6c26dc76e7f0d",
+    "mode": "federated",
+    "training_procedure": "continual_replay",
+    "training_seed": 52,
+    "algorithm": "fedavg",
+    "best_round": 16,
+    "replay_size": 2000,
+    "active_banks": [
+      "JPMorgan_Chase",
+      "Wells_Fargo",
+      "Key_Bank"
+    ],
+    "batch_size": 1024,
+    "encoder_source": "verified JSON artifact; no runtime fitting",
+    "preprocessing_sha256": "8840ae7c2fed95108b02d6b9f414e2c40fb7374351b4b1f5f03c61695c4a3b38",
+    "legacy_verification": {
+      "validation": {
+        "metrics": {
+          "pr_auc": 0.9057291428614958,
+          "roc_auc": 0.9998506772851709,
+          "precision": 0.40384615384615385,
+          "recall": 0.9545454545454546,
+          "f1": 0.5675675675675675
+        },
+        "saved_metric_absolute_errors": {
+          "pr_auc": 2.220446049250313e-16,
+          "roc_auc": 1.1102230246251565e-16,
+          "precision": 0.0,
+          "recall": 0.0,
+          "f1": 0.0
+        },
+        "max_probability_error": 0.0
+      },
+      "testing": {
+        "metrics": {
+          "pr_auc": 0.869249205175179,
+          "roc_auc": 0.999811213579257,
+          "precision": 0.6875,
+          "recall": 0.9166666666666666,
+          "f1": 0.7857142857142857
+        },
+        "saved_metric_absolute_errors": {
+          "pr_auc": 0.0,
+          "roc_auc": 0.0,
+          "precision": 0.0,
+          "recall": 0.0,
+          "f1": 0.0
+        },
+        "max_probability_error": 0.0
+      }
+    },
+    "calibration": "none",
+    "input_sha256": {
+      "configuration\\model_feature_columns.json": "6e3f3bfc52667427398844255f82a35473d3740564ac4085e6514422b507d87b",
+      "testing\\Wells_Fargo\\edge_list.csv.gz": "05677ef96681941a5600cfdaee988145228eca9f34831a7101b3929955bb9469",
+      "testing\\Wells_Fargo\\ground_truth.csv.gz": "bf6ce5d2f583f12fca3e453497d7cb2e6a35b16fddbc290c7a59b541e845812d",
+      "testing\\Wells_Fargo\\node_features.csv.gz": "d1a0b61d2fa609812c3a5c67a05818504e5bdd9967efb2c6eb5036cd9dd1ac18",
+      "testing\\Wells_Fargo\\node_map.csv.gz": "5cfe5fde0ea994b07f35bbf3cc2bf01f9225badef2c7c7187644d393939cfb13",
+      "training\\Wells_Fargo\\edge_list.csv.gz": "9ddf9936c6f5d5425a0bdc99aa71343ab52c4572777d55c7a363d219f5bcf5ee",
+      "training\\Wells_Fargo\\ground_truth.csv.gz": "1bc4297a43ccba5d8231bfaccaaa017ff91437725d1efa874b338ab96ac008c1",
+      "training\\Wells_Fargo\\node_features.csv.gz": "64ff1f4fc516cb0b269cb89b916519ac52699fb04efd1ec93e53442c8dc33e2d",
+      "training\\Wells_Fargo\\node_map.csv.gz": "98d1f90c874a9e6fe363a9f00711ae5d7d57b0e2f6c99c732e34841be248b0ef",
+      "validation\\Wells_Fargo\\edge_list.csv.gz": "baf51c1a7cd3f9dffea427e10c3f0709f0fbd6adc7d4f5e277509b36a849b9ab",
+      "validation\\Wells_Fargo\\ground_truth.csv.gz": "3dba302e6a5a57492a8e0df09a4f0400ed3aba499ca532b9a4cb702079deffd4",
+      "validation\\Wells_Fargo\\node_features.csv.gz": "aa0e3b8dc3ca61105135a18724e2a22cdf65d002a3c7f7ea9e2b29591eae5062",
+      "validation\\Wells_Fargo\\node_map.csv.gz": "43225356af1fca9911b761ef679f62ba5cbadab4b6649507bf6a0e006c06a598"
+    },
+    "metrics_sha256": "0e752dbbc555e444c51f0b58380c26ac1c0f9b36b929ce65f64310ecc1867622"
+  },
+  "limitations": [
+    "Model explanations do not establish fraud or causality; scores are uncalibrated.",
+    "Feature SHAP holds account memory fixed; static node-feature attribution is not implemented.",
+    "Temporal graph perturbation is a bounded replay intervention, not GNNExplainer. Earlier anchor memory remains intact.",
+    "Interventional SHAP hybrids can be unrealistic for correlated fields; exactness is relative to the sampled background.",
+    "Legacy preprocessing reproduces current original evaluation and saved metrics; original fitted objects were not preserved.",
+    "The original fixed-size batching and timestamp-tie behavior are preserved.",
+    "Explains the final saved model; does not attribute predictions to individual training rounds, replay samples, or client updates. No formal differential privacy is implemented."
+  ]
+}

@@ -1,0 +1,19 @@
+{
+  "schema_version": 1,
+  "selected_from": "Sia context-harmonized seed 42 August validation, balanced selection",
+  "selection_note": "Fixed transaction IDs are reused for paired checkpoint comparisons.",
+  "cases": {
+    "JPMorgan_Chase": [
+      "3592925",
+      "3594822"
+    ],
+    "Wells_Fargo": [
+      "2965676",
+      "3445857"
+    ],
+    "Key_Bank": [
+      "3007750",
+      "3290172"
+    ]
+  }
+}
