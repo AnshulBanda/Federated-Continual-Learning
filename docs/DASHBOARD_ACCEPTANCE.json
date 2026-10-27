@@ -1,0 +1,160 @@
+{
+  "date": "2026-10-27",
+  "scope": "Executed local acceptance checks; not cross-laptop deployment certification",
+  "unit_tests": {
+    "dashboard_and_federation": 83,
+    "adaptive_model": 17,
+    "xai": 23
+  },
+  "dashboard_workflow": {
+    "reference_macro_september_pr_auc": 0.9067783483397621,
+    "test_data_loaded": false,
+    "validation": [
+      {
+        "bank": "JPMorgan_Chase",
+        "pr_auc": 0.8300817557164852,
+        "matches_frozen": true
+      },
+      {
+        "bank": "Wells_Fargo",
+        "pr_auc": 0.9622832604116025,
+        "matches_frozen": true
+      },
+      {
+        "bank": "Key_Bank",
+        "pr_auc": 0.8654682493601763,
+        "matches_frozen": true
+      }
+    ],
+    "xai": {
+      "matches_replay": true,
+      "additivity_residual": -2.4615429836671865e-06,
+      "method": "exact_empirical_group_interventional_shap_v1",
+      "background_size": 32
+    },
+    "local_adaptation": {
+      "completed": true,
+      "members": 3,
+      "validation_pr_auc": 0.9087593748751843,
+      "reloaded_score_matches": true,
+      "member_results": [
+        {
+          "seed": 42,
+          "baseline_pr_auc": 0.9199227981071856,
+          "candidate_pr_auc": 0.9075628249011276,
+          "baseline_retained": true,
+          "replay": {
+            "mean_train_loss": 0.037945689883179944,
+            "june_events": 11065,
+            "july_events": 11347,
+            "replay_events": 2000,
+            "replay_positives": 42,
+            "june_pr_auc_before": 0.8933166102178519,
+            "june_pr_auc_after": 0.9511134868078107,
+            "forgetting": -0.0577968765899588
+          }
+        },
+        {
+          "seed": 52,
+          "baseline_pr_auc": 0.8383331359909283,
+          "candidate_pr_auc": 0.9311307037434859,
+          "baseline_retained": false,
+          "replay": {
+            "mean_train_loss": 0.03635299674047902,
+            "june_events": 11065,
+            "july_events": 11347,
+            "replay_events": 2000,
+            "replay_positives": 42,
+            "june_pr_auc_before": 0.8625667162552986,
+            "june_pr_auc_after": 0.9353674575405823,
+            "forgetting": -0.07280074128528369
+          }
+        },
+        {
+          "seed": 62,
+          "baseline_pr_auc": 0.7062787053831835,
+          "candidate_pr_auc": 0.4122976020957706,
+          "baseline_retained": true,
+          "replay": {
+            "mean_train_loss": 0.04483955463699574,
+            "june_events": 11065,
+            "july_events": 11347,
+            "replay_events": 2000,
+            "replay_positives": 42,
+            "june_pr_auc_before": 0.9061402882597797,
+            "june_pr_auc_after": 0.8823029587555038,
+            "forgetting": 0.02383732950427586
+          }
+        }
+      ]
+    },
+    "privacy": {
+      "differential_privacy": false,
+      "status": "Not implemented in final training or transfers",
+      "epsilon": null,
+      "delta": null,
+      "accounting": null,
+      "checks": [
+        {
+          "name": "Transaction data",
+          "status": "Local",
+          "detail": "Bank workers train on their own transaction graph using a fixed synthetic-reference feature schema."
+        },
+        {
+          "name": "Transfer integrity",
+          "status": "Implemented",
+          "detail": "HMAC signatures, SHA-256 hashes, chunk verification and signed delivery receipts."
+        },
+        {
+          "name": "Differential privacy",
+          "status": "Not implemented",
+          "detail": "Final model updates have no DP noise mechanism or privacy accountant. Optimizer gradient clipping is not a DP guarantee."
+        },
+        {
+          "name": "Transport encryption",
+          "status": "Not configured by the app",
+          "detail": "Kafka clients do not configure TLS. Any private-network encryption is outside this application."
+        },
+        {
+          "name": "Secure aggregation",
+          "status": "Not implemented",
+          "detail": "The coordinator can read each client update."
+        },
+        {
+          "name": "Explanations",
+          "status": "Local only",
+          "detail": "Transaction explanations stay in the local workspace and are not included in automatic federation messages."
+        }
+      ],
+      "scope": "Current final ensemble, dashboard training, automatic federation and opaque file transfers.",
+      "evidence": [
+        "src/gnn/adaptive_continual_federated.py",
+        "distributed_federation/common/model_runtime.py",
+        "distributed_federation/common/kafka_io.py",
+        "distributed_federation/common/protocol.py",
+        "streaming/app/transfers.py"
+      ]
+    },
+    "result": "PASS"
+  },
+  "local_kafka_federation": {
+    "run_id": "accept-b8e0a85d2b0042b9",
+    "broker": "127.0.0.1:9092",
+    "rounds": 1,
+    "banks": [
+      "Key_Bank",
+      "Wells_Fargo",
+      "JPMorgan_Chase"
+    ],
+    "result": "PASS",
+    "rounds_verified": [
+      {
+        "round": 1,
+        "sha256": "e4a2ff8a3f8e6a800575a6045fb2900bc9d60dd8187d61dfb283a2da3e3cf96d",
+        "bytes": 2915100,
+        "verified_banks": 3,
+        "verified_updates": 3
+      }
+    ]
+  }
+}

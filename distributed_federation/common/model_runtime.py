@@ -149,6 +149,28 @@ def train_local(runtime: RuntimeData, config: FederationConfig, round_id: int, c
     check_control()
     from distributed_federation.privacy.subset import configure_trainable
     configure_trainable(runtime.model,getattr(config,"private_subset","all"))
+    if getattr(config, 'training_protocol', 'legacy') == 'adaptive_ensemble':
+        from types import SimpleNamespace
+        from adaptive_continual_federated import train_client, calendar_boundary
+        cfg = SimpleNamespace(local_epochs=config.local_epochs, learning_rate=config.learning_rate,
+            replay=config.replay, replay_size=config.replay_size, distill=0,
+            batch_size=config.batch_size, rng_policy=config.rng_policy,
+            weight_decay=config.weight_decay, negative_ratio=config.negative_ratio)
+        boundary = calendar_boundary(config.dataset_dir, config.clients[client_index].bank)
+        diagnostics=[]
+        for seed, member in runtime.model.items():
+            check_control()
+            def progress(task,epoch):
+                if config.privacy.mode == 'none':
+                    emit('epoch_completed',round_id,seed=int(seed),task=task,epoch=epoch,
+                         total_epochs=config.local_epochs,mean_train_loss=None)
+            result=train_client(member,runtime.static,runtime.streams['training'],boundary,cfg,
+                int(seed)+round_id*100000+client_index,check_cancel=check_control,progress=progress)
+            diagnostics.append(result)
+        if config.privacy.mode == 'none':
+            emit('context_replay_completed',round_id,members=diagnostics)
+            return sum(d['mean_train_loss'] for d in diagnostics) / len(diagnostics)
+        return None
     cfg = SimpleNamespace(local_epochs=config.local_epochs, learning_rate=config.learning_rate,
         batch_size=config.batch_size, replay_size=config.replay_size, replay=config.replay,
         distill=0., rng_policy=config.rng_policy,
@@ -227,14 +249,39 @@ def prepare_frozen_runtime(config, bank=None):
             nodes, edges, splits=('training',))
         if node_columns != contract['node_columns'] or edge_columns != contract['edge_columns']:
             raise ValueError('Local approved feature columns differ from the shared schema')
-    model = Model(contract['node_feature_count'], contract['edge_feature_count'], config.hidden_channels, config.dropout).cpu()
+    if getattr(config, 'training_protocol', 'legacy') == 'adaptive_ensemble':
+        from streaming.app.final_model import build_ensemble
+        model = build_ensemble(contract)
+    else:
+        model = Model(contract['node_feature_count'], contract['edge_feature_count'], config.hidden_channels, config.dropout).cpu()
     from dataclasses import asdict
     schema = dict(implementation_sha256=implementation_sha256(),model='CausalTemporalGraphSAGE', feature_contract=contract,
-                  training_protocol=dict(aggregation=config.aggregation,rounds=config.rounds,local_epochs=config.local_epochs,batch_size=config.batch_size,
+                  training_protocol=dict(protocol=getattr(config,'training_protocol','legacy'),aggregation=config.aggregation,rounds=config.rounds,local_epochs=config.local_epochs,batch_size=config.batch_size,
                       negative_ratio=config.negative_ratio,learning_rate=config.learning_rate,weight_decay=config.weight_decay,
                       replay=config.replay,replay_size=config.replay_size,rng_policy=config.rng_policy,
                       privacy=asdict(config.privacy),server_optimizer=asdict(config.server_optimizer),private_subset=config.private_subset,seed=config.seed,clients=[dict(client_id=c.client_id,bank=c.bank) for c in config.clients]),
                   hidden_channels=config.hidden_channels, dropout=config.dropout,
                   state={key:dict(shape=list(value.shape),dtype=str(value.dtype)) for key,value in model.state_dict().items()})
+    if getattr(config, 'training_protocol', 'legacy') == 'adaptive_ensemble':
+        from streaming.app.final_model import reference_model
+        schema['ensemble'] = dict(seeds=[42,52,62], aggregation='mean probabilities',
+            initial_hashes=[m['sha256'] for m in reference_model('Key_Bank')['members']])
+        schema['privacy'] = dict(differential_privacy=config.privacy.mode!='none',
+            mode=config.privacy.mode, accounting=config.privacy.accounting(config.rounds) if config.privacy.mode!='none' else None,
+            scope='Incremental releases conditional on nonprivate frozen ensemble')
     encoded=json.dumps(schema, sort_keys=True, separators=(',',':')).encode()
     return RuntimeData(model, static, streams, schema, hashlib.sha256(encoded).hexdigest())
+
+
+def aggregate_adaptive(states, global_state):
+    """Equal-client temporal harmonization applied independently to each seed."""
+    from adaptive_continual_federated import temporal_harmonized_average
+    result={}
+    for seed in ('42','52','62'):
+        prefix=seed+'.'
+        original={k[len(prefix):]:v for k,v in global_state.items() if k.startswith(prefix)}
+        members=[{k[len(prefix):]:v for k,v in state.items() if k.startswith(prefix)} for state in states]
+        aggregated,_=temporal_harmonized_average(members,original,strength=.5)
+        result.update({prefix+k:v for k,v in aggregated.items()})
+    validate_state(result,global_state)
+    return result

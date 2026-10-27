@@ -13,9 +13,9 @@ class OverviewTests(unittest.TestCase):
             for bank in BANKS:
                 result = overview.save({'bank': bank})
                 self.assertEqual(Overview(tmp).load()['bank'], bank)
-                self.assertIsNone(result['active_model'])
+                self.assertEqual(len(result['active_model']['members']),3)
                 self.assertIsNone(result['last_training'])
-                source = json.loads((overview.repo / 'artifacts/final_evaluation/corrected_fedavg/seed_42/metrics.json').read_text())
+                source = json.loads((overview.repo / 'artifacts/research_seed_ensemble/exploratory_september/metrics.json').read_text())
                 expected = next(row['testing'] for row in source['per_bank'] if row['bank'] == bank)
                 for metric in ('pr_auc', 'precision', 'recall'):
                     self.assertEqual(result['evaluation'][metric], expected[metric])

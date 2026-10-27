@@ -6,8 +6,8 @@ from streaming.app.results import research_results
 from streaming.app.dashboard import server
 class TabTests(unittest.TestCase):
  def test_research_all_methods_and_splits(self):
-  rows=research_results();self.assertEqual(len(rows),54)
-  self.assertEqual({r['method'] for r in rows},{'local','cl','corrected_fedavg'})
+  rows=research_results();self.assertEqual(len(rows),60)
+  self.assertEqual({r['method'] for r in rows},{'local','cl','corrected_fedavg','final_ensemble'})
   self.assertEqual({r['split'] for r in rows},{'validation','testing'})
  def test_restart_and_bank_isolation(self):
   with tempfile.TemporaryDirectory() as tmp:

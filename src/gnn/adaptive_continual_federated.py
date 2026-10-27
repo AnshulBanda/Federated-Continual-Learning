@@ -251,7 +251,7 @@ def public_training_seed(seed, phase, epoch):
     return int.from_bytes(hashlib.sha256(domain).digest()[:8], "big") % (2**31)
 
 
-def train_client(model, static, training, boundary, cfg, seed, check_cancel=None):
+def train_client(model, static, training, boundary, cfg, seed, check_cancel=lambda: None, progress=lambda *args: None):
     if getattr(cfg, "rng_policy", "per_client") == "per_client":
         set_seed(seed)
     counter_rng = getattr(cfg, "rng_policy", "per_client") == "counter"
@@ -263,12 +263,16 @@ def train_client(model, static, training, boundary, cfg, seed, check_cancel=None
         raise ValueError("Both calendar tasks must contain events")
     optimizer = torch.optim.AdamW(model.parameters(), lr=cfg.learning_rate, weight_decay=getattr(cfg, "weight_decay", 1e-4))
     generator = torch.Generator().manual_seed(seed)
+    epoch_losses = []
     for epoch in range(cfg.local_epochs):
         if counter_rng:
             set_seed(public_training_seed(seed, "june_dropout", epoch))
             generator.manual_seed(public_training_seed(seed, "june_sampling", epoch))
-        train_temporal_epoch(model, static, june, optimizer,
+        check_cancel()
+        loss, _ = train_temporal_epoch(model, static, june, optimizer,
                              epoch_sample_mask(june.labels, getattr(cfg, "negative_ratio", 20), generator), cfg.batch_size, 2, check_cancel=check_cancel)
+        epoch_losses.append(loss)
+        progress("June", epoch + 1)
     june_scores, june_labels, _ = score_stream(model, model.initial_state(static), june, cfg.batch_size, check_cancel=check_cancel)
     if cfg.replay == "risk_context":
         indices = risk_context_indices(june, june_scores, cfg.replay_size, seed)
@@ -293,16 +297,19 @@ def train_client(model, static, training, boundary, cfg, seed, check_cancel=None
         if counter_rng:
             set_seed(public_training_seed(seed, "july_dropout", epoch))
             generator.manual_seed(public_training_seed(seed, "july_sampling", epoch))
+        check_cancel()
         mask = epoch_sample_mask(task.labels, getattr(cfg, "negative_ratio", 20), generator)
         if cfg.distill > 0:
             distillation_epoch(model, static, task, optimizer, mask, cfg.batch_size, 2,
                                teacher, replay_mask, cfg.distill)
         else:
-            train_temporal_epoch(model, static, task, optimizer, mask, cfg.batch_size, 2, check_cancel=check_cancel)
+            loss, _ = train_temporal_epoch(model, static, task, optimizer, mask, cfg.batch_size, 2, check_cancel=check_cancel)
+            epoch_losses.append(loss)
+        progress("July + context replay", epoch + 1)
     after, _, _ = score_stream(model, model.initial_state(static), june, cfg.batch_size, check_cancel=check_cancel)
     before_ap = float(average_precision_score(june_labels, june_scores))
     after_ap = float(average_precision_score(june_labels, after))
-    return {"june_events": len(june), "july_events": len(july), "replay_events": replay_count,
+    return {"mean_train_loss": float(np.mean(epoch_losses)), "june_events": len(june), "july_events": len(july), "replay_events": replay_count,
             "replay_positives": int(replay.labels.sum()) if replay is not None else 0,
             "june_pr_auc_before": before_ap, "june_pr_auc_after": after_ap,
             "forgetting": before_ap - after_ap}

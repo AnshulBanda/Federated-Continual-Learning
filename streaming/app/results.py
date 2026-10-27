@@ -12,4 +12,10 @@ def research_results(repo=REPO):
                 for split in ('validation','testing'):
                     if isinstance(row.get(split),dict):
                         rows.append(dict(method=method,seed=path.parent.name,bank=row.get('bank'),split=split,metrics=row[split],source=str(path.relative_to(repo))))
+    path = Path(repo)/'artifacts/research_seed_ensemble/exploratory_september/metrics.json'
+    for row in read_json(path, {}).get('per_bank', []):
+        for split in ('validation','testing'):
+            if isinstance(row.get(split),dict):
+                rows.append(dict(method='final_ensemble',seed='42+52+62',bank=row['bank'],split=split,
+                    metrics=row[split],source=str(path.relative_to(repo)),result_type='one three-member ensemble'))
     return rows

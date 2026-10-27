@@ -58,6 +58,7 @@ class FederationConfig:
     privacy: Privacy = Privacy()
     server_optimizer: ServerConfig = ServerConfig()
     private_subset: str = "all"
+    training_protocol: str = "legacy"
 
     def client(self, client_id: str) -> ClientConfig:
         for client in self.clients:
@@ -159,6 +160,11 @@ def load_config(path: str | Path, broker_override: str | None = None) -> Federat
     if private_subset not in PREFIXES or (private_subset != "all" and not privacy.secure):
         raise ValueError("Parameter subsets require secure aggregation and a known subset")
 
+    if raw.get("training_protocol", "legacy") not in ("legacy", "adaptive_ensemble"):
+        raise ValueError("Unknown training protocol")
+    if raw.get("training_protocol") == "adaptive_ensemble" and not raw.get("feature_schema"):
+        raise ValueError("Adaptive ensemble requires a frozen public feature schema")
+
     return FederationConfig(
         broker=broker,
         run_id=run_id,
@@ -182,6 +188,7 @@ def load_config(path: str | Path, broker_override: str | None = None) -> Federat
         initial_checkpoint=_repo_path(raw.get("initial_checkpoint")),
         feature_schema=_repo_path(raw.get("feature_schema")),
         return_aggregate=raw.get("return_aggregate", False) is True,
+        training_protocol=raw.get("training_protocol", "legacy"),
         aggregation=aggregation, replay_size=int(raw.get("replay_size", 2000)), replay=raw.get("replay", "risk_context"),
         rng_policy=raw.get("rng_policy", "per_client"), privacy=privacy, server_optimizer=server_optimizer, private_subset=private_subset,
     )

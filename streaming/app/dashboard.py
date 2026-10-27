@@ -18,6 +18,9 @@ from .local_training import LocalTraining
 from .collaboration import Collaboration
 from .monitoring import Monitoring
 from .results import research_results
+from .explanations import Explanations
+from .privacy import privacy_status
+from .final_model import reference_evidence, reference_model
 
 WEB = Path(__file__).resolve().parents[1] / 'web' / 'index.html'
 
@@ -36,6 +39,7 @@ def server(root, port=8765):
     training = LocalTraining(root)
     collaboration = Collaboration(root)
     monitoring = Monitoring(root)
+    explanations = Explanations(root, monitoring)
     check_lock = threading.Lock()
     token = secrets.token_urlsafe(32)
 
@@ -72,6 +76,12 @@ def server(root, port=8765):
             path = urlparse(self.path).path
             if path == '/':
                 self.respond(200, WEB.read_text(encoding='utf-8').replace('__TOKEN__', token).encode(), 'text/html; charset=utf-8')
+            elif path == '/api/privacy':
+                self.respond(200, privacy_status())
+            elif path == '/api/explanations':
+                self.respond(200, explanations.status(overview.load()['bank']))
+            elif path == '/api/final-model':
+                self.respond(200, reference_evidence())
             elif path == '/api/monitoring':
                 self.respond(200, monitoring.status(overview.load()['bank']))
             elif path.startswith('/api/monitoring/rows/'):
@@ -123,7 +133,14 @@ def server(root, port=8765):
                     data = json.loads(body)
                     if not isinstance(data, dict):
                         raise ValueError('Expected a JSON object.')
-                    if self.path == '/api/monitoring/start':
+                    if self.path == '/api/explanations/start':
+                        result = explanations.start(data, overview.load()['bank'])
+                    elif self.path == '/api/model/reference':
+                        bank = overview.load()['bank']
+                        if not bank: raise ValueError('Choose your bank first.')
+                        result = reference_model(bank)
+                        (Path(root)/'local-training'/('active-'+bank+'.json')).unlink(missing_ok=True)
+                    elif self.path == '/api/monitoring/start':
                         result = monitoring.start(data, overview.load()['bank'])
                     elif self.path == '/api/monitoring/cancel':
                         result = monitoring.cancel(data.get('id'), overview.load()['bank'])
@@ -182,6 +199,7 @@ def server(root, port=8765):
 
     class Server(ThreadingHTTPServer):
         def server_close(self):
+            explanations.close()
             monitoring.close()
             training.close()
             transfers.close()
@@ -199,12 +217,12 @@ def server(root, port=8765):
 
 
 def main():
-    parser = argparse.ArgumentParser(description='Model-weight file dashboard (no training)')
+    parser = argparse.ArgumentParser(description='AML dashboard: ensemble training, scoring, explanations and model collaboration')
     parser.add_argument('--port', type=int, default=8765)
     parser.add_argument('--state-dir', type=Path, default=Path(__file__).resolve().parents[1] / '.local' / 'transfers')
     args = parser.parse_args()
     app = server(args.state_dir, args.port)
-    print(f'Weight dashboard: http://127.0.0.1:{app.server_port}', flush=True)
+    print(f'AML dashboard: http://127.0.0.1:{app.server_port}', flush=True)
     try:
         app.serve_forever()
     except KeyboardInterrupt:

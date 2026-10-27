@@ -21,7 +21,7 @@ class LocalTrainingTests(unittest.TestCase):
         with patch('streaming.app.local_training.subprocess.Popen') as process, patch('streaming.app.local_training.importlib.util.find_spec',return_value=object()):
             result=self.training.start(dict(dataset=self.tmp.name,kind='check'),'Key_Bank')
             job=self.training.jobs()[0]
-            self.assertEqual(job['epochs'],25)
+            self.assertEqual(job['epochs'],18)
             self.assertEqual(job['patience'],5)
             self.assertTrue(process.called)
 
@@ -36,6 +36,10 @@ class LocalTrainingTests(unittest.TestCase):
         with self.assertRaises(ValueError):self.training.activate('abc','Key_Bank')
         job['status']='Completed';write_json(folder/'job.json',job)
         with self.assertRaises(ValueError):self.training.activate('abc','Wells_Fargo')
+        with self.assertRaisesRegex(ValueError,'legacy'):
+            self.training.activate('abc','Key_Bank')
+        write_json(folder/'ensemble.json',dict(bank='Key_Bank',version='local-abc',model_kind='adaptive_probability_ensemble',
+            members=[dict(seed=seed,checkpoint=str(path),sha256=job['sha256']) for seed in (42,52,62)],sha256=job['sha256']))
         model=self.training.activate('abc','Key_Bank')
         self.assertEqual(model['version'],'local-abc')
         self.assertEqual(read_json(self.training.root/'active-Key_Bank.json')['sha256'],job['sha256'])
