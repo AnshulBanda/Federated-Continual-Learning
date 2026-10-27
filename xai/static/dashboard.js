@@ -76,25 +76,118 @@ function patternLabels(story){
  const patterns=observedPatterns(story);
  return `<div class="observed-patterns"><span class="muted">Observed transaction patterns:</span> ${patterns.length?patterns.map(pattern=>`<span class="pattern-chip" title="${esc(pattern.description)}">${pattern.label}</span>`).join(' '):'<span class="muted">No fan-in, fan-out or cycle found in the displayed transfers.</span>'}<small>Based only on the transfers shown, including the selected transfer. Fan-in/out requires at least 3 distinct counterpart accounts. These labels describe connections, not confirmed fraud or measured score effects.</small></div>`;
 }
+// Geometry is presentation-only. Event selection and measured effects are unchanged.
+function networkLayout(story){
+ const width=740,height=560,positions=new Map(),selected=story.selected_transfer;
+ const source=selected.source_alias,target=selected.target_alias;
+ for(const account of story.accounts){
+  const current=account.alias===source||account.alias===target;
+  if(current)positions.set(account.alias,{x:source===target?370:account.alias===source?145:595,y:280,w:158,h:90});
+ }
+ const slots=[{x:135,y:86},{x:370,y:86},{x:605,y:86},{x:135,y:474},{x:370,y:474},{x:605,y:474}];
+ for(const account of story.accounts.filter(a=>!positions.has(a.alias))){
+  const peers=story.transfers.filter(e=>e.source_alias===account.alias||e.target_alias===account.alias)
+   .map(e=>e.source_alias===account.alias?e.target_alias:e.source_alias);
+  const preferred=peers.includes(source)&&peers.includes(target)?370:peers.includes(source)?135:peers.includes(target)?605:370;
+  slots.sort((a,b)=>Math.abs(a.x-preferred)-Math.abs(b.x-preferred)||a.y-b.y||a.x-b.x);
+  positions.set(account.alias,{...slots.shift(),w:142,h:80});
+ }
+ const overlaps=(a,b,gap=8)=>a.x-a.w/2<b.x+b.w/2+gap&&a.x+a.w/2>b.x-b.w/2-gap&&a.y-a.h/2<b.y+b.h/2+gap&&a.y+a.h/2>b.y-b.h/2-gap;
+ const inside=(p,box,gap=0)=>Math.abs(p.x-box.x)<box.w/2+gap&&Math.abs(p.y-box.y)<box.h/2+gap;
+ const clip=(node,toward,pad)=>{
+  const dx=toward.x-node.x,dy=toward.y-node.y;
+  const scale=Math.min((node.w/2+pad)/(Math.abs(dx)||.001),(node.h/2+pad)/(Math.abs(dy)||.001));
+  return {x:node.x+dx*scale,y:node.y+dy*scale};
+ };
+ const nodeBoxes=[...positions.values()],options=new Map();
+ // Reserve the selected badge first. Historical routing then avoids that focal point.
+ const importance=event=>Math.abs((story.model_link_effects||[]).find(e=>String(e.transaction_id)===String(event.transaction_id))?.score_support||0);
+ const ordered=[...story.transfers].sort((a,b)=>(b.kind==='selected')-(a.kind==='selected')||importance(b)-importance(a));
+ for(const event of ordered){
+  const a=positions.get(event.source_alias),b=positions.get(event.target_alias),current=event.kind==='selected';
+  const effect=(story.model_link_effects||[]).find(e=>String(e.transaction_id)===String(event.transaction_id));
+  const primary=`${!current&&effect?(effect.score_support>1e-6?'↑ ':effect.score_support< -1e-6?'↓ ':'• '):''}TX ${event.transaction_id}`;
+  const secondary=current?amount(event):'';
+  const box={w:Math.max(current?140:112,primary.length*(current?8:7.5)+24,secondary.length*7.2+20),h:current?49:26};
+  const offsets=current?[-60,60,-120,120,0,-200,200]:[0,80,-80,160,-160,240,-240,320,-320];
+  const choices=[];
+  for(const offset of offsets){
+   let start,end,control,path,point;
+   if(event.source_alias===event.target_alias){
+    const direction=offset>0?1:-1,reach=130+Math.abs(offset)/2;
+    start={x:a.x-a.w*.35,y:a.y+direction*(a.h/2+4)};
+    end={x:a.x+a.w*.35,y:start.y};
+    const c1={x:a.x-reach,y:a.y+direction*reach},c2={x:a.x+reach,y:c1.y};
+    point=t=>({x:(1-t)**3*start.x+3*(1-t)**2*t*c1.x+3*(1-t)*t*t*c2.x+t**3*end.x,
+     y:(1-t)**3*start.y+3*(1-t)**2*t*c1.y+3*(1-t)*t*t*c2.y+t**3*end.y});
+    path=`M ${start.x} ${start.y} C ${c1.x} ${c1.y}, ${c2.x} ${c2.y}, ${end.x} ${end.y}`;
+   }else{
+    // Use a canonical normal so opposite-direction transfers separate consistently.
+    const first=event.source_alias<event.target_alias?a:b,last=first===a?b:a;
+    const dx=last.x-first.x,dy=last.y-first.y,distance=Math.hypot(dx,dy)||1;
+    control={x:(a.x+b.x)/2-dy/distance*offset,y:(a.y+b.y)/2+dx/distance*offset};
+    start=clip(a,control,5);end=clip(b,control,9);
+    point=t=>({x:(1-t)**2*start.x+2*(1-t)*t*control.x+t*t*end.x,y:(1-t)**2*start.y+2*(1-t)*t*control.y+t*t*end.y});
+    path=`M ${start.x} ${start.y} Q ${control.x} ${control.y}, ${end.x} ${end.y}`;
+   }
+   const samples=Array.from({length:19},(_,i)=>point((i+1)/20));
+   for(const t of [.5,.35,.65,.2,.8])for(const [shiftX,shiftY] of (current?[[0,0]]:[[0,0],[0,-36],[0,36],[-28,-28],[28,28]])){
+    const anchor=point(t),candidate={...box,x:anchor.x+shiftX,y:anchor.y+shiftY};
+    let cost=Math.abs(offset)*.012+Math.abs(t-.5)*12+Math.hypot(shiftX,shiftY)*.08;
+    const nodeHits=nodeBoxes.filter(n=>overlaps(candidate,n,8)).length;
+    const boundsClear=!(candidate.x-box.w/2<12||candidate.x+box.w/2>width-12||candidate.y-box.h/2<12||candidate.y+box.h/2>height-12);
+    cost+=nodeHits*50000+(boundsClear?0:20000);
+    const baseCost=cost+samples.filter(p=>nodeBoxes.some(n=>n!==a&&n!==b&&inside(p,n,7))).length*100+samples.filter(p=>p.x<8||p.x>width-8||p.y<8||p.y>height-8).length*1000;
+    choices.push({path,label:candidate,anchor,samples,baseCost,clear:nodeHits===0&&boundsClear,primary,secondary});
+   }
+  }
+  const free=choices.filter(c=>c.clear);
+  options.set(String(event.transaction_id),(free.length?free:choices).sort((a,b)=>a.baseCost-b.baseCost));
+ }
+ // Keep a bounded set of whole-layout alternatives so an early badge cannot
+ // consume the only clear space needed by a later parallel transfer.
+ let beam=[{cost:0,placed:[]}];
+ for(const event of ordered){
+  const id=String(event.transaction_id),unique=new Map();
+  for(const option of options.get(id)){
+   const key=[option.label.x.toFixed(0),option.label.y.toFixed(0)].join(',');
+   if(!unique.has(key))unique.set(key,option);
+  }
+  const choices=[...unique.values()].slice(0,event.kind==='selected'?1:64),next=[];
+  for(const state of beam)for(const candidate of choices){
+   let cost=state.cost+candidate.baseCost;
+   for(const [,previous] of state.placed){
+    if(overlaps(candidate.label,previous.label,6))cost+=10000;
+    for(const p of candidate.samples)if(inside(p,previous.label,3))cost+=20;
+    for(const p of previous.samples)if(inside(p,candidate.label,3))cost+=20;
+   }
+   next.push({cost,placed:[...state.placed,[id,candidate]]});
+  }
+  next.sort((a,b)=>a.cost-b.cost);beam=next.slice(0,16);
+ }
+ return {width,height,positions,edges:new Map(beam[0].placed)};
+}
+function networkEdgeClass(event,effect){
+ return event.kind==='selected'?'selected-transfer':!effect?'observed-only':effect.score_support>1e-6?'tested-up':effect.score_support< -1e-6?'tested-down':'tested-neutral';
+}
 function flowDiagram(story){
- const measured=new Map((story.model_link_effects||[]).map(effect=>[String(effect.transaction_id),effect]));
- const positions=new Map(),others=[[360,55],[360,305],[215,65],[505,295],[505,65],[215,295]];let connectedIndex=0;
- for(const account of story.accounts){positions.set(account.alias,account.alias==='A'?[125,180]:account.alias==='B'?[595,180]:others[connectedIndex++]||[360,180])}
- const pairs=new Map();
- const paths=story.transfers.map(event=>{
-  const [ax,ay]=positions.get(event.source_alias),[bx,by]=positions.get(event.target_alias),current=event.kind==='selected';
-  const key=[event.source_alias,event.target_alias].sort().join('-'),index=pairs.get(key)||0;pairs.set(key,index+1);
-  const distance=Math.hypot(bx-ax,by-ay)||1,dx=(bx-ax)/distance,dy=(by-ay)/distance;
-  const sx=ax+39*dx,sy=ay+39*dy,tx=bx-43*dx,ty=by-43*dy;
-  const effect=measured.get(String(event.transaction_id));
-  const evidenceClass=current?'selected-transfer':!effect?'observed-only':effect.score_support>1e-6?'tested-up':effect.score_support< -1e-6?'tested-down':'tested-neutral';
-  const evidenceText=current?'Transaction being explained':effect?`Tested: score ${score(effect.original_model_score)} → ${score(effect.model_score_without_event)} without this transfer; absolute change ${score(Math.abs(effect.score_support))}`:'Recorded earlier transfer';
-  const offset=current?-22:30+index*22,cx=(ax+bx)/2-dy*offset,cy=(ay+by)/2+dx*offset;
-  const path=event.source_alias===event.target_alias?`M ${ax-22} ${ay-24} C ${ax-90} ${ay-120}, ${ax+90} ${ay-120}, ${ax+22} ${ay-24}`:`M ${sx} ${sy} Q ${cx} ${cy} ${tx} ${ty}`;
-  return `<g class="graph-edge" data-edge="${esc(event.transaction_id)}" tabindex="0" role="button" aria-label="Inspect transaction ${esc(event.transaction_id)}"><path d="${path}" class="flow-hit"/><path d="${path}" class="flow-line ${evidenceClass}" marker-end="url(#${current?'arrow-current':'arrow-earlier'})"><title>Transaction ${esc(event.transaction_id)}: account ${esc(event.source_account_id)} → account ${esc(event.target_account_id)}; ${amount(event)}; ${time(event.timestamp)}; ${esc(evidenceText)}</title></path><text class="flow-transaction ${current?'current':''}" x="${cx}" y="${cy-10}" text-anchor="middle">TX ${esc(event.transaction_id)}${effect?' [tested]':''}</text>${current?`<text class="flow-amount" x="${cx}" y="${cy+10}" text-anchor="middle">${amount(event)}</text>`:''}</g>`;
+ const measured=new Map((story.model_link_effects||[]).map(e=>[String(e.transaction_id),e]));
+ const layout=networkLayout(story);
+ const paths=[...story.transfers].sort((a,b)=>(a.kind==='selected')-(b.kind==='selected')).map(event=>{
+  const route=layout.edges.get(String(event.transaction_id)),label=route.label,current=event.kind==='selected';
+  const effect=measured.get(String(event.transaction_id)),evidenceClass=networkEdgeClass(event,effect);
+  const marker=current?'selected':!effect?'observed':effect.score_support>1e-6?'up':effect.score_support< -1e-6?'down':'neutral';
+  const evidenceText=current?'Selected transaction':effect?`Verified replay: original score ${score(effect.original_model_score)}, without this history update ${score(effect.model_score_without_event)}; measured support ${effect.score_support}`:'Earlier observed transfer; effect not measured';
+  return `<g class="graph-edge ${evidenceClass}" data-edge="${esc(event.transaction_id)}" tabindex="0" role="button" aria-pressed="false" aria-label="Inspect transaction ${esc(event.transaction_id)}"><title>TX ${esc(event.transaction_id)}: account ${esc(event.source_account_id)} → ${esc(event.target_account_id)}; ${time(event.timestamp)}; ${amount(event)}; ${esc(event.payment_method)}; ${esc(evidenceText)}</title><path d="${route.path}" class="flow-hit"/><path d="${route.path}" class="flow-halo"/><path d="${route.path}" class="flow-line ${evidenceClass}" marker-end="url(#arrow-${marker})"/>${Math.hypot(route.anchor.x-label.x,route.anchor.y-label.y)>0?`<line class="badge-leader" x1="${route.anchor.x}" y1="${route.anchor.y}" x2="${label.x}" y2="${label.y}"/>`:''}<g class="edge-badge ${evidenceClass}" transform="translate(${label.x-label.w/2},${label.y-label.h/2})"><rect width="${label.w}" height="${label.h}" rx="${current?9:13}"/><text class="flow-transaction" x="${label.w/2}" y="${current?20:17}" text-anchor="middle">${esc(route.primary)}</text>${current?`<text class="flow-amount" x="${label.w/2}" y="38" text-anchor="middle">${route.secondary}</text>`:''}</g></g>`;
  }).join('');
- const nodes=story.accounts.map(account=>{const [x,y]=positions.get(account.alias),id=String(account.account_id??account.node_id);return `<g class="graph-account" data-account="${esc(id)}" tabindex="0" role="button" aria-label="Inspect account ${esc(id)}"><circle class="flow-node ${['sender','receiver','sender and receiver'].includes(account.role)?'current':''}" cx="${x}" cy="${y}" r="36"/><text class="flow-label" style="font-size:${id.length>7?11:14}px" x="${x}" y="${y+5}" text-anchor="middle">${esc(id)}</text><text class="flow-role" x="${x}" y="${y+55}" text-anchor="middle">${esc(account.role)}</text><title>Dataset account ID ${esc(id)}; model node ${esc(account.node_id)}</title></g>`}).join('');
- return `<figure class="flow-card"><svg viewBox="0 0 720 365" role="group" aria-label="Observed transfers labeled with actual transaction and dataset account IDs"><defs><marker id="arrow-current" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto"><path d="M 0 0 L 10 5 L 0 10 z" fill="#f3c477"/></marker><marker id="arrow-earlier" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto"><path d="M 0 0 L 10 5 L 0 10 z" fill="#8aaed1"/></marker></defs>${paths}${nodes}</svg></figure>`;
+ const nodes=story.accounts.map(account=>{
+  const n=layout.positions.get(account.alias),id=String(account.account_id??account.node_id);
+  const current=['sender','receiver','sender and receiver'].includes(account.role);
+  return `<g class="graph-account" data-account="${esc(id)}" tabindex="0" role="button" aria-pressed="false" aria-label="Inspect account ${esc(id)}"><title>Account ${esc(account.alias)}: dataset ID ${esc(id)}; model node ${esc(account.node_id)}; ${esc(account.role)}</title><rect class="flow-node ${current?'current':''}" x="${n.x-n.w/2}" y="${n.y-n.h/2}" width="${n.w}" height="${n.h}" rx="14"/><text class="account-alias" x="${n.x}" y="${n.y-18}" text-anchor="middle">Account ${esc(account.alias)}</text><text class="flow-label ${current?'current':''}" x="${n.x}" y="${n.y+6}" text-anchor="middle">${esc(id)}</text><text class="flow-role" x="${n.x}" y="${n.y+26}" text-anchor="middle">${esc(account.role)}</text></g>`;
+ }).join('');
+ const markers=[['selected','#14785f'],['observed','#a9b8bf'],['up','#b57728'],['down','#27846c'],['neutral','#819197']]
+  .map(([name,color])=>`<marker id="arrow-${name}" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="${name==='selected'?12:9}" markerHeight="${name==='selected'?12:9}" markerUnits="userSpaceOnUse" orient="auto"><path d="M 0 0 L 10 5 L 0 10 z" fill="${color}"/></marker>`).join('');
+ return `<figure class="flow-card"><svg viewBox="0 0 ${layout.width} ${layout.height}" role="group" aria-label="Observed transfers labeled with actual transaction and dataset account IDs"><defs>${markers}</defs>${paths}${nodes}</svg><figcaption>Select any account or transfer. Use Enter or Space on a focused item.</figcaption></figure>`;
 }
 
 function transferFields(feature){return Object.fromEntries(String(feature.value).split(' / ').map(part=>{const i=part.indexOf(': ');return [part.slice(0,i),part.slice(i+2)]}))}
@@ -107,27 +200,33 @@ function observedFeature(feature){
 }
 function displayScore(value){return value!==0&&Math.abs(value)<.0001?Number(value).toExponential(3):Number(value).toFixed(4)}
 function exact(value){return value==null?'Not recorded':esc(String(value))}
-function renderSimpleExplanation(x,s){
- const d=s.decision,h=s.history_summary,cf=s.counterfactual_summary,event=x.transaction_story.selected_transfer;
- const margin=d.margin===0?'At the review cutoff':`${displayScore(Math.abs(d.margin))} ${d.margin>0?'above':'below'} the review cutoff`;
- const factorCards=s.top_factors.map(f=>`<li class="factor-card"><div class="factor-heading"><strong>${f.direction==='up'?'↑':f.direction==='down'?'↓':'•'} ${esc(f.label)}</strong><span class="chip ${f.direction==='up'?'alert':f.direction==='down'?'known':''}">${esc(f.effect)}</span></div><p class="factor-value"><span class="observed-label">Observed:</span> ${esc(f.observed)}</p><div class="factor-track" aria-hidden="true"><span class="factor-bar ${f.direction==='down'?'lower':''}" style="width:${100*f.relative_size}%"></span></div></li>`).join('');
+function renderHeroExplanation(s){
+ const d=s.decision,h=s.history_summary;
+ const margin=d.margin===0?'At the review cutoff':`${d.margin>0?'+':'−'}${displayScore(Math.abs(d.margin))} ${d.margin>0?'above':'below'} cutoff`;
+ const factors=s.top_factors.map(f=>`<li class="factor-card"><div class="factor-heading"><strong><span class="direction ${f.direction}" aria-hidden="true">${f.direction==='up'?'↑':f.direction==='down'?'↓':'•'}</span> ${esc(f.label)}</strong><span class="factor-effect ${f.direction}">${esc(f.effect)}</span></div><p class="factor-value"><span class="observed-label">Observed:</span> ${esc(f.observed)}</p><div class="factor-track" aria-hidden="true"><span class="factor-bar ${f.direction==='down'?'lower':''}" style="width:${100*f.relative_size}%"></span></div></li>`).join('');
+ return `<section class="hero-explanation" aria-labelledby="decision-question"><p class="eyebrow">Model explanation</p><h3 id="decision-question">${d.flagged?'Why was this flagged?':'Why was this not flagged?'}</h3>
+ <div class="decision-banner"><span class="status ${d.flagged?'review-status':''}">${d.flagged?'Flagged for review':'Not flagged'}</span><p class="decision-score">Score <strong>${displayScore(d.score)}</strong> <span aria-hidden="true">·</span> Review cutoff <strong>${displayScore(d.threshold)}</strong></p><p class="decision-margin">${margin}</p></div>
+ <div class="reason"><h4>MAIN REASON</h4><p class="primary-reason">${esc(s.primary_reason.sentence)}</p></div>
+ <div class="top-factors"><h4>Top factors</h4><ol class="factor-list">${factors}</ol><p class="relative-help" title="Strong: at least 67% of the largest absolute contribution; Moderate: at least 33%; Small: smaller non-negligible contributions. Compared with training examples, holding earlier account activity fixed.">Strength is relative to this explanation’s largest feature effect, not a probability.</p></div>
+ <div class="hero-history"><h4>Earlier activity</h4><p>${esc(h.sentence)}</p></div><p class="model-scope">${esc(s.model_scope)}</p></section>`;
+}
+function renderFollowupExplanation(x,s){
+ const d=s.decision,h=s.history_summary,cf=s.counterfactual_summary,story=x.transaction_story,event=story.selected_transfer;
+ const earlier=story.transfers.filter(t=>t.kind==='earlier');
  const history=h.strongest?`<div class="score-comparison"><div><span>With this history</span><strong>${displayScore(h.strongest.original_model_score)}</strong></div><span class="comparison-arrow" aria-hidden="true">→</span><div><span>Without this history update</span><strong>${displayScore(h.strongest.model_score_without_event)}</strong></div></div><p class="muted">${h.tested_count} earlier transfer${h.tested_count===1?' has':'s have'} a verified score test. The strongest effect is shown.</p>`:'';
  const c=cf.alternative;
  const alternative=c?`<div class="score-comparison"><div><span>Current amount / score / decision</span><strong>${amount(event)}</strong><p>${displayScore(d.score)} · ${d.flagged?'Flagged':'Not flagged'}</p></div><span class="comparison-arrow" aria-hidden="true">→</span><div><span>Tested alternative / score / decision</span><strong>${amount({amount:c.changed_features.amount??c.changed_features.Amount_Received,currency:event.currency})}</strong><p>${displayScore(c.counterfactual_probability)} · ${c.counterfactual_probability>=d.threshold?'Flagged':'Not flagged'}</p></div></div>`:'';
- return `<div class="investigator-summary" data-view="simple">
- <div class="decision-banner ${d.flagged?'flagged':'not-flagged'}"><div><p class="eyebrow">MODEL DECISION</p><h3>${d.flagged?'Flagged for review':'Not flagged'}</h3><p>Score ${displayScore(d.score)} — ${margin.toLowerCase()}${d.margin===0?'':` of ${displayScore(d.threshold)}`}</p></div><span class="model-scope">${esc(s.model_scope)}</span></div>
- <div class="facts"><div class="fact"><span>MODEL SCORE</span><strong>${displayScore(d.score)}</strong></div><div class="fact"><span>BANK REVIEW CUTOFF</span><strong>${displayScore(d.threshold)}</strong></div><div class="fact"><span>MARGIN ${d.margin>=0?'ABOVE':'BELOW'} CUTOFF</span><strong>${d.margin>0?'+':d.margin<0?'−':''}${displayScore(Math.abs(d.margin))}</strong></div></div>
- <section aria-labelledby="decision-question"><h3 id="decision-question">${d.flagged?'Why was this flagged?':'Why was this not flagged?'}</h3><div class="reason"><span class="eyebrow">MAIN REASON</span><p class="primary-reason">${esc(s.primary_reason.sentence)}</p></div><div class="quick-context"><p><strong>Earlier activity</strong><br>${esc(h.sentence)}</p><p><strong>Account activity</strong><br>${s.patterns.length?s.patterns.map(p=>esc(p.label)).join(' · ')+' observed in the displayed transfers. Score effects of these patterns were not measured.':'No fan-in, fan-out or cycle in the displayed transfers.'}</p></div></section>
- <section class="section" aria-labelledby="feature-question"><h3 id="feature-question">Top factors</h3><ol class="factor-list">${factorCards}</ol><p class="muted relative-help" title="Strong: at least 67% of the largest absolute contribution; Moderate: at least 33%; Small: smaller non-negligible contributions.">Compared with training examples, with earlier account activity held fixed. Strength and bar lengths are relative to this explanation’s largest measured feature effect; they are visual comparisons, not probabilities.</p></section>
- <section class="section" aria-labelledby="history-question"><h3 id="history-question">Earlier activity</h3><p>${esc(h.sentence)}</p>${history}${h.tested_count?'<button type="button" id="see-history" class="text-button">See all tested earlier transfers</button>':''}</section>
- <section class="section" aria-labelledby="patterns-question"><h3 id="patterns-question">Account activity patterns</h3>${s.patterns.length?s.patterns.map(p=>`<p><strong>${esc(p.label)}</strong><br>${esc(p.description)}</p>`).join(''):'<p>No fan-in, fan-out or chronological cycle found in the displayed transfers.</p>'}<p class="muted">These describe observed account relationships. They do not prove fraud and do not automatically mean they affected the model score.</p></section>
- <section class="section"><h3>What would have changed the result?</h3><p>${esc(cf.sentence)}</p>${alternative}<p class="muted">${cf.note}</p></section>
- <p class="label-comparison">Dataset label: <strong>${s.evaluation.label}</strong> · ${s.evaluation.status}. Dataset labels are evaluation evidence, separate from the model decision.</p>
- <p class="muted">The score is not a calibrated probability of fraud. This explanation describes measured model behavior.</p></div>`;
+ return `<div class="followup-explanation"><section class="section" aria-labelledby="history-question"><p class="eyebrow">Earlier activity</p><h3 id="history-question">Tested account history</h3><p>${esc(h.sentence)}</p>${history}${h.tested_count?'<button type="button" id="see-history" class="secondary">See all tested earlier transfers</button>':''}${earlier.length?`<details class="recorded-history"><summary>View earlier transaction history</summary>${historyTable(earlier,story.model_link_effects||[])}</details>`:''}</section>
+ <section class="section" aria-labelledby="patterns-question"><p class="eyebrow">Observed relationships</p><h3 id="patterns-question">Account activity patterns</h3>${s.patterns.length?s.patterns.map(p=>`<p><span class="pattern-chip">${esc(p.label)}</span> ${esc(p.description)}</p>`).join(''):'<p>No fan-in, fan-out or chronological cycle found in the displayed transfers.</p>'}<p class="muted">These describe observed account relationships. They do not prove fraud and do not automatically mean they affected the model score.</p></section>
+ <section class="section"><p class="eyebrow">Model sensitivity</p><h3>What would have changed the result?</h3><p>${esc(cf.sentence)}</p>${alternative}<p class="muted">${cf.note}</p></section>
+ <section class="section label-comparison"><p class="eyebrow">Independent evaluation</p><h3>Dataset label and model outcome</h3><p>Dataset label: <strong>${s.evaluation.label}</strong> · ${s.evaluation.status}. Dataset labels are evaluation evidence, separate from the model decision.</p><p class="muted">The score is not a calibrated probability of fraud. This explanation describes measured model behavior.</p></section></div>`;
+}
+function renderSimpleExplanation(x,s){
+ return `<div class="investigator-summary" data-view="simple"><div class="investigation-hero">${renderNetwork(x)}${renderHeroExplanation(s)}</div>${renderFollowupExplanation(x,s)}</div>`;
 }
 function renderNetwork(x){
- const story=x.transaction_story,earlier=story.transfers.filter(t=>t.kind==='earlier');
- return `<details class="network-details"><summary>View transaction network</summary>${patternLabels(story)}<div class="graph-legend"><span class="legend-selected">Selected transfer</span><span class="legend-context">Earlier observed transfer</span><span class="legend-up">Verified test: raised score</span><span class="legend-down">Verified test: lowered score</span><span class="legend-neutral">Verified test: negligible effect</span></div><div class="graph-layout">${flowDiagram(story)}<aside id="graph-inspector" class="graph-inspector" aria-live="polite"><h4>Select an account or transfer</h4><p>View its details and any tested effect on the score.</p></aside></div>${earlier.length?`<details class="recorded-history"><summary>View earlier transaction history</summary>${historyTable(earlier,story.model_link_effects||[])}</details>`:''}</details>`;
+ const story=x.transaction_story;
+ return `<section class="hero-network" aria-labelledby="network-question"><h3 class="eyebrow" id="network-question">Transaction network</h3><p class="network-meta">${story.accounts.length} accounts <span aria-hidden="true">·</span> ${story.transfers.length} displayed transfers <span class="selected-tx">Selected TX ${esc(x.transaction_id)}</span></p>${flowDiagram(story)}<div class="graph-legend" aria-label="Network legend"><span class="legend-selected">Selected transaction</span><span class="legend-context">Earlier observed transfer</span><span class="legend-up">Earlier transfer that raised score</span><span class="legend-down">Earlier transfer that lowered score</span><span class="legend-neutral">Tested: negligible effect</span></div><p class="network-disclaimer">Connections show recorded activity. A connection does not by itself mean it influenced the model or indicates fraud.</p><aside id="graph-inspector" class="graph-inspector" aria-live="polite"><h4>Explore this network</h4><p>Select an account or transfer to see its details and any verified score test.</p></aside></section>`;
 }
 function historyTable(events,effects){
  if(!events.length)return '<p>No earlier eligible transfers are recorded in this scope.</p>';
@@ -166,7 +265,7 @@ function readableTechnicalDetails(x){
 }
 function render(x){
  const s=ExplanationSummary.summarize(x),event=x.transaction_story.selected_transfer;
- $('#detail').innerHTML=`<div class="transaction-heading"><div><p class="eyebrow bank">${esc(x.bank.replaceAll('_',' '))}</p><h2>Transaction ${esc(x.transaction_id)}</h2></div><a class="picker-link" href="#bank">Find another transaction</a><a class="depth-link" href="#technical-explanation" id="open-technical">In-depth explanation ↗</a></div><p class="intro">Account ${esc(event.source_account_id)} sent ${amount(event)} to account ${esc(event.target_account_id)} using ${esc(event.payment_method)}.</p>${renderSimpleExplanation(x,s)}${renderNetwork(x)}${readableTechnicalDetails(x)}`;
+ $('#detail').innerHTML=`<div class="transaction-heading"><div><p class="eyebrow bank">${esc(x.bank.replaceAll('_',' '))}</p><h2>Transaction ${esc(x.transaction_id)}</h2></div><a class="picker-link" href="#bank">Find another transaction</a><a class="depth-link" href="#technical-explanation" id="open-technical">In-depth explanation ↗</a></div><p class="intro">Account ${esc(event.source_account_id)} sent ${amount(event)} to account ${esc(event.target_account_id)} using ${esc(event.payment_method)}.</p>${renderSimpleExplanation(x,s)}${readableTechnicalDetails(x)}`;
  attachGraphInteractions(x.transaction_story,x.prediction);
  if(typeof matchMedia==='function'&&matchMedia('(max-width:1000px)').matches)$('#detail').scrollIntoView({block:'start'});
  const open=()=>{$('#technical-explanation').open=true};
@@ -177,22 +276,25 @@ function graphEdgeDetails(event,effect,prediction){
  const tested=event.kind==='earlier'&&effect;
  const status=tested?(effect.score_support>1e-6?'Helped raise the score':effect.score_support< -1e-6?'Helped lower the score':'Tested change was too small to measure clearly'):'';
  const scoreLabel=event.kind==='selected'?'Model score':'Selected transaction’s model score';
- return `<h4>Transaction ${esc(event.transaction_id)}</h4><p>Account ${esc(event.source_account_id)} → ${esc(event.target_account_id)}</p><p>${time(event.timestamp)}<br>${amount(event)}<br>${esc(event.payment_method)}</p>${status?`<p><strong>${status}</strong></p>`:''}<p>${scoreLabel}: ${score(prediction.probability)}</p>${tested?`<p>Without its history update: ${score(effect.model_score_without_event)}</p><p class="muted">Earlier account memory is retained. Full replay scope and exact scores are in the in-depth explanation.</p>`:''}`;
+ return `<h4>Transaction ${esc(event.transaction_id)}</h4><p>Account ${esc(event.source_account_id)} → ${esc(event.target_account_id)}</p><p>${time(event.timestamp)}<br>${amount(event)}<br>${esc(event.payment_method)}</p>${status?`<p class="inspector-effect"><strong>${status}</strong></p>`:''}<p>${scoreLabel}: ${score(prediction.probability)}</p>${tested?`<div class="inspector-scores"><p>Original score: <strong title="${exact(effect.original_model_score)}">${score(effect.original_model_score)}</strong></p><p>Without its history update: ${score(effect.model_score_without_event)}</p><p>Measured difference: <strong>${effect.score_support>0?'+':''}${displayScore(effect.score_support)}</strong></p></div><p class="muted">Earlier account memory is retained. Full replay scope and exact scores are in the in-depth explanation.</p>`:event.kind==='earlier'?'<p class="muted">Observed transfer; its score effect was not measured.</p>':''}`;
 }
 function attachGraphInteractions(story,prediction){
  const panel=$('#graph-inspector');
  const effects=new Map((story.model_link_effects||[]).map(effect=>[String(effect.transaction_id),effect]));
- const earlier=story.transfers.filter(event=>event.kind==='earlier');
- const verified=earlier.filter(event=>effects.has(String(event.transaction_id))).length;
+ function markSelected(kind,id){
+  document.querySelectorAll('[data-edge],[data-account]').forEach(element=>element.setAttribute('aria-pressed',String(element.dataset[kind]===String(id))));
+ }
  function inspectEdge(id){
   const event=story.transfers.find(event=>String(event.transaction_id)===String(id));
   if(!event)return;
   const effect=effects.get(String(id));
   panel.innerHTML=graphEdgeDetails(event,effect,prediction);
+  markSelected('edge',id);
  }
  function inspectAccount(id){
   const account=story.accounts.find(account=>String(account.account_id)===String(id));
   const related=story.transfers.filter(event=>String(event.source_account_id)===String(id)||String(event.target_account_id)===String(id));
+  markSelected('account',id);
   panel.innerHTML=`<h4>Account ${esc(id)}</h4><p>${esc(account?.role)} · ${related.length} displayed transfers</p><p>Connections describe recorded activity; they do not identify account ownership, payment purpose, or fraud.</p>${related.map(event=>`<button class="inspect-transfer" data-inspect-edge="${esc(event.transaction_id)}">Inspect TX ${esc(event.transaction_id)}</button>`).join('')}`;
   panel.querySelectorAll('[data-inspect-edge]').forEach(button=>button.addEventListener('click',()=>inspectEdge(button.dataset.inspectEdge)));
  }

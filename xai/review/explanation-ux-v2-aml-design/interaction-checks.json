@@ -1,0 +1,28 @@
+{
+  "keyboardTransfer": {
+    "transaction_id": "180238",
+    "result": "Helped lower the score",
+    "original_score_display": "0.0862",
+    "without_history_display": "0.2785",
+    "measured_difference_display": "-0.1924"
+  },
+  "keyboardAccount": {
+    "account_id": "268537464",
+    "role": "sender",
+    "displayed_transfers": 9,
+    "connected_transfers_available": true
+  },
+  "connectedTransferButton": {
+    "transaction_id": "180245",
+    "model_score_display": "0.0862"
+  },
+  "technicalSectionsVerified": true,
+  "nestedRawDisclosureVerified": true,
+  "historyControl": {
+    "historyHeading": "D. Historical replay",
+    "overflow": false,
+    "rawClosed": true,
+    "technicalOpen": true
+  },
+  "consoleWarningsOrErrors": []
+}

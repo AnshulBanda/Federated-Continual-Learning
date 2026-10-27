@@ -1,0 +1,70 @@
+{
+  "date": "2026-10-28",
+  "branch": "xai/explanation-ux-v2",
+  "starting_review_sha": "446709374636b8c954792c2caf3ef97156edaf49",
+  "main_sha": "6db498730f36f112ea89d183b4bec6b1178f80f7",
+  "main_modified_merged_or_pushed": false,
+  "protected_sources": {
+    "xai/static/explanation_summary.js": {
+      "approved_sha256": "8605033398feb6862590a8f4573b9a779df43ead3e15d7b4e6cdd25d07a17751",
+      "current_sha256": "8605033398feb6862590a8f4573b9a779df43ead3e15d7b4e6cdd25d07a17751"
+    },
+    "xai/serve_dashboard.py": {
+      "approved_sha256": "1808a6b614d8511d4d36c45aa3939e8ef25dede2d253fe5d01a0b0a5322d9962",
+      "current_sha256": "1808a6b614d8511d4d36c45aa3939e8ef25dede2d253fe5d01a0b0a5322d9962"
+    },
+    "xai/src/grouped_features.py": {
+      "approved_sha256": "9c3d43476355b8e810ab66051d15f9ddec136088815fc335b27e7898c5a3611c",
+      "current_sha256": "9c3d43476355b8e810ab66051d15f9ddec136088815fc335b27e7898c5a3611c"
+    },
+    "xai/src/transaction_story.py": {
+      "approved_sha256": "4fa35cc28c31e1c8463c17bb4a1aad8e1672eaab9d1d066d82cb4b15a2ab9253",
+      "current_sha256": "4fa35cc28c31e1c8463c17bb4a1aad8e1672eaab9d1d066d82cb4b15a2ab9253"
+    },
+    "xai/src/counterfactuals.py": {
+      "approved_sha256": "f8bdb7d6fbec0454149ddb221caa3bd317eff88b31b88c867af34914f1bfc0f9",
+      "current_sha256": "f8bdb7d6fbec0454149ddb221caa3bd317eff88b31b88c867af34914f1bfc0f9"
+    },
+    "xai/run_updated.py": {
+      "approved_sha256": "12550005152a445bc7e09defcbac95b328173eaa197b779fb853e55156fd9818",
+      "current_sha256": "12550005152a445bc7e09defcbac95b328173eaa197b779fb853e55156fd9818"
+    }
+  },
+  "technical_renderer_unchanged": true,
+  "technical_renderer_sha256": "61eb99d1e4cab791347046d5b97e2b46bf031e377bd49cfc58a40414a4bc9be7",
+  "python_tests": {
+    "passed": 35,
+    "failed": 0
+  },
+  "frontend_tests": {
+    "original_passed": 17,
+    "new_passed": 12,
+    "total_passed": 29,
+    "failed": 0
+  },
+  "evaluation": {
+    "cases": 17,
+    "history_interventions": 49,
+    "max_score_error": 7.81343665323675e-08,
+    "max_replay_error": 1.1102230246251565e-16,
+    "parity_guard": 1e-06,
+    "output_only_isolated": true
+  },
+  "visual_review": {
+    "desktop_cases": 8,
+    "desktop_width": 1280,
+    "mobile_width": 390,
+    "tablet_width": 980,
+    "single_visible_network_in_hero": true,
+    "badge_overlaps": 0,
+    "badges_covering_accounts": 0,
+    "document_overflow": false,
+    "default_technical_and_raw_collapsed": true,
+    "console_errors": [],
+    "temporary_viewport_reset": true
+  },
+  "engine_math_cache_identity_and_provenance_unchanged": true,
+  "existing_runtime_caches_excluded_from_commit": true,
+  "git_diff_check_passed": true,
+  "ready_for_human_visual_approval_before_merge": true
+}

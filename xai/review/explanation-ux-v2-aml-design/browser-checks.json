@@ -1,0 +1,678 @@
+[
+  {
+    "bank": "Wells_Fargo",
+    "transaction_id": "2954161",
+    "case": "false-positive-no-history",
+    "checks": {
+      "edgeClasses": [
+        {
+          "class": "graph-edge selected-transfer",
+          "transaction": "2954161"
+        }
+      ],
+      "explanation": {
+        "bottom": 947.5703125,
+        "height": 694.328125,
+        "left": 837.2734375,
+        "right": 1236,
+        "top": 253.2421875,
+        "width": 398.7265625,
+        "x": 837.2734375,
+        "y": 253.2421875
+      },
+      "graph": {
+        "bottom": 947.5703125,
+        "height": 694.328125,
+        "left": 299,
+        "right": 837.2734375,
+        "top": 253.2421875,
+        "width": 538.2734375,
+        "x": 299,
+        "y": 253.2421875
+      },
+      "graphCount": 1,
+      "green": "#14785f",
+      "hero": {
+        "bottom": 948.5703125,
+        "height": 696.328125,
+        "left": 298,
+        "right": 1237,
+        "top": 252.2421875,
+        "width": 939,
+        "x": 298,
+        "y": 252.2421875
+      },
+      "heroText": "MODEL EXPLANATION\n\nWhy was this flagged?\nFlagged for review\n\nScore 0.2051 · Review cutoff 0.1869\n\n+0.0183 above cutoff\n\nMAIN REASON\n\nThe payment method was the strongest measured factor pushing the model score higher.\n\nTOP FACTORS\n↑ Payment method\nStrong upward effect\n\nObserved: ACH\n\n↓ Amount and currencies\nSmall downward effect\n\nObserved: Sent 522.7 USD; received 522.7 USD\n\nStrength is relative to this explanation’s largest feature effect, not a probability.\n\nEARLIER ACTIVITY\n\nNo earlier eligible transfers involving these accounts were available to the model before this prediction.\n\nNon-private reference model",
+      "labelOverlaps": 0,
+      "labelsCoveringAccounts": 0,
+      "lowerHistory": {
+        "bottom": 1036.5703125,
+        "height": 21.5,
+        "left": 323,
+        "right": 1212,
+        "top": 1015.0703125,
+        "width": 889,
+        "x": 323,
+        "y": 1015.0703125
+      },
+      "overflow": false,
+      "rawOpen": false,
+      "rootBackground": "rgb(244, 246, 248)",
+      "selectedEdges": 1,
+      "technicalOpen": false,
+      "viewport": {
+        "height": 900,
+        "width": 1280
+      }
+    }
+  },
+  {
+    "bank": "JPMorgan_Chase",
+    "transaction_id": "2580817",
+    "case": "true-positive-untested-fan-out",
+    "checks": {
+      "edgeClasses": [
+        {
+          "class": "graph-edge observed-only",
+          "transaction": "1319081"
+        },
+        {
+          "class": "graph-edge observed-only",
+          "transaction": "1877212"
+        },
+        {
+          "class": "graph-edge observed-only",
+          "transaction": "2089204"
+        },
+        {
+          "class": "graph-edge observed-only",
+          "transaction": "2580821"
+        },
+        {
+          "class": "graph-edge selected-transfer",
+          "transaction": "2580817"
+        }
+      ],
+      "explanation": {
+        "bottom": 947.5703125,
+        "height": 694.328125,
+        "left": 837.2734375,
+        "right": 1236,
+        "top": 253.2421875,
+        "width": 398.7265625,
+        "x": 837.2734375,
+        "y": 253.2421875
+      },
+      "graph": {
+        "bottom": 947.5703125,
+        "height": 694.328125,
+        "left": 299,
+        "right": 837.2734375,
+        "top": 253.2421875,
+        "width": 538.2734375,
+        "x": 299,
+        "y": 253.2421875
+      },
+      "graphCount": 1,
+      "green": "#14785f",
+      "hero": {
+        "bottom": 948.5703125,
+        "height": 696.328125,
+        "left": 298,
+        "right": 1237,
+        "top": 252.2421875,
+        "width": 939,
+        "x": 298,
+        "y": 252.2421875
+      },
+      "heroText": "MODEL EXPLANATION\n\nWhy was this flagged?\nFlagged for review\n\nScore 0.9308 · Review cutoff 0.0178\n\n+0.9130 above cutoff\n\nMAIN REASON\n\nThe payment method was the strongest measured factor pushing the model score higher.\n\nTOP FACTORS\n↑ Payment method\nStrong upward effect\n\nObserved: ACH\n\n↓ Amount and currencies\nSmall downward effect\n\nObserved: Sent 0.47 USD; received 0.47 USD\n\nStrength is relative to this explanation’s largest feature effect, not a probability.\n\nEARLIER ACTIVITY\n\nEarlier transfers were observed, but their effect on this prediction was not measured.\n\nNon-private reference model",
+      "labelOverlaps": 0,
+      "labelsCoveringAccounts": 0,
+      "lowerHistory": {
+        "bottom": 1036.5703125,
+        "height": 21.5,
+        "left": 323,
+        "right": 1212,
+        "top": 1015.0703125,
+        "width": 889,
+        "x": 323,
+        "y": 1015.0703125
+      },
+      "overflow": false,
+      "rawOpen": false,
+      "rootBackground": "rgb(244, 246, 248)",
+      "selectedEdges": 1,
+      "technicalOpen": false,
+      "viewport": {
+        "height": 900,
+        "width": 1280
+      }
+    }
+  },
+  {
+    "bank": "JPMorgan_Chase",
+    "transaction_id": "3008974",
+    "case": "true-positive-fan-in",
+    "checks": {
+      "edgeClasses": [
+        {
+          "class": "graph-edge observed-only",
+          "transaction": "1752360"
+        },
+        {
+          "class": "graph-edge observed-only",
+          "transaction": "1892372"
+        },
+        {
+          "class": "graph-edge observed-only",
+          "transaction": "1877212"
+        },
+        {
+          "class": "graph-edge observed-only",
+          "transaction": "1877224"
+        },
+        {
+          "class": "graph-edge observed-only",
+          "transaction": "1877217"
+        },
+        {
+          "class": "graph-edge observed-only",
+          "transaction": "1877220"
+        },
+        {
+          "class": "graph-edge observed-only",
+          "transaction": "2089203"
+        },
+        {
+          "class": "graph-edge observed-only",
+          "transaction": "3008973"
+        },
+        {
+          "class": "graph-edge selected-transfer",
+          "transaction": "3008974"
+        }
+      ],
+      "explanation": {
+        "bottom": 947.5703125,
+        "height": 694.328125,
+        "left": 837.2734375,
+        "right": 1236,
+        "top": 253.2421875,
+        "width": 398.7265625,
+        "x": 837.2734375,
+        "y": 253.2421875
+      },
+      "graph": {
+        "bottom": 947.5703125,
+        "height": 694.328125,
+        "left": 299,
+        "right": 837.2734375,
+        "top": 253.2421875,
+        "width": 538.2734375,
+        "x": 299,
+        "y": 253.2421875
+      },
+      "graphCount": 1,
+      "green": "#14785f",
+      "hero": {
+        "bottom": 948.5703125,
+        "height": 696.328125,
+        "left": 298,
+        "right": 1237,
+        "top": 252.2421875,
+        "width": 939,
+        "x": 298,
+        "y": 252.2421875
+      },
+      "heroText": "MODEL EXPLANATION\n\nWhy was this flagged?\nFlagged for review\n\nScore 0.5321 · Review cutoff 0.0178\n\n+0.5143 above cutoff\n\nMAIN REASON\n\nThe payment method was the strongest measured factor pushing the model score higher.\n\nTOP FACTORS\n↑ Payment method\nStrong upward effect\n\nObserved: ACH\n\n↑ Amount and currencies\nStrong upward effect\n\nObserved: Sent 86,122.71 USD; received 86,122.71 USD\n\nStrength is relative to this explanation’s largest feature effect, not a probability.\n\nEARLIER ACTIVITY\n\nEarlier transfers were observed, but their effect on this prediction was not measured.\n\nNon-private reference model",
+      "labelOverlaps": 0,
+      "labelsCoveringAccounts": 0,
+      "lowerHistory": {
+        "bottom": 1036.5703125,
+        "height": 21.5,
+        "left": 323,
+        "right": 1212,
+        "top": 1015.0703125,
+        "width": 889,
+        "x": 323,
+        "y": 1015.0703125
+      },
+      "overflow": false,
+      "rawOpen": false,
+      "rootBackground": "rgb(244, 246, 248)",
+      "selectedEdges": 1,
+      "technicalOpen": false,
+      "viewport": {
+        "height": 900,
+        "width": 1280
+      }
+    }
+  },
+  {
+    "bank": "Wells_Fargo",
+    "transaction_id": "2965480",
+    "case": "true-negative",
+    "checks": {
+      "edgeClasses": [
+        {
+          "class": "graph-edge tested-neutral",
+          "transaction": "2865351"
+        },
+        {
+          "class": "graph-edge tested-neutral",
+          "transaction": "2859827"
+        },
+        {
+          "class": "graph-edge tested-neutral",
+          "transaction": "2868826"
+        },
+        {
+          "class": "graph-edge tested-neutral",
+          "transaction": "2885297"
+        },
+        {
+          "class": "graph-edge tested-neutral",
+          "transaction": "2852028"
+        },
+        {
+          "class": "graph-edge tested-neutral",
+          "transaction": "2883164"
+        },
+        {
+          "class": "graph-edge selected-transfer",
+          "transaction": "2965480"
+        }
+      ],
+      "explanation": {
+        "bottom": 947.5703125,
+        "height": 694.328125,
+        "left": 837.2734375,
+        "right": 1236,
+        "top": 253.2421875,
+        "width": 398.7265625,
+        "x": 837.2734375,
+        "y": 253.2421875
+      },
+      "graph": {
+        "bottom": 947.5703125,
+        "height": 694.328125,
+        "left": 299,
+        "right": 837.2734375,
+        "top": 253.2421875,
+        "width": 538.2734375,
+        "x": 299,
+        "y": 253.2421875
+      },
+      "graphCount": 1,
+      "green": "#14785f",
+      "hero": {
+        "bottom": 948.5703125,
+        "height": 696.328125,
+        "left": 298,
+        "right": 1237,
+        "top": 252.2421875,
+        "width": 939,
+        "x": 298,
+        "y": 252.2421875
+      },
+      "heroText": "MODEL EXPLANATION\n\nWhy was this not flagged?\nNot flagged\n\nScore 2.116e-9 · Review cutoff 0.1869\n\n−0.1869 below cutoff\n\nMAIN REASON\n\nThe amount and currency combination was the strongest measured factor pushing the model score lower.\n\nTOP FACTORS\n↑ Payment method\nStrong upward effect\n\nObserved: ACH\n\n↓ Amount and currencies\nSmall downward effect\n\nObserved: Sent 21.7 USD; received 21.7 USD\n\nStrength is relative to this explanation’s largest feature effect, not a probability.\n\nEARLIER ACTIVITY\n\nTX 2865351: this earlier transfer helped push the current score higher.\n\nNon-private reference model",
+      "labelOverlaps": 0,
+      "labelsCoveringAccounts": 0,
+      "lowerHistory": {
+        "bottom": 1036.5703125,
+        "height": 21.5,
+        "left": 323,
+        "right": 1212,
+        "top": 1015.0703125,
+        "width": 889,
+        "x": 323,
+        "y": 1015.0703125
+      },
+      "overflow": false,
+      "rawOpen": false,
+      "rootBackground": "rgb(244, 246, 248)",
+      "selectedEdges": 1,
+      "technicalOpen": false,
+      "viewport": {
+        "height": 900,
+        "width": 1280
+      }
+    }
+  },
+  {
+    "bank": "Wells_Fargo",
+    "transaction_id": "2794670",
+    "case": "missed-fraud",
+    "checks": {
+      "edgeClasses": [
+        {
+          "class": "graph-edge selected-transfer",
+          "transaction": "2794670"
+        }
+      ],
+      "explanation": {
+        "bottom": 947.5703125,
+        "height": 694.328125,
+        "left": 837.2734375,
+        "right": 1236,
+        "top": 253.2421875,
+        "width": 398.7265625,
+        "x": 837.2734375,
+        "y": 253.2421875
+      },
+      "graph": {
+        "bottom": 947.5703125,
+        "height": 694.328125,
+        "left": 299,
+        "right": 837.2734375,
+        "top": 253.2421875,
+        "width": 538.2734375,
+        "x": 299,
+        "y": 253.2421875
+      },
+      "graphCount": 1,
+      "green": "#14785f",
+      "hero": {
+        "bottom": 948.5703125,
+        "height": 696.328125,
+        "left": 298,
+        "right": 1237,
+        "top": 252.2421875,
+        "width": 939,
+        "x": 298,
+        "y": 252.2421875
+      },
+      "heroText": "MODEL EXPLANATION\n\nWhy was this not flagged?\nNot flagged\n\nScore 0.0340 · Review cutoff 0.1869\n\n−0.1529 below cutoff\n\nMAIN REASON\n\nThe amount and currency combination was the strongest measured factor pushing the model score lower.\n\nTOP FACTORS\n↑ Payment method\nStrong upward effect\n\nObserved: ACH\n\n↓ Amount and currencies\nSmall downward effect\n\nObserved: Sent 664.94 USD; received 664.94 USD\n\nStrength is relative to this explanation’s largest feature effect, not a probability.\n\nEARLIER ACTIVITY\n\nNo earlier eligible transfers involving these accounts were available to the model before this prediction.\n\nNon-private reference model",
+      "labelOverlaps": 0,
+      "labelsCoveringAccounts": 0,
+      "lowerHistory": {
+        "bottom": 1036.5703125,
+        "height": 21.5,
+        "left": 323,
+        "right": 1212,
+        "top": 1015.0703125,
+        "width": 889,
+        "x": 323,
+        "y": 1015.0703125
+      },
+      "overflow": false,
+      "rawOpen": false,
+      "rootBackground": "rgb(244, 246, 248)",
+      "selectedEdges": 1,
+      "technicalOpen": false,
+      "viewport": {
+        "height": 900,
+        "width": 1280
+      }
+    }
+  },
+  {
+    "bank": "Key_Bank",
+    "transaction_id": "2974317",
+    "case": "verified-positive-history",
+    "checks": {
+      "edgeClasses": [
+        {
+          "class": "graph-edge tested-up",
+          "transaction": "2627867"
+        },
+        {
+          "class": "graph-edge selected-transfer",
+          "transaction": "2974317"
+        }
+      ],
+      "explanation": {
+        "bottom": 947.5703125,
+        "height": 694.328125,
+        "left": 837.2734375,
+        "right": 1236,
+        "top": 253.2421875,
+        "width": 398.7265625,
+        "x": 837.2734375,
+        "y": 253.2421875
+      },
+      "graph": {
+        "bottom": 947.5703125,
+        "height": 694.328125,
+        "left": 299,
+        "right": 837.2734375,
+        "top": 253.2421875,
+        "width": 538.2734375,
+        "x": 299,
+        "y": 253.2421875
+      },
+      "graphCount": 1,
+      "green": "#14785f",
+      "hero": {
+        "bottom": 948.5703125,
+        "height": 696.328125,
+        "left": 298,
+        "right": 1237,
+        "top": 252.2421875,
+        "width": 939,
+        "x": 298,
+        "y": 252.2421875
+      },
+      "heroText": "MODEL EXPLANATION\n\nWhy was this flagged?\nFlagged for review\n\nScore 0.4101 · Review cutoff 0.3759\n\n+0.0342 above cutoff\n\nMAIN REASON\n\nThe payment method was the strongest measured factor pushing the model score higher.\n\nTOP FACTORS\n↑ Payment method\nStrong upward effect\n\nObserved: ACH\n\n↑ Amount and currencies\nStrong upward effect\n\nObserved: Sent 66,528.69 USD; received 66,528.69 USD\n\nStrength is relative to this explanation’s largest feature effect, not a probability.\n\nEARLIER ACTIVITY\n\nTX 2627867: this earlier transfer helped push the current score higher.\n\nNon-private reference model",
+      "labelOverlaps": 0,
+      "labelsCoveringAccounts": 0,
+      "lowerHistory": {
+        "bottom": 1036.5703125,
+        "height": 21.5,
+        "left": 323,
+        "right": 1212,
+        "top": 1015.0703125,
+        "width": 889,
+        "x": 323,
+        "y": 1015.0703125
+      },
+      "overflow": false,
+      "rawOpen": false,
+      "rootBackground": "rgb(244, 246, 248)",
+      "selectedEdges": 1,
+      "technicalOpen": false,
+      "viewport": {
+        "height": 900,
+        "width": 1280
+      }
+    }
+  },
+  {
+    "bank": "JPMorgan_Chase",
+    "transaction_id": "180245",
+    "case": "verified-negative-history",
+    "checks": {
+      "edgeClasses": [
+        {
+          "class": "graph-edge observed-only",
+          "transaction": "180147"
+        },
+        {
+          "class": "graph-edge observed-only",
+          "transaction": "180156"
+        },
+        {
+          "class": "graph-edge observed-only",
+          "transaction": "180178"
+        },
+        {
+          "class": "graph-edge observed-only",
+          "transaction": "180180"
+        },
+        {
+          "class": "graph-edge observed-only",
+          "transaction": "180183"
+        },
+        {
+          "class": "graph-edge observed-only",
+          "transaction": "180197"
+        },
+        {
+          "class": "graph-edge observed-only",
+          "transaction": "180202"
+        },
+        {
+          "class": "graph-edge tested-down",
+          "transaction": "180238"
+        },
+        {
+          "class": "graph-edge selected-transfer",
+          "transaction": "180245"
+        }
+      ],
+      "explanation": {
+        "bottom": 947.5703125,
+        "height": 694.328125,
+        "left": 837.2734375,
+        "right": 1236,
+        "top": 253.2421875,
+        "width": 398.7265625,
+        "x": 837.2734375,
+        "y": 253.2421875
+      },
+      "graph": {
+        "bottom": 947.5703125,
+        "height": 694.328125,
+        "left": 299,
+        "right": 837.2734375,
+        "top": 253.2421875,
+        "width": 538.2734375,
+        "x": 299,
+        "y": 253.2421875
+      },
+      "graphCount": 1,
+      "green": "#14785f",
+      "hero": {
+        "bottom": 948.5703125,
+        "height": 696.328125,
+        "left": 298,
+        "right": 1237,
+        "top": 252.2421875,
+        "width": 939,
+        "x": 298,
+        "y": 252.2421875
+      },
+      "heroText": "MODEL EXPLANATION\n\nWhy was this flagged?\nFlagged for review\n\nScore 0.0862 · Review cutoff 0.0178\n\n+0.0684 above cutoff\n\nMAIN REASON\n\nThe payment method was the strongest measured factor pushing the model score higher.\n\nTOP FACTORS\n↑ Payment method\nStrong upward effect\n\nObserved: ACH\n\n↓ Amount and currencies\nSmall downward effect\n\nObserved: Sent 31.36 USD; received 31.36 USD\n\nStrength is relative to this explanation’s largest feature effect, not a probability.\n\nEARLIER ACTIVITY\n\nTX 180238: this earlier transfer helped keep the current score lower.\n\nNon-private reference model",
+      "labelOverlaps": 0,
+      "labelsCoveringAccounts": 0,
+      "lowerHistory": {
+        "bottom": 1036.5703125,
+        "height": 21.5,
+        "left": 323,
+        "right": 1212,
+        "top": 1015.0703125,
+        "width": 889,
+        "x": 323,
+        "y": 1015.0703125
+      },
+      "overflow": false,
+      "rawOpen": false,
+      "rootBackground": "rgb(244, 246, 248)",
+      "selectedEdges": 1,
+      "technicalOpen": false,
+      "viewport": {
+        "height": 900,
+        "width": 1280
+      }
+    }
+  },
+  {
+    "bank": "JPMorgan_Chase",
+    "transaction_id": "66943",
+    "case": "chronological-cycle",
+    "checks": {
+      "edgeClasses": [
+        {
+          "class": "graph-edge observed-only",
+          "transaction": "66911"
+        },
+        {
+          "class": "graph-edge observed-only",
+          "transaction": "66929"
+        },
+        {
+          "class": "graph-edge observed-only",
+          "transaction": "66930"
+        },
+        {
+          "class": "graph-edge observed-only",
+          "transaction": "66936"
+        },
+        {
+          "class": "graph-edge observed-only",
+          "transaction": "66939"
+        },
+        {
+          "class": "graph-edge tested-up",
+          "transaction": "66941"
+        },
+        {
+          "class": "graph-edge tested-up",
+          "transaction": "66942"
+        },
+        {
+          "class": "graph-edge tested-up",
+          "transaction": "66940"
+        },
+        {
+          "class": "graph-edge selected-transfer",
+          "transaction": "66943"
+        }
+      ],
+      "explanation": {
+        "bottom": 947.5703125,
+        "height": 694.328125,
+        "left": 837.2734375,
+        "right": 1236,
+        "top": 253.2421875,
+        "width": 398.7265625,
+        "x": 837.2734375,
+        "y": 253.2421875
+      },
+      "graph": {
+        "bottom": 947.5703125,
+        "height": 694.328125,
+        "left": 299,
+        "right": 837.2734375,
+        "top": 253.2421875,
+        "width": 538.2734375,
+        "x": 299,
+        "y": 253.2421875
+      },
+      "graphCount": 1,
+      "green": "#14785f",
+      "hero": {
+        "bottom": 948.5703125,
+        "height": 696.328125,
+        "left": 298,
+        "right": 1237,
+        "top": 252.2421875,
+        "width": 939,
+        "x": 298,
+        "y": 252.2421875
+      },
+      "heroText": "MODEL EXPLANATION\n\nWhy was this not flagged?\nNot flagged\n\nScore 0.0010 · Review cutoff 0.0178\n\n−0.0168 below cutoff\n\nMAIN REASON\n\nThe amount and currency combination was the strongest measured factor pushing the model score lower.\n\nTOP FACTORS\n↑ Payment method\nStrong upward effect\n\nObserved: ACH\n\n↓ Amount and currencies\nSmall downward effect\n\nObserved: Sent 89.78 USD; received 89.78 USD\n\nStrength is relative to this explanation’s largest feature effect, not a probability.\n\nEARLIER ACTIVITY\n\nTX 66942: this earlier transfer helped push the current score higher.\n\nNon-private reference model",
+      "labelOverlaps": 0,
+      "labelsCoveringAccounts": 0,
+      "lowerHistory": {
+        "bottom": 1036.5703125,
+        "height": 21.5,
+        "left": 323,
+        "right": 1212,
+        "top": 1015.0703125,
+        "width": 889,
+        "x": 323,
+        "y": 1015.0703125
+      },
+      "overflow": false,
+      "rawOpen": false,
+      "rootBackground": "rgb(244, 246, 248)",
+      "selectedEdges": 1,
+      "technicalOpen": false,
+      "viewport": {
+        "height": 900,
+        "width": 1280
+      }
+    }
+  }
+]

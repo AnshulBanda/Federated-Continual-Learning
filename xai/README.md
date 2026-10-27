@@ -254,13 +254,17 @@ attribution calculations were changed by this integration.
 
 ## Investigator explanation UX v2
 
-The interactive dashboard now leads with a deterministic plain-language reason,
-score/cutoff/margin, up to three measured feature groups and verified history
-status. **View transaction network** and **View in-depth explanation** start
-collapsed; the full raw audit record has a further nested disclosure. The
+The interactive dashboard pairs the transaction network with a deterministic
+plain-language explanation in its first investigation card. It uses the light
+AML Operations design system. Score/cutoff/margin, up to three measured feature
+groups and verified history status remain simple; **View in-depth explanation**
+starts collapsed, with a further nested raw audit disclosure. On smaller screens
+the explanation appears first and the network immediately follows. The
 translation lives in `static/explanation_summary.js`, independently of scoring.
 See [EXPLANATION_UX_V2.md](EXPLANATION_UX_V2.md) for the exact structures, model
-scope, screenshots, examples and regression evidence.
+scope, examples and original regression evidence, and
+[EXPLANATION_AML_DESIGN.md](EXPLANATION_AML_DESIGN.md) for the current layout,
+graph design, fresh screenshots and visual-review regression results.
 
 The engine still requires CPython 3.12 and compatible scientific dependencies.
 On LF checkouts of the Windows-produced reference artifacts, the dashboard can

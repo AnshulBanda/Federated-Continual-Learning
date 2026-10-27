@@ -1,0 +1,37 @@
+✔ every cached bank/transaction renders feature directions from its own SHAP (4468.0765ms)
+✔ empty eligible history renders an accurate message and no history table (3.080208ms)
+✔ untested existing history is not described as absent (273.4475ms)
+✔ mixed identities, scores, feature values, decisions and stale graph effects are rejected (2.324583ms)
+✔ out-of-order catalog responses cannot overwrite the current bank threshold (0.934459ms)
+✔ out-of-order explanation responses cannot overwrite the selected transaction (80.921834ms)
+✔ selected transfer cards across every bank show model score without historical-test wording (1.734042ms)
+✔ technical threshold is bank-specific and a different bank threshold is rejected (277.185ms)
+✔ plain-language technical details adapt to selected score, directions, history and available checks (21.204375ms)
+✔ observed pattern labels count distinct peers and require a chronological cycle (1.449292ms)
+✔ all cached summaries deterministically select the measured primary direction, rank factors and compute margins (4672.754ms)
+✔ top three factors, ties, neutral values and relative strength boundaries remain deterministic (8.338167ms)
+✔ only independently verified replay effects create positive or negative history claims (7.277958ms)
+✔ counterfactual decision changes require actual crossing with matching baseline and cutoff (1.860709ms)
+✔ evaluation labels remain independent of the four possible model outcomes (1.157ms)
+✔ privacy scope is explicit and model evidence or a relaxed parity tolerance is rejected (6.668458ms)
+✔ a self-consistent report from another checkpoint is rejected against the active catalog (0.645042ms)
+✔ the visible network precedes lower history, pattern, sensitivity and evaluation sections (269.943ms)
+✔ network and simple model explanation share the first investigation hero (3.280208ms)
+✔ default assets use the actual AML Operations design tokens and components (1.786166ms)
+✔ the standalone page no longer defines a dark root theme or navy panels (0.205625ms)
+✔ the selected transaction has the prominent class, arrow and amount badge (265.311334ms)
+✔ observed transfers are distinct from edges with a verified replay test (265.894041ms)
+✔ tested edge visual directions continue to use the measured score support (3.15275ms)
+✔ the graph legend explains each visual meaning and retains the observed-only disclaimer (261.058958ms)
+✔ every cached network has deterministic finite routes and readable identity labels (6329.091167ms)
+✔ mobile styles stack the explanation immediately before the network and ahead of the picker (0.36075ms)
+✔ moving the graph into the hero keeps technical and raw disclosures collapsed (5.11425ms)
+✔ network accounts and transfers retain Enter/Space interaction and active inspection state (266.535709ms)
+ℹ tests 29
+ℹ suites 0
+ℹ pass 29
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 17575.047875
