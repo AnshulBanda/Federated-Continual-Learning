@@ -16,8 +16,9 @@ from distributed_federation.common.model_runtime import (
     serialize_state,
     train_local,
     validate_state,
+    save_state_and_manifest,
 )
-from distributed_federation.common.protocol import ChunkAssembler, verify_chunk
+from distributed_federation.common.protocol import ChunkAssembler, verify_chunk, verify_for_run
 
 
 def parse_args() -> argparse.Namespace:
@@ -62,6 +63,12 @@ def run(config, client_id) -> int:
     emit('runtime_ready', client_id=client_id, schema_sha256=runtime.schema_sha256,
          training_examples=int(len(runtime.streams['training'])))
 
+    if config.return_aggregate:
+        publish_payload(producer, config.update_topic, b'ready',
+            dict(message_type='client_ready', run_id=config.run_id, round_id=0,
+                 sender_id=client_id, schema_sha256=runtime.schema_sha256, base_model_sha256=''),
+            client_secret, config.max_chunk_bytes)
+        emit('readiness_published', client_id=client_id)
     try:
         for expected_round in range(1, config.rounds + 1):
             check_control(round_boundary=True)
@@ -78,7 +85,9 @@ def run(config, client_id) -> int:
                 if message.error():
                     raise RuntimeError(f"Kafka consumer error: {message.error()}")
                 try:
-                    envelope = verify_chunk(message.value(), central_secret)
+                    envelope = verify_for_run(message.value(), central_secret, config.run_id)
+                    if envelope is None:
+                        continue
                     if (
                         envelope["sender_id"] != "central"
                         or envelope["message_type"] != "global_model"
@@ -99,6 +108,7 @@ def run(config, client_id) -> int:
                     consumer.commit(message=message, asynchronous=False)
                     break
                 except ValueError as exc:
+                    emit('model_rejected', expected_round, error_type=type(exc).__name__)
                     print(f"[{client.client_id}] Rejected Kafka message: {exc}", file=sys.stderr, flush=True)
 
             print(f"[{client.client_id}] Round {expected_round}: training locally", flush=True)
@@ -124,6 +134,44 @@ def run(config, client_id) -> int:
             )
             emit('update_published', expected_round, payload_sha256=update_hash,
                  training_examples=metadata['training_examples'])
+            if config.return_aggregate:
+                emit('waiting_for_aggregate', expected_round, update_sha256=update_hash)
+                deadline = time.monotonic()+config.round_timeout_seconds
+                while True:
+                    check_control()
+                    if time.monotonic()>=deadline:
+                        raise TimeoutError(f'Timed out waiting for aggregate round {expected_round}')
+                    message=consumer.poll(min(1.0, max(0.01,deadline-time.monotonic())))
+                    if message is None:
+                        continue
+                    if message.error():
+                        raise RuntimeError(f'Kafka consumer error: {message.error()}')
+                    try:
+                        envelope=verify_for_run(message.value(),central_secret,config.run_id)
+                        if envelope is None:
+                            continue
+                        if (envelope['sender_id']!='central' or envelope['message_type']!='aggregated_model'
+                                or envelope['run_id']!=config.run_id or int(envelope['round_id'])!=expected_round):
+                            continue
+                        assembled=assembler.add(envelope)
+                        if assembled is None:
+                            continue
+                        returned, metadata=assembled
+                        if metadata['schema_sha256']!=runtime.schema_sha256 or metadata['base_model_sha256']!=global_meta['payload_sha256']:
+                            raise ValueError('Aggregated model schema or original base does not match')
+                        state=deserialize_state(returned)
+                        validate_state(state,runtime.model.state_dict())
+                        runtime.model.load_state_dict(state,strict=True)
+                        path, manifest=save_state_and_manifest(state,config.output_dir/config.run_id/client_id,
+                            expected_round,dict(run_id=config.run_id,round_id=expected_round,client_id=client_id,
+                            bank=client.bank,schema_sha256=runtime.schema_sha256,payload_sha256=metadata['payload_sha256'],
+                            input_global_sha256=global_meta['payload_sha256'],schema=runtime.schema))
+                        consumer.commit(message=message,asynchronous=False)
+                        emit('aggregate_received',expected_round,payload_sha256=metadata['payload_sha256'],checkpoint=str(path),manifest=str(manifest))
+                        break
+                    except ValueError as exc:
+                        emit('aggregate_rejected',expected_round,error_type=type(exc).__name__)
+                        print(f'[{client_id}] Rejected aggregate: {exc}',file=sys.stderr,flush=True)
             print(
                 f"[{client.client_id}] Round {expected_round}: sent update "
                 f"{update_hash[:12]} (loss={mean_loss:.6f})",

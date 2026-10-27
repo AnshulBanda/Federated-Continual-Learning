@@ -144,3 +144,14 @@ class ChunkAssembler:
         cutoff = time.monotonic() - self.ttl_seconds
         for key in [k for k, value in self._pending.items() if value.updated_at < cutoff]:
             del self._pending[key]
+
+
+def verify_for_run(raw: bytes, secret: str, run_id: str):
+    """Ignore retained other-run traffic; every current-run message still requires HMAC."""
+    try:
+        header = json.loads(raw)
+    except (ValueError, UnicodeDecodeError) as exc:
+        raise ValueError('Invalid protocol JSON') from exc
+    if not isinstance(header, dict) or header.get('run_id') != run_id:
+        return None
+    return verify_chunk(raw, secret)

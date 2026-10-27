@@ -24,7 +24,7 @@ class RunController:
         self.python = str(python)
         self.store = StateStore(self.state_dir / 'state.sqlite3')
 
-    def start(self, config_path, role, client_id=None):
+    def start(self, config_path, role, client_id=None, environment=None, output=None):
         if role not in {'central', 'bank'}:
             raise ValueError('role must be central or bank')
         config = load_config(config_path)
@@ -46,7 +46,8 @@ class RunController:
             command += ['--client-id', client_id]
         # No shell; no window on Windows. Popen returning is not a readiness claim.
         return subprocess.Popen(command, cwd=REPO_ROOT, stdin=subprocess.DEVNULL,
-                                creationflags=subprocess.CREATE_NO_WINDOW if os.name == 'nt' else 0)
+                                creationflags=subprocess.CREATE_NO_WINDOW if os.name == 'nt' else 0,
+                                env=environment, stdout=output, stderr=subprocess.STDOUT if output else None)
 
     def stop(self, run, cancel=False):
         self.status()

@@ -1,0 +1,244 @@
+{
+  "format": 1,
+  "source": "Fixed synthetic AML reference training data; not fit on participant data at runtime",
+  "banks": [
+    "JPMorgan_Chase",
+    "Wells_Fargo",
+    "Key_Bank"
+  ],
+  "node_columns": [
+    "Account_Country",
+    "Account_Currency",
+    "Entity_Type",
+    "Does_Account_Have_Debit_Card",
+    "DebitCard_Index_in_EntityCards",
+    "MCC",
+    "Account_Type",
+    "Max_Overdraft",
+    "account_kind",
+    "hist_sent_count",
+    "hist_sent_amount_sum",
+    "hist_recv_count",
+    "hist_recv_amount_sum",
+    "hist_out_degree",
+    "hist_in_degree"
+  ],
+  "edge_columns": [
+    "amount",
+    "currency",
+    "Amount_Received",
+    "Receiving_Currency",
+    "payment_format"
+  ],
+  "nodes": {
+    "numeric": [
+      {
+        "name": "Does_Account_Have_Debit_Card",
+        "median": 0.0,
+        "mean": 0.004866062825207169,
+        "scale": 0.06958724206194916
+      },
+      {
+        "name": "DebitCard_Index_in_EntityCards",
+        "median": 0.0,
+        "mean": 0.0025534785122374253,
+        "scale": 0.06688880215601428
+      },
+      {
+        "name": "MCC",
+        "median": 5411.0,
+        "mean": 5140.5721719021,
+        "scale": 2197.146618831092
+      },
+      {
+        "name": "Max_Overdraft",
+        "median": 250.0,
+        "mean": 540.972730776643,
+        "scale": 6685.196466460116
+      },
+      {
+        "name": "hist_sent_count",
+        "median": 0.0,
+        "mean": 0.0,
+        "scale": 1.0
+      },
+      {
+        "name": "hist_sent_amount_sum",
+        "median": 0.0,
+        "mean": 0.0,
+        "scale": 1.0
+      },
+      {
+        "name": "hist_recv_count",
+        "median": 0.0,
+        "mean": 0.0,
+        "scale": 1.0
+      },
+      {
+        "name": "hist_recv_amount_sum",
+        "median": 0.0,
+        "mean": 0.0,
+        "scale": 1.0
+      },
+      {
+        "name": "hist_out_degree",
+        "median": 0.0,
+        "mean": 0.0,
+        "scale": 1.0
+      },
+      {
+        "name": "hist_in_degree",
+        "median": 0.0,
+        "mean": 0.0,
+        "scale": 1.0
+      }
+    ],
+    "categorical": [
+      {
+        "name": "Account_Country",
+        "fill": "United States",
+        "categories": [
+          "Argentina",
+          "Austria",
+          "Canada",
+          "China",
+          "Dominican Republic",
+          "Germany",
+          "Hungary",
+          "India",
+          "Japan",
+          "Mexico",
+          "New Zealand",
+          "South Korea",
+          "Switzerland",
+          "United Kingdom",
+          "United States",
+          "Unknown",
+          "Vietnam"
+        ]
+      },
+      {
+        "name": "Account_Currency",
+        "fill": "USD",
+        "categories": [
+          "ARS",
+          "CAD",
+          "CHF",
+          "CNY",
+          "DOP",
+          "EUR",
+          "GBP",
+          "JPY",
+          "KRW",
+          "MXN",
+          "NZD",
+          "USD",
+          "Unknown",
+          "VND"
+        ]
+      },
+      {
+        "name": "Entity_Type",
+        "fill": "Sole_Proprietorship",
+        "categories": [
+          "Large_Corporation",
+          "National_Government",
+          "Partnership",
+          "Person",
+          "Small_Corporation",
+          "Sole_Proprietorship",
+          "Unknown"
+        ]
+      },
+      {
+        "name": "Account_Type",
+        "fill": "Checking",
+        "categories": [
+          "CD",
+          "Cash",
+          "Checking",
+          "Money Market",
+          "Savings",
+          "Unknown"
+        ]
+      },
+      {
+        "name": "account_kind",
+        "fill": "company",
+        "categories": [
+          "Unknown",
+          "company",
+          "person"
+        ]
+      }
+    ]
+  },
+  "edges": {
+    "numeric": [
+      {
+        "name": "amount",
+        "median": 122.78,
+        "mean": 3366.410259964555,
+        "scale": 65382.34274023974
+      },
+      {
+        "name": "Amount_Received",
+        "median": 122.81,
+        "mean": 3430.6316988568187,
+        "scale": 72142.24541313176
+      }
+    ],
+    "categorical": [
+      {
+        "name": "currency",
+        "fill": "USD",
+        "categories": [
+          "EUR",
+          "GBP",
+          "JPY",
+          "KRW",
+          "NZD",
+          "USD"
+        ]
+      },
+      {
+        "name": "Receiving_Currency",
+        "fill": "USD",
+        "categories": [
+          "ARS",
+          "CAD",
+          "CHF",
+          "CNY",
+          "DOP",
+          "GBP",
+          "JPY",
+          "MXN",
+          "USD",
+          "VND"
+        ]
+      },
+      {
+        "name": "payment_format",
+        "fill": "ACH",
+        "categories": [
+          "ACH",
+          "ApplePay",
+          "Bank Fee",
+          "Cash",
+          "Cash App",
+          "Cheque",
+          "Debit Non-Prepaid",
+          "Dividend",
+          "Interest",
+          "MetaPay",
+          "PayPal",
+          "Venmo",
+          "Wire",
+          "Zelle"
+        ]
+      }
+    ]
+  },
+  "node_feature_count": 57,
+  "edge_feature_count": 32
+}
