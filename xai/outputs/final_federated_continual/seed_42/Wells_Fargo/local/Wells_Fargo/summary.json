@@ -1,0 +1,20 @@
+{
+  "bank": "Wells_Fargo",
+  "split": "testing",
+  "selection": "balanced",
+  "sample_count": 2,
+  "class_counts": {
+    "fraud": 1,
+    "legitimate": 1
+  },
+  "max_prediction_error": 9.809224377210768e-09,
+  "mean_top_ablation_absolute_change": 0.022288862779387478,
+  "mean_low_ablation_absolute_change": 2.8443366368799405e-17,
+  "graph_explanations_with_candidates": 2,
+  "mean_graph_sufficiency_error": 0.002332118747141645,
+  "reports": [
+    "reports\\testing_00013815",
+    "reports\\testing_00022593"
+  ],
+  "sampling_note": "Balanced predicted-class samples are illustrative, not population-representative. Missing classes are reported, not fabricated."
+}

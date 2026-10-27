@@ -1,0 +1,206 @@
+{
+  "training_procedure": "FedAvg with bank-local continual learning and replay",
+  "runs": [
+    {
+      "seed": 42,
+      "bank": "JPMorgan_Chase",
+      "split": "testing",
+      "selection": "balanced",
+      "sample_count": 2,
+      "class_counts": {
+        "fraud": 1,
+        "legitimate": 1
+      },
+      "max_prediction_error": 1.817310774088199e-08,
+      "mean_top_ablation_absolute_change": 0.017784285855356942,
+      "mean_low_ablation_absolute_change": 0.0,
+      "graph_explanations_with_candidates": 1,
+      "mean_graph_sufficiency_error": 1.985173882563941e-06,
+      "reports": [
+        "reports\\testing_00006659",
+        "reports\\testing_00033811"
+      ],
+      "sampling_note": "Balanced predicted-class samples are illustrative, not population-representative. Missing classes are reported, not fabricated.",
+      "checkpoint_sha256": "976942a5e4924635b5e2fb5a6a52aba2f79cb61216cf8acb6a01b540ed68c2d3"
+    },
+    {
+      "seed": 42,
+      "bank": "Wells_Fargo",
+      "split": "testing",
+      "selection": "balanced",
+      "sample_count": 2,
+      "class_counts": {
+        "fraud": 1,
+        "legitimate": 1
+      },
+      "max_prediction_error": 9.809224377210768e-09,
+      "mean_top_ablation_absolute_change": 0.022288862779387478,
+      "mean_low_ablation_absolute_change": 2.8443366368799405e-17,
+      "graph_explanations_with_candidates": 2,
+      "mean_graph_sufficiency_error": 0.002332118747141645,
+      "reports": [
+        "reports\\testing_00013815",
+        "reports\\testing_00022593"
+      ],
+      "sampling_note": "Balanced predicted-class samples are illustrative, not population-representative. Missing classes are reported, not fabricated.",
+      "checkpoint_sha256": "976942a5e4924635b5e2fb5a6a52aba2f79cb61216cf8acb6a01b540ed68c2d3"
+    },
+    {
+      "seed": 42,
+      "bank": "Key_Bank",
+      "split": "testing",
+      "selection": "balanced",
+      "sample_count": 2,
+      "class_counts": {
+        "fraud": 1,
+        "legitimate": 1
+      },
+      "max_prediction_error": 3.928738678826704e-08,
+      "mean_top_ablation_absolute_change": 0.10840552404438329,
+      "mean_low_ablation_absolute_change": 4.182541031577669e-05,
+      "graph_explanations_with_candidates": 2,
+      "mean_graph_sufficiency_error": 1.8811622406859647e-06,
+      "reports": [
+        "reports\\testing_00003618",
+        "reports\\testing_00006204"
+      ],
+      "sampling_note": "Balanced predicted-class samples are illustrative, not population-representative. Missing classes are reported, not fabricated.",
+      "checkpoint_sha256": "976942a5e4924635b5e2fb5a6a52aba2f79cb61216cf8acb6a01b540ed68c2d3"
+    },
+    {
+      "seed": 52,
+      "bank": "JPMorgan_Chase",
+      "split": "testing",
+      "selection": "balanced",
+      "sample_count": 2,
+      "class_counts": {
+        "fraud": 1,
+        "legitimate": 1
+      },
+      "max_prediction_error": 9.633284224139227e-09,
+      "mean_top_ablation_absolute_change": 0.0006321356253704996,
+      "mean_low_ablation_absolute_change": 3.382710778154774e-17,
+      "graph_explanations_with_candidates": 1,
+      "mean_graph_sufficiency_error": 2.6403121598209254e-07,
+      "reports": [
+        "reports\\testing_00002177",
+        "reports\\testing_00046451"
+      ],
+      "sampling_note": "Balanced predicted-class samples are illustrative, not population-representative. Missing classes are reported, not fabricated.",
+      "checkpoint_sha256": "7a8535d80f194cc1f6aeff8fa3189aefd0ffa158f28bfaf0fdb6c26dc76e7f0d"
+    },
+    {
+      "seed": 52,
+      "bank": "Wells_Fargo",
+      "split": "testing",
+      "selection": "balanced",
+      "sample_count": 2,
+      "class_counts": {
+        "fraud": 1,
+        "legitimate": 1
+      },
+      "max_prediction_error": 5.5253109421116164e-08,
+      "mean_top_ablation_absolute_change": 0.04007241616536499,
+      "mean_low_ablation_absolute_change": 2.220446049250313e-16,
+      "graph_explanations_with_candidates": 2,
+      "mean_graph_sufficiency_error": 0.002751096566455773,
+      "reports": [
+        "reports\\testing_00005455",
+        "reports\\testing_00017621"
+      ],
+      "sampling_note": "Balanced predicted-class samples are illustrative, not population-representative. Missing classes are reported, not fabricated.",
+      "checkpoint_sha256": "7a8535d80f194cc1f6aeff8fa3189aefd0ffa158f28bfaf0fdb6c26dc76e7f0d"
+    },
+    {
+      "seed": 52,
+      "bank": "Key_Bank",
+      "split": "testing",
+      "selection": "balanced",
+      "sample_count": 2,
+      "class_counts": {
+        "fraud": 1,
+        "legitimate": 1
+      },
+      "max_prediction_error": 5.1057400196619085e-08,
+      "mean_top_ablation_absolute_change": 0.10802342438793014,
+      "mean_low_ablation_absolute_change": 5.551115123125783e-17,
+      "graph_explanations_with_candidates": 2,
+      "mean_graph_sufficiency_error": 5.200058102646035e-10,
+      "reports": [
+        "reports\\testing_00003043",
+        "reports\\testing_00006205"
+      ],
+      "sampling_note": "Balanced predicted-class samples are illustrative, not population-representative. Missing classes are reported, not fabricated.",
+      "checkpoint_sha256": "7a8535d80f194cc1f6aeff8fa3189aefd0ffa158f28bfaf0fdb6c26dc76e7f0d"
+    },
+    {
+      "seed": 62,
+      "bank": "JPMorgan_Chase",
+      "split": "testing",
+      "selection": "balanced",
+      "sample_count": 2,
+      "class_counts": {
+        "fraud": 1,
+        "legitimate": 1
+      },
+      "max_prediction_error": 4.154013022450442e-09,
+      "mean_top_ablation_absolute_change": 0.0007401670653488003,
+      "mean_low_ablation_absolute_change": 4.5110645430159087e-17,
+      "graph_explanations_with_candidates": 0,
+      "mean_graph_sufficiency_error": null,
+      "reports": [
+        "reports\\testing_00006470",
+        "reports\\testing_00049931"
+      ],
+      "sampling_note": "Balanced predicted-class samples are illustrative, not population-representative. Missing classes are reported, not fabricated.",
+      "checkpoint_sha256": "e725a614f4c7fe9a6adf1197a45131419b26c5b1dd4d8c5b532e557745f0f963"
+    },
+    {
+      "seed": 62,
+      "bank": "Wells_Fargo",
+      "split": "testing",
+      "selection": "balanced",
+      "sample_count": 2,
+      "class_counts": {
+        "fraud": 1,
+        "legitimate": 1
+      },
+      "max_prediction_error": 5.452662321658863e-08,
+      "mean_top_ablation_absolute_change": 0.04438760129556435,
+      "mean_low_ablation_absolute_change": 0.0,
+      "graph_explanations_with_candidates": 2,
+      "mean_graph_sufficiency_error": 2.6732021758261566e-08,
+      "reports": [
+        "reports\\testing_00011301",
+        "reports\\testing_00022595"
+      ],
+      "sampling_note": "Balanced predicted-class samples are illustrative, not population-representative. Missing classes are reported, not fabricated.",
+      "checkpoint_sha256": "e725a614f4c7fe9a6adf1197a45131419b26c5b1dd4d8c5b532e557745f0f963"
+    },
+    {
+      "seed": 62,
+      "bank": "Key_Bank",
+      "split": "testing",
+      "selection": "balanced",
+      "sample_count": 2,
+      "class_counts": {
+        "fraud": 1,
+        "legitimate": 1
+      },
+      "max_prediction_error": 1.9906543635705987e-08,
+      "mean_top_ablation_absolute_change": 0.11133344699389175,
+      "mean_low_ablation_absolute_change": 8.66885281955573e-21,
+      "graph_explanations_with_candidates": 1,
+      "mean_graph_sufficiency_error": 2.921930049237167e-08,
+      "reports": [
+        "reports\\testing_00004026",
+        "reports\\testing_00006203"
+      ],
+      "sampling_note": "Balanced predicted-class samples are illustrative, not population-representative. Missing classes are reported, not fabricated.",
+      "checkpoint_sha256": "e725a614f4c7fe9a6adf1197a45131419b26c5b1dd4d8c5b532e557745f0f963"
+    }
+  ],
+  "frozen_checkpoints_and_metrics_unchanged": true,
+  "scope": "Post-hoc predictions from final checkpoints; not attribution of training rounds or client updates.",
+  "aggregation": "Sample-weighted bank statistics separately for each seed; no cross-checkpoint pooling."
+}

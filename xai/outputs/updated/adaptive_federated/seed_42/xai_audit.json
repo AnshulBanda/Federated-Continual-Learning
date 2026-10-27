@@ -1,0 +1,264 @@
+{
+  "checkpoint": "d650af6959d1da46888f30fb79bbfd888a6ec20743d14d447ea078dc351536f5",
+  "banks": {
+    "JPMorgan_Chase": {
+      "saved_cutoff": 0.017805186897516156,
+      "recomputed_cutoff": 0.017805171020328903,
+      "absolute_cutoff_error": 1.5877187252433256e-08,
+      "identical_alert_decisions": true,
+      "selection": "maximum validation F1 over 501 score quantiles",
+      "metrics_parity": {
+        "passed": true,
+        "metric_absolute_errors": {
+          "pr_auc": 1.1102230246251565e-16,
+          "roc_auc": 1.1102230246251565e-16,
+          "precision": 0.0,
+          "recall": 0.0,
+          "f1": 0.0
+        },
+        "metrics": {
+          "pr_auc": 0.8903013804800092,
+          "roc_auc": 0.9999389260287571,
+          "precision": 0.12403100775193798,
+          "recall": 1.0,
+          "f1": 0.2206896551724138
+        }
+      },
+      "alerts": 129,
+      "true_positives": 16,
+      "false_positives": 113
+    },
+    "Wells_Fargo": {
+      "saved_cutoff": 0.1868941614329799,
+      "recomputed_cutoff": 0.18689424812793573,
+      "absolute_cutoff_error": 8.669495582536157e-08,
+      "identical_alert_decisions": true,
+      "selection": "maximum validation F1 over 501 score quantiles",
+      "metrics_parity": {
+        "passed": true,
+        "metric_absolute_errors": {
+          "pr_auc": 1.1102230246251565e-16,
+          "roc_auc": 0.0,
+          "precision": 0.0,
+          "recall": 0.0,
+          "f1": 0.0
+        },
+        "metrics": {
+          "pr_auc": 0.9599386797680174,
+          "roc_auc": 0.9998453443310698,
+          "precision": 0.40384615384615385,
+          "recall": 0.9545454545454546,
+          "f1": 0.5675675675675675
+        }
+      },
+      "alerts": 52,
+      "true_positives": 21,
+      "false_positives": 31
+    },
+    "Key_Bank": {
+      "saved_cutoff": 0.3759195153712922,
+      "recomputed_cutoff": 0.37591947567459877,
+      "absolute_cutoff_error": 3.9696693432400565e-08,
+      "identical_alert_decisions": true,
+      "selection": "maximum validation F1 over 501 score quantiles",
+      "metrics_parity": {
+        "passed": true,
+        "metric_absolute_errors": {
+          "pr_auc": 2.220446049250313e-16,
+          "roc_auc": 0.0,
+          "precision": 0.0,
+          "recall": 0.0,
+          "f1": 0.0
+        },
+        "metrics": {
+          "pr_auc": 0.9199227981071854,
+          "roc_auc": 0.998742359100348,
+          "precision": 0.782608695652174,
+          "recall": 0.8571428571428571,
+          "f1": 0.8181818181818182
+        }
+      },
+      "alerts": 23,
+      "true_positives": 18,
+      "false_positives": 5
+    }
+  },
+  "features": [
+    {
+      "bank": "JPMorgan_Chase",
+      "transaction_id": "180245",
+      "maximum_shap_error": 0.0,
+      "additivity_error": 4.470348358154297e-07,
+      "displayed_probability_error": 1.8698995005173025e-08,
+      "ablations": {
+        "payment_format": {
+          "logit_drop": 2.1571640968322754,
+          "shap_logit": 2.158680936321616,
+          "direction_agrees": true
+        },
+        "amount": {
+          "logit_drop": -0.041124820709228516,
+          "shap_logit": -0.03858081251382828,
+          "direction_agrees": true
+        },
+        "Amount_Received": {
+          "logit_drop": -0.03764677047729492,
+          "shap_logit": -0.035210853442549706,
+          "direction_agrees": true
+        },
+        "Receiving_Currency": {
+          "logit_drop": -4.76837158203125e-07,
+          "shap_logit": 0.0,
+          "direction_agrees": true
+        },
+        "currency": {
+          "logit_drop": -4.76837158203125e-07,
+          "shap_logit": 0.0,
+          "direction_agrees": true
+        }
+      }
+    },
+    {
+      "bank": "JPMorgan_Chase",
+      "transaction_id": "2580817",
+      "maximum_shap_error": 0.0,
+      "additivity_error": 4.3213367462158203e-07,
+      "displayed_probability_error": 4.74090394719795e-08,
+      "ablations": {
+        "payment_format": {
+          "logit_drop": 1.9661439061164856,
+          "shap_logit": 1.9673650575180848,
+          "direction_agrees": true
+        },
+        "amount": {
+          "logit_drop": -0.034091949462890625,
+          "shap_logit": -0.03068536023298899,
+          "direction_agrees": true
+        },
+        "Amount_Received": {
+          "logit_drop": -0.032753944396972656,
+          "shap_logit": -0.02934042985240619,
+          "direction_agrees": true
+        },
+        "Receiving_Currency": {
+          "logit_drop": -4.76837158203125e-07,
+          "shap_logit": 0.0,
+          "direction_agrees": true
+        },
+        "currency": {
+          "logit_drop": -4.76837158203125e-07,
+          "shap_logit": 0.0,
+          "direction_agrees": true
+        }
+      }
+    },
+    {
+      "bank": "JPMorgan_Chase",
+      "transaction_id": "3400462",
+      "maximum_shap_error": 6.505213034913027e-19,
+      "additivity_error": 0.0,
+      "displayed_probability_error": 4.367375727731826e-08,
+      "ablations": {
+        "payment_format": {
+          "logit_drop": 1.2206592559814453,
+          "shap_logit": 1.2177580919815227,
+          "direction_agrees": true
+        },
+        "Amount_Received": {
+          "logit_drop": -0.0004024505615234375,
+          "shap_logit": -0.0019106367835775016,
+          "direction_agrees": true
+        },
+        "amount": {
+          "logit_drop": 0.0010995864868164062,
+          "shap_logit": -0.000604326487518847,
+          "direction_agrees": false
+        },
+        "Receiving_Currency": {
+          "logit_drop": 0.0,
+          "shap_logit": 0.0,
+          "direction_agrees": true
+        },
+        "currency": {
+          "logit_drop": 0.0,
+          "shap_logit": 0.0,
+          "direction_agrees": true
+        }
+      }
+    },
+    {
+      "bank": "Wells_Fargo",
+      "transaction_id": "2794670",
+      "maximum_shap_error": 4.440892098500626e-16,
+      "additivity_error": 2.384185791015625e-07,
+      "displayed_probability_error": 8.02338508132383e-09,
+      "ablations": {
+        "payment_format": {
+          "logit_drop": 1.6648073196411133,
+          "shap_logit": 1.685807392001152,
+          "direction_agrees": true
+        },
+        "amount": {
+          "logit_drop": -0.028882980346679688,
+          "shap_logit": -0.017077481374144554,
+          "direction_agrees": true
+        },
+        "Amount_Received": {
+          "logit_drop": -0.026515960693359375,
+          "shap_logit": -0.01557827927172184,
+          "direction_agrees": true
+        },
+        "Receiving_Currency": {
+          "logit_drop": 2.384185791015625e-07,
+          "shap_logit": 0.0,
+          "direction_agrees": true
+        },
+        "currency": {
+          "logit_drop": 2.384185791015625e-07,
+          "shap_logit": 0.0,
+          "direction_agrees": true
+        }
+      }
+    },
+    {
+      "bank": "Key_Bank",
+      "transaction_id": "2974317",
+      "maximum_shap_error": 4.440892098500626e-16,
+      "additivity_error": 1.862645149230957e-07,
+      "displayed_probability_error": 4.731442737604397e-09,
+      "ablations": {
+        "payment_format": {
+          "logit_drop": 2.4128491580486298,
+          "shap_logit": 3.0944013973930846,
+          "direction_agrees": true
+        },
+        "amount": {
+          "logit_drop": -0.09207046031951904,
+          "shap_logit": 1.430775616201572,
+          "direction_agrees": false
+        },
+        "Amount_Received": {
+          "logit_drop": -0.22221025824546814,
+          "shap_logit": 1.2833293405128645,
+          "direction_agrees": false
+        },
+        "Receiving_Currency": {
+          "logit_drop": -2.086162567138672e-07,
+          "shap_logit": 0.0,
+          "direction_agrees": true
+        },
+        "currency": {
+          "logit_drop": -2.086162567138672e-07,
+          "shap_logit": 0.0,
+          "direction_agrees": true
+        }
+      }
+    }
+  ],
+  "limitations": [
+    "Validation-selected cutoff and validation metrics are not independent test evidence.",
+    "Attributions depend on 32 training reference rows and fixed account memory.",
+    "Amount/currency aliases are perturbed separately by the original engine; display grouping is not grouped SHAP.",
+    "Ablation direction agreement is a sensitivity check, not proof of fraud or global faithfulness."
+  ]
+}

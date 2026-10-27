@@ -1,0 +1,62 @@
+{
+  "method": "pre-report target parity check",
+  "tolerance": 1e-06,
+  "passed": false,
+  "cases": [
+    {
+      "bank": "JPMorgan_Chase",
+      "transaction_id": "3592925",
+      "index": 59321,
+      "stream_probability": 0.1371750831604004,
+      "xai_probability": 0.13717507967092177,
+      "absolute_error": 3.489478622720199e-09,
+      "passed": true
+    },
+    {
+      "bank": "JPMorgan_Chase",
+      "transaction_id": "3594822",
+      "index": 63654,
+      "stream_probability": 9.075280900106009e-07,
+      "xai_probability": 8.969986809513944e-07,
+      "absolute_error": 1.0529409059206441e-08,
+      "passed": true
+    },
+    {
+      "bank": "Wells_Fargo",
+      "transaction_id": "2965676",
+      "index": 2264,
+      "stream_probability": 0.8719319701194763,
+      "xai_probability": 0.8719320400432636,
+      "absolute_error": 6.992378731585092e-08,
+      "passed": true
+    },
+    {
+      "bank": "Wells_Fargo",
+      "transaction_id": "3445857",
+      "index": 19564,
+      "stream_probability": 1.3017081073485315e-05,
+      "xai_probability": 1.4275317264544851e-05,
+      "absolute_error": 1.258236191059536e-06,
+      "passed": false
+    },
+    {
+      "bank": "Key_Bank",
+      "transaction_id": "3007750",
+      "index": 5743,
+      "stream_probability": 0.9842261672019958,
+      "xai_probability": 0.9838399949590468,
+      "absolute_error": 0.0003861722429490122,
+      "passed": false
+    },
+    {
+      "bank": "Key_Bank",
+      "transaction_id": "3290172",
+      "index": 6204,
+      "stream_probability": 0.0014707623049616814,
+      "xai_probability": 0.0014707623425171598,
+      "absolute_error": 3.755547847532348e-11,
+      "passed": true
+    }
+  ],
+  "test_loaded": false
+}

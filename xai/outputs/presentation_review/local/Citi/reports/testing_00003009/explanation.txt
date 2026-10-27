@@ -1,0 +1,27 @@
+FRAUD EXPLANATION
+Transaction: 3697344
+Bank: Citi
+Prediction: FRAUD
+Fraud model score: 0.474126
+
+WHY DID THE MODEL MAKE THIS PREDICTION?
+
+FEATURE EVIDENCE
+- Transaction amount: 22,826.81 USD
+  Increased the fraud score.
+- Amount received: 22,826.81 USD
+  Increased the fraud score.
+- Payment format: ACH
+  Increased the fraud score.
+Compared with reference transactions, with account history held fixed.
+
+TEMPORAL EVIDENCE
+No relevant historical activity was found in the configured temporal window.
+
+GRAPH EVIDENCE
+No relevant historical graph interactions were found in the configured neighborhood/window.
+
+OVERALL EXPLANATION
+The model score met the alert threshold. The transaction details shown above influenced the score upward relative to the reference transactions. No historical interaction exceeded the display tolerance within the examined neighborhood/window.
+
+This explanation describes model behavior and does not establish that the transaction is actually fraudulent.

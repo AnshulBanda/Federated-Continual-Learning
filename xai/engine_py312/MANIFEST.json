@@ -1,0 +1,93 @@
+{
+  "purpose": "Intentional source-less runtime distribution; original Python sources were absent upstream. These are not disposable interpreter caches.",
+  "runtime": "CPython 3.12",
+  "source_commit": "18663536f62e6e3c61ca6a43c3f98651320ec9d2",
+  "original_directory": "xai/__pycache__",
+  "modules": {
+    "__init__.cpython-312.pyc": {
+      "original_path": "xai/__pycache__/__init__.cpython-312.pyc",
+      "bytes": 240,
+      "sha256": "6e1b5e8cd4f24ef0ad47f8cb7457e813abf176734d7f0ce7760d73272f6c3e53"
+    },
+    "cli.cpython-312.pyc": {
+      "original_path": "xai/__pycache__/cli.cpython-312.pyc",
+      "bytes": 10258,
+      "sha256": "3b05102836fc9671f7feb1da7742254027634709113596786d97d218dc198805"
+    },
+    "config.cpython-312.pyc": {
+      "original_path": "xai/__pycache__/config.cpython-312.pyc",
+      "bytes": 2731,
+      "sha256": "8e7ead1ed867cc8ce8f2852c46aaf73bd22b59c5c6609b9e68b667555c90b88a"
+    },
+    "explain.cpython-312.pyc": {
+      "original_path": "xai/__pycache__/explain.cpython-312.pyc",
+      "bytes": 1807,
+      "sha256": "f497a3c91b4e7a498dd495f92d4658ef00f45941ee247471796dfeba000c2ffd"
+    },
+    "explanation_engine.cpython-312.pyc": {
+      "original_path": "xai/__pycache__/explanation_engine.cpython-312.pyc",
+      "bytes": 8413,
+      "sha256": "3f4fb1294ef22ce77225d019d13929812b404b3c772e8af94f628f2c41cf0680"
+    },
+    "explanation_formatter.cpython-312.pyc": {
+      "original_path": "xai/__pycache__/explanation_formatter.cpython-312.pyc",
+      "bytes": 7387,
+      "sha256": "1a25e09595fcb47ba943a2c2d1e9e83ae57a5b99bfd79a42df187ee8c5013668"
+    },
+    "feature_explainer.cpython-312.pyc": {
+      "original_path": "xai/__pycache__/feature_explainer.cpython-312.pyc",
+      "bytes": 2806,
+      "sha256": "99d8293a1272373625614d0265b02fbfa796039836634cf66c29de534cf8ff27"
+    },
+    "federated_explainer.cpython-312.pyc": {
+      "original_path": "xai/__pycache__/federated_explainer.cpython-312.pyc",
+      "bytes": 10081,
+      "sha256": "c61ddcf49b391712e86d2a4fa21ae32728a3280c23736713bcc9d68a5f3abf9a"
+    },
+    "graph_explainer.cpython-312.pyc": {
+      "original_path": "xai/__pycache__/graph_explainer.cpython-312.pyc",
+      "bytes": 8570,
+      "sha256": "6c049ed4919a704639bcd592249719e78bb028f6eac17b9816b3800512f85f02"
+    },
+    "metrics.cpython-312.pyc": {
+      "original_path": "xai/__pycache__/metrics.cpython-312.pyc",
+      "bytes": 4689,
+      "sha256": "0361f6d5b733a30663e6c1dd5ea7083fa2c9ceae7a256425579959be9e00a0a5"
+    },
+    "preprocessing.cpython-312.pyc": {
+      "original_path": "xai/__pycache__/preprocessing.cpython-312.pyc",
+      "bytes": 17439,
+      "sha256": "a2ed7547c5e44472bf432e41b1744317e7e325d83264c4fa49abd129534c9184"
+    },
+    "shapley.cpython-312.pyc": {
+      "original_path": "xai/__pycache__/shapley.cpython-312.pyc",
+      "bytes": 2862,
+      "sha256": "b5f863aa6ae5315f4c95576a0dcec46e0db01a4c92b56170ac901b9ddbc1fbe7"
+    },
+    "temporal.cpython-312.pyc": {
+      "original_path": "xai/__pycache__/temporal.cpython-312.pyc",
+      "bytes": 16341,
+      "sha256": "994a1a367933775f4db9c98d99eb879b70c1ba4dfddb68cd5234eae1e1e1dc6c"
+    },
+    "temporal_explainer.cpython-312.pyc": {
+      "original_path": "xai/__pycache__/temporal_explainer.cpython-312.pyc",
+      "bytes": 3585,
+      "sha256": "c6c2a0b65ce1585b04e42000df9873b6cb262be83c3fae595b8b08d6b189c80e"
+    },
+    "test_pipeline.cpython-312.pyc": {
+      "original_path": "xai/__pycache__/test_pipeline.cpython-312.pyc",
+      "bytes": 18339,
+      "sha256": "c31729e4f5d048816aba7a7af255cb8654bd72d8c0242428d37403086628f2e4"
+    },
+    "test_xai.cpython-312.pyc": {
+      "original_path": "xai/__pycache__/test_xai.cpython-312.pyc",
+      "bytes": 8943,
+      "sha256": "a36386f9b412bd530eeee95b7e416cdaa75e4c0b3cf9db555d3e6ec40b8d6637"
+    },
+    "visualization.cpython-312.pyc": {
+      "original_path": "xai/__pycache__/visualization.cpython-312.pyc",
+      "bytes": 8471,
+      "sha256": "2eac583eeeadfd4c12889d9af12a60175ea93d4217eae3d29154b58daa2b904d"
+    }
+  }
+}

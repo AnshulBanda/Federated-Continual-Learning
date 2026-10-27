@@ -46,3 +46,8 @@ training.lock
 # Optimization evidence keeps runtime locks and the final self-referential Git record local.
 artifacts/dp_level3_utility_optimization/**/*.reserved
 artifacts/dp_level3_utility_optimization/FINAL_GIT_STATE.json
+
+# XAI ships a pinned source-less CPython 3.12 runtime, not regenerable caches.
+!xai/engine_py312/*.cpython-312.pyc
+/tmp/
+/xai/outputs/**/*.tmp

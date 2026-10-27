@@ -1,0 +1,76 @@
+{
+  "schema_version": 1,
+  "transaction_id": "3598769",
+  "bank": "JPMorgan_Chase",
+  "brief": {
+    "top_factor": "Payment format: ACH",
+    "top_feature": "payment_format",
+    "why": "This was the strongest upward influence among the transaction features. Compared with the reference transactions, this value pushed the model toward a higher fraud score while account history was held fixed. It does not mean this value is inherently fraudulent.",
+    "scoring": "Score: 0.0106986. Alert threshold: 0.00797743. The score met or exceeded the threshold, so the prediction is FRAUD. This score is not a calibrated chance of fraud.",
+    "history": "No relevant historical interactions were available for testing.",
+    "summary": "The transaction was flagged because its score met or exceeded the alert threshold. Payment format: ACH was the strongest transaction feature pushing upward. "
+  },
+  "prediction": "FRAUD",
+  "fraud_score": 0.010698556579965936,
+  "score_label": "Fraud model score",
+  "score_type": "uncalibrated sigmoid model score",
+  "threshold": 0.007977433372288888,
+  "top_features": [
+    {
+      "feature": "payment_format",
+      "label": "Payment format",
+      "value": "ACH",
+      "display_value": "ACH",
+      "contribution": 1.70893494784832,
+      "direction": "increased",
+      "explanation": "Payment format (ACH) increased the fraud score relative to the reference transactions, with account history held fixed. It had the largest absolute feature contribution among the displayed factors."
+    },
+    {
+      "feature": "amount",
+      "label": "Transaction amount",
+      "value": 175.63,
+      "display_value": "175.63 USD",
+      "contribution": -0.021966420114040375,
+      "direction": "decreased",
+      "explanation": "Transaction amount (175.63 USD) decreased the fraud score relative to the reference transactions, with account history held fixed. Its contribution opposed the direction of the largest displayed factor."
+    },
+    {
+      "feature": "Amount_Received",
+      "label": "Amount received",
+      "value": 175.63,
+      "display_value": "175.63 USD",
+      "contribution": -0.021209925413131714,
+      "direction": "decreased",
+      "explanation": "Amount received (175.63 USD) decreased the fraud score relative to the reference transactions, with account history held fixed. Its contribution opposed the direction of the largest displayed factor."
+    }
+  ],
+  "prediction_summary": "The model classified this transaction as FRAUD because its score of 0.0106985566 met or exceeded the decision threshold of 0.00797743337. This is an uncalibrated model score, not a confirmed chance of fraud.",
+  "feature_reference": "Compared with reference transactions, with account history held fixed.",
+  "contribution_units": "raw_logit",
+  "temporal_evidence": {
+    "events_in_window": 0,
+    "summary": "No relevant historical activity was found in the configured temporal window."
+  },
+  "graph_evidence": {
+    "historical_edges_evaluated": 0,
+    "higher_score_supporting_events": 0,
+    "lower_score_supporting_events": 0,
+    "nodes_represented": 2,
+    "summary": "No relevant historical graph interactions were found in the configured neighborhood/window."
+  },
+  "top_historical_interactions": [],
+  "overall_explanation": "The model score met the alert threshold. Among the displayed features, Payment format (ACH) provided upward influences relative to the reference transactions. Among the displayed features, Transaction amount (175.63 USD), Amount received (175.63 USD) provided downward influences relative to the reference transactions. No historical interaction exceeded the display tolerance within the examined neighborhood/window.",
+  "disclaimer": "This explanation describes model behavior and does not establish that the transaction is actually fraudulent.",
+  "technical": {
+    "fidelity_error": 0.0,
+    "fidelity_applicable": false,
+    "stability_jaccard": 1.0
+  },
+  "presentation": {
+    "feature_zero_tolerance": 1e-08,
+    "interaction_zero_tolerance": 1e-08,
+    "technical_top_features": 5,
+    "top_interactions": 5,
+    "show_all_interactions": false
+  }
+}

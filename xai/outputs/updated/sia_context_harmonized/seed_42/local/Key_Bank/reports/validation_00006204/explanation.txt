@@ -1,0 +1,57 @@
+============================================================
+TRANSACTION XAI
+============================================================
+Transaction: 3290172
+Bank: Key_Bank
+
+MODEL PREDICTION
+Fraud model score (uncalibrated): 0.000942344
+Prediction: LEGITIMATE (threshold 0.375919515)
+
+PREDICTION PARITY
+Existing evaluation: 0.000942343
+XAI:                 0.000942344
+
+FEATURE CONTRIBUTIONS (raw logit units)
+1. payment_format = ACH    +3.982437
+2. amount = 1128.88    +0.074680
+3. Amount_Received = 1128.88    +0.067830
+4. Receiving_Currency = USD    +0.000000
+5. currency = USD    +0.000000
+
+TEMPORAL EVIDENCE
+Recent completed batches examined: 8
+Events involving sender/receiver in that window: 1
+Time since sender's last recorded event: 1203020.5 seconds
+Time since receiver's last recorded event: 1203020.5 seconds
+Window volume by currency: {'USD': 1128.88}
+
+IMPORTANT HISTORICAL INTERACTIONS
+Event 3014995: delta probability on removal = +0.000391021
+
+GRAPH EVIDENCE
+Evaluated historical edges: 1
+Nodes represented, including target endpoints: 2
+Method: temporal graph perturbation (not GNNExplainer)
+
+INTERPRETATION
+payment_format contributed positively relative to the sampled training reference, with account memory fixed.
+amount contributed positively relative to the sampled training reference, with account memory fixed.
+Amount_Received contributed positively relative to the sampled training reference, with account memory fixed.
+Suppressing the most influential tested historical event changed the score by +0.000391021.
+Temporal counts and volumes describe observed history; they are not independently attributed model features.
+This explanation describes model behavior and does not establish that the transaction is actually fraudulent.
+
+FIDELITY / STABILITY
+Retained-window-subgraph absolute score error: 0.000000000
+Background-resampling top-feature Jaccard: 1.0
+
+LIMITATIONS
+Model explanations do not establish fraud or causality; scores are uncalibrated.
+Feature SHAP holds account memory fixed; static node-feature attribution is not implemented.
+Temporal graph perturbation is a bounded replay intervention, not GNNExplainer. Earlier anchor memory remains intact.
+Interventional SHAP hybrids can be unrealistic for correlated fields; exactness is relative to the sampled background.
+Legacy preprocessing reproduces current original evaluation and saved metrics; original fitted objects were not preserved.
+The original fixed-size batching and timestamp-tie behavior are preserved.
+This explanation uses a federated continual checkpoint. The model was not trained with a formal differential-privacy mechanism.
+============================================================

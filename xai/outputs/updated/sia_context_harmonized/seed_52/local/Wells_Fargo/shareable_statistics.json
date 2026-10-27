@@ -1,0 +1,166 @@
+{
+  "schema_version": 1,
+  "bank": "Wells_Fargo",
+  "model_sha256": "930a7b0197c9bbb0cbbab7e9acce7c7b7b03d4d137d738bccf058f8dd4e88ec9",
+  "method": "exact_empirical_interventional_shap",
+  "units": "raw_logit",
+  "feature_names": [
+    "Amount_Received",
+    "Receiving_Currency",
+    "amount",
+    "currency",
+    "payment_format"
+  ],
+  "split": "validation",
+  "selection": "explicit",
+  "config": {
+    "background_size": 32,
+    "seed": 42,
+    "history_batches": 8,
+    "hops": 2,
+    "max_events": 12,
+    "max_nodes": 12,
+    "top_k": 3,
+    "stability_runs": 3,
+    "probability_tolerance": 1e-06
+  },
+  "sample_count": 1,
+  "class_counts": {
+    "fraud": 0,
+    "legitimate": 1
+  },
+  "sum_abs": {
+    "Amount_Received": 0.009905909498532614,
+    "Receiving_Currency": 0.0,
+    "amount": 0.012477596600850425,
+    "currency": 0.0,
+    "payment_format": 1.3748714377482734
+  },
+  "sum_signed": {
+    "Amount_Received": 0.009905909498532614,
+    "Receiving_Currency": 0.0,
+    "amount": 0.012477596600850425,
+    "currency": 0.0,
+    "payment_format": 1.3748714377482734
+  },
+  "top_features": [
+    "payment_format",
+    "amount",
+    "Amount_Received"
+  ],
+  "xai_provenance": {
+    "family": "sia_context_harmonized",
+    "label": "Sia context replay + temporal harmonization",
+    "source_ref": "origin/sia",
+    "checkpoint_path": "origin/sia:artifacts/research_adaptive_fcl/warm_start/federated/context_harmonized/seed_52/global_model.pt",
+    "checkpoint_sha256": "98b6c782a27013e4b1917669b2a5ae48d3a7e44ce6a9aa0149aef446473ab0e2",
+    "metrics_path": "origin/sia:artifacts/research_adaptive_fcl/warm_start/federated/context_harmonized/seed_52/metrics.json",
+    "source_metrics_sha256": "2f51ec81f602767d312bccbb4f417ac3f88abb88f077be62b62aeca968fa4ae3",
+    "seed": 52,
+    "evaluation_split": "validation",
+    "test_loaded": false,
+    "privacy_mode": "none",
+    "privacy": {
+      "mode": "none",
+      "formal_dp": false
+    },
+    "validation_metrics": [
+      {
+        "bank": "JPMorgan_Chase",
+        "validation": {
+          "pr_auc": 0.777324471887828,
+          "roc_auc": 0.9998032060926618,
+          "precision": 0.12403100775193798,
+          "recall": 1.0,
+          "f1": 0.2206896551724138
+        },
+        "threshold": 0.016475216403603537,
+        "validation_alert_metrics": {
+          "10": {
+            "alerts": 10,
+            "true_positives": 10,
+            "precision_at_k": 1.0,
+            "recall_at_k": 0.625
+          },
+          "25": {
+            "alerts": 25,
+            "true_positives": 12,
+            "precision_at_k": 0.48,
+            "recall_at_k": 0.75
+          },
+          "50": {
+            "alerts": 50,
+            "true_positives": 12,
+            "precision_at_k": 0.24,
+            "recall_at_k": 0.75
+          }
+        }
+      },
+      {
+        "bank": "Wells_Fargo",
+        "validation": {
+          "pr_auc": 0.9665638458852288,
+          "roc_auc": 0.9999111174316493,
+          "precision": 0.40384615384615385,
+          "recall": 0.9545454545454546,
+          "f1": 0.5675675675675675
+        },
+        "threshold": 0.1430635732710353,
+        "validation_alert_metrics": {
+          "10": {
+            "alerts": 10,
+            "true_positives": 10,
+            "precision_at_k": 1.0,
+            "recall_at_k": 0.45454545454545453
+          },
+          "25": {
+            "alerts": 25,
+            "true_positives": 21,
+            "precision_at_k": 0.84,
+            "recall_at_k": 0.9545454545454546
+          },
+          "50": {
+            "alerts": 50,
+            "true_positives": 21,
+            "precision_at_k": 0.42,
+            "recall_at_k": 0.9545454545454546
+          }
+        }
+      },
+      {
+        "bank": "Key_Bank",
+        "validation": {
+          "pr_auc": 0.8383331359909283,
+          "roc_auc": 0.998525092233963,
+          "precision": 0.6956521739130435,
+          "recall": 0.7619047619047619,
+          "f1": 0.7272727272727273
+        },
+        "threshold": 0.3252794043421577,
+        "validation_alert_metrics": {
+          "10": {
+            "alerts": 10,
+            "true_positives": 10,
+            "precision_at_k": 1.0,
+            "recall_at_k": 0.47619047619047616
+          },
+          "25": {
+            "alerts": 25,
+            "true_positives": 17,
+            "precision_at_k": 0.68,
+            "recall_at_k": 0.8095238095238095
+          },
+          "50": {
+            "alerts": 50,
+            "true_positives": 18,
+            "precision_at_k": 0.36,
+            "recall_at_k": 0.8571428571428571
+          }
+        }
+      }
+    ],
+    "accounting": {},
+    "selection": "validation checkpoint selection",
+    "privacy_disclaimer": "This model was not trained with a formal differential-privacy mechanism."
+  }
+}

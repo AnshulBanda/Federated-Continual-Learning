@@ -1,0 +1,51 @@
+{
+  "schema_version": 1,
+  "bank": "Citi",
+  "model_sha256": "e96adc0743127c78ca727da7a4255e25630f454b1eb751e59a349950be3fbeb1",
+  "method": "exact_empirical_interventional_shap",
+  "units": "raw_logit",
+  "feature_names": [
+    "Amount_Received",
+    "Receiving_Currency",
+    "amount",
+    "currency",
+    "payment_format"
+  ],
+  "split": "testing",
+  "selection": "balanced",
+  "config": {
+    "background_size": 32,
+    "seed": 42,
+    "history_batches": 8,
+    "hops": 2,
+    "max_events": 12,
+    "max_nodes": 12,
+    "top_k": 3,
+    "stability_runs": 3,
+    "probability_tolerance": 1e-06
+  },
+  "sample_count": 2,
+  "class_counts": {
+    "fraud": 1,
+    "legitimate": 1
+  },
+  "sum_abs": {
+    "Amount_Received": 0.002363708335906267,
+    "Receiving_Currency": 0.0,
+    "amount": 0.006242634030058981,
+    "currency": 0.0,
+    "payment_format": 1.5031428213696927
+  },
+  "sum_signed": {
+    "Amount_Received": 0.0008852151222527027,
+    "Receiving_Currency": 0.0,
+    "amount": 0.004648597212508322,
+    "currency": 0.0,
+    "payment_format": 1.5031428213696927
+  },
+  "top_features": [
+    "payment_format",
+    "amount",
+    "Amount_Received"
+  ]
+}

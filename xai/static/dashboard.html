@@ -1,0 +1,31 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>XAI · Transaction explanation</title>
+  <link rel="stylesheet" href="/dashboard.css">
+  <script src="/dashboard.js" defer></script>
+</head>
+<body>
+  <header><div class="header-inner"><p class="eyebrow">XAI</p><h1>Understand the model’s decision.</h1><p>See what influenced the score and why the transaction was flagged for review.</p></div></header>
+  <main class="layout">
+    <aside class="panel filters">
+      <h2>Find a transaction</h2>
+      <label for="bank">Bank</label><select id="bank"></select>
+      <label for="view">Show</label><select id="view">
+        <option value="flagged">Flagged by model</option>
+        <option value="known_fraud">Known fraud labels</option>
+        <option value="missed_fraud">Missed fraud</option>
+      </select>
+      <label for="query">Search transaction ID</label><input id="query" placeholder="Enter all or part of an ID">
+      <p id="threshold" class="muted">Loading transactions…</p>
+      <p id="count" class="counts" aria-live="polite"></p>
+      <div class="tablewrap"><table class="case-table"><thead><tr><th>Transaction</th><th>Score</th><th>Dataset label</th><th>Model result</th></tr></thead><tbody id="rows"></tbody></table></div>
+      <div class="pager"><button id="prev">Previous</button><span id="page"></span><button id="next">Next</button></div>
+      <p class="muted legend">Dataset label: the classification recorded in the data.<br>Model result: whether the score reached the configured review threshold selected using validation data.</p>
+    </aside>
+    <article id="detail" class="panel detail" aria-live="polite"><div class="empty"><h2>Select a transaction</h2><p>Its transfer map, actual transaction IDs and a short explanation will appear here. The first explanation can take longer to generate.</p></div></article>
+  </main>
+</body>
+</html>

@@ -1,0 +1,34 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1"><title>XAI report Â· Key_Bank</title>
+<style>body{font:16px/1.6 system-ui,sans-serif;background:#f1f5f9;color:#172033;margin:0}
+main{max-width:900px;margin:40px auto;padding:0 20px}h1{margin-bottom:0}h2{font-size:18px;margin-bottom:4px}
+details{background:white;border:1px solid #dce3ec;border-radius:12px;padding:20px;margin:16px 0}
+summary{cursor:pointer;font-weight:650}.muted{color:#526178;font-size:14px}a{color:#3346a8}
+.validation{background:#f8fafc;font-size:14px}li{margin:8px 0}</style></head>
+<body><main><h1>Transaction explanations</h1><p>Key_Bank Â· 2 transaction(s)</p>
+<p>Select a transaction to read its explanation.</p><p class="muted">Scores describe model output, not calibrated fraud probabilities.</p>
+<details >
+<summary>Transaction 3815878 Â· FRAUD Â· Score 0.998</summary>
+<section class="panel"><p><strong>Fraud model score: 0.998248</strong><br>
+Decision threshold: 0.927827<br>Result: <strong>FRAUD</strong></p>
+<h2>Why was it flagged?</h2><p><strong>Top factor pushing toward fraud: Payment format: Wire</strong></p>
+<p>This was the strongest transaction feature pushing the score upward compared with the model’s reference transactions.</p><h3>Other contributing factors</h3><ul><li>Transaction amount: <strong>20,881.11 USD</strong> &rarr; increased the fraud score</li><li>Amount received: <strong>20,881.11 USD</strong> &rarr; increased the fraud score</li></ul>
+<h2>What about the transaction history?</h2><p>No relevant historical interactions were available for testing.</p>
+<h2>Final explanation</h2><blockquote>The transaction was flagged because its score met or exceeded the alert threshold. Payment format: Wire was the strongest transaction feature pushing upward. </blockquote>
+<p class="muted small">Uncalibrated model score. This explanation describes model behavior and does not establish that the transaction is actually fraudulent.</p></section>
+<details class="validation"><summary>View technical XAI details</summary>
+<p>No relevant historical graph interactions were found in the configured neighborhood/window.</p>
+<p><a href="local/Key_Bank/reports/testing_00004026/explanation.html">Open full evidence, validation and downloads</a></p></details>
+</details><details >
+<summary>Transaction 3954298 Â· LEGITIMATE Â· Score 0.000</summary>
+<section class="panel"><p><strong>Fraud model score: 1.62144e-07</strong><br>
+Decision threshold: 0.927827<br>Result: <strong>LEGITIMATE</strong></p>
+<h2>Why was it not flagged?</h2><p><strong>Top factor pushing toward fraud: Payment format: ACH</strong></p>
+<p>This was the strongest transaction feature pushing the score upward compared with the model’s reference transactions.</p><h3>Other contributing factors</h3><ul><li>Transaction amount: <strong>4,642.08 USD</strong> &rarr; increased the fraud score</li><li>Amount received: <strong>4,642.08 USD</strong> &rarr; increased the fraud score</li></ul>
+<h2>What about the transaction history?</h2><p>The historical interaction with the largest measured effect (event 3816126) raised the original fraud score. Removing it changed the score from 1.62144e-07 to 5.37225e-08. Other tested interactions had mixed effects.</p>
+<h2>Final explanation</h2><blockquote>The transaction was not flagged because its score was below the alert threshold. Payment format: ACH was the strongest transaction feature pushing upward. The strongest tested historical interaction also pushed upward.</blockquote>
+<p class="muted small">Uncalibrated model score. This explanation describes model behavior and does not establish that the transaction is actually fraudulent.</p></section>
+<details class="validation"><summary>View technical XAI details</summary>
+<p>12 historical interactions were tested by temporarily removing them. Removing the most influential interaction lowered the model score by approximately 1.08422e-07. The strongest measured change was for event 3816126. The account history was replayed after removing this event, keeping the model weights fixed. The score changed from 1.62144013e-07 to 5.37225315e-08. This event was helping raise the original score. This is a measured model response within the examined history, not evidence that the event caused fraud. Across the individual removal tests, 1 interaction(s) supported a higher score and 1 supported a lower score; 10 had no effect above the display tolerance. These separate effects cannot be added to infer the effect of removing all history together.</p>
+<p><a href="local/Key_Bank/reports/testing_00006203/explanation.html">Open full evidence, validation and downloads</a></p></details>
+</details></main></body></html>

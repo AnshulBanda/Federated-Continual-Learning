@@ -1,0 +1,27 @@
+FRAUD EXPLANATION
+Transaction: 4235615
+Bank: Citi
+Prediction: LEGITIMATE
+Fraud model score: 0.018368
+
+WHY DID THE MODEL MAKE THIS PREDICTION?
+
+FEATURE EVIDENCE
+- Payment format: Cheque
+  Decreased the fraud score.
+- Transaction amount: 537.05 USD
+  Decreased the fraud score.
+- Amount received: 537.05 USD
+  Decreased the fraud score.
+Compared with reference transactions, with account history held fixed.
+
+TEMPORAL EVIDENCE
+3 earlier transactions involving the sender or receiver were examined in the configured history window.
+
+GRAPH EVIDENCE
+3 historical interactions were tested by temporarily removing them. Removing the most influential interaction raised the model score by approximately 0.0001524.
+
+OVERALL EXPLANATION
+The model score did not meet the alert threshold. The transaction details shown above influenced the score downward relative to the reference transactions. Tested historical interactions also affected the score.
+
+This explanation describes model behavior and does not establish that the transaction is actually fraudulent.

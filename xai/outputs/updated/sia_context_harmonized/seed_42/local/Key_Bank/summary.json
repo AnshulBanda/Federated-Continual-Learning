@@ -1,0 +1,135 @@
+{
+  "bank": "Key_Bank",
+  "split": "validation",
+  "selection": "balanced",
+  "sample_count": 2,
+  "class_counts": {
+    "fraud": 1,
+    "legitimate": 1
+  },
+  "max_prediction_error": 5.416119408518938e-08,
+  "mean_top_ablation_absolute_change": 0.10210188029704724,
+  "mean_low_ablation_absolute_change": 6.792526610621685e-17,
+  "graph_explanations_with_candidates": 2,
+  "mean_graph_sufficiency_error": 0.0011885701556915858,
+  "reports": [
+    "reports\\validation_00005743",
+    "reports\\validation_00006204"
+  ],
+  "sampling_note": "Balanced predicted-class samples are illustrative, not population-representative. Missing classes are reported, not fabricated.",
+  "xai_provenance": {
+    "family": "sia_context_harmonized",
+    "label": "Sia context replay + temporal harmonization",
+    "source_ref": "origin/sia",
+    "checkpoint_path": "origin/sia:artifacts/research_adaptive_fcl/warm_start/federated/context_harmonized/seed_42/global_model.pt",
+    "checkpoint_sha256": "d650af6959d1da46888f30fb79bbfd888a6ec20743d14d447ea078dc351536f5",
+    "metrics_path": "origin/sia:artifacts/research_adaptive_fcl/warm_start/federated/context_harmonized/seed_42/metrics.json",
+    "source_metrics_sha256": "ba6c6e33b87d6d7b4c95f2e45e3db25786d9cbdceb43232a3d0bcc4a22086778",
+    "seed": 42,
+    "evaluation_split": "validation",
+    "test_loaded": false,
+    "privacy_mode": "none",
+    "privacy": {
+      "mode": "none",
+      "formal_dp": false
+    },
+    "validation_metrics": [
+      {
+        "bank": "JPMorgan_Chase",
+        "validation": {
+          "pr_auc": 0.8903013804800091,
+          "roc_auc": 0.9999389260287572,
+          "precision": 0.12403100775193798,
+          "recall": 1.0,
+          "f1": 0.2206896551724138
+        },
+        "threshold": 0.017805186897516156,
+        "validation_alert_metrics": {
+          "10": {
+            "alerts": 10,
+            "true_positives": 10,
+            "precision_at_k": 1.0,
+            "recall_at_k": 0.625
+          },
+          "25": {
+            "alerts": 25,
+            "true_positives": 14,
+            "precision_at_k": 0.56,
+            "recall_at_k": 0.875
+          },
+          "50": {
+            "alerts": 50,
+            "true_positives": 15,
+            "precision_at_k": 0.3,
+            "recall_at_k": 0.9375
+          }
+        }
+      },
+      {
+        "bank": "Wells_Fargo",
+        "validation": {
+          "pr_auc": 0.9599386797680173,
+          "roc_auc": 0.9998453443310698,
+          "precision": 0.40384615384615385,
+          "recall": 0.9545454545454546,
+          "f1": 0.5675675675675675
+        },
+        "threshold": 0.1868941614329799,
+        "validation_alert_metrics": {
+          "10": {
+            "alerts": 10,
+            "true_positives": 10,
+            "precision_at_k": 1.0,
+            "recall_at_k": 0.45454545454545453
+          },
+          "25": {
+            "alerts": 25,
+            "true_positives": 21,
+            "precision_at_k": 0.84,
+            "recall_at_k": 0.9545454545454546
+          },
+          "50": {
+            "alerts": 50,
+            "true_positives": 21,
+            "precision_at_k": 0.42,
+            "recall_at_k": 0.9545454545454546
+          }
+        }
+      },
+      {
+        "bank": "Key_Bank",
+        "validation": {
+          "pr_auc": 0.9199227981071856,
+          "roc_auc": 0.998742359100348,
+          "precision": 0.782608695652174,
+          "recall": 0.8571428571428571,
+          "f1": 0.8181818181818182
+        },
+        "threshold": 0.3759195153712922,
+        "validation_alert_metrics": {
+          "10": {
+            "alerts": 10,
+            "true_positives": 10,
+            "precision_at_k": 1.0,
+            "recall_at_k": 0.47619047619047616
+          },
+          "25": {
+            "alerts": 25,
+            "true_positives": 19,
+            "precision_at_k": 0.76,
+            "recall_at_k": 0.9047619047619048
+          },
+          "50": {
+            "alerts": 50,
+            "true_positives": 20,
+            "precision_at_k": 0.4,
+            "recall_at_k": 0.9523809523809523
+          }
+        }
+      }
+    ],
+    "accounting": {},
+    "selection": "validation checkpoint selection",
+    "privacy_disclaimer": "This model was not trained with a formal differential-privacy mechanism."
+  }
+}

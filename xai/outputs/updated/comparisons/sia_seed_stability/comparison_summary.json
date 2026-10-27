@@ -1,0 +1,60 @@
+{
+  "method": "paired_validation_case_comparison",
+  "case_key": "bank + transaction_id",
+  "checkpoint_count": 3,
+  "shared_case_count": 6,
+  "checkpoint_names": [
+    "seed_42",
+    "seed_52",
+    "seed_62"
+  ],
+  "comparisons": [
+    {
+      "baseline": "seed_42",
+      "comparison": "seed_52",
+      "paired_cases": 6,
+      "mean_absolute_probability_change": 0.14424213451150422,
+      "mean_top3_feature_jaccard": 1.0,
+      "mean_top5_graph_edge_jaccard": 0.9047619047619048,
+      "decision_flips": 1,
+      "baseline_mean_validation_metrics": {
+        "pr_auc": 0.9233876194517373,
+        "roc_auc": 0.999508876486725,
+        "precision": 0.4368286190834219,
+        "recall": 0.9372294372294372,
+        "f1": 0.5354796803072666
+      },
+      "comparison_mean_validation_metrics": {
+        "pr_auc": 0.860740484587995,
+        "roc_auc": 0.9994131385860914,
+        "precision": 0.4078431118370451,
+        "recall": 0.9054834054834054,
+        "f1": 0.5051766500042362
+      }
+    },
+    {
+      "baseline": "seed_42",
+      "comparison": "seed_62",
+      "paired_cases": 6,
+      "mean_absolute_probability_change": 0.13959158407439917,
+      "mean_top3_feature_jaccard": 1.0,
+      "mean_top5_graph_edge_jaccard": 0.9047619047619048,
+      "decision_flips": 1,
+      "baseline_mean_validation_metrics": {
+        "pr_auc": 0.9233876194517373,
+        "roc_auc": 0.999508876486725,
+        "precision": 0.4368286190834219,
+        "recall": 0.9372294372294372,
+        "f1": 0.5354796803072666
+      },
+      "comparison_mean_validation_metrics": {
+        "pr_auc": 0.6500968386353174,
+        "roc_auc": 0.9990861746761082,
+        "precision": 0.3660370917701555,
+        "recall": 0.8434343434343434,
+        "f1": 0.4568556016831879
+      }
+    }
+  ],
+  "privacy": "paired transaction details are local-only; aggregate file contains no identifiers or bank-level rows"
+}

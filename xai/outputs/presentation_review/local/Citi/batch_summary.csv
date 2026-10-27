@@ -1,0 +1,11 @@
+transaction_id,prediction,fraud_score,top_factor,report
+117168,LEGITIMATE,0.02474895699131792,Payment format,reports\testing_00000675
+3651064,FRAUD,0.39777796875958277,Payment format,reports\testing_00001446
+3697344,FRAUD,0.47412634224882116,Transaction amount,reports\testing_00003009
+3734548,LEGITIMATE,0.019772327379932925,Payment format,reports\testing_00003378
+3724859,LEGITIMATE,0.022005746252369864,Payment format,reports\testing_00003610
+89367,FRAUD,0.3337075430585081,Payment format,reports\testing_00004123
+3802308,LEGITIMATE,0.01347042938420794,Payment format,reports\testing_00005957
+4103366,FRAUD,0.3466700479646948,Payment format,reports\testing_00013873
+4153607,FRAUD,0.31896440073391713,Payment format,reports\testing_00015334
+4235615,LEGITIMATE,0.018367935699467312,Payment format,reports\testing_00017531

@@ -1,0 +1,29 @@
+FRAUD EXPLANATION
+Transaction: 36554
+Bank: JPMorgan_Chase
+Prediction: FRAUD
+Fraud model score: 0.0591138373
+Decision threshold: 0.0147527556
+The model classified this transaction as FRAUD because its score of 0.0591138373 met or exceeded the decision threshold of 0.0147527556. This is an uncalibrated model score, not a confirmed chance of fraud.
+
+WHAT PUSHED THE MODEL SCORE UP OR DOWN?
+
+FEATURE EVIDENCE
+- Payment format: ACH
+  Payment format (ACH) increased the fraud score relative to the reference transactions, with account history held fixed. It had the largest absolute feature contribution among the displayed factors.
+- Transaction amount: 40.73 USD
+  Transaction amount (40.73 USD) decreased the fraud score relative to the reference transactions, with account history held fixed. Its contribution opposed the direction of the largest displayed factor.
+- Amount received: 40.73 USD
+  Amount received (40.73 USD) decreased the fraud score relative to the reference transactions, with account history held fixed. Its contribution opposed the direction of the largest displayed factor.
+Compared with reference transactions, with account history held fixed.
+
+TEMPORAL EVIDENCE
+No relevant historical activity was found in the configured temporal window.
+
+GRAPH EVIDENCE
+No relevant historical graph interactions were found in the configured neighborhood/window.
+
+OVERALL EXPLANATION
+The model score met the alert threshold. Among the displayed features, Payment format (ACH) provided upward influences relative to the reference transactions. Among the displayed features, Transaction amount (40.73 USD), Amount received (40.73 USD) provided downward influences relative to the reference transactions. No historical interaction exceeded the display tolerance within the examined neighborhood/window.
+
+This explanation describes model behavior and does not establish that the transaction is actually fraudulent.

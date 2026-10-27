@@ -1,0 +1,6 @@
+feature,value,shap_logit,ablation_logit_drop
+payment_format,ACH,1.7851425682504973,1.6823920905590057
+Amount_Received,34580.44,1.203777836014827,0.45218630135059357
+amount,34580.44,1.0848862243195374,0.37369098514318466
+Receiving_Currency,USD,0.0,0.0
+currency,USD,0.0,0.0

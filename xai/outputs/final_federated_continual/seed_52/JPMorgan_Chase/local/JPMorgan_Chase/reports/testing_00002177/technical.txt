@@ -1,0 +1,58 @@
+TECHNICAL XAI DETAILS
+Transaction: 3598769
+Bank: JPMorgan_Chase
+
+MODEL PREDICTION
+Fraud model score (uncalibrated): 0.010698557
+Prediction: FRAUD
+Decision threshold: 0.007977433
+
+PREDICTION PARITY
+Existing evaluation score: 0.010698566
+XAI score: 0.010698557
+Absolute difference: 9.63328422e-09
+
+FEATURE ATTRIBUTION
+Method: exact_empirical_interventional_shap
+Units: raw_logit; account memory held fixed.
+- payment_format = ACH: +1.708934948 (increased)
+- amount = 175.63: -0.021966420 (decreased)
+- Amount_Received = 175.63: -0.021209925 (decreased)
+
+TEMPORAL EVIDENCE
+Window: 8 completed batches
+Relevant endpoint events: 0
+Volume by currency: {}
+Time since sender last seen: 603165.5 seconds
+Time since receiver last seen: 603165.5 seconds
+The current decoder does not directly use time deltas. Earlier deltas enter recurrent memory updates. A zero last_seen sentinel is reported as unknown.
+
+TOP HISTORICAL INTERACTIONS
+No historical candidate events in the configured neighborhood/window.
+Showing 0 of 0 evaluated interactions.
+
+GRAPH EVIDENCE
+Evaluated historical edges: 0
+Nodes represented: 2
+Method: temporal graph perturbation
+Retained events for fidelity: 0
+Only selected updates retained inside bounded window; pre-window account memory remains intact.
+
+FIDELITY
+Graph fidelity: not applicable (no historical candidates).
+Top feature ablation absolute score change: 0.00126401422
+Low feature ablation absolute score change: 6.76542156e-17
+Random feature ablation absolute score change: 0.000284458468
+
+STABILITY
+Background-resampling top-feature Jaccard: 1.0
+Background runs: 3; top-k: 3
+
+LIMITATIONS
+- Model explanations do not establish fraud or causality; scores are uncalibrated.
+- Feature SHAP holds account memory fixed; static node-feature attribution is not implemented.
+- Temporal graph perturbation is a bounded replay intervention, not GNNExplainer. Earlier anchor memory remains intact.
+- Interventional SHAP hybrids can be unrealistic for correlated fields; exactness is relative to the sampled background.
+- Legacy preprocessing reproduces current original evaluation and saved metrics; original fitted objects were not preserved.
+- The original fixed-size batching and timestamp-tie behavior are preserved.
+- Explains the final saved model; does not attribute predictions to individual training rounds, replay samples, or client updates. No formal differential privacy is implemented.

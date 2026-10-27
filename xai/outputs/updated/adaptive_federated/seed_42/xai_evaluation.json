@@ -1,0 +1,1299 @@
+{
+  "model": "d650af6959d1da46888f30fb79bbfd888a6ec20743d14d447ea078dc351536f5",
+  "case_selection": "cached examples plus first case of each available bank/status stratum",
+  "numerical_consistency": [
+    {
+      "bank": "JPMorgan_Chase",
+      "transaction_id": "180245",
+      "additivity_error": 4.470348358154297e-07,
+      "probability_error": 1.8698995005173025e-08
+    },
+    {
+      "bank": "JPMorgan_Chase",
+      "transaction_id": "2580817",
+      "additivity_error": 4.3213367462158203e-07,
+      "probability_error": 4.74090394719795e-08
+    },
+    {
+      "bank": "JPMorgan_Chase",
+      "transaction_id": "3400462",
+      "additivity_error": 0.0,
+      "probability_error": 4.367375727731826e-08
+    },
+    {
+      "bank": "Wells_Fargo",
+      "transaction_id": "2794670",
+      "additivity_error": 2.384185791015625e-07,
+      "probability_error": 8.02338508132383e-09
+    },
+    {
+      "bank": "Key_Bank",
+      "transaction_id": "2974317",
+      "additivity_error": 1.862645149230957e-07,
+      "probability_error": 4.731442737604397e-09
+    },
+    {
+      "bank": "JPMorgan_Chase",
+      "transaction_id": "2912559",
+      "additivity_error": 2.2351741790771484e-07,
+      "probability_error": 1.3114763275368091e-08
+    },
+    {
+      "bank": "JPMorgan_Chase",
+      "transaction_id": "2952760",
+      "additivity_error": 0.0,
+      "probability_error": 8.721382802594924e-14
+    },
+    {
+      "bank": "Wells_Fargo",
+      "transaction_id": "2788586",
+      "additivity_error": 2.384185791015625e-07,
+      "probability_error": 3.845609086727819e-08
+    },
+    {
+      "bank": "Wells_Fargo",
+      "transaction_id": "2961223",
+      "additivity_error": 1.2665987014770508e-07,
+      "probability_error": 7.491116038593759e-08
+    },
+    {
+      "bank": "Wells_Fargo",
+      "transaction_id": "2965480",
+      "additivity_error": 0.0,
+      "probability_error": 7.667354894409299e-17
+    },
+    {
+      "bank": "Key_Bank",
+      "transaction_id": "3007764",
+      "additivity_error": 4.3213367462158203e-07,
+      "probability_error": 3.4260039583067226e-08
+    },
+    {
+      "bank": "Key_Bank",
+      "transaction_id": "2928144",
+      "additivity_error": 5.960464477539063e-08,
+      "probability_error": 2.986239354178745e-12
+    }
+  ],
+  "stability": [
+    {
+      "bank": "JPMorgan_Chase",
+      "transaction_id": "180245",
+      "reference_seeds": [
+        42,
+        52,
+        62
+      ],
+      "references_per_run": 32,
+      "groups": [
+        "payment_method",
+        "transfer_terms"
+      ],
+      "shap_values": [
+        [
+          2.1586664970964193,
+          -0.07377722673118114
+        ],
+        [
+          2.541874472051859,
+          -0.04581877961754799
+        ],
+        [
+          2.0573919843882322,
+          -0.24402152746915817
+        ]
+      ],
+      "range_per_group": [
+        0.48448248766362667,
+        0.19820274785161018
+      ],
+      "top_group_agrees": true,
+      "sign_agrees_per_group": [
+        true,
+        true
+      ]
+    },
+    {
+      "bank": "JPMorgan_Chase",
+      "transaction_id": "2580817",
+      "reference_seeds": [
+        42,
+        52,
+        62
+      ],
+      "references_per_run": 32,
+      "groups": [
+        "payment_method",
+        "transfer_terms"
+      ],
+      "shap_values": [
+        [
+          1.9673663415014744,
+          -0.060027074068784714
+        ],
+        [
+          2.296409849077463,
+          -0.04103313758969307
+        ],
+        [
+          1.9381270296871662,
+          -0.18250416591763496
+        ]
+      ],
+      "range_per_group": [
+        0.35828281939029694,
+        0.1414710283279419
+      ],
+      "top_group_agrees": true,
+      "sign_agrees_per_group": [
+        true,
+        true
+      ]
+    },
+    {
+      "bank": "JPMorgan_Chase",
+      "transaction_id": "3400462",
+      "reference_seeds": [
+        42,
+        52,
+        62
+      ],
+      "references_per_run": 32,
+      "groups": [
+        "payment_method",
+        "transfer_terms"
+      ],
+      "shap_values": [
+        [
+          1.2177579715498723,
+          -0.002514842839445919
+        ],
+        [
+          1.3705667644389905,
+          -0.0014294795109890401
+        ],
+        [
+          1.1490317689604126,
+          -0.0703402838553302
+        ]
+      ],
+      "range_per_group": [
+        0.2215349954785779,
+        0.06891080434434116
+      ],
+      "top_group_agrees": true,
+      "sign_agrees_per_group": [
+        true,
+        true
+      ]
+    },
+    {
+      "bank": "Wells_Fargo",
+      "transaction_id": "2794670",
+      "reference_seeds": [
+        42,
+        52,
+        62
+      ],
+      "references_per_run": 32,
+      "groups": [
+        "payment_method",
+        "transfer_terms"
+      ],
+      "shap_values": [
+        [
+          1.685915119946003,
+          -0.032763488590717316
+        ],
+        [
+          2.8300205869600177,
+          -0.05898656230419874
+        ],
+        [
+          2.0598818250000477,
+          0.16227735951542854
+        ]
+      ],
+      "range_per_group": [
+        1.1441054670140147,
+        0.22126392181962729
+      ],
+      "top_group_agrees": true,
+      "sign_agrees_per_group": [
+        true,
+        false
+      ]
+    },
+    {
+      "bank": "Key_Bank",
+      "transaction_id": "2974317",
+      "reference_seeds": [
+        42,
+        52,
+        62
+      ],
+      "references_per_run": 32,
+      "groups": [
+        "payment_method",
+        "transfer_terms"
+      ],
+      "shap_values": [
+        [
+          3.02292072417913,
+          2.7855856299283914
+        ],
+        [
+          1.096206423069816,
+          2.3123207368771546
+        ],
+        [
+          0.9708583069732413,
+          2.2231153352186084
+        ]
+      ],
+      "range_per_group": [
+        2.052062417205889,
+        0.562470294709783
+      ],
+      "top_group_agrees": false,
+      "sign_agrees_per_group": [
+        true,
+        true
+      ]
+    },
+    {
+      "bank": "JPMorgan_Chase",
+      "transaction_id": "2912559",
+      "reference_seeds": [
+        42,
+        52,
+        62
+      ],
+      "references_per_run": 32,
+      "groups": [
+        "payment_method",
+        "transfer_terms"
+      ],
+      "shap_values": [
+        [
+          4.521703654900193,
+          -0.055862633511424065
+        ],
+        [
+          4.856788592413068,
+          -0.03557177819311619
+        ],
+        [
+          4.456546461209655,
+          -0.1740244347602129
+        ]
+      ],
+      "range_per_group": [
+        0.400242131203413,
+        0.1384526565670967
+      ],
+      "top_group_agrees": true,
+      "sign_agrees_per_group": [
+        true,
+        true
+      ]
+    },
+    {
+      "bank": "JPMorgan_Chase",
+      "transaction_id": "2952760",
+      "reference_seeds": [
+        42,
+        52,
+        62
+      ],
+      "references_per_run": 32,
+      "groups": [
+        "payment_method",
+        "transfer_terms"
+      ],
+      "shap_values": [
+        [
+          2.238562971353531,
+          -0.0849904716014862
+        ],
+        [
+          2.644823044538498,
+          -0.04670330882072449
+        ],
+        [
+          2.1234135031700134,
+          -0.3413766622543335
+        ]
+      ],
+      "range_per_group": [
+        0.5214095413684845,
+        0.294673353433609
+      ],
+      "top_group_agrees": true,
+      "sign_agrees_per_group": [
+        true,
+        true
+      ]
+    },
+    {
+      "bank": "Wells_Fargo",
+      "transaction_id": "2788586",
+      "reference_seeds": [
+        42,
+        52,
+        62
+      ],
+      "references_per_run": 32,
+      "groups": [
+        "payment_method",
+        "transfer_terms"
+      ],
+      "shap_values": [
+        [
+          1.3493700101971626,
+          -0.058937057852745056
+        ],
+        [
+          2.3024621484801173,
+          -0.028330831788480282
+        ],
+        [
+          1.632324893027544,
+          0.07653703913092613
+        ]
+      ],
+      "range_per_group": [
+        0.9530921382829547,
+        0.1354740969836712
+      ],
+      "top_group_agrees": true,
+      "sign_agrees_per_group": [
+        true,
+        false
+      ]
+    },
+    {
+      "bank": "Wells_Fargo",
+      "transaction_id": "2961223",
+      "reference_seeds": [
+        42,
+        52,
+        62
+      ],
+      "references_per_run": 32,
+      "groups": [
+        "payment_method",
+        "transfer_terms"
+      ],
+      "shap_values": [
+        [
+          1.410940256435424,
+          0.7204695623368025
+        ],
+        [
+          2.37547029950656,
+          0.7158089408185333
+        ],
+        [
+          1.7178997909650207,
+          0.8444700837135315
+        ]
+      ],
+      "range_per_group": [
+        0.9645300430711359,
+        0.1286611428949982
+      ],
+      "top_group_agrees": true,
+      "sign_agrees_per_group": [
+        true,
+        true
+      ]
+    },
+    {
+      "bank": "Wells_Fargo",
+      "transaction_id": "2965480",
+      "reference_seeds": [
+        42,
+        52,
+        62
+      ],
+      "references_per_run": 32,
+      "groups": [
+        "payment_method",
+        "transfer_terms"
+      ],
+      "shap_values": [
+        [
+          1.711861789226532,
+          -0.16432631015777588
+        ],
+        [
+          2.862807422876358,
+          -0.21205738186836243
+        ],
+        [
+          2.102298140525818,
+          0.0168379545211792
+        ]
+      ],
+      "range_per_group": [
+        1.150945633649826,
+        0.22889533638954163
+      ],
+      "top_group_agrees": true,
+      "sign_agrees_per_group": [
+        true,
+        false
+      ]
+    },
+    {
+      "bank": "Key_Bank",
+      "transaction_id": "3007764",
+      "reference_seeds": [
+        42,
+        52,
+        62
+      ],
+      "references_per_run": 32,
+      "groups": [
+        "payment_method",
+        "transfer_terms"
+      ],
+      "shap_values": [
+        [
+          3.3946209847927094,
+          0.05852431058883667
+        ],
+        [
+          1.2453419975936413,
+          0.023399513214826584
+        ],
+        [
+          1.105383761227131,
+          0.02273813635110855
+        ]
+      ],
+      "range_per_group": [
+        2.2892372235655785,
+        0.03578617423772812
+      ],
+      "top_group_agrees": true,
+      "sign_agrees_per_group": [
+        true,
+        true
+      ]
+    },
+    {
+      "bank": "Key_Bank",
+      "transaction_id": "2928144",
+      "reference_seeds": [
+        42,
+        52,
+        62
+      ],
+      "references_per_run": 32,
+      "groups": [
+        "payment_method",
+        "transfer_terms"
+      ],
+      "shap_values": [
+        [
+          3.9944190233945847,
+          0.5490536838769913
+        ],
+        [
+          1.5320422798395157,
+          0.3988903611898422
+        ],
+        [
+          1.4010918587446213,
+          0.3621465712785721
+        ]
+      ],
+      "range_per_group": [
+        2.5933271646499634,
+        0.1869071125984192
+      ],
+      "top_group_agrees": true,
+      "sign_agrees_per_group": [
+        true,
+        true
+      ]
+    }
+  ],
+  "faithfulness": [
+    {
+      "bank": "JPMorgan_Chase",
+      "transaction_id": "180245",
+      "scope": "joint-group reference replacements with other actual groups fixed; not a causal claim",
+      "groups": [
+        {
+          "group": "payment_method",
+          "shap_logit": 2.1586664970964193,
+          "reference_ablation_logit_drop": 2.1571639627218246,
+          "direction_agrees": true
+        },
+        {
+          "group": "transfer_terms",
+          "shap_logit": -0.07377722673118114,
+          "reference_ablation_logit_drop": -0.07527976110577583,
+          "direction_agrees": true
+        }
+      ]
+    },
+    {
+      "bank": "JPMorgan_Chase",
+      "transaction_id": "2580817",
+      "scope": "joint-group reference replacements with other actual groups fixed; not a causal claim",
+      "groups": [
+        {
+          "group": "payment_method",
+          "shap_logit": 1.9673663415014744,
+          "reference_ablation_logit_drop": 1.9661439210176468,
+          "direction_agrees": true
+        },
+        {
+          "group": "transfer_terms",
+          "shap_logit": -0.060027074068784714,
+          "reference_ablation_logit_drop": -0.061249494552612305,
+          "direction_agrees": true
+        }
+      ]
+    },
+    {
+      "bank": "JPMorgan_Chase",
+      "transaction_id": "3400462",
+      "scope": "joint-group reference replacements with other actual groups fixed; not a causal claim",
+      "groups": [
+        {
+          "group": "payment_method",
+          "shap_logit": 1.2177579715498723,
+          "reference_ablation_logit_drop": 1.220659380313009,
+          "direction_agrees": true
+        },
+        {
+          "group": "transfer_terms",
+          "shap_logit": -0.002514842839445919,
+          "reference_ablation_logit_drop": 0.0003865659236907959,
+          "direction_agrees": false
+        }
+      ]
+    },
+    {
+      "bank": "Wells_Fargo",
+      "transaction_id": "2794670",
+      "scope": "joint-group reference replacements with other actual groups fixed; not a causal claim",
+      "groups": [
+        {
+          "group": "payment_method",
+          "shap_logit": 1.685915119946003,
+          "reference_ablation_logit_drop": 1.6648075953125954,
+          "direction_agrees": true
+        },
+        {
+          "group": "transfer_terms",
+          "shap_logit": -0.032763488590717316,
+          "reference_ablation_logit_drop": -0.05387101322412491,
+          "direction_agrees": true
+        }
+      ]
+    },
+    {
+      "bank": "Key_Bank",
+      "transaction_id": "2974317",
+      "scope": "joint-group reference replacements with other actual groups fixed; not a causal claim",
+      "groups": [
+        {
+          "group": "payment_method",
+          "shap_logit": 3.02292072417913,
+          "reference_ablation_logit_drop": 2.412849166430533,
+          "direction_agrees": true
+        },
+        {
+          "group": "transfer_terms",
+          "shap_logit": 2.7855856299283914,
+          "reference_ablation_logit_drop": 2.1755140721797943,
+          "direction_agrees": true
+        }
+      ]
+    },
+    {
+      "bank": "JPMorgan_Chase",
+      "transaction_id": "2912559",
+      "scope": "joint-group reference replacements with other actual groups fixed; not a causal claim",
+      "groups": [
+        {
+          "group": "payment_method",
+          "shap_logit": 4.521703654900193,
+          "reference_ablation_logit_drop": 4.546717718243599,
+          "direction_agrees": true
+        },
+        {
+          "group": "transfer_terms",
+          "shap_logit": -0.055862633511424065,
+          "reference_ablation_logit_drop": -0.03084857016801834,
+          "direction_agrees": true
+        }
+      ]
+    },
+    {
+      "bank": "JPMorgan_Chase",
+      "transaction_id": "2952760",
+      "scope": "joint-group reference replacements with other actual groups fixed; not a causal claim",
+      "groups": [
+        {
+          "group": "payment_method",
+          "shap_logit": 2.238562971353531,
+          "reference_ablation_logit_drop": 2.2369017601013184,
+          "direction_agrees": true
+        },
+        {
+          "group": "transfer_terms",
+          "shap_logit": -0.0849904716014862,
+          "reference_ablation_logit_drop": -0.08665168285369873,
+          "direction_agrees": true
+        }
+      ]
+    },
+    {
+      "bank": "Wells_Fargo",
+      "transaction_id": "2788586",
+      "scope": "joint-group reference replacements with other actual groups fixed; not a causal claim",
+      "groups": [
+        {
+          "group": "payment_method",
+          "shap_logit": 1.3493700101971626,
+          "reference_ablation_logit_drop": 1.3573960661888123,
+          "direction_agrees": true
+        },
+        {
+          "group": "transfer_terms",
+          "shap_logit": -0.058937057852745056,
+          "reference_ablation_logit_drop": -0.05091100186109543,
+          "direction_agrees": true
+        }
+      ]
+    },
+    {
+      "bank": "Wells_Fargo",
+      "transaction_id": "2961223",
+      "scope": "joint-group reference replacements with other actual groups fixed; not a causal claim",
+      "groups": [
+        {
+          "group": "payment_method",
+          "shap_logit": 1.410940256435424,
+          "reference_ablation_logit_drop": 1.39920604089275,
+          "direction_agrees": true
+        },
+        {
+          "group": "transfer_terms",
+          "shap_logit": 0.7204695623368025,
+          "reference_ablation_logit_drop": 0.7087353467941284,
+          "direction_agrees": true
+        }
+      ]
+    },
+    {
+      "bank": "Wells_Fargo",
+      "transaction_id": "2965480",
+      "scope": "joint-group reference replacements with other actual groups fixed; not a causal claim",
+      "groups": [
+        {
+          "group": "payment_method",
+          "shap_logit": 1.711861789226532,
+          "reference_ablation_logit_drop": 1.6879929900169373,
+          "direction_agrees": true
+        },
+        {
+          "group": "transfer_terms",
+          "shap_logit": -0.16432631015777588,
+          "reference_ablation_logit_drop": -0.1881951093673706,
+          "direction_agrees": true
+        }
+      ]
+    },
+    {
+      "bank": "Key_Bank",
+      "transaction_id": "3007764",
+      "scope": "joint-group reference replacements with other actual groups fixed; not a causal claim",
+      "groups": [
+        {
+          "group": "payment_method",
+          "shap_logit": 3.3946209847927094,
+          "reference_ablation_logit_drop": 3.3928876146674156,
+          "direction_agrees": true
+        },
+        {
+          "group": "transfer_terms",
+          "shap_logit": 0.05852431058883667,
+          "reference_ablation_logit_drop": 0.05679094046354294,
+          "direction_agrees": true
+        }
+      ]
+    },
+    {
+      "bank": "Key_Bank",
+      "transaction_id": "2928144",
+      "scope": "joint-group reference replacements with other actual groups fixed; not a causal claim",
+      "groups": [
+        {
+          "group": "payment_method",
+          "shap_logit": 3.9944190233945847,
+          "reference_ablation_logit_drop": 4.014915645122528,
+          "direction_agrees": true
+        },
+        {
+          "group": "transfer_terms",
+          "shap_logit": 0.5490536838769913,
+          "reference_ablation_logit_drop": 0.5695503056049347,
+          "direction_agrees": true
+        }
+      ]
+    }
+  ],
+  "temporal_replay": [
+    {
+      "bank": "JPMorgan_Chase",
+      "transaction_id": "180245",
+      "baseline_error": 1.8698995005173025e-08,
+      "independent_source_replays": [
+        {
+          "transaction_id": "180238",
+          "without_probability": 0.27852281810824586,
+          "error": 0.0
+        }
+      ]
+    },
+    {
+      "bank": "JPMorgan_Chase",
+      "transaction_id": "2580817",
+      "baseline_error": 4.74090394719795e-08,
+      "independent_source_replays": []
+    },
+    {
+      "bank": "JPMorgan_Chase",
+      "transaction_id": "3400462",
+      "baseline_error": 4.367375727731826e-08,
+      "independent_source_replays": [
+        {
+          "transaction_id": "3400461",
+          "without_probability": 0.9999143640893,
+          "error": 0.0
+        },
+        {
+          "transaction_id": "3400460",
+          "without_probability": 0.9999796098438982,
+          "error": 1.1102230246251565e-16
+        }
+      ]
+    },
+    {
+      "bank": "Wells_Fargo",
+      "transaction_id": "2794670",
+      "baseline_error": 8.02338508132383e-09,
+      "independent_source_replays": []
+    },
+    {
+      "bank": "Key_Bank",
+      "transaction_id": "2974317",
+      "baseline_error": 4.731442737604397e-09,
+      "independent_source_replays": [
+        {
+          "transaction_id": "2627867",
+          "without_probability": 0.2703917984499289,
+          "error": 5.551115123125783e-17
+        }
+      ]
+    },
+    {
+      "bank": "JPMorgan_Chase",
+      "transaction_id": "2912559",
+      "baseline_error": 1.3114763275368091e-08,
+      "independent_source_replays": []
+    },
+    {
+      "bank": "JPMorgan_Chase",
+      "transaction_id": "2952760",
+      "baseline_error": 8.721382802594924e-14,
+      "independent_source_replays": [
+        {
+          "transaction_id": "2881856",
+          "without_probability": 4.440767670293534e-08,
+          "error": 6.617444900424222e-24
+        },
+        {
+          "transaction_id": "2891796",
+          "without_probability": 4.504947527309793e-08,
+          "error": 3.970466940254533e-23
+        },
+        {
+          "transaction_id": "2894626",
+          "without_probability": 4.449483466606322e-08,
+          "error": 2.6469779601696886e-23
+        },
+        {
+          "transaction_id": "2879503",
+          "without_probability": 4.488882478207958e-08,
+          "error": 3.3087224502121107e-23
+        },
+        {
+          "transaction_id": "2874624",
+          "without_probability": 4.4881462183359795e-08,
+          "error": 2.6469779601696886e-23
+        },
+        {
+          "transaction_id": "2892020",
+          "without_probability": 4.486494353775726e-08,
+          "error": 3.3087224502121107e-23
+        },
+        {
+          "transaction_id": "2909285",
+          "without_probability": 4.4846891249667924e-08,
+          "error": 1.3234889800848443e-23
+        },
+        {
+          "transaction_id": "2859178",
+          "without_probability": 4.4846549096361634e-08,
+          "error": 5.955700410381799e-23
+        },
+        {
+          "transaction_id": "2859696",
+          "without_probability": 4.465961157529843e-08,
+          "error": 7.279189390466644e-23
+        },
+        {
+          "transaction_id": "2863200",
+          "without_probability": 4.4690884109776114e-08,
+          "error": 2.6469779601696886e-23
+        }
+      ]
+    },
+    {
+      "bank": "Wells_Fargo",
+      "transaction_id": "2788586",
+      "baseline_error": 3.845609086727819e-08,
+      "independent_source_replays": []
+    },
+    {
+      "bank": "Wells_Fargo",
+      "transaction_id": "2961223",
+      "baseline_error": 7.491116038593759e-08,
+      "independent_source_replays": []
+    },
+    {
+      "bank": "Wells_Fargo",
+      "transaction_id": "2965480",
+      "baseline_error": 7.667354894409299e-17,
+      "independent_source_replays": [
+        {
+          "transaction_id": "2865351",
+          "without_probability": 2.0941911657045253e-09,
+          "error": 2.895132143935597e-24
+        },
+        {
+          "transaction_id": "2868826",
+          "without_probability": 2.0966971229630486e-09,
+          "error": 2.0679515313825692e-24
+        },
+        {
+          "transaction_id": "2885297",
+          "without_probability": 2.129670615443346e-09,
+          "error": 4.1359030627651384e-25
+        },
+        {
+          "transaction_id": "2852028",
+          "without_probability": 2.1265978818638507e-09,
+          "error": 8.271806125530277e-25
+        },
+        {
+          "transaction_id": "2859827",
+          "without_probability": 2.1251786983762874e-09,
+          "error": 2.895132143935597e-24
+        },
+        {
+          "transaction_id": "2883164",
+          "without_probability": 2.124465409731102e-09,
+          "error": 1.2407709188295415e-24
+        },
+        {
+          "transaction_id": "2908015",
+          "without_probability": 2.1234566773382644e-09,
+          "error": 4.1359030627651384e-25
+        },
+        {
+          "transaction_id": "2897046",
+          "without_probability": 2.1098151520996997e-09,
+          "error": 1.2407709188295415e-24
+        },
+        {
+          "transaction_id": "2891888",
+          "without_probability": 2.12046570852223e-09,
+          "error": 0.0
+        },
+        {
+          "transaction_id": "2852647",
+          "without_probability": 2.1194669603650865e-09,
+          "error": 8.271806125530277e-25
+        }
+      ]
+    },
+    {
+      "bank": "Key_Bank",
+      "transaction_id": "3007764",
+      "baseline_error": 3.4260039583067226e-08,
+      "independent_source_replays": [
+        {
+          "transaction_id": "2608916",
+          "without_probability": 0.9864019846245214,
+          "error": 1.1102230246251565e-16
+        },
+        {
+          "transaction_id": "2608906",
+          "without_probability": 0.9803845118011564,
+          "error": 0.0
+        },
+        {
+          "transaction_id": "2608888",
+          "without_probability": 0.9721995320293784,
+          "error": 0.0
+        },
+        {
+          "transaction_id": "2540914",
+          "without_probability": 0.9725239964881706,
+          "error": 0.0
+        },
+        {
+          "transaction_id": "2540915",
+          "without_probability": 0.977853918099422,
+          "error": 0.0
+        },
+        {
+          "transaction_id": "2540913",
+          "without_probability": 0.9729612851440438,
+          "error": 1.1102230246251565e-16
+        },
+        {
+          "transaction_id": "2608887",
+          "without_probability": 0.9774947443550478,
+          "error": 0.0
+        },
+        {
+          "transaction_id": "2608885",
+          "without_probability": 0.976968101429219,
+          "error": 0.0
+        },
+        {
+          "transaction_id": "2608886",
+          "without_probability": 0.9766278470389375,
+          "error": 1.1102230246251565e-16
+        },
+        {
+          "transaction_id": "2540912",
+          "without_probability": 0.9765124691955908,
+          "error": 0.0
+        }
+      ]
+    },
+    {
+      "bank": "Key_Bank",
+      "transaction_id": "2928144",
+      "baseline_error": 2.986239354178745e-12,
+      "independent_source_replays": [
+        {
+          "transaction_id": "2737282",
+          "without_probability": 2.3482524068077856e-06,
+          "error": 8.470329472543003e-22
+        },
+        {
+          "transaction_id": "2876577",
+          "without_probability": 3.225105272776342e-06,
+          "error": 8.470329472543003e-22
+        },
+        {
+          "transaction_id": "2864031",
+          "without_probability": 3.058933720700906e-06,
+          "error": 2.117582368135751e-21
+        },
+        {
+          "transaction_id": "2892677",
+          "without_probability": 3.0710202309079658e-06,
+          "error": 2.117582368135751e-21
+        },
+        {
+          "transaction_id": "2869236",
+          "without_probability": 3.0806121726388258e-06,
+          "error": 1.6940658945086007e-21
+        },
+        {
+          "transaction_id": "2892246",
+          "without_probability": 3.0830839306085306e-06,
+          "error": 2.117582368135751e-21
+        },
+        {
+          "transaction_id": "2876196",
+          "without_probability": 3.0969459310196946e-06,
+          "error": 1.2705494208814505e-21
+        },
+        {
+          "transaction_id": "2863008",
+          "without_probability": 3.1087882968437233e-06,
+          "error": 1.2705494208814505e-21
+        },
+        {
+          "transaction_id": "2745100",
+          "without_probability": 3.1371712652762383e-06,
+          "error": 8.470329472543003e-22
+        },
+        {
+          "transaction_id": "2870350",
+          "without_probability": 3.1333679644593085e-06,
+          "error": 4.235164736271502e-22
+        },
+        {
+          "transaction_id": "2865196",
+          "without_probability": 3.1320653786951265e-06,
+          "error": 1.2705494208814505e-21
+        },
+        {
+          "transaction_id": "2892166",
+          "without_probability": 3.118655829133822e-06,
+          "error": 2.117582368135751e-21
+        }
+      ]
+    }
+  ],
+  "coverage": [
+    {
+      "bank": "JPMorgan_Chase",
+      "transaction_id": "180245",
+      "displayed_history_edges": 8,
+      "verified_displayed_edges": 1,
+      "fraction": 0.125
+    },
+    {
+      "bank": "JPMorgan_Chase",
+      "transaction_id": "2580817",
+      "displayed_history_edges": 4,
+      "verified_displayed_edges": 0,
+      "fraction": 0.0
+    },
+    {
+      "bank": "JPMorgan_Chase",
+      "transaction_id": "3400462",
+      "displayed_history_edges": 2,
+      "verified_displayed_edges": 2,
+      "fraction": 1.0
+    },
+    {
+      "bank": "Wells_Fargo",
+      "transaction_id": "2794670",
+      "displayed_history_edges": 0,
+      "verified_displayed_edges": 0,
+      "fraction": null
+    },
+    {
+      "bank": "Key_Bank",
+      "transaction_id": "2974317",
+      "displayed_history_edges": 1,
+      "verified_displayed_edges": 1,
+      "fraction": 1.0
+    },
+    {
+      "bank": "JPMorgan_Chase",
+      "transaction_id": "2912559",
+      "displayed_history_edges": 0,
+      "verified_displayed_edges": 0,
+      "fraction": null
+    },
+    {
+      "bank": "JPMorgan_Chase",
+      "transaction_id": "2952760",
+      "displayed_history_edges": 6,
+      "verified_displayed_edges": 6,
+      "fraction": 1.0
+    },
+    {
+      "bank": "Wells_Fargo",
+      "transaction_id": "2788586",
+      "displayed_history_edges": 8,
+      "verified_displayed_edges": 0,
+      "fraction": 0.0
+    },
+    {
+      "bank": "Wells_Fargo",
+      "transaction_id": "2961223",
+      "displayed_history_edges": 0,
+      "verified_displayed_edges": 0,
+      "fraction": null
+    },
+    {
+      "bank": "Wells_Fargo",
+      "transaction_id": "2965480",
+      "displayed_history_edges": 6,
+      "verified_displayed_edges": 6,
+      "fraction": 1.0
+    },
+    {
+      "bank": "Key_Bank",
+      "transaction_id": "3007764",
+      "displayed_history_edges": 8,
+      "verified_displayed_edges": 8,
+      "fraction": 1.0
+    },
+    {
+      "bank": "Key_Bank",
+      "transaction_id": "2928144",
+      "displayed_history_edges": 8,
+      "verified_displayed_edges": 8,
+      "fraction": 1.0
+    }
+  ],
+  "detection_performance": {
+    "status": "archived frozen September evaluation; exploratory because September was previously inspected",
+    "test_rerun": false,
+    "threshold_changed": false,
+    "rows": [
+      {
+        "seed": 42,
+        "bank": "JPMorgan_Chase",
+        "cutoff": 0.017805186897516156,
+        "precision": 0.1743119266055046,
+        "recall": 1.0,
+        "f1": 0.296875,
+        "pr_auc": 1.0,
+        "alert_count": 109,
+        "true_positives": 19,
+        "false_positives": 90,
+        "alert_count_source": "derived from archived exact threshold precision/recall and recall-at-k counts",
+        "checkpoint_sha256": "d650af6959d1da46888f30fb79bbfd888a6ec20743d14d447ea078dc351536f5",
+        "artifact_sha256": "2effb445654382f57e0c3868a34b4ad5289f8de405a8f83cf453f26beb3e6b48"
+      },
+      {
+        "seed": 42,
+        "bank": "Wells_Fargo",
+        "cutoff": 0.1868941614329799,
+        "precision": 0.75,
+        "recall": 1.0,
+        "f1": 0.8571428571428571,
+        "pr_auc": 0.9842640431227387,
+        "alert_count": 32,
+        "true_positives": 24,
+        "false_positives": 8,
+        "alert_count_source": "derived from archived exact threshold precision/recall and recall-at-k counts",
+        "checkpoint_sha256": "d650af6959d1da46888f30fb79bbfd888a6ec20743d14d447ea078dc351536f5",
+        "artifact_sha256": "2effb445654382f57e0c3868a34b4ad5289f8de405a8f83cf453f26beb3e6b48"
+      },
+      {
+        "seed": 42,
+        "bank": "Key_Bank",
+        "cutoff": 0.3759195153712922,
+        "precision": 0.9411764705882353,
+        "recall": 0.7111111111111111,
+        "f1": 0.810126582278481,
+        "pr_auc": 0.8105585687819068,
+        "alert_count": 34,
+        "true_positives": 32,
+        "false_positives": 2,
+        "alert_count_source": "derived from archived exact threshold precision/recall and recall-at-k counts",
+        "checkpoint_sha256": "d650af6959d1da46888f30fb79bbfd888a6ec20743d14d447ea078dc351536f5",
+        "artifact_sha256": "2effb445654382f57e0c3868a34b4ad5289f8de405a8f83cf453f26beb3e6b48"
+      },
+      {
+        "seed": 52,
+        "bank": "JPMorgan_Chase",
+        "cutoff": 0.016475216403603537,
+        "precision": 0.19,
+        "recall": 1.0,
+        "f1": 0.31932773109243695,
+        "pr_auc": 0.8967925996309452,
+        "alert_count": 100,
+        "true_positives": 19,
+        "false_positives": 81,
+        "alert_count_source": "derived from archived exact threshold precision/recall and recall-at-k counts",
+        "checkpoint_sha256": "98b6c782a27013e4b1917669b2a5ae48d3a7e44ce6a9aa0149aef446473ab0e2",
+        "artifact_sha256": "b1bde9757f3ec47354f4560097d4b50ce1637383af3e45163cba3fe8c118d03b"
+      },
+      {
+        "seed": 52,
+        "bank": "Wells_Fargo",
+        "cutoff": 0.1430635732710353,
+        "precision": 0.71875,
+        "recall": 0.9583333333333334,
+        "f1": 0.8214285714285714,
+        "pr_auc": 0.9721310932266309,
+        "alert_count": 32,
+        "true_positives": 23,
+        "false_positives": 9,
+        "alert_count_source": "derived from archived exact threshold precision/recall and recall-at-k counts",
+        "checkpoint_sha256": "98b6c782a27013e4b1917669b2a5ae48d3a7e44ce6a9aa0149aef446473ab0e2",
+        "artifact_sha256": "b1bde9757f3ec47354f4560097d4b50ce1637383af3e45163cba3fe8c118d03b"
+      },
+      {
+        "seed": 52,
+        "bank": "Key_Bank",
+        "cutoff": 0.3252794043421577,
+        "precision": 0.896551724137931,
+        "recall": 0.5777777777777777,
+        "f1": 0.7027027027027027,
+        "pr_auc": 0.7467315854151705,
+        "alert_count": 29,
+        "true_positives": 26,
+        "false_positives": 3,
+        "alert_count_source": "derived from archived exact threshold precision/recall and recall-at-k counts",
+        "checkpoint_sha256": "98b6c782a27013e4b1917669b2a5ae48d3a7e44ce6a9aa0149aef446473ab0e2",
+        "artifact_sha256": "b1bde9757f3ec47354f4560097d4b50ce1637383af3e45163cba3fe8c118d03b"
+      },
+      {
+        "seed": 62,
+        "bank": "JPMorgan_Chase",
+        "cutoff": 0.010321403410285633,
+        "precision": 0.21348314606741572,
+        "recall": 1.0,
+        "f1": 0.35185185185185186,
+        "pr_auc": 0.8682962183132905,
+        "alert_count": 89,
+        "true_positives": 19,
+        "false_positives": 70,
+        "alert_count_source": "derived from archived exact threshold precision/recall and recall-at-k counts",
+        "checkpoint_sha256": "4cd0854f6740f99a9f9ef7f1ba3360c06b5178846394feb73033da718ac715fe",
+        "artifact_sha256": "97f314231fd086919a7d12ccd223b0f00976cc4bfa828bbcf217e68f94d00285"
+      },
+      {
+        "seed": 62,
+        "bank": "Wells_Fargo",
+        "cutoff": 0.45000763261316873,
+        "precision": 0.8333333333333334,
+        "recall": 0.8333333333333334,
+        "f1": 0.8333333333333334,
+        "pr_auc": 0.9078059095491418,
+        "alert_count": 24,
+        "true_positives": 20,
+        "false_positives": 4,
+        "alert_count_source": "derived from archived exact threshold precision/recall and recall-at-k counts",
+        "checkpoint_sha256": "4cd0854f6740f99a9f9ef7f1ba3360c06b5178846394feb73033da718ac715fe",
+        "artifact_sha256": "97f314231fd086919a7d12ccd223b0f00976cc4bfa828bbcf217e68f94d00285"
+      },
+      {
+        "seed": 62,
+        "bank": "Key_Bank",
+        "cutoff": 0.8417026891708207,
+        "precision": 0.9545454545454546,
+        "recall": 0.4666666666666667,
+        "f1": 0.6268656716417911,
+        "pr_auc": 0.6522007297003204,
+        "alert_count": 22,
+        "true_positives": 21,
+        "false_positives": 1,
+        "alert_count_source": "derived from archived exact threshold precision/recall and recall-at-k counts",
+        "checkpoint_sha256": "4cd0854f6740f99a9f9ef7f1ba3360c06b5178846394feb73033da718ac715fe",
+        "artifact_sha256": "97f314231fd086919a7d12ccd223b0f00976cc4bfa828bbcf217e68f94d00285"
+      }
+    ]
+  },
+  "limitations": [
+    "Reference stability covers three samples of 32 training rows, not all valid backgrounds.",
+    "Stratified cases are a diagnostic sample, not an exhaustive or unbiased estimate.",
+    "Numerical consistency, reference stability and perturbation faithfulness are separate measurements.",
+    "Graph coverage counts displayed edges with verified effects; untested edges remain context."
+  ]
+}

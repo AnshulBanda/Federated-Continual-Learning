@@ -1,0 +1,51 @@
+{
+  "schema_version": 1,
+  "bank": "JPMorgan_Chase",
+  "model_sha256": "e725a614f4c7fe9a6adf1197a45131419b26c5b1dd4d8c5b532e557745f0f963",
+  "method": "exact_empirical_interventional_shap",
+  "units": "raw_logit",
+  "feature_names": [
+    "Amount_Received",
+    "Receiving_Currency",
+    "amount",
+    "currency",
+    "payment_format"
+  ],
+  "split": "testing",
+  "selection": "balanced",
+  "config": {
+    "background_size": 32,
+    "seed": 42,
+    "history_batches": 8,
+    "hops": 2,
+    "max_events": 12,
+    "max_nodes": 12,
+    "top_k": 3,
+    "stability_runs": 3,
+    "probability_tolerance": 1e-06
+  },
+  "sample_count": 2,
+  "class_counts": {
+    "fraud": 1,
+    "legitimate": 1
+  },
+  "sum_abs": {
+    "Amount_Received": 0.05061365043123563,
+    "Receiving_Currency": 0.0,
+    "amount": 0.05716432941456635,
+    "currency": 0.0,
+    "payment_format": 3.595128492141763
+  },
+  "sum_signed": {
+    "Amount_Received": -0.05061365043123563,
+    "Receiving_Currency": 0.0,
+    "amount": -0.05716432941456635,
+    "currency": 0.0,
+    "payment_format": 3.595128492141763
+  },
+  "top_features": [
+    "payment_format",
+    "amount",
+    "Amount_Received"
+  ]
+}

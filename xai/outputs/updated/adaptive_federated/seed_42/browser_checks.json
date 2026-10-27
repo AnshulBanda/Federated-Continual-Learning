@@ -1,0 +1,20 @@
+{
+  "server": "http://127.0.0.1:8768/",
+  "passed": [
+    "JPMorgan 180245 exact transaction identity and matching catalog/detail probability 0.08616924 and cutoff 0.01780519",
+    "Grouped SHAP values, fixed-memory method, global-model seed and checkpoint visible",
+    "Tested lowering edge 180238 opens before/after scores; untested edge 180147 makes no measured-importance claim",
+    "Account 268537464 opens correct related-transfer list",
+    "Keyboard Enter opens edge inspector",
+    "Bank switch to Wells Fargo clears stale query and updates cutoff to 0.18689416",
+    "Wells Fargo non-alert deep link 2965480 opens correct catalog and detail record using All transactions",
+    "Key Bank 2974317 displays probability 0.41010210 and cutoff 0.37591952 plus unstable-reference warning",
+    "Supporting edge 2627867 opens baseline 0.41010210 and intervention score 0.27039180",
+    "No JavaScript console errors on final third-bank page",
+    "Responsive graph and inspector visually reviewed"
+  ],
+  "screenshots": [
+    "dashboard_verified.png",
+    "graph_verified.png"
+  ]
+}

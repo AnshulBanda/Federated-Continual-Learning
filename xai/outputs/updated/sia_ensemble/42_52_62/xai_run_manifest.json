@@ -1,0 +1,19 @@
+{
+  "family": "sia_three_member_probability_ensemble",
+  "seeds": [
+    42,
+    52,
+    62
+  ],
+  "checkpoint_sha256": {
+    "42": "d650af6959d1da46888f30fb79bbfd888a6ec20743d14d447ea078dc351536f5",
+    "52": "98b6c782a27013e4b1917669b2a5ae48d3a7e44ce6a9aa0149aef446473ab0e2",
+    "62": "4cd0854f6740f99a9f9ef7f1ba3360c06b5178846394feb73033da718ac715fe"
+  },
+  "source_ref": "origin/sia",
+  "evaluation_split": "validation",
+  "test_loaded": false,
+  "privacy_mode": "none",
+  "aggregation": "mean of probabilities",
+  "explanation_scope": "exact empirical interventional feature SHAP for logit(mean member probability); per-member graph explanations only"
+}

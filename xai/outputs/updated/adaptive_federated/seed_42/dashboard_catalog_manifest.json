@@ -1,0 +1,109 @@
+{
+  "schema": "adaptive-federated-single-model-group-shap-v2",
+  "family": "adaptive_federated_global_model",
+  "seed": 42,
+  "model_count": 1,
+  "ensemble": false,
+  "best_round": 4,
+  "training_rounds": 4,
+  "source_ref": "origin/sia",
+  "checkpoint_path": "origin/sia:artifacts/research_adaptive_fcl/warm_start/federated/context_harmonized/seed_42/global_model.pt",
+  "checkpoint_sha256": "d650af6959d1da46888f30fb79bbfd888a6ec20743d14d447ea078dc351536f5",
+  "inference_checkpoint_sha256": "d650af6959d1da46888f30fb79bbfd888a6ec20743d14d447ea078dc351536f5",
+  "metrics_path": "origin/sia:artifacts/research_adaptive_fcl/warm_start/federated/context_harmonized/seed_42/metrics.json",
+  "metrics_sha256": "ba6c6e33b87d6d7b4c95f2e45e3db25786d9cbdceb43232a3d0bcc4a22086778",
+  "preprocessing_sha256": "8f42764a7a22242bb2a879106cf9029cbb4b0247b875d26bfc4c0fb2e049c31f",
+  "reference_prediction_sha256": {
+    "JPMorgan_Chase": "ec0b955d2f22af812d776754fa0e5d5176391c8019e5b03c9462c337b7dc5b22",
+    "Wells_Fargo": "2a906ff65a040b39be4f638e937487c13d5a8d8b32a63e5789c8bd9a6c8a4fb0",
+    "Key_Bank": "ad1f69233706f3a407d66e778078e361305fc8acd76419fd62361a0550bed781"
+  },
+  "evaluation_split": "validation",
+  "test_loaded": false,
+  "privacy_mode": "none",
+  "threshold_policy": "saved per-bank threshold from the selected adaptive federated model's metrics.json; no dashboard threshold fitting",
+  "banks": {
+    "JPMorgan_Chase": {
+      "validation_transactions": 64487,
+      "known_fraud": 16,
+      "flagged": 129,
+      "missed_fraud": 0,
+      "threshold": 0.017805186897516156,
+      "validation_parity": {
+        "passed": true,
+        "metric_absolute_errors": {
+          "pr_auc": 1.1102230246251565e-16,
+          "roc_auc": 1.1102230246251565e-16,
+          "precision": 0.0,
+          "recall": 0.0,
+          "f1": 0.0
+        },
+        "metrics": {
+          "pr_auc": 0.8903013804800092,
+          "roc_auc": 0.9999389260287571,
+          "precision": 0.12403100775193798,
+          "recall": 1.0,
+          "f1": 0.2206896551724138
+        }
+      }
+    },
+    "Wells_Fargo": {
+      "validation_transactions": 25592,
+      "known_fraud": 22,
+      "flagged": 52,
+      "missed_fraud": 1,
+      "threshold": 0.1868941614329799,
+      "validation_parity": {
+        "passed": true,
+        "metric_absolute_errors": {
+          "pr_auc": 1.1102230246251565e-16,
+          "roc_auc": 0.0,
+          "precision": 0.0,
+          "recall": 0.0,
+          "f1": 0.0
+        },
+        "metrics": {
+          "pr_auc": 0.9599386797680174,
+          "roc_auc": 0.9998453443310698,
+          "precision": 0.40384615384615385,
+          "recall": 0.9545454545454546,
+          "f1": 0.5675675675675675
+        }
+      }
+    },
+    "Key_Bank": {
+      "validation_transactions": 11418,
+      "known_fraud": 21,
+      "flagged": 23,
+      "missed_fraud": 3,
+      "threshold": 0.3759195153712922,
+      "validation_parity": {
+        "passed": true,
+        "metric_absolute_errors": {
+          "pr_auc": 2.220446049250313e-16,
+          "roc_auc": 0.0,
+          "precision": 0.0,
+          "recall": 0.0,
+          "f1": 0.0
+        },
+        "metrics": {
+          "pr_auc": 0.9199227981071854,
+          "roc_auc": 0.998742359100348,
+          "precision": 0.782608695652174,
+          "recall": 0.8571428571428571,
+          "f1": 0.8181818181818182
+        }
+      }
+    }
+  },
+  "implementation_sha256": {
+    "serve_dashboard.py": "40defafe61df398b841c1623d5e272929efb94dca0de5fc64d5446fabfde8e32",
+    "src\\model_catalog.py": "44f41c7eb1f5ab45b17110a65d45ad4cdcfb8539e77bbe7ae96aceb94c0ab2c6",
+    "src\\counterfactuals.py": "ebe3edfbd31f684e6e6ace57f515d8edb574c8ab131244b2b0415cdd9c36168d",
+    "src\\transaction_story.py": "18ff2e5c972e5615955b776dfff94bd61fb134666dad04a16faf4edb1b0dc56a",
+    "src\\grouped_features.py": "9c3d43476355b8e810ab66051d15f9ddec136088815fc335b27e7898c5a3611c",
+    "__pycache__\\explanation_engine.cpython-312.pyc": "3f4fb1294ef22ce77225d019d13929812b404b3c772e8af94f628f2c41cf0680",
+    "__pycache__\\temporal.cpython-312.pyc": "994a1a367933775f4db9c98d99eb879b70c1ba4dfddb68cd5234eae1e1e1dc6c",
+    "__pycache__\\graph_explainer.cpython-312.pyc": "6c049ed4919a704639bcd592249719e78bb028f6eac17b9816b3800512f85f02"
+  }
+}
