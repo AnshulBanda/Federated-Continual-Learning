@@ -9,14 +9,22 @@ class LocalTrainingTests(unittest.TestCase):
         self.tmp=tempfile.TemporaryDirectory()
         self.addCleanup(self.tmp.cleanup)
         self.training=LocalTraining(self.tmp.name)
-    def test_training_requires_bank_quality_check_and_valid_epochs(self):
-        args=dict(dataset=self.tmp.name,kind='train',epochs=1)
+    def test_training_requires_bank_quality_check_and_automatic_epochs(self):
+        args=dict(dataset=self.tmp.name,kind='train')
         with self.assertRaises(ValueError):self.training.start(args,None)
-        for epochs in (0,26,True,1.5):
+        for epochs in (0,1,25,26,True,1.5):
             with self.assertRaises(ValueError):self.training.start(dict(args,epochs=epochs),'Key_Bank')
         with patch('streaming.app.local_training.importlib.util.find_spec',return_value=object()):
             with self.assertRaisesRegex(ValueError,'Check data quality'):
                 self.training.start(args,'Key_Bank')
+    def test_new_jobs_use_automatic_limit_and_patience(self):
+        with patch('streaming.app.local_training.subprocess.Popen') as process, patch('streaming.app.local_training.importlib.util.find_spec',return_value=object()):
+            result=self.training.start(dict(dataset=self.tmp.name,kind='check'),'Key_Bank')
+            job=self.training.jobs()[0]
+            self.assertEqual(job['epochs'],25)
+            self.assertEqual(job['patience'],5)
+            self.assertTrue(process.called)
+
     def test_selection_rejects_unfinished_wrong_bank_and_changed_checkpoint(self):
         import hashlib
         folder=self.training.root/'abc'
