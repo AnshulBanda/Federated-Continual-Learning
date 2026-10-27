@@ -14,7 +14,7 @@ from .settings import validate_settings
 from .final_federation import (CLIENTS, LABEL, POLICY, PRIVACY, build_config,
                                public_privacy, validate_operational_config)
 
-SCHEMA=REPO/'artifacts/dp_level3_secagg/feature_schema.json'
+SCHEMA=REPO/'distributed_federation/feature_schema.json'
 GLOBAL_TOPIC='fcl.collaboration.global.v1'
 UPDATE_TOPIC='fcl.collaboration.updates.v1'
 
@@ -28,7 +28,7 @@ class Collaboration:
         self.checked=None
     def defaults(self):
         return dict(role='bank',broker='10.30.127.124:9092',run_id='team-'+time.strftime('%Y%m%d-%H%M%S'),
-                    banks=list(CLIENTS),dataset=os.environ.get('CAPSTONE_DATASET_DIR',str(REPO/'data/final_temporal_dataset')),rounds=1,local_epochs=2,timeout=900)
+                    banks=list(CLIENTS),dataset=os.environ.get('CAPSTONE_DATASET_DIR',str(REPO/'data/final_temporal_dataset')),rounds=4,local_epochs=3,timeout=900)
     def profile(self):
         return read_json(self.root/'profile.json',self.defaults())
     def validate(self, data):
@@ -49,8 +49,8 @@ class Collaboration:
             value=data[name]
             if isinstance(value,bool) or not isinstance(value,int) or not low<=value<=high:
                 raise ValueError(f'{name} must be an integer from {low} to {high}.')
-        if data['rounds']!=1 or data['local_epochs']!=2:
-            raise ValueError('The validated Level-3 deployment requires one private round and two local epochs.')
+        if data['rounds']!=4 or data['local_epochs']!=3:
+            raise ValueError('The final private ensemble requires four rounds and three local epochs.')
         if not isinstance(data['dataset'],str) or not data['dataset'].strip():
             raise ValueError('Set the local prepared dataset folder.')
         values['dataset']=str(Path(data['dataset'].strip()).expanduser().resolve())
@@ -158,9 +158,16 @@ class Collaboration:
         weighting=configuration.get('aggregation','samples')
         kind='Federated sample-weighted FedAvg' if weighting=='samples' else 'Federated equal mean'
         if mode!='none':kind+='; '+mode
+        if configuration.get('training_protocol')=='adaptive_ensemble':
+            manifest=read_json(checkpoint.with_suffix('.json'),{})
+            if manifest.get('schema',{}).get('training_protocol',{}).get('protocol')!='adaptive_ensemble':
+                raise ValueError('Checkpoint does not have the final ensemble contract.')
+            kind='federated_ensemble'
         model=dict(bank=bank,version=f"fed-{run['run_id']}-r{round_id}",sha256=digest,
             checkpoint=str(checkpoint),trained_at=event['time'],selected_at=now(),
-            model_kind=kind,validation=None,job='federation:'+str(run_id))
+            model_kind=kind,validation=None,job='federation:'+str(run_id),
+            privacy=dict(differential_privacy=mode!='none',mode=mode,
+                accounting_scope='Incremental releases conditional on nonprivate warm ensemble' if mode!='none' else None))
         write_json(self.root.parent/'local-training'/('active-'+bank+'.json'),model)
         return model
     def status(self, bank):
@@ -196,7 +203,7 @@ class Collaboration:
                 if key in saved:profile[key]=saved[key]
             # Display-only expected policy. A failed asset/setup check cannot launch.
             config=dict(clients=[dict(client_id=c,bank=b) for b,c in CLIENTS.items()],
-                        rounds=1,privacy=dict(PRIVACY),operational_policy=POLICY)
+                        rounds=4,privacy=dict(PRIVACY),operational_policy=POLICY)
         if active:config=configs.get(active['id'],config)
         roster=[dict(client_id=c['client_id'],bank=c['bank'],name=BANKS.get(c['bank'],c['bank']),status='Not observed on this laptop') for c in config['clients']]
         events=active.get('events',[]) if active else []
@@ -230,9 +237,33 @@ class Collaboration:
         privacy_status=dict(mode=privacy.get('mode','none'),secagg=privacy.get('mode') in ('secure_central_dp','distributed_dp'),
             required_cohort=privacy.get('expected_clients',len(config['clients'])),multiplier=privacy.get('multiplier',0),
             epsilon=budget.get('epsilon',epsilon),delta=privacy.get('delta'),phase=events[-1]['kind'] if events else 'idle')
+        scope='Reported round bound' if budget else 'Configured per-run bound; all reserved runs/releases compose'
+        ledger_status=None
+        if active and private and config.get('output_dir'):
+            from distributed_federation.privacy.ledger import Ledger
+            import sqlite3
+            output=Path(config['output_dir']);output=output if output.is_absolute() else REPO/output
+            actor=active['actor'].removeprefix('bank:')
+            path=output/'privacy-ledgers'/(actor+'.sqlite3')
+            if path.is_file():
+                try:
+                    ledger=Ledger(path)
+                    try:
+                        releases=sum(e['run']==active['run_id'] and e['role']==actor and e['round']>0 for e in ledger.entries())
+                        cumulative=ledger.accounting(actor,privacy['delta'])
+                    finally:ledger.close()
+                    current_epsilon=Privacy(**privacy).accounting(releases)['epsilon']
+                    privacy_status['epsilon']=current_epsilon if math.isfinite(current_epsilon) else None
+                    cumulative={k:(v if not isinstance(v,float) or math.isfinite(v) else 'infinite') for k,v in cumulative.items()}
+                    ledger_status=dict(current_run_reserved_releases=releases,cumulative=cumulative)
+                    scope=f"Current run: {releases} reserved releases; cumulative local ledger epsilon={cumulative['epsilon']}; all retained ledgers compose"
+                except (ValueError,KeyError,sqlite3.Error):
+                    scope+='; ledger unavailable, showing conservative configured/observed bound'
         final_policy=config.get('operational_policy')==POLICY and all(privacy.get(k)==v for k,v in PRIVACY.items())
-        label=LABEL if final_policy else 'Non-private federation (research/debug history)' if privacy_status['mode']=='none' else 'Research/debug privacy mode: '+str(privacy_status['mode'])
-        return dict(privacy=privacy_status,privacy_label=label,epsilon_scope='Reported round bound' if budget else 'Configured per-run bound; all reserved runs/releases compose',
+        historical=config.get('operational_policy')=='level3_final_v1'
+        label=LABEL if final_policy else 'Previous single-model decoder-private continuation (historical)' if historical else 'Non-private federation (research/debug history)' if privacy_status['mode']=='none' else 'Research/debug privacy mode: '+str(privacy_status['mode'])
+        model_scope='Three-member ensemble continuation' if config.get('training_protocol')=='adaptive_ensemble' or not active else 'Historical single-model continuation'
+        return dict(privacy=privacy_status,privacy_label=label,epsilon_scope=scope,privacy_accounting=ledger_status,model_scope=model_scope,
             setup_error=setup_error,profile=profile,roster=roster,current_round=latest_round,rounds=config['rounds'],runs=runs,
             process_running=busy,launch_pending=busy and (not active or active['status']!='Running'),launch_error=launch_error,
             checked=self.checked[3] if self.checked and not setup_error else None,bank=bank,local_client_id=CLIENTS.get(bank),

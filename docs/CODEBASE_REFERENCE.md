@@ -1,5 +1,12 @@
 # Codebase reference
 
+Scope update: reference-model, local-training and scoring descriptions below remain
+valid for Sia's nonprivate ensemble. Statements describing plaintext federation
+or absence of DP refer to that reference/research path. Current browser
+collaboration uses the private four-round adaptive ensemble described in
+[PRIVACY_AUDIT.md](PRIVACY_AUDIT.md) and [the new evidence](../artifacts/dp_level3_ensemble/).
+
+
 This map describes the active application and its reusable model modules. For behavior and data flow, read the [implementation guide](IMPLEMENTATION_GUIDE.md). The symbol index links directly to implementation lines; historical research modules are identified separately.
 
 ## Directory map

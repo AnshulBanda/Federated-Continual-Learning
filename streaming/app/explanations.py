@@ -77,7 +77,7 @@ def explain(job):
             predictors.append(predict)
     row=frame.iloc[index]
     probabilities=member_probability_details(predictors,pd.DataFrame([row]))
-    if abs(probabilities['ensemble_probability']-job['expected_score'])>2e-6:
+    if abs(probabilities['ensemble_probability']-job['expected_score'])>1e-6:
         raise ValueError('Explanation score does not match the saved replay. Rescore this model.')
     background=pd.read_csv(dataset/'training'/bank/'edge_list.csv.gz')
     report=explain_groups(ensemble_logit_predictor(predictors),row,background,background_size=32)

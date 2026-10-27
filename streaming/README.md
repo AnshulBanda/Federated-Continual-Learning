@@ -2,6 +2,14 @@
 
 The dashboard now uses the final three-member adaptive ensemble for training, validation replay and local explanations. Start with the [current project README](../README.md), [implementation guide](../docs/IMPLEMENTATION_GUIDE.md) and [final review checklist](../docs/FINAL_REVIEW.md).
 
+Current operational collaboration is the four-round **private adaptive ensemble**:
+three epochs per phase, lr=.001, replay=2000, ensemble_decoder dimension 197379,
+C=6.5, m=.30 and delta=1e-6. It uses all three frozen Sia members and secure equal
+aggregation. The 90.68% reference is nonprivate; the old 90.281% single-model DP
+result remains historical. See [current privacy scope](../docs/PRIVACY_AUDIT.md)
+and [new evidence](../artifacts/dp_level3_ensemble/). The one-round settings below
+are preserved development history and are not the current deployment policy.
+
 The material below is preserved development history. Statements about single-model training, sample-weighted federation, missing browser integration or an unchanged model connection describe older versions and are superseded by the current guides. Transfer protocol details remain useful where unchanged.
 
 ---

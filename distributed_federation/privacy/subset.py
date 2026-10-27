@@ -2,6 +2,7 @@
 PREFIXES={
     'all':('',),
     'decoder':('decoder.',),
+    'ensemble_decoder':('42.decoder.','52.decoder.','62.decoder.'),
     'temporal_decoder':('time_projection.','memory_update.','decoder.'),
     'message_decoder':('message_projection.','memory_update.','decoder.'),
 }
@@ -11,6 +12,12 @@ def parameter_keys(state,subset='all'):
     if subset not in PREFIXES:raise ValueError('Unknown private subset')
     keys=sorted(k for k in state if k.startswith(PREFIXES[subset]))
     if not keys:raise ValueError('Empty private subset')
+    if subset=='ensemble_decoder':
+        # All three members must have the same decoder key contract. Never
+        # silently release only one member or broaden the legacy decoder subset.
+        members=[{k.split('.',1)[1] for k in keys if k.startswith(seed+'.')} for seed in ('42','52','62')]
+        if not members[0] or any(member!=members[0] for member in members):
+            raise ValueError('Ensemble private subset requires all three complete decoders')
     return keys
 
 

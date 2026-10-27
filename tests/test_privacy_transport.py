@@ -34,7 +34,7 @@ class PrivateRoundTrip(unittest.TestCase):
     def run_mode(self,mode,m):
         with tempfile.TemporaryDirectory() as temp:
             raw=json.loads((Path(__file__).resolve().parents[1]/'configs/privacy_distributed_dp.json').read_text())
-            raw.update(dataset_dir=temp,output_dir=str(Path(temp)/'out'),feature_schema=str(Path(temp)/'schema.json'),rounds=2,round_timeout_seconds=10)
+            raw.update(dataset_dir=temp,output_dir=str(Path(temp)/'out'),feature_schema=str(Path(temp)/'schema.json'),rounds=2,round_timeout_seconds=10,training_protocol='adaptive_ensemble')
             raw['privacy']['mode']=mode;raw['privacy']['multiplier']=m
             path=Path(temp)/'config.json';path.write_text(json.dumps(raw));cfg=load_config(path)
             upstream=queue.Queue();queues={c.client_id:queue.Queue() for c in cfg.clients}
@@ -65,7 +65,7 @@ class PrivateRoundTrip(unittest.TestCase):
                     for p in rt.model.parameters():p.add_((index+1)/100)
             secrets={'FCL_CENTRAL_SECRET':'c'*32,'FCL_CLIENT_SECRET':'s'*32}
             secrets.update({secret_env_name(c.client_id):'s'*32 for c in cfg.clients})
-            with patch.dict('os.environ',secrets),patch.object(transport,'make_consumer',side_effect=consumer),patch.object(transport,'make_producer',side_effect=lambda _:Producer()),patch.object(transport,'prepare_runtime',side_effect=runtime),patch.object(transport,'prepare_frozen_runtime',side_effect=runtime),patch.object(transport,'train_local',side_effect=train),patch.object(transport,'deserialize_state',side_effect=private_deserialize):
+            with patch.dict('os.environ',secrets),patch.object(transport,'make_consumer',side_effect=consumer),patch.object(transport,'make_producer',side_effect=lambda _:Producer()),patch.object(transport,'prepare_runtime',side_effect=runtime),patch.object(transport,'prepare_frozen_runtime',side_effect=runtime),patch.object(transport,'train_local',side_effect=train),patch.object(transport,'deserialize_state',side_effect=private_deserialize),patch('distributed_federation.common.model_runtime.aggregate_adaptive',side_effect=AssertionError('Plaintext harmonization forbidden in secure mode')):
                 def central():
                     actor.central=True
                     with event_sink(lambda kind,round_id=None,**data:events.append((kind,round_id,data))):return transport.central(cfg)

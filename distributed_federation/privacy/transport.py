@@ -209,7 +209,12 @@ def central(cfg):
                 noisy_aggregate=aggregate(secure.complete(),private_base,cfg.privacy,cfg.run_id,rid)
                 base=reconstruct(base,server_optimizer.apply(private_base,noisy_aggregate),cfg.private_subset)
                 del noisy_aggregate
-                secure=None  # clean L2 aggregate exists only inside aggregate(), transiently
+                secure=None  # Distributed DP noise is already inside every bank share.
+            elif cfg.privacy.mode=='none' and getattr(cfg,'training_protocol','legacy')=='adaptive_ensemble':
+                # Plaintext reference/research only. SecAgg deliberately hides
+                # individual directions, so private mode never harmonizes them.
+                from distributed_federation.common.model_runtime import aggregate_adaptive
+                base=aggregate_adaptive([states[c.client_id] for c in cfg.clients],base)
             else:
                 base=fedavg([states[c.client_id] for c in cfg.clients],[counts[c.client_id] for c in cfg.clients] if cfg.aggregation=='samples' else [1]*len(keys))
             runtime.model.load_state_dict(base)
@@ -223,7 +228,8 @@ def central(cfg):
                 input_global_sha256=base_hash,output_global_sha256=digest,schema=runtime.schema,
                 clients=[dict(client_id=c.client_id,bank=c.bank,update_sha256=hashes[c.client_id]) for c in cfg.clients],
                 aggregation=cfg.aggregation,secagg_exchange=exchange_metadata,privacy=asdict(cfg.privacy),mechanism_parameters=cfg.privacy.parameters(len(vector(extract(base,cfg.private_subset)))) if cfg.privacy.mode!="none" else None,accounting=account,cumulative_ledger_accounting=cumulative,
-                starting_checkpoint_scope='conditional_fixed_checkpoint' if cfg.initial_checkpoint else 'random_initialization_public_schema')
+                starting_checkpoint_scope='conditional_nonprivate_frozen_ensemble' if getattr(cfg,'training_protocol','legacy')=='adaptive_ensemble' else 'conditional_fixed_checkpoint' if cfg.initial_checkpoint else 'random_initialization_public_schema',
+                aggregation_method='secure_equal' if secure is not None or cfg.privacy.secure else 'temporal_harmonization' if getattr(cfg,'training_protocol','legacy')=='adaptive_ensemble' else 'fedavg')
             path,manifest_path=save_state_and_manifest(base,output,rid,manifest)
             emit('round_completed',rid,checkpoint=str(path),manifest=str(manifest_path),privacy_mode=cfg.privacy.mode,
                  secagg=cfg.privacy.secure,epsilon=account['epsilon'],delta=account['delta'],required_cohort=len(keys))

@@ -15,7 +15,7 @@ from distributed_federation.common.checkpoints import verify_checkpoint
 def main():
     parser=argparse.ArgumentParser(description=__doc__)
     parser.add_argument('--broker',default='10.30.127.124:9092')
-    parser.add_argument('--rounds',type=int,choices=[1],default=1)
+    parser.add_argument('--rounds',type=int,choices=[4],default=4)
     parser.add_argument('--client-state-dir',type=Path,help='Optional existing client dashboard state folder; records Key Bank acceptance run there.')
     parser.add_argument('--central-state-dir',type=Path,help='Optional existing coordinator dashboard state folder.')
     args=parser.parse_args()
@@ -23,7 +23,7 @@ def main():
     evidence=REPO/'streaming/.local'/run_id
     actors={name:Collaboration(args.client_state_dir if name==CLIENTS['Key_Bank'] and args.client_state_dir else args.central_state_dir if name=='central' and args.central_state_dir else evidence/name) for name in ('central',*CLIENTS.values())}
     secret=secrets.token_urlsafe(40)
-    shared=dict(broker=args.broker,run_id=run_id,banks=list(CLIENTS),dataset=actors['central'].defaults()['dataset'],rounds=args.rounds,local_epochs=2,timeout=900)
+    shared=dict(broker=args.broker,run_id=run_id,banks=list(CLIENTS),dataset=actors['central'].defaults()['dataset'],rounds=args.rounds,local_epochs=3,timeout=900)
     started=[]
     try:
         actors['central'].preflight(dict(shared,role='central'),None,prepare=True)

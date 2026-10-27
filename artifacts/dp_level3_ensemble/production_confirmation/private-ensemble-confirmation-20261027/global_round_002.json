@@ -1,0 +1,726 @@
+{
+  "accounting": {
+    "bound": "encoded_share_postprocessing",
+    "delta": 1e-06,
+    "epsilon": 76.25265385912027,
+    "releases": 2,
+    "research_only": false,
+    "rho": 33.333333333333336,
+    "sampler_assumption": "ideal Gaussian; finite-precision sampler is not exact-DP certified"
+  },
+  "aggregation": "equal",
+  "aggregation_method": "secure_equal",
+  "clients": [
+    {
+      "bank": "Key_Bank",
+      "client_id": "bank-1",
+      "update_sha256": "d0596517c1695f3f812a81dd00428f3719c3eb8a1df9acc9c610c6c373ce1229"
+    },
+    {
+      "bank": "Wells_Fargo",
+      "client_id": "bank-2",
+      "update_sha256": "03c6676c6973210636df063eb30f42a26a86994d2630d9cc672492aed214a123"
+    },
+    {
+      "bank": "JPMorgan_Chase",
+      "client_id": "bank-3",
+      "update_sha256": "5f169a0b06dbd653c7d5d5bd61a120f8d58cdfe49a566f8672ce9e4999ab844d"
+    }
+  ],
+  "cumulative_ledger_accounting": {
+    "delta": 1e-06,
+    "epsilon": 76.25265385912027,
+    "reservations": 2,
+    "rho": 33.333333333333336,
+    "scope": "all runs retained in this local ledger; deletion/rollback invalidates composition"
+  },
+  "input_global_sha256": "afcdc3b72df2b6690eb755def0f2956507b9dda2df4650d04b52e7426f572779",
+  "mechanism_parameters": {
+    "C": 6.5,
+    "accounting_sensitivity": 4.333342160255996,
+    "dimension": 197379,
+    "effective_clip": 6.500013240383994,
+    "expected_noise_l2": 577.5568101544084,
+    "ideal_sensitivity": 4.333333333333333,
+    "n": 3,
+    "quantization_l2_bound": 1.3240383993751503e-05,
+    "sensitivity": 4.333342160255996,
+    "sigma_mean": 1.3000026480767988,
+    "sigma_share": 2.251670636443098
+  },
+  "output_global_sha256": "27edd7416d70d215d15518f94f4137ea4ca5f51221f943d8b74e6e6a0fdfc930",
+  "privacy": {
+    "clip": 6.5,
+    "delta": 1e-06,
+    "entropy": "production",
+    "expected_clients": 3,
+    "min_noise_contributors": 3,
+    "mode": "distributed_dp",
+    "multiplier": 0.3,
+    "research_seed": 42,
+    "scale": 16777216
+  },
+  "round_id": 2,
+  "run_id": "private-ensemble-confirmation-20261027",
+  "schema": {
+    "dropout": 0.25,
+    "ensemble": {
+      "aggregation": "mean probabilities",
+      "initial_hashes": [
+        "d650af6959d1da46888f30fb79bbfd888a6ec20743d14d447ea078dc351536f5",
+        "98b6c782a27013e4b1917669b2a5ae48d3a7e44ce6a9aa0149aef446473ab0e2",
+        "4cd0854f6740f99a9f9ef7f1ba3360c06b5178846394feb73033da718ac715fe"
+      ],
+      "seeds": [
+        42,
+        52,
+        62
+      ]
+    },
+    "feature_contract": {
+      "banks": [
+        "JPMorgan_Chase",
+        "Wells_Fargo",
+        "Key_Bank"
+      ],
+      "edge_columns": [
+        "amount",
+        "currency",
+        "Amount_Received",
+        "Receiving_Currency",
+        "payment_format"
+      ],
+      "edge_feature_count": 32,
+      "edges": {
+        "categorical": [
+          {
+            "categories": [
+              "EUR",
+              "GBP",
+              "JPY",
+              "KRW",
+              "NZD",
+              "USD"
+            ],
+            "fill": "USD",
+            "name": "currency"
+          },
+          {
+            "categories": [
+              "ARS",
+              "CAD",
+              "CHF",
+              "CNY",
+              "DOP",
+              "GBP",
+              "JPY",
+              "MXN",
+              "USD",
+              "VND"
+            ],
+            "fill": "USD",
+            "name": "Receiving_Currency"
+          },
+          {
+            "categories": [
+              "ACH",
+              "ApplePay",
+              "Bank Fee",
+              "Cash",
+              "Cash App",
+              "Cheque",
+              "Debit Non-Prepaid",
+              "Dividend",
+              "Interest",
+              "MetaPay",
+              "PayPal",
+              "Venmo",
+              "Wire",
+              "Zelle"
+            ],
+            "fill": "ACH",
+            "name": "payment_format"
+          }
+        ],
+        "numeric": [
+          {
+            "mean": 3366.410259964555,
+            "median": 122.78,
+            "name": "amount",
+            "scale": 65382.34274023974
+          },
+          {
+            "mean": 3430.6316988568187,
+            "median": 122.81,
+            "name": "Amount_Received",
+            "scale": 72142.24541313176
+          }
+        ]
+      },
+      "format": 1,
+      "node_columns": [
+        "Account_Country",
+        "Account_Currency",
+        "Entity_Type",
+        "Does_Account_Have_Debit_Card",
+        "DebitCard_Index_in_EntityCards",
+        "MCC",
+        "Account_Type",
+        "Max_Overdraft",
+        "account_kind",
+        "hist_sent_count",
+        "hist_sent_amount_sum",
+        "hist_recv_count",
+        "hist_recv_amount_sum",
+        "hist_out_degree",
+        "hist_in_degree"
+      ],
+      "node_feature_count": 57,
+      "nodes": {
+        "categorical": [
+          {
+            "categories": [
+              "Argentina",
+              "Austria",
+              "Canada",
+              "China",
+              "Dominican Republic",
+              "Germany",
+              "Hungary",
+              "India",
+              "Japan",
+              "Mexico",
+              "New Zealand",
+              "South Korea",
+              "Switzerland",
+              "United Kingdom",
+              "United States",
+              "Unknown",
+              "Vietnam"
+            ],
+            "fill": "United States",
+            "name": "Account_Country"
+          },
+          {
+            "categories": [
+              "ARS",
+              "CAD",
+              "CHF",
+              "CNY",
+              "DOP",
+              "EUR",
+              "GBP",
+              "JPY",
+              "KRW",
+              "MXN",
+              "NZD",
+              "USD",
+              "Unknown",
+              "VND"
+            ],
+            "fill": "USD",
+            "name": "Account_Currency"
+          },
+          {
+            "categories": [
+              "Large_Corporation",
+              "National_Government",
+              "Partnership",
+              "Person",
+              "Small_Corporation",
+              "Sole_Proprietorship",
+              "Unknown"
+            ],
+            "fill": "Sole_Proprietorship",
+            "name": "Entity_Type"
+          },
+          {
+            "categories": [
+              "CD",
+              "Cash",
+              "Checking",
+              "Money Market",
+              "Savings",
+              "Unknown"
+            ],
+            "fill": "Checking",
+            "name": "Account_Type"
+          },
+          {
+            "categories": [
+              "Unknown",
+              "company",
+              "person"
+            ],
+            "fill": "company",
+            "name": "account_kind"
+          }
+        ],
+        "numeric": [
+          {
+            "mean": 0.004866062825207169,
+            "median": 0.0,
+            "name": "Does_Account_Have_Debit_Card",
+            "scale": 0.06958724206194916
+          },
+          {
+            "mean": 0.0025534785122374253,
+            "median": 0.0,
+            "name": "DebitCard_Index_in_EntityCards",
+            "scale": 0.06688880215601428
+          },
+          {
+            "mean": 5140.5721719021,
+            "median": 5411.0,
+            "name": "MCC",
+            "scale": 2197.146618831092
+          },
+          {
+            "mean": 540.972730776643,
+            "median": 250.0,
+            "name": "Max_Overdraft",
+            "scale": 6685.196466460116
+          },
+          {
+            "mean": 0.0,
+            "median": 0.0,
+            "name": "hist_sent_count",
+            "scale": 1.0
+          },
+          {
+            "mean": 0.0,
+            "median": 0.0,
+            "name": "hist_sent_amount_sum",
+            "scale": 1.0
+          },
+          {
+            "mean": 0.0,
+            "median": 0.0,
+            "name": "hist_recv_count",
+            "scale": 1.0
+          },
+          {
+            "mean": 0.0,
+            "median": 0.0,
+            "name": "hist_recv_amount_sum",
+            "scale": 1.0
+          },
+          {
+            "mean": 0.0,
+            "median": 0.0,
+            "name": "hist_out_degree",
+            "scale": 1.0
+          },
+          {
+            "mean": 0.0,
+            "median": 0.0,
+            "name": "hist_in_degree",
+            "scale": 1.0
+          }
+        ]
+      },
+      "source": "Fixed synthetic AML reference training data; not fit on participant data at runtime"
+    },
+    "hidden_channels": 128,
+    "implementation_sha256": "b7c5664aba583a15dc7db0e03f7dbbca4d57c807e548adb088157351defdc459",
+    "model": "CausalTemporalGraphSAGE",
+    "privacy": {
+      "accounting": {
+        "bound": "encoded_share_postprocessing",
+        "delta": 1e-06,
+        "epsilon": 127.36375184207253,
+        "releases": 4,
+        "research_only": false,
+        "rho": 66.66666666666667,
+        "sampler_assumption": "ideal Gaussian; finite-precision sampler is not exact-DP certified"
+      },
+      "differential_privacy": true,
+      "mode": "distributed_dp",
+      "scope": "Incremental releases conditional on nonprivate frozen ensemble"
+    },
+    "state": {
+      "42.decoder.0.bias": {
+        "dtype": "torch.float32",
+        "shape": [
+          128
+        ]
+      },
+      "42.decoder.0.weight": {
+        "dtype": "torch.float32",
+        "shape": [
+          128,
+          512
+        ]
+      },
+      "42.decoder.3.bias": {
+        "dtype": "torch.float32",
+        "shape": [
+          1
+        ]
+      },
+      "42.decoder.3.weight": {
+        "dtype": "torch.float32",
+        "shape": [
+          1,
+          128
+        ]
+      },
+      "42.edge_projection.0.bias": {
+        "dtype": "torch.float32",
+        "shape": [
+          128
+        ]
+      },
+      "42.edge_projection.0.weight": {
+        "dtype": "torch.float32",
+        "shape": [
+          128,
+          32
+        ]
+      },
+      "42.memory_update.bias_hh": {
+        "dtype": "torch.float32",
+        "shape": [
+          384
+        ]
+      },
+      "42.memory_update.bias_ih": {
+        "dtype": "torch.float32",
+        "shape": [
+          384
+        ]
+      },
+      "42.memory_update.weight_hh": {
+        "dtype": "torch.float32",
+        "shape": [
+          384,
+          128
+        ]
+      },
+      "42.memory_update.weight_ih": {
+        "dtype": "torch.float32",
+        "shape": [
+          384,
+          128
+        ]
+      },
+      "42.message_projection.0.bias": {
+        "dtype": "torch.float32",
+        "shape": [
+          128
+        ]
+      },
+      "42.message_projection.0.weight": {
+        "dtype": "torch.float32",
+        "shape": [
+          128,
+          512
+        ]
+      },
+      "42.static_projection.bias": {
+        "dtype": "torch.float32",
+        "shape": [
+          128
+        ]
+      },
+      "42.static_projection.weight": {
+        "dtype": "torch.float32",
+        "shape": [
+          128,
+          57
+        ]
+      },
+      "42.time_projection.0.bias": {
+        "dtype": "torch.float32",
+        "shape": [
+          128
+        ]
+      },
+      "42.time_projection.0.weight": {
+        "dtype": "torch.float32",
+        "shape": [
+          128,
+          2
+        ]
+      },
+      "52.decoder.0.bias": {
+        "dtype": "torch.float32",
+        "shape": [
+          128
+        ]
+      },
+      "52.decoder.0.weight": {
+        "dtype": "torch.float32",
+        "shape": [
+          128,
+          512
+        ]
+      },
+      "52.decoder.3.bias": {
+        "dtype": "torch.float32",
+        "shape": [
+          1
+        ]
+      },
+      "52.decoder.3.weight": {
+        "dtype": "torch.float32",
+        "shape": [
+          1,
+          128
+        ]
+      },
+      "52.edge_projection.0.bias": {
+        "dtype": "torch.float32",
+        "shape": [
+          128
+        ]
+      },
+      "52.edge_projection.0.weight": {
+        "dtype": "torch.float32",
+        "shape": [
+          128,
+          32
+        ]
+      },
+      "52.memory_update.bias_hh": {
+        "dtype": "torch.float32",
+        "shape": [
+          384
+        ]
+      },
+      "52.memory_update.bias_ih": {
+        "dtype": "torch.float32",
+        "shape": [
+          384
+        ]
+      },
+      "52.memory_update.weight_hh": {
+        "dtype": "torch.float32",
+        "shape": [
+          384,
+          128
+        ]
+      },
+      "52.memory_update.weight_ih": {
+        "dtype": "torch.float32",
+        "shape": [
+          384,
+          128
+        ]
+      },
+      "52.message_projection.0.bias": {
+        "dtype": "torch.float32",
+        "shape": [
+          128
+        ]
+      },
+      "52.message_projection.0.weight": {
+        "dtype": "torch.float32",
+        "shape": [
+          128,
+          512
+        ]
+      },
+      "52.static_projection.bias": {
+        "dtype": "torch.float32",
+        "shape": [
+          128
+        ]
+      },
+      "52.static_projection.weight": {
+        "dtype": "torch.float32",
+        "shape": [
+          128,
+          57
+        ]
+      },
+      "52.time_projection.0.bias": {
+        "dtype": "torch.float32",
+        "shape": [
+          128
+        ]
+      },
+      "52.time_projection.0.weight": {
+        "dtype": "torch.float32",
+        "shape": [
+          128,
+          2
+        ]
+      },
+      "62.decoder.0.bias": {
+        "dtype": "torch.float32",
+        "shape": [
+          128
+        ]
+      },
+      "62.decoder.0.weight": {
+        "dtype": "torch.float32",
+        "shape": [
+          128,
+          512
+        ]
+      },
+      "62.decoder.3.bias": {
+        "dtype": "torch.float32",
+        "shape": [
+          1
+        ]
+      },
+      "62.decoder.3.weight": {
+        "dtype": "torch.float32",
+        "shape": [
+          1,
+          128
+        ]
+      },
+      "62.edge_projection.0.bias": {
+        "dtype": "torch.float32",
+        "shape": [
+          128
+        ]
+      },
+      "62.edge_projection.0.weight": {
+        "dtype": "torch.float32",
+        "shape": [
+          128,
+          32
+        ]
+      },
+      "62.memory_update.bias_hh": {
+        "dtype": "torch.float32",
+        "shape": [
+          384
+        ]
+      },
+      "62.memory_update.bias_ih": {
+        "dtype": "torch.float32",
+        "shape": [
+          384
+        ]
+      },
+      "62.memory_update.weight_hh": {
+        "dtype": "torch.float32",
+        "shape": [
+          384,
+          128
+        ]
+      },
+      "62.memory_update.weight_ih": {
+        "dtype": "torch.float32",
+        "shape": [
+          384,
+          128
+        ]
+      },
+      "62.message_projection.0.bias": {
+        "dtype": "torch.float32",
+        "shape": [
+          128
+        ]
+      },
+      "62.message_projection.0.weight": {
+        "dtype": "torch.float32",
+        "shape": [
+          128,
+          512
+        ]
+      },
+      "62.static_projection.bias": {
+        "dtype": "torch.float32",
+        "shape": [
+          128
+        ]
+      },
+      "62.static_projection.weight": {
+        "dtype": "torch.float32",
+        "shape": [
+          128,
+          57
+        ]
+      },
+      "62.time_projection.0.bias": {
+        "dtype": "torch.float32",
+        "shape": [
+          128
+        ]
+      },
+      "62.time_projection.0.weight": {
+        "dtype": "torch.float32",
+        "shape": [
+          128,
+          2
+        ]
+      }
+    },
+    "training_protocol": {
+      "aggregation": "equal",
+      "batch_size": 1024,
+      "clients": [
+        {
+          "bank": "Key_Bank",
+          "client_id": "bank-1"
+        },
+        {
+          "bank": "Wells_Fargo",
+          "client_id": "bank-2"
+        },
+        {
+          "bank": "JPMorgan_Chase",
+          "client_id": "bank-3"
+        }
+      ],
+      "learning_rate": 0.001,
+      "local_epochs": 3,
+      "negative_ratio": 20,
+      "privacy": {
+        "clip": 6.5,
+        "delta": 1e-06,
+        "entropy": "production",
+        "expected_clients": 3,
+        "min_noise_contributors": 3,
+        "mode": "distributed_dp",
+        "multiplier": 0.3,
+        "research_seed": 42,
+        "scale": 16777216
+      },
+      "private_subset": "ensemble_decoder",
+      "protocol": "adaptive_ensemble",
+      "replay": "risk_context",
+      "replay_size": 2000,
+      "rng_policy": "per_client",
+      "rounds": 4,
+      "seed": 42,
+      "server_optimizer": {
+        "beta1": 0.9,
+        "beta2": 0.99,
+        "epsilon": 0.001,
+        "learning_rate": 1.0,
+        "name": "fedavg"
+      },
+      "weight_decay": 0.0001
+    }
+  },
+  "schema_sha256": "6c9f7122f794449ba82cb131a5b6e1e683bb6f0b8c90022ddd8c5dd83e01c811",
+  "secagg_exchange": {
+    "context": {
+      "base_model_sha256": "afcdc3b72df2b6690eb755def0f2956507b9dda2df4650d04b52e7426f572779",
+      "cohort": [
+        "bank-1",
+        "bank-2",
+        "bank-3"
+      ],
+      "dimension": 197379,
+      "domain": "secagg-ring64-v1",
+      "round_id": 2,
+      "run_id": "private-ensemble-confirmation-20261027",
+      "schema_sha256": "6c9f7122f794449ba82cb131a5b6e1e683bb6f0b8c90022ddd8c5dd83e01c811"
+    },
+    "public_keys": {
+      "bank-1": "f7c2ef6102ff0b95cdf5598fa2f9060caa9e2a55d0eac4bce24c35fd9a7b215d",
+      "bank-2": "8e1b762d4b489fb922ec43086e0952fd4b4d9fda59de4c22bdd85278ed35ae56",
+      "bank-3": "76d7e1e6addd68c846d811aae09035d4e7c9bb41b0047ee4938bbcbb572b4e4f"
+    },
+    "roster_sha256": "fe2267aea267a292078587f95c7bc944e6cef7166c17a2658d76169921b04204"
+  },
+  "starting_checkpoint_scope": "conditional_nonprivate_frozen_ensemble"
+}

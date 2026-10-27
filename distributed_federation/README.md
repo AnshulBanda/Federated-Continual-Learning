@@ -9,13 +9,13 @@ Use the Windows/macOS dashboard launcher, configure Bank/client or Central
 coordinator, compare the same fresh run ID/roster/settings, check local readiness,
 and start all banks before central. See streaming/README.md for the current guide.
 
-The browser configuration uses artifacts/dp_level3_secagg/feature_schema.json, a JSON-only preprocessing
+The browser configuration uses distributed_federation/feature_schema.json, a JSON-only preprocessing
 contract exported once from the public simulated reference training data. Banks
 read only their own training graph at runtime; central reads no bank transactions.
 Every round returns the signed aggregate to each bank for verification and atomic
 checkpoint saving. The final browser path enforces Level-3 distributed DP and
 Secure Aggregation, the approved frozen warm checkpoint, three distinct banks,
-equal weights, one release and decoder-only adaptation. See the backend guide
+equal weights, four releases and adaptation of all three decoders as one clipped bank contribution (ensemble_decoder, 197379 coordinates). See the backend guide
 for exact settings, privacy scope and real Kafka acceptance evidence.
 
 Legacy CLI configs without feature_schema retain the older shared-data preparation

@@ -1,5 +1,12 @@
 # Final review: demonstration and verified status
 
+Current private-ensemble integration: see [the new evidence](../artifacts/dp_level3_ensemble/)
+and [scope-aware privacy audit](PRIVACY_AUDIT.md). The recorded acceptance results
+below describe the earlier nonprivate reference implementation; they are retained
+as historical evidence. The current browser collaboration requires four rounds,
+three epochs, C=6.5, m=.30 and secure equal aggregation.
+
+
 Prepared 27 October 2026. This checklist describes the integrated local application and the checks completed during implementation. It does not certify external networks or production deployment.
 
 ## Start
@@ -21,7 +28,7 @@ Open `http://127.0.0.1:8765`. If another instance owns the port, use `--port 876
 5. **Results & history:** compare earlier models with the final ensemble. Separate the original September headline from new August validation runs. Export the displayed JSON if reviewers want evidence.
 6. **Collaboration:** show coordinator/bank roles and the common run setup. With Kafka available, demonstrate readiness, training, signed updates, harmonization, verified returns and explicit shared-model selection. Use a fresh run ID and the same roster/settings on all participants.
 7. **Weight transfers:** explain Published versus Delivered versus Verified. Demonstrate only when both endpoints and a broker are ready; transfer receipt confirmation is separate from model evaluation.
-8. **Privacy & transfers:** state that signatures and hashes protect integrity, while **formal DP, secure aggregation and application-configured Kafka TLS are not implemented**.
+8. **Privacy & transfers:** state that signatures and hashes protect integrity, while the **90.68% reference remains nonprivate** and the separate operational collaboration implements Level-3 DP + Secure Aggregation. App-configured Kafka TLS remains absent.
 
 ## Checks already completed
 
@@ -73,7 +80,7 @@ The HTTP workflow check never loads September transactions and does not modify t
 
 **Where is explainability?** Exact grouped Shapley values explain the selected transaction's features under fixed pre-batch account memory, using 32 training references. Predictions are checked against the saved replay.
 
-**Is the model differentially private?** No. The final path has no calibrated DP noise or privacy accountant. This limitation is displayed and documented rather than hidden.
+**Is the model differentially private?** The frozen 90.68% reference is nonprivate. The operational ensemble continuation has calibrated distributed DP with a composed four-release bound and mandatory SecAgg; it requires its own August evaluation.
 
 **Does 90.68% mean accuracy?** No. It is macro average precision across three banks on the saved exploratory September evaluation.
 
@@ -85,5 +92,5 @@ The HTTP workflow check never loads September transactions and does not modify t
 - September was inspected in prior development and is exploratory.
 - New local/federated training versions must be evaluated; they do not inherit the original headline.
 - Cross-laptop deployment, external network availability and production hardening require separate verification.
-- DP, secure aggregation and application-configured TLS are absent.
+- The reference ensemble has no DP guarantee. App-configured TLS is absent. The separate private continuation uses Level-3 DP and SecAgg.
 - Backend acceptance checks passed. Full browser/responsive inspection of every screen was not completed before the final documentation-only stop.

@@ -44,6 +44,7 @@ class RunController:
         if operational:
             from .final_federation import POLICY
             raw['operational_policy'] = POLICY
+            raw['ensemble_initialization'] = original['ensemble_initialization']
         snapshots = self.state_dir / 'configs'
         snapshots.mkdir(exist_ok=True)
         path = snapshots / (uuid.uuid4().hex + '.json')
