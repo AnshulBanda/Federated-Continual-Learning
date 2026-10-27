@@ -1,0 +1,13 @@
+{
+  "executable": "/Users/pj/Desktop/college/capstone/Capstone/.venv/bin/python",
+  "python": "3.13.12 | packaged by Anaconda, Inc. | (main, Feb 24 2026, 16:07:20) [Clang 20.1.8 ]",
+  "platform": "macOS-26.2-arm64-arm-64bit-Mach-O",
+  "torch": "2.14.0",
+  "numpy": "2.3.5",
+  "sklearn": "1.7.2",
+  "cryptography": "46.0.5",
+  "threads": 1,
+  "deterministic_torch": true,
+  "client_date": "2026-10-27",
+  "client_timezone": "Asia/Kolkata"
+}

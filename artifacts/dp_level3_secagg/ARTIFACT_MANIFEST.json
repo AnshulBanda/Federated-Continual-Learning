@@ -1,0 +1,1513 @@
+{
+  "files": {
+    "artifacts/dp_level3_secagg/FILES_CHANGED.txt": {
+      "bytes": 38570,
+      "sha256": "d72a020f44d5c670cad39984ce2a01269a48ac7eabdcc3404292858f457888b8"
+    },
+    "artifacts/dp_level3_secagg/FINAL_REPORT.md": {
+      "bytes": 35311,
+      "sha256": "f1f9125a2027d3116947e34a76a5922c53649e5eeea98b6a0ef6f12eafa221a7"
+    },
+    "artifacts/dp_level3_secagg/FRONTIER.md": {
+      "bytes": 2278,
+      "sha256": "e0b03dd895be1d51a4799fcd1e1a4a971dccf073f9e2b71caa9472c1090adbf2"
+    },
+    "artifacts/dp_level3_secagg/LOADED_SOURCE_PROVENANCE.json": {
+      "bytes": 10464,
+      "sha256": "1591d78635854b705266938626b5aa97253bdccd1e380e146a2a55c9fa878151"
+    },
+    "artifacts/dp_level3_secagg/REPRODUCTION.md": {
+      "bytes": 6048,
+      "sha256": "75cfa7651a2526057c2960dc4231d8ca8d301a0ff2239100c21484faf62bfdd6"
+    },
+    "artifacts/dp_level3_secagg/SEARCH_DESIGN.json": {
+      "bytes": 2131,
+      "sha256": "9443ba626273f4d950e7a97565d7ebfa163e04026a24004e0f42c491749e48a7"
+    },
+    "artifacts/dp_level3_secagg/SECURITY_QA.md": {
+      "bytes": 5152,
+      "sha256": "b55c698f95e64834410c90376bde63a2ce1a06cf2bb0f4443b4b203d1de35f0e"
+    },
+    "artifacts/dp_level3_secagg/SOURCE_SNAPSHOT.json": {
+      "bytes": 365,
+      "sha256": "f3289effc5bb0b021e56e3d0f02a914dca90c628d9ffd829dbd40a04c34b5766"
+    },
+    "artifacts/dp_level3_secagg/VALIDATION_SELECTION_FOLLOWUP.json": {
+      "bytes": 1251,
+      "sha256": "a97850d99a891e20641815d36b1a9a8e664ac5d3d4dc8282403632f82cce9d34"
+    },
+    "artifacts/dp_level3_secagg/aggregate_results.json": {
+      "bytes": 10578,
+      "sha256": "531d47b6d337aed03bc5e5475a39e3e44f12a4326cb33a31482cb697d723c5f2"
+    },
+    "artifacts/dp_level3_secagg/best_utility_configs/seed_42.json": {
+      "bytes": 1456,
+      "sha256": "478384bc9dd8f589a4f1470608aab9590e60233c2fac9d32cd73ccffd32cc1ba"
+    },
+    "artifacts/dp_level3_secagg/best_utility_configs/seed_52.json": {
+      "bytes": 1456,
+      "sha256": "eb649c5c8145fb80f2b9c244ed52c3955aa5a296605e62d33de484854a13b157"
+    },
+    "artifacts/dp_level3_secagg/best_utility_configs/seed_62.json": {
+      "bytes": 1456,
+      "sha256": "3e71e621dbe0490b949e5648db71c68a829ad267401f86cabd228a156ed86744"
+    },
+    "artifacts/dp_level3_secagg/checkpoint_provenance.json": {
+      "bytes": 1041,
+      "sha256": "8b6d80ee6939ed91ae5740c79f0e130ac7bf486652465981c84d0f330b236f2e"
+    },
+    "artifacts/dp_level3_secagg/checkpoint_reload_qa.json": {
+      "bytes": 762,
+      "sha256": "bfb21c3c22ec7b0f527a0a962e9b72827e13c985fa5ef2fed4357aefa785809b"
+    },
+    "artifacts/dp_level3_secagg/clipping_calibration.json": {
+      "bytes": 5668,
+      "sha256": "b1db04c17cd4622647c4a6a4045c22a1edabb50eac40b8bcc2262a90f3755768"
+    },
+    "artifacts/dp_level3_secagg/development_data_fingerprint.json": {
+      "bytes": 3165,
+      "sha256": "4c4ed9e52b8d70274b683cb5bcf3eb602a43e67eb04d9d8bb9cef7be0704feab"
+    },
+    "artifacts/dp_level3_secagg/environment.json": {
+      "bytes": 399,
+      "sha256": "043afee359007513d3b1a8c193fd8a1fd89a06f9211c4de9d146ead12d85b1c6"
+    },
+    "artifacts/dp_level3_secagg/experiment_source/distributed_federation/common/model_runtime.py": {
+      "bytes": 10374,
+      "sha256": "34848f1fae5454953361f8c789882fdba5df07f5016e78d5ff6c5ab0ecb99047"
+    },
+    "artifacts/dp_level3_secagg/experiment_source/distributed_federation/privacy/__init__.py": {
+      "bytes": 76,
+      "sha256": "adf2dca181ca48d146f7d63792f64f0b321c80c2fd074ac6fc9521118b3611d9"
+    },
+    "artifacts/dp_level3_secagg/experiment_source/distributed_federation/privacy/ledger.py": {
+      "bytes": 1215,
+      "sha256": "f6650ae9f8f1af111c795a4900439c31568749ac474dd1d3037ce8d4ee679010"
+    },
+    "artifacts/dp_level3_secagg/experiment_source/distributed_federation/privacy/mechanism.py": {
+      "bytes": 6748,
+      "sha256": "562e47ecd59840af78a52655d2a0d9c3502f59c6408453a7237e97b45cf322ee"
+    },
+    "artifacts/dp_level3_secagg/experiment_source/distributed_federation/privacy/secagg.py": {
+      "bytes": 5943,
+      "sha256": "31d5604ed074d5508fb7e4d652b3137937d9073450ca54807066dfbc888aeb86"
+    },
+    "artifacts/dp_level3_secagg/experiment_source/distributed_federation/privacy/transport.py": {
+      "bytes": 12830,
+      "sha256": "b0e0e2b0001ccaea08ffcce644724187a7527a0c63c6c86b5cabc8807f873c6e"
+    },
+    "artifacts/dp_level3_secagg/experiment_source/hashes.json": {
+      "bytes": 1144,
+      "sha256": "b277b9600858c651b82fd0cca4079ab2dff579767183e1b01b7e8f62ef03c759"
+    },
+    "artifacts/dp_level3_secagg/experiment_source/scripts/run_private_federation.py": {
+      "bytes": 7978,
+      "sha256": "8f8f1d43fab915699d4a4fa6c62bbe7444071ef24eeaada0b6123db724a91bc2"
+    },
+    "artifacts/dp_level3_secagg/experiment_source/src/gnn/adaptive_continual_federated.py": {
+      "bytes": 24471,
+      "sha256": "56bd2a0d62ef2d761eee0daab6e10d7a2b184694cf0d9fe8eee498d93d28006f"
+    },
+    "artifacts/dp_level3_secagg/experiment_source/src/gnn/causal_temporal_graphsage.py": {
+      "bytes": 29972,
+      "sha256": "77ec113dd6b16ed0bf6956d1ce9fa7d9da5b300b672f085c76830b203ea2e2eb"
+    },
+    "artifacts/dp_level3_secagg/experiment_source/src/gnn/continual_temporal_graphsage.py": {
+      "bytes": 8674,
+      "sha256": "3ab7bc55e8b14f6dc69cc8d1188fc4daaf806e3010e00764b13bedeecea721d5"
+    },
+    "artifacts/dp_level3_secagg/experiments/scratch_distributed_dp_m0.001_s42/global_model.pt": {
+      "bytes": 978401,
+      "sha256": "2b7c35875f7c9f1ac5dec7d8bf1c0c54b652abcdee0298fe84cece4e6dcd1982"
+    },
+    "artifacts/dp_level3_secagg/experiments/scratch_distributed_dp_m0.001_s42/manifest.json": {
+      "bytes": 1860,
+      "sha256": "6d4a8222ac738cd9573c4a0bf5f7af438d548229796946d9f1897fb53446187c"
+    },
+    "artifacts/dp_level3_secagg/experiments/scratch_distributed_dp_m0.001_s42/progress.json": {
+      "bytes": 55151,
+      "sha256": "ed6cd707959310c61d677bf6f221ffeab8777dc3a0f8d2408dae6dd8bf9b7c64"
+    },
+    "artifacts/dp_level3_secagg/experiments/scratch_distributed_dp_m0.001_s42/results.json": {
+      "bytes": 61623,
+      "sha256": "4727f13db9674890445ca90508b2356aa712758d5ca4cc6f1845c7b2465c7716"
+    },
+    "artifacts/dp_level3_secagg/experiments/scratch_distributed_dp_m0.001_s42/source_snapshot/distributed_federation/privacy/mechanism.py": {
+      "bytes": 6966,
+      "sha256": "da8a9da6f5415156dbb98926266679a36447a9aa68737067b22a79832ce769ef"
+    },
+    "artifacts/dp_level3_secagg/experiments/scratch_distributed_dp_m0.001_s42/source_snapshot/distributed_federation/privacy/secagg.py": {
+      "bytes": 5943,
+      "sha256": "31d5604ed074d5508fb7e4d652b3137937d9073450ca54807066dfbc888aeb86"
+    },
+    "artifacts/dp_level3_secagg/experiments/scratch_distributed_dp_m0.001_s42/source_snapshot/src/gnn/adaptive_continual_federated.py": {
+      "bytes": 24471,
+      "sha256": "56bd2a0d62ef2d761eee0daab6e10d7a2b184694cf0d9fe8eee498d93d28006f"
+    },
+    "artifacts/dp_level3_secagg/experiments/scratch_distributed_dp_m0.001_s42/source_snapshot/src/gnn/causal_temporal_graphsage.py": {
+      "bytes": 29972,
+      "sha256": "77ec113dd6b16ed0bf6956d1ce9fa7d9da5b300b672f085c76830b203ea2e2eb"
+    },
+    "artifacts/dp_level3_secagg/experiments/scratch_distributed_dp_m0.001_s42/source_snapshot/src/gnn/continual_temporal_graphsage.py": {
+      "bytes": 8674,
+      "sha256": "3ab7bc55e8b14f6dc69cc8d1188fc4daaf806e3010e00764b13bedeecea721d5"
+    },
+    "artifacts/dp_level3_secagg/experiments/scratch_distributed_dp_m0.001_s52/global_model.pt": {
+      "bytes": 978401,
+      "sha256": "b7ec480654fd4e2e56063407c19acd07b96b7c7f73dfbba5fc150c5116d4f16c"
+    },
+    "artifacts/dp_level3_secagg/experiments/scratch_distributed_dp_m0.001_s52/manifest.json": {
+      "bytes": 1860,
+      "sha256": "0ed3afd6d1f75658d43abd7c4183ce6925972afd397aead8f9e339d6365afd45"
+    },
+    "artifacts/dp_level3_secagg/experiments/scratch_distributed_dp_m0.001_s52/progress.json": {
+      "bytes": 55246,
+      "sha256": "7295fe42058ee5380844600471d05f2c623e34cf473de4bf433e5a5cd7611804"
+    },
+    "artifacts/dp_level3_secagg/experiments/scratch_distributed_dp_m0.001_s52/results.json": {
+      "bytes": 61741,
+      "sha256": "119884c09dda380caec354ac1d9004a2be2b314d26167b68cbc110d686421dfa"
+    },
+    "artifacts/dp_level3_secagg/experiments/scratch_distributed_dp_m0.001_s52/source_snapshot/distributed_federation/privacy/mechanism.py": {
+      "bytes": 6966,
+      "sha256": "da8a9da6f5415156dbb98926266679a36447a9aa68737067b22a79832ce769ef"
+    },
+    "artifacts/dp_level3_secagg/experiments/scratch_distributed_dp_m0.001_s52/source_snapshot/distributed_federation/privacy/secagg.py": {
+      "bytes": 5943,
+      "sha256": "31d5604ed074d5508fb7e4d652b3137937d9073450ca54807066dfbc888aeb86"
+    },
+    "artifacts/dp_level3_secagg/experiments/scratch_distributed_dp_m0.001_s52/source_snapshot/src/gnn/adaptive_continual_federated.py": {
+      "bytes": 24598,
+      "sha256": "f0a1dc4972e76077cc10827c99f584d292951aa870d8cf983b74889c55b38bb0"
+    },
+    "artifacts/dp_level3_secagg/experiments/scratch_distributed_dp_m0.001_s52/source_snapshot/src/gnn/causal_temporal_graphsage.py": {
+      "bytes": 29972,
+      "sha256": "77ec113dd6b16ed0bf6956d1ce9fa7d9da5b300b672f085c76830b203ea2e2eb"
+    },
+    "artifacts/dp_level3_secagg/experiments/scratch_distributed_dp_m0.001_s52/source_snapshot/src/gnn/continual_temporal_graphsage.py": {
+      "bytes": 8674,
+      "sha256": "3ab7bc55e8b14f6dc69cc8d1188fc4daaf806e3010e00764b13bedeecea721d5"
+    },
+    "artifacts/dp_level3_secagg/experiments/scratch_distributed_dp_m0.001_s62/global_model.pt": {
+      "bytes": 978401,
+      "sha256": "698548947953722f7d544e0a7e25aad21e3efbf4cdee1433bff10f6c8e31ca9c"
+    },
+    "artifacts/dp_level3_secagg/experiments/scratch_distributed_dp_m0.001_s62/manifest.json": {
+      "bytes": 1860,
+      "sha256": "49247f7656b0a62f2462bcd89447a6d60c271a9a275b7b142a8314d2682bc938"
+    },
+    "artifacts/dp_level3_secagg/experiments/scratch_distributed_dp_m0.001_s62/progress.json": {
+      "bytes": 55196,
+      "sha256": "f82ee88277068635d8d0d0f6f10dc19c7c40b4e113064963679b0efa049ce5e0"
+    },
+    "artifacts/dp_level3_secagg/experiments/scratch_distributed_dp_m0.001_s62/results.json": {
+      "bytes": 61685,
+      "sha256": "5c7932cda25e7e5d162ddcf0e8e4542cce02e246de72933c5e1dbc51cbf7fc2d"
+    },
+    "artifacts/dp_level3_secagg/experiments/scratch_distributed_dp_m0.001_s62/source_snapshot/distributed_federation/privacy/mechanism.py": {
+      "bytes": 7493,
+      "sha256": "6ed1d4c70e4a984d70131b9bcb0a61332b92d3f4ad290f9bb5cf36b8dd133bff"
+    },
+    "artifacts/dp_level3_secagg/experiments/scratch_distributed_dp_m0.001_s62/source_snapshot/distributed_federation/privacy/secagg.py": {
+      "bytes": 5943,
+      "sha256": "31d5604ed074d5508fb7e4d652b3137937d9073450ca54807066dfbc888aeb86"
+    },
+    "artifacts/dp_level3_secagg/experiments/scratch_distributed_dp_m0.001_s62/source_snapshot/src/gnn/adaptive_continual_federated.py": {
+      "bytes": 24598,
+      "sha256": "f0a1dc4972e76077cc10827c99f584d292951aa870d8cf983b74889c55b38bb0"
+    },
+    "artifacts/dp_level3_secagg/experiments/scratch_distributed_dp_m0.001_s62/source_snapshot/src/gnn/causal_temporal_graphsage.py": {
+      "bytes": 29972,
+      "sha256": "77ec113dd6b16ed0bf6956d1ce9fa7d9da5b300b672f085c76830b203ea2e2eb"
+    },
+    "artifacts/dp_level3_secagg/experiments/scratch_distributed_dp_m0.001_s62/source_snapshot/src/gnn/continual_temporal_graphsage.py": {
+      "bytes": 8674,
+      "sha256": "3ab7bc55e8b14f6dc69cc8d1188fc4daaf806e3010e00764b13bedeecea721d5"
+    },
+    "artifacts/dp_level3_secagg/experiments/scratch_none_m0_s42/global_model.pt": {
+      "bytes": 977761,
+      "sha256": "79c1eb660a26e0d22aedb45cabf1a9ddb83a8503b598846ce609d62a1a2b5290"
+    },
+    "artifacts/dp_level3_secagg/experiments/scratch_none_m0_s42/manifest.json": {
+      "bytes": 1150,
+      "sha256": "c6bd83ff5d5b44e8fbc27e4c54d3a8a507e8ffe5f97141e16e59e8c50768dc97"
+    },
+    "artifacts/dp_level3_secagg/experiments/scratch_none_m0_s42/progress.json": {
+      "bytes": 55191,
+      "sha256": "101529e776b619cdeb820ed9c2d0ad9624f10b4309ae26b23f97899c830185cf"
+    },
+    "artifacts/dp_level3_secagg/experiments/scratch_none_m0_s42/results.json": {
+      "bytes": 67356,
+      "sha256": "4630f08e8f76a4e5d01422e773b89502519e793dc87123c682ff67cbe1038741"
+    },
+    "artifacts/dp_level3_secagg/experiments/scratch_none_m0_s52/global_model.pt": {
+      "bytes": 977761,
+      "sha256": "d93c39173e4f892cb9ae473d5dfe6e660a9d2dffb5bafebf28f1c570ebb78b97"
+    },
+    "artifacts/dp_level3_secagg/experiments/scratch_none_m0_s52/manifest.json": {
+      "bytes": 1150,
+      "sha256": "e3748dd9526fe886aa94cf4eb65b785fcb5c48c3e1b06c0dcba27c2f33d5b021"
+    },
+    "artifacts/dp_level3_secagg/experiments/scratch_none_m0_s52/progress.json": {
+      "bytes": 55230,
+      "sha256": "aa33065d3a06461d00f64cd99e90d5e15feeeaa85a8475403e828f84a0d90357"
+    },
+    "artifacts/dp_level3_secagg/experiments/scratch_none_m0_s52/results.json": {
+      "bytes": 67376,
+      "sha256": "b813357531dd5f7eeef6bf78b7b900b90a2bdcf34b0d56ff9526032c3889fc58"
+    },
+    "artifacts/dp_level3_secagg/experiments/scratch_none_m0_s62/global_model.pt": {
+      "bytes": 977761,
+      "sha256": "ad52710e1f3847d09b7d1159eaa93c9c4e69e8a49e2f644bb0ec6948210a5f16"
+    },
+    "artifacts/dp_level3_secagg/experiments/scratch_none_m0_s62/manifest.json": {
+      "bytes": 1150,
+      "sha256": "7dcdc064f5361937673896a88e474dca2ba82cbfc9c87f0a08a17fbe43d72ee4"
+    },
+    "artifacts/dp_level3_secagg/experiments/scratch_none_m0_s62/progress.json": {
+      "bytes": 55231,
+      "sha256": "fb9a7226c35589e174ca193c5a5fc1ea7c77620eb0f0167cb81d0b4b19852ef3"
+    },
+    "artifacts/dp_level3_secagg/experiments/scratch_none_m0_s62/results.json": {
+      "bytes": 67380,
+      "sha256": "7ebf4b0a7345f1c56dc7472b4edc3789339a686f60f254aa9248f6f73ea75f3d"
+    },
+    "artifacts/dp_level3_secagg/experiments/warm_distributed_dp_m0.0001_s42/global_model.pt": {
+      "bytes": 977889,
+      "sha256": "a7108a3118b754026e4d84e691752fa3683392473c3958dd4cb839480f8d6d94"
+    },
+    "artifacts/dp_level3_secagg/experiments/warm_distributed_dp_m0.0001_s42/manifest.json": {
+      "bytes": 1350,
+      "sha256": "011df05bc04fa9aad9d55c35647554bb2b6febdd6f13338f12134ca3ae33025b"
+    },
+    "artifacts/dp_level3_secagg/experiments/warm_distributed_dp_m0.0001_s42/progress.json": {
+      "bytes": 14725,
+      "sha256": "aec3d97c65b6b0cd982e8801c3cd8ece32ba43dfccb78bde812b6e3081675839"
+    },
+    "artifacts/dp_level3_secagg/experiments/warm_distributed_dp_m0.0001_s42/results.json": {
+      "bytes": 21213,
+      "sha256": "5a5f318ff8ebc80ed4826392d2552e81da394e0780788cc239bd48a8cbe3f772"
+    },
+    "artifacts/dp_level3_secagg/experiments/warm_distributed_dp_m0.0001_s52/global_model.pt": {
+      "bytes": 978529,
+      "sha256": "0b793fde67977adec7daaa6c9b263ec5d96123474eab78ff42be9bd1ed03e323"
+    },
+    "artifacts/dp_level3_secagg/experiments/warm_distributed_dp_m0.0001_s52/manifest.json": {
+      "bytes": 2001,
+      "sha256": "e69026b3c4210a1c2361eacaaa3e734a86427e8e5fb10498bce631d385691ed5"
+    },
+    "artifacts/dp_level3_secagg/experiments/warm_distributed_dp_m0.0001_s52/progress.json": {
+      "bytes": 15379,
+      "sha256": "484e0aff394c74f02a70eb7b6f1a5c510218154b8582ec697e3981f3adba4e70"
+    },
+    "artifacts/dp_level3_secagg/experiments/warm_distributed_dp_m0.0001_s52/results.json": {
+      "bytes": 21873,
+      "sha256": "5fb00cb136505d2dc1ad46b8cd2797210d8bdc554d4472f0f68e93e1f3c72134"
+    },
+    "artifacts/dp_level3_secagg/experiments/warm_distributed_dp_m0.0001_s52/source_snapshot/distributed_federation/privacy/mechanism.py": {
+      "bytes": 6966,
+      "sha256": "da8a9da6f5415156dbb98926266679a36447a9aa68737067b22a79832ce769ef"
+    },
+    "artifacts/dp_level3_secagg/experiments/warm_distributed_dp_m0.0001_s52/source_snapshot/distributed_federation/privacy/secagg.py": {
+      "bytes": 5943,
+      "sha256": "31d5604ed074d5508fb7e4d652b3137937d9073450ca54807066dfbc888aeb86"
+    },
+    "artifacts/dp_level3_secagg/experiments/warm_distributed_dp_m0.0001_s52/source_snapshot/src/gnn/adaptive_continual_federated.py": {
+      "bytes": 24598,
+      "sha256": "f0a1dc4972e76077cc10827c99f584d292951aa870d8cf983b74889c55b38bb0"
+    },
+    "artifacts/dp_level3_secagg/experiments/warm_distributed_dp_m0.0001_s52/source_snapshot/src/gnn/causal_temporal_graphsage.py": {
+      "bytes": 29972,
+      "sha256": "77ec113dd6b16ed0bf6956d1ce9fa7d9da5b300b672f085c76830b203ea2e2eb"
+    },
+    "artifacts/dp_level3_secagg/experiments/warm_distributed_dp_m0.0001_s52/source_snapshot/src/gnn/continual_temporal_graphsage.py": {
+      "bytes": 8674,
+      "sha256": "3ab7bc55e8b14f6dc69cc8d1188fc4daaf806e3010e00764b13bedeecea721d5"
+    },
+    "artifacts/dp_level3_secagg/experiments/warm_distributed_dp_m0.0001_s62/global_model.pt": {
+      "bytes": 978529,
+      "sha256": "1c659652948727d10f8c9a17e5c6197ec9e295fccf51496dfffaea617536c1d5"
+    },
+    "artifacts/dp_level3_secagg/experiments/warm_distributed_dp_m0.0001_s62/manifest.json": {
+      "bytes": 2001,
+      "sha256": "ca844f8c939e7360474c378875bb586da6f859d4ae22ee5c902ec492a3f249b4"
+    },
+    "artifacts/dp_level3_secagg/experiments/warm_distributed_dp_m0.0001_s62/progress.json": {
+      "bytes": 15359,
+      "sha256": "c9f7c828d61bf2d84c1aa98a37d2eca73ff9aba94ecb22d51855b463bc593068"
+    },
+    "artifacts/dp_level3_secagg/experiments/warm_distributed_dp_m0.0001_s62/results.json": {
+      "bytes": 21839,
+      "sha256": "06210fa150472e9dcc2fb97fbdb0e443cdd856190f5c0f71810d96d0f0dcbb1c"
+    },
+    "artifacts/dp_level3_secagg/experiments/warm_distributed_dp_m0.0001_s62/source_snapshot/distributed_federation/privacy/mechanism.py": {
+      "bytes": 6966,
+      "sha256": "da8a9da6f5415156dbb98926266679a36447a9aa68737067b22a79832ce769ef"
+    },
+    "artifacts/dp_level3_secagg/experiments/warm_distributed_dp_m0.0001_s62/source_snapshot/distributed_federation/privacy/secagg.py": {
+      "bytes": 5943,
+      "sha256": "31d5604ed074d5508fb7e4d652b3137937d9073450ca54807066dfbc888aeb86"
+    },
+    "artifacts/dp_level3_secagg/experiments/warm_distributed_dp_m0.0001_s62/source_snapshot/src/gnn/adaptive_continual_federated.py": {
+      "bytes": 24598,
+      "sha256": "f0a1dc4972e76077cc10827c99f584d292951aa870d8cf983b74889c55b38bb0"
+    },
+    "artifacts/dp_level3_secagg/experiments/warm_distributed_dp_m0.0001_s62/source_snapshot/src/gnn/causal_temporal_graphsage.py": {
+      "bytes": 29972,
+      "sha256": "77ec113dd6b16ed0bf6956d1ce9fa7d9da5b300b672f085c76830b203ea2e2eb"
+    },
+    "artifacts/dp_level3_secagg/experiments/warm_distributed_dp_m0.0001_s62/source_snapshot/src/gnn/continual_temporal_graphsage.py": {
+      "bytes": 8674,
+      "sha256": "3ab7bc55e8b14f6dc69cc8d1188fc4daaf806e3010e00764b13bedeecea721d5"
+    },
+    "artifacts/dp_level3_secagg/experiments/warm_distributed_dp_m0.001_s42/global_model.pt": {
+      "bytes": 977889,
+      "sha256": "a8f59ff8ad9d1c8048e71ed7befd7eeccf1ea70155c4e9608aeab43c3f3fffd5"
+    },
+    "artifacts/dp_level3_secagg/experiments/warm_distributed_dp_m0.001_s42/manifest.json": {
+      "bytes": 1344,
+      "sha256": "39689a05e62f0d216cd0d6f6bc865899114de120189dc98de616506427195162"
+    },
+    "artifacts/dp_level3_secagg/experiments/warm_distributed_dp_m0.001_s42/progress.json": {
+      "bytes": 14712,
+      "sha256": "5790ef4a137e09403800e41713a343c7c1d596edff8739c7e2542125c86189fe"
+    },
+    "artifacts/dp_level3_secagg/experiments/warm_distributed_dp_m0.001_s42/results.json": {
+      "bytes": 21192,
+      "sha256": "64ec8bf21293de1434b0ba1f62ccf84ee8d011d9fe5bf19ee3a61a297bf79ab2"
+    },
+    "artifacts/dp_level3_secagg/experiments/warm_distributed_dp_m0.001_s52/global_model.pt": {
+      "bytes": 978529,
+      "sha256": "fc262594f7feab55cd80d9f034df0fe14b0ba706e66407e7e72dfe2d5c33c8b2"
+    },
+    "artifacts/dp_level3_secagg/experiments/warm_distributed_dp_m0.001_s52/manifest.json": {
+      "bytes": 1995,
+      "sha256": "313fa9beafcabdd9c45b911d6e7d92a56c4c48bfb2d66cad418606770c8bc14b"
+    },
+    "artifacts/dp_level3_secagg/experiments/warm_distributed_dp_m0.001_s52/progress.json": {
+      "bytes": 15348,
+      "sha256": "a6bccb7df489828cf8e044c61679f13f619059e604e7cd9fba9088a805805167"
+    },
+    "artifacts/dp_level3_secagg/experiments/warm_distributed_dp_m0.001_s52/results.json": {
+      "bytes": 21821,
+      "sha256": "8842f899bbf73457b8cd7439eee4fa2180be79710842587779630705b02d4d7b"
+    },
+    "artifacts/dp_level3_secagg/experiments/warm_distributed_dp_m0.001_s52/source_snapshot/distributed_federation/privacy/mechanism.py": {
+      "bytes": 6966,
+      "sha256": "da8a9da6f5415156dbb98926266679a36447a9aa68737067b22a79832ce769ef"
+    },
+    "artifacts/dp_level3_secagg/experiments/warm_distributed_dp_m0.001_s52/source_snapshot/distributed_federation/privacy/secagg.py": {
+      "bytes": 5943,
+      "sha256": "31d5604ed074d5508fb7e4d652b3137937d9073450ca54807066dfbc888aeb86"
+    },
+    "artifacts/dp_level3_secagg/experiments/warm_distributed_dp_m0.001_s52/source_snapshot/src/gnn/adaptive_continual_federated.py": {
+      "bytes": 24598,
+      "sha256": "f0a1dc4972e76077cc10827c99f584d292951aa870d8cf983b74889c55b38bb0"
+    },
+    "artifacts/dp_level3_secagg/experiments/warm_distributed_dp_m0.001_s52/source_snapshot/src/gnn/causal_temporal_graphsage.py": {
+      "bytes": 29972,
+      "sha256": "77ec113dd6b16ed0bf6956d1ce9fa7d9da5b300b672f085c76830b203ea2e2eb"
+    },
+    "artifacts/dp_level3_secagg/experiments/warm_distributed_dp_m0.001_s52/source_snapshot/src/gnn/continual_temporal_graphsage.py": {
+      "bytes": 8674,
+      "sha256": "3ab7bc55e8b14f6dc69cc8d1188fc4daaf806e3010e00764b13bedeecea721d5"
+    },
+    "artifacts/dp_level3_secagg/experiments/warm_distributed_dp_m0.001_s62/global_model.pt": {
+      "bytes": 978529,
+      "sha256": "071a5a57b125f67edd938f4ca8d413490c78144d0b4b5a69e1da378610158258"
+    },
+    "artifacts/dp_level3_secagg/experiments/warm_distributed_dp_m0.001_s62/manifest.json": {
+      "bytes": 1995,
+      "sha256": "7d3882e441792be897cccbb86a337616f187f46b178288f3db36d18dc867bb71"
+    },
+    "artifacts/dp_level3_secagg/experiments/warm_distributed_dp_m0.001_s62/progress.json": {
+      "bytes": 15317,
+      "sha256": "2b173f393344c362172ba98298231a77cf63d1b9bf5e062b28f92cbbbe0547c5"
+    },
+    "artifacts/dp_level3_secagg/experiments/warm_distributed_dp_m0.001_s62/results.json": {
+      "bytes": 21795,
+      "sha256": "333526dc2b835c08d45bc1c1cd69c5c7fd3cb11883d64a1a50a4fce625cc3529"
+    },
+    "artifacts/dp_level3_secagg/experiments/warm_distributed_dp_m0.001_s62/source_snapshot/distributed_federation/privacy/mechanism.py": {
+      "bytes": 7093,
+      "sha256": "e9eab2338dcc5f05fafdd2b344ec638afbe59de3e9d9b366220bedd464d735d8"
+    },
+    "artifacts/dp_level3_secagg/experiments/warm_distributed_dp_m0.001_s62/source_snapshot/distributed_federation/privacy/secagg.py": {
+      "bytes": 5943,
+      "sha256": "31d5604ed074d5508fb7e4d652b3137937d9073450ca54807066dfbc888aeb86"
+    },
+    "artifacts/dp_level3_secagg/experiments/warm_distributed_dp_m0.001_s62/source_snapshot/src/gnn/adaptive_continual_federated.py": {
+      "bytes": 24598,
+      "sha256": "f0a1dc4972e76077cc10827c99f584d292951aa870d8cf983b74889c55b38bb0"
+    },
+    "artifacts/dp_level3_secagg/experiments/warm_distributed_dp_m0.001_s62/source_snapshot/src/gnn/causal_temporal_graphsage.py": {
+      "bytes": 29972,
+      "sha256": "77ec113dd6b16ed0bf6956d1ce9fa7d9da5b300b672f085c76830b203ea2e2eb"
+    },
+    "artifacts/dp_level3_secagg/experiments/warm_distributed_dp_m0.001_s62/source_snapshot/src/gnn/continual_temporal_graphsage.py": {
+      "bytes": 8674,
+      "sha256": "3ab7bc55e8b14f6dc69cc8d1188fc4daaf806e3010e00764b13bedeecea721d5"
+    },
+    "artifacts/dp_level3_secagg/experiments/warm_distributed_dp_m0.01_s42/global_model.pt": {
+      "bytes": 977889,
+      "sha256": "337d38887b9d85faa51d6fd24df4e93ebc18a5831bf1d87f835730c051e78f0a"
+    },
+    "artifacts/dp_level3_secagg/experiments/warm_distributed_dp_m0.01_s42/manifest.json": {
+      "bytes": 1343,
+      "sha256": "4e3969e69570efe295b5d648e45e056f1c7b62b833f3e68955da7fcb49c04bed"
+    },
+    "artifacts/dp_level3_secagg/experiments/warm_distributed_dp_m0.01_s42/progress.json": {
+      "bytes": 14668,
+      "sha256": "6f2fb7dd26cbd1823ae43596aeb826829ad1124102cbc9d31729f10e35b49975"
+    },
+    "artifacts/dp_level3_secagg/experiments/warm_distributed_dp_m0.01_s42/results.json": {
+      "bytes": 21133,
+      "sha256": "bb8ef4609091bac9fd71fc29973c970c60bfdfc3caafd7a490ea442a3c0c0802"
+    },
+    "artifacts/dp_level3_secagg/experiments/warm_distributed_dp_m0.01_s52/global_model.pt": {
+      "bytes": 978529,
+      "sha256": "1be8248bea703082f3df911a67410d5453c2cc436997128b6c8dbd20d0171d82"
+    },
+    "artifacts/dp_level3_secagg/experiments/warm_distributed_dp_m0.01_s52/manifest.json": {
+      "bytes": 1994,
+      "sha256": "5e6f87cb10bec439ab9e5376c26db52ec38d98e6e68800b2119201ee7191b3f1"
+    },
+    "artifacts/dp_level3_secagg/experiments/warm_distributed_dp_m0.01_s52/progress.json": {
+      "bytes": 15345,
+      "sha256": "b3ddc9492274ef940f396008e063a17def8911acbc4baa4507c2bc72d7d153e1"
+    },
+    "artifacts/dp_level3_secagg/experiments/warm_distributed_dp_m0.01_s52/results.json": {
+      "bytes": 21827,
+      "sha256": "14efff9cbb939c5a74dbc3223992e35aa01457f0e3e93b74a25a452720bc23bf"
+    },
+    "artifacts/dp_level3_secagg/experiments/warm_distributed_dp_m0.01_s52/source_snapshot/distributed_federation/privacy/mechanism.py": {
+      "bytes": 7093,
+      "sha256": "e9eab2338dcc5f05fafdd2b344ec638afbe59de3e9d9b366220bedd464d735d8"
+    },
+    "artifacts/dp_level3_secagg/experiments/warm_distributed_dp_m0.01_s52/source_snapshot/distributed_federation/privacy/secagg.py": {
+      "bytes": 5943,
+      "sha256": "31d5604ed074d5508fb7e4d652b3137937d9073450ca54807066dfbc888aeb86"
+    },
+    "artifacts/dp_level3_secagg/experiments/warm_distributed_dp_m0.01_s52/source_snapshot/src/gnn/adaptive_continual_federated.py": {
+      "bytes": 24598,
+      "sha256": "f0a1dc4972e76077cc10827c99f584d292951aa870d8cf983b74889c55b38bb0"
+    },
+    "artifacts/dp_level3_secagg/experiments/warm_distributed_dp_m0.01_s52/source_snapshot/src/gnn/causal_temporal_graphsage.py": {
+      "bytes": 29972,
+      "sha256": "77ec113dd6b16ed0bf6956d1ce9fa7d9da5b300b672f085c76830b203ea2e2eb"
+    },
+    "artifacts/dp_level3_secagg/experiments/warm_distributed_dp_m0.01_s52/source_snapshot/src/gnn/continual_temporal_graphsage.py": {
+      "bytes": 8674,
+      "sha256": "3ab7bc55e8b14f6dc69cc8d1188fc4daaf806e3010e00764b13bedeecea721d5"
+    },
+    "artifacts/dp_level3_secagg/experiments/warm_distributed_dp_m0.01_s62/global_model.pt": {
+      "bytes": 978529,
+      "sha256": "88695ca8fd078fce8cbc8ce4fef929db590afd1325d36883463496ee8d8bba0f"
+    },
+    "artifacts/dp_level3_secagg/experiments/warm_distributed_dp_m0.01_s62/manifest.json": {
+      "bytes": 1994,
+      "sha256": "7c23835026ce912cee4d9e46e4837d5dc1ae10a726803d971386288905eb2869"
+    },
+    "artifacts/dp_level3_secagg/experiments/warm_distributed_dp_m0.01_s62/progress.json": {
+      "bytes": 15327,
+      "sha256": "8f3ae5510116890f8da2255f95e39d219bd28f22bf80892e3f0e8a899e3d91fa"
+    },
+    "artifacts/dp_level3_secagg/experiments/warm_distributed_dp_m0.01_s62/results.json": {
+      "bytes": 21787,
+      "sha256": "1e0f22b7eef2f44a4d776ae213109a67dc34454e49b0891383f9c22261f6115c"
+    },
+    "artifacts/dp_level3_secagg/experiments/warm_distributed_dp_m0.01_s62/source_snapshot/distributed_federation/privacy/mechanism.py": {
+      "bytes": 7093,
+      "sha256": "e9eab2338dcc5f05fafdd2b344ec638afbe59de3e9d9b366220bedd464d735d8"
+    },
+    "artifacts/dp_level3_secagg/experiments/warm_distributed_dp_m0.01_s62/source_snapshot/distributed_federation/privacy/secagg.py": {
+      "bytes": 5943,
+      "sha256": "31d5604ed074d5508fb7e4d652b3137937d9073450ca54807066dfbc888aeb86"
+    },
+    "artifacts/dp_level3_secagg/experiments/warm_distributed_dp_m0.01_s62/source_snapshot/src/gnn/adaptive_continual_federated.py": {
+      "bytes": 24598,
+      "sha256": "f0a1dc4972e76077cc10827c99f584d292951aa870d8cf983b74889c55b38bb0"
+    },
+    "artifacts/dp_level3_secagg/experiments/warm_distributed_dp_m0.01_s62/source_snapshot/src/gnn/causal_temporal_graphsage.py": {
+      "bytes": 29972,
+      "sha256": "77ec113dd6b16ed0bf6956d1ce9fa7d9da5b300b672f085c76830b203ea2e2eb"
+    },
+    "artifacts/dp_level3_secagg/experiments/warm_distributed_dp_m0.01_s62/source_snapshot/src/gnn/continual_temporal_graphsage.py": {
+      "bytes": 8674,
+      "sha256": "3ab7bc55e8b14f6dc69cc8d1188fc4daaf806e3010e00764b13bedeecea721d5"
+    },
+    "artifacts/dp_level3_secagg/experiments/warm_distributed_dp_m0.1_s42/global_model.pt": {
+      "bytes": 977889,
+      "sha256": "149cfda721ebe4bb02169084d6592e73cc3a395be3a19c44aeab3c94adb1db31"
+    },
+    "artifacts/dp_level3_secagg/experiments/warm_distributed_dp_m0.1_s42/manifest.json": {
+      "bytes": 1339,
+      "sha256": "7372e22a4ea730e295e2fe5c7376c6b8553c39e1d64158cc1cb016d2087e3519"
+    },
+    "artifacts/dp_level3_secagg/experiments/warm_distributed_dp_m0.1_s42/progress.json": {
+      "bytes": 14378,
+      "sha256": "e8a1ae7adf7574b196a66629758be1ade4054a058eb956a48b8daa3fe25658f7"
+    },
+    "artifacts/dp_level3_secagg/experiments/warm_distributed_dp_m0.1_s42/results.json": {
+      "bytes": 20730,
+      "sha256": "1a08068917d127891349f34d183da41949ac18e8f2159a66d370b5e3167435a8"
+    },
+    "artifacts/dp_level3_secagg/experiments/warm_distributed_dp_m1e-05_s42/global_model.pt": {
+      "bytes": 977889,
+      "sha256": "4efa8a691d6a0252c74396863c4dff3316c658e37dedfd3f083b4055cad100dd"
+    },
+    "artifacts/dp_level3_secagg/experiments/warm_distributed_dp_m1e-05_s42/manifest.json": {
+      "bytes": 1348,
+      "sha256": "857b0ace9f62bfe0487e737f21eb2bfb3b691877696daaabd72d8a02105402d7"
+    },
+    "artifacts/dp_level3_secagg/experiments/warm_distributed_dp_m1e-05_s42/progress.json": {
+      "bytes": 14750,
+      "sha256": "0a2796370a3b813c15a4f5038e94be2971400f1ad401f6f02f0f7c6a26627b2b"
+    },
+    "artifacts/dp_level3_secagg/experiments/warm_distributed_dp_m1e-05_s42/results.json": {
+      "bytes": 21258,
+      "sha256": "003b9d92a2a1368d4faa569aba64a5c86ac1b91d0ff9811f888aa6d2ed43f8c3"
+    },
+    "artifacts/dp_level3_secagg/experiments/warm_distributed_dp_m1e-05_s42_best_validation/global_model.pt": {
+      "bytes": 978465,
+      "sha256": "4265b880086d00a8680afaeb8ee8ed3ccbacca8c490cefb8401b58b468bf9211"
+    },
+    "artifacts/dp_level3_secagg/experiments/warm_distributed_dp_m1e-05_s42_best_validation/manifest.json": {
+      "bytes": 1949,
+      "sha256": "5d5d02e24466e48f30f9a106ce0542ba79c392259638f16e2bac922610b0d190"
+    },
+    "artifacts/dp_level3_secagg/experiments/warm_distributed_dp_m1e-05_s42_best_validation/progress.json": {
+      "bytes": 15736,
+      "sha256": "c8c5c072766b6e47b07d55226c24f7e320d5e68d7fdee47daa872b88c6f37c2c"
+    },
+    "artifacts/dp_level3_secagg/experiments/warm_distributed_dp_m1e-05_s42_best_validation/results.json": {
+      "bytes": 25860,
+      "sha256": "ed39ed02aff4fce094e3eae24f0c27f96bb800631d708ccc92108608cfe13640"
+    },
+    "artifacts/dp_level3_secagg/experiments/warm_distributed_dp_m1e-05_s42_best_validation/selected_model.pt": {
+      "bytes": 978509,
+      "sha256": "55e57d124a820474c8f156ba40d7adf524c587ce7c004054714cfa721714f351"
+    },
+    "artifacts/dp_level3_secagg/experiments/warm_distributed_dp_m1e-05_s42_best_validation/source_snapshot/distributed_federation/privacy/mechanism.py": {
+      "bytes": 7493,
+      "sha256": "6ed1d4c70e4a984d70131b9bcb0a61332b92d3f4ad290f9bb5cf36b8dd133bff"
+    },
+    "artifacts/dp_level3_secagg/experiments/warm_distributed_dp_m1e-05_s42_best_validation/source_snapshot/distributed_federation/privacy/secagg.py": {
+      "bytes": 5943,
+      "sha256": "31d5604ed074d5508fb7e4d652b3137937d9073450ca54807066dfbc888aeb86"
+    },
+    "artifacts/dp_level3_secagg/experiments/warm_distributed_dp_m1e-05_s42_best_validation/source_snapshot/src/gnn/adaptive_continual_federated.py": {
+      "bytes": 24598,
+      "sha256": "f0a1dc4972e76077cc10827c99f584d292951aa870d8cf983b74889c55b38bb0"
+    },
+    "artifacts/dp_level3_secagg/experiments/warm_distributed_dp_m1e-05_s42_best_validation/source_snapshot/src/gnn/causal_temporal_graphsage.py": {
+      "bytes": 29972,
+      "sha256": "77ec113dd6b16ed0bf6956d1ce9fa7d9da5b300b672f085c76830b203ea2e2eb"
+    },
+    "artifacts/dp_level3_secagg/experiments/warm_distributed_dp_m1e-05_s42_best_validation/source_snapshot/src/gnn/continual_temporal_graphsage.py": {
+      "bytes": 8674,
+      "sha256": "3ab7bc55e8b14f6dc69cc8d1188fc4daaf806e3010e00764b13bedeecea721d5"
+    },
+    "artifacts/dp_level3_secagg/experiments/warm_distributed_dp_m1e-05_s52/global_model.pt": {
+      "bytes": 978529,
+      "sha256": "07d205c48da34b014323f077c7a3ee1adc9eeb065ba581584076bce37e1ab98e"
+    },
+    "artifacts/dp_level3_secagg/experiments/warm_distributed_dp_m1e-05_s52/manifest.json": {
+      "bytes": 1999,
+      "sha256": "494d61b30fa8f518e14ef7fbc04522828592667831b449f678b087c8317608ef"
+    },
+    "artifacts/dp_level3_secagg/experiments/warm_distributed_dp_m1e-05_s52/progress.json": {
+      "bytes": 15373,
+      "sha256": "4a2434535b184a997f0a4333d45ea56e1f9f9db2203cd64f5edc259b4a6e35a0"
+    },
+    "artifacts/dp_level3_secagg/experiments/warm_distributed_dp_m1e-05_s52/results.json": {
+      "bytes": 21875,
+      "sha256": "5356435a205b2438660a251ae5bd5764397ef17585d55531abce0aef9c5a336e"
+    },
+    "artifacts/dp_level3_secagg/experiments/warm_distributed_dp_m1e-05_s52/source_snapshot/distributed_federation/privacy/mechanism.py": {
+      "bytes": 6966,
+      "sha256": "da8a9da6f5415156dbb98926266679a36447a9aa68737067b22a79832ce769ef"
+    },
+    "artifacts/dp_level3_secagg/experiments/warm_distributed_dp_m1e-05_s52/source_snapshot/distributed_federation/privacy/secagg.py": {
+      "bytes": 5943,
+      "sha256": "31d5604ed074d5508fb7e4d652b3137937d9073450ca54807066dfbc888aeb86"
+    },
+    "artifacts/dp_level3_secagg/experiments/warm_distributed_dp_m1e-05_s52/source_snapshot/src/gnn/adaptive_continual_federated.py": {
+      "bytes": 24471,
+      "sha256": "56bd2a0d62ef2d761eee0daab6e10d7a2b184694cf0d9fe8eee498d93d28006f"
+    },
+    "artifacts/dp_level3_secagg/experiments/warm_distributed_dp_m1e-05_s52/source_snapshot/src/gnn/causal_temporal_graphsage.py": {
+      "bytes": 29972,
+      "sha256": "77ec113dd6b16ed0bf6956d1ce9fa7d9da5b300b672f085c76830b203ea2e2eb"
+    },
+    "artifacts/dp_level3_secagg/experiments/warm_distributed_dp_m1e-05_s52/source_snapshot/src/gnn/continual_temporal_graphsage.py": {
+      "bytes": 8674,
+      "sha256": "3ab7bc55e8b14f6dc69cc8d1188fc4daaf806e3010e00764b13bedeecea721d5"
+    },
+    "artifacts/dp_level3_secagg/experiments/warm_distributed_dp_m1e-05_s52_best_validation/global_model.pt": {
+      "bytes": 978465,
+      "sha256": "ea088aa2bb3b4ed576ac862364b7b2a9fc3fc7a4b395818354daeebfba16e623"
+    },
+    "artifacts/dp_level3_secagg/experiments/warm_distributed_dp_m1e-05_s52_best_validation/manifest.json": {
+      "bytes": 1949,
+      "sha256": "aed64b65cbcef85997742e10108433ed2f7da87fb98a3aaf2c8db1888d9ba539"
+    },
+    "artifacts/dp_level3_secagg/experiments/warm_distributed_dp_m1e-05_s52_best_validation/progress.json": {
+      "bytes": 15741,
+      "sha256": "c32c08a554bb3a1127e9fc63975de5370d9d4800783d1714607a51a0aede40bb"
+    },
+    "artifacts/dp_level3_secagg/experiments/warm_distributed_dp_m1e-05_s52_best_validation/results.json": {
+      "bytes": 25883,
+      "sha256": "e81a1abba86ec6abb6582ca67f55184ebbd82139f04fe4d28ea6a3bd79a88af9"
+    },
+    "artifacts/dp_level3_secagg/experiments/warm_distributed_dp_m1e-05_s52_best_validation/selected_model.pt": {
+      "bytes": 978509,
+      "sha256": "5f56938a4e2833c6168eeb4ccb1f678be494a974c432df479bcc53122292cd4a"
+    },
+    "artifacts/dp_level3_secagg/experiments/warm_distributed_dp_m1e-05_s52_best_validation/source_snapshot/distributed_federation/privacy/mechanism.py": {
+      "bytes": 7493,
+      "sha256": "6ed1d4c70e4a984d70131b9bcb0a61332b92d3f4ad290f9bb5cf36b8dd133bff"
+    },
+    "artifacts/dp_level3_secagg/experiments/warm_distributed_dp_m1e-05_s52_best_validation/source_snapshot/distributed_federation/privacy/secagg.py": {
+      "bytes": 5943,
+      "sha256": "31d5604ed074d5508fb7e4d652b3137937d9073450ca54807066dfbc888aeb86"
+    },
+    "artifacts/dp_level3_secagg/experiments/warm_distributed_dp_m1e-05_s52_best_validation/source_snapshot/src/gnn/adaptive_continual_federated.py": {
+      "bytes": 24598,
+      "sha256": "f0a1dc4972e76077cc10827c99f584d292951aa870d8cf983b74889c55b38bb0"
+    },
+    "artifacts/dp_level3_secagg/experiments/warm_distributed_dp_m1e-05_s52_best_validation/source_snapshot/src/gnn/causal_temporal_graphsage.py": {
+      "bytes": 29972,
+      "sha256": "77ec113dd6b16ed0bf6956d1ce9fa7d9da5b300b672f085c76830b203ea2e2eb"
+    },
+    "artifacts/dp_level3_secagg/experiments/warm_distributed_dp_m1e-05_s52_best_validation/source_snapshot/src/gnn/continual_temporal_graphsage.py": {
+      "bytes": 8674,
+      "sha256": "3ab7bc55e8b14f6dc69cc8d1188fc4daaf806e3010e00764b13bedeecea721d5"
+    },
+    "artifacts/dp_level3_secagg/experiments/warm_distributed_dp_m1e-05_s62/global_model.pt": {
+      "bytes": 978529,
+      "sha256": "9f0419a92ba8147c7875fb7392923a97c46dcdedefa786f442c7dda6abf1ad02"
+    },
+    "artifacts/dp_level3_secagg/experiments/warm_distributed_dp_m1e-05_s62/manifest.json": {
+      "bytes": 1999,
+      "sha256": "3012e9951ab26927271bff26524fffed8981c81ffec060cd20d08bb3984c919e"
+    },
+    "artifacts/dp_level3_secagg/experiments/warm_distributed_dp_m1e-05_s62/progress.json": {
+      "bytes": 15358,
+      "sha256": "dfc5f9284c9a8aafd9b091aa5c756fd23783e71ad305b860b5536e39a8456e53"
+    },
+    "artifacts/dp_level3_secagg/experiments/warm_distributed_dp_m1e-05_s62/results.json": {
+      "bytes": 21852,
+      "sha256": "7b5e8299cd71e80d98dddf2b84ab1c0982fa3e5cc163471af6e451316ef70263"
+    },
+    "artifacts/dp_level3_secagg/experiments/warm_distributed_dp_m1e-05_s62/source_snapshot/distributed_federation/privacy/mechanism.py": {
+      "bytes": 6966,
+      "sha256": "da8a9da6f5415156dbb98926266679a36447a9aa68737067b22a79832ce769ef"
+    },
+    "artifacts/dp_level3_secagg/experiments/warm_distributed_dp_m1e-05_s62/source_snapshot/distributed_federation/privacy/secagg.py": {
+      "bytes": 5943,
+      "sha256": "31d5604ed074d5508fb7e4d652b3137937d9073450ca54807066dfbc888aeb86"
+    },
+    "artifacts/dp_level3_secagg/experiments/warm_distributed_dp_m1e-05_s62/source_snapshot/src/gnn/adaptive_continual_federated.py": {
+      "bytes": 24598,
+      "sha256": "f0a1dc4972e76077cc10827c99f584d292951aa870d8cf983b74889c55b38bb0"
+    },
+    "artifacts/dp_level3_secagg/experiments/warm_distributed_dp_m1e-05_s62/source_snapshot/src/gnn/causal_temporal_graphsage.py": {
+      "bytes": 29972,
+      "sha256": "77ec113dd6b16ed0bf6956d1ce9fa7d9da5b300b672f085c76830b203ea2e2eb"
+    },
+    "artifacts/dp_level3_secagg/experiments/warm_distributed_dp_m1e-05_s62/source_snapshot/src/gnn/continual_temporal_graphsage.py": {
+      "bytes": 8674,
+      "sha256": "3ab7bc55e8b14f6dc69cc8d1188fc4daaf806e3010e00764b13bedeecea721d5"
+    },
+    "artifacts/dp_level3_secagg/experiments/warm_distributed_dp_m1e-05_s62_best_validation/global_model.pt": {
+      "bytes": 978465,
+      "sha256": "9f1069589f0a45768fafbfaffb5ca36dceb2f919927e29a288058decf0b171ef"
+    },
+    "artifacts/dp_level3_secagg/experiments/warm_distributed_dp_m1e-05_s62_best_validation/manifest.json": {
+      "bytes": 1949,
+      "sha256": "41448626a068ac6a708a149cdd1d71e3b8c56cae979d9b14900b7bfb3f06bba5"
+    },
+    "artifacts/dp_level3_secagg/experiments/warm_distributed_dp_m1e-05_s62_best_validation/progress.json": {
+      "bytes": 15740,
+      "sha256": "24050b8317f353a03dbb0416448f6be2438aad5d01306a59e9df8da964b3cd58"
+    },
+    "artifacts/dp_level3_secagg/experiments/warm_distributed_dp_m1e-05_s62_best_validation/results.json": {
+      "bytes": 25895,
+      "sha256": "472927221a6bb00b84359261ee71a44205162090f125b8d1db05c2bd5d667ef6"
+    },
+    "artifacts/dp_level3_secagg/experiments/warm_distributed_dp_m1e-05_s62_best_validation/selected_model.pt": {
+      "bytes": 978509,
+      "sha256": "26b185d96d90f6111292a04dce8d4760c44b18657546ceeaea6503833f526b93"
+    },
+    "artifacts/dp_level3_secagg/experiments/warm_distributed_dp_m1e-05_s62_best_validation/source_snapshot/distributed_federation/privacy/mechanism.py": {
+      "bytes": 7493,
+      "sha256": "6ed1d4c70e4a984d70131b9bcb0a61332b92d3f4ad290f9bb5cf36b8dd133bff"
+    },
+    "artifacts/dp_level3_secagg/experiments/warm_distributed_dp_m1e-05_s62_best_validation/source_snapshot/distributed_federation/privacy/secagg.py": {
+      "bytes": 5943,
+      "sha256": "31d5604ed074d5508fb7e4d652b3137937d9073450ca54807066dfbc888aeb86"
+    },
+    "artifacts/dp_level3_secagg/experiments/warm_distributed_dp_m1e-05_s62_best_validation/source_snapshot/src/gnn/adaptive_continual_federated.py": {
+      "bytes": 24598,
+      "sha256": "f0a1dc4972e76077cc10827c99f584d292951aa870d8cf983b74889c55b38bb0"
+    },
+    "artifacts/dp_level3_secagg/experiments/warm_distributed_dp_m1e-05_s62_best_validation/source_snapshot/src/gnn/causal_temporal_graphsage.py": {
+      "bytes": 29972,
+      "sha256": "77ec113dd6b16ed0bf6956d1ce9fa7d9da5b300b672f085c76830b203ea2e2eb"
+    },
+    "artifacts/dp_level3_secagg/experiments/warm_distributed_dp_m1e-05_s62_best_validation/source_snapshot/src/gnn/continual_temporal_graphsage.py": {
+      "bytes": 8674,
+      "sha256": "3ab7bc55e8b14f6dc69cc8d1188fc4daaf806e3010e00764b13bedeecea721d5"
+    },
+    "artifacts/dp_level3_secagg/experiments/warm_none_m0_s42/global_model.pt": {
+      "bytes": 977889,
+      "sha256": "353a293c68154857545c404176b78f87490d957cb761d146a4e90ffe755c49fe"
+    },
+    "artifacts/dp_level3_secagg/experiments/warm_none_m0_s42/manifest.json": {
+      "bytes": 1285,
+      "sha256": "96c696eaa259bbbb091e67da86cb97dab6dd7835e1a0e1878cd98918bfc55158"
+    },
+    "artifacts/dp_level3_secagg/experiments/warm_none_m0_s42/progress.json": {
+      "bytes": 14825,
+      "sha256": "2da80c9fc97ed62bef2d7fa6ba9c82ad5e8d5ba2fa75cd8c1fffc312cf5ab245"
+    },
+    "artifacts/dp_level3_secagg/experiments/warm_none_m0_s42/results.json": {
+      "bytes": 23636,
+      "sha256": "38393ff7254f261d4f41931dcccb9d44fefadddf6658715c1a14059ec1447d84"
+    },
+    "artifacts/dp_level3_secagg/experiments/warm_none_m0_s52/global_model.pt": {
+      "bytes": 977889,
+      "sha256": "8d32f5ad6c8600fa422fb3ad694f5be628fd1d5f7b985ee7f9ab2b467af3b4b4"
+    },
+    "artifacts/dp_level3_secagg/experiments/warm_none_m0_s52/manifest.json": {
+      "bytes": 1285,
+      "sha256": "c6a931afed997e9895bfc317b70e48f06eb3582fff7d1b7f632371e0a5a44929"
+    },
+    "artifacts/dp_level3_secagg/experiments/warm_none_m0_s52/progress.json": {
+      "bytes": 14820,
+      "sha256": "78bace05c950f691cf9a662f8d941ef16af76912fe10e671504da51f3dddc339"
+    },
+    "artifacts/dp_level3_secagg/experiments/warm_none_m0_s52/results.json": {
+      "bytes": 23628,
+      "sha256": "6b0f112a08eaa38daa7eb3a00e04f2c2347802d20e5645427bcbbe20c923f5a1"
+    },
+    "artifacts/dp_level3_secagg/experiments/warm_none_m0_s62/global_model.pt": {
+      "bytes": 977889,
+      "sha256": "bc18c897e2bc3d6adc448103d48f24d16fd4602bc95c094674534509ec3b04e7"
+    },
+    "artifacts/dp_level3_secagg/experiments/warm_none_m0_s62/manifest.json": {
+      "bytes": 1285,
+      "sha256": "bbc023cfade6584ee96487839a77b26dd07506e5a80c0b9f6dac39750881d2c7"
+    },
+    "artifacts/dp_level3_secagg/experiments/warm_none_m0_s62/progress.json": {
+      "bytes": 14777,
+      "sha256": "4b935ba1914dd98f487d558c45f1ec6c5106a4c2e28830e5297d01d0366850f3"
+    },
+    "artifacts/dp_level3_secagg/experiments/warm_none_m0_s62/results.json": {
+      "bytes": 23549,
+      "sha256": "6a0c7e9cd0c248bc9100135756bf71ea80cc0c91ce7890253f14514e00d1767d"
+    },
+    "artifacts/dp_level3_secagg/experiments/warm_option_a_m0.001_s42/global_model.pt": {
+      "bytes": 978529,
+      "sha256": "dd87a1b0aa6bb9c0a4cbfe9dcacbd3def09b30d38ddb508a720972232960d207"
+    },
+    "artifacts/dp_level3_secagg/experiments/warm_option_a_m0.001_s42/manifest.json": {
+      "bytes": 1944,
+      "sha256": "f234a87682ac9d2f199aa8399fb9803d4eb21a369b1f91dbd3e9b5a3e3287dba"
+    },
+    "artifacts/dp_level3_secagg/experiments/warm_option_a_m0.001_s42/progress.json": {
+      "bytes": 15229,
+      "sha256": "c4417aed5ac436a13ea7c936b9f227c068a23d5d949e7fbc74e047e1e4100705"
+    },
+    "artifacts/dp_level3_secagg/experiments/warm_option_a_m0.001_s42/results.json": {
+      "bytes": 21672,
+      "sha256": "77bf9cd79dba89e33c6c1e2a5354a5a18d4cae07a5fcb5efc9f9cde51689dc59"
+    },
+    "artifacts/dp_level3_secagg/experiments/warm_option_a_m0.001_s42/source_snapshot/distributed_federation/privacy/mechanism.py": {
+      "bytes": 6966,
+      "sha256": "da8a9da6f5415156dbb98926266679a36447a9aa68737067b22a79832ce769ef"
+    },
+    "artifacts/dp_level3_secagg/experiments/warm_option_a_m0.001_s42/source_snapshot/distributed_federation/privacy/secagg.py": {
+      "bytes": 5943,
+      "sha256": "31d5604ed074d5508fb7e4d652b3137937d9073450ca54807066dfbc888aeb86"
+    },
+    "artifacts/dp_level3_secagg/experiments/warm_option_a_m0.001_s42/source_snapshot/src/gnn/adaptive_continual_federated.py": {
+      "bytes": 24598,
+      "sha256": "f0a1dc4972e76077cc10827c99f584d292951aa870d8cf983b74889c55b38bb0"
+    },
+    "artifacts/dp_level3_secagg/experiments/warm_option_a_m0.001_s42/source_snapshot/src/gnn/causal_temporal_graphsage.py": {
+      "bytes": 29972,
+      "sha256": "77ec113dd6b16ed0bf6956d1ce9fa7d9da5b300b672f085c76830b203ea2e2eb"
+    },
+    "artifacts/dp_level3_secagg/experiments/warm_option_a_m0.001_s42/source_snapshot/src/gnn/continual_temporal_graphsage.py": {
+      "bytes": 8674,
+      "sha256": "3ab7bc55e8b14f6dc69cc8d1188fc4daaf806e3010e00764b13bedeecea721d5"
+    },
+    "artifacts/dp_level3_secagg/experiments/warm_option_a_m0.001_s52/global_model.pt": {
+      "bytes": 978529,
+      "sha256": "ce10a1b6ae2c8034e436d67f7cb7f3abf0b83134fcf10ae18fe1a0d94b161cef"
+    },
+    "artifacts/dp_level3_secagg/experiments/warm_option_a_m0.001_s52/manifest.json": {
+      "bytes": 1944,
+      "sha256": "73a6279ca2667b4904bcdeb51684b90f11a2744550f0ca12ab6e19584f475db0"
+    },
+    "artifacts/dp_level3_secagg/experiments/warm_option_a_m0.001_s52/progress.json": {
+      "bytes": 15198,
+      "sha256": "21c1fcc4477493d0b82755b2f45aecf5d740c0b1bce387ddfb4c9b86d44e6701"
+    },
+    "artifacts/dp_level3_secagg/experiments/warm_option_a_m0.001_s52/results.json": {
+      "bytes": 21611,
+      "sha256": "eb77c67055aa13edd4948d21e70a203617802e92e32eae999bd29f5ccd5a2527"
+    },
+    "artifacts/dp_level3_secagg/experiments/warm_option_a_m0.001_s52/source_snapshot/distributed_federation/privacy/mechanism.py": {
+      "bytes": 6966,
+      "sha256": "da8a9da6f5415156dbb98926266679a36447a9aa68737067b22a79832ce769ef"
+    },
+    "artifacts/dp_level3_secagg/experiments/warm_option_a_m0.001_s52/source_snapshot/distributed_federation/privacy/secagg.py": {
+      "bytes": 5943,
+      "sha256": "31d5604ed074d5508fb7e4d652b3137937d9073450ca54807066dfbc888aeb86"
+    },
+    "artifacts/dp_level3_secagg/experiments/warm_option_a_m0.001_s52/source_snapshot/src/gnn/adaptive_continual_federated.py": {
+      "bytes": 24598,
+      "sha256": "f0a1dc4972e76077cc10827c99f584d292951aa870d8cf983b74889c55b38bb0"
+    },
+    "artifacts/dp_level3_secagg/experiments/warm_option_a_m0.001_s52/source_snapshot/src/gnn/causal_temporal_graphsage.py": {
+      "bytes": 29972,
+      "sha256": "77ec113dd6b16ed0bf6956d1ce9fa7d9da5b300b672f085c76830b203ea2e2eb"
+    },
+    "artifacts/dp_level3_secagg/experiments/warm_option_a_m0.001_s52/source_snapshot/src/gnn/continual_temporal_graphsage.py": {
+      "bytes": 8674,
+      "sha256": "3ab7bc55e8b14f6dc69cc8d1188fc4daaf806e3010e00764b13bedeecea721d5"
+    },
+    "artifacts/dp_level3_secagg/experiments/warm_option_a_m0.001_s62/global_model.pt": {
+      "bytes": 978529,
+      "sha256": "9ddf4dc783328255e506f48bac67e23c6dc75db91481618906fe95bf7ade3664"
+    },
+    "artifacts/dp_level3_secagg/experiments/warm_option_a_m0.001_s62/manifest.json": {
+      "bytes": 1944,
+      "sha256": "e785a95a43d260e5eb61b2af39dc26c3f437595528d1730b9888d422528c9ab4"
+    },
+    "artifacts/dp_level3_secagg/experiments/warm_option_a_m0.001_s62/progress.json": {
+      "bytes": 15189,
+      "sha256": "89fc62ccc875d42a0cc6821f4a31a6d1fdf23c223d2c13933c66c0310dd94e0d"
+    },
+    "artifacts/dp_level3_secagg/experiments/warm_option_a_m0.001_s62/results.json": {
+      "bytes": 21588,
+      "sha256": "00b93704416a93b45ae85446f4e5e0d3f62199bfbad144527b5902f996ed5d0b"
+    },
+    "artifacts/dp_level3_secagg/experiments/warm_option_a_m0.001_s62/source_snapshot/distributed_federation/privacy/mechanism.py": {
+      "bytes": 6966,
+      "sha256": "da8a9da6f5415156dbb98926266679a36447a9aa68737067b22a79832ce769ef"
+    },
+    "artifacts/dp_level3_secagg/experiments/warm_option_a_m0.001_s62/source_snapshot/distributed_federation/privacy/secagg.py": {
+      "bytes": 5943,
+      "sha256": "31d5604ed074d5508fb7e4d652b3137937d9073450ca54807066dfbc888aeb86"
+    },
+    "artifacts/dp_level3_secagg/experiments/warm_option_a_m0.001_s62/source_snapshot/src/gnn/adaptive_continual_federated.py": {
+      "bytes": 24598,
+      "sha256": "f0a1dc4972e76077cc10827c99f584d292951aa870d8cf983b74889c55b38bb0"
+    },
+    "artifacts/dp_level3_secagg/experiments/warm_option_a_m0.001_s62/source_snapshot/src/gnn/causal_temporal_graphsage.py": {
+      "bytes": 29972,
+      "sha256": "77ec113dd6b16ed0bf6956d1ce9fa7d9da5b300b672f085c76830b203ea2e2eb"
+    },
+    "artifacts/dp_level3_secagg/experiments/warm_option_a_m0.001_s62/source_snapshot/src/gnn/continual_temporal_graphsage.py": {
+      "bytes": 8674,
+      "sha256": "3ab7bc55e8b14f6dc69cc8d1188fc4daaf806e3010e00764b13bedeecea721d5"
+    },
+    "artifacts/dp_level3_secagg/experiments/warm_reference_m0_s42/global_model.pt": {
+      "bytes": 977889,
+      "sha256": "ea898f7783c54ac32cd194d73ff4868c67da0f758152a9e78943f388a556294d"
+    },
+    "artifacts/dp_level3_secagg/experiments/warm_reference_m0_s42/manifest.json": {
+      "bytes": 1290,
+      "sha256": "3acfc3aaa2ad0b5370421bb93f1b1fae1a0c846e0f26fcec89feae5306ed2e54"
+    },
+    "artifacts/dp_level3_secagg/experiments/warm_reference_m0_s42/progress.json": {
+      "bytes": 14820,
+      "sha256": "17da889272ec5d8f093f05bda80e2cd14c64293c647c925f7f76335151d7ed81"
+    },
+    "artifacts/dp_level3_secagg/experiments/warm_reference_m0_s42/results.json": {
+      "bytes": 23627,
+      "sha256": "270e8e9dd39604569367057c8e0ed193e5ffbc2f098646c0ec7c1eb5e3532d49"
+    },
+    "artifacts/dp_level3_secagg/experiments/warm_reference_m0_s52/global_model.pt": {
+      "bytes": 977889,
+      "sha256": "d3d17ca5b432a6e861b8e0db8461e99401d4964d5874388b98e6e705d753d59c"
+    },
+    "artifacts/dp_level3_secagg/experiments/warm_reference_m0_s52/manifest.json": {
+      "bytes": 1290,
+      "sha256": "412375d490f623974814fc8ef530085678eb329e1adff6ad602c66c0f8bec98b"
+    },
+    "artifacts/dp_level3_secagg/experiments/warm_reference_m0_s52/progress.json": {
+      "bytes": 14827,
+      "sha256": "58a058ba49a3cdb02ecb2efcbc88f6ebb557760026d9eb981ea28c5597052cda"
+    },
+    "artifacts/dp_level3_secagg/experiments/warm_reference_m0_s52/results.json": {
+      "bytes": 23637,
+      "sha256": "6e7878a23e2bb1840e8e97780a17a390464eb1842c0bcda8a8e75b4bcc7addf0"
+    },
+    "artifacts/dp_level3_secagg/experiments/warm_reference_m0_s62/global_model.pt": {
+      "bytes": 977889,
+      "sha256": "792aa74c4111ccf33a6fe90cb7a1937f3f51ffdae60cfce63cc9fd892373d59f"
+    },
+    "artifacts/dp_level3_secagg/experiments/warm_reference_m0_s62/manifest.json": {
+      "bytes": 1290,
+      "sha256": "89a9cca56ecf9ddaea1637ddde07497073146970e21c4813be8acfb7839f29e1"
+    },
+    "artifacts/dp_level3_secagg/experiments/warm_reference_m0_s62/progress.json": {
+      "bytes": 14739,
+      "sha256": "fd5acac8295ff6e5958bad747b130ef79839d274da5007c010650f93bc9ac030"
+    },
+    "artifacts/dp_level3_secagg/experiments/warm_reference_m0_s62/results.json": {
+      "bytes": 23524,
+      "sha256": "3fa599cfaf92aa4dff29d62a423ba73dc57f67e3321de8b633938f32f58b6ecb"
+    },
+    "artifacts/dp_level3_secagg/experiments/warm_secure_central_dp_m0.001_s42/global_model.pt": {
+      "bytes": 977889,
+      "sha256": "744d020d433425704a37b0b20a94212ed846db318aceb1c3f60d3cb35d345cad"
+    },
+    "artifacts/dp_level3_secagg/experiments/warm_secure_central_dp_m0.001_s42/manifest.json": {
+      "bytes": 1347,
+      "sha256": "c3676b607bc40ef1719deec0e46f01559addc053b26481deaf8642c5640a5254"
+    },
+    "artifacts/dp_level3_secagg/experiments/warm_secure_central_dp_m0.001_s42/progress.json": {
+      "bytes": 14650,
+      "sha256": "bb4ea2ae122fe0b3c89e91ea4388b5df74eaed084868ebc458c13e1526471e0d"
+    },
+    "artifacts/dp_level3_secagg/experiments/warm_secure_central_dp_m0.001_s42/results.json": {
+      "bytes": 21084,
+      "sha256": "d1fc10737a20de3245ca8f07a1a949dc78f5e56189ce4ff71f0ddfeac3817f56"
+    },
+    "artifacts/dp_level3_secagg/experiments/warm_secure_central_dp_m0.001_s52/global_model.pt": {
+      "bytes": 977889,
+      "sha256": "7b2fa3ec6e9c7ff879f3e4d65223033814ef3f6a40ff615044d6f1aae39dea6b"
+    },
+    "artifacts/dp_level3_secagg/experiments/warm_secure_central_dp_m0.001_s52/manifest.json": {
+      "bytes": 1347,
+      "sha256": "8e5d91e7f15d05599960f8612adbe4a900aaa23af3600e558b03d0e3c8ef7136"
+    },
+    "artifacts/dp_level3_secagg/experiments/warm_secure_central_dp_m0.001_s52/progress.json": {
+      "bytes": 14636,
+      "sha256": "15c70e3cb506a5e83f5d7a236faf687d401f38aab1dc44450300fc9b4c803609"
+    },
+    "artifacts/dp_level3_secagg/experiments/warm_secure_central_dp_m0.001_s52/results.json": {
+      "bytes": 21068,
+      "sha256": "9360e5422a6030c7d686f25ce00d9cbce5e81b54ff6874c287b515f7cd751258"
+    },
+    "artifacts/dp_level3_secagg/experiments/warm_secure_central_dp_m0.001_s62/global_model.pt": {
+      "bytes": 977889,
+      "sha256": "eeb13251a294f89175bc1f9ded55e4f349da4a6e45ce735065f6c64814f63413"
+    },
+    "artifacts/dp_level3_secagg/experiments/warm_secure_central_dp_m0.001_s62/manifest.json": {
+      "bytes": 1347,
+      "sha256": "c7e4658fd8c063dd8862f30b343cb7acf366c22a9513160c68113babff237a82"
+    },
+    "artifacts/dp_level3_secagg/experiments/warm_secure_central_dp_m0.001_s62/progress.json": {
+      "bytes": 14627,
+      "sha256": "da61638d24696150d9e1799272de9b72c38c538fc4ff3edb0ada9b2f22670e32"
+    },
+    "artifacts/dp_level3_secagg/experiments/warm_secure_central_dp_m0.001_s62/results.json": {
+      "bytes": 21056,
+      "sha256": "98557d5ba4430511142fd25fa7b9924549498040b9e56c8bc5a4776798cd2dff"
+    },
+    "artifacts/dp_level3_secagg/experiments/warm_secure_central_dp_m0_s42/global_model.pt": {
+      "bytes": 977889,
+      "sha256": "61d338656879a1de287c88216752eecce05f26d393273dfabbcdc8a68f12d54a"
+    },
+    "artifacts/dp_level3_secagg/experiments/warm_secure_central_dp_m0_s42/manifest.json": {
+      "bytes": 1297,
+      "sha256": "69c2edb2fc1f37596c407a517e41cf190cbc963ceeb12699b575d820e4b7d9f5"
+    },
+    "artifacts/dp_level3_secagg/experiments/warm_secure_central_dp_m0_s42/progress.json": {
+      "bytes": 14569,
+      "sha256": "6e6ffe3e0237423a18182ec31307cdb9c4f5a2f9f0eb6f04ca452089cc43b0db"
+    },
+    "artifacts/dp_level3_secagg/experiments/warm_secure_central_dp_m0_s42/results.json": {
+      "bytes": 20982,
+      "sha256": "2b6383509a62f56efca85f657229880ecea7a94726f1109051734c3e664c53f2"
+    },
+    "artifacts/dp_level3_secagg/experiments/warm_secure_central_dp_m0_s52/global_model.pt": {
+      "bytes": 977889,
+      "sha256": "069411ad42bc797d48a3b5cfc32d91cf556481a8bf755f8de47e4cee745bfc31"
+    },
+    "artifacts/dp_level3_secagg/experiments/warm_secure_central_dp_m0_s52/manifest.json": {
+      "bytes": 1297,
+      "sha256": "3ca982bf280c01def924c4658602f987c3e10cb4ad91b212ba19d8deb0efcf1b"
+    },
+    "artifacts/dp_level3_secagg/experiments/warm_secure_central_dp_m0_s52/progress.json": {
+      "bytes": 14580,
+      "sha256": "c7ecb9f503e98643186c29e1612776c35e4ec5063f75ae3e6e56544577a21b93"
+    },
+    "artifacts/dp_level3_secagg/experiments/warm_secure_central_dp_m0_s52/results.json": {
+      "bytes": 21003,
+      "sha256": "7b6e47f159ba3c32e070272c55d2392ec54acd9986c3462b6fd2ff66c7f5c6e0"
+    },
+    "artifacts/dp_level3_secagg/experiments/warm_secure_central_dp_m0_s62/global_model.pt": {
+      "bytes": 977889,
+      "sha256": "10e4bb966c1eaf1ea30cf7486c7f351f8b6a1eef011697794ecf86a7e90c34f9"
+    },
+    "artifacts/dp_level3_secagg/experiments/warm_secure_central_dp_m0_s62/manifest.json": {
+      "bytes": 1297,
+      "sha256": "bf8e9fafa3d32fc3753767017d866cd0c46d2be647d2305491feb360027b450a"
+    },
+    "artifacts/dp_level3_secagg/experiments/warm_secure_central_dp_m0_s62/progress.json": {
+      "bytes": 14538,
+      "sha256": "a2150c9ceea5046571c8d4d8d6200ba61648b1a310f128d063f3f1b24e0987f4"
+    },
+    "artifacts/dp_level3_secagg/experiments/warm_secure_central_dp_m0_s62/results.json": {
+      "bytes": 20923,
+      "sha256": "d1b4ef08ae63442bb2f09e6362d15696059f187444f658148532be4c520246f0"
+    },
+    "artifacts/dp_level3_secagg/feature_schema.json": {
+      "bytes": 4954,
+      "sha256": "ae6fabba8641da6f835b6ea9eb946f6ec9dc2713f50e3bf82446740b0f07dd35"
+    },
+    "artifacts/dp_level3_secagg/kafka_acceptance/central/models/qa-2985ba7ac1c34aed/bank-1/global_round_001.commit.json": {
+      "bytes": 193,
+      "sha256": "5ce0056404016231c085db95f97a2f7c29a96bb930394ea3799e761eebb53d4e"
+    },
+    "artifacts/dp_level3_secagg/kafka_acceptance/central/models/qa-2985ba7ac1c34aed/bank-1/global_round_001.json": {
+      "bytes": 9284,
+      "sha256": "9ab5745e8de13b68d2c662945c91c7d6ccec3347d11e1ddd8ecb0ca5bd8c1e40"
+    },
+    "artifacts/dp_level3_secagg/kafka_acceptance/central/models/qa-2985ba7ac1c34aed/bank-1/global_round_001.safetensors": {
+      "bytes": 971628,
+      "sha256": "2853e0f72e52580d45294643c93bb5d3b17e7f5db08a653a338debb542b45d8a"
+    },
+    "artifacts/dp_level3_secagg/kafka_acceptance/central/models/qa-2985ba7ac1c34aed/bank-1/global_round_002.commit.json": {
+      "bytes": 193,
+      "sha256": "a961c92cc3f2ec564fdf0e47ba685e548fe659df216d689e14e1ee5f6c35c507"
+    },
+    "artifacts/dp_level3_secagg/kafka_acceptance/central/models/qa-2985ba7ac1c34aed/bank-1/global_round_002.json": {
+      "bytes": 9284,
+      "sha256": "1da14321b69dfb8b0a3be207aa1b3b110c5f63a47a502c9ed4609638208df95a"
+    },
+    "artifacts/dp_level3_secagg/kafka_acceptance/central/models/qa-2985ba7ac1c34aed/bank-1/global_round_002.safetensors": {
+      "bytes": 971628,
+      "sha256": "e20bb984a4444cda571677dba2be305a649383bb56454668f64c2aff381acc35"
+    },
+    "artifacts/dp_level3_secagg/kafka_acceptance/central/models/qa-2985ba7ac1c34aed/bank-2/global_round_001.commit.json": {
+      "bytes": 193,
+      "sha256": "5ce0056404016231c085db95f97a2f7c29a96bb930394ea3799e761eebb53d4e"
+    },
+    "artifacts/dp_level3_secagg/kafka_acceptance/central/models/qa-2985ba7ac1c34aed/bank-2/global_round_001.json": {
+      "bytes": 9284,
+      "sha256": "9ab5745e8de13b68d2c662945c91c7d6ccec3347d11e1ddd8ecb0ca5bd8c1e40"
+    },
+    "artifacts/dp_level3_secagg/kafka_acceptance/central/models/qa-2985ba7ac1c34aed/bank-2/global_round_001.safetensors": {
+      "bytes": 971628,
+      "sha256": "2853e0f72e52580d45294643c93bb5d3b17e7f5db08a653a338debb542b45d8a"
+    },
+    "artifacts/dp_level3_secagg/kafka_acceptance/central/models/qa-2985ba7ac1c34aed/bank-2/global_round_002.commit.json": {
+      "bytes": 193,
+      "sha256": "a961c92cc3f2ec564fdf0e47ba685e548fe659df216d689e14e1ee5f6c35c507"
+    },
+    "artifacts/dp_level3_secagg/kafka_acceptance/central/models/qa-2985ba7ac1c34aed/bank-2/global_round_002.json": {
+      "bytes": 9284,
+      "sha256": "1da14321b69dfb8b0a3be207aa1b3b110c5f63a47a502c9ed4609638208df95a"
+    },
+    "artifacts/dp_level3_secagg/kafka_acceptance/central/models/qa-2985ba7ac1c34aed/bank-2/global_round_002.safetensors": {
+      "bytes": 971628,
+      "sha256": "e20bb984a4444cda571677dba2be305a649383bb56454668f64c2aff381acc35"
+    },
+    "artifacts/dp_level3_secagg/kafka_acceptance/central/models/qa-2985ba7ac1c34aed/bank-3/global_round_001.commit.json": {
+      "bytes": 193,
+      "sha256": "5ce0056404016231c085db95f97a2f7c29a96bb930394ea3799e761eebb53d4e"
+    },
+    "artifacts/dp_level3_secagg/kafka_acceptance/central/models/qa-2985ba7ac1c34aed/bank-3/global_round_001.json": {
+      "bytes": 9284,
+      "sha256": "9ab5745e8de13b68d2c662945c91c7d6ccec3347d11e1ddd8ecb0ca5bd8c1e40"
+    },
+    "artifacts/dp_level3_secagg/kafka_acceptance/central/models/qa-2985ba7ac1c34aed/bank-3/global_round_001.safetensors": {
+      "bytes": 971628,
+      "sha256": "2853e0f72e52580d45294643c93bb5d3b17e7f5db08a653a338debb542b45d8a"
+    },
+    "artifacts/dp_level3_secagg/kafka_acceptance/central/models/qa-2985ba7ac1c34aed/bank-3/global_round_002.commit.json": {
+      "bytes": 193,
+      "sha256": "a961c92cc3f2ec564fdf0e47ba685e548fe659df216d689e14e1ee5f6c35c507"
+    },
+    "artifacts/dp_level3_secagg/kafka_acceptance/central/models/qa-2985ba7ac1c34aed/bank-3/global_round_002.json": {
+      "bytes": 9284,
+      "sha256": "1da14321b69dfb8b0a3be207aa1b3b110c5f63a47a502c9ed4609638208df95a"
+    },
+    "artifacts/dp_level3_secagg/kafka_acceptance/central/models/qa-2985ba7ac1c34aed/bank-3/global_round_002.safetensors": {
+      "bytes": 971628,
+      "sha256": "e20bb984a4444cda571677dba2be305a649383bb56454668f64c2aff381acc35"
+    },
+    "artifacts/dp_level3_secagg/kafka_acceptance/central/models/qa-2985ba7ac1c34aed/global_round_001.commit.json": {
+      "bytes": 193,
+      "sha256": "f13e89b5976a05b5f0fbf89d660c1a3cafbc81d2497e6b10db8b97b20d8bb22a"
+    },
+    "artifacts/dp_level3_secagg/kafka_acceptance/central/models/qa-2985ba7ac1c34aed/global_round_001.json": {
+      "bytes": 11404,
+      "sha256": "29f7fbec7dff34ac0f9ea5dd383e66c4819f2160f4ae18e5ffc19ff85c389212"
+    },
+    "artifacts/dp_level3_secagg/kafka_acceptance/central/models/qa-2985ba7ac1c34aed/global_round_001.safetensors": {
+      "bytes": 971628,
+      "sha256": "2853e0f72e52580d45294643c93bb5d3b17e7f5db08a653a338debb542b45d8a"
+    },
+    "artifacts/dp_level3_secagg/kafka_acceptance/central/models/qa-2985ba7ac1c34aed/global_round_002.commit.json": {
+      "bytes": 193,
+      "sha256": "7c03dddca399561effd77e0490e5d87ad18922e697ca3d7687b0bcf36e1bcef9"
+    },
+    "artifacts/dp_level3_secagg/kafka_acceptance/central/models/qa-2985ba7ac1c34aed/global_round_002.json": {
+      "bytes": 11408,
+      "sha256": "e74cccd51d904482f6a901c477277c8be331c5a2c70bc8e595a70f337e56fcc9"
+    },
+    "artifacts/dp_level3_secagg/kafka_acceptance/central/models/qa-2985ba7ac1c34aed/global_round_002.safetensors": {
+      "bytes": 971628,
+      "sha256": "e20bb984a4444cda571677dba2be305a649383bb56454668f64c2aff381acc35"
+    },
+    "artifacts/dp_level3_secagg/kafka_acceptance/central/result.json": {
+      "bytes": 523,
+      "sha256": "63e02054539e0bd41f4978c7a2829640e2f68d254d40cab3b40da3335a2d2001"
+    },
+    "artifacts/dp_level3_secagg/kafka_acceptance/central/run.json": {
+      "bytes": 1366,
+      "sha256": "e7ca78fb9e5ee8e8275de5cee353f696ef106368827ebb367624944f47b09512"
+    },
+    "artifacts/dp_level3_secagg/kafka_acceptance/distributed/models/qa-4e29cd61c4964ae5/bank-1/global_round_001.commit.json": {
+      "bytes": 193,
+      "sha256": "57384635d56ff1094815b3621c22d522570fd7ac68b04d25b5f57372fc274052"
+    },
+    "artifacts/dp_level3_secagg/kafka_acceptance/distributed/models/qa-4e29cd61c4964ae5/bank-1/global_round_001.json": {
+      "bytes": 9278,
+      "sha256": "3252d6ce3c5ac991e809a9f31c1cc60243f0d41a26bcd3f8ebc3e6ccd3724782"
+    },
+    "artifacts/dp_level3_secagg/kafka_acceptance/distributed/models/qa-4e29cd61c4964ae5/bank-1/global_round_001.safetensors": {
+      "bytes": 971628,
+      "sha256": "842b81f26357be4acd77e9135a1f8fdf656b6ee93d491185edc51b71757e8344"
+    },
+    "artifacts/dp_level3_secagg/kafka_acceptance/distributed/models/qa-4e29cd61c4964ae5/bank-1/global_round_002.commit.json": {
+      "bytes": 193,
+      "sha256": "3f817ab970873e42b5794552486399c1fb1449438bec2862e91a44bf8770a8c7"
+    },
+    "artifacts/dp_level3_secagg/kafka_acceptance/distributed/models/qa-4e29cd61c4964ae5/bank-1/global_round_002.json": {
+      "bytes": 9278,
+      "sha256": "de1affb0e24a95369987fbf5ff3e42f8fe8c713295762e0c0bffe68843f0f763"
+    },
+    "artifacts/dp_level3_secagg/kafka_acceptance/distributed/models/qa-4e29cd61c4964ae5/bank-1/global_round_002.safetensors": {
+      "bytes": 971628,
+      "sha256": "b4f401efd386fd43ec1f3fd636dce1009e97c35245f54783bfa1196a3fec99a4"
+    },
+    "artifacts/dp_level3_secagg/kafka_acceptance/distributed/models/qa-4e29cd61c4964ae5/bank-2/global_round_001.commit.json": {
+      "bytes": 193,
+      "sha256": "57384635d56ff1094815b3621c22d522570fd7ac68b04d25b5f57372fc274052"
+    },
+    "artifacts/dp_level3_secagg/kafka_acceptance/distributed/models/qa-4e29cd61c4964ae5/bank-2/global_round_001.json": {
+      "bytes": 9278,
+      "sha256": "3252d6ce3c5ac991e809a9f31c1cc60243f0d41a26bcd3f8ebc3e6ccd3724782"
+    },
+    "artifacts/dp_level3_secagg/kafka_acceptance/distributed/models/qa-4e29cd61c4964ae5/bank-2/global_round_001.safetensors": {
+      "bytes": 971628,
+      "sha256": "842b81f26357be4acd77e9135a1f8fdf656b6ee93d491185edc51b71757e8344"
+    },
+    "artifacts/dp_level3_secagg/kafka_acceptance/distributed/models/qa-4e29cd61c4964ae5/bank-2/global_round_002.commit.json": {
+      "bytes": 193,
+      "sha256": "3f817ab970873e42b5794552486399c1fb1449438bec2862e91a44bf8770a8c7"
+    },
+    "artifacts/dp_level3_secagg/kafka_acceptance/distributed/models/qa-4e29cd61c4964ae5/bank-2/global_round_002.json": {
+      "bytes": 9278,
+      "sha256": "de1affb0e24a95369987fbf5ff3e42f8fe8c713295762e0c0bffe68843f0f763"
+    },
+    "artifacts/dp_level3_secagg/kafka_acceptance/distributed/models/qa-4e29cd61c4964ae5/bank-2/global_round_002.safetensors": {
+      "bytes": 971628,
+      "sha256": "b4f401efd386fd43ec1f3fd636dce1009e97c35245f54783bfa1196a3fec99a4"
+    },
+    "artifacts/dp_level3_secagg/kafka_acceptance/distributed/models/qa-4e29cd61c4964ae5/bank-3/global_round_001.commit.json": {
+      "bytes": 193,
+      "sha256": "57384635d56ff1094815b3621c22d522570fd7ac68b04d25b5f57372fc274052"
+    },
+    "artifacts/dp_level3_secagg/kafka_acceptance/distributed/models/qa-4e29cd61c4964ae5/bank-3/global_round_001.json": {
+      "bytes": 9278,
+      "sha256": "3252d6ce3c5ac991e809a9f31c1cc60243f0d41a26bcd3f8ebc3e6ccd3724782"
+    },
+    "artifacts/dp_level3_secagg/kafka_acceptance/distributed/models/qa-4e29cd61c4964ae5/bank-3/global_round_001.safetensors": {
+      "bytes": 971628,
+      "sha256": "842b81f26357be4acd77e9135a1f8fdf656b6ee93d491185edc51b71757e8344"
+    },
+    "artifacts/dp_level3_secagg/kafka_acceptance/distributed/models/qa-4e29cd61c4964ae5/bank-3/global_round_002.commit.json": {
+      "bytes": 193,
+      "sha256": "3f817ab970873e42b5794552486399c1fb1449438bec2862e91a44bf8770a8c7"
+    },
+    "artifacts/dp_level3_secagg/kafka_acceptance/distributed/models/qa-4e29cd61c4964ae5/bank-3/global_round_002.json": {
+      "bytes": 9278,
+      "sha256": "de1affb0e24a95369987fbf5ff3e42f8fe8c713295762e0c0bffe68843f0f763"
+    },
+    "artifacts/dp_level3_secagg/kafka_acceptance/distributed/models/qa-4e29cd61c4964ae5/bank-3/global_round_002.safetensors": {
+      "bytes": 971628,
+      "sha256": "b4f401efd386fd43ec1f3fd636dce1009e97c35245f54783bfa1196a3fec99a4"
+    },
+    "artifacts/dp_level3_secagg/kafka_acceptance/distributed/models/qa-4e29cd61c4964ae5/global_round_001.commit.json": {
+      "bytes": 193,
+      "sha256": "8472117a854c38e87f2c4902f2664adeeea2d4aa1523875ef405ccca3d3960c0"
+    },
+    "artifacts/dp_level3_secagg/kafka_acceptance/distributed/models/qa-4e29cd61c4964ae5/global_round_001.json": {
+      "bytes": 11417,
+      "sha256": "bdd801454749fbd4c6e1b05817f142355af68b92e5137ffea82296f96ea8dbb2"
+    },
+    "artifacts/dp_level3_secagg/kafka_acceptance/distributed/models/qa-4e29cd61c4964ae5/global_round_001.safetensors": {
+      "bytes": 971628,
+      "sha256": "842b81f26357be4acd77e9135a1f8fdf656b6ee93d491185edc51b71757e8344"
+    },
+    "artifacts/dp_level3_secagg/kafka_acceptance/distributed/models/qa-4e29cd61c4964ae5/global_round_002.commit.json": {
+      "bytes": 193,
+      "sha256": "0a41f54f5d32e3071eddb4bbf0f6865b672db6c701afd22a33fa57b92a776ab7"
+    },
+    "artifacts/dp_level3_secagg/kafka_acceptance/distributed/models/qa-4e29cd61c4964ae5/global_round_002.json": {
+      "bytes": 11415,
+      "sha256": "e353efdd0be2ccacda624abb49299d74c62d7e2f2c1e2bce644bdfbb1e258520"
+    },
+    "artifacts/dp_level3_secagg/kafka_acceptance/distributed/models/qa-4e29cd61c4964ae5/global_round_002.safetensors": {
+      "bytes": 971628,
+      "sha256": "b4f401efd386fd43ec1f3fd636dce1009e97c35245f54783bfa1196a3fec99a4"
+    },
+    "artifacts/dp_level3_secagg/kafka_acceptance/distributed/result.json": {
+      "bytes": 520,
+      "sha256": "268337fbf7b6f7a88ad3998e9b762d5d4e78f66548eeb51d7ad442a10c826608"
+    },
+    "artifacts/dp_level3_secagg/kafka_acceptance/distributed/run.json": {
+      "bytes": 1367,
+      "sha256": "97837ede2407bb945ea6043a1e2c3e38c4948dae40677cb216535e29fc32927c"
+    },
+    "artifacts/dp_level3_secagg/kafka_acceptance/distributed_final/models/qa-bc4c2ad6358c4335/bank-1/global_round_001.commit.json": {
+      "bytes": 193,
+      "sha256": "5e7c8c7131bcca69d393c372fa0bba973210e5711af27988fd838d65fe8edee9"
+    },
+    "artifacts/dp_level3_secagg/kafka_acceptance/distributed_final/models/qa-bc4c2ad6358c4335/bank-1/global_round_001.json": {
+      "bytes": 9375,
+      "sha256": "51065c266a270b7d47aa4eb6e0dc5d8488b17f14c85c8fe237206d42f9789d3b"
+    },
+    "artifacts/dp_level3_secagg/kafka_acceptance/distributed_final/models/qa-bc4c2ad6358c4335/bank-1/global_round_001.safetensors": {
+      "bytes": 971628,
+      "sha256": "3ff6a17a5cb116da42e9b54eeb8d405fb265068d656611a1888e10dea58d6791"
+    },
+    "artifacts/dp_level3_secagg/kafka_acceptance/distributed_final/models/qa-bc4c2ad6358c4335/bank-1/global_round_002.commit.json": {
+      "bytes": 193,
+      "sha256": "69d2b48720bf79397ba935d3df41220d78ee1716853c06270cb94c0988881b56"
+    },
+    "artifacts/dp_level3_secagg/kafka_acceptance/distributed_final/models/qa-bc4c2ad6358c4335/bank-1/global_round_002.json": {
+      "bytes": 9375,
+      "sha256": "c1e00f7a63f10b580e9d12a5d8c92ed3d6a65e5529b3ce2689ca7feb639a8673"
+    },
+    "artifacts/dp_level3_secagg/kafka_acceptance/distributed_final/models/qa-bc4c2ad6358c4335/bank-1/global_round_002.safetensors": {
+      "bytes": 971628,
+      "sha256": "780afd6f0557bbcf398f6105fedb3ce1e453dc884e88ff6eea616535fc8a5e4b"
+    },
+    "artifacts/dp_level3_secagg/kafka_acceptance/distributed_final/models/qa-bc4c2ad6358c4335/bank-2/global_round_001.commit.json": {
+      "bytes": 193,
+      "sha256": "5e7c8c7131bcca69d393c372fa0bba973210e5711af27988fd838d65fe8edee9"
+    },
+    "artifacts/dp_level3_secagg/kafka_acceptance/distributed_final/models/qa-bc4c2ad6358c4335/bank-2/global_round_001.json": {
+      "bytes": 9375,
+      "sha256": "51065c266a270b7d47aa4eb6e0dc5d8488b17f14c85c8fe237206d42f9789d3b"
+    },
+    "artifacts/dp_level3_secagg/kafka_acceptance/distributed_final/models/qa-bc4c2ad6358c4335/bank-2/global_round_001.safetensors": {
+      "bytes": 971628,
+      "sha256": "3ff6a17a5cb116da42e9b54eeb8d405fb265068d656611a1888e10dea58d6791"
+    },
+    "artifacts/dp_level3_secagg/kafka_acceptance/distributed_final/models/qa-bc4c2ad6358c4335/bank-2/global_round_002.commit.json": {
+      "bytes": 193,
+      "sha256": "69d2b48720bf79397ba935d3df41220d78ee1716853c06270cb94c0988881b56"
+    },
+    "artifacts/dp_level3_secagg/kafka_acceptance/distributed_final/models/qa-bc4c2ad6358c4335/bank-2/global_round_002.json": {
+      "bytes": 9375,
+      "sha256": "c1e00f7a63f10b580e9d12a5d8c92ed3d6a65e5529b3ce2689ca7feb639a8673"
+    },
+    "artifacts/dp_level3_secagg/kafka_acceptance/distributed_final/models/qa-bc4c2ad6358c4335/bank-2/global_round_002.safetensors": {
+      "bytes": 971628,
+      "sha256": "780afd6f0557bbcf398f6105fedb3ce1e453dc884e88ff6eea616535fc8a5e4b"
+    },
+    "artifacts/dp_level3_secagg/kafka_acceptance/distributed_final/models/qa-bc4c2ad6358c4335/bank-3/global_round_001.commit.json": {
+      "bytes": 193,
+      "sha256": "5e7c8c7131bcca69d393c372fa0bba973210e5711af27988fd838d65fe8edee9"
+    },
+    "artifacts/dp_level3_secagg/kafka_acceptance/distributed_final/models/qa-bc4c2ad6358c4335/bank-3/global_round_001.json": {
+      "bytes": 9375,
+      "sha256": "51065c266a270b7d47aa4eb6e0dc5d8488b17f14c85c8fe237206d42f9789d3b"
+    },
+    "artifacts/dp_level3_secagg/kafka_acceptance/distributed_final/models/qa-bc4c2ad6358c4335/bank-3/global_round_001.safetensors": {
+      "bytes": 971628,
+      "sha256": "3ff6a17a5cb116da42e9b54eeb8d405fb265068d656611a1888e10dea58d6791"
+    },
+    "artifacts/dp_level3_secagg/kafka_acceptance/distributed_final/models/qa-bc4c2ad6358c4335/bank-3/global_round_002.commit.json": {
+      "bytes": 193,
+      "sha256": "69d2b48720bf79397ba935d3df41220d78ee1716853c06270cb94c0988881b56"
+    },
+    "artifacts/dp_level3_secagg/kafka_acceptance/distributed_final/models/qa-bc4c2ad6358c4335/bank-3/global_round_002.json": {
+      "bytes": 9375,
+      "sha256": "c1e00f7a63f10b580e9d12a5d8c92ed3d6a65e5529b3ce2689ca7feb639a8673"
+    },
+    "artifacts/dp_level3_secagg/kafka_acceptance/distributed_final/models/qa-bc4c2ad6358c4335/bank-3/global_round_002.safetensors": {
+      "bytes": 971628,
+      "sha256": "780afd6f0557bbcf398f6105fedb3ce1e453dc884e88ff6eea616535fc8a5e4b"
+    },
+    "artifacts/dp_level3_secagg/kafka_acceptance/distributed_final/models/qa-bc4c2ad6358c4335/global_round_001.commit.json": {
+      "bytes": 193,
+      "sha256": "a16cc45e3d742d4f350b54e38dcce262b4841b84ad9b266e7574eb122db2169c"
+    },
+    "artifacts/dp_level3_secagg/kafka_acceptance/distributed_final/models/qa-bc4c2ad6358c4335/global_round_001.json": {
+      "bytes": 11514,
+      "sha256": "1a920455f72847314b5198543f49fdc230d8ec31cb87dd3e14a00dc80dc16a94"
+    },
+    "artifacts/dp_level3_secagg/kafka_acceptance/distributed_final/models/qa-bc4c2ad6358c4335/global_round_001.safetensors": {
+      "bytes": 971628,
+      "sha256": "3ff6a17a5cb116da42e9b54eeb8d405fb265068d656611a1888e10dea58d6791"
+    },
+    "artifacts/dp_level3_secagg/kafka_acceptance/distributed_final/models/qa-bc4c2ad6358c4335/global_round_002.commit.json": {
+      "bytes": 193,
+      "sha256": "f001269a712aef1df4f846480076473bf37c6299d5fb4b8f5b246543ff55970a"
+    },
+    "artifacts/dp_level3_secagg/kafka_acceptance/distributed_final/models/qa-bc4c2ad6358c4335/global_round_002.json": {
+      "bytes": 11512,
+      "sha256": "59824be2dd5641488c6c3524cb050cf64f1dce8fad43f5dcfbc1a61e54d2b292"
+    },
+    "artifacts/dp_level3_secagg/kafka_acceptance/distributed_final/models/qa-bc4c2ad6358c4335/global_round_002.safetensors": {
+      "bytes": 971628,
+      "sha256": "780afd6f0557bbcf398f6105fedb3ce1e453dc884e88ff6eea616535fc8a5e4b"
+    },
+    "artifacts/dp_level3_secagg/kafka_acceptance/distributed_final/result.json": {
+      "bytes": 520,
+      "sha256": "e9b5d0fae4357944e8057cac26f6fc0de155686a3374a6664fd8158991f1263f"
+    },
+    "artifacts/dp_level3_secagg/kafka_acceptance/distributed_final/run.json": {
+      "bytes": 1373,
+      "sha256": "9473a73ffde5c1aa1a9606dbba0b47d8f956b234de3d20cc040c2fdeafc9bbdb"
+    },
+    "artifacts/dp_level3_secagg/loaded_source_groups/ddp_confirmation/distributed_federation/privacy/mechanism.py": {
+      "bytes": 6966,
+      "sha256": "da8a9da6f5415156dbb98926266679a36447a9aa68737067b22a79832ce769ef"
+    },
+    "artifacts/dp_level3_secagg/loaded_source_groups/ddp_confirmation/distributed_federation/privacy/secagg.py": {
+      "bytes": 5943,
+      "sha256": "31d5604ed074d5508fb7e4d652b3137937d9073450ca54807066dfbc888aeb86"
+    },
+    "artifacts/dp_level3_secagg/loaded_source_groups/ddp_confirmation/src/gnn/adaptive_continual_federated.py": {
+      "bytes": 24471,
+      "sha256": "56bd2a0d62ef2d761eee0daab6e10d7a2b184694cf0d9fe8eee498d93d28006f"
+    },
+    "artifacts/dp_level3_secagg/loaded_source_groups/ddp_confirmation/src/gnn/causal_temporal_graphsage.py": {
+      "bytes": 29972,
+      "sha256": "77ec113dd6b16ed0bf6956d1ce9fa7d9da5b300b672f085c76830b203ea2e2eb"
+    },
+    "artifacts/dp_level3_secagg/loaded_source_groups/ddp_confirmation/src/gnn/continual_temporal_graphsage.py": {
+      "bytes": 8674,
+      "sha256": "3ab7bc55e8b14f6dc69cc8d1188fc4daaf806e3010e00764b13bedeecea721d5"
+    },
+    "artifacts/dp_level3_secagg/loaded_source_groups/initial/distributed_federation/privacy/mechanism.py": {
+      "bytes": 6748,
+      "sha256": "562e47ecd59840af78a52655d2a0d9c3502f59c6408453a7237e97b45cf322ee"
+    },
+    "artifacts/dp_level3_secagg/loaded_source_groups/initial/distributed_federation/privacy/secagg.py": {
+      "bytes": 5943,
+      "sha256": "31d5604ed074d5508fb7e4d652b3137937d9073450ca54807066dfbc888aeb86"
+    },
+    "artifacts/dp_level3_secagg/loaded_source_groups/initial/src/gnn/adaptive_continual_federated.py": {
+      "bytes": 24471,
+      "sha256": "56bd2a0d62ef2d761eee0daab6e10d7a2b184694cf0d9fe8eee498d93d28006f"
+    },
+    "artifacts/dp_level3_secagg/loaded_source_groups/initial/src/gnn/causal_temporal_graphsage.py": {
+      "bytes": 29972,
+      "sha256": "77ec113dd6b16ed0bf6956d1ce9fa7d9da5b300b672f085c76830b203ea2e2eb"
+    },
+    "artifacts/dp_level3_secagg/loaded_source_groups/initial/src/gnn/continual_temporal_graphsage.py": {
+      "bytes": 8674,
+      "sha256": "3ab7bc55e8b14f6dc69cc8d1188fc4daaf806e3010e00764b13bedeecea721d5"
+    },
+    "artifacts/dp_level3_secagg/loaded_source_groups/option_a/distributed_federation/privacy/mechanism.py": {
+      "bytes": 6966,
+      "sha256": "da8a9da6f5415156dbb98926266679a36447a9aa68737067b22a79832ce769ef"
+    },
+    "artifacts/dp_level3_secagg/loaded_source_groups/option_a/distributed_federation/privacy/secagg.py": {
+      "bytes": 5943,
+      "sha256": "31d5604ed074d5508fb7e4d652b3137937d9073450ca54807066dfbc888aeb86"
+    },
+    "artifacts/dp_level3_secagg/loaded_source_groups/option_a/src/gnn/adaptive_continual_federated.py": {
+      "bytes": 24598,
+      "sha256": "f0a1dc4972e76077cc10827c99f584d292951aa870d8cf983b74889c55b38bb0"
+    },
+    "artifacts/dp_level3_secagg/loaded_source_groups/option_a/src/gnn/causal_temporal_graphsage.py": {
+      "bytes": 29972,
+      "sha256": "77ec113dd6b16ed0bf6956d1ce9fa7d9da5b300b672f085c76830b203ea2e2eb"
+    },
+    "artifacts/dp_level3_secagg/loaded_source_groups/option_a/src/gnn/continual_temporal_graphsage.py": {
+      "bytes": 8674,
+      "sha256": "3ab7bc55e8b14f6dc69cc8d1188fc4daaf806e3010e00764b13bedeecea721d5"
+    },
+    "artifacts/dp_level3_secagg/loaded_source_groups/scratch_ddp/distributed_federation/privacy/mechanism.py": {
+      "bytes": 6966,
+      "sha256": "da8a9da6f5415156dbb98926266679a36447a9aa68737067b22a79832ce769ef"
+    },
+    "artifacts/dp_level3_secagg/loaded_source_groups/scratch_ddp/distributed_federation/privacy/secagg.py": {
+      "bytes": 5943,
+      "sha256": "31d5604ed074d5508fb7e4d652b3137937d9073450ca54807066dfbc888aeb86"
+    },
+    "artifacts/dp_level3_secagg/loaded_source_groups/scratch_ddp/src/gnn/adaptive_continual_federated.py": {
+      "bytes": 24471,
+      "sha256": "56bd2a0d62ef2d761eee0daab6e10d7a2b184694cf0d9fe8eee498d93d28006f"
+    },
+    "artifacts/dp_level3_secagg/loaded_source_groups/scratch_ddp/src/gnn/causal_temporal_graphsage.py": {
+      "bytes": 29972,
+      "sha256": "77ec113dd6b16ed0bf6956d1ce9fa7d9da5b300b672f085c76830b203ea2e2eb"
+    },
+    "artifacts/dp_level3_secagg/loaded_source_groups/scratch_ddp/src/gnn/continual_temporal_graphsage.py": {
+      "bytes": 8674,
+      "sha256": "3ab7bc55e8b14f6dc69cc8d1188fc4daaf806e3010e00764b13bedeecea721d5"
+    },
+    "artifacts/dp_level3_secagg/privacy_utility_frontier.json": {
+      "bytes": 19801,
+      "sha256": "2e9cb4d0993e03c9116152e64af47940c49e13200194b4b0c21bcecf1b516cbb"
+    },
+    "artifacts/dp_level3_secagg/reload_selected_seed_42.json": {
+      "bytes": 2701,
+      "sha256": "8198d406f77a337c939122f1762174aa84d6da76619795505672fae03923637f"
+    },
+    "artifacts/dp_level3_secagg/reload_selected_seed_52.json": {
+      "bytes": 2713,
+      "sha256": "c44b2d337b1dfe9e5141d7321f016ba8a420306887b9dad1d8f7234a53952117"
+    },
+    "artifacts/dp_level3_secagg/reload_selected_seed_62.json": {
+      "bytes": 2717,
+      "sha256": "545d4ee3d084bf6ef8f43bc70ff40d0b672483b2bd59e641e41c2a7b6442381a"
+    },
+    "artifacts/dp_level3_secagg/reloaded_final_validation.json": {
+      "bytes": 2699,
+      "sha256": "8e2a4b3b992c7f2d42dce7e1ea73240e8665902a9837b1ad138cff6c2a6d1417"
+    },
+    "artifacts/dp_level3_secagg/secagg_smoke.json": {
+      "bytes": 113,
+      "sha256": "83f59c64981700db116ffe0168877965d9ab85db13105156ffc6e126a4f54375"
+    },
+    "artifacts/dp_level3_secagg/seed_results.csv": {
+      "bytes": 16161,
+      "sha256": "319ba033a66eca325834529c9656007a70d663ecccf2a120fa5c4c1d009a59a2"
+    },
+    "artifacts/dp_level3_secagg/source_manifest.json": {
+      "bytes": 17353,
+      "sha256": "64576a4e56a30613141fcd62b03fada09cca4c1f029b268eba0b60250254360b"
+    },
+    "artifacts/dp_level3_secagg/source_snapshot.tar.gz": {
+      "bytes": 256553,
+      "sha256": "ded44d49641c28ac6b8cd601bb8134ced2f81927e523f816319736599a623fcf"
+    },
+    "artifacts/dp_level3_secagg/test_report.txt": {
+      "bytes": 191,
+      "sha256": "772141a47d8a3aeb63e56a1157647d4a36db6f43e32002b07efc7132e6c94b1d"
+    },
+    "artifacts/dp_level3_secagg/validation_selection_freeze.json": {
+      "bytes": 3251,
+      "sha256": "26a503ca1ecfecbff2b6c4b596fdf7da1d5b434babf78d77a813018ee0659a10"
+    },
+    "artifacts/dp_level3_secagg/visualization/Key_Bank_validation.html": {
+      "bytes": 58268,
+      "sha256": "df2012566a86370b670bfa1cdaa79697957b153c11c47221363b685cdbe8bd78"
+    },
+    "artifacts/dp_level3_secagg/visualization/combined_validation.html": {
+      "bytes": 8915,
+      "sha256": "24f6b0a06e58296fb002f81357ec33c84b2ea5914c054feef2088820e2e7f920"
+    }
+  },
+  "excluded": "Manifest itself, post-commit Git state and ignored local runtime files"
+}

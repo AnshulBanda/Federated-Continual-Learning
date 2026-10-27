@@ -1,0 +1,66 @@
+{
+  "rounds": 1,
+  "local_epochs": 2,
+  "hidden_channels": 128,
+  "dropout": 0.25,
+  "batch_size": 1024,
+  "negative_ratio": 20,
+  "learning_rate": 0.0003,
+  "weight_decay": 0.0001,
+  "seed": 42,
+  "return_aggregate": true,
+  "aggregation": "equal",
+  "rng_policy": "per_client",
+  "replay": "risk_context",
+  "replay_size": 2000,
+  "private_subset": "decoder",
+  "max_chunk_bytes": 524288,
+  "privacy": {
+    "mode": "distributed_dp",
+    "clip": 1.25,
+    "multiplier": 0.15,
+    "delta": 1e-06,
+    "expected_clients": 3,
+    "min_noise_contributors": 3,
+    "scale": 16777216,
+    "entropy": "production"
+  },
+  "server_optimizer": {
+    "name": "fedavg",
+    "learning_rate": 1.0,
+    "beta1": 0.9,
+    "beta2": 0.99,
+    "epsilon": 0.001
+  },
+  "clients": [
+    {
+      "client_id": "bank-1",
+      "bank": "JPMorgan_Chase"
+    },
+    {
+      "client_id": "bank-2",
+      "bank": "Wells_Fargo"
+    },
+    {
+      "client_id": "bank-3",
+      "bank": "Key_Bank"
+    }
+  ],
+  "schema_banks": [
+    "JPMorgan_Chase",
+    "Wells_Fargo",
+    "Key_Bank"
+  ],
+  "initial_checkpoint": "artifacts/dp_level3_utility_optimization/frozen_warm_starts/seed_42/global_model.pt",
+  "feature_schema": "artifacts/dp_level3_secagg/feature_schema.json",
+  "operational_policy": "level3_final_v1",
+  "broker": "127.0.0.1:19092",
+  "run_id": "op-complete-cohort-bf21d636e9b74b0c",
+  "dataset_dir": "/Users/pj/Desktop/college/capstone/Capstone/data/final_temporal_dataset",
+  "output_dir": "/Users/pj/Desktop/college/capstone/Capstone-DP-SecAgg/.local/operational-level3/acceptance-20261027/complete-cohort/central/collaboration/models",
+  "round_timeout_seconds": 900,
+  "topics": {
+    "global_model": "fcl.collaboration.global.v1",
+    "client_updates": "fcl.collaboration.updates.v1"
+  }
+}

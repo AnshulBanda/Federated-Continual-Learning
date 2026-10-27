@@ -1,0 +1,12 @@
+{
+  "browser": "streaming/web/index.html: fedAction posts /api/collaboration/start",
+  "endpoint": "streaming/app/dashboard.py: Handler calls collaboration.start(data, overview bank)",
+  "configuration": "streaming/app/collaboration.py: config -> final_federation.build_config; start requires recent readiness and passes operational=True",
+  "controller": "RunController: validates pinned single-model config, snapshots allowlisted fields, starts runner with --operational-final; secrets only in environment",
+  "runner": "runner.execute: revalidates forced policy, owns lock, persists public events, dispatches bank/central wrappers",
+  "bank": "bank_worker.run -> privacy.transport.worker: global model -> full key roster -> adaptive_single training -> decoder delta -> clip -> independent bank Gaussian share -> fixed point -> pair mask -> masked_client_update",
+  "central": "aggregator.run -> privacy.transport.central: accepts public key messages + masked contributions; no individual model deserializer; complete ring sum -> noisy equal aggregate -> FedAvg lr.1 -> reconstruct decoder with frozen backbone -> checkpoint -> broadcast",
+  "kafka": "common/kafka_io.py: identical to origin/main; configured bootstrap.servers passes through, signed chunking, acks all, idempotent producer, existing stop/cancel checks",
+  "workflow": "Saved profile fields, bank/central roles, broker/ZeroTier IP, secret input, prepare/readiness/start/stop/cancel and checkpoint selection stay unchanged. Mode-specific private.single topics are prepared automatically.",
+  "ZeroTier": "Networking only; no OS/network/ZeroTier behavior changed; no remote ZeroTier test claimed"
+}

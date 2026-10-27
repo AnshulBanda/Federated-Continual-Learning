@@ -1,0 +1,2 @@
+missing-bank: launched via Collaboration.start -> controller -> runner
+PASS: missing third bank aborts before training; no update, aggregate, checkpoint or fallback

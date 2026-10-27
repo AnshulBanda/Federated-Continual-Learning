@@ -22,7 +22,7 @@ import torch
 XAI_ROOT = Path(__file__).resolve().parent
 if str(XAI_ROOT) not in sys.path:
     sys.path.insert(0, str(XAI_ROOT))
-from run_updated import BANKS, DATASET, REPO_ROOT, git_blob, load_cached_engine, normalize_checkpoint_for_engine, sha256
+from run_updated import BANKS, DATASET, REPO_ROOT, ENGINE_ROOT, git_blob, load_cached_engine, normalize_checkpoint_for_engine, sha256
 from src.model_catalog import filter_catalog, model_catalog_rows, verify_saved_metrics
 from src.transaction_story import build_transaction_story, canonical_frames, completed_history
 
@@ -121,9 +121,9 @@ class AdaptiveFederatedDashboard:
                 XAI_ROOT / "serve_dashboard.py", XAI_ROOT / "src/model_catalog.py",
                 XAI_ROOT / "src/counterfactuals.py", XAI_ROOT / "src/transaction_story.py",
                 XAI_ROOT / "src/grouped_features.py",
-                XAI_ROOT / "__pycache__/explanation_engine.cpython-312.pyc",
-                XAI_ROOT / "__pycache__/temporal.cpython-312.pyc",
-                XAI_ROOT / "__pycache__/graph_explainer.cpython-312.pyc")},
+                ENGINE_ROOT / "explanation_engine.cpython-312.pyc",
+                ENGINE_ROOT / "temporal.cpython-312.pyc",
+                ENGINE_ROOT / "graph_explainer.cpython-312.pyc")},
         }
         (self.output / "dashboard_catalog_manifest.json").write_text(json.dumps(self.manifest, indent=2) + "\n", encoding="utf-8")
 

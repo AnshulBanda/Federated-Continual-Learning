@@ -245,23 +245,35 @@ def distillation_epoch(model, static, events, optimizer, sample_mask, batch_size
             pending_distill = {0: [], 1: []}
 
 
+def public_training_seed(seed, phase, epoch):
+    """Public data-independent per-worker/phase/epoch RNG domain, never DP entropy."""
+    domain = f"aml-local-counter-v1/{seed}/{phase}/{epoch}".encode()
+    return int.from_bytes(hashlib.sha256(domain).digest()[:8], "big") % (2**31)
+
+
 def train_client(model, static, training, boundary, cfg, seed, check_cancel=lambda: None, progress=lambda *args: None):
     if getattr(cfg, "rng_policy", "per_client") == "per_client":
         set_seed(seed)
+    counter_rng = getattr(cfg, "rng_policy", "per_client") == "counter"
+    if counter_rng:
+        set_seed(public_training_seed(seed, "setup", 0))
     june = subset(training, training.timestamp < boundary)
     july = subset(training, training.timestamp >= boundary)
     if not len(june) or not len(july):
         raise ValueError("Both calendar tasks must contain events")
-    optimizer = torch.optim.AdamW(model.parameters(), lr=cfg.learning_rate, weight_decay=1e-4)
+    optimizer = torch.optim.AdamW(model.parameters(), lr=cfg.learning_rate, weight_decay=getattr(cfg, "weight_decay", 1e-4))
     generator = torch.Generator().manual_seed(seed)
     epoch_losses = []
     for epoch in range(cfg.local_epochs):
+        if counter_rng:
+            set_seed(public_training_seed(seed, "june_dropout", epoch))
+            generator.manual_seed(public_training_seed(seed, "june_sampling", epoch))
         check_cancel()
         loss, _ = train_temporal_epoch(model, static, june, optimizer,
-                             epoch_sample_mask(june.labels, 20, generator), cfg.batch_size, 2, check_cancel=check_cancel)
+                             epoch_sample_mask(june.labels, getattr(cfg, "negative_ratio", 20), generator), cfg.batch_size, 2, check_cancel=check_cancel)
         epoch_losses.append(loss)
         progress("June", epoch + 1)
-    june_scores, june_labels, _ = score_stream(model, model.initial_state(static), june, cfg.batch_size)
+    june_scores, june_labels, _ = score_stream(model, model.initial_state(static), june, cfg.batch_size, check_cancel=check_cancel)
     if cfg.replay == "risk_context":
         indices = risk_context_indices(june, june_scores, cfg.replay_size, seed)
         replay = subset(june, indices)
@@ -282,8 +294,11 @@ def train_client(model, static, training, boundary, cfg, seed, check_cancel=lamb
         replay_mask[:replay_count] = True
     generator = torch.Generator().manual_seed(seed + 1)
     for epoch in range(cfg.local_epochs):
+        if counter_rng:
+            set_seed(public_training_seed(seed, "july_dropout", epoch))
+            generator.manual_seed(public_training_seed(seed, "july_sampling", epoch))
         check_cancel()
-        mask = epoch_sample_mask(task.labels, 20, generator)
+        mask = epoch_sample_mask(task.labels, getattr(cfg, "negative_ratio", 20), generator)
         if cfg.distill > 0:
             distillation_epoch(model, static, task, optimizer, mask, cfg.batch_size, 2,
                                teacher, replay_mask, cfg.distill)
@@ -291,7 +306,7 @@ def train_client(model, static, training, boundary, cfg, seed, check_cancel=lamb
             loss, _ = train_temporal_epoch(model, static, task, optimizer, mask, cfg.batch_size, 2, check_cancel=check_cancel)
             epoch_losses.append(loss)
         progress("July + context replay", epoch + 1)
-    after, _, _ = score_stream(model, model.initial_state(static), june, cfg.batch_size)
+    after, _, _ = score_stream(model, model.initial_state(static), june, cfg.batch_size, check_cancel=check_cancel)
     before_ap = float(average_precision_score(june_labels, june_scores))
     after_ap = float(average_precision_score(june_labels, after))
     return {"mean_train_loss": float(np.mean(epoch_losses)), "june_events": len(june), "july_events": len(july), "replay_events": replay_count,

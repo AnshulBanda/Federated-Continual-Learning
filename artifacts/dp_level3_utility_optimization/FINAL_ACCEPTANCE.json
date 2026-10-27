@@ -1,0 +1,30 @@
+{
+  "verdict": "TARGET ACHIEVED",
+  "macro_AP_mean": 0.9028095494826616,
+  "sample_sd": 0.03241549443748849,
+  "seed_scope": "Three private-continuation seeds, fixed nonprivate pretraining seed42 checkpoint",
+  "epsilon": 127.36375184207253,
+  "delta": 1e-06,
+  "security_tests_passed": 139,
+  "subtests_passed": 8,
+  "Kafka": "PASS",
+  "wire": "PASS",
+  "checkpoint_reload": "PASS",
+  "worker_parity": "PASS",
+  "historical_evidence_unchanged": true,
+  "source_frozen": true,
+  "September_loaded": false,
+  "artifact_sha256": {
+    "FINAL_REPORT.md": "3b653224d2f77a2eebd531ff90ffa31ec54608c50b58c821e01cb7f627f30a0c",
+    "SEARCH_LOG.json": "fa05781cdf7e2b64055be02ca8f7d327ca506da5e35cd75065a2af0b2e63aa2c",
+    "FINALIST_CONFIG.json": "cb9b4c3626ec2fdf32dd0ae07d7e2e26f450675d4b7a0114c698f50f47d6d44c",
+    "FINALIST_PRIVACY.json": "debd5104b6c375972dae3a2acf8ad775ee363962c9786021486002ce10f840d1",
+    "FINALIST_RESULTS.json": "8c77b15bf69f1c069ad908f633b5710e16e9f3ed231bc1e440389efed42e6aa2",
+    "SEED_RESULTS.csv": "9119af7905eef7ec40c1edba98f0b84d4aece274711e50bbe97b69945d5036f2",
+    "PRIVACY_UTILITY_FRONTIER.json": "5ce491985aa32fb769b6ba86d0c4fd64a4d3748a9fbe9e000c6e5d565ae25b88",
+    "QA_REPORT.md": "ee4eb8f75e71695355d0d51ee09b54db8739d70541ccb95c33f983c4be9ec94f",
+    "TEST_REPORT.txt": "6b7a3debdd50a4c3024e739d5f679606abd56bcdfc503e1969f29bf1f699d2f1",
+    "SOURCE_MANIFEST.json": "681f9cf109521dd0ecdaf31b196f82cc923b518a5aa978d2f14773b679fc9828",
+    "CHECKPOINT_PROVENANCE.json": "27ce721851c7de03a5a49ea5a7a7e3e7af14d0eca8ef654919643010aa7aa4f5"
+  }
+}

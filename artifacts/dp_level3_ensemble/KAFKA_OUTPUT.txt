@@ -1,0 +1,2 @@
+complete-cohort: launched via Collaboration.start -> controller -> runner
+PASS: all four ensemble rounds; three masked contributions per round; identical verified returns and frozen non-decoders

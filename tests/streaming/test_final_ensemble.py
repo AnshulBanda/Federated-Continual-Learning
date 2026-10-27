@@ -25,10 +25,12 @@ class FinalEnsembleTests(unittest.TestCase):
         with self.assertRaises(ValueError):validate_selected(selected)
         selected=reference_model('Key_Bank');selected['members'][0]['sha256']='0'*64
         with self.assertRaises(ValueError):validate_selected(selected)
-    def test_collaboration_uses_final_protocol(self):
+    def test_collaboration_uses_private_single_protocol(self):
         with tempfile.TemporaryDirectory() as tmp:
             app=Collaboration(tmp); cfg=app.config(app.defaults())
-            self.assertEqual(cfg['training_protocol'],'adaptive_ensemble')
+            self.assertEqual(cfg['training_protocol'],'adaptive_single')
+            self.assertEqual(cfg['private_subset'],'decoder')
+            self.assertEqual(cfg['rounds'],4)
             self.assertEqual(cfg['replay_size'],2000)
             self.assertEqual(cfg['local_epochs'],3)
     def test_serialized_ensemble_round_trip_and_harmonization(self):

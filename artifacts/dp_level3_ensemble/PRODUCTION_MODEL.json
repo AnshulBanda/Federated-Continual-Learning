@@ -1,0 +1,18 @@
+{
+  "model_kind": "federated_ensemble",
+  "reference": false,
+  "version": "Private ensemble confirmation \u2014 round 4",
+  "checkpoint": "artifacts/dp_level3_ensemble/production_confirmation/private-ensemble-confirmation-20261027/global_round_004.safetensors",
+  "sha256": "d8f92d5929c25a6cc3ac8f3c170a97aa82232ebf1763cf2e445c7c2964968fde",
+  "validation_status": "Single predeclared August confirmation; poor utility, not promoted over reference",
+  "privacy": {
+    "differential_privacy": true,
+    "mode": "distributed_dp",
+    "clip": 6.5,
+    "multiplier": 0.3,
+    "releases": 4,
+    "epsilon": 127.36375184207253,
+    "delta": 1e-06,
+    "scope": "Conditional on nonprivate frozen members and fixed public calibration; validation metrics are nonprivate"
+  }
+}

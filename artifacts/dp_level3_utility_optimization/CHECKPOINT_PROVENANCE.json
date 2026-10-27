@@ -1,0 +1,44 @@
+{
+  "starting": [
+    {
+      "seed": 42,
+      "path": "/Users/pj/Desktop/college/capstone/Capstone-DP-SecAgg/artifacts/dp_level3_utility_optimization/frozen_warm_starts/seed_42/global_model.pt",
+      "sha256": "d650af6959d1da46888f30fb79bbfd888a6ec20743d14d447ea078dc351536f5"
+    },
+    {
+      "seed": 52,
+      "path": "/Users/pj/Desktop/college/capstone/Capstone-DP-SecAgg/artifacts/dp_level3_utility_optimization/frozen_warm_starts/seed_42/global_model.pt",
+      "sha256": "d650af6959d1da46888f30fb79bbfd888a6ec20743d14d447ea078dc351536f5"
+    },
+    {
+      "seed": 62,
+      "path": "/Users/pj/Desktop/college/capstone/Capstone-DP-SecAgg/artifacts/dp_level3_utility_optimization/frozen_warm_starts/seed_42/global_model.pt",
+      "sha256": "d650af6959d1da46888f30fb79bbfd888a6ec20743d14d447ea078dc351536f5"
+    }
+  ],
+  "retained": [
+    {
+      "seed": 42,
+      "path": "/Users/pj/Desktop/college/capstone/Capstone-DP-SecAgg/artifacts/dp_level3_utility_optimization/production/confirm_calibrated_decoder_m0p15_s42/round_01.pt",
+      "sha256": "53c818ae82d7ea745b480acbce8d959ec48e2cff813b2ef6baef9f3acf3f0adf",
+      "selected_round": 1,
+      "executed_releases": 1
+    },
+    {
+      "seed": 52,
+      "path": "/Users/pj/Desktop/college/capstone/Capstone-DP-SecAgg/artifacts/dp_level3_utility_optimization/production/confirm_calibrated_decoder_m0p15_s52/round_01.pt",
+      "sha256": "1e56c4266eb02f822555bef964db7288f52ff8585e45daf2512b8e185f305113",
+      "selected_round": 1,
+      "executed_releases": 1
+    },
+    {
+      "seed": 62,
+      "path": "/Users/pj/Desktop/college/capstone/Capstone-DP-SecAgg/artifacts/dp_level3_utility_optimization/production/confirm_calibrated_decoder_m0p15_s62/round_01.pt",
+      "sha256": "e6bd2709dd79f9f2fee7ed72d78cfd85800a6fd2543ab40e3d6b3d4d17af73dc",
+      "selected_round": 1,
+      "executed_releases": 1
+    }
+  ],
+  "all_round_checkpoints_retained": true,
+  "September_loaded": false
+}

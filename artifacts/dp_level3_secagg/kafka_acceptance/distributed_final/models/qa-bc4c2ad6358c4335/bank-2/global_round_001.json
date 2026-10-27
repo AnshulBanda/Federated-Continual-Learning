@@ -1,0 +1,401 @@
+{
+  "input_global_sha256": "b5ec38ab02850fe6f21acebf792069008a6beb81f0408a78b523e2b9b1ed19f5",
+  "payload_sha256": "3ff6a17a5cb116da42e9b54eeb8d405fb265068d656611a1888e10dea58d6791",
+  "privacy_mode": "distributed_dp",
+  "round_id": 1,
+  "run_id": "qa-bc4c2ad6358c4335",
+  "schema": {
+    "dropout": 0.25,
+    "feature_contract": {
+      "banks": [
+        "JPMorgan_Chase",
+        "Wells_Fargo",
+        "Key_Bank"
+      ],
+      "edge_columns": [
+        "amount",
+        "currency",
+        "Amount_Received",
+        "Receiving_Currency",
+        "payment_format"
+      ],
+      "edge_feature_count": 32,
+      "edges": {
+        "categorical": [
+          {
+            "categories": [
+              "EUR",
+              "GBP",
+              "JPY",
+              "KRW",
+              "NZD",
+              "USD"
+            ],
+            "fill": "USD",
+            "name": "currency"
+          },
+          {
+            "categories": [
+              "ARS",
+              "CAD",
+              "CHF",
+              "CNY",
+              "DOP",
+              "GBP",
+              "JPY",
+              "MXN",
+              "USD",
+              "VND"
+            ],
+            "fill": "USD",
+            "name": "Receiving_Currency"
+          },
+          {
+            "categories": [
+              "ACH",
+              "ApplePay",
+              "Bank Fee",
+              "Cash",
+              "Cash App",
+              "Cheque",
+              "Debit Non-Prepaid",
+              "Dividend",
+              "Interest",
+              "MetaPay",
+              "PayPal",
+              "Venmo",
+              "Wire",
+              "Zelle"
+            ],
+            "fill": "ACH",
+            "name": "payment_format"
+          }
+        ],
+        "numeric": [
+          {
+            "mean": 3366.410259964555,
+            "median": 122.78,
+            "name": "amount",
+            "scale": 65382.34274023974
+          },
+          {
+            "mean": 3430.6316988568187,
+            "median": 122.81,
+            "name": "Amount_Received",
+            "scale": 72142.24541313176
+          }
+        ]
+      },
+      "format": 1,
+      "node_columns": [
+        "Account_Country",
+        "Account_Currency",
+        "Entity_Type",
+        "Does_Account_Have_Debit_Card",
+        "DebitCard_Index_in_EntityCards",
+        "MCC",
+        "Account_Type",
+        "Max_Overdraft",
+        "account_kind",
+        "hist_sent_count",
+        "hist_sent_amount_sum",
+        "hist_recv_count",
+        "hist_recv_amount_sum",
+        "hist_out_degree",
+        "hist_in_degree"
+      ],
+      "node_feature_count": 57,
+      "nodes": {
+        "categorical": [
+          {
+            "categories": [
+              "Argentina",
+              "Austria",
+              "Canada",
+              "China",
+              "Dominican Republic",
+              "Germany",
+              "Hungary",
+              "India",
+              "Japan",
+              "Mexico",
+              "New Zealand",
+              "South Korea",
+              "Switzerland",
+              "United Kingdom",
+              "United States",
+              "Unknown",
+              "Vietnam"
+            ],
+            "fill": "United States",
+            "name": "Account_Country"
+          },
+          {
+            "categories": [
+              "ARS",
+              "CAD",
+              "CHF",
+              "CNY",
+              "DOP",
+              "EUR",
+              "GBP",
+              "JPY",
+              "KRW",
+              "MXN",
+              "NZD",
+              "USD",
+              "Unknown",
+              "VND"
+            ],
+            "fill": "USD",
+            "name": "Account_Currency"
+          },
+          {
+            "categories": [
+              "Large_Corporation",
+              "National_Government",
+              "Partnership",
+              "Person",
+              "Small_Corporation",
+              "Sole_Proprietorship",
+              "Unknown"
+            ],
+            "fill": "Sole_Proprietorship",
+            "name": "Entity_Type"
+          },
+          {
+            "categories": [
+              "CD",
+              "Cash",
+              "Checking",
+              "Money Market",
+              "Savings",
+              "Unknown"
+            ],
+            "fill": "Checking",
+            "name": "Account_Type"
+          },
+          {
+            "categories": [
+              "Unknown",
+              "company",
+              "person"
+            ],
+            "fill": "company",
+            "name": "account_kind"
+          }
+        ],
+        "numeric": [
+          {
+            "mean": 0.004866062825207169,
+            "median": 0.0,
+            "name": "Does_Account_Have_Debit_Card",
+            "scale": 0.06958724206194916
+          },
+          {
+            "mean": 0.0025534785122374253,
+            "median": 0.0,
+            "name": "DebitCard_Index_in_EntityCards",
+            "scale": 0.06688880215601428
+          },
+          {
+            "mean": 5140.5721719021,
+            "median": 5411.0,
+            "name": "MCC",
+            "scale": 2197.146618831092
+          },
+          {
+            "mean": 540.972730776643,
+            "median": 250.0,
+            "name": "Max_Overdraft",
+            "scale": 6685.196466460116
+          },
+          {
+            "mean": 0.0,
+            "median": 0.0,
+            "name": "hist_sent_count",
+            "scale": 1.0
+          },
+          {
+            "mean": 0.0,
+            "median": 0.0,
+            "name": "hist_sent_amount_sum",
+            "scale": 1.0
+          },
+          {
+            "mean": 0.0,
+            "median": 0.0,
+            "name": "hist_recv_count",
+            "scale": 1.0
+          },
+          {
+            "mean": 0.0,
+            "median": 0.0,
+            "name": "hist_recv_amount_sum",
+            "scale": 1.0
+          },
+          {
+            "mean": 0.0,
+            "median": 0.0,
+            "name": "hist_out_degree",
+            "scale": 1.0
+          },
+          {
+            "mean": 0.0,
+            "median": 0.0,
+            "name": "hist_in_degree",
+            "scale": 1.0
+          }
+        ]
+      },
+      "source": "Fixed synthetic AML reference training data; not fit on participant data at runtime"
+    },
+    "hidden_channels": 128,
+    "implementation_sha256": "f32538460b9f3c21edb29f0fccab3e9f53e4285f987d1cbfe7cfd0a749c57314",
+    "model": "CausalTemporalGraphSAGE",
+    "state": {
+      "decoder.0.bias": {
+        "dtype": "torch.float32",
+        "shape": [
+          128
+        ]
+      },
+      "decoder.0.weight": {
+        "dtype": "torch.float32",
+        "shape": [
+          128,
+          512
+        ]
+      },
+      "decoder.3.bias": {
+        "dtype": "torch.float32",
+        "shape": [
+          1
+        ]
+      },
+      "decoder.3.weight": {
+        "dtype": "torch.float32",
+        "shape": [
+          1,
+          128
+        ]
+      },
+      "edge_projection.0.bias": {
+        "dtype": "torch.float32",
+        "shape": [
+          128
+        ]
+      },
+      "edge_projection.0.weight": {
+        "dtype": "torch.float32",
+        "shape": [
+          128,
+          32
+        ]
+      },
+      "memory_update.bias_hh": {
+        "dtype": "torch.float32",
+        "shape": [
+          384
+        ]
+      },
+      "memory_update.bias_ih": {
+        "dtype": "torch.float32",
+        "shape": [
+          384
+        ]
+      },
+      "memory_update.weight_hh": {
+        "dtype": "torch.float32",
+        "shape": [
+          384,
+          128
+        ]
+      },
+      "memory_update.weight_ih": {
+        "dtype": "torch.float32",
+        "shape": [
+          384,
+          128
+        ]
+      },
+      "message_projection.0.bias": {
+        "dtype": "torch.float32",
+        "shape": [
+          128
+        ]
+      },
+      "message_projection.0.weight": {
+        "dtype": "torch.float32",
+        "shape": [
+          128,
+          512
+        ]
+      },
+      "static_projection.bias": {
+        "dtype": "torch.float32",
+        "shape": [
+          128
+        ]
+      },
+      "static_projection.weight": {
+        "dtype": "torch.float32",
+        "shape": [
+          128,
+          57
+        ]
+      },
+      "time_projection.0.bias": {
+        "dtype": "torch.float32",
+        "shape": [
+          128
+        ]
+      },
+      "time_projection.0.weight": {
+        "dtype": "torch.float32",
+        "shape": [
+          128,
+          2
+        ]
+      }
+    },
+    "training_protocol": {
+      "aggregation": "equal",
+      "batch_size": 1024,
+      "clients": [
+        {
+          "bank": "JPMorgan_Chase",
+          "client_id": "bank-1"
+        },
+        {
+          "bank": "Wells_Fargo",
+          "client_id": "bank-2"
+        },
+        {
+          "bank": "Key_Bank",
+          "client_id": "bank-3"
+        }
+      ],
+      "learning_rate": 0.001,
+      "local_epochs": 3,
+      "negative_ratio": 20,
+      "privacy": {
+        "clip": 6.5,
+        "delta": 1e-06,
+        "entropy": "production",
+        "expected_clients": 3,
+        "min_noise_contributors": 3,
+        "mode": "distributed_dp",
+        "multiplier": 0.001,
+        "research_seed": 42,
+        "scale": 16777216
+      },
+      "replay": "risk_context",
+      "replay_size": 2000,
+      "rng_policy": "per_client",
+      "rounds": 2,
+      "seed": 42,
+      "weight_decay": 0.0001
+    }
+  }
+}

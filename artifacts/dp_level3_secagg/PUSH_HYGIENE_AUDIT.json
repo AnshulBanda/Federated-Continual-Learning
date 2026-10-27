@@ -1,0 +1,68 @@
+{
+  "start_head": "4ca1e078fa54ffc339ffe19fa0713b8d98b00d46",
+  "changed_paths": 425,
+  "files_changed_manifest_missing": [],
+  "new_dataset_paths": [],
+  "new_lfs_pointers": [],
+  "private_json_fields": [],
+  "private_pem_paths": [],
+  "outgoing_history_unsafe_paths": [],
+  "checked_outgoing_commits": [
+    "4ca1e078fa54ffc339ffe19fa0713b8d98b00d46",
+    "a274e885ca833c130fa1700adf4ef35436760a80",
+    "1d7060829235b2c0b6e371f64169c0faf120b57a"
+  ],
+  "largest_changed_files": [
+    [
+      978529,
+      "artifacts/dp_level3_secagg/experiments/warm_option_a_m0.001_s62/global_model.pt"
+    ],
+    [
+      978529,
+      "artifacts/dp_level3_secagg/experiments/warm_option_a_m0.001_s52/global_model.pt"
+    ],
+    [
+      978529,
+      "artifacts/dp_level3_secagg/experiments/warm_option_a_m0.001_s42/global_model.pt"
+    ],
+    [
+      978529,
+      "artifacts/dp_level3_secagg/experiments/warm_distributed_dp_m1e-05_s62/global_model.pt"
+    ],
+    [
+      978529,
+      "artifacts/dp_level3_secagg/experiments/warm_distributed_dp_m1e-05_s52/global_model.pt"
+    ],
+    [
+      978529,
+      "artifacts/dp_level3_secagg/experiments/warm_distributed_dp_m0.01_s62/global_model.pt"
+    ],
+    [
+      978529,
+      "artifacts/dp_level3_secagg/experiments/warm_distributed_dp_m0.01_s52/global_model.pt"
+    ],
+    [
+      978529,
+      "artifacts/dp_level3_secagg/experiments/warm_distributed_dp_m0.001_s62/global_model.pt"
+    ]
+  ],
+  "weight_paths": 64,
+  "weight_unique_blobs": 46,
+  "weight_unique_bytes": 44957108,
+  "weights_only_checkpoints_verified": 40,
+  "existing_base_checkpoint_paths": 257,
+  "ignored_local_files": 148,
+  "ignored_runtime_categories": {
+    "sqlite": 49,
+    "logs": 12,
+    "reservations": 24,
+    "python_caches": 57
+  },
+  "source_archives": [
+    {
+      "path": "artifacts/dp_level3_secagg/source_snapshot.tar.gz",
+      "members": 157,
+      "forbidden": []
+    }
+  ]
+}

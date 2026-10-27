@@ -1,0 +1,16 @@
+[
+  {
+    "id": "stage5_C5p5",
+    "seeds": [
+      62
+    ],
+    "config": {
+      "clip": 5.5,
+      "server": {
+        "name": "fedavgm",
+        "learning_rate": 0.5,
+        "beta1": 0.5
+      }
+    }
+  }
+]

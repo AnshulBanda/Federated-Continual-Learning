@@ -1,0 +1,144 @@
+artifacts/dp_level3_utility_optimization/INTERIM_SUBSET_TEST_REPORT.txt:12: trailing whitespace.
++tests/streaming/test_round_trip.py:70:
+artifacts/dp_level3_utility_optimization/INTERIM_SUBSET_TEST_REPORT.txt:13: trailing whitespace.
++_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+artifacts/dp_level3_utility_optimization/INTERIM_SUBSET_TEST_REPORT.txt:34: trailing whitespace.
++_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+artifacts/dp_level3_utility_optimization/INTERIM_SUBSET_TEST_REPORT.txt:71: trailing whitespace.
++tests/streaming/test_round_trip.py:64:
+artifacts/dp_level3_utility_optimization/INTERIM_SUBSET_TEST_REPORT.txt:72: trailing whitespace.
++_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+artifacts/dp_level3_utility_optimization/INTERIM_SUBSET_TEST_REPORT.txt:96: trailing whitespace.
++_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+artifacts/dp_level3_utility_optimization/INTERIM_SUBSET_TEST_REPORT.txt:112: trailing whitespace.
++tests/streaming/test_round_trip.py:67:
+artifacts/dp_level3_utility_optimization/INTERIM_SUBSET_TEST_REPORT.txt:113: trailing whitespace.
++_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+artifacts/dp_level3_utility_optimization/INTERIM_SUBSET_TEST_REPORT.txt:134: trailing whitespace.
++_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+artifacts/dp_level3_utility_optimization/SEED_RESULTS.csv:1: trailing whitespace.
++id,kind,seed,macro_pr_auc,JPMorgan_Chase_pr_auc,Wells_Fargo_pr_auc,Key_Bank_pr_auc,precision,recall,f1,roc_auc,selected_round,executed_releases,epsilon,delta,checkpoint
+artifacts/dp_level3_utility_optimization/SEED_RESULTS.csv:2: trailing whitespace.
++calibrated_decoder_m0p03_s42,research,42,0.9210177977557557,0.8887657673101435,0.9506851604278073,0.9236024655293165,0.4368286190834219,0.9372294372294373,0.5354796803072666,0.9993673565250836,1,1,1970.152092543696,1e-06,artifacts/dp_level3_utility_optimization/research/calibrated_decoder_m0p03_s42/round_01.pt
+artifacts/dp_level3_utility_optimization/SEED_RESULTS.csv:3: trailing whitespace.
++calibrated_decoder_m0p15_s42,research,42,0.8819374135584512,0.7971575426834787,0.9357439945675239,0.9129107034243509,0.4368286190834219,0.9372294372294373,0.5354796803072666,0.9987905264108617,1,1,127.36375184207253,1e-06,artifacts/dp_level3_utility_optimization/research/calibrated_decoder_m0p15_s42/round_01.pt
+artifacts/dp_level3_utility_optimization/SEED_RESULTS.csv:4: trailing whitespace.
++calibrated_decoder_m0p15_s52,research,52,0.9126826175559604,0.8985441641691643,0.9378646715603236,0.9016390169383932,0.4432388754936783,0.9523809523809524,0.5444886893162756,0.9993871406439271,1,1,127.36375184207253,1e-06,artifacts/dp_level3_utility_optimization/research/calibrated_decoder_m0p15_s52/round_01.pt
+artifacts/dp_level3_utility_optimization/SEED_RESULTS.csv:5: trailing whitespace.
++calibrated_decoder_m0p15_s62,research,62,0.8859183171460924,0.8430766174030513,0.944291907684142,0.8703864263510839,0.42233586546023344,0.9213564213564215,0.5203281651557513,0.9994645820744124,1,1,127.36375184207253,1e-06,artifacts/dp_level3_utility_optimization/research/calibrated_decoder_m0p15_s62/round_01.pt
+artifacts/dp_level3_utility_optimization/SEED_RESULTS.csv:6: trailing whitespace.
++calibrated_decoder_m0p1_s42,research,42,0.9040136247733734,0.8374314894988946,0.9467532467532465,0.9278561380679794,0.4368286190834219,0.9372294372294373,0.5354796803072666,0.999207317263755,1,1,241.04562776310874,1e-06,artifacts/dp_level3_utility_optimization/research/calibrated_decoder_m0p1_s42/round_01.pt
+artifacts/dp_level3_utility_optimization/SEED_RESULTS.csv:7: trailing whitespace.
++calibrated_decoder_m0p1_s52,research,52,0.9257511487029838,0.9045207509881423,0.9587506224755158,0.9139820726452934,0.4368286190834219,0.9372294372294373,0.5354796803072666,0.9994032002177886,1,1,241.04562776310874,1e-06,artifacts/dp_level3_utility_optimization/research/calibrated_decoder_m0p1_s52/round_01.pt
+artifacts/dp_level3_utility_optimization/SEED_RESULTS.csv:8: trailing whitespace.
++calibrated_decoder_m0p1_s62,research,62,0.9218366748792235,0.8977464680589681,0.9619565217391304,0.9058070348395719,0.4368286190834219,0.9372294372294373,0.5354796803072666,0.9995012149836833,1,1,241.04562776310874,1e-06,artifacts/dp_level3_utility_optimization/research/calibrated_decoder_m0p1_s62/round_01.pt
+artifacts/dp_level3_utility_optimization/SEED_RESULTS.csv:9: trailing whitespace.
++calibrated_decoder_m0p25_s42,research,42,0.7999258303748092,0.685791431835025,0.8575436254935405,0.856442433795862,0.42649270177076043,0.8538961038961039,0.5170888757095654,0.9970068111384375,1,1,60.41825110524351,1e-06,artifacts/dp_level3_utility_optimization/research/calibrated_decoder_m0p25_s42/round_01.pt
+artifacts/dp_level3_utility_optimization/SEED_RESULTS.csv:10: trailing whitespace.
++calibrated_decoder_m0p25_s52,research,52,0.8738555059154759,0.8718013690540065,0.9151555599680828,0.834609588724338,0.40784311183704514,0.9054834054834054,0.5051766500042362,0.9989732884394664,1,1,60.41825110524351,1e-06,artifacts/dp_level3_utility_optimization/research/calibrated_decoder_m0p25_s52/round_01.pt
+artifacts/dp_level3_utility_optimization/SEED_RESULTS.csv:11: trailing whitespace.
++calibrated_decoder_m0p2_s42,research,42,0.8553863201990639,0.7453310554873055,0.9264767031214398,0.8943512019884461,0.43166066042709117,0.8955627705627706,0.5262842780084159,0.99811797915277,1,1,83.02281388155438,1e-06,artifacts/dp_level3_utility_optimization/research/calibrated_decoder_m0p2_s42/round_01.pt
+artifacts/dp_level3_utility_optimization/SEED_RESULTS.csv:12: trailing whitespace.
++calibrated_decoder_m0p2_s52,research,52,0.8921203709884113,0.8835684313064329,0.9219497607655502,0.8708429208932508,0.40784311183704514,0.9054834054834054,0.5051766500042362,0.9992943706530303,1,1,83.02281388155438,1e-06,artifacts/dp_level3_utility_optimization/research/calibrated_decoder_m0p2_s52/round_01.pt
+artifacts/dp_level3_utility_optimization/SEED_RESULTS.csv:13: trailing whitespace.
++calibrated_decoder_m0p2_s62,research,62,0.5239508065673742,0.465703584067676,0.6226066811063191,0.48354215452812765,0.27474873177603204,0.8342352092352092,0.3956842071098376,0.9973015364456076,1,1,83.02281388155438,1e-06,artifacts/dp_level3_utility_optimization/research/calibrated_decoder_m0p2_s62/round_01.pt
+artifacts/dp_level3_utility_optimization/SEED_RESULTS.csv:14: trailing whitespace.
++calibrated_decoder_m0p3_s42,research,42,0.7315074758561737,0.6408900036453767,0.7602050045106894,0.7934274194124551,0.3975071945243836,0.8221500721500722,0.4867858454065351,0.9948960848024898,1,1,47.015209254369594,1e-06,artifacts/dp_level3_utility_optimization/research/calibrated_decoder_m0p3_s42/round_01.pt
+artifacts/dp_level3_utility_optimization/SEED_RESULTS.csv:15: trailing whitespace.
++fixed_warm_decoder_m0p0001_s42,research,42,0.9217107743564927,0.8878566329319695,0.9521450459652705,0.9251306441722381,0.4368286190834219,0.9372294372294373,0.5354796803072666,0.999396911788781,1,1,150091045.62776312,1e-06,artifacts/dp_level3_utility_optimization/research/fixed_warm_decoder_m0p0001_s42/round_01.pt
+artifacts/dp_level3_utility_optimization/SEED_RESULTS.csv:16: trailing whitespace.
++fixed_warm_decoder_m0p001_s42,research,42,0.9210064624096373,0.8883191676220713,0.950993809058325,0.9237064105485157,0.4368286190834219,0.9372294372294373,0.5354796803072666,0.9993876934126367,1,1,1509104.5627763108,1e-06,artifacts/dp_level3_utility_optimization/research/fixed_warm_decoder_m0p001_s42/round_01.pt
+artifacts/dp_level3_utility_optimization/SEED_RESULTS.csv:17: trailing whitespace.
++fixed_warm_decoder_m0p01_s42,research,42,0.9185951036758468,0.8790399016692121,0.949690567648314,0.9270548417100143,0.4368286190834219,0.9372294372294373,0.5354796803072666,0.999336847908041,1,1,15910.456277631089,1e-06,artifacts/dp_level3_utility_optimization/research/fixed_warm_decoder_m0p01_s42/round_01.pt
+artifacts/dp_level3_utility_optimization/SEED_RESULTS.csv:18: trailing whitespace.
++fixed_warm_decoder_m0p01_s52,research,52,0.9236885422766296,0.8935275009554047,0.9549932825794895,0.9225448432949944,0.4368286190834219,0.9372294372294373,0.5354796803072666,0.9994226203514004,1,1,15910.456277631089,1e-06,artifacts/dp_level3_utility_optimization/research/fixed_warm_decoder_m0p01_s52/round_01.pt
+artifacts/dp_level3_utility_optimization/SEED_RESULTS.csv:19: trailing whitespace.
++fixed_warm_decoder_m0p01_s62,research,62,0.9237906600696726,0.8907772775423729,0.960099591419816,0.920495111246829,0.4368286190834219,0.9372294372294373,0.5354796803072666,0.999478014371198,1,1,15910.456277631089,1e-06,artifacts/dp_level3_utility_optimization/research/fixed_warm_decoder_m0p01_s62/round_01.pt
+artifacts/dp_level3_utility_optimization/SEED_RESULTS.csv:20: trailing whitespace.
++fixed_warm_decoder_m0p03_s42,research,42,0.8784237224554884,0.7895193477949598,0.93505386344261,0.9106979561288955,0.4368286190834219,0.9372294372294373,0.5354796803072666,0.9987251987301415,1,1,1970.152092543696,1e-06,artifacts/dp_level3_utility_optimization/research/fixed_warm_decoder_m0p03_s42/round_01.pt
+artifacts/dp_level3_utility_optimization/SEED_RESULTS.csv:21: trailing whitespace.
++fixed_warm_decoder_m0p03_s52,research,52,0.9113137460023016,0.8985441641691642,0.9374572795625429,0.8979397942751982,0.4432388754936783,0.9523809523809524,0.5444886893162756,0.999381569698635,1,1,1970.152092543696,1e-06,artifacts/dp_level3_utility_optimization/research/fixed_warm_decoder_m0p03_s52/round_01.pt
+artifacts/dp_level3_utility_optimization/SEED_RESULTS.csv:22: trailing whitespace.
++fixed_warm_decoder_m0p1_s42,research,42,0.3068266085392039,0.2839945993701602,0.3194138780520725,0.31707134819537897,0.39783405000796307,0.408008658008658,0.36041377345725173,0.9792519176846254,1,1,241.04562776310874,1e-06,artifacts/dp_level3_utility_optimization/research/fixed_warm_decoder_m0p1_s42/round_01.pt
+artifacts/dp_level3_utility_optimization/SEED_RESULTS.csv:23: trailing whitespace.
++refine_one_epochs4_s42,research,42,0.801925235599399,0.7336243122082781,0.9620871382490572,0.710064256340862,0.37627362526250296,0.8529040404040403,0.4702759185517806,0.9921111272453861,1,1,15000910456.27763,1e-06,artifacts/dp_level3_utility_optimization/research/refine_one_epochs4_s42/round_01.pt
+artifacts/dp_level3_utility_optimization/SEED_RESULTS.csv:24: trailing whitespace.
++refine_one_lr0015_neg10_s42,research,42,0.8561706157185877,0.8338686790505676,0.9246604414261457,0.8099827266790496,0.40784311183704514,0.9054834054834054,0.5051766500042362,0.999175037644148,1,1,15000910456.27763,1e-06,artifacts/dp_level3_utility_optimization/research/refine_one_lr0015_neg10_s42/round_01.pt
+artifacts/dp_level3_utility_optimization/SEED_RESULTS.csv:25: trailing whitespace.
++refine_one_lr0015_neg10_s52,research,52,0.8715947529297429,0.7785605778769842,0.9447129021499729,0.8915107787622714,0.43424463975525657,0.9163961038961039,0.5308819791578413,0.9997099182089865,1,1,15000910456.27763,1e-06,artifacts/dp_level3_utility_optimization/research/refine_one_lr0015_neg10_s52/round_01.pt
+artifacts/dp_level3_utility_optimization/SEED_RESULTS.csv:26: trailing whitespace.
++refine_one_lr0015_neg10_s62,research,62,0.7375662214079975,0.740058732256143,0.6957355014229324,0.7769044305449175,0.37627362526250296,0.8529040404040403,0.4702759185517806,0.9993889524087436,1,1,15000910456.27763,1e-06,artifacts/dp_level3_utility_optimization/research/refine_one_lr0015_neg10_s62/round_01.pt
+artifacts/dp_level3_utility_optimization/SEED_RESULTS.csv:27: trailing whitespace.
++refine_one_lr002_s42,research,42,0.7242888860276736,0.7545327168051353,0.6693464850570077,0.7489874562208781,0.34422234321122086,0.7771464646464646,0.42523087350673555,0.9987108711774663,1,1,15000910456.27763,1e-06,artifacts/dp_level3_utility_optimization/research/refine_one_lr002_s42/round_01.pt
+artifacts/dp_level3_utility_optimization/SEED_RESULTS.csv:28: trailing whitespace.
++stage1_selection_s42,research,42,0.9021286160840024,0.8426521967482645,0.9626834204756282,0.9010502310281147,0.4368286190834219,0.9372294372294373,0.5354796803072666,0.9991277536859112,4,4,60001820912.55525,1e-06,artifacts/dp_level3_utility_optimization/research/stage1_selection_s42/round_04.pt
+artifacts/dp_level3_utility_optimization/SEED_RESULTS.csv:29: trailing whitespace.
++stage1_selection_s52,research,52,0.866565321707543,0.7355794032481364,0.9570715934352296,0.907044968439263,0.4368286190834219,0.9372294372294373,0.5354796803072666,0.9995430245817016,4,4,60001820912.55525,1e-06,artifacts/dp_level3_utility_optimization/research/stage1_selection_s52/round_04.pt
+artifacts/dp_level3_utility_optimization/SEED_RESULTS.csv:30: trailing whitespace.
++stage1_selection_s62,research,62,0.6427683087528278,0.5367612458088649,0.6914977503186177,0.7000459301310007,0.3472881180161261,0.8211580086580087,0.4399728882487503,0.9990498238082822,4,4,60001820912.55525,1e-06,artifacts/dp_level3_utility_optimization/research/stage1_selection_s62/round_04.pt
+artifacts/dp_level3_utility_optimization/SEED_RESULTS.csv:31: trailing whitespace.
++stage2_0_fedavg_s42,research,42,0.8369716415231524,0.777172329482112,0.9585115579899485,0.7752310370973967,0.39335035821385667,0.8896103896103896,0.490025134852721,0.9986251007109027,2,4,60001820912.55525,1e-06,artifacts/dp_level3_utility_optimization/research/stage2_0_fedavg_s42/round_02.pt
+artifacts/dp_level3_utility_optimization/SEED_RESULTS.csv:32: trailing whitespace.
++stage2_1_fedavgm_s42,research,42,0.8871159819929503,0.8188263771207812,0.9437017231134877,0.8988198457445821,0.4368286190834219,0.9372294372294373,0.5354796803072666,0.9992733189632531,3,4,60001820912.55525,1e-06,artifacts/dp_level3_utility_optimization/research/stage2_1_fedavgm_s42/round_03.pt
+artifacts/dp_level3_utility_optimization/SEED_RESULTS.csv:33: trailing whitespace.
++stage2_1_fedavgm_s52,research,52,0.848403356001675,0.7470242219228117,0.9600562901877362,0.8381295558944771,0.4197518861320681,0.9005230880230881,0.515730464006326,0.9986896671842359,4,4,60001820912.55525,1e-06,artifacts/dp_level3_utility_optimization/research/stage2_1_fedavgm_s52/round_04.pt
+artifacts/dp_level3_utility_optimization/SEED_RESULTS.csv:34: trailing whitespace.
++stage2_1_fedavgm_s62,research,62,0.6112546318130017,0.6451507740064211,0.48182305308599394,0.7067900683465899,0.3463763794906363,0.785894660894661,0.4325086842328221,0.9988226806891333,1,4,60001820912.55525,1e-06,artifacts/dp_level3_utility_optimization/research/stage2_1_fedavgm_s62/round_01.pt
+artifacts/dp_level3_utility_optimization/SEED_RESULTS.csv:35: trailing whitespace.
++stage2_2_fedavgm_s42,research,42,0.8623304172077387,0.7659277804721972,0.931554853346297,0.8895086178047221,0.42233586546023344,0.9213564213564215,0.5203281651557513,0.9993371310776552,3,4,60001820912.55525,1e-06,artifacts/dp_level3_utility_optimization/research/stage2_2_fedavgm_s42/round_03.pt
+artifacts/dp_level3_utility_optimization/SEED_RESULTS.csv:36: trailing whitespace.
++stage2_3_fedadam_s42,research,42,0.84309773181501,0.7547312989944179,0.9611749910168881,0.8133869054337242,0.4026751531807144,0.8638167388167388,0.4959812477053856,0.9989904108795482,3,4,60001820912.55525,1e-06,artifacts/dp_level3_utility_optimization/research/stage2_3_fedadam_s42/round_03.pt
+artifacts/dp_level3_utility_optimization/SEED_RESULTS.csv:37: trailing whitespace.
++stage2_4_fedadam_s42,research,42,0.8536965991257035,0.7399249052071366,0.9302924348378891,0.8908724573320846,0.4107576503936463,0.8645382395382395,0.5021237538478918,0.999606073817234,3,4,60001820912.55525,1e-06,artifacts/dp_level3_utility_optimization/research/stage2_4_fedadam_s42/round_03.pt
+artifacts/dp_level3_utility_optimization/SEED_RESULTS.csv:38: trailing whitespace.
++stage2_5_fedyogi_s42,research,42,0.8114167761233088,0.7225496119382881,0.9642541924095323,0.747446524022106,0.37368964593433757,0.8320707070707071,0.46567821740235527,0.9986848807552194,3,4,60001820912.55525,1e-06,artifacts/dp_level3_utility_optimization/research/stage2_5_fedyogi_s42/round_03.pt
+artifacts/dp_level3_utility_optimization/SEED_RESULTS.csv:39: trailing whitespace.
++stage3_epochs2_s42,research,42,0.8772710206900918,0.820206043956044,0.9558041958041956,0.855802822310036,0.42233586546023344,0.9213564213564215,0.5203281651557513,0.9945390194921337,3,4,60001820912.55525,1e-06,artifacts/dp_level3_utility_optimization/research/stage3_epochs2_s42/round_03.pt
+artifacts/dp_level3_utility_optimization/SEED_RESULTS.csv:40: trailing whitespace.
++stage3_epochs2_s52,research,52,0.8496833937619964,0.7836858460304731,0.9604231974921629,0.8049411377633532,0.42233586546023344,0.9213564213564215,0.5203281651557513,0.9986945982607915,2,4,60001820912.55525,1e-06,artifacts/dp_level3_utility_optimization/research/stage3_epochs2_s52/round_02.pt
+artifacts/dp_level3_utility_optimization/SEED_RESULTS.csv:41: trailing whitespace.
++stage3_epochs2_s62,research,62,0.5540435041121214,0.6479766053007548,0.3138228503851614,0.7003310566504483,0.2925426727443082,0.8161976911976913,0.373337513061651,0.9982875704517103,1,4,60001820912.55525,1e-06,artifacts/dp_level3_utility_optimization/research/stage3_epochs2_s62/round_01.pt
+artifacts/dp_level3_utility_optimization/SEED_RESULTS.csv:42: trailing whitespace.
++stage3_lr0003_s42,research,42,0.7988812257084067,0.7184758920383567,0.947841767427974,0.7303260176588894,0.37885760459066836,0.8737373737373737,0.47487361970120584,0.9928986252962831,3,4,60001820912.55525,1e-06,artifacts/dp_level3_utility_optimization/research/stage3_lr0003_s42/round_03.pt
+artifacts/dp_level3_utility_optimization/SEED_RESULTS.csv:43: trailing whitespace.
++stage3_lr0005_s42,research,42,0.7843420437167667,0.6963801582384875,0.9445078903654485,0.7121380825463642,0.37368964593433757,0.8320707070707071,0.46567821740235527,0.9977120908726658,3,4,60001820912.55525,1e-06,artifacts/dp_level3_utility_optimization/research/stage3_lr0005_s42/round_03.pt
+artifacts/dp_level3_utility_optimization/SEED_RESULTS.csv:44: trailing whitespace.
++stage3_lr00075_s42,research,42,0.832985027498439,0.752130471349808,0.9381770460510617,0.8086475650944474,0.40784311183704514,0.9054834054834054,0.5051766500042362,0.9987559175093349,3,4,60001820912.55525,1e-06,artifacts/dp_level3_utility_optimization/research/stage3_lr00075_s42/round_03.pt
+artifacts/dp_level3_utility_optimization/SEED_RESULTS.csv:45: trailing whitespace.
++stage3_lr0015_s42,research,42,0.8465193590714789,0.7905677455549673,0.9614079102715465,0.7875824213879229,0.39335035821385667,0.8896103896103896,0.490025134852721,0.9992108969107721,1,4,60001820912.55525,1e-06,artifacts/dp_level3_utility_optimization/research/stage3_lr0015_s42/round_01.pt
+artifacts/dp_level3_utility_optimization/SEED_RESULTS.csv:46: trailing whitespace.
++stage3_replay4000_s42,research,42,0.8520625387648675,0.738886078196423,0.9568001443001442,0.860501393798035,0.42233586546023344,0.9213564213564215,0.5203281651557513,0.9991757554373691,4,4,60001820912.55525,1e-06,artifacts/dp_level3_utility_optimization/research/stage3_replay4000_s42/round_04.pt
+artifacts/dp_level3_utility_optimization/SEED_RESULTS.csv:47: trailing whitespace.
++stage4_counter_s42,research,42,0.8588912573074691,0.8213926857196787,0.9560064935064935,0.7992745926962352,0.39335035821385667,0.8896103896103896,0.490025134852721,0.9994162717707646,1,4,60001820912.55525,1e-06,artifacts/dp_level3_utility_optimization/research/stage4_counter_s42/round_01.pt
+artifacts/dp_level3_utility_optimization/SEED_RESULTS.csv:48: trailing whitespace.
++stage4_counter_s52,research,52,0.8741569536461427,0.7972550862450243,0.9698236546062631,0.8553921200871404,0.42874612187048994,0.9365079365079364,0.5293371741647603,0.9981988010078453,3,4,60001820912.55525,1e-06,artifacts/dp_level3_utility_optimization/research/stage4_counter_s52/round_03.pt
+artifacts/dp_level3_utility_optimization/SEED_RESULTS.csv:49: trailing whitespace.
++stage4_counter_s62,research,62,0.565985011224564,0.6184070444886691,0.3770231659815082,0.7025248232035146,0.319493056095685,0.7518037518037518,0.39665904148662773,0.9985781793547264,2,4,60001820912.55525,1e-06,artifacts/dp_level3_utility_optimization/research/stage4_counter_s62/round_02.pt
+artifacts/dp_level3_utility_optimization/SEED_RESULTS.csv:50: trailing whitespace.
++stage5_C3p5_s42,research,42,0.8454508366802047,0.7608695073093807,0.9646464646464648,0.8108365380847685,0.39335035821385667,0.8896103896103896,0.490025134852721,0.9993872451116325,4,4,60001820912.55525,1e-06,artifacts/dp_level3_utility_optimization/research/stage5_C3p5_s42/round_04.pt
+artifacts/dp_level3_utility_optimization/SEED_RESULTS.csv:51: trailing whitespace.
++stage5_C5p5_s42,research,42,0.8962895290007271,0.8456638923015223,0.9579545454545453,0.8852501492461139,0.4368286190834219,0.9372294372294373,0.5354796803072666,0.9989555253361516,4,4,60001820912.55525,1e-06,artifacts/dp_level3_utility_optimization/research/stage5_C5p5_s42/round_04.pt
+artifacts/dp_level3_utility_optimization/SEED_RESULTS.csv:52: trailing whitespace.
++stage5_C5p5_s52,research,52,0.8819576004528341,0.7953250594774463,0.9682440846824407,0.8823036571986153,0.42233586546023344,0.9213564213564215,0.5203281651557513,0.9990449315849563,4,4,60001820912.55525,1e-06,artifacts/dp_level3_utility_optimization/research/stage5_C5p5_s52/round_04.pt
+artifacts/dp_level3_utility_optimization/SEED_RESULTS.csv:53: trailing whitespace.
++stage5_C5p5_s62,research,62,0.6111142727516983,0.6420279402102267,0.48390673112186444,0.7074081469230035,0.3463763794906363,0.785894660894661,0.4325086842328221,0.9988229043993143,1,4,60001820912.55525,1e-06,artifacts/dp_level3_utility_optimization/research/stage5_C5p5_s62/round_01.pt
+artifacts/dp_level3_utility_optimization/SEED_RESULTS.csv:54: trailing whitespace.
++stage7_decoder_s42,research,42,0.8308368867526651,0.8036158098658098,0.9102843042340054,0.77861054615818,0.3997606146241131,0.9047619047619048,0.49903414386173006,0.9962652959549425,4,4,60001820912.55525,1e-06,artifacts/dp_level3_utility_optimization/research/stage7_decoder_s42/round_04.pt
+artifacts/dp_level3_utility_optimization/SEED_RESULTS.csv:55: trailing whitespace.
++stage7_message_decoder_s42,research,42,0.8824342380422058,0.8436714222632373,0.9538437752723465,0.8497875165910335,0.40784311183704514,0.9054834054834054,0.5051766500042362,0.9976789851724837,4,4,60001820912.55525,1e-06,artifacts/dp_level3_utility_optimization/research/stage7_message_decoder_s42/round_04.pt
+artifacts/dp_level3_utility_optimization/SEED_RESULTS.csv:56: trailing whitespace.
++stage7_message_decoder_s52,research,52,0.886906520511566,0.8295467744300554,0.9630455751145406,0.8681272119901021,0.40784311183704514,0.9054834054834054,0.5051766500042362,0.9996796048103916,1,4,60001820912.55525,1e-06,artifacts/dp_level3_utility_optimization/research/stage7_message_decoder_s52/round_01.pt
+artifacts/dp_level3_utility_optimization/SEED_RESULTS.csv:57: trailing whitespace.
++stage7_message_decoder_s62,research,62,0.6033594331900335,0.6576934060833145,0.47630320736082743,0.6760816861259586,0.3544588767035683,0.7866161616161617,0.43865119037532835,0.9975385319287263,2,4,60001820912.55525,1e-06,artifacts/dp_level3_utility_optimization/research/stage7_message_decoder_s62/round_02.pt
+artifacts/dp_level3_utility_optimization/SEED_RESULTS.csv:58: trailing whitespace.
++stage7_temporal_decoder_s42,research,42,0.8512061716609107,0.7626456926137232,0.933438021673316,0.8575348006956929,0.42233586546023344,0.9213564213564215,0.5203281651557513,0.9985385415523303,3,4,60001820912.55525,1e-06,artifacts/dp_level3_utility_optimization/research/stage7_temporal_decoder_s42/round_03.pt
+artifacts/dp_level3_utility_optimization/SEED_RESULTS.csv:59: trailing whitespace.
++stage8_frozen_warm_s42,research,42,0.8710012260710615,0.7531430792700816,0.9646744607941946,0.8951861381489079,0.4368286190834219,0.9372294372294373,0.5354796803072666,0.9993558679649569,4,4,60001820912.55525,1e-06,artifacts/dp_level3_utility_optimization/research/stage8_frozen_warm_s42/round_04.pt
+artifacts/dp_level3_utility_optimization/SEED_RESULTS.csv:60: trailing whitespace.
++stage8_global_one_s42,research,42,0.5433721706122385,0.654538317302211,0.25308114657944747,0.7224970479550571,0.2763614429708454,0.7404401154401153,0.34667084639498436,0.9983673115650223,1,1,15000910456.27763,1e-06,artifacts/dp_level3_utility_optimization/research/stage8_global_one_s42/round_01.pt
+artifacts/dp_level3_utility_optimization/SEED_RESULTS.csv:61: trailing whitespace.
++confirm_calibrated_decoder_m0p15_s42,production,42,0.875532822229926,0.8057326075688301,0.9157617845117845,0.9051040746091636,0.4197518861320681,0.9005230880230881,0.515730464006326,0.9987756376569017,1,1,127.36375184207253,1e-06,/Users/pj/Desktop/college/capstone/Capstone-DP-SecAgg/artifacts/dp_level3_utility_optimization/production/confirm_calibrated_decoder_m0p15_s42/round_01.pt
+artifacts/dp_level3_utility_optimization/SEED_RESULTS.csv:62: trailing whitespace.
++confirm_calibrated_decoder_m0p15_s52,production,52,0.8942499539142802,0.8504300098050097,0.9378017815517816,0.8945180703860492,0.4368286190834219,0.9372294372294373,0.5354796803072666,0.9987072525873422,1,1,127.36375184207253,1e-06,/Users/pj/Desktop/college/capstone/Capstone-DP-SecAgg/artifacts/dp_level3_utility_optimization/production/confirm_calibrated_decoder_m0p15_s52/round_01.pt
+artifacts/dp_level3_utility_optimization/SEED_RESULTS.csv:63: trailing whitespace.
++confirm_calibrated_decoder_m0p15_s62,production,62,0.9386458723037786,0.9218787515006002,0.964384100747737,0.9296747646629986,0.4513213727066103,0.9531024531024531,0.5506311954587817,0.9994116012725155,1,1,127.36375184207253,1e-06,/Users/pj/Desktop/college/capstone/Capstone-DP-SecAgg/artifacts/dp_level3_utility_optimization/production/confirm_calibrated_decoder_m0p15_s62/round_01.pt

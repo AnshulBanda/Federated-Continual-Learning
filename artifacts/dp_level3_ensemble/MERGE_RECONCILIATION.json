@@ -1,0 +1,13 @@
+{
+  "main_merged": "1760f95f19b3411c3cb5ae3bcef356f8f7d23c60",
+  "merge_commit": "75a3e3a5fe179e2d6b286a2a540ad3c6ce0ed2fc",
+  "conflicts": {
+    "distributed_federation/central/aggregator.py": "DP transport wrapper retained; nonprivate harmonization moved into an explicit privacy.mode=none branch in transport.",
+    "distributed_federation/common/config.py": "Combined training_protocol support with DP/subset/cohort guards and research compatibility.",
+    "distributed_federation/common/model_runtime.py": "Combined three-member initialization/training with frozen subsets, implementation binding, safe loading and private diagnostic suppression.",
+    "src/gnn/adaptive_continual_federated.py": "Sia current training/progress/mean loss behavior retained; optional counter RNG, configurable wd/negative ratio and cancellation preserved with unchanged final defaults.",
+    "streaming/app/collaboration.py": "DP guards and scoped status retained; final policy superseded by four-round ensemble settings and calibrated C.",
+    "streaming/test_federation.py": "Private launcher kept; updated to four-round/three-epoch ensemble settings.",
+    "streaming/web/index.html": "Latest main dashboard used as base; fixed cohort/training controls and scope-aware DP status reapplied."
+  }
+}

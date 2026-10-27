@@ -1,0 +1,16 @@
+{
+  "main_used": "1760f95f19b3411c3cb5ae3bcef356f8f7d23c60",
+  "canonical_before": "3ba2fd2b2e19c38bec53b3f302e648efcb16020f",
+  "successful_local_repair": "f1e7c5ddc0673efd7e7b7c62cccce03daef879e1",
+  "repair_tree": "27ea12d5c46b17d2fa21484dcdb69e725613d734",
+  "integration_method": "fast-forward; no conflicts, no source rewrite",
+  "computational_behavior_changed": false,
+  "new_production_noise_draws": 0,
+  "kafka_io_identical_to_main": true,
+  "only_additional_changes": "Four negative regression subtests and integration evidence",
+  "expected_after_integration_commit": {
+    "dp_ahead": 12,
+    "dp_behind": 0
+  },
+  "human_verification_required_before_main_merge": true
+}

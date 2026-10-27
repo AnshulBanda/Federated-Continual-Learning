@@ -1,0 +1,17 @@
+half_C seed 52 round 1 AP 0.9183428 step 4.4836
+half_C seed 52 round 2 AP 0.9218571 step 4.5095
+half_C seed 52 round 3 AP 0.9249542 step 4.4783
+half_C seed 52 round 4 AP 0.9255954 step 4.4852
+half_C seed 62 round 1 AP 0.9166223 step 4.4975
+half_C seed 62 round 2 AP 0.9193389 step 4.5071
+half_C seed 62 round 3 AP 0.9168081 step 4.4686
+half_C seed 62 round 4 AP 0.910256 step 4.4862
+server_0p05 seed 52 round 1 AP 0.9181273 step 4.4833
+server_0p05 seed 52 round 2 AP 0.9218944 step 4.5093
+server_0p05 seed 52 round 3 AP 0.925039 step 4.4781
+server_0p05 seed 52 round 4 AP 0.9257826 step 4.4852
+server_0p05 seed 62 round 1 AP 0.9164 step 4.4974
+server_0p05 seed 62 round 2 AP 0.9187127 step 4.5068
+server_0p05 seed 62 round 3 AP 0.9165093 step 4.4683
+server_0p05 seed 62 round 4 AP 0.9083546 step 4.4862
+ROBUSTNESS [{'candidate': {'id': 'half_C', 'training': {}, 'clip': 0.875, 'server': {'learning_rate': 0.1}}, 'scores': [0.9044426389118883, 0.9255953694489244, 0.9102559556622593], 'mean': 0.913431321341024, 'sample_sd': 0.010928024189601844, 'worst': 0.9044426389118883}, {'candidate': {'id': 'server_0p05', 'training': {}, 'clip': 1.75, 'server': {'learning_rate': 0.05}}, 'scores': [0.903788907312553, 0.9257825531707349, 0.9083545627767551], 'mean': 0.9126420077533477, 'sample_sd': 0.011606754621954483, 'worst': 0.903788907312553}]

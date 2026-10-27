@@ -1,7 +1,7 @@
 # Federated AML XAI
 
 This folder explains the Sia and DP checkpoint families against the current
-temporal dataset. It keeps the supplied XAI engine (Python 3.12 bytecode) as the
+temporal dataset. It keeps the supplied XAI engine (Python 3.12 bytecode) under `engine_py312/` as the
 scoring core because its original `.py` files were missing from the supplied
 folder. The editable runner and source modules around it add checkpoint
 staging, fixed-case comparisons, constrained amount counterfactuals, privacy
@@ -220,3 +220,34 @@ intended recipient and disclosure scope before sharing.
 The single-global-model dashboard now uses exact grouped empirical interventional SHAP. Amount sent, amount received and both currencies are perturbed jointly. Numerical signed logit attributions, model provenance, reference-stability diagnostics, graph replay coverage, clickable accounts/edges and an intervention inspector are shown. See [XAI_EVALUATION.md](XAI_EVALUATION.md) for measured limitations and separate frozen detection performance.
 
 Run `.venv/Scripts/python.exe xai/evaluate_xai.py` to reproduce diagnostic group stability, perturbation and source-level bounded-replay checks. Existing frozen September artifacts are hash-verified and reported without retuning or repeating test inference. September remains exploratory because it was previously inspected.
+
+## Integration/runtime boundary
+
+The source-less CPython 3.12 engine is intentionally versioned under
+`engine_py312/`, outside ordinary `__pycache__` directories. Its original sources
+were not supplied. All 17 upstream modules are preserved byte-for-byte; the
+manifest records their source commit, original paths, sizes and SHA-256 hashes.
+See [engine_py312/README.md](engine_py312/README.md). Ordinary generated caches
+and repository-local temporary staging remain ignored. Run the live scoring
+engine in an existing CPython 3.12 environment with its compatible dependencies.
+The loader rejects incompatible Python versions before modifying staged model
+source or importing the engine. Editable utility/frontend tests can run separately.
+
+**DP model integration preserved; direct XAI explanation of DP checkpoints remains guarded pending target-wrapper parity.**
+
+This statement applies to the legacy bytecode-engine checkpoint adapter. Current
+operational privacy uses ONE seed-42 decoder-private model, separately from the
+nonprivate reference ensemble. Both current dashboard paths passed live checks:
+reference probability error 0; private single-model error 1.6014e-8, below the
+unchanged strict 1e-6 guard. Both reject an injected 1.5e-6 mismatch. See
+`artifacts/dp_singlemodel_r4e3/LIVE_XAI.json`. The prior private-ensemble experiment
+is historical and retired; its evidence remains archived. No guard is removed,
+and explanations of private transactions do not inherit a DP guarantee.
+
+The optimized decoder-only Level-3 finalist and its retained validation evidence
+remain under `artifacts/dp_level3_utility_optimization/`. The current interactive
+XAI dashboard targets the nonprivate Sia adaptive checkpoint. This integration
+does not claim that the cached target wrapper explains the optimized DP finalist;
+the existing per-target `1e-6` parity preflight and fail-closed behavior remain
+unchanged. No model parameters, thresholds, DP accounting or explanation
+attribution calculations were changed by this integration.

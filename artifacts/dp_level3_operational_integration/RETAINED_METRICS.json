@@ -1,0 +1,25 @@
+{
+  "scope": "Retained August validation evidence only; no evaluation or search rerun",
+  "mean": 0.9028095494826616,
+  "sample_sd": 0.03241549443748849,
+  "seeds": [
+    {
+      "seed": 42,
+      "pr_auc": 0.875532822229926,
+      "epsilon": 127.36375184207253,
+      "delta": 1e-06
+    },
+    {
+      "seed": 52,
+      "pr_auc": 0.8942499539142802,
+      "epsilon": 127.36375184207253,
+      "delta": 1e-06
+    },
+    {
+      "seed": 62,
+      "pr_auc": 0.9386458723037786,
+      "epsilon": 127.36375184207253,
+      "delta": 1e-06
+    }
+  ]
+}

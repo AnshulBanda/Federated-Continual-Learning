@@ -8,3 +8,46 @@ distributed_federation/.env
 distributed_federation/.env.backup
 distributed_federation/config.json
 distributed_federation/kafka/.env
+# Local privacy reservations and operational logs; never publish secret-bearing runtime state.
+artifacts/dp_level3_secagg/**/*.sqlite3
+artifacts/dp_level3_secagg/**/*.sqlite3-*
+artifacts/dp_level3_secagg/**/*.log
+artifacts/dp_level3_secagg/**/*.reserved
+artifacts/dp_level3_secagg/FINAL_GIT_STATE.json
+
+# Credentials, private keys, caches and transient local runtime files.
+.env
+.env.*
+!.env.example
+.secrets/
+*.pem
+*.key
+id_rsa
+id_rsa.*
+id_ed25519
+id_ed25519.*
+*.sqlite
+*.sqlite3
+*.sqlite3-*
+*.db
+*.db-*
+*.upload
+*.log
+dashboard.lock
+runtime.lock
+training.lock
+.pytest_cache/
+.DS_Store
+.idea/
+*.swp
+*.swo
+*~
+
+# Optimization evidence keeps runtime locks and the final self-referential Git record local.
+artifacts/dp_level3_utility_optimization/**/*.reserved
+artifacts/dp_level3_utility_optimization/FINAL_GIT_STATE.json
+
+# XAI ships a pinned source-less CPython 3.12 runtime, not regenerable caches.
+!xai/engine_py312/*.cpython-312.pyc
+/tmp/
+/xai/outputs/**/*.tmp

@@ -1,0 +1,33 @@
+[
+  {
+    "id": "refine_one_lr002",
+    "seeds": [
+      42
+    ],
+    "config": {
+      "rounds": 1,
+      "learning_rate": 0.002
+    }
+  },
+  {
+    "id": "refine_one_lr0015_neg10",
+    "seeds": [
+      42
+    ],
+    "config": {
+      "rounds": 1,
+      "learning_rate": 0.0015,
+      "negative_ratio": 10
+    }
+  },
+  {
+    "id": "refine_one_epochs4",
+    "seeds": [
+      42
+    ],
+    "config": {
+      "rounds": 1,
+      "local_epochs": 4
+    }
+  }
+]

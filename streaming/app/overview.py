@@ -58,8 +58,10 @@ class Overview:
             try:
                 active = json.loads((local / ('active-'+bank+'.json')).read_text(encoding='utf-8'))
                 validate_selected(active)
-                if active.get('model_kind') not in ('adaptive_probability_ensemble', 'federated_ensemble'):
+                if active.get('model_kind') not in ('adaptive_probability_ensemble', 'federated_ensemble', 'federated_single'):
                     raise ValueError()
+                if active.get('model_kind')=='federated_ensemble' and active.get('privacy',{}).get('differential_privacy'):
+                    raise ValueError('Private ensemble mode is retired')
                 result['active_model'] = active
             except FileNotFoundError:
                 pass
@@ -80,18 +82,22 @@ class Overview:
         if bank:
             import sqlite3
             dbpath = self.path.parent / 'collaboration/state.sqlite3'
-            client_id = {'Key_Bank':'bank-1','Wells_Fargo':'bank-2','JPMorgan_Chase':'bank-3'}[bank]
             if dbpath.is_file():
                 try:
                     db=sqlite3.connect(dbpath.resolve().as_uri()+'?mode=ro',uri=True,timeout=2)
                     try:
-                        row=db.execute("SELECT e.time FROM events e JOIN runs r ON e.run=r.id WHERE r.actor=? AND e.kind='training_completed' ORDER BY e.id DESC LIMIT 1",('bank:'+client_id,)).fetchone()
-                        if row and (not result['last_training'] or row[0]>result['last_training']):
-                            result['last_training']=row[0]
+                        rows=db.execute("SELECT e.time,r.actor,r.config FROM events e JOIN runs r ON e.run=r.id WHERE e.kind='training_completed' ORDER BY e.id DESC").fetchall()
+                        # Client IDs changed across historical deployments; the
+                        # saved run config is the authority for its bank identity.
+                        stamp=next((time for time,actor,raw in rows if any(
+                            c['bank']==bank and actor=='bank:'+c['client_id']
+                            for c in json.loads(raw).get('clients',[]))),None)
+                        if stamp and (not result['last_training'] or stamp>result['last_training']):
+                            result['last_training']=stamp
                             result['last_training_source']='Federated local training phase'
                     finally:
                         db.close()
-                except sqlite3.Error:
+                except (sqlite3.Error,ValueError,KeyError,TypeError):
                     warnings.append('Federated training time is temporarily unavailable.')
             if (result.get('active_model') or {}).get('model_kind'):
                 if not result['active_model'].get('reference'):

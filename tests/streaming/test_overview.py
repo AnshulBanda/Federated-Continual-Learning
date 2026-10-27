@@ -6,6 +6,15 @@ from unittest.mock import patch
 from streaming.app.overview import Overview, BANKS
 
 class OverviewTests(unittest.TestCase):
+    def test_historical_client_id_does_not_attribute_training_to_another_bank(self):
+        from streaming.app.state import StateStore
+        with tempfile.TemporaryDirectory() as tmp:
+            store=StateStore(Path(tmp)/'collaboration/state.sqlite3')
+            run=store.begin('previous-dp-roster','bank:bank-1',{'clients':[{'client_id':'bank-1','bank':'JPMorgan_Chase'}]})
+            store.emit(run,'training_completed',1);store.finish(run,'Completed')
+            overview=Overview(tmp)
+            self.assertIsNone(overview.save({'bank':'Key_Bank'})['last_training'])
+            self.assertIsNotNone(overview.save({'bank':'JPMorgan_Chase'})['last_training'])
     def test_bank_persists_and_metrics_match_selected_bank(self):
         with tempfile.TemporaryDirectory() as tmp:
             overview = Overview(tmp)

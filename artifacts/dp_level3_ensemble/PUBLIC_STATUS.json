@@ -1,0 +1,98 @@
+{
+  "central": {
+    "privacy": {
+      "mode": "distributed_dp",
+      "secagg": true,
+      "required_cohort": 3,
+      "multiplier": 0.3,
+      "epsilon": 127.36375184207253,
+      "delta": 1e-06,
+      "phase": "run_completed"
+    },
+    "privacy_label": "Level-3 Distributed DP + Secure Aggregation",
+    "epsilon_scope": "Current run: 4 reserved releases; cumulative local ledger epsilon=127.36375184207253; all retained ledgers compose",
+    "privacy_accounting": {
+      "current_run_reserved_releases": 4,
+      "cumulative": {
+        "reservations": 4,
+        "rho": 66.66666666666667,
+        "epsilon": 127.36375184207253,
+        "delta": 1e-06,
+        "scope": "all runs retained in this local ledger; deletion/rollback invalidates composition"
+      }
+    },
+    "model_scope": "Three-member ensemble continuation"
+  },
+  "bank-1": {
+    "privacy": {
+      "mode": "distributed_dp",
+      "secagg": true,
+      "required_cohort": 3,
+      "multiplier": 0.3,
+      "epsilon": 127.36375184207253,
+      "delta": 1e-06,
+      "phase": "worker_completed"
+    },
+    "privacy_label": "Level-3 Distributed DP + Secure Aggregation",
+    "epsilon_scope": "Current run: 4 reserved releases; cumulative local ledger epsilon=127.36375184207253; all retained ledgers compose",
+    "privacy_accounting": {
+      "current_run_reserved_releases": 4,
+      "cumulative": {
+        "reservations": 4,
+        "rho": 66.66666666666667,
+        "epsilon": 127.36375184207253,
+        "delta": 1e-06,
+        "scope": "all runs retained in this local ledger; deletion/rollback invalidates composition"
+      }
+    },
+    "model_scope": "Three-member ensemble continuation"
+  },
+  "bank-2": {
+    "privacy": {
+      "mode": "distributed_dp",
+      "secagg": true,
+      "required_cohort": 3,
+      "multiplier": 0.3,
+      "epsilon": 127.36375184207253,
+      "delta": 1e-06,
+      "phase": "worker_completed"
+    },
+    "privacy_label": "Level-3 Distributed DP + Secure Aggregation",
+    "epsilon_scope": "Current run: 4 reserved releases; cumulative local ledger epsilon=127.36375184207253; all retained ledgers compose",
+    "privacy_accounting": {
+      "current_run_reserved_releases": 4,
+      "cumulative": {
+        "reservations": 4,
+        "rho": 66.66666666666667,
+        "epsilon": 127.36375184207253,
+        "delta": 1e-06,
+        "scope": "all runs retained in this local ledger; deletion/rollback invalidates composition"
+      }
+    },
+    "model_scope": "Three-member ensemble continuation"
+  },
+  "bank-3": {
+    "privacy": {
+      "mode": "distributed_dp",
+      "secagg": true,
+      "required_cohort": 3,
+      "multiplier": 0.3,
+      "epsilon": 127.36375184207253,
+      "delta": 1e-06,
+      "phase": "worker_completed"
+    },
+    "privacy_label": "Level-3 Distributed DP + Secure Aggregation",
+    "epsilon_scope": "Current run: 4 reserved releases; cumulative local ledger epsilon=127.36375184207253; all retained ledgers compose",
+    "privacy_accounting": {
+      "current_run_reserved_releases": 4,
+      "cumulative": {
+        "reservations": 4,
+        "rho": 66.66666666666667,
+        "epsilon": 127.36375184207253,
+        "delta": 1e-06,
+        "scope": "all runs retained in this local ledger; deletion/rollback invalidates composition"
+      }
+    },
+    "model_scope": "Three-member ensemble continuation"
+  }
+}

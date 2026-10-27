@@ -1,0 +1,265 @@
+{
+  "training_only": true,
+  "nonprivate": true,
+  "rows": [
+    {
+      "bank": "JPMorgan_Chase",
+      "round": 1,
+      "norm": 6.068573900833717
+    },
+    {
+      "bank": "Wells_Fargo",
+      "round": 1,
+      "norm": 3.6919800756397168
+    },
+    {
+      "bank": "Key_Bank",
+      "round": 1,
+      "norm": 2.211417263892614
+    },
+    {
+      "bank": "JPMorgan_Chase",
+      "round": 2,
+      "norm": 5.731271555100434
+    },
+    {
+      "bank": "Wells_Fargo",
+      "round": 2,
+      "norm": 2.939633220372816
+    },
+    {
+      "bank": "Key_Bank",
+      "round": 2,
+      "norm": 2.2538625074591305
+    },
+    {
+      "bank": "JPMorgan_Chase",
+      "round": 3,
+      "norm": 5.081214108871908
+    },
+    {
+      "bank": "Wells_Fargo",
+      "round": 3,
+      "norm": 3.198886721950353
+    },
+    {
+      "bank": "Key_Bank",
+      "round": 3,
+      "norm": 2.3811299421664773
+    },
+    {
+      "bank": "JPMorgan_Chase",
+      "round": 4,
+      "norm": 5.042223688774381
+    },
+    {
+      "bank": "Wells_Fargo",
+      "round": 4,
+      "norm": 3.396192123498318
+    },
+    {
+      "bank": "Key_Bank",
+      "round": 4,
+      "norm": 2.3725493221400127
+    },
+    {
+      "bank": "JPMorgan_Chase",
+      "round": 1,
+      "norm": 6.164142809925994
+    },
+    {
+      "bank": "Wells_Fargo",
+      "round": 1,
+      "norm": 3.323976545167275
+    },
+    {
+      "bank": "Key_Bank",
+      "round": 1,
+      "norm": 2.613328218030785
+    },
+    {
+      "bank": "JPMorgan_Chase",
+      "round": 2,
+      "norm": 5.976881097001333
+    },
+    {
+      "bank": "Wells_Fargo",
+      "round": 2,
+      "norm": 3.4259887607420376
+    },
+    {
+      "bank": "Key_Bank",
+      "round": 2,
+      "norm": 2.466466064755553
+    },
+    {
+      "bank": "JPMorgan_Chase",
+      "round": 3,
+      "norm": 6.4265353065672555
+    },
+    {
+      "bank": "Wells_Fargo",
+      "round": 3,
+      "norm": 3.078126298175803
+    },
+    {
+      "bank": "Key_Bank",
+      "round": 3,
+      "norm": 2.3794933207002984
+    },
+    {
+      "bank": "JPMorgan_Chase",
+      "round": 4,
+      "norm": 5.239221649563535
+    },
+    {
+      "bank": "Wells_Fargo",
+      "round": 4,
+      "norm": 4.255848456232075
+    },
+    {
+      "bank": "Key_Bank",
+      "round": 4,
+      "norm": 2.614970878573657
+    },
+    {
+      "bank": "JPMorgan_Chase",
+      "round": 1,
+      "norm": 5.916796561451855
+    },
+    {
+      "bank": "Wells_Fargo",
+      "round": 1,
+      "norm": 3.423383099611624
+    },
+    {
+      "bank": "Key_Bank",
+      "round": 1,
+      "norm": 2.557354041798026
+    },
+    {
+      "bank": "JPMorgan_Chase",
+      "round": 2,
+      "norm": 5.690447177393298
+    },
+    {
+      "bank": "Wells_Fargo",
+      "round": 2,
+      "norm": 3.2025999689077205
+    },
+    {
+      "bank": "Key_Bank",
+      "round": 2,
+      "norm": 2.2332162808622957
+    },
+    {
+      "bank": "JPMorgan_Chase",
+      "round": 3,
+      "norm": 5.399609769774929
+    },
+    {
+      "bank": "Wells_Fargo",
+      "round": 3,
+      "norm": 3.3241832918097227
+    },
+    {
+      "bank": "Key_Bank",
+      "round": 3,
+      "norm": 2.665884715671546
+    },
+    {
+      "bank": "JPMorgan_Chase",
+      "round": 4,
+      "norm": 5.586058387219833
+    },
+    {
+      "bank": "Wells_Fargo",
+      "round": 4,
+      "norm": 3.834472211125479
+    },
+    {
+      "bank": "Key_Bank",
+      "round": 4,
+      "norm": 2.7084355959778548
+    }
+  ],
+  "statistics": {
+    "min": 2.211417263892614,
+    "median": 3.3601877076540205,
+    "mean": 3.8576765260483237,
+    "p75": 5.279318679616384,
+    "p90": 5.946838829226595,
+    "p95": 6.092466128106786,
+    "max": 6.4265353065672555
+  },
+  "chosen_C": 6.5,
+  "rule": "Round the training-only maximum up to the next half unit; freeze before private utility search",
+  "formal_scope": "Calibration disclosure is not DP; guarantees conditional on public fixed C and preprocessing",
+  "per_bank": {
+    "JPMorgan_Chase": {
+      "min": 5.042223688774381,
+      "median": 5.710859366246866,
+      "mean": 5.693581334373206,
+      "p75": 5.999804297959429,
+      "p90": 6.154585919016766,
+      "p95": 6.282219433414562,
+      "max": 6.4265353065672555
+    },
+    "Key_Bank": {
+      "min": 2.211417263892614,
+      "median": 2.423798003461015,
+      "mean": 2.4548423460023536,
+      "p75": 2.613738883166503,
+      "p90": 2.660793331961757,
+      "p95": 2.685032611809385,
+      "max": 2.7084355959778548
+    },
+    "Wells_Fargo": {
+      "min": 2.939633220372816,
+      "median": 3.3601877076540205,
+      "mean": 3.424605897769412,
+      "p75": 3.4924865894664574,
+      "p90": 3.820222997576903,
+      "p95": 4.024091521423447,
+      "max": 4.255848456232075
+    }
+  },
+  "per_round": {
+    "1": {
+      "min": 2.211417263892614,
+      "median": 3.423383099611624,
+      "mean": 3.9967725018168454,
+      "p75": 5.916796561451855,
+      "p90": 6.087687682652172,
+      "p95": 6.125915246289083,
+      "max": 6.164142809925994
+    },
+    "2": {
+      "min": 2.2332162808622957,
+      "median": 3.2025999689077205,
+      "mean": 3.768929625843847,
+      "p75": 5.690447177393298,
+      "p90": 5.780393463480613,
+      "p95": 5.878637280240973,
+      "max": 5.976881097001333
+    },
+    "3": {
+      "min": 2.3794933207002984,
+      "median": 3.198886721950353,
+      "mean": 3.7705626084098105,
+      "p75": 5.081214108871908,
+      "p90": 5.604994877133395,
+      "p95": 6.015765091850325,
+      "max": 6.4265353065672555
+    },
+    "4": {
+      "min": 2.3725493221400127,
+      "median": 3.834472211125479,
+      "mean": 3.8944413681227936,
+      "p75": 5.042223688774381,
+      "p90": 5.308588997094795,
+      "p95": 5.447323692157314,
+      "max": 5.586058387219833
+    }
+  }
+}

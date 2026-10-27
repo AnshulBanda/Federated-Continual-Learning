@@ -1,0 +1,981 @@
+{
+  "scope": "New private adaptive three-member ensemble; August validation only",
+  "production_run_id": "private-ensemble-confirmation-20261027",
+  "production_runs": 1,
+  "primary_round": 4,
+  "selected": {
+    "round": 4,
+    "macro": {
+      "pr_auc": 0.2171404870679732,
+      "precision": 0.5869565217391305,
+      "recall": 0.18235930735930736,
+      "f1": 0.23757575757575755,
+      "roc_auc": 0.9647182999542512
+    },
+    "per_bank": [
+      {
+        "bank": "Key_Bank",
+        "validation": {
+          "pr_auc": 0.16152879064602194,
+          "roc_auc": 0.9279446972260871,
+          "precision": 0.2608695652173913,
+          "recall": 0.2857142857142857,
+          "f1": 0.2727272727272727
+        },
+        "threshold": 0.41663355105105937,
+        "ensemble_aggregation": "arithmetic mean of three probabilities",
+        "members": [
+          {
+            "seed": 42,
+            "metrics": {
+              "pr_auc": 0.011864114994234651,
+              "roc_auc": 0.7543965203875707,
+              "precision": 0.023323615160349854,
+              "recall": 0.38095238095238093,
+              "f1": 0.04395604395604396
+            }
+          },
+          {
+            "seed": 52,
+            "metrics": {
+              "pr_auc": 0.04629573448518236,
+              "roc_auc": 0.8931840877089627,
+              "precision": 0.07103825136612021,
+              "recall": 0.6190476190476191,
+              "f1": 0.12745098039215685
+            }
+          },
+          {
+            "seed": 62,
+            "metrics": {
+              "pr_auc": 0.22529281355440117,
+              "roc_auc": 0.7844900704863852,
+              "precision": 0.391304347826087,
+              "recall": 0.42857142857142855,
+              "f1": 0.4090909090909091
+            }
+          }
+        ]
+      },
+      {
+        "bank": "Wells_Fargo",
+        "validation": {
+          "pr_auc": 0.2727334909045316,
+          "roc_auc": 0.9867911615174032,
+          "precision": 1.0,
+          "recall": 0.13636363636363635,
+          "f1": 0.24
+        },
+        "threshold": 1.0,
+        "ensemble_aggregation": "arithmetic mean of three probabilities",
+        "members": [
+          {
+            "seed": 42,
+            "metrics": {
+              "pr_auc": 0.00538378430127331,
+              "roc_auc": 0.7361067657411028,
+              "precision": 0.010845986984815618,
+              "recall": 0.45454545454545453,
+              "f1": 0.0211864406779661
+            }
+          },
+          {
+            "seed": 52,
+            "metrics": {
+              "pr_auc": 0.1347231649637787,
+              "roc_auc": 0.9291854801436343,
+              "precision": 0.1565217391304348,
+              "recall": 0.8181818181818182,
+              "f1": 0.26277372262773724
+            }
+          },
+          {
+            "seed": 62,
+            "metrics": {
+              "pr_auc": 0.07486906783941746,
+              "roc_auc": 0.7257261705834251,
+              "precision": 0.1346153846153846,
+              "recall": 0.3181818181818182,
+              "f1": 0.1891891891891892
+            }
+          }
+        ]
+      },
+      {
+        "bank": "JPMorgan_Chase",
+        "validation": {
+          "pr_auc": 0.2171591796533661,
+          "roc_auc": 0.9794190411192629,
+          "precision": 0.5,
+          "recall": 0.125,
+          "f1": 0.2
+        },
+        "threshold": 1.0,
+        "ensemble_aggregation": "arithmetic mean of three probabilities",
+        "members": [
+          {
+            "seed": 42,
+            "metrics": {
+              "pr_auc": 0.0028973975437999178,
+              "roc_auc": 0.8963060911107319,
+              "precision": 0.0034590107229332413,
+              "recall": 0.625,
+              "f1": 0.0068799449604403165
+            }
+          },
+          {
+            "seed": 52,
+            "metrics": {
+              "pr_auc": 0.020813536580078167,
+              "roc_auc": 0.8091700144250903,
+              "precision": 0.03773584905660377,
+              "recall": 0.375,
+              "f1": 0.06857142857142857
+            }
+          },
+          {
+            "seed": 62,
+            "metrics": {
+              "pr_auc": 0.13965216240101153,
+              "roc_auc": 0.7808394471933117,
+              "precision": 0.3125,
+              "recall": 0.3125,
+              "f1": 0.3125
+            }
+          }
+        ]
+      }
+    ],
+    "checkpoint_sha256": "d8f92d5929c25a6cc3ac8f3c170a97aa82232ebf1763cf2e445c7c2964968fde"
+  },
+  "trajectory": [
+    {
+      "round": 0,
+      "macro": {
+        "pr_auc": 0.8859444218294213,
+        "precision": 0.42233586546023355,
+        "recall": 0.9213564213564215,
+        "f1": 0.5203281651557513,
+        "roc_auc": 0.9996011078942494
+      },
+      "per_bank": [
+        {
+          "bank": "Key_Bank",
+          "validation": {
+            "pr_auc": 0.8654682493601761,
+            "roc_auc": 0.9990849722358014,
+            "precision": 0.7391304347826086,
+            "recall": 0.8095238095238095,
+            "f1": 0.7727272727272727
+          },
+          "threshold": 0.4178731563389285,
+          "ensemble_aggregation": "arithmetic mean of three probabilities",
+          "members": [
+            {
+              "seed": 42,
+              "metrics": {
+                "pr_auc": 0.9199227981071854,
+                "roc_auc": 0.998742359100348,
+                "precision": 0.782608695652174,
+                "recall": 0.8571428571428571,
+                "f1": 0.8181818181818182
+              }
+            },
+            {
+              "seed": 52,
+              "metrics": {
+                "pr_auc": 0.8383331359909285,
+                "roc_auc": 0.9985250922339631,
+                "precision": 0.6956521739130435,
+                "recall": 0.7619047619047619,
+                "f1": 0.7272727272727273
+              }
+            },
+            {
+              "seed": 62,
+              "metrics": {
+                "pr_auc": 0.7062787053831835,
+                "roc_auc": 0.998232617606137,
+                "precision": 0.6086956521739131,
+                "recall": 0.6666666666666666,
+                "f1": 0.6363636363636364
+              }
+            }
+          ]
+        },
+        {
+          "bank": "Wells_Fargo",
+          "validation": {
+            "pr_auc": 0.9622832604116025,
+            "roc_auc": 0.999856010239272,
+            "precision": 0.40384615384615385,
+            "recall": 0.9545454545454546,
+            "f1": 0.5675675675675675
+          },
+          "threshold": 0.26483766158297434,
+          "ensemble_aggregation": "arithmetic mean of three probabilities",
+          "members": [
+            {
+              "seed": 42,
+              "metrics": {
+                "pr_auc": 0.9599386797680174,
+                "roc_auc": 0.9998453443310699,
+                "precision": 0.40384615384615385,
+                "recall": 0.9545454545454546,
+                "f1": 0.5675675675675675
+              }
+            },
+            {
+              "seed": 52,
+              "metrics": {
+                "pr_auc": 0.9665638458852288,
+                "roc_auc": 0.9999111174316494,
+                "precision": 0.40384615384615385,
+                "recall": 0.9545454545454546,
+                "f1": 0.5675675675675675
+              }
+            },
+            {
+              "seed": 62,
+              "metrics": {
+                "pr_auc": 0.5227721515244094,
+                "roc_auc": 0.9993138265723327,
+                "precision": 0.36538461538461536,
+                "recall": 0.8636363636363636,
+                "f1": 0.5135135135135135
+              }
+            }
+          ]
+        },
+        {
+          "bank": "JPMorgan_Chase",
+          "validation": {
+            "pr_auc": 0.8300817557164852,
+            "roc_auc": 0.9998623412076748,
+            "precision": 0.12403100775193798,
+            "recall": 1.0,
+            "f1": 0.2206896551724138
+          },
+          "threshold": 0.01821659985588204,
+          "ensemble_aggregation": "arithmetic mean of three probabilities",
+          "members": [
+            {
+              "seed": 42,
+              "metrics": {
+                "pr_auc": 0.8903013804800091,
+                "roc_auc": 0.9999389260287572,
+                "precision": 0.12403100775193798,
+                "recall": 1.0,
+                "f1": 0.2206896551724138
+              }
+            },
+            {
+              "seed": 52,
+              "metrics": {
+                "pr_auc": 0.777324471887828,
+                "roc_auc": 0.9998032060926618,
+                "precision": 0.12403100775193798,
+                "recall": 1.0,
+                "f1": 0.2206896551724138
+              }
+            },
+            {
+              "seed": 62,
+              "metrics": {
+                "pr_auc": 0.7212396589983595,
+                "roc_auc": 0.9997120798498549,
+                "precision": 0.12403100775193798,
+                "recall": 1.0,
+                "f1": 0.2206896551724138
+              }
+            }
+          ]
+        }
+      ],
+      "checkpoint_sha256": [
+        "d650af6959d1da46888f30fb79bbfd888a6ec20743d14d447ea078dc351536f5",
+        "98b6c782a27013e4b1917669b2a5ae48d3a7e44ce6a9aa0149aef446473ab0e2",
+        "4cd0854f6740f99a9f9ef7f1ba3360c06b5178846394feb73033da718ac715fe"
+      ]
+    },
+    {
+      "round": 1,
+      "macro": {
+        "pr_auc": 0.000766105212003888,
+        "precision": 0.0010327541582910691,
+        "recall": 0.873015873015873,
+        "f1": 0.0020607218323806247,
+        "roc_auc": 0.3367245329196426
+      },
+      "per_bank": [
+        {
+          "bank": "Key_Bank",
+          "validation": {
+            "pr_auc": 0.001540799881377254,
+            "roc_auc": 0.44483092877407165,
+            "precision": 0.001990506813657939,
+            "recall": 0.6190476190476191,
+            "f1": 0.003968253968253968
+          },
+          "threshold": 0.6668299265405707,
+          "ensemble_aggregation": "arithmetic mean of three probabilities",
+          "members": [
+            {
+              "seed": 42,
+              "metrics": {
+                "pr_auc": 0.00184097484001052,
+                "roc_auc": 0.500482583135913,
+                "precision": 0.00184097484001052,
+                "recall": 1.0,
+                "f1": 0.0036751837591879593
+              }
+            },
+            {
+              "seed": 52,
+              "metrics": {
+                "pr_auc": 0.0019016571583808748,
+                "roc_auc": 0.5164516978152145,
+                "precision": 0.0019016571583808748,
+                "recall": 1.0,
+                "f1": 0.003796095444685466
+              }
+            },
+            {
+              "seed": 62,
+              "metrics": {
+                "pr_auc": 0.0015186488883358698,
+                "roc_auc": 0.42979564379932894,
+                "precision": 0.002021018593371059,
+                "recall": 0.7142857142857143,
+                "f1": 0.004030632809351068
+              }
+            }
+          ]
+        },
+        {
+          "bank": "Wells_Fargo",
+          "validation": {
+            "pr_auc": 0.000594149639794109,
+            "roc_auc": 0.3310333487396452,
+            "precision": 0.0008596436386370741,
+            "recall": 1.0,
+            "f1": 0.0017178105723432498
+          },
+          "threshold": 0.3333333333333333,
+          "ensemble_aggregation": "arithmetic mean of three probabilities",
+          "members": [
+            {
+              "seed": 42,
+              "metrics": {
+                "pr_auc": 0.0005883170045318276,
+                "roc_auc": 0.29575585736125437,
+                "precision": 0.0008596436386370741,
+                "recall": 1.0,
+                "f1": 0.0017178105723432498
+              }
+            },
+            {
+              "seed": 52,
+              "metrics": {
+                "pr_auc": 0.0009303505730113757,
+                "roc_auc": 0.5380328509972624,
+                "precision": 0.0009303505730113757,
+                "recall": 1.0,
+                "f1": 0.001858971650682327
+              }
+            },
+            {
+              "seed": 62,
+              "metrics": {
+                "pr_auc": 0.000727118863922736,
+                "roc_auc": 0.44248231236889823,
+                "precision": 0.0010883084577114428,
+                "recall": 0.9545454545454546,
+                "f1": 0.0021741381095351487
+              }
+            }
+          ]
+        },
+        {
+          "bank": "JPMorgan_Chase",
+          "validation": {
+            "pr_auc": 0.00016336611484030097,
+            "roc_auc": 0.234309321245211,
+            "precision": 0.0002481120225781941,
+            "recall": 1.0,
+            "f1": 0.0004961009565446568
+          },
+          "threshold": 0.3333333333333333,
+          "ensemble_aggregation": "arithmetic mean of three probabilities",
+          "members": [
+            {
+              "seed": 42,
+              "metrics": {
+                "pr_auc": 0.0002336749478110697,
+                "roc_auc": 0.46897054489615486,
+                "precision": 0.0002481120225781941,
+                "recall": 1.0,
+                "f1": 0.0004961009565446568
+              }
+            },
+            {
+              "seed": 52,
+              "metrics": {
+                "pr_auc": 0.0002802936075539127,
+                "roc_auc": 0.5574211661056909,
+                "precision": 0.0002802936075539127,
+                "recall": 1.0,
+                "f1": 0.0005604301301248708
+              }
+            },
+            {
+              "seed": 62,
+              "metrics": {
+                "pr_auc": 0.0001576282715634051,
+                "roc_auc": 0.20465209163810086,
+                "precision": 0.0002481120225781941,
+                "recall": 1.0,
+                "f1": 0.0004961009565446568
+              }
+            }
+          ]
+        }
+      ],
+      "checkpoint_sha256": "afcdc3b72df2b6690eb755def0f2956507b9dda2df4650d04b52e7426f572779"
+    },
+    {
+      "round": 2,
+      "macro": {
+        "pr_auc": 0.1369718070386036,
+        "precision": 0.4083333333333334,
+        "recall": 0.09875541125541125,
+        "f1": 0.15598290598290598,
+        "roc_auc": 0.906212745934018
+      },
+      "per_bank": [
+        {
+          "bank": "Key_Bank",
+          "validation": {
+            "pr_auc": 0.2088888326558508,
+            "roc_auc": 0.8728779921198979,
+            "precision": 0.6,
+            "recall": 0.14285714285714285,
+            "f1": 0.23076923076923078
+          },
+          "threshold": 1.0,
+          "ensemble_aggregation": "arithmetic mean of three probabilities",
+          "members": [
+            {
+              "seed": 42,
+              "metrics": {
+                "pr_auc": 0.0030110482478449612,
+                "roc_auc": 0.6834776904532103,
+                "precision": 0.0036488951956213257,
+                "recall": 0.8571428571428571,
+                "f1": 0.0072668550666128385
+              }
+            },
+            {
+              "seed": 52,
+              "metrics": {
+                "pr_auc": 0.0063803032724582655,
+                "roc_auc": 0.7912399670757133,
+                "precision": 0.007103393843725336,
+                "recall": 0.8571428571428571,
+                "f1": 0.014090019569471625
+              }
+            },
+            {
+              "seed": 62,
+              "metrics": {
+                "pr_auc": 0.20820861561431853,
+                "roc_auc": 0.759934736375905,
+                "precision": 0.5,
+                "recall": 0.3333333333333333,
+                "f1": 0.4
+              }
+            }
+          ]
+        },
+        {
+          "bank": "Wells_Fargo",
+          "validation": {
+            "pr_auc": 0.1856851816407524,
+            "roc_auc": 0.923467664521634,
+            "precision": 0.5,
+            "recall": 0.09090909090909091,
+            "f1": 0.15384615384615385
+          },
+          "threshold": 1.0,
+          "ensemble_aggregation": "arithmetic mean of three probabilities",
+          "members": [
+            {
+              "seed": 42,
+              "metrics": {
+                "pr_auc": 0.0008744039766614981,
+                "roc_auc": 0.5003288655028976,
+                "precision": 0.001003861003861004,
+                "recall": 0.5909090909090909,
+                "f1": 0.0020043169904409497
+              }
+            },
+            {
+              "seed": 52,
+              "metrics": {
+                "pr_auc": 0.00550177326832859,
+                "roc_auc": 0.863749244498169,
+                "precision": 0.006168831168831169,
+                "recall": 0.8636363636363636,
+                "f1": 0.012250161186331399
+              }
+            },
+            {
+              "seed": 62,
+              "metrics": {
+                "pr_auc": 0.2084850626099712,
+                "roc_auc": 0.9303329541010418,
+                "precision": 0.25,
+                "recall": 0.5909090909090909,
+                "f1": 0.35135135135135137
+              }
+            }
+          ]
+        },
+        {
+          "bank": "JPMorgan_Chase",
+          "validation": {
+            "pr_auc": 0.016341406819207586,
+            "roc_auc": 0.9222925811605218,
+            "precision": 0.125,
+            "recall": 0.0625,
+            "f1": 0.08333333333333333
+          },
+          "threshold": 1.0,
+          "ensemble_aggregation": "arithmetic mean of three probabilities",
+          "members": [
+            {
+              "seed": 42,
+              "metrics": {
+                "pr_auc": 0.0005713288394666885,
+                "roc_auc": 0.77763888027175,
+                "precision": 0.000611222036591826,
+                "recall": 0.9375,
+                "f1": 0.0012216475953903164
+              }
+            },
+            {
+              "seed": 52,
+              "metrics": {
+                "pr_auc": 0.0017155733479947927,
+                "roc_auc": 0.8306632051620109,
+                "precision": 0.0022104332449160036,
+                "recall": 0.625,
+                "f1": 0.004405286343612335
+              }
+            },
+            {
+              "seed": 62,
+              "metrics": {
+                "pr_auc": 0.009621429770405716,
+                "roc_auc": 0.7158092398132494,
+                "precision": 0.027777777777777776,
+                "recall": 0.0625,
+                "f1": 0.038461538461538464
+              }
+            }
+          ]
+        }
+      ],
+      "checkpoint_sha256": "27edd7416d70d215d15518f94f4137ea4ca5f51221f943d8b74e6e6a0fdfc930"
+    },
+    {
+      "round": 3,
+      "macro": {
+        "pr_auc": 0.10088672862424163,
+        "precision": 0.1691086691086691,
+        "recall": 0.4650974025974026,
+        "f1": 0.18078447015024598,
+        "roc_auc": 0.9863922608654522
+      },
+      "per_bank": [
+        {
+          "bank": "Key_Bank",
+          "validation": {
+            "pr_auc": 0.10625330586957496,
+            "roc_auc": 0.9832349365121148,
+            "precision": 0.10256410256410256,
+            "recall": 0.5714285714285714,
+            "f1": 0.17391304347826086
+          },
+          "threshold": 0.6666666666666666,
+          "ensemble_aggregation": "arithmetic mean of three probabilities",
+          "members": [
+            {
+              "seed": 42,
+              "metrics": {
+                "pr_auc": 0.013185807983495845,
+                "roc_auc": 0.6133527202229493,
+                "precision": 0.05194805194805195,
+                "recall": 0.19047619047619047,
+                "f1": 0.08163265306122448
+              }
+            },
+            {
+              "seed": 52,
+              "metrics": {
+                "pr_auc": 0.03631310740900407,
+                "roc_auc": 0.9068280290970472,
+                "precision": 0.043701799485861184,
+                "recall": 0.8095238095238095,
+                "f1": 0.08292682926829269
+              }
+            },
+            {
+              "seed": 62,
+              "metrics": {
+                "pr_auc": 0.04310701804198392,
+                "roc_auc": 0.9082987586541155,
+                "precision": 0.05405405405405406,
+                "recall": 0.6666666666666666,
+                "f1": 0.1
+              }
+            }
+          ]
+        },
+        {
+          "bank": "Wells_Fargo",
+          "validation": {
+            "pr_auc": 0.0990836396557238,
+            "roc_auc": 0.9885492587193799,
+            "precision": 0.07142857142857142,
+            "recall": 0.6363636363636364,
+            "f1": 0.12844036697247707
+          },
+          "threshold": 0.6666666666666666,
+          "ensemble_aggregation": "arithmetic mean of three probabilities",
+          "members": [
+            {
+              "seed": 42,
+              "metrics": {
+                "pr_auc": 0.003433807065904267,
+                "roc_auc": 0.5632586127208731,
+                "precision": 0.019736842105263157,
+                "recall": 0.13636363636363635,
+                "f1": 0.034482758620689655
+              }
+            },
+            {
+              "seed": 52,
+              "metrics": {
+                "pr_auc": 0.03092194330896643,
+                "roc_auc": 0.9411837380452946,
+                "precision": 0.0347985347985348,
+                "recall": 0.8636363636363636,
+                "f1": 0.06690140845070422
+              }
+            },
+            {
+              "seed": 62,
+              "metrics": {
+                "pr_auc": 0.02928497867884813,
+                "roc_auc": 0.9395865182920327,
+                "precision": 0.03571428571428571,
+                "recall": 0.6363636363636364,
+                "f1": 0.06763285024154589
+              }
+            }
+          ]
+        },
+        {
+          "bank": "JPMorgan_Chase",
+          "validation": {
+            "pr_auc": 0.09732324034742612,
+            "roc_auc": 0.9873925873648617,
+            "precision": 0.3333333333333333,
+            "recall": 0.1875,
+            "f1": 0.24
+          },
+          "threshold": 1.0,
+          "ensemble_aggregation": "arithmetic mean of three probabilities",
+          "members": [
+            {
+              "seed": 42,
+              "metrics": {
+                "pr_auc": 0.009049319535839932,
+                "roc_auc": 0.7148504754075476,
+                "precision": 0.02158273381294964,
+                "recall": 0.375,
+                "f1": 0.04081632653061224
+              }
+            },
+            {
+              "seed": 52,
+              "metrics": {
+                "pr_auc": 0.007839456251709814,
+                "roc_auc": 0.8325516511299654,
+                "precision": 0.01206140350877193,
+                "recall": 0.6875,
+                "f1": 0.023706896551724137
+              }
+            },
+            {
+              "seed": 62,
+              "metrics": {
+                "pr_auc": 0.0077912480533869725,
+                "roc_auc": 0.8326578035085542,
+                "precision": 0.012544802867383513,
+                "recall": 0.4375,
+                "f1": 0.024390243902439025
+              }
+            }
+          ]
+        }
+      ],
+      "checkpoint_sha256": "a8a7f5572e08a758fdc6be7c82dda7470a56373b9fe366eeda19645362dbee65"
+    },
+    {
+      "round": 4,
+      "macro": {
+        "pr_auc": 0.2171404870679732,
+        "precision": 0.5869565217391305,
+        "recall": 0.18235930735930736,
+        "f1": 0.23757575757575755,
+        "roc_auc": 0.9647182999542512
+      },
+      "per_bank": [
+        {
+          "bank": "Key_Bank",
+          "validation": {
+            "pr_auc": 0.16152879064602194,
+            "roc_auc": 0.9279446972260871,
+            "precision": 0.2608695652173913,
+            "recall": 0.2857142857142857,
+            "f1": 0.2727272727272727
+          },
+          "threshold": 0.41663355105105937,
+          "ensemble_aggregation": "arithmetic mean of three probabilities",
+          "members": [
+            {
+              "seed": 42,
+              "metrics": {
+                "pr_auc": 0.011864114994234651,
+                "roc_auc": 0.7543965203875707,
+                "precision": 0.023323615160349854,
+                "recall": 0.38095238095238093,
+                "f1": 0.04395604395604396
+              }
+            },
+            {
+              "seed": 52,
+              "metrics": {
+                "pr_auc": 0.04629573448518236,
+                "roc_auc": 0.8931840877089627,
+                "precision": 0.07103825136612021,
+                "recall": 0.6190476190476191,
+                "f1": 0.12745098039215685
+              }
+            },
+            {
+              "seed": 62,
+              "metrics": {
+                "pr_auc": 0.22529281355440117,
+                "roc_auc": 0.7844900704863852,
+                "precision": 0.391304347826087,
+                "recall": 0.42857142857142855,
+                "f1": 0.4090909090909091
+              }
+            }
+          ]
+        },
+        {
+          "bank": "Wells_Fargo",
+          "validation": {
+            "pr_auc": 0.2727334909045316,
+            "roc_auc": 0.9867911615174032,
+            "precision": 1.0,
+            "recall": 0.13636363636363635,
+            "f1": 0.24
+          },
+          "threshold": 1.0,
+          "ensemble_aggregation": "arithmetic mean of three probabilities",
+          "members": [
+            {
+              "seed": 42,
+              "metrics": {
+                "pr_auc": 0.00538378430127331,
+                "roc_auc": 0.7361067657411028,
+                "precision": 0.010845986984815618,
+                "recall": 0.45454545454545453,
+                "f1": 0.0211864406779661
+              }
+            },
+            {
+              "seed": 52,
+              "metrics": {
+                "pr_auc": 0.1347231649637787,
+                "roc_auc": 0.9291854801436343,
+                "precision": 0.1565217391304348,
+                "recall": 0.8181818181818182,
+                "f1": 0.26277372262773724
+              }
+            },
+            {
+              "seed": 62,
+              "metrics": {
+                "pr_auc": 0.07486906783941746,
+                "roc_auc": 0.7257261705834251,
+                "precision": 0.1346153846153846,
+                "recall": 0.3181818181818182,
+                "f1": 0.1891891891891892
+              }
+            }
+          ]
+        },
+        {
+          "bank": "JPMorgan_Chase",
+          "validation": {
+            "pr_auc": 0.2171591796533661,
+            "roc_auc": 0.9794190411192629,
+            "precision": 0.5,
+            "recall": 0.125,
+            "f1": 0.2
+          },
+          "threshold": 1.0,
+          "ensemble_aggregation": "arithmetic mean of three probabilities",
+          "members": [
+            {
+              "seed": 42,
+              "metrics": {
+                "pr_auc": 0.0028973975437999178,
+                "roc_auc": 0.8963060911107319,
+                "precision": 0.0034590107229332413,
+                "recall": 0.625,
+                "f1": 0.0068799449604403165
+              }
+            },
+            {
+              "seed": 52,
+              "metrics": {
+                "pr_auc": 0.020813536580078167,
+                "roc_auc": 0.8091700144250903,
+                "precision": 0.03773584905660377,
+                "recall": 0.375,
+                "f1": 0.06857142857142857
+              }
+            },
+            {
+              "seed": 62,
+              "metrics": {
+                "pr_auc": 0.13965216240101153,
+                "roc_auc": 0.7808394471933117,
+                "precision": 0.3125,
+                "recall": 0.3125,
+                "f1": 0.3125
+              }
+            }
+          ]
+        }
+      ],
+      "checkpoint_sha256": "d8f92d5929c25a6cc3ac8f3c170a97aa82232ebf1763cf2e445c7c2964968fde"
+    }
+  ],
+  "primary_selection": "Final round four fixed before production; no best-noise/round selection",
+  "declaration_sha256": "6e5616233ade8a0c454242024cf257319aeaa6441ebf15189e709b4fb7df2aa6",
+  "training": {
+    "training_protocol": "adaptive_ensemble",
+    "rounds": 4,
+    "local_epochs": 3,
+    "hidden_channels": 128,
+    "dropout": 0.25,
+    "batch_size": 1024,
+    "negative_ratio": 20,
+    "learning_rate": 0.001,
+    "weight_decay": 0.0001,
+    "seed": 42,
+    "return_aggregate": true,
+    "aggregation": "equal",
+    "rng_policy": "per_client",
+    "replay": "risk_context",
+    "replay_size": 2000,
+    "private_subset": "ensemble_decoder",
+    "max_chunk_bytes": 524288,
+    "privacy": {
+      "mode": "distributed_dp",
+      "clip": 6.5,
+      "multiplier": 0.3,
+      "delta": 1e-06,
+      "expected_clients": 3,
+      "min_noise_contributors": 3,
+      "scale": 16777216,
+      "entropy": "production"
+    },
+    "server_optimizer": {
+      "name": "fedavg",
+      "learning_rate": 1.0,
+      "beta1": 0.9,
+      "beta2": 0.99,
+      "epsilon": 0.001
+    },
+    "clients": [
+      {
+        "client_id": "bank-1",
+        "bank": "Key_Bank"
+      },
+      {
+        "client_id": "bank-2",
+        "bank": "Wells_Fargo"
+      },
+      {
+        "client_id": "bank-3",
+        "bank": "JPMorgan_Chase"
+      }
+    ],
+    "schema_banks": [
+      "Key_Bank",
+      "Wells_Fargo",
+      "JPMorgan_Chase"
+    ],
+    "initial_checkpoint": null,
+    "feature_schema": "distributed_federation/feature_schema.json",
+    "ensemble_initialization": [
+      {
+        "seed": 42,
+        "checkpoint": "artifacts/research_adaptive_fcl/warm_start/federated/context_harmonized/seed_42/global_model.pt",
+        "sha256": "d650af6959d1da46888f30fb79bbfd888a6ec20743d14d447ea078dc351536f5"
+      },
+      {
+        "seed": 52,
+        "checkpoint": "artifacts/research_adaptive_fcl/warm_start/federated/context_harmonized/seed_52/global_model.pt",
+        "sha256": "98b6c782a27013e4b1917669b2a5ae48d3a7e44ce6a9aa0149aef446473ab0e2"
+      },
+      {
+        "seed": 62,
+        "checkpoint": "artifacts/research_adaptive_fcl/warm_start/federated/context_harmonized/seed_62/global_model.pt",
+        "sha256": "4cd0854f6740f99a9f9ef7f1ba3360c06b5178846394feb73033da718ac715fe"
+      }
+    ],
+    "operational_policy": "level3_adaptive_ensemble_v2",
+    "broker": "127.0.0.1:19092",
+    "run_id": "private-ensemble-confirmation-20261027",
+    "dataset_dir": "/Users/pj/Desktop/college/capstone/Capstone/data/final_temporal_dataset",
+    "output_dir": "/Users/pj/Desktop/college/capstone/Capstone-DP-SecAgg/.local/dp-ensemble-level3/production-confirmation/complete-cohort/central/collaboration/models",
+    "round_timeout_seconds": 900,
+    "topics": {
+      "global_model": "fcl.collaboration.global.v1",
+      "client_updates": "fcl.collaboration.updates.v1"
+    }
+  },
+  "accounting": {
+    "bound": "encoded_share_postprocessing",
+    "delta": 1e-06,
+    "epsilon": 127.36375184207253,
+    "releases": 4,
+    "research_only": false,
+    "rho": 66.66666666666667,
+    "sampler_assumption": "ideal Gaussian; finite-precision sampler is not exact-DP certified"
+  },
+  "validation_loaded": true,
+  "test_loaded": false,
+  "metric_privacy": "Metrics and August-selected decision thresholds are nonprivate research disclosures",
+  "result_does_not_relabel_reference_or_historical_dp": true
+}

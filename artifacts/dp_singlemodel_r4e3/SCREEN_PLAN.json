@@ -1,0 +1,67 @@
+{
+  "candidates": [
+    {
+      "id": "baseline",
+      "training": {},
+      "clip": 1.75,
+      "server": {
+        "learning_rate": 1.0
+      }
+    },
+    {
+      "id": "server_0p25",
+      "training": {},
+      "clip": 1.75,
+      "server": {
+        "learning_rate": 0.25
+      }
+    },
+    {
+      "id": "server_0p1",
+      "training": {},
+      "clip": 1.75,
+      "server": {
+        "learning_rate": 0.1
+      }
+    },
+    {
+      "id": "server_0p05",
+      "training": {},
+      "clip": 1.75,
+      "server": {
+        "learning_rate": 0.05
+      }
+    },
+    {
+      "id": "low_lr",
+      "training": {
+        "learning_rate": 0.0001
+      },
+      "clip": 1.0,
+      "server": {
+        "learning_rate": 0.1
+      }
+    },
+    {
+      "id": "smaller_replay",
+      "training": {
+        "replay_size": 1000
+      },
+      "clip": 2.0,
+      "server": {
+        "learning_rate": 0.1
+      }
+    },
+    {
+      "id": "half_C",
+      "training": {},
+      "clip": 0.875,
+      "server": {
+        "learning_rate": 0.1
+      }
+    }
+  ],
+  "seed": 42,
+  "max_candidates": 7,
+  "selection": "Final round-four AP; no production noise used"
+}

@@ -1,0 +1,99 @@
+{
+  "production_runs": 1,
+  "run_id": "private-ensemble-confirmation-20261027",
+  "primary_round": 4,
+  "settings": {
+    "training_protocol": "adaptive_ensemble",
+    "rounds": 4,
+    "local_epochs": 3,
+    "hidden_channels": 128,
+    "dropout": 0.25,
+    "batch_size": 1024,
+    "negative_ratio": 20,
+    "learning_rate": 0.001,
+    "weight_decay": 0.0001,
+    "seed": 42,
+    "return_aggregate": true,
+    "aggregation": "equal",
+    "rng_policy": "per_client",
+    "replay": "risk_context",
+    "replay_size": 2000,
+    "private_subset": "ensemble_decoder",
+    "max_chunk_bytes": 524288
+  },
+  "privacy": {
+    "mode": "distributed_dp",
+    "clip": 6.5,
+    "multiplier": 0.3,
+    "delta": 1e-06,
+    "expected_clients": 3,
+    "min_noise_contributors": 3,
+    "scale": 16777216,
+    "entropy": "production"
+  },
+  "private_dimension": 197379,
+  "initialization": {
+    "clients": [
+      {
+        "client_id": "bank-1",
+        "bank": "Key_Bank"
+      },
+      {
+        "client_id": "bank-2",
+        "bank": "Wells_Fargo"
+      },
+      {
+        "client_id": "bank-3",
+        "bank": "JPMorgan_Chase"
+      }
+    ],
+    "schema_banks": [
+      "Key_Bank",
+      "Wells_Fargo",
+      "JPMorgan_Chase"
+    ],
+    "initial_checkpoint": null,
+    "feature_schema": "distributed_federation/feature_schema.json",
+    "ensemble_initialization": [
+      {
+        "seed": 42,
+        "checkpoint": "artifacts/research_adaptive_fcl/warm_start/federated/context_harmonized/seed_42/global_model.pt",
+        "sha256": "d650af6959d1da46888f30fb79bbfd888a6ec20743d14d447ea078dc351536f5"
+      },
+      {
+        "seed": 52,
+        "checkpoint": "artifacts/research_adaptive_fcl/warm_start/federated/context_harmonized/seed_52/global_model.pt",
+        "sha256": "98b6c782a27013e4b1917669b2a5ae48d3a7e44ce6a9aa0149aef446473ab0e2"
+      },
+      {
+        "seed": 62,
+        "checkpoint": "artifacts/research_adaptive_fcl/warm_start/federated/context_harmonized/seed_62/global_model.pt",
+        "sha256": "4cd0854f6740f99a9f9ef7f1ba3360c06b5178846394feb73033da718ac715fe"
+      }
+    ]
+  },
+  "accounting": {
+    "releases": 4,
+    "rho": 66.66666666666667,
+    "epsilon": 127.36375184207253,
+    "delta": 1e-06,
+    "bound": "encoded_share_postprocessing",
+    "research_only": false,
+    "sampler_assumption": "ideal Gaussian; finite-precision sampler is not exact-DP certified"
+  },
+  "primary_selection": "Fixed final round four; report all four August trajectories, no configuration/noise tuning or September evaluation",
+  "calibration_sha256": "e404eb99a4d7f1883a5a3e374b25bb21f0af0b293bbbee9eaa5a006976447eb2",
+  "source_sha256": {
+    "distributed_federation/common/model_runtime.py": "5ad2cd758d3f31a7f9a588a6a3dfc0bd723f2a7f7bdfe463c709371ef1ed462e",
+    "distributed_federation/common/config.py": "7d9e78704856064623f16435cf86473be659b1f5aac5e8feb5a994b665d336b9",
+    "distributed_federation/privacy/subset.py": "7ab50dac1497b4b21b91ffbfe4afdf7a01159f8c9e656c7011181bfd026c8a63",
+    "distributed_federation/privacy/transport.py": "77470bb9eec82c1710215be4d6a280ecdd46f2797ea3dcffa2e7dc0c06beb4b4",
+    "distributed_federation/privacy/mechanism.py": "6ed1d4c70e4a984d70131b9bcb0a61332b92d3f4ad290f9bb5cf36b8dd133bff",
+    "distributed_federation/privacy/secagg.py": "31d5604ed074d5508fb7e4d652b3137937d9073450ca54807066dfbc888aeb86",
+    "streaming/app/final_federation.py": "707b08a702188595742fe54218575443c52b30809d8d2fa91ddacd41322edfea",
+    "scripts/operational_level3_acceptance.py": "df9c00f58c4caff10a79c0799ab39797598fa793aa3966c1bdba3f8496bce52d",
+    "scripts/evaluate_private_ensemble.py": "42b8114a7bbba6f8e75a6debf14903223634dac1d008301123a9f0bd57b26d91",
+    "src/gnn/adaptive_continual_federated.py": "7d85b0e64fd31ccf472392afd2b58d89b18513b268309e63ab0438286dc915f0"
+  },
+  "main_merged": "1760f95f19b3411c3cb5ae3bcef356f8f7d23c60"
+}

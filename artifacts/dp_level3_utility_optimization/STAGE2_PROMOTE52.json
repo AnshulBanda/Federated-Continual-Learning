@@ -1,0 +1,15 @@
+[
+  {
+    "id": "stage2_1_fedavgm",
+    "seeds": [
+      52
+    ],
+    "config": {
+      "server": {
+        "name": "fedavgm",
+        "learning_rate": 0.5,
+        "beta1": 0.5
+      }
+    }
+  }
+]

@@ -1,0 +1,18 @@
+$ node --test xai/tests/test_dashboard_frontend.cjs
+✔ every cached bank/transaction renders feature directions from its own SHAP (54.626625ms)
+✔ empty eligible history renders an accurate message and no history table (1.015417ms)
+✔ untested existing history is not described as absent (1.168167ms)
+✔ mixed identities, scores, feature values, decisions and stale graph effects are rejected (1.780209ms)
+✔ out-of-order catalog responses cannot overwrite the current bank threshold (1.124542ms)
+✔ out-of-order explanation responses cannot overwrite the selected transaction (1.388125ms)
+✔ selected transfer cards across every bank show model score without historical-test wording (1.074625ms)
+✔ technical threshold is bank-specific and a different bank threshold is rejected (2.112084ms)
+✔ plain-language technical details adapt to selected score, directions, history and available checks (1.806708ms)
+ℹ tests 9
+ℹ suites 0
+ℹ pass 9
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 122.383667

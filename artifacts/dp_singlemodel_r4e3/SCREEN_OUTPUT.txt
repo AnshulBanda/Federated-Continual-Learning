@@ -1,0 +1,31 @@
+CALIBRATION base {'min': 0.573212871519958, 'median': 0.9068616860627795, 'mean': 0.8781248850634285, 'p75': 0.9659130986017569, 'p90': 1.1371618871146232, 'p95': 1.2444650022431523, 'max': 1.3691145213287728} C 1.75
+CALIBRATION low_lr {'min': 0.2415626354643908, 'median': 0.3766583096644204, 'mean': 0.3725511893784195, 'p75': 0.44077223358004797, 'p90': 0.4955787924438071, 'p95': 0.5441126654518125, 'max': 0.6002095852140429} C 1.0
+CALIBRATION smaller_replay {'min': 0.5619468982731022, 'median': 0.8330055033816597, 'mean': 0.8644117545358293, 'p75': 0.9962364578765732, 'p90': 1.1591335447873892, 'p95': 1.2908195659765518, 'max': 1.449619892068697} C 2.0
+baseline seed 42 round 1 AP 0.0920715 step 89.4689
+baseline seed 42 round 2 AP 0.3586935 step 90.0641
+baseline seed 42 round 3 AP 0.2754704 step 90.0914
+baseline seed 42 round 4 AP 0.6298949 step 90.1513
+server_0p25 seed 42 round 1 AP 0.8784235 step 22.3672
+server_0p25 seed 42 round 2 AP 0.868726 step 22.5157
+server_0p25 seed 42 round 3 AP 0.8113184 step 22.523
+server_0p25 seed 42 round 4 AP 0.8313334 step 22.5379
+server_0p1 seed 42 round 1 AP 0.8954406 step 8.9469
+server_0p1 seed 42 round 2 AP 0.8952188 step 9.0061
+server_0p1 seed 42 round 3 AP 0.8871695 step 9.0091
+server_0p1 seed 42 round 4 AP 0.8907841 step 9.0153
+server_0p05 seed 42 round 1 AP 0.9102122 step 4.4734
+server_0p05 seed 42 round 2 AP 0.9085667 step 4.503
+server_0p05 seed 42 round 3 AP 0.9007445 step 4.5046
+server_0p05 seed 42 round 4 AP 0.9037889 step 4.5074
+low_lr seed 42 round 1 AP 0.9082283 step 5.1124
+low_lr seed 42 round 2 AP 0.9054147 step 5.1464
+low_lr seed 42 round 3 AP 0.8966565 step 5.148
+low_lr seed 42 round 4 AP 0.8986815 step 5.1514
+smaller_replay seed 42 round 1 AP 0.8939637 step 10.225
+smaller_replay seed 42 round 2 AP 0.8938928 step 10.2926
+smaller_replay seed 42 round 3 AP 0.8862815 step 10.2958
+smaller_replay seed 42 round 4 AP 0.8893601 step 10.3032
+half_C seed 42 round 1 AP 0.9104248 step 4.4737
+half_C seed 42 round 2 AP 0.9090309 step 4.5032
+half_C seed 42 round 3 AP 0.9020632 step 4.5049
+half_C seed 42 round 4 AP 0.9044426 step 4.5075

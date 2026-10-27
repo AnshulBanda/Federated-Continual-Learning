@@ -1,0 +1,36 @@
+{
+  "reservations": [
+    {
+      "ledger": "/Users/pj/Desktop/college/capstone/Capstone-DP-SecAgg/artifacts/dp_level3_utility_optimization/production/confirm_calibrated_decoder_m0p15_s42/ledger.sqlite3",
+      "run": "confirm_calibrated_decoder_m0p15_s42",
+      "round": 1,
+      "role": "simulation",
+      "rho": 66.66666666666667
+    },
+    {
+      "ledger": "/Users/pj/Desktop/college/capstone/Capstone-DP-SecAgg/artifacts/dp_level3_utility_optimization/production/confirm_calibrated_decoder_m0p15_s62/ledger.sqlite3",
+      "run": "confirm_calibrated_decoder_m0p15_s62",
+      "round": 1,
+      "role": "simulation",
+      "rho": 66.66666666666667
+    },
+    {
+      "ledger": "/Users/pj/Desktop/college/capstone/Capstone-DP-SecAgg/artifacts/dp_level3_utility_optimization/production/confirm_calibrated_decoder_m0p15_s52/ledger.sqlite3",
+      "run": "confirm_calibrated_decoder_m0p15_s52",
+      "round": 1,
+      "role": "simulation",
+      "rho": 66.66666666666667
+    },
+    {
+      "ledger": "/Users/pj/Desktop/college/capstone/Capstone-DP-SecAgg/artifacts/dp_level3_utility_optimization/kafka_acceptance/finalist/models/privacy-ledgers/central.sqlite3",
+      "run": "qa-d153475bca634f2c",
+      "round": 1,
+      "role": "central",
+      "rho": 66.66666666666667
+    }
+  ],
+  "rho": 266.6666666666667,
+  "epsilon": 388.0608370174784,
+  "delta": 1e-06,
+  "includes_failed_reservations": true
+}

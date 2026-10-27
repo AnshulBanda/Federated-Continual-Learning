@@ -1,0 +1,11 @@
+[
+  {
+    "id": "stage7_temporal_decoder",
+    "seeds": [
+      52
+    ],
+    "config": {
+      "subset": "temporal_decoder"
+    }
+  }
+]

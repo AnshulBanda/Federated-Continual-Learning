@@ -1,0 +1,2 @@
+$ node --check .local/canonical-single-integration/dashboard.js
+PASS (no output)

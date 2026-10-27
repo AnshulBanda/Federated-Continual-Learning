@@ -31,10 +31,10 @@ The existing `Start-Weights-macOS.command`, `Start-Weights-Windows.cmd` and `lau
 | **Data & training** | Check bank-local training/validation data, adapt all three members with June/July context replay, cancel a job, inspect progress, and explicitly select a completed version. |
 | **Transactions** | Score August with the selected ensemble; load, play or step through the replay; jump to the next alert; review all scored transactions; search account or transaction IDs; inspect account connections. |
 | **Explanations** | Choose **Explain score** on a transaction. Compute exact grouped SHAP with the same model and pre-batch account memory used for its prediction. |
-| **Collaboration** | Configure bank/coordinator roles, check Kafka topics, train across banks, harmonize updates, receive verified ensembles, and select a returned model. |
+| **Collaboration** | Configure bank/coordinator roles, check Kafka topics, train across banks, securely aggregate noisy decoder updates, receive verified ensembles, and select a returned model. |
 | **Results & history** | Compare saved baseline and final-ensemble metrics; inspect new validation runs and transfer/federation history; export displayed evidence as JSON. |
 | **Weight transfers** | Send or receive an opaque model file using signed chunks, hashes, delivery receipts, cancellation and explicit recovery. |
-| **Privacy & transfers** | Inspect implemented controls and missing privacy guarantees. **DP is not implemented in the final model/transfer path.** |
+| **Privacy & transfers** | Distinguish the **nonprivate reference ensemble** from **Level-3 private collaboration**, with actual epsilon/delta and accounting scope. |
 
 A five-minute demonstration: save **Key Bank** → **Transactions** → **Score validation replay** → **Load replay** → **Next alert** → **Explain score**. Then show **Results & history**, **Privacy & transfers**, and a completed training run.
 
@@ -64,7 +64,7 @@ Their hashes are checked against [`FREEZE.json`](artifacts/research_seed_ensembl
 
 **Local adaptation:** each member starts from its final checkpoint, trains three June epochs and three July-plus-context-replay epochs, then competes against its initial checkpoint using August PR-AUC. Each member keeps the better validation checkpoint. The dashboard reports the resulting ensemble's measured validation score. This bank-local adaptation is separate from the original three-bank training study.
 
-**Federated training:** each bank receives all three members and trains them locally with context replay. The coordinator applies equal-client temporal harmonization independently for each seed, saves one safetensors ensemble, and returns it to participating banks. New rounds can improve or worsen performance; returned versions must be evaluated. The workflow does not claim to reproduce 90.68% after arbitrary updates.
+**Private federated training:** each bank receives ONE seed-42 warm CausalTemporalGraphSAGE and trains its decoder locally with context replay. The coordinator securely aggregates the noisy decoder contributions, applies noisy-only FedAvg postprocessing (server lr=.1), saves one global single-model checkpoint, and returns it to all banks. Plaintext temporal harmonization is retained only for explicit nonprivate research. New rounds can improve or worsen performance; returned versions must be evaluated. The workflow does not claim to reproduce 90.68% after arbitrary updates.
 
 ## Architecture
 
@@ -74,8 +74,11 @@ flowchart TD
     Schema --> Members[Three temporal GraphSAGE models: 42 / 52 / 62]
     Members --> Train[June then July plus risk/account-context replay]
     Train --> Local[Local validation selects each member]
-    Train --> Send[Signed model updates through Kafka]
-    Send --> Central[Equal-client temporal harmonization per seed]
+    Warm[One frozen seed-42 warm model] --> PrivateTrain[Private single-model decoder adaptation]
+    PrivateTrain --> Clip[One global bank clip across 65793 decoder coordinates]
+    Clip --> Noise[Independent distributed Gaussian bank share]
+    Noise --> Send[Signed masked ring contribution through Kafka]
+    Send --> Central[Complete-cohort secure equal aggregation]
     Central --> Receive[Hash-verified ensemble returned to banks]
     Local --> Select[Explicit model version selection]
     Receive --> Select
@@ -98,9 +101,36 @@ Manual file transfers use a separate topic and `FCL_TRANSFER_SECRET` environment
 
 ## Privacy status
 
-**There is no formal differential privacy guarantee in the final implementation.** It has no DP noise mechanism, epsilon/delta accountant or DP release-budget enforcement. Ordinary gradient clipping, HMAC signatures and file hashes do not provide DP. Kafka TLS is not configured by the application; secure aggregation is also absent. The coordinator can inspect individual updates. Transaction explanations are local and are not sent by automatic federation.
+The **90.68% frozen Sia reference ensemble is nonprivate**. Ordinary local adaptation,
+manual file transfers, transaction scores and explanations make no DP claim.
 
-See the [privacy audit](docs/PRIVACY_AUDIT.md) for the exact code paths and evidence. Historical XAI reports that mention other privacy experiments do not establish a guarantee for these final checkpoints.
+The **operational private single model** uses bank-level Level-3 distributed DP and
+Secure Aggregation: four rounds, three local epochs per phase, lr=.0003,
+risk/context replay=2000, one decoder subset (65,793 coordinates), one
+global bank clip C=.875, multiplier=.30, delta=1e-6, three mandatory contributors
+and production entropy. Conservative encoded-share accounting gives per-run
+epsilon=127.363751842; all reserved runs/releases compose. Privacy is conditional
+on the nonprivate frozen seed-42 initialization, not end-to-end pretraining.
+Calibration statistics and validation metrics are nonprivate research disclosures.
+
+The private path uses the successful original single-model adaptive continuation,
+with four real communication rounds and three local epochs per phase. Seeds 52/62
+are separate experiment RNG seeds, never private ensemble members. No plaintext
+temporal harmonization is used. Noisy-only FedAvg server lr=.1 attenuates both
+signal and noise without changing accounting. There is no plaintext fallback. The earlier
+90.281% result remains historical single-model decoder-private evidence and is not
+the performance of this new architecture. See the [current privacy audit](docs/PRIVACY_AUDIT.md)
+and [new single-model evidence](artifacts/dp_singlemodel_r4e3/).
+
+The local single-model repair records **0.913431 ± 0.010928 macro August PR-AUC**
+across continuation seeds 42/52/62, all from the same seed-42 warm checkpoint.
+One predeclared production-entropy Kafka confirmation scored **0.913565** at
+round four. These are August validation results, separate from the frozen
+nonprivate September headline. See the [local repair report](artifacts/dp_singlemodel_r4e3/FINAL_REPORT.md).
+
+Kafka TLS is not configured by the app; ZeroTier is networking only. Team-shared
+HMAC authentication retains the existing honest-but-curious/noncolluding threat
+model and does not independently authenticate institutions.
 
 ## Verify before the review
 
@@ -110,7 +140,7 @@ python -m unittest discover -s tests -v
 python -m unittest discover -s xai/tests -v
 python scripts/verify_dashboard_workflow.py
 # Requires a reachable local Kafka broker:
-python -m streaming.test_federation --broker 127.0.0.1:9092 --rounds 1
+python -m streaming.test_federation --broker 127.0.0.1:9092 --rounds 4
 ```
 
 The HTTP acceptance check creates an isolated workspace, verifies all three saved August scores, explains a high-risk transaction, adapts all three models, selects the new ensemble and checks its reloaded score. It does not load September transactions. Runtime state and evidence stay under ignored `streaming/.local/`.

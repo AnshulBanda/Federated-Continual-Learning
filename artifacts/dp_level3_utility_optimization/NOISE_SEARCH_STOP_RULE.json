@@ -1,0 +1,4 @@
+{
+  "stop": "After this midpoint, no further multiplier search. Confirm successful m=.15 and m=.1 research nominees in epsilon order, at most once per configuration/seed. The m=.2 research result failed across all three seeds; m=.25 is not promoted after the m=.2 seed62 failure.",
+  "reason": "Bounded coarse-to-fine privacy/utility search; avoid unbounded or favorable-noise resampling"
+}

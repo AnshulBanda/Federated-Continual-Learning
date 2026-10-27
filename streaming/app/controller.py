@@ -24,10 +24,15 @@ class RunController:
         self.python = str(python)
         self.store = StateStore(self.state_dir / 'state.sqlite3')
 
-    def start(self, config_path, role, client_id=None, environment=None, output=None):
+    def start(self, config_path, role, client_id=None, environment=None, output=None, operational=False):
         if role not in {'central', 'bank'}:
             raise ValueError('role must be central or bank')
         config = load_config(config_path)
+        original = json.loads(Path(config_path).read_text(encoding='utf-8'))
+        operational = operational or 'operational_policy' in original
+        if operational:
+            from .final_federation import validate_operational_config
+            validate_operational_config(original, config)
         if role == 'bank':
             config.client(client_id)
         elif client_id is not None:
@@ -36,6 +41,10 @@ class RunController:
         raw = asdict(config)
         raw['topics'] = {'global_model': raw.pop('global_topic'),
                          'client_updates': raw.pop('update_topic')}
+        if operational:
+            from .final_federation import POLICY
+            raw['operational_policy'] = POLICY
+            raw['warm_checkpoint_sha256'] = original['warm_checkpoint_sha256']
         snapshots = self.state_dir / 'configs'
         snapshots.mkdir(exist_ok=True)
         path = snapshots / (uuid.uuid4().hex + '.json')
@@ -44,6 +53,8 @@ class RunController:
                    '--role', role, '--state-dir', str(self.state_dir)]
         if client_id:
             command += ['--client-id', client_id]
+        if operational:
+            command += ['--operational-final']
         # No shell; no window on Windows. Popen returning is not a readiness claim.
         return subprocess.Popen(command, cwd=REPO_ROOT, stdin=subprocess.DEVNULL,
                                 creationflags=subprocess.CREATE_NO_WINDOW if os.name == 'nt' else 0,

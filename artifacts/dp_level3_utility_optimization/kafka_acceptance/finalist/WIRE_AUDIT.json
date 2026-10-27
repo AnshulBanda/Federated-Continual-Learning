@@ -1,0 +1,77 @@
+{
+  "result": "PASS",
+  "run_id": "qa-d153475bca634f2c",
+  "messages": [
+    {
+      "type": "global_model",
+      "sender": "central",
+      "sha256": "209d8cac5242fd6e11bc4b7eea36e41e408cc7777d506b37f1d959d12487cbfb",
+      "round": 1
+    },
+    {
+      "type": "secagg_ready",
+      "sender": "central",
+      "sha256": "517667274a8dc238114b4a49ba9f8ad2e54dad7887c00bf08120afbaa712b807",
+      "round": 1
+    },
+    {
+      "type": "aggregated_model",
+      "sender": "central",
+      "sha256": "b5c9f0c04081b788f60f1189984e12f0ec0f0c3c211f667ea8b2113a697e9473",
+      "round": 1
+    },
+    {
+      "type": "secagg_public_key",
+      "sender": "bank-2",
+      "sha256": "055aa94637f49d0c8c49656a213204a908128f8f379cfb7742a54046b08ead1a",
+      "round": 1
+    },
+    {
+      "type": "secagg_public_key",
+      "sender": "bank-1",
+      "sha256": "30ef622d015e11eb77eb697be19c107815fe301975bf2152a138e2bb8b1deb4b",
+      "round": 1
+    },
+    {
+      "type": "secagg_public_key",
+      "sender": "bank-3",
+      "sha256": "2e4c4d8be592edd4c2917e9ebd0f6ed4193f83168218d353454789b716eb6705",
+      "round": 1
+    },
+    {
+      "type": "masked_client_update",
+      "sender": "bank-3",
+      "sha256": "63ae68128efbc9aa50c9957f9674103b2b2097e091d764c0a56c08726db32c2a",
+      "round": 1,
+      "tensor_names": [
+        "masked_ring"
+      ],
+      "dimension": 65793
+    },
+    {
+      "type": "masked_client_update",
+      "sender": "bank-2",
+      "sha256": "1d757c9ca1ffea89987eb916f692b63b693e1f1e6c6f148b762596d1f5bded4d",
+      "round": 1,
+      "tensor_names": [
+        "masked_ring"
+      ],
+      "dimension": 65793
+    },
+    {
+      "type": "masked_client_update",
+      "sender": "bank-1",
+      "sha256": "f5970f48e8a726a5b819e7732960646ed43fa32d9bf544699d9ca66e74490954",
+      "round": 1,
+      "tensor_names": [
+        "masked_ring"
+      ],
+      "dimension": 65793
+    }
+  ],
+  "masked_updates_only": true,
+  "noise_contributors_required": 3,
+  "no_clean_updates_persisted": true,
+  "wire_payloads_persisted": false,
+  "HMAC_note": "HMACs were verified by operational coordinator/workers; this post-run read audit checks payload SHA against the verified manifests because ephemeral HMAC secrets were intentionally not persisted."
+}

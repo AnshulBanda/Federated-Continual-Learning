@@ -1,0 +1,12 @@
+{
+  "baseline": {
+    "independent_rho_per_release": 15000000000.000002,
+    "stored_rho_per_release": 14999999999.999998,
+    "pass_": true
+  },
+  "finalist": {
+    "independent_rho_per_release": 66.66666666666669,
+    "stored_rho_per_release": 66.66666666666667,
+    "pass_": true
+  }
+}

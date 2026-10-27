@@ -1,0 +1,19 @@
+FINAL pytest tests -q
+...................................................................... [ 50%]
+.................................................................. [ 97%]
+...                                                                      [100%]
+139 passed, 8 subtests passed in 9.26s
+
+FINAL python scripts/secagg_smoke.py
+{
+  "result": "PASS",
+  "dimension": 242561,
+  "exact_ring_cancellation": true,
+  "mean": 0.019999980926513672
+}
+
+git diff --check: PASS (empty output)
+
+Real Kafka: PASS; three bank processes + coordinator; see kafka_acceptance/finalist/result.json and WIRE_AUDIT.json.
+Real-data worker/reference parity: PASS for all banks.
+Checkpoint reload: PASS; exact per-bank metrics, original NumPy macro mean, hashes and frozen parameters.

@@ -1,0 +1,246 @@
+{
+  "base": {
+    "training": {},
+    "rows": [
+      {
+        "round": 1,
+        "bank": "Key_Bank",
+        "norm": 0.5903991883455041
+      },
+      {
+        "round": 1,
+        "bank": "Wells_Fargo",
+        "norm": 1.3691145213287728
+      },
+      {
+        "round": 1,
+        "bank": "JPMorgan_Chase",
+        "norm": 1.0893075824065184
+      },
+      {
+        "round": 2,
+        "bank": "Key_Bank",
+        "norm": 0.573212871519958
+      },
+      {
+        "round": 2,
+        "bank": "Wells_Fargo",
+        "norm": 1.1424790320821903
+      },
+      {
+        "round": 2,
+        "bank": "JPMorgan_Chase",
+        "norm": 0.9134071264583202
+      },
+      {
+        "round": 3,
+        "bank": "Key_Bank",
+        "norm": 0.6589621046930577
+      },
+      {
+        "round": 3,
+        "bank": "Wells_Fargo",
+        "norm": 0.9247816040001697
+      },
+      {
+        "round": 3,
+        "bank": "JPMorgan_Chase",
+        "norm": 0.9109659763831254
+      },
+      {
+        "round": 4,
+        "bank": "Key_Bank",
+        "norm": 0.5919040235988596
+      },
+      {
+        "round": 4,
+        "bank": "Wells_Fargo",
+        "norm": 0.9027573957424336
+      },
+      {
+        "round": 4,
+        "bank": "JPMorgan_Chase",
+        "norm": 0.8702071942022321
+      }
+    ],
+    "statistics": {
+      "min": 0.573212871519958,
+      "median": 0.9068616860627795,
+      "mean": 0.8781248850634285,
+      "p75": 0.9659130986017569,
+      "p90": 1.1371618871146232,
+      "p95": 1.2444650022431523,
+      "max": 1.3691145213287728
+    },
+    "max_bound": 1.75,
+    "candidate_clipping_rates": {
+      "1.75": 0.0,
+      "0.875": 0.5833333333333334,
+      "0.4375": 1.0
+    }
+  },
+  "low_lr": {
+    "training": {
+      "learning_rate": 0.0001
+    },
+    "rows": [
+      {
+        "round": 1,
+        "bank": "Key_Bank",
+        "norm": 0.2493442570369536
+      },
+      {
+        "round": 1,
+        "bank": "Wells_Fargo",
+        "norm": 0.6002095852140429
+      },
+      {
+        "round": 1,
+        "bank": "JPMorgan_Chase",
+        "norm": 0.4718512536209092
+      },
+      {
+        "round": 2,
+        "bank": "Key_Bank",
+        "norm": 0.2415915857270354
+      },
+      {
+        "round": 2,
+        "bank": "Wells_Fargo",
+        "norm": 0.4982151856463513
+      },
+      {
+        "round": 2,
+        "bank": "JPMorgan_Chase",
+        "norm": 0.3607381431339547
+      },
+      {
+        "round": 3,
+        "bank": "Key_Bank",
+        "norm": 0.24693748240178703
+      },
+      {
+        "round": 3,
+        "bank": "Wells_Fargo",
+        "norm": 0.4086848761324961
+      },
+      {
+        "round": 3,
+        "bank": "JPMorgan_Chase",
+        "norm": 0.4304125602330942
+      },
+      {
+        "round": 4,
+        "bank": "Key_Bank",
+        "norm": 0.2415626354643908
+      },
+      {
+        "round": 4,
+        "bank": "Wells_Fargo",
+        "norm": 0.392578476194886
+      },
+      {
+        "round": 4,
+        "bank": "JPMorgan_Chase",
+        "norm": 0.3284882317351334
+      }
+    ],
+    "statistics": {
+      "min": 0.2415626354643908,
+      "median": 0.3766583096644204,
+      "mean": 0.3725511893784195,
+      "p75": 0.44077223358004797,
+      "p90": 0.4955787924438071,
+      "p95": 0.5441126654518125,
+      "max": 0.6002095852140429
+    },
+    "max_bound": 1.0,
+    "candidate_clipping_rates": {
+      "1.0": 0.0,
+      "0.5": 0.08333333333333333,
+      "0.25": 0.6666666666666666
+    }
+  },
+  "smaller_replay": {
+    "training": {
+      "replay_size": 1000
+    },
+    "rows": [
+      {
+        "round": 1,
+        "bank": "Key_Bank",
+        "norm": 0.6109204138797478
+      },
+      {
+        "round": 1,
+        "bank": "Wells_Fargo",
+        "norm": 1.449619892068697
+      },
+      {
+        "round": 1,
+        "bank": "JPMorgan_Chase",
+        "norm": 1.1433072098543557
+      },
+      {
+        "round": 2,
+        "bank": "Key_Bank",
+        "norm": 0.5664618995483448
+      },
+      {
+        "round": 2,
+        "bank": "Wells_Fargo",
+        "norm": 1.1608920264466152
+      },
+      {
+        "round": 2,
+        "bank": "JPMorgan_Chase",
+        "norm": 0.8874839830088466
+      },
+      {
+        "round": 3,
+        "bank": "Key_Bank",
+        "norm": 0.5619468982731022
+      },
+      {
+        "round": 3,
+        "bank": "Wells_Fargo",
+        "norm": 0.947212873883979
+      },
+      {
+        "round": 3,
+        "bank": "JPMorgan_Chase",
+        "norm": 0.8312722053213595
+      },
+      {
+        "round": 4,
+        "bank": "Key_Bank",
+        "norm": 0.5800635379124557
+      },
+      {
+        "round": 4,
+        "bank": "Wells_Fargo",
+        "norm": 0.7990213127904878
+      },
+      {
+        "round": 4,
+        "bank": "JPMorgan_Chase",
+        "norm": 0.8347388014419598
+      }
+    ],
+    "statistics": {
+      "min": 0.5619468982731022,
+      "median": 0.8330055033816597,
+      "mean": 0.8644117545358293,
+      "p75": 0.9962364578765732,
+      "p90": 1.1591335447873892,
+      "p95": 1.2908195659765518,
+      "max": 1.449619892068697
+    },
+    "max_bound": 2.0,
+    "candidate_clipping_rates": {
+      "2.0": 0.0,
+      "1.0": 0.25,
+      "0.5": 1.0
+    }
+  }
+}

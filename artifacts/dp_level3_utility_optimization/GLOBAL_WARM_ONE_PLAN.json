@@ -1,0 +1,13 @@
+[
+  {
+    "id": "stage8_global_one",
+    "seeds": [
+      42
+    ],
+    "config": {
+      "rounds": 1,
+      "checkpoint_template": "/Users/pj/Desktop/college/capstone/Capstone-DP-SecAgg/artifacts/dp_level3_utility_optimization/frozen_global_rng_starts/seed_{seed}/global_model.pt",
+      "learning_rate": 0.0015
+    }
+  }
+]

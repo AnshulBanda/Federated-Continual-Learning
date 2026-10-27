@@ -28,6 +28,8 @@ class RuntimeData:
 
 def _imports():
     import torch
+    torch.set_num_threads(1)
+    torch.use_deterministic_algorithms(True)
     from causal_temporal_graphsage import (
         CausalTemporalGraphSAGE,
         build_bank_data,
@@ -38,6 +40,15 @@ def _imports():
     return torch, CausalTemporalGraphSAGE, build_bank_data, fit_shared_feature_encoders, set_seed
 
 
+def implementation_sha256():
+    """Bind the training/encoding implementation, not only parameter shapes."""
+    files=("src/gnn/causal_temporal_graphsage.py", "src/gnn/adaptive_continual_federated.py",
+        "src/gnn/continual_temporal_graphsage.py", "distributed_federation/common/model_runtime.py",
+        "distributed_federation/privacy/mechanism.py", "distributed_federation/privacy/secagg.py",
+        "distributed_federation/privacy/server_optimizer.py", "distributed_federation/privacy/subset.py")
+    return hashlib.sha256(b"".join(name.encode()+b"\0"+(REPO_ROOT/name).read_bytes() for name in files)).hexdigest()
+
+
 def prepare_runtime(config: FederationConfig, bank: str) -> RuntimeData:
     torch, Model, build_bank_data, fit_encoders, set_seed = _imports()
     if config.feature_schema:
@@ -45,14 +56,21 @@ def prepare_runtime(config: FederationConfig, bank: str) -> RuntimeData:
     set_seed(config.seed)
     node_encoder, edge_encoder = fit_encoders(config.dataset_dir, list(config.schema_banks))
     static, streams, node_columns, edge_columns = build_bank_data(
-        config.dataset_dir, bank, node_encoder=node_encoder, edge_encoder=edge_encoder
+        config.dataset_dir, bank, node_encoder=node_encoder, edge_encoder=edge_encoder, splits=("training",)
     )
     model = Model(
         static.shape[1], streams["training"].edge_attr.shape[1],
         config.hidden_channels, config.dropout,
     ).cpu()
+    from dataclasses import asdict
     schema = {
+        "training_protocol": dict(aggregation=config.aggregation,replay=config.replay,replay_size=config.replay_size,
+            rng_policy=config.rng_policy,local_epochs=config.local_epochs,seed=config.seed,
+            learning_rate=config.learning_rate,batch_size=config.batch_size,
+            clients=[dict(client_id=c.client_id,bank=c.bank) for c in config.clients],
+            privacy=asdict(config.privacy),server_optimizer=asdict(config.server_optimizer),private_subset=config.private_subset),
         "model": "CausalTemporalGraphSAGE",
+        "implementation_sha256": implementation_sha256(),
         "schema_banks": list(config.schema_banks),
         "node_columns": list(node_columns),
         "edge_columns": list(edge_columns),
@@ -112,13 +130,11 @@ def load_initial_checkpoint(model: Any, path: Path | None) -> bool:
 
         state = load_file(str(path), device="cpu")
     elif path.suffix in {".pt", ".pth"}:
-        # The existing project checkpoint contains argparse/Path metadata, so
-        # weights_only cannot read it. Only load checkpoints from this trusted repo.
-        try:
-            path.resolve().relative_to(REPO_ROOT.resolve())
-        except ValueError as exc:
-            raise ValueError("For safety, .pt/.pth checkpoints must be inside this repository") from exc
-        bundle = torch.load(path, map_location="cpu", weights_only=False)
+        # No pickle execution: accept the fixed checkpoint outside the worktree
+        # without requiring a duplicate. Only inert pathlib metadata is allowed.
+        from pathlib import PosixPath
+        with torch.serialization.safe_globals([Path, PosixPath]):
+            bundle = torch.load(path, map_location="cpu", weights_only=True)
         state = bundle.get("state_dict", bundle) if isinstance(bundle, dict) else bundle
     else:
         raise ValueError("Initial checkpoint must end in .safetensors, .pt, or .pth")
@@ -128,41 +144,46 @@ def load_initial_checkpoint(model: Any, path: Path | None) -> bool:
 
 
 def train_local(runtime: RuntimeData, config: FederationConfig, round_id: int, client_index: int) -> float:
-    torch, _, _, _, set_seed = _imports()
-    from causal_temporal_graphsage import epoch_sample_mask, train_temporal_epoch
-    if config.training_protocol == 'adaptive_ensemble':
+    from adaptive_continual_federated import train_client, calendar_boundary
+    from types import SimpleNamespace
+    check_control()
+    from distributed_federation.privacy.subset import configure_trainable
+    configure_trainable(runtime.model,getattr(config,"private_subset","all"))
+    if getattr(config, 'training_protocol', 'legacy') == 'adaptive_ensemble':
+        if config.privacy.mode!='none':
+            raise ValueError('Private ensemble training is retired; use adaptive_single')
         from types import SimpleNamespace
         from adaptive_continual_federated import train_client, calendar_boundary
         cfg = SimpleNamespace(local_epochs=config.local_epochs, learning_rate=config.learning_rate,
-            replay='risk_context', replay_size=config.replay_size, distill=0,
-            batch_size=config.batch_size, rng_policy='per_client')
+            replay=config.replay, replay_size=config.replay_size, distill=0,
+            batch_size=config.batch_size, rng_policy=config.rng_policy,
+            weight_decay=config.weight_decay, negative_ratio=config.negative_ratio)
         boundary = calendar_boundary(config.dataset_dir, config.clients[client_index].bank)
         diagnostics=[]
         for seed, member in runtime.model.items():
             check_control()
             def progress(task,epoch):
-                emit('epoch_completed',round_id,seed=int(seed),task=task,epoch=epoch,
-                     total_epochs=config.local_epochs,mean_train_loss=None)
+                if config.privacy.mode == 'none':
+                    emit('epoch_completed',round_id,seed=int(seed),task=task,epoch=epoch,
+                         total_epochs=config.local_epochs,mean_train_loss=None)
             result=train_client(member,runtime.static,runtime.streams['training'],boundary,cfg,
                 int(seed)+round_id*100000+client_index,check_cancel=check_control,progress=progress)
             diagnostics.append(result)
-        emit('context_replay_completed',round_id,members=diagnostics)
-        return sum(d['mean_train_loss'] for d in diagnostics) / len(diagnostics)
-    seed = config.seed + round_id * 100_000 + client_index
-    set_seed(seed)
-    model, static, train = runtime.model, runtime.static, runtime.streams['training']
-    optimizer = torch.optim.AdamW(model.parameters(), lr=config.learning_rate, weight_decay=config.weight_decay)
-    generator = torch.Generator().manual_seed(seed)
-    losses = []
-    for epoch in range(config.local_epochs):
-        check_control()
-        mask = epoch_sample_mask(train.labels, config.negative_ratio, generator)
-        loss, steps = train_temporal_epoch(model, static, train, optimizer, mask,
-            config.batch_size, 2, 1.0, check_cancel=check_control)
-        losses.append(loss)
-        emit('epoch_completed', round_id, epoch=epoch+1, total_epochs=config.local_epochs,
-             mean_train_loss=loss, optimizer_steps=steps)
-    return sum(losses) / max(1, len(losses))
+        if config.privacy.mode == 'none':
+            emit('context_replay_completed',round_id,members=diagnostics)
+            return sum(d['mean_train_loss'] for d in diagnostics) / len(diagnostics)
+        return None
+    cfg = SimpleNamespace(local_epochs=config.local_epochs, learning_rate=config.learning_rate,
+        batch_size=config.batch_size, replay_size=config.replay_size, replay=config.replay,
+        distill=0., rng_policy=config.rng_policy,
+        weight_decay=getattr(config,"weight_decay",1e-4),negative_ratio=getattr(config,"negative_ratio",20))
+    # Same local seed rule as Sia's simulator. Per-client RNG is necessary for
+    # independent processes; global simulator RNG is kept as a separate reference.
+    train_client(runtime.model, runtime.static, runtime.streams['training'],
+        calendar_boundary(config.dataset_dir, config.clients[client_index].bank), cfg,
+        config.seed + round_id*100 + client_index, check_cancel=check_control)
+    check_control()
+    return None  # No identifiable loss/replay statistics leave a bank.
 
 
 def fedavg(states: list[dict[str, Any]], weights: list[int]) -> dict[str, Any]:
@@ -219,7 +240,6 @@ class FrozenEncoder:
 
 def prepare_frozen_runtime(config, bank=None):
     torch, Model, build_bank_data, _, set_seed = _imports()
-    torch.set_num_threads(2)
     contract = json.loads(config.feature_schema.read_text(encoding='utf-8'))
     if contract.get('format') != 1:
         raise ValueError('Unknown feature-schema format')
@@ -231,23 +251,32 @@ def prepare_frozen_runtime(config, bank=None):
             nodes, edges, splits=('training',))
         if node_columns != contract['node_columns'] or edge_columns != contract['edge_columns']:
             raise ValueError('Local approved feature columns differ from the shared schema')
-    if config.training_protocol == 'adaptive_ensemble':
+    if getattr(config, 'training_protocol', 'legacy') == 'adaptive_ensemble':
+        if config.privacy.mode!='none':
+            raise ValueError('Private ensemble initialization is retired; use adaptive_single')
         from streaming.app.final_model import build_ensemble
         model = build_ensemble(contract)
     else:
         model = Model(contract['node_feature_count'], contract['edge_feature_count'], config.hidden_channels, config.dropout).cpu()
-    schema = dict(model='CausalTemporalGraphSAGE', feature_contract=contract,
-                  training_protocol=dict(rounds=config.rounds,local_epochs=config.local_epochs,batch_size=config.batch_size,
+    from dataclasses import asdict
+    schema = dict(implementation_sha256=implementation_sha256(),model='CausalTemporalGraphSAGE', feature_contract=contract,
+                  training_protocol=dict(protocol=getattr(config,'training_protocol','legacy'),aggregation=config.aggregation,rounds=config.rounds,local_epochs=config.local_epochs,batch_size=config.batch_size,
                       negative_ratio=config.negative_ratio,learning_rate=config.learning_rate,weight_decay=config.weight_decay,
-                      seed=config.seed,clients=[dict(client_id=c.client_id,bank=c.bank) for c in config.clients],
-                      protocol=config.training_protocol,replay_size=config.replay_size),
+                      replay=config.replay,replay_size=config.replay_size,rng_policy=config.rng_policy,
+                      privacy=asdict(config.privacy),server_optimizer=asdict(config.server_optimizer),private_subset=config.private_subset,seed=config.seed,clients=[dict(client_id=c.client_id,bank=c.bank) for c in config.clients]),
                   hidden_channels=config.hidden_channels, dropout=config.dropout,
                   state={key:dict(shape=list(value.shape),dtype=str(value.dtype)) for key,value in model.state_dict().items()})
-    if config.training_protocol == 'adaptive_ensemble':
+    if getattr(config, 'training_protocol', 'legacy') == 'adaptive_ensemble':
         from streaming.app.final_model import reference_model
-        schema['ensemble'] = {'seeds':[42,52,62], 'aggregation':'mean probabilities',
-            'initial_hashes':[m['sha256'] for m in reference_model('Key_Bank')['members']]}
-        schema['privacy'] = {'differential_privacy':False,'accounting':None}
+        schema['ensemble'] = dict(seeds=[42,52,62], aggregation='mean probabilities',
+            initial_hashes=[m['sha256'] for m in reference_model('Key_Bank')['members']])
+        schema['privacy'] = dict(differential_privacy=config.privacy.mode!='none',
+            mode=config.privacy.mode, accounting=config.privacy.accounting(config.rounds) if config.privacy.mode!='none' else None,
+            scope='Incremental releases conditional on nonprivate frozen ensemble')
+    elif config.privacy.mode!='none':
+        schema['privacy']=dict(differential_privacy=True,mode=config.privacy.mode,
+            accounting=config.privacy.accounting(config.rounds),
+            scope='Single-model incremental releases conditional on nonprivate seed-42 warm checkpoint and fixed calibration')
     encoded=json.dumps(schema, sort_keys=True, separators=(',',':')).encode()
     return RuntimeData(model, static, streams, schema, hashlib.sha256(encoded).hexdigest())
 

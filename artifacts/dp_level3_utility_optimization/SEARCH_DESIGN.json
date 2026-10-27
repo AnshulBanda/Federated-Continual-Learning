@@ -1,0 +1,83 @@
+{
+  "selection": "highest August macro AP; earliest tie; all executed rounds count",
+  "seeds": [
+    42,
+    52,
+    62
+  ],
+  "screening": "deterministic research-only common Gaussian domain; production finalist confirmation exactly once per seed",
+  "success": "mean >= 0.85 after production confirmation, QA, tests, Kafka",
+  "escalation": [
+    "checkpoint selection",
+    "aggregate FedAvgM/FedAdam/FedYogi",
+    "bounded local hyperparameters",
+    "public RNG stabilization",
+    "clipping bounds",
+    "release count",
+    "frozen parameter subsets",
+    "proven frozen warm starts",
+    "aggregate-only refinements"
+  ],
+  "server_grid": [
+    {
+      "name": "fedavg",
+      "learning_rate": 0.5
+    },
+    {
+      "name": "fedavgm",
+      "learning_rate": 0.5,
+      "beta1": 0.5
+    },
+    {
+      "name": "fedavgm",
+      "learning_rate": 0.5,
+      "beta1": 0.9
+    },
+    {
+      "name": "fedadam",
+      "learning_rate": 0.01
+    },
+    {
+      "name": "fedadam",
+      "learning_rate": 0.03
+    },
+    {
+      "name": "fedyogi",
+      "learning_rate": 0.01
+    }
+  ],
+  "local_grid": {
+    "learning_rate": [
+      0.0003,
+      0.0005,
+      0.00075,
+      0.0015,
+      0.002
+    ],
+    "local_epochs": [
+      2,
+      4,
+      6
+    ],
+    "replay_size": [
+      1000,
+      4000
+    ],
+    "weight_decay": [
+      3e-05,
+      0.0003
+    ],
+    "negative_ratio": [
+      10,
+      30
+    ]
+  },
+  "privacy_floor": {
+    "mode": "distributed_dp",
+    "multiplier": 1e-05,
+    "releases": 4,
+    "clients": 3,
+    "delta": 1e-06
+  },
+  "no_September": true
+}

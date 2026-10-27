@@ -1,0 +1,44 @@
+[
+  {
+    "id": "fixed_warm_decoder_m0p0001",
+    "seeds": [
+      42
+    ],
+    "config": {
+      "rounds": 1,
+      "checkpoint_template": "/Users/pj/Desktop/college/capstone/Capstone-DP-SecAgg/artifacts/dp_level3_utility_optimization/frozen_warm_starts/seed_42/global_model.pt",
+      "subset": "decoder",
+      "learning_rate": 0.0003,
+      "local_epochs": 2,
+      "multiplier": 0.0001
+    }
+  },
+  {
+    "id": "fixed_warm_decoder_m0p001",
+    "seeds": [
+      42
+    ],
+    "config": {
+      "rounds": 1,
+      "checkpoint_template": "/Users/pj/Desktop/college/capstone/Capstone-DP-SecAgg/artifacts/dp_level3_utility_optimization/frozen_warm_starts/seed_42/global_model.pt",
+      "subset": "decoder",
+      "learning_rate": 0.0003,
+      "local_epochs": 2,
+      "multiplier": 0.001
+    }
+  },
+  {
+    "id": "fixed_warm_decoder_m0p01",
+    "seeds": [
+      42
+    ],
+    "config": {
+      "rounds": 1,
+      "checkpoint_template": "/Users/pj/Desktop/college/capstone/Capstone-DP-SecAgg/artifacts/dp_level3_utility_optimization/frozen_warm_starts/seed_42/global_model.pt",
+      "subset": "decoder",
+      "learning_rate": 0.0003,
+      "local_epochs": 2,
+      "multiplier": 0.01
+    }
+  }
+]

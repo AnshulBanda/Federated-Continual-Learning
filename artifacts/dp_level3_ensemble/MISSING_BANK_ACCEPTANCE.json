@@ -1,0 +1,234 @@
+{
+  "scope": "Actual Collaboration.start subprocesses, local Kafka; no remote ZeroTier cryptography test",
+  "runtime_root": "/Users/pj/Desktop/college/capstone/Capstone-DP-SecAgg/.local/dp-ensemble-level3/missing-bank",
+  "broker": "127.0.0.1:19092",
+  "missing_bank": {
+    "run_id": "private-ensemble-missing-bank-20261027",
+    "exit_codes": {
+      "bank-1": 1,
+      "bank-2": 1,
+      "central": 1
+    },
+    "status": {
+      "bank-1": {
+        "status": "Failed",
+        "privacy": {
+          "mode": "distributed_dp",
+          "secagg": true,
+          "required_cohort": 3,
+          "multiplier": 0.3,
+          "epsilon": 0.0,
+          "delta": 1e-06,
+          "phase": "process_failed"
+        },
+        "label": "Level-3 Distributed DP + Secure Aggregation"
+      },
+      "bank-2": {
+        "status": "Failed",
+        "privacy": {
+          "mode": "distributed_dp",
+          "secagg": true,
+          "required_cohort": 3,
+          "multiplier": 0.3,
+          "epsilon": 0.0,
+          "delta": 1e-06,
+          "phase": "process_failed"
+        },
+        "label": "Level-3 Distributed DP + Secure Aggregation"
+      },
+      "central": {
+        "status": "Failed",
+        "privacy": {
+          "mode": "distributed_dp",
+          "secagg": true,
+          "required_cohort": 3,
+          "multiplier": 0.3,
+          "epsilon": 47.015209254369594,
+          "delta": 1e-06,
+          "phase": "process_failed"
+        },
+        "label": "Level-3 Distributed DP + Secure Aggregation"
+      }
+    },
+    "events": {
+      "bank-1": [
+        {
+          "kind": "process_started",
+          "round_id": null,
+          "details": {
+            "client_id": "bank-1",
+            "role": "bank"
+          }
+        },
+        {
+          "kind": "runtime_ready",
+          "round_id": null,
+          "details": {
+            "client_id": "bank-1",
+            "schema_sha256": "6c9f7122f794449ba82cb131a5b6e1e683bb6f0b8c90022ddd8c5dd83e01c811"
+          }
+        },
+        {
+          "kind": "waiting_for_model",
+          "round_id": 1,
+          "details": {
+            "privacy_mode": "distributed_dp"
+          }
+        },
+        {
+          "kind": "model_loaded",
+          "round_id": 1,
+          "details": {
+            "base_model_sha256": "1d8082374d781ef714bdd2da87385183744ddeec46c02a798b503d7067db17fa"
+          }
+        },
+        {
+          "kind": "process_failed",
+          "round_id": null,
+          "details": {
+            "error_type": "TimeoutError"
+          }
+        }
+      ],
+      "bank-2": [
+        {
+          "kind": "process_started",
+          "round_id": null,
+          "details": {
+            "client_id": "bank-2",
+            "role": "bank"
+          }
+        },
+        {
+          "kind": "runtime_ready",
+          "round_id": null,
+          "details": {
+            "client_id": "bank-2",
+            "schema_sha256": "6c9f7122f794449ba82cb131a5b6e1e683bb6f0b8c90022ddd8c5dd83e01c811"
+          }
+        },
+        {
+          "kind": "waiting_for_model",
+          "round_id": 1,
+          "details": {
+            "privacy_mode": "distributed_dp"
+          }
+        },
+        {
+          "kind": "model_loaded",
+          "round_id": 1,
+          "details": {
+            "base_model_sha256": "1d8082374d781ef714bdd2da87385183744ddeec46c02a798b503d7067db17fa"
+          }
+        },
+        {
+          "kind": "process_failed",
+          "round_id": null,
+          "details": {
+            "error_type": "TimeoutError"
+          }
+        }
+      ],
+      "central": [
+        {
+          "kind": "process_started",
+          "round_id": null,
+          "details": {
+            "client_id": null,
+            "role": "central"
+          }
+        },
+        {
+          "kind": "runtime_ready",
+          "round_id": null,
+          "details": {
+            "schema_sha256": "6c9f7122f794449ba82cb131a5b6e1e683bb6f0b8c90022ddd8c5dd83e01c811"
+          }
+        },
+        {
+          "kind": "secagg_key_exchange",
+          "round_id": 1,
+          "details": {
+            "privacy_mode": "distributed_dp",
+            "required_cohort": 3
+          }
+        },
+        {
+          "kind": "process_failed",
+          "round_id": null,
+          "details": {
+            "error_type": "TimeoutError"
+          }
+        }
+      ]
+    },
+    "wire": [
+      {
+        "topic": "fcl.collaboration.global.v1",
+        "message_type": "global_model",
+        "sender_id": "central",
+        "round_id": 1,
+        "payload_sha256": "1d8082374d781ef714bdd2da87385183744ddeec46c02a798b503d7067db17fa",
+        "bytes": 2915100,
+        "hmac_verified": true
+      },
+      {
+        "topic": "fcl.collaboration.updates.v1",
+        "message_type": "secagg_public_key",
+        "sender_id": "bank-2",
+        "round_id": 1,
+        "payload_sha256": "a6371a5b81bd12efbdc973697bcc53b658816ce132eb332372f21f053ea2cf24",
+        "bytes": 432,
+        "hmac_verified": true
+      },
+      {
+        "topic": "fcl.collaboration.updates.v1",
+        "message_type": "secagg_public_key",
+        "sender_id": "bank-1",
+        "round_id": 1,
+        "payload_sha256": "eaeb83c004e8b935e9991fba96af22351b35f2ddbf26246e7bab547be566b5ea",
+        "bytes": 432,
+        "hmac_verified": true
+      }
+    ],
+    "ledger_accounting": {
+      "bank-1": {
+        "reservations": 0,
+        "rho": 0,
+        "epsilon": 0.0,
+        "delta": 1e-06,
+        "scope": "all runs retained in this local ledger; deletion/rollback invalidates composition"
+      },
+      "bank-2": {
+        "reservations": 0,
+        "rho": 0,
+        "epsilon": 0.0,
+        "delta": 1e-06,
+        "scope": "all runs retained in this local ledger; deletion/rollback invalidates composition"
+      },
+      "central": {
+        "reservations": 1,
+        "rho": 16.666666666666668,
+        "epsilon": 47.015209254369594,
+        "delta": 1e-06,
+        "scope": "all runs retained in this local ledger; deletion/rollback invalidates composition"
+      }
+    },
+    "begin_offsets": {
+      "fcl.collaboration.global.v1": 7,
+      "fcl.collaboration.updates.v1": 11
+    },
+    "end_offsets": {
+      "fcl.collaboration.global.v1": 13,
+      "fcl.collaboration.updates.v1": 13
+    },
+    "result": "PASS: missing third bank aborts before training; no update, aggregate, checkpoint or fallback"
+  },
+  "acceptance_central_reservations_composed": {
+    "reservations": 1,
+    "rho": 16.666666666666668,
+    "epsilon": 47.015209254369594,
+    "delta": 1e-06,
+    "scope": "Acceptance roots in this report combined; excludes prior development ledgers"
+  }
+}

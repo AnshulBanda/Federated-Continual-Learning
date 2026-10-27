@@ -1,0 +1,148 @@
+{
+  "clip": 6.5,
+  "dimension": 197379,
+  "per_member_dimension": {
+    "42": 65793,
+    "52": 65793,
+    "62": 65793
+  },
+  "private_keys": [
+    "42.decoder.0.bias",
+    "42.decoder.0.weight",
+    "42.decoder.3.bias",
+    "42.decoder.3.weight",
+    "52.decoder.0.bias",
+    "52.decoder.0.weight",
+    "52.decoder.3.bias",
+    "52.decoder.3.weight",
+    "62.decoder.0.bias",
+    "62.decoder.0.weight",
+    "62.decoder.3.bias",
+    "62.decoder.3.weight"
+  ],
+  "statistics": {
+    "min": 2.845771300822167,
+    "median": 3.9544408824780075,
+    "mean": 3.88058962213594,
+    "p75": 4.362726696841828,
+    "p90": 4.846948105003556,
+    "p95": 5.020723899723724,
+    "max": 5.181009981530904
+  },
+  "samples": [
+    {
+      "round": 1,
+      "bank": "Key_Bank",
+      "global_ensemble_decoder_l2": 3.18797647996544
+    },
+    {
+      "round": 1,
+      "bank": "Wells_Fargo",
+      "global_ensemble_decoder_l2": 4.8895807418814865
+    },
+    {
+      "round": 1,
+      "bank": "JPMorgan_Chase",
+      "global_ensemble_decoder_l2": 5.181009981530904
+    },
+    {
+      "round": 2,
+      "bank": "Key_Bank",
+      "global_ensemble_decoder_l2": 2.8703574004807515
+    },
+    {
+      "round": 2,
+      "bank": "Wells_Fargo",
+      "global_ensemble_decoder_l2": 4.46325437310218
+    },
+    {
+      "round": 2,
+      "bank": "JPMorgan_Chase",
+      "global_ensemble_decoder_l2": 4.25562821884017
+    },
+    {
+      "round": 3,
+      "bank": "Key_Bank",
+      "global_ensemble_decoder_l2": 2.956284946473436
+    },
+    {
+      "round": 3,
+      "bank": "Wells_Fargo",
+      "global_ensemble_decoder_l2": 4.32921747142171
+    },
+    {
+      "round": 3,
+      "bank": "JPMorgan_Chase",
+      "global_ensemble_decoder_l2": 3.9133661294326196
+    },
+    {
+      "round": 4,
+      "bank": "Key_Bank",
+      "global_ensemble_decoder_l2": 2.845771300822167
+    },
+    {
+      "round": 4,
+      "bank": "Wells_Fargo",
+      "global_ensemble_decoder_l2": 3.9955156355233954
+    },
+    {
+      "round": 4,
+      "bank": "JPMorgan_Chase",
+      "global_ensemble_decoder_l2": 3.6791127861570234
+    }
+  ],
+  "training": {
+    "training_protocol": "adaptive_ensemble",
+    "rounds": 4,
+    "local_epochs": 3,
+    "learning_rate": 0.001,
+    "weight_decay": 0.0001,
+    "batch_size": 1024,
+    "negative_ratio": 20,
+    "replay": "risk_context",
+    "replay_size": 2000,
+    "rng_policy": "per_client",
+    "seed": 42,
+    "hidden_channels": 128,
+    "dropout": 0.25,
+    "aggregation": "equal",
+    "private_subset": "ensemble_decoder",
+    "return_aggregate": true,
+    "max_chunk_bytes": 524288
+  },
+  "bank_order": [
+    "Key_Bank",
+    "Wells_Fargo",
+    "JPMorgan_Chase"
+  ],
+  "rule": "ceil(1.25 * max(global ensemble decoder L2) / 0.5) * 0.5; minimum 0.5",
+  "splits": [
+    "training"
+  ],
+  "validation_loaded": false,
+  "test_loaded": false,
+  "disclosure": "Nonprivate research disclosure; calibration was not separately privatized",
+  "ensemble_members": [
+    {
+      "seed": 42,
+      "checkpoint": "/Users/pj/Desktop/college/capstone/Capstone-DP-SecAgg/artifacts/research_adaptive_fcl/warm_start/federated/context_harmonized/seed_42/global_model.pt",
+      "sha256": "d650af6959d1da46888f30fb79bbfd888a6ec20743d14d447ea078dc351536f5"
+    },
+    {
+      "seed": 52,
+      "checkpoint": "/Users/pj/Desktop/college/capstone/Capstone-DP-SecAgg/artifacts/research_adaptive_fcl/warm_start/federated/context_harmonized/seed_52/global_model.pt",
+      "sha256": "98b6c782a27013e4b1917669b2a5ae48d3a7e44ce6a9aa0149aef446473ab0e2"
+    },
+    {
+      "seed": 62,
+      "checkpoint": "/Users/pj/Desktop/college/capstone/Capstone-DP-SecAgg/artifacts/research_adaptive_fcl/warm_start/federated/context_harmonized/seed_62/global_model.pt",
+      "sha256": "4cd0854f6740f99a9f9ef7f1ba3360c06b5178846394feb73033da718ac715fe"
+    }
+  ],
+  "source_sha256": {
+    "scripts/calibrate_private_ensemble.py": "8e91bde08cb5c442a10da1e3aef3bcba781d401c6c7da683de2ba0c0a869ec51",
+    "src/gnn/adaptive_continual_federated.py": "7d85b0e64fd31ccf472392afd2b58d89b18513b268309e63ab0438286dc915f0",
+    "distributed_federation/common/model_runtime.py": "5ad2cd758d3f31a7f9a588a6a3dfc0bd723f2a7f7bdfe463c709371ef1ed462e",
+    "distributed_federation/privacy/subset.py": "7ab50dac1497b4b21b91ffbfe4afdf7a01159f8c9e656c7011181bfd026c8a63"
+  }
+}

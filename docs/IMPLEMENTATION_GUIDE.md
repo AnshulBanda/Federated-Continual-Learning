@@ -94,20 +94,26 @@ Reports include member scores, baseline/target logits, group contributions, resi
 
 ## 8. Federated training and final transfers
 
-The dashboard's `Collaboration.config` sets `training_protocol="adaptive_ensemble"` and replay size 2,000. New collaboration defaults are four rounds and three local epochs per task. Legacy CLI JSON files default to `legacy` for historical reproducibility; they are not the current dashboard path.
+The dashboard's `Collaboration.config` sets `training_protocol="adaptive_single"` and replay size 2,000. New collaboration defaults are four rounds and three local epochs per task. Legacy CLI JSON files default to `legacy` for historical reproducibility; they are not the current dashboard path.
 
-`prepare_frozen_runtime` builds a `ModuleDict` containing the three members, initialized from their verified final checkpoints. Schema metadata includes feature contract, training protocol, roster, member seeds and initial hashes. Every bank and coordinator must match this contract before updates are accepted.
+For private collaboration, `prepare_frozen_runtime` builds ONE CausalTemporalGraphSAGE initialized from the verified seed-42 checkpoint. The ModuleDict remains only for the nonprivate reference/research ensemble. Schema metadata binds the feature contract, training protocol, roster, privacy, source implementation and tensor contract. The private launcher additionally verifies the single warm checkpoint hash. Every bank and coordinator must match this contract before updates are accepted.
 
 For each round:
 
-1. Banks publish signed readiness. The coordinator waits for the configured roster.
-2. The coordinator broadcasts a serialized safetensors ensemble and its identity.
-3. Each bank verifies the schema, run, round and base-model hash, then trains all three members on its own June/July stream with context replay.
-4. The bank serializes and signs the three-member update. Metadata records the training sample count and actual mean training loss.
-5. The coordinator validates one update per configured bank. `aggregate_adaptive` splits state keys by seed and applies equal-client `temporal_harmonized_average` independently for each member.
-6. Temporal harmonization reduces conflicting temporal-component updates; the classifier components use equal-client averaging. It is not DP noise or secure aggregation.
-7. The coordinator atomically saves the aggregate, manifest and commit marker, then broadcasts the result. Banks verify and save identical returned bytes.
-8. A bank can explicitly select the returned ensemble and evaluate it through Transactions. This integration does not automatically select federation rounds by global August performance; all newly selected versions require evaluation.
+1. The coordinator broadcasts the verified seed-42 single global model.
+2. Every bank validates the schema, round and base-model hash, and publishes an authenticated ephemeral X25519 public key. All three are required before a key roster can be accepted.
+3. Each bank adapts one decoder using the original June/July risk-context continuation: three epochs per phase, lr=.0003, replay capacity 2000. Non-decoder parameters remain frozen.
+4. The single-model decoder delta receives one global L2 clip C=.875, an independent production Gaussian share (m=.30), fixed-point encoding and pair masks. Kafka carries one masked contribution per bank, without sample counts or losses.
+5. The private coordinator accepts only the three masked contributions. Exact uint64 pair-mask cancellation yields the noisy equal mean; noisy-only FedAvg postprocessing (server lr=.1) reconstructs the one decoder with its frozen backbone.
+6. Private mode never calls plaintext `aggregate_adaptive` or temporal harmonization. That method remains available only for explicit nonprivate research.
+7. The coordinator atomically saves each of four aggregates with manifests and commit markers and broadcasts it. Every bank verifies and saves identical returned bytes.
+8. A bank can select the returned ensemble and evaluate it through Transactions. New versions do not inherit either the 90.68% nonprivate reference score or the historical 90.281% single-model DP score.
+
+The four-release conservative encoded-share bound is epsilon=127.363751842 at
+delta=1e-6. Ledgers reserve before sending; failed attempts can count and all
+reservations compose. This is conditional continuation privacy given nonprivate
+warm members. See [privacy scope](PRIVACY_AUDIT.md) and the
+[single-model evidence](../artifacts/dp_singlemodel_r4e3/).
 
 Stop finishes the current local round; cancel checks cooperative boundaries. These requests affect the local worker, not remote laptops. Restarted active jobs are marked interrupted. Retry/recovery does not claim partial-byte or training-state resume.
 
@@ -140,4 +146,4 @@ Each training/scoring/explanation job has JSON status and a worker log. Writes u
 
 There is no automatic deletion of local evidence. Shutdown requests cancellation or terminates explanation work; an interrupted job cannot masquerade as completed. Missing checkpoints, modified hashes, wrong-bank IDs, changed data and incompatible feature schemas produce errors rather than silent model substitution.
 
-DP, TLS configuration, secure aggregation and independent institutional authentication are not implemented. The repository's real-Kafka acceptance test proves local-process transport and aggregation, not availability across an external network. Exact deployment, multi-laptop firewall/VPN setup and access control remain environment-specific. See [PRIVACY_AUDIT.md](PRIVACY_AUDIT.md).
+The reference ensemble, ordinary local adaptation and opaque file transfers have no DP guarantee. Operational private collaboration implements distributed DP and secure aggregation. App-configured Kafka TLS and independent institutional authentication remain absent. The repository's real-Kafka acceptance test proves local-process transport and aggregation, not availability across an external network. Exact deployment, multi-laptop firewall/VPN setup and access control remain environment-specific. See [PRIVACY_AUDIT.md](PRIVACY_AUDIT.md).

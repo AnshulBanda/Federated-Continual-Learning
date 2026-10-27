@@ -77,7 +77,7 @@ def server(root, port=8765):
             if path == '/':
                 self.respond(200, WEB.read_text(encoding='utf-8').replace('__TOKEN__', token).encode(), 'text/html; charset=utf-8')
             elif path == '/api/privacy':
-                self.respond(200, privacy_status())
+                self.respond(200, privacy_status(collaboration.status(overview.load()['bank'])))
             elif path == '/api/explanations':
                 self.respond(200, explanations.status(overview.load()['bank']))
             elif path == '/api/final-model':

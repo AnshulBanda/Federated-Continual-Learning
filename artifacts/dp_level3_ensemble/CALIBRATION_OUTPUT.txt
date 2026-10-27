@@ -1,0 +1,13 @@
+{'round': 1, 'bank': 'Key_Bank', 'global_ensemble_decoder_l2': 3.18797647996544}
+{'round': 1, 'bank': 'Wells_Fargo', 'global_ensemble_decoder_l2': 4.8895807418814865}
+{'round': 1, 'bank': 'JPMorgan_Chase', 'global_ensemble_decoder_l2': 5.181009981530904}
+{'round': 2, 'bank': 'Key_Bank', 'global_ensemble_decoder_l2': 2.8703574004807515}
+{'round': 2, 'bank': 'Wells_Fargo', 'global_ensemble_decoder_l2': 4.46325437310218}
+{'round': 2, 'bank': 'JPMorgan_Chase', 'global_ensemble_decoder_l2': 4.25562821884017}
+{'round': 3, 'bank': 'Key_Bank', 'global_ensemble_decoder_l2': 2.956284946473436}
+{'round': 3, 'bank': 'Wells_Fargo', 'global_ensemble_decoder_l2': 4.32921747142171}
+{'round': 3, 'bank': 'JPMorgan_Chase', 'global_ensemble_decoder_l2': 3.9133661294326196}
+{'round': 4, 'bank': 'Key_Bank', 'global_ensemble_decoder_l2': 2.845771300822167}
+{'round': 4, 'bank': 'Wells_Fargo', 'global_ensemble_decoder_l2': 3.9955156355233954}
+{'round': 4, 'bank': 'JPMorgan_Chase', 'global_ensemble_decoder_l2': 3.6791127861570234}
+FROZEN C: 6.5 statistics: {'min': 2.845771300822167, 'median': 3.9544408824780075, 'mean': 3.88058962213594, 'p75': 4.362726696841828, 'p90': 4.846948105003556, 'p95': 5.020723899723724, 'max': 5.181009981530904}

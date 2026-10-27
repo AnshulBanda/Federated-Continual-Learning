@@ -1,0 +1,23 @@
+[
+  {
+    "bank": "JPMorgan_Chase",
+    "training_nodes": 24906,
+    "development_nodes": 25999,
+    "common_static_bitwise": true,
+    "training_events_bitwise": true
+  },
+  {
+    "bank": "Wells_Fargo",
+    "training_nodes": 11292,
+    "development_nodes": 11829,
+    "common_static_bitwise": true,
+    "training_events_bitwise": true
+  },
+  {
+    "bank": "Key_Bank",
+    "training_nodes": 5314,
+    "development_nodes": 5631,
+    "common_static_bitwise": true,
+    "training_events_bitwise": true
+  }
+]

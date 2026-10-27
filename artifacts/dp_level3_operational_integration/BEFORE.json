@@ -1,0 +1,21 @@
+{
+  "checkpoint_sha": "294af55519f9817a2b985ade85c3614ae30004f4",
+  "defaults": {
+    "rounds": 1,
+    "local_epochs": 1,
+    "learning_rate": 0.001,
+    "initial_checkpoint": null,
+    "privacy_block": "omitted: parser defaults to none",
+    "aggregation": "omitted: parser defaults to samples",
+    "private_subset": "omitted: parser defaults to all",
+    "clients": "one to three banks accepted"
+  },
+  "path": [
+    "Collaboration.start",
+    "RunController.start",
+    "streaming.app.runner.execute",
+    "bank_worker.run / aggregator.run",
+    "privacy.transport.worker / central",
+    "Kafka at configured broker (ZeroTier is networking only)"
+  ]
+}

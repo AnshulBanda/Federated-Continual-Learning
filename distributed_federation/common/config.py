@@ -5,6 +5,9 @@ import re
 from dataclasses import dataclass
 from pathlib import Path
 from typing import Any
+from distributed_federation.privacy.mechanism import Privacy
+from distributed_federation.privacy.server_optimizer import ServerConfig
+from distributed_federation.privacy.subset import PREFIXES
 
 
 REPO_ROOT = Path(__file__).resolve().parents[2]
@@ -48,8 +51,14 @@ class FederationConfig:
     initial_checkpoint: Path | None
     feature_schema: Path | None = None
     return_aggregate: bool = False
-    training_protocol: str = "legacy"
+    aggregation: str = "samples"
     replay_size: int = 2000
+    replay: str = "risk_context"
+    rng_policy: str = "per_client"
+    privacy: Privacy = Privacy()
+    server_optimizer: ServerConfig = ServerConfig()
+    private_subset: str = "all"
+    training_protocol: str = "legacy"
 
     def client(self, client_id: str) -> ClientConfig:
         for client in self.clients:
@@ -134,10 +143,29 @@ def load_config(path: str | Path, broker_override: str | None = None) -> Federat
     if not dataset_dir.is_dir():
         raise ValueError(f"Dataset directory does not exist: {dataset_dir}")
 
-    if raw.get("training_protocol", "legacy") not in ("legacy", "adaptive_ensemble"):
+    privacy = Privacy(**raw.get("privacy", {}))
+    aggregation = raw.get("aggregation", "samples")
+    if aggregation not in ("equal", "samples") or (privacy.mode != "none" and aggregation != "equal"):
+        raise ValueError("Private aggregation supports equal weights only")
+    if privacy.mode != "none" and len({c.bank for c in clients}) != len(clients):
+        raise ValueError("Private client adjacency requires distinct bank datasets")
+    if privacy.mode != "none" and privacy.expected_clients != len(clients):
+        raise ValueError("Privacy requires the complete configured cohort")
+    if raw.get("rng_policy", "per_client") not in ("per_client", "counter"):
+        raise ValueError("Distributed training requires reproducible per_client RNG; global is simulator-only")
+    if raw.get("replay", "risk_context") not in ("risk_context", "uniform") or int(raw.get("replay_size", 2000)) < 0:
+        raise ValueError("Invalid replay configuration")
+    server_optimizer = ServerConfig(**raw.get("server_optimizer", {}))
+    private_subset = raw.get("private_subset", "all")
+    if private_subset not in PREFIXES or (private_subset != "all" and not privacy.secure):
+        raise ValueError("Parameter subsets require secure aggregation and a known subset")
+
+    if raw.get("training_protocol", "legacy") not in ("legacy", "adaptive_single", "adaptive_ensemble"):
         raise ValueError("Unknown training protocol")
-    if not 1 <= int(raw.get("replay_size", 2000)) <= 10000:
-        raise ValueError("Replay size must be between 1 and 10000")
+    if raw.get('training_protocol')=='adaptive_ensemble' and privacy.mode!='none':
+        raise ValueError('Private ensemble federation is retired; use the single-model decoder continuation')
+    if raw.get("training_protocol") == "adaptive_ensemble" and not raw.get("feature_schema"):
+        raise ValueError("Adaptive ensemble requires a frozen public feature schema")
 
     return FederationConfig(
         broker=broker,
@@ -163,7 +191,8 @@ def load_config(path: str | Path, broker_override: str | None = None) -> Federat
         feature_schema=_repo_path(raw.get("feature_schema")),
         return_aggregate=raw.get("return_aggregate", False) is True,
         training_protocol=raw.get("training_protocol", "legacy"),
-        replay_size=int(raw.get("replay_size", 2000)),
+        aggregation=aggregation, replay_size=int(raw.get("replay_size", 2000)), replay=raw.get("replay", "risk_context"),
+        rng_policy=raw.get("rng_policy", "per_client"), privacy=privacy, server_optimizer=server_optimizer, private_subset=private_subset,
     )
 
 

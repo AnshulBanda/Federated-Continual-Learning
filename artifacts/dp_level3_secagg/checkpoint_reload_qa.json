@@ -1,0 +1,28 @@
+{
+  "result": "PASS",
+  "three_selected_checkpoints": [
+    {
+      "seed": 42,
+      "checkpoint_sha256": "55e57d124a820474c8f156ba40d7adf524c587ce7c004054714cfa721714f351",
+      "validation": 0.9129142777576197,
+      "difference": 0.0,
+      "round": 3
+    },
+    {
+      "seed": 52,
+      "checkpoint_sha256": "5f56938a4e2833c6168eeb4ccb1f678be494a974c432df479bcc53122292cd4a",
+      "validation": 0.8561644285375696,
+      "difference": 0.0,
+      "round": 3
+    },
+    {
+      "seed": 62,
+      "checkpoint_sha256": "26b185d96d90f6111292a04dce8d4760c44b18657546ceeaea6503833f526b93",
+      "validation": 0.7188010403090721,
+      "difference": 0.0,
+      "round": 2
+    }
+  ],
+  "additional_final_checkpoint_verified": true,
+  "September_loaded": false
+}

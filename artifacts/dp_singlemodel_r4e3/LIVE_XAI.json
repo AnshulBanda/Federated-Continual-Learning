@@ -1,0 +1,28 @@
+{
+  "checks": [
+    {
+      "model": "nonprivate_reference",
+      "result": "PASS",
+      "probability_parity_absolute_error": 0.0,
+      "strict_prediction_tolerance": 1e-06,
+      "guard_rejects_1p5e_minus6_mismatch": true,
+      "additivity_residual": -2.634460470218869e-06,
+      "members": 3,
+      "model_sha256": "2245190d2d9d49f0e869a6ac0c256efd904d8295d139e1686f980ff3baa9b463",
+      "method": "exact_empirical_group_interventional_shap_v1"
+    },
+    {
+      "model": "private_single_round4",
+      "result": "PASS",
+      "probability_parity_absolute_error": 1.6013934733827284e-08,
+      "strict_prediction_tolerance": 1e-06,
+      "guard_rejects_1p5e_minus6_mismatch": true,
+      "additivity_residual": -9.5367431640625e-07,
+      "members": 1,
+      "model_sha256": "abb151efea1ebb73a9aecea5ed80fc88a28f132e6b1239550a3656cef396acf7",
+      "method": "exact_empirical_group_interventional_shap_v1"
+    }
+  ],
+  "scope": "Local August replay/attribution only; no transaction-level DP claim",
+  "test_loaded": false
+}

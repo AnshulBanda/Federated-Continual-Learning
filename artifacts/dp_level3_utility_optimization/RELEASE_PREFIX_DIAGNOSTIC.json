@@ -1,0 +1,98 @@
+[
+  {
+    "candidate": "stage1_selection",
+    "hypothetical_deployment_rounds": 1,
+    "macro_AP": 0.6325059513358922,
+    "seed_AP": [
+      0.7321091434157744,
+      0.5771607467008156,
+      0.5882479638910865
+    ],
+    "actual_executed_screening_releases": 4,
+    "privacy_note": "Prefix comparison only; does not erase later releases from these completed screening runs"
+  },
+  {
+    "candidate": "stage1_selection",
+    "hypothetical_deployment_rounds": 2,
+    "macro_AP": 0.7511729889551669,
+    "seed_AP": [
+      0.8532182800351777,
+      0.8120527229392364,
+      0.5882479638910865
+    ],
+    "actual_executed_screening_releases": 4,
+    "privacy_note": "Prefix comparison only; does not erase later releases from these completed screening runs"
+  },
+  {
+    "candidate": "stage1_selection",
+    "hypothetical_deployment_rounds": 3,
+    "macro_AP": 0.7511729889551669,
+    "seed_AP": [
+      0.8532182800351777,
+      0.8120527229392364,
+      0.5882479638910865
+    ],
+    "actual_executed_screening_releases": 4,
+    "privacy_note": "Prefix comparison only; does not erase later releases from these completed screening runs"
+  },
+  {
+    "candidate": "stage1_selection",
+    "hypothetical_deployment_rounds": 4,
+    "macro_AP": 0.8038207488481244,
+    "seed_AP": [
+      0.9021286160840024,
+      0.866565321707543,
+      0.6427683087528278
+    ],
+    "actual_executed_screening_releases": 4,
+    "privacy_note": "Prefix comparison only; does not erase later releases from these completed screening runs"
+  },
+  {
+    "candidate": "stage2_1_fedavgm",
+    "hypothetical_deployment_rounds": 1,
+    "macro_AP": 0.692283121068587,
+    "seed_AP": [
+      0.7347020870852372,
+      0.7308926443075224,
+      0.6112546318130017
+    ],
+    "actual_executed_screening_releases": 4,
+    "privacy_note": "Prefix comparison only; does not erase later releases from these completed screening runs"
+  },
+  {
+    "candidate": "stage2_1_fedavgm",
+    "hypothetical_deployment_rounds": 2,
+    "macro_AP": 0.7249389599990032,
+    "seed_AP": [
+      0.8326696038764855,
+      0.7308926443075224,
+      0.6112546318130017
+    ],
+    "actual_executed_screening_releases": 4,
+    "privacy_note": "Prefix comparison only; does not erase later releases from these completed screening runs"
+  },
+  {
+    "candidate": "stage2_1_fedavgm",
+    "hypothetical_deployment_rounds": 3,
+    "macro_AP": 0.7797794046888669,
+    "seed_AP": [
+      0.8871159819929503,
+      0.8409676002606489,
+      0.6112546318130017
+    ],
+    "actual_executed_screening_releases": 4,
+    "privacy_note": "Prefix comparison only; does not erase later releases from these completed screening runs"
+  },
+  {
+    "candidate": "stage2_1_fedavgm",
+    "hypothetical_deployment_rounds": 4,
+    "macro_AP": 0.7822579899358756,
+    "seed_AP": [
+      0.8871159819929503,
+      0.848403356001675,
+      0.6112546318130017
+    ],
+    "actual_executed_screening_releases": 4,
+    "privacy_note": "Prefix comparison only; does not erase later releases from these completed screening runs"
+  }
+]

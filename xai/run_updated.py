@@ -2,8 +2,8 @@
 """Run the cached XAI engine on frozen Sia or DP checkpoints.
 
 The XAI Python sources were not included in this folder; Python 3.12 bytecode is
-preserved in ``__pycache__``. This runner loads those modules without modifying
-the cache and adds branch-aware checkpoint staging and validation-only execution.
+preserved as versioned runtime assets in ``engine_py312``. This runner loads
+those immutable modules and adds branch-aware checkpoint staging and validation-only execution.
 """
 
 from __future__ import annotations
@@ -24,6 +24,7 @@ from typing import Any
 
 
 XAI_ROOT = Path(__file__).resolve().parent
+ENGINE_ROOT = XAI_ROOT / "engine_py312"
 REPO_ROOT = XAI_ROOT.parent
 DATASET = REPO_ROOT / "data" / "final_temporal_dataset"
 VAL_SPLITS = ("training", "validation")
@@ -91,13 +92,13 @@ FAMILIES: dict[str, dict[str, Any]] = {
 
 
 class CachedXaiFinder(importlib.abc.MetaPathFinder):
-    """Load the preserved Python 3.12 XAI bytecode from its __pycache__."""
+    """Load the preserved CPython 3.12 source-less runtime assets."""
 
     def find_spec(self, fullname: str, path: Any = None, target: Any = None):
         if not fullname.startswith("xai."):
             return None
         module_name = fullname.rsplit(".", 1)[1]
-        bytecode = XAI_ROOT / "__pycache__" / f"{module_name}.cpython-312.pyc"
+        bytecode = ENGINE_ROOT / f"{module_name}.cpython-312.pyc"
         if not bytecode.is_file():
             return None
         loader = importlib.machinery.SourcelessFileLoader(fullname, str(bytecode))
@@ -105,6 +106,8 @@ class CachedXaiFinder(importlib.abc.MetaPathFinder):
 
 
 def load_cached_engine(ref: str):
+    if sys.implementation.name != "cpython" or sys.version_info[:2] != (3, 12):
+        raise RuntimeError("The source-less XAI scoring engine requires CPython 3.12; use an existing compatible environment. Editable utility tests do not require the engine.")
     # XAI must hash and import the same model implementation that produced the
     # selected checkpoint. The two source branches have small but real changes.
     model_path = XAI_ROOT / "src" / "gnn" / "causal_temporal_graphsage.py"
