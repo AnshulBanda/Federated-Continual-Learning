@@ -76,12 +76,20 @@ def explain(job):
                     return model.decoder(torch.cat((src,dst,torch.abs(src-dst),edge),dim=1)).squeeze(1).numpy()
             predictors.append(predict)
     row=frame.iloc[index]
-    probabilities=member_probability_details(predictors,pd.DataFrame([row]))
+    if len(predictors)==1:
+        single_logit=float(np.asarray(predictors[0](pd.DataFrame([row]))).reshape(-1)[0])
+        probability=float(torch.sigmoid(torch.tensor(single_logit,dtype=torch.float64)))
+        probabilities=dict(member_probabilities=[probability],ensemble_probability=probability,
+                           aggregation='single model probability')
+        predictor=predictors[0]
+    else:
+        probabilities=member_probability_details(predictors,pd.DataFrame([row]))
+        predictor=ensemble_logit_predictor(predictors)
     if abs(probabilities['ensemble_probability']-job['expected_score'])>1e-6:
         raise ValueError('Explanation score does not match the saved replay. Rescore this model.')
     background=pd.read_csv(dataset/'training'/bank/'edge_list.csv.gz')
-    report=explain_groups(ensemble_logit_predictor(predictors),row,background,background_size=32)
-    report.update(probabilities, units='logit(mean of three member probabilities)',
+    report=explain_groups(predictor,row,background,background_size=32)
+    report.update(probabilities, units='single-model logit' if len(predictors)==1 else 'logit(mean of three member probabilities)',
                   transaction_id=job['txn_id'],bank=bank,model_version=job['model']['version'],
                   checkpoint_hash=job['model']['sha256'],history_events=batch_start,
                   privacy='Local explanation; no differential privacy guarantee',

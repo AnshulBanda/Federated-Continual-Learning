@@ -235,14 +235,14 @@ source or importing the engine. Editable utility/frontend tests can run separate
 
 **DP model integration preserved; direct XAI explanation of DP checkpoints remains guarded pending target-wrapper parity.**
 
-This statement applies to the legacy bytecode-engine checkpoint adapter. The new
-three-member private federated ensemble also uses the current dashboard's
-`streaming.app.explanations` path. Live checks of the nonprivate reference and the
-private production round-four checkpoint passed with zero observed probability
-parity error and rejected an injected 1.5e-6 mismatch under the strict 1e-6 guard.
-See `artifacts/dp_level3_ensemble/LIVE_ENSEMBLE_XAI.json`. This verifies those
-targets; it does not remove either path's guard or give transaction explanations
-a DP guarantee.
+This statement applies to the legacy bytecode-engine checkpoint adapter. Current
+operational privacy uses ONE seed-42 decoder-private model, separately from the
+nonprivate reference ensemble. Both current dashboard paths passed live checks:
+reference probability error 0; private single-model error 1.6014e-8, below the
+unchanged strict 1e-6 guard. Both reject an injected 1.5e-6 mismatch. See
+`artifacts/dp_singlemodel_r4e3/LIVE_XAI.json`. The prior private-ensemble experiment
+is historical and retired; its evidence remains archived. No guard is removed,
+and explanations of private transactions do not inherit a DP guarantee.
 
 The optimized decoder-only Level-3 finalist and its retained validation evidence
 remain under `artifacts/dp_level3_utility_optimization/`. The current interactive

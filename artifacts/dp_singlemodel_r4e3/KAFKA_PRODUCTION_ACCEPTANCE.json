@@ -1,0 +1,1735 @@
+{
+  "scope": "Actual Collaboration.start subprocesses, local Kafka; no remote ZeroTier cryptography test",
+  "runtime_root": "/Users/pj/Desktop/college/capstone/Capstone-DP-SecAgg/.local/dp-singlemodel-r4e3/production-confirmation",
+  "broker": "127.0.0.1:19092",
+  "complete_cohort": {
+    "run_id": "single-r4e3-confirmation-20261027",
+    "exit_codes": {
+      "bank-1": 0,
+      "bank-2": 0,
+      "bank-3": 0,
+      "central": 0
+    },
+    "status": {
+      "bank-1": {
+        "status": "Completed",
+        "privacy": {
+          "mode": "distributed_dp",
+          "secagg": true,
+          "required_cohort": 3,
+          "multiplier": 0.3,
+          "epsilon": 127.36375184207253,
+          "delta": 1e-06,
+          "phase": "worker_completed"
+        },
+        "label": "Level-3 Distributed DP + Secure Aggregation"
+      },
+      "bank-2": {
+        "status": "Completed",
+        "privacy": {
+          "mode": "distributed_dp",
+          "secagg": true,
+          "required_cohort": 3,
+          "multiplier": 0.3,
+          "epsilon": 127.36375184207253,
+          "delta": 1e-06,
+          "phase": "worker_completed"
+        },
+        "label": "Level-3 Distributed DP + Secure Aggregation"
+      },
+      "bank-3": {
+        "status": "Completed",
+        "privacy": {
+          "mode": "distributed_dp",
+          "secagg": true,
+          "required_cohort": 3,
+          "multiplier": 0.3,
+          "epsilon": 127.36375184207253,
+          "delta": 1e-06,
+          "phase": "worker_completed"
+        },
+        "label": "Level-3 Distributed DP + Secure Aggregation"
+      },
+      "central": {
+        "status": "Completed",
+        "privacy": {
+          "mode": "distributed_dp",
+          "secagg": true,
+          "required_cohort": 3,
+          "multiplier": 0.3,
+          "epsilon": 127.36375184207253,
+          "delta": 1e-06,
+          "phase": "run_completed"
+        },
+        "label": "Level-3 Distributed DP + Secure Aggregation"
+      }
+    },
+    "events": {
+      "bank-1": [
+        {
+          "kind": "process_started",
+          "round_id": null,
+          "details": {
+            "client_id": "bank-1",
+            "role": "bank"
+          }
+        },
+        {
+          "kind": "runtime_ready",
+          "round_id": null,
+          "details": {
+            "client_id": "bank-1",
+            "schema_sha256": "a9ceb5c5b32b598bde9ef86f1f728786b20e310385a9c0ea0cb7d7117d33a597"
+          }
+        },
+        {
+          "kind": "waiting_for_model",
+          "round_id": 1,
+          "details": {
+            "privacy_mode": "distributed_dp"
+          }
+        },
+        {
+          "kind": "model_loaded",
+          "round_id": 1,
+          "details": {
+            "base_model_sha256": "209d8cac5242fd6e11bc4b7eea36e41e408cc7777d506b37f1d959d12487cbfb"
+          }
+        },
+        {
+          "kind": "secagg_ready",
+          "round_id": 1,
+          "details": {
+            "privacy_mode": "distributed_dp",
+            "required_cohort": 3
+          }
+        },
+        {
+          "kind": "training",
+          "round_id": 1,
+          "details": {}
+        },
+        {
+          "kind": "training_completed",
+          "round_id": 1,
+          "details": {}
+        },
+        {
+          "kind": "publishing_update",
+          "round_id": 1,
+          "details": {
+            "bytes": 526432
+          }
+        },
+        {
+          "kind": "update_published",
+          "round_id": 1,
+          "details": {
+            "payload_sha256": "94d984617834f30002f071e78ef3f0c9210de27c9e8d8c66a8a31241a16ed84c",
+            "privacy_mode": "distributed_dp"
+          }
+        },
+        {
+          "kind": "waiting_for_aggregate",
+          "round_id": 1,
+          "details": {}
+        },
+        {
+          "kind": "aggregate_received",
+          "round_id": 1,
+          "details": {
+            "checkpoint": "/Users/pj/Desktop/college/capstone/Capstone-DP-SecAgg/.local/dp-singlemodel-r4e3/production-confirmation/complete-cohort/bank-1/collaboration/models/single-r4e3-confirmation-20261027/bank-1/global_round_001.safetensors",
+            "manifest": "/Users/pj/Desktop/college/capstone/Capstone-DP-SecAgg/.local/dp-singlemodel-r4e3/production-confirmation/complete-cohort/bank-1/collaboration/models/single-r4e3-confirmation-20261027/bank-1/global_round_001.json",
+            "payload_sha256": "7af220d4c23b4214673b5e63250c1df7bd89acfddb2015e61b8ca4554cfba855"
+          }
+        },
+        {
+          "kind": "waiting_for_model",
+          "round_id": 2,
+          "details": {
+            "privacy_mode": "distributed_dp"
+          }
+        },
+        {
+          "kind": "model_loaded",
+          "round_id": 2,
+          "details": {
+            "base_model_sha256": "7af220d4c23b4214673b5e63250c1df7bd89acfddb2015e61b8ca4554cfba855"
+          }
+        },
+        {
+          "kind": "secagg_ready",
+          "round_id": 2,
+          "details": {
+            "privacy_mode": "distributed_dp",
+            "required_cohort": 3
+          }
+        },
+        {
+          "kind": "training",
+          "round_id": 2,
+          "details": {}
+        },
+        {
+          "kind": "training_completed",
+          "round_id": 2,
+          "details": {}
+        },
+        {
+          "kind": "publishing_update",
+          "round_id": 2,
+          "details": {
+            "bytes": 526432
+          }
+        },
+        {
+          "kind": "update_published",
+          "round_id": 2,
+          "details": {
+            "payload_sha256": "2d3f24f4d20af1199280bec88a19b604aed107169ebb35304d7513f1553c17ba",
+            "privacy_mode": "distributed_dp"
+          }
+        },
+        {
+          "kind": "waiting_for_aggregate",
+          "round_id": 2,
+          "details": {}
+        },
+        {
+          "kind": "aggregate_received",
+          "round_id": 2,
+          "details": {
+            "checkpoint": "/Users/pj/Desktop/college/capstone/Capstone-DP-SecAgg/.local/dp-singlemodel-r4e3/production-confirmation/complete-cohort/bank-1/collaboration/models/single-r4e3-confirmation-20261027/bank-1/global_round_002.safetensors",
+            "manifest": "/Users/pj/Desktop/college/capstone/Capstone-DP-SecAgg/.local/dp-singlemodel-r4e3/production-confirmation/complete-cohort/bank-1/collaboration/models/single-r4e3-confirmation-20261027/bank-1/global_round_002.json",
+            "payload_sha256": "54c2e46528eb8b1607278595cfc7bab88d19c066987099779114eaf310df50f1"
+          }
+        },
+        {
+          "kind": "waiting_for_model",
+          "round_id": 3,
+          "details": {
+            "privacy_mode": "distributed_dp"
+          }
+        },
+        {
+          "kind": "model_loaded",
+          "round_id": 3,
+          "details": {
+            "base_model_sha256": "54c2e46528eb8b1607278595cfc7bab88d19c066987099779114eaf310df50f1"
+          }
+        },
+        {
+          "kind": "secagg_ready",
+          "round_id": 3,
+          "details": {
+            "privacy_mode": "distributed_dp",
+            "required_cohort": 3
+          }
+        },
+        {
+          "kind": "training",
+          "round_id": 3,
+          "details": {}
+        },
+        {
+          "kind": "training_completed",
+          "round_id": 3,
+          "details": {}
+        },
+        {
+          "kind": "publishing_update",
+          "round_id": 3,
+          "details": {
+            "bytes": 526432
+          }
+        },
+        {
+          "kind": "update_published",
+          "round_id": 3,
+          "details": {
+            "payload_sha256": "fdaf8e38feaf38f2c4a37e158b848113dfa9facaa27d3c3c52dae35b12516eac",
+            "privacy_mode": "distributed_dp"
+          }
+        },
+        {
+          "kind": "waiting_for_aggregate",
+          "round_id": 3,
+          "details": {}
+        },
+        {
+          "kind": "aggregate_received",
+          "round_id": 3,
+          "details": {
+            "checkpoint": "/Users/pj/Desktop/college/capstone/Capstone-DP-SecAgg/.local/dp-singlemodel-r4e3/production-confirmation/complete-cohort/bank-1/collaboration/models/single-r4e3-confirmation-20261027/bank-1/global_round_003.safetensors",
+            "manifest": "/Users/pj/Desktop/college/capstone/Capstone-DP-SecAgg/.local/dp-singlemodel-r4e3/production-confirmation/complete-cohort/bank-1/collaboration/models/single-r4e3-confirmation-20261027/bank-1/global_round_003.json",
+            "payload_sha256": "c3632af92845cd0dfbfa5fde0db24041a3a727e964fec27bb484fc02673d5e5f"
+          }
+        },
+        {
+          "kind": "waiting_for_model",
+          "round_id": 4,
+          "details": {
+            "privacy_mode": "distributed_dp"
+          }
+        },
+        {
+          "kind": "model_loaded",
+          "round_id": 4,
+          "details": {
+            "base_model_sha256": "c3632af92845cd0dfbfa5fde0db24041a3a727e964fec27bb484fc02673d5e5f"
+          }
+        },
+        {
+          "kind": "secagg_ready",
+          "round_id": 4,
+          "details": {
+            "privacy_mode": "distributed_dp",
+            "required_cohort": 3
+          }
+        },
+        {
+          "kind": "training",
+          "round_id": 4,
+          "details": {}
+        },
+        {
+          "kind": "training_completed",
+          "round_id": 4,
+          "details": {}
+        },
+        {
+          "kind": "publishing_update",
+          "round_id": 4,
+          "details": {
+            "bytes": 526432
+          }
+        },
+        {
+          "kind": "update_published",
+          "round_id": 4,
+          "details": {
+            "payload_sha256": "cab9ea59869289e3704c381df5ade64a6e3adb89b5b373c68d864a178536cc07",
+            "privacy_mode": "distributed_dp"
+          }
+        },
+        {
+          "kind": "waiting_for_aggregate",
+          "round_id": 4,
+          "details": {}
+        },
+        {
+          "kind": "aggregate_received",
+          "round_id": 4,
+          "details": {
+            "checkpoint": "/Users/pj/Desktop/college/capstone/Capstone-DP-SecAgg/.local/dp-singlemodel-r4e3/production-confirmation/complete-cohort/bank-1/collaboration/models/single-r4e3-confirmation-20261027/bank-1/global_round_004.safetensors",
+            "manifest": "/Users/pj/Desktop/college/capstone/Capstone-DP-SecAgg/.local/dp-singlemodel-r4e3/production-confirmation/complete-cohort/bank-1/collaboration/models/single-r4e3-confirmation-20261027/bank-1/global_round_004.json",
+            "payload_sha256": "abb151efea1ebb73a9aecea5ed80fc88a28f132e6b1239550a3656cef396acf7"
+          }
+        },
+        {
+          "kind": "worker_completed",
+          "round_id": null,
+          "details": {
+            "rounds": 4
+          }
+        }
+      ],
+      "bank-2": [
+        {
+          "kind": "process_started",
+          "round_id": null,
+          "details": {
+            "client_id": "bank-2",
+            "role": "bank"
+          }
+        },
+        {
+          "kind": "runtime_ready",
+          "round_id": null,
+          "details": {
+            "client_id": "bank-2",
+            "schema_sha256": "a9ceb5c5b32b598bde9ef86f1f728786b20e310385a9c0ea0cb7d7117d33a597"
+          }
+        },
+        {
+          "kind": "waiting_for_model",
+          "round_id": 1,
+          "details": {
+            "privacy_mode": "distributed_dp"
+          }
+        },
+        {
+          "kind": "model_loaded",
+          "round_id": 1,
+          "details": {
+            "base_model_sha256": "209d8cac5242fd6e11bc4b7eea36e41e408cc7777d506b37f1d959d12487cbfb"
+          }
+        },
+        {
+          "kind": "secagg_ready",
+          "round_id": 1,
+          "details": {
+            "privacy_mode": "distributed_dp",
+            "required_cohort": 3
+          }
+        },
+        {
+          "kind": "training",
+          "round_id": 1,
+          "details": {}
+        },
+        {
+          "kind": "training_completed",
+          "round_id": 1,
+          "details": {}
+        },
+        {
+          "kind": "publishing_update",
+          "round_id": 1,
+          "details": {
+            "bytes": 526432
+          }
+        },
+        {
+          "kind": "update_published",
+          "round_id": 1,
+          "details": {
+            "payload_sha256": "765cbf0e9a028615ae45ff65d770b3fe48f6757f3020318edb1b0b833d53951f",
+            "privacy_mode": "distributed_dp"
+          }
+        },
+        {
+          "kind": "waiting_for_aggregate",
+          "round_id": 1,
+          "details": {}
+        },
+        {
+          "kind": "aggregate_received",
+          "round_id": 1,
+          "details": {
+            "checkpoint": "/Users/pj/Desktop/college/capstone/Capstone-DP-SecAgg/.local/dp-singlemodel-r4e3/production-confirmation/complete-cohort/bank-2/collaboration/models/single-r4e3-confirmation-20261027/bank-2/global_round_001.safetensors",
+            "manifest": "/Users/pj/Desktop/college/capstone/Capstone-DP-SecAgg/.local/dp-singlemodel-r4e3/production-confirmation/complete-cohort/bank-2/collaboration/models/single-r4e3-confirmation-20261027/bank-2/global_round_001.json",
+            "payload_sha256": "7af220d4c23b4214673b5e63250c1df7bd89acfddb2015e61b8ca4554cfba855"
+          }
+        },
+        {
+          "kind": "waiting_for_model",
+          "round_id": 2,
+          "details": {
+            "privacy_mode": "distributed_dp"
+          }
+        },
+        {
+          "kind": "model_loaded",
+          "round_id": 2,
+          "details": {
+            "base_model_sha256": "7af220d4c23b4214673b5e63250c1df7bd89acfddb2015e61b8ca4554cfba855"
+          }
+        },
+        {
+          "kind": "secagg_ready",
+          "round_id": 2,
+          "details": {
+            "privacy_mode": "distributed_dp",
+            "required_cohort": 3
+          }
+        },
+        {
+          "kind": "training",
+          "round_id": 2,
+          "details": {}
+        },
+        {
+          "kind": "training_completed",
+          "round_id": 2,
+          "details": {}
+        },
+        {
+          "kind": "publishing_update",
+          "round_id": 2,
+          "details": {
+            "bytes": 526432
+          }
+        },
+        {
+          "kind": "update_published",
+          "round_id": 2,
+          "details": {
+            "payload_sha256": "f7286ae3b209c918c5070d09c265163ec893aef7aa27dfeda2be4b744a115fe3",
+            "privacy_mode": "distributed_dp"
+          }
+        },
+        {
+          "kind": "waiting_for_aggregate",
+          "round_id": 2,
+          "details": {}
+        },
+        {
+          "kind": "aggregate_received",
+          "round_id": 2,
+          "details": {
+            "checkpoint": "/Users/pj/Desktop/college/capstone/Capstone-DP-SecAgg/.local/dp-singlemodel-r4e3/production-confirmation/complete-cohort/bank-2/collaboration/models/single-r4e3-confirmation-20261027/bank-2/global_round_002.safetensors",
+            "manifest": "/Users/pj/Desktop/college/capstone/Capstone-DP-SecAgg/.local/dp-singlemodel-r4e3/production-confirmation/complete-cohort/bank-2/collaboration/models/single-r4e3-confirmation-20261027/bank-2/global_round_002.json",
+            "payload_sha256": "54c2e46528eb8b1607278595cfc7bab88d19c066987099779114eaf310df50f1"
+          }
+        },
+        {
+          "kind": "waiting_for_model",
+          "round_id": 3,
+          "details": {
+            "privacy_mode": "distributed_dp"
+          }
+        },
+        {
+          "kind": "model_loaded",
+          "round_id": 3,
+          "details": {
+            "base_model_sha256": "54c2e46528eb8b1607278595cfc7bab88d19c066987099779114eaf310df50f1"
+          }
+        },
+        {
+          "kind": "secagg_ready",
+          "round_id": 3,
+          "details": {
+            "privacy_mode": "distributed_dp",
+            "required_cohort": 3
+          }
+        },
+        {
+          "kind": "training",
+          "round_id": 3,
+          "details": {}
+        },
+        {
+          "kind": "training_completed",
+          "round_id": 3,
+          "details": {}
+        },
+        {
+          "kind": "publishing_update",
+          "round_id": 3,
+          "details": {
+            "bytes": 526432
+          }
+        },
+        {
+          "kind": "update_published",
+          "round_id": 3,
+          "details": {
+            "payload_sha256": "178dd554803691c4fe1500c9b95f4df9cb07bfdebb0959f6a7edd78a9ebdcc80",
+            "privacy_mode": "distributed_dp"
+          }
+        },
+        {
+          "kind": "waiting_for_aggregate",
+          "round_id": 3,
+          "details": {}
+        },
+        {
+          "kind": "aggregate_received",
+          "round_id": 3,
+          "details": {
+            "checkpoint": "/Users/pj/Desktop/college/capstone/Capstone-DP-SecAgg/.local/dp-singlemodel-r4e3/production-confirmation/complete-cohort/bank-2/collaboration/models/single-r4e3-confirmation-20261027/bank-2/global_round_003.safetensors",
+            "manifest": "/Users/pj/Desktop/college/capstone/Capstone-DP-SecAgg/.local/dp-singlemodel-r4e3/production-confirmation/complete-cohort/bank-2/collaboration/models/single-r4e3-confirmation-20261027/bank-2/global_round_003.json",
+            "payload_sha256": "c3632af92845cd0dfbfa5fde0db24041a3a727e964fec27bb484fc02673d5e5f"
+          }
+        },
+        {
+          "kind": "waiting_for_model",
+          "round_id": 4,
+          "details": {
+            "privacy_mode": "distributed_dp"
+          }
+        },
+        {
+          "kind": "model_loaded",
+          "round_id": 4,
+          "details": {
+            "base_model_sha256": "c3632af92845cd0dfbfa5fde0db24041a3a727e964fec27bb484fc02673d5e5f"
+          }
+        },
+        {
+          "kind": "secagg_ready",
+          "round_id": 4,
+          "details": {
+            "privacy_mode": "distributed_dp",
+            "required_cohort": 3
+          }
+        },
+        {
+          "kind": "training",
+          "round_id": 4,
+          "details": {}
+        },
+        {
+          "kind": "training_completed",
+          "round_id": 4,
+          "details": {}
+        },
+        {
+          "kind": "publishing_update",
+          "round_id": 4,
+          "details": {
+            "bytes": 526432
+          }
+        },
+        {
+          "kind": "update_published",
+          "round_id": 4,
+          "details": {
+            "payload_sha256": "272d94e329d9895f55f22af13037eba9205d30e040e110cbed8a05d59151c59a",
+            "privacy_mode": "distributed_dp"
+          }
+        },
+        {
+          "kind": "waiting_for_aggregate",
+          "round_id": 4,
+          "details": {}
+        },
+        {
+          "kind": "aggregate_received",
+          "round_id": 4,
+          "details": {
+            "checkpoint": "/Users/pj/Desktop/college/capstone/Capstone-DP-SecAgg/.local/dp-singlemodel-r4e3/production-confirmation/complete-cohort/bank-2/collaboration/models/single-r4e3-confirmation-20261027/bank-2/global_round_004.safetensors",
+            "manifest": "/Users/pj/Desktop/college/capstone/Capstone-DP-SecAgg/.local/dp-singlemodel-r4e3/production-confirmation/complete-cohort/bank-2/collaboration/models/single-r4e3-confirmation-20261027/bank-2/global_round_004.json",
+            "payload_sha256": "abb151efea1ebb73a9aecea5ed80fc88a28f132e6b1239550a3656cef396acf7"
+          }
+        },
+        {
+          "kind": "worker_completed",
+          "round_id": null,
+          "details": {
+            "rounds": 4
+          }
+        }
+      ],
+      "bank-3": [
+        {
+          "kind": "process_started",
+          "round_id": null,
+          "details": {
+            "client_id": "bank-3",
+            "role": "bank"
+          }
+        },
+        {
+          "kind": "runtime_ready",
+          "round_id": null,
+          "details": {
+            "client_id": "bank-3",
+            "schema_sha256": "a9ceb5c5b32b598bde9ef86f1f728786b20e310385a9c0ea0cb7d7117d33a597"
+          }
+        },
+        {
+          "kind": "waiting_for_model",
+          "round_id": 1,
+          "details": {
+            "privacy_mode": "distributed_dp"
+          }
+        },
+        {
+          "kind": "model_loaded",
+          "round_id": 1,
+          "details": {
+            "base_model_sha256": "209d8cac5242fd6e11bc4b7eea36e41e408cc7777d506b37f1d959d12487cbfb"
+          }
+        },
+        {
+          "kind": "secagg_ready",
+          "round_id": 1,
+          "details": {
+            "privacy_mode": "distributed_dp",
+            "required_cohort": 3
+          }
+        },
+        {
+          "kind": "training",
+          "round_id": 1,
+          "details": {}
+        },
+        {
+          "kind": "training_completed",
+          "round_id": 1,
+          "details": {}
+        },
+        {
+          "kind": "publishing_update",
+          "round_id": 1,
+          "details": {
+            "bytes": 526432
+          }
+        },
+        {
+          "kind": "update_published",
+          "round_id": 1,
+          "details": {
+            "payload_sha256": "46c19c40d4ffa744f8e60c5926ad2660714027f686d50f772101cd15516a0c86",
+            "privacy_mode": "distributed_dp"
+          }
+        },
+        {
+          "kind": "waiting_for_aggregate",
+          "round_id": 1,
+          "details": {}
+        },
+        {
+          "kind": "aggregate_received",
+          "round_id": 1,
+          "details": {
+            "checkpoint": "/Users/pj/Desktop/college/capstone/Capstone-DP-SecAgg/.local/dp-singlemodel-r4e3/production-confirmation/complete-cohort/bank-3/collaboration/models/single-r4e3-confirmation-20261027/bank-3/global_round_001.safetensors",
+            "manifest": "/Users/pj/Desktop/college/capstone/Capstone-DP-SecAgg/.local/dp-singlemodel-r4e3/production-confirmation/complete-cohort/bank-3/collaboration/models/single-r4e3-confirmation-20261027/bank-3/global_round_001.json",
+            "payload_sha256": "7af220d4c23b4214673b5e63250c1df7bd89acfddb2015e61b8ca4554cfba855"
+          }
+        },
+        {
+          "kind": "waiting_for_model",
+          "round_id": 2,
+          "details": {
+            "privacy_mode": "distributed_dp"
+          }
+        },
+        {
+          "kind": "model_loaded",
+          "round_id": 2,
+          "details": {
+            "base_model_sha256": "7af220d4c23b4214673b5e63250c1df7bd89acfddb2015e61b8ca4554cfba855"
+          }
+        },
+        {
+          "kind": "secagg_ready",
+          "round_id": 2,
+          "details": {
+            "privacy_mode": "distributed_dp",
+            "required_cohort": 3
+          }
+        },
+        {
+          "kind": "training",
+          "round_id": 2,
+          "details": {}
+        },
+        {
+          "kind": "training_completed",
+          "round_id": 2,
+          "details": {}
+        },
+        {
+          "kind": "publishing_update",
+          "round_id": 2,
+          "details": {
+            "bytes": 526432
+          }
+        },
+        {
+          "kind": "update_published",
+          "round_id": 2,
+          "details": {
+            "payload_sha256": "8f8523dae5ecf8ec5e808ae31aff074a515a4221b1c8b9a2798165b19e861a4b",
+            "privacy_mode": "distributed_dp"
+          }
+        },
+        {
+          "kind": "waiting_for_aggregate",
+          "round_id": 2,
+          "details": {}
+        },
+        {
+          "kind": "aggregate_received",
+          "round_id": 2,
+          "details": {
+            "checkpoint": "/Users/pj/Desktop/college/capstone/Capstone-DP-SecAgg/.local/dp-singlemodel-r4e3/production-confirmation/complete-cohort/bank-3/collaboration/models/single-r4e3-confirmation-20261027/bank-3/global_round_002.safetensors",
+            "manifest": "/Users/pj/Desktop/college/capstone/Capstone-DP-SecAgg/.local/dp-singlemodel-r4e3/production-confirmation/complete-cohort/bank-3/collaboration/models/single-r4e3-confirmation-20261027/bank-3/global_round_002.json",
+            "payload_sha256": "54c2e46528eb8b1607278595cfc7bab88d19c066987099779114eaf310df50f1"
+          }
+        },
+        {
+          "kind": "waiting_for_model",
+          "round_id": 3,
+          "details": {
+            "privacy_mode": "distributed_dp"
+          }
+        },
+        {
+          "kind": "model_loaded",
+          "round_id": 3,
+          "details": {
+            "base_model_sha256": "54c2e46528eb8b1607278595cfc7bab88d19c066987099779114eaf310df50f1"
+          }
+        },
+        {
+          "kind": "secagg_ready",
+          "round_id": 3,
+          "details": {
+            "privacy_mode": "distributed_dp",
+            "required_cohort": 3
+          }
+        },
+        {
+          "kind": "training",
+          "round_id": 3,
+          "details": {}
+        },
+        {
+          "kind": "training_completed",
+          "round_id": 3,
+          "details": {}
+        },
+        {
+          "kind": "publishing_update",
+          "round_id": 3,
+          "details": {
+            "bytes": 526432
+          }
+        },
+        {
+          "kind": "update_published",
+          "round_id": 3,
+          "details": {
+            "payload_sha256": "72058bcadf13feedc13a9281e8b6181fccc540422a1536019991aecca5aff285",
+            "privacy_mode": "distributed_dp"
+          }
+        },
+        {
+          "kind": "waiting_for_aggregate",
+          "round_id": 3,
+          "details": {}
+        },
+        {
+          "kind": "aggregate_received",
+          "round_id": 3,
+          "details": {
+            "checkpoint": "/Users/pj/Desktop/college/capstone/Capstone-DP-SecAgg/.local/dp-singlemodel-r4e3/production-confirmation/complete-cohort/bank-3/collaboration/models/single-r4e3-confirmation-20261027/bank-3/global_round_003.safetensors",
+            "manifest": "/Users/pj/Desktop/college/capstone/Capstone-DP-SecAgg/.local/dp-singlemodel-r4e3/production-confirmation/complete-cohort/bank-3/collaboration/models/single-r4e3-confirmation-20261027/bank-3/global_round_003.json",
+            "payload_sha256": "c3632af92845cd0dfbfa5fde0db24041a3a727e964fec27bb484fc02673d5e5f"
+          }
+        },
+        {
+          "kind": "waiting_for_model",
+          "round_id": 4,
+          "details": {
+            "privacy_mode": "distributed_dp"
+          }
+        },
+        {
+          "kind": "model_loaded",
+          "round_id": 4,
+          "details": {
+            "base_model_sha256": "c3632af92845cd0dfbfa5fde0db24041a3a727e964fec27bb484fc02673d5e5f"
+          }
+        },
+        {
+          "kind": "secagg_ready",
+          "round_id": 4,
+          "details": {
+            "privacy_mode": "distributed_dp",
+            "required_cohort": 3
+          }
+        },
+        {
+          "kind": "training",
+          "round_id": 4,
+          "details": {}
+        },
+        {
+          "kind": "training_completed",
+          "round_id": 4,
+          "details": {}
+        },
+        {
+          "kind": "publishing_update",
+          "round_id": 4,
+          "details": {
+            "bytes": 526432
+          }
+        },
+        {
+          "kind": "update_published",
+          "round_id": 4,
+          "details": {
+            "payload_sha256": "0daba58e17a3ea94f1d3b609baf4c502dbd9b52b710ac5369a814007f3029343",
+            "privacy_mode": "distributed_dp"
+          }
+        },
+        {
+          "kind": "waiting_for_aggregate",
+          "round_id": 4,
+          "details": {}
+        },
+        {
+          "kind": "aggregate_received",
+          "round_id": 4,
+          "details": {
+            "checkpoint": "/Users/pj/Desktop/college/capstone/Capstone-DP-SecAgg/.local/dp-singlemodel-r4e3/production-confirmation/complete-cohort/bank-3/collaboration/models/single-r4e3-confirmation-20261027/bank-3/global_round_004.safetensors",
+            "manifest": "/Users/pj/Desktop/college/capstone/Capstone-DP-SecAgg/.local/dp-singlemodel-r4e3/production-confirmation/complete-cohort/bank-3/collaboration/models/single-r4e3-confirmation-20261027/bank-3/global_round_004.json",
+            "payload_sha256": "abb151efea1ebb73a9aecea5ed80fc88a28f132e6b1239550a3656cef396acf7"
+          }
+        },
+        {
+          "kind": "worker_completed",
+          "round_id": null,
+          "details": {
+            "rounds": 4
+          }
+        }
+      ],
+      "central": [
+        {
+          "kind": "process_started",
+          "round_id": null,
+          "details": {
+            "client_id": null,
+            "role": "central"
+          }
+        },
+        {
+          "kind": "runtime_ready",
+          "round_id": null,
+          "details": {
+            "schema_sha256": "a9ceb5c5b32b598bde9ef86f1f728786b20e310385a9c0ea0cb7d7117d33a597"
+          }
+        },
+        {
+          "kind": "secagg_key_exchange",
+          "round_id": 1,
+          "details": {
+            "privacy_mode": "distributed_dp",
+            "required_cohort": 3
+          }
+        },
+        {
+          "kind": "waiting_for_updates",
+          "round_id": 1,
+          "details": {
+            "privacy_mode": "distributed_dp",
+            "required_cohort": 3,
+            "secagg": true
+          }
+        },
+        {
+          "kind": "update_validated",
+          "round_id": 1,
+          "details": {
+            "client_id": "bank-1",
+            "payload_sha256": "94d984617834f30002f071e78ef3f0c9210de27c9e8d8c66a8a31241a16ed84c"
+          }
+        },
+        {
+          "kind": "update_validated",
+          "round_id": 1,
+          "details": {
+            "client_id": "bank-2",
+            "payload_sha256": "765cbf0e9a028615ae45ff65d770b3fe48f6757f3020318edb1b0b833d53951f"
+          }
+        },
+        {
+          "kind": "update_validated",
+          "round_id": 1,
+          "details": {
+            "client_id": "bank-3",
+            "payload_sha256": "46c19c40d4ffa744f8e60c5926ad2660714027f686d50f772101cd15516a0c86"
+          }
+        },
+        {
+          "kind": "round_completed",
+          "round_id": 1,
+          "details": {
+            "checkpoint": "/Users/pj/Desktop/college/capstone/Capstone-DP-SecAgg/.local/dp-singlemodel-r4e3/production-confirmation/complete-cohort/central/collaboration/models/single-r4e3-confirmation-20261027/global_round_001.safetensors",
+            "delta": 1e-06,
+            "epsilon": 47.015209254369594,
+            "manifest": "/Users/pj/Desktop/college/capstone/Capstone-DP-SecAgg/.local/dp-singlemodel-r4e3/production-confirmation/complete-cohort/central/collaboration/models/single-r4e3-confirmation-20261027/global_round_001.json",
+            "privacy_mode": "distributed_dp",
+            "required_cohort": 3,
+            "secagg": true
+          }
+        },
+        {
+          "kind": "aggregate_published",
+          "round_id": 1,
+          "details": {
+            "payload_sha256": "7af220d4c23b4214673b5e63250c1df7bd89acfddb2015e61b8ca4554cfba855"
+          }
+        },
+        {
+          "kind": "secagg_key_exchange",
+          "round_id": 2,
+          "details": {
+            "privacy_mode": "distributed_dp",
+            "required_cohort": 3
+          }
+        },
+        {
+          "kind": "waiting_for_updates",
+          "round_id": 2,
+          "details": {
+            "privacy_mode": "distributed_dp",
+            "required_cohort": 3,
+            "secagg": true
+          }
+        },
+        {
+          "kind": "update_validated",
+          "round_id": 2,
+          "details": {
+            "client_id": "bank-1",
+            "payload_sha256": "2d3f24f4d20af1199280bec88a19b604aed107169ebb35304d7513f1553c17ba"
+          }
+        },
+        {
+          "kind": "update_validated",
+          "round_id": 2,
+          "details": {
+            "client_id": "bank-2",
+            "payload_sha256": "f7286ae3b209c918c5070d09c265163ec893aef7aa27dfeda2be4b744a115fe3"
+          }
+        },
+        {
+          "kind": "update_validated",
+          "round_id": 2,
+          "details": {
+            "client_id": "bank-3",
+            "payload_sha256": "8f8523dae5ecf8ec5e808ae31aff074a515a4221b1c8b9a2798165b19e861a4b"
+          }
+        },
+        {
+          "kind": "round_completed",
+          "round_id": 2,
+          "details": {
+            "checkpoint": "/Users/pj/Desktop/college/capstone/Capstone-DP-SecAgg/.local/dp-singlemodel-r4e3/production-confirmation/complete-cohort/central/collaboration/models/single-r4e3-confirmation-20261027/global_round_002.safetensors",
+            "delta": 1e-06,
+            "epsilon": 76.25265385912027,
+            "manifest": "/Users/pj/Desktop/college/capstone/Capstone-DP-SecAgg/.local/dp-singlemodel-r4e3/production-confirmation/complete-cohort/central/collaboration/models/single-r4e3-confirmation-20261027/global_round_002.json",
+            "privacy_mode": "distributed_dp",
+            "required_cohort": 3,
+            "secagg": true
+          }
+        },
+        {
+          "kind": "aggregate_published",
+          "round_id": 2,
+          "details": {
+            "payload_sha256": "54c2e46528eb8b1607278595cfc7bab88d19c066987099779114eaf310df50f1"
+          }
+        },
+        {
+          "kind": "secagg_key_exchange",
+          "round_id": 3,
+          "details": {
+            "privacy_mode": "distributed_dp",
+            "required_cohort": 3
+          }
+        },
+        {
+          "kind": "waiting_for_updates",
+          "round_id": 3,
+          "details": {
+            "privacy_mode": "distributed_dp",
+            "required_cohort": 3,
+            "secagg": true
+          }
+        },
+        {
+          "kind": "update_validated",
+          "round_id": 3,
+          "details": {
+            "client_id": "bank-1",
+            "payload_sha256": "fdaf8e38feaf38f2c4a37e158b848113dfa9facaa27d3c3c52dae35b12516eac"
+          }
+        },
+        {
+          "kind": "update_validated",
+          "round_id": 3,
+          "details": {
+            "client_id": "bank-2",
+            "payload_sha256": "178dd554803691c4fe1500c9b95f4df9cb07bfdebb0959f6a7edd78a9ebdcc80"
+          }
+        },
+        {
+          "kind": "update_validated",
+          "round_id": 3,
+          "details": {
+            "client_id": "bank-3",
+            "payload_sha256": "72058bcadf13feedc13a9281e8b6181fccc540422a1536019991aecca5aff285"
+          }
+        },
+        {
+          "kind": "round_completed",
+          "round_id": 3,
+          "details": {
+            "checkpoint": "/Users/pj/Desktop/college/capstone/Capstone-DP-SecAgg/.local/dp-singlemodel-r4e3/production-confirmation/complete-cohort/central/collaboration/models/single-r4e3-confirmation-20261027/global_round_003.safetensors",
+            "delta": 1e-06,
+            "epsilon": 102.56521769756932,
+            "manifest": "/Users/pj/Desktop/college/capstone/Capstone-DP-SecAgg/.local/dp-singlemodel-r4e3/production-confirmation/complete-cohort/central/collaboration/models/single-r4e3-confirmation-20261027/global_round_003.json",
+            "privacy_mode": "distributed_dp",
+            "required_cohort": 3,
+            "secagg": true
+          }
+        },
+        {
+          "kind": "aggregate_published",
+          "round_id": 3,
+          "details": {
+            "payload_sha256": "c3632af92845cd0dfbfa5fde0db24041a3a727e964fec27bb484fc02673d5e5f"
+          }
+        },
+        {
+          "kind": "secagg_key_exchange",
+          "round_id": 4,
+          "details": {
+            "privacy_mode": "distributed_dp",
+            "required_cohort": 3
+          }
+        },
+        {
+          "kind": "waiting_for_updates",
+          "round_id": 4,
+          "details": {
+            "privacy_mode": "distributed_dp",
+            "required_cohort": 3,
+            "secagg": true
+          }
+        },
+        {
+          "kind": "update_validated",
+          "round_id": 4,
+          "details": {
+            "client_id": "bank-1",
+            "payload_sha256": "cab9ea59869289e3704c381df5ade64a6e3adb89b5b373c68d864a178536cc07"
+          }
+        },
+        {
+          "kind": "update_validated",
+          "round_id": 4,
+          "details": {
+            "client_id": "bank-2",
+            "payload_sha256": "272d94e329d9895f55f22af13037eba9205d30e040e110cbed8a05d59151c59a"
+          }
+        },
+        {
+          "kind": "update_validated",
+          "round_id": 4,
+          "details": {
+            "client_id": "bank-3",
+            "payload_sha256": "0daba58e17a3ea94f1d3b609baf4c502dbd9b52b710ac5369a814007f3029343"
+          }
+        },
+        {
+          "kind": "round_completed",
+          "round_id": 4,
+          "details": {
+            "checkpoint": "/Users/pj/Desktop/college/capstone/Capstone-DP-SecAgg/.local/dp-singlemodel-r4e3/production-confirmation/complete-cohort/central/collaboration/models/single-r4e3-confirmation-20261027/global_round_004.safetensors",
+            "delta": 1e-06,
+            "epsilon": 127.36375184207253,
+            "manifest": "/Users/pj/Desktop/college/capstone/Capstone-DP-SecAgg/.local/dp-singlemodel-r4e3/production-confirmation/complete-cohort/central/collaboration/models/single-r4e3-confirmation-20261027/global_round_004.json",
+            "privacy_mode": "distributed_dp",
+            "required_cohort": 3,
+            "secagg": true
+          }
+        },
+        {
+          "kind": "aggregate_published",
+          "round_id": 4,
+          "details": {
+            "payload_sha256": "abb151efea1ebb73a9aecea5ed80fc88a28f132e6b1239550a3656cef396acf7"
+          }
+        },
+        {
+          "kind": "run_completed",
+          "round_id": null,
+          "details": {
+            "rounds": 4
+          }
+        }
+      ]
+    },
+    "wire": [
+      {
+        "topic": "fcl.private.single.global.v1",
+        "message_type": "global_model",
+        "sender_id": "central",
+        "round_id": 1,
+        "payload_sha256": "209d8cac5242fd6e11bc4b7eea36e41e408cc7777d506b37f1d959d12487cbfb",
+        "bytes": 971628,
+        "hmac_verified": true
+      },
+      {
+        "topic": "fcl.private.single.global.v1",
+        "message_type": "secagg_ready",
+        "sender_id": "central",
+        "round_id": 1,
+        "payload_sha256": "c6fbd9c2cbaf664532837a024b856b5d9f1e1f7cf89d2cefe01bf78fda06dcf7",
+        "bytes": 562,
+        "hmac_verified": true
+      },
+      {
+        "topic": "fcl.private.single.global.v1",
+        "message_type": "aggregated_model",
+        "sender_id": "central",
+        "round_id": 1,
+        "payload_sha256": "7af220d4c23b4214673b5e63250c1df7bd89acfddb2015e61b8ca4554cfba855",
+        "bytes": 971628,
+        "hmac_verified": true
+      },
+      {
+        "topic": "fcl.private.single.global.v1",
+        "message_type": "global_model",
+        "sender_id": "central",
+        "round_id": 2,
+        "payload_sha256": "7af220d4c23b4214673b5e63250c1df7bd89acfddb2015e61b8ca4554cfba855",
+        "bytes": 971628,
+        "hmac_verified": true
+      },
+      {
+        "topic": "fcl.private.single.global.v1",
+        "message_type": "secagg_ready",
+        "sender_id": "central",
+        "round_id": 2,
+        "payload_sha256": "5e35280eed772fc050bb5e9fbb2234a018272386d56c33d791a6e9d56a89dcf9",
+        "bytes": 562,
+        "hmac_verified": true
+      },
+      {
+        "topic": "fcl.private.single.global.v1",
+        "message_type": "aggregated_model",
+        "sender_id": "central",
+        "round_id": 2,
+        "payload_sha256": "54c2e46528eb8b1607278595cfc7bab88d19c066987099779114eaf310df50f1",
+        "bytes": 971628,
+        "hmac_verified": true
+      },
+      {
+        "topic": "fcl.private.single.global.v1",
+        "message_type": "global_model",
+        "sender_id": "central",
+        "round_id": 3,
+        "payload_sha256": "54c2e46528eb8b1607278595cfc7bab88d19c066987099779114eaf310df50f1",
+        "bytes": 971628,
+        "hmac_verified": true
+      },
+      {
+        "topic": "fcl.private.single.global.v1",
+        "message_type": "secagg_ready",
+        "sender_id": "central",
+        "round_id": 3,
+        "payload_sha256": "0d4f502c21d043db735db8d8c2bd89cf575dd449a980d817d7c93513e5724bdf",
+        "bytes": 562,
+        "hmac_verified": true
+      },
+      {
+        "topic": "fcl.private.single.global.v1",
+        "message_type": "aggregated_model",
+        "sender_id": "central",
+        "round_id": 3,
+        "payload_sha256": "c3632af92845cd0dfbfa5fde0db24041a3a727e964fec27bb484fc02673d5e5f",
+        "bytes": 971628,
+        "hmac_verified": true
+      },
+      {
+        "topic": "fcl.private.single.global.v1",
+        "message_type": "global_model",
+        "sender_id": "central",
+        "round_id": 4,
+        "payload_sha256": "c3632af92845cd0dfbfa5fde0db24041a3a727e964fec27bb484fc02673d5e5f",
+        "bytes": 971628,
+        "hmac_verified": true
+      },
+      {
+        "topic": "fcl.private.single.global.v1",
+        "message_type": "secagg_ready",
+        "sender_id": "central",
+        "round_id": 4,
+        "payload_sha256": "411af2f73761ead57592a80ec5223bb3c0ddea663ebeea4877a0587dce66247a",
+        "bytes": 562,
+        "hmac_verified": true
+      },
+      {
+        "topic": "fcl.private.single.global.v1",
+        "message_type": "aggregated_model",
+        "sender_id": "central",
+        "round_id": 4,
+        "payload_sha256": "abb151efea1ebb73a9aecea5ed80fc88a28f132e6b1239550a3656cef396acf7",
+        "bytes": 971628,
+        "hmac_verified": true
+      },
+      {
+        "topic": "fcl.private.single.updates.v1",
+        "message_type": "secagg_public_key",
+        "sender_id": "bank-1",
+        "round_id": 1,
+        "payload_sha256": "0e676003c1adcf933c81af66a61b4f8becefa5693db8654667bfb31294bd0d09",
+        "bytes": 426,
+        "hmac_verified": true
+      },
+      {
+        "topic": "fcl.private.single.updates.v1",
+        "message_type": "secagg_public_key",
+        "sender_id": "bank-2",
+        "round_id": 1,
+        "payload_sha256": "b69c93a092513d45dca7179fd4d4246bb5d32b67e7172fc4ab7a0babfcd8effd",
+        "bytes": 426,
+        "hmac_verified": true
+      },
+      {
+        "topic": "fcl.private.single.updates.v1",
+        "message_type": "secagg_public_key",
+        "sender_id": "bank-3",
+        "round_id": 1,
+        "payload_sha256": "22dc2d3b620ef185d2840db16a08bb2b06ff8c4cc2b8191b03a7673fe358c2c3",
+        "bytes": 426,
+        "hmac_verified": true
+      },
+      {
+        "topic": "fcl.private.single.updates.v1",
+        "message_type": "masked_client_update",
+        "sender_id": "bank-1",
+        "round_id": 1,
+        "payload_sha256": "94d984617834f30002f071e78ef3f0c9210de27c9e8d8c66a8a31241a16ed84c",
+        "bytes": 526432,
+        "hmac_verified": true,
+        "tensor_keys": [
+          "masked_ring"
+        ],
+        "dimension": 65793,
+        "dtype": "int64"
+      },
+      {
+        "topic": "fcl.private.single.updates.v1",
+        "message_type": "masked_client_update",
+        "sender_id": "bank-2",
+        "round_id": 1,
+        "payload_sha256": "765cbf0e9a028615ae45ff65d770b3fe48f6757f3020318edb1b0b833d53951f",
+        "bytes": 526432,
+        "hmac_verified": true,
+        "tensor_keys": [
+          "masked_ring"
+        ],
+        "dimension": 65793,
+        "dtype": "int64"
+      },
+      {
+        "topic": "fcl.private.single.updates.v1",
+        "message_type": "masked_client_update",
+        "sender_id": "bank-3",
+        "round_id": 1,
+        "payload_sha256": "46c19c40d4ffa744f8e60c5926ad2660714027f686d50f772101cd15516a0c86",
+        "bytes": 526432,
+        "hmac_verified": true,
+        "tensor_keys": [
+          "masked_ring"
+        ],
+        "dimension": 65793,
+        "dtype": "int64"
+      },
+      {
+        "topic": "fcl.private.single.updates.v1",
+        "message_type": "secagg_public_key",
+        "sender_id": "bank-2",
+        "round_id": 2,
+        "payload_sha256": "52788f4e63474dc9c162de1a568a245568ce60f64ba9e69501879373742ea804",
+        "bytes": 426,
+        "hmac_verified": true
+      },
+      {
+        "topic": "fcl.private.single.updates.v1",
+        "message_type": "secagg_public_key",
+        "sender_id": "bank-3",
+        "round_id": 2,
+        "payload_sha256": "4273934da092f1fedc88f5a651b9876b75bba76d1aa2e2302a8df0450cf9d04d",
+        "bytes": 426,
+        "hmac_verified": true
+      },
+      {
+        "topic": "fcl.private.single.updates.v1",
+        "message_type": "secagg_public_key",
+        "sender_id": "bank-1",
+        "round_id": 2,
+        "payload_sha256": "cc5223da026239b9681c79de84ab160564c91b9e38378668b1c4120b816e152a",
+        "bytes": 426,
+        "hmac_verified": true
+      },
+      {
+        "topic": "fcl.private.single.updates.v1",
+        "message_type": "masked_client_update",
+        "sender_id": "bank-1",
+        "round_id": 2,
+        "payload_sha256": "2d3f24f4d20af1199280bec88a19b604aed107169ebb35304d7513f1553c17ba",
+        "bytes": 526432,
+        "hmac_verified": true,
+        "tensor_keys": [
+          "masked_ring"
+        ],
+        "dimension": 65793,
+        "dtype": "int64"
+      },
+      {
+        "topic": "fcl.private.single.updates.v1",
+        "message_type": "masked_client_update",
+        "sender_id": "bank-2",
+        "round_id": 2,
+        "payload_sha256": "f7286ae3b209c918c5070d09c265163ec893aef7aa27dfeda2be4b744a115fe3",
+        "bytes": 526432,
+        "hmac_verified": true,
+        "tensor_keys": [
+          "masked_ring"
+        ],
+        "dimension": 65793,
+        "dtype": "int64"
+      },
+      {
+        "topic": "fcl.private.single.updates.v1",
+        "message_type": "masked_client_update",
+        "sender_id": "bank-3",
+        "round_id": 2,
+        "payload_sha256": "8f8523dae5ecf8ec5e808ae31aff074a515a4221b1c8b9a2798165b19e861a4b",
+        "bytes": 526432,
+        "hmac_verified": true,
+        "tensor_keys": [
+          "masked_ring"
+        ],
+        "dimension": 65793,
+        "dtype": "int64"
+      },
+      {
+        "topic": "fcl.private.single.updates.v1",
+        "message_type": "secagg_public_key",
+        "sender_id": "bank-2",
+        "round_id": 3,
+        "payload_sha256": "9ba9bc37e7bcea962092b10db294767acb921917107f897ef686290d57d551a3",
+        "bytes": 426,
+        "hmac_verified": true
+      },
+      {
+        "topic": "fcl.private.single.updates.v1",
+        "message_type": "secagg_public_key",
+        "sender_id": "bank-1",
+        "round_id": 3,
+        "payload_sha256": "c97285045cfdca656f63b5d424b0f9d9d5e84ea02048fe6588b5a23005753ef7",
+        "bytes": 426,
+        "hmac_verified": true
+      },
+      {
+        "topic": "fcl.private.single.updates.v1",
+        "message_type": "secagg_public_key",
+        "sender_id": "bank-3",
+        "round_id": 3,
+        "payload_sha256": "2b5da6f2bdadea36d63c39bf614a67322429fa1a0c6f5371e8ec1944355fd869",
+        "bytes": 426,
+        "hmac_verified": true
+      },
+      {
+        "topic": "fcl.private.single.updates.v1",
+        "message_type": "masked_client_update",
+        "sender_id": "bank-1",
+        "round_id": 3,
+        "payload_sha256": "fdaf8e38feaf38f2c4a37e158b848113dfa9facaa27d3c3c52dae35b12516eac",
+        "bytes": 526432,
+        "hmac_verified": true,
+        "tensor_keys": [
+          "masked_ring"
+        ],
+        "dimension": 65793,
+        "dtype": "int64"
+      },
+      {
+        "topic": "fcl.private.single.updates.v1",
+        "message_type": "masked_client_update",
+        "sender_id": "bank-2",
+        "round_id": 3,
+        "payload_sha256": "178dd554803691c4fe1500c9b95f4df9cb07bfdebb0959f6a7edd78a9ebdcc80",
+        "bytes": 526432,
+        "hmac_verified": true,
+        "tensor_keys": [
+          "masked_ring"
+        ],
+        "dimension": 65793,
+        "dtype": "int64"
+      },
+      {
+        "topic": "fcl.private.single.updates.v1",
+        "message_type": "masked_client_update",
+        "sender_id": "bank-3",
+        "round_id": 3,
+        "payload_sha256": "72058bcadf13feedc13a9281e8b6181fccc540422a1536019991aecca5aff285",
+        "bytes": 526432,
+        "hmac_verified": true,
+        "tensor_keys": [
+          "masked_ring"
+        ],
+        "dimension": 65793,
+        "dtype": "int64"
+      },
+      {
+        "topic": "fcl.private.single.updates.v1",
+        "message_type": "secagg_public_key",
+        "sender_id": "bank-3",
+        "round_id": 4,
+        "payload_sha256": "63ac2e57aaa74a399709b805329ba8a616e33631bd61ce4f2a3542a9b1299e92",
+        "bytes": 426,
+        "hmac_verified": true
+      },
+      {
+        "topic": "fcl.private.single.updates.v1",
+        "message_type": "secagg_public_key",
+        "sender_id": "bank-1",
+        "round_id": 4,
+        "payload_sha256": "950d859cbd6e32109e3c66fb680fcb2cf3adbf7ede5bb3d9e082a8ef3df4e1d3",
+        "bytes": 426,
+        "hmac_verified": true
+      },
+      {
+        "topic": "fcl.private.single.updates.v1",
+        "message_type": "secagg_public_key",
+        "sender_id": "bank-2",
+        "round_id": 4,
+        "payload_sha256": "1c8bef939f7d48387e330d45f243a9d01f48762cb7a7168527d57f7a6226021b",
+        "bytes": 426,
+        "hmac_verified": true
+      },
+      {
+        "topic": "fcl.private.single.updates.v1",
+        "message_type": "masked_client_update",
+        "sender_id": "bank-1",
+        "round_id": 4,
+        "payload_sha256": "cab9ea59869289e3704c381df5ade64a6e3adb89b5b373c68d864a178536cc07",
+        "bytes": 526432,
+        "hmac_verified": true,
+        "tensor_keys": [
+          "masked_ring"
+        ],
+        "dimension": 65793,
+        "dtype": "int64"
+      },
+      {
+        "topic": "fcl.private.single.updates.v1",
+        "message_type": "masked_client_update",
+        "sender_id": "bank-2",
+        "round_id": 4,
+        "payload_sha256": "272d94e329d9895f55f22af13037eba9205d30e040e110cbed8a05d59151c59a",
+        "bytes": 526432,
+        "hmac_verified": true,
+        "tensor_keys": [
+          "masked_ring"
+        ],
+        "dimension": 65793,
+        "dtype": "int64"
+      },
+      {
+        "topic": "fcl.private.single.updates.v1",
+        "message_type": "masked_client_update",
+        "sender_id": "bank-3",
+        "round_id": 4,
+        "payload_sha256": "0daba58e17a3ea94f1d3b609baf4c502dbd9b52b710ac5369a814007f3029343",
+        "bytes": 526432,
+        "hmac_verified": true,
+        "tensor_keys": [
+          "masked_ring"
+        ],
+        "dimension": 65793,
+        "dtype": "int64"
+      }
+    ],
+    "ledger_accounting": {
+      "bank-1": {
+        "reservations": 4,
+        "rho": 66.66666666666667,
+        "epsilon": 127.36375184207253,
+        "delta": 1e-06,
+        "scope": "all runs retained in this local ledger; deletion/rollback invalidates composition"
+      },
+      "bank-2": {
+        "reservations": 4,
+        "rho": 66.66666666666667,
+        "epsilon": 127.36375184207253,
+        "delta": 1e-06,
+        "scope": "all runs retained in this local ledger; deletion/rollback invalidates composition"
+      },
+      "bank-3": {
+        "reservations": 4,
+        "rho": 66.66666666666667,
+        "epsilon": 127.36375184207253,
+        "delta": 1e-06,
+        "scope": "all runs retained in this local ledger; deletion/rollback invalidates composition"
+      },
+      "central": {
+        "reservations": 4,
+        "rho": 66.66666666666667,
+        "epsilon": 127.36375184207253,
+        "delta": 1e-06,
+        "scope": "all runs retained in this local ledger; deletion/rollback invalidates composition"
+      }
+    },
+    "begin_offsets": {
+      "fcl.private.single.global.v1": 2,
+      "fcl.private.single.updates.v1": 2
+    },
+    "end_offsets": {
+      "fcl.private.single.global.v1": 22,
+      "fcl.private.single.updates.v1": 38
+    },
+    "checkpoints": {
+      "1": {
+        "bank-1": {
+          "global_round_001.json": "a1949943366e7308f5f42c44ae5680dca83e5a19a0d20aa50132c61dc5c5b913",
+          "global_round_001.safetensors": "7af220d4c23b4214673b5e63250c1df7bd89acfddb2015e61b8ca4554cfba855"
+        },
+        "bank-2": {
+          "global_round_001.json": "a1949943366e7308f5f42c44ae5680dca83e5a19a0d20aa50132c61dc5c5b913",
+          "global_round_001.safetensors": "7af220d4c23b4214673b5e63250c1df7bd89acfddb2015e61b8ca4554cfba855"
+        },
+        "bank-3": {
+          "global_round_001.json": "a1949943366e7308f5f42c44ae5680dca83e5a19a0d20aa50132c61dc5c5b913",
+          "global_round_001.safetensors": "7af220d4c23b4214673b5e63250c1df7bd89acfddb2015e61b8ca4554cfba855"
+        },
+        "central": {
+          "global_round_001.json": "a68091a2298c2e4c8e1c5451b4dc1f9349fa05613ec7ee292eb34c93ac187a8c",
+          "global_round_001.safetensors": "7af220d4c23b4214673b5e63250c1df7bd89acfddb2015e61b8ca4554cfba855"
+        }
+      },
+      "2": {
+        "bank-1": {
+          "global_round_002.json": "10d422d37c2cf301f46cdbc039d3fbe8f8b9c1f9bd4ae74581a862aee67092d7",
+          "global_round_002.safetensors": "54c2e46528eb8b1607278595cfc7bab88d19c066987099779114eaf310df50f1"
+        },
+        "bank-2": {
+          "global_round_002.json": "10d422d37c2cf301f46cdbc039d3fbe8f8b9c1f9bd4ae74581a862aee67092d7",
+          "global_round_002.safetensors": "54c2e46528eb8b1607278595cfc7bab88d19c066987099779114eaf310df50f1"
+        },
+        "bank-3": {
+          "global_round_002.json": "10d422d37c2cf301f46cdbc039d3fbe8f8b9c1f9bd4ae74581a862aee67092d7",
+          "global_round_002.safetensors": "54c2e46528eb8b1607278595cfc7bab88d19c066987099779114eaf310df50f1"
+        },
+        "central": {
+          "global_round_002.json": "14bc7a717b02047be32f74919fa449487acb2bec65431a28e41b5ab5a8a8cccd",
+          "global_round_002.safetensors": "54c2e46528eb8b1607278595cfc7bab88d19c066987099779114eaf310df50f1"
+        }
+      },
+      "3": {
+        "bank-1": {
+          "global_round_003.json": "dbd48dbfdf780970c43cd4252d8de0d5fc0584e11c6bb085c4a3a0313a1f4b79",
+          "global_round_003.safetensors": "c3632af92845cd0dfbfa5fde0db24041a3a727e964fec27bb484fc02673d5e5f"
+        },
+        "bank-2": {
+          "global_round_003.json": "dbd48dbfdf780970c43cd4252d8de0d5fc0584e11c6bb085c4a3a0313a1f4b79",
+          "global_round_003.safetensors": "c3632af92845cd0dfbfa5fde0db24041a3a727e964fec27bb484fc02673d5e5f"
+        },
+        "bank-3": {
+          "global_round_003.json": "dbd48dbfdf780970c43cd4252d8de0d5fc0584e11c6bb085c4a3a0313a1f4b79",
+          "global_round_003.safetensors": "c3632af92845cd0dfbfa5fde0db24041a3a727e964fec27bb484fc02673d5e5f"
+        },
+        "central": {
+          "global_round_003.json": "f65d514eb494d178f9b1d7264e6499d2c883e1729ea13d537061df62a3ee5639",
+          "global_round_003.safetensors": "c3632af92845cd0dfbfa5fde0db24041a3a727e964fec27bb484fc02673d5e5f"
+        }
+      },
+      "4": {
+        "bank-1": {
+          "global_round_004.json": "1f9d48b851b30e558829334dafcdcdab85b34d07c0e63caf814b2aa5aeaa60e5",
+          "global_round_004.safetensors": "abb151efea1ebb73a9aecea5ed80fc88a28f132e6b1239550a3656cef396acf7"
+        },
+        "bank-2": {
+          "global_round_004.json": "1f9d48b851b30e558829334dafcdcdab85b34d07c0e63caf814b2aa5aeaa60e5",
+          "global_round_004.safetensors": "abb151efea1ebb73a9aecea5ed80fc88a28f132e6b1239550a3656cef396acf7"
+        },
+        "bank-3": {
+          "global_round_004.json": "1f9d48b851b30e558829334dafcdcdab85b34d07c0e63caf814b2aa5aeaa60e5",
+          "global_round_004.safetensors": "abb151efea1ebb73a9aecea5ed80fc88a28f132e6b1239550a3656cef396acf7"
+        },
+        "central": {
+          "global_round_004.json": "3d09f7a006dbafbaed58e0540f24a542ab199096b447267b035320f94d0b238e",
+          "global_round_004.safetensors": "abb151efea1ebb73a9aecea5ed80fc88a28f132e6b1239550a3656cef396acf7"
+        }
+      }
+    },
+    "rounds": [
+      {
+        "round": 1,
+        "masked_contributions": 3,
+        "dimension": 65793,
+        "aggregate_sha256": "7af220d4c23b4214673b5e63250c1df7bd89acfddb2015e61b8ca4554cfba855",
+        "accounting": {
+          "bound": "encoded_share_postprocessing",
+          "delta": 1e-06,
+          "epsilon": 47.015209254369594,
+          "releases": 1,
+          "research_only": false,
+          "rho": 16.666666666666668,
+          "sampler_assumption": "ideal Gaussian; finite-precision sampler is not exact-DP certified"
+        },
+        "masked_ring_sum_reconstructs_returned_noisy_aggregate": true,
+        "frozen_tensors_unchanged": 12
+      },
+      {
+        "round": 2,
+        "masked_contributions": 3,
+        "dimension": 65793,
+        "aggregate_sha256": "54c2e46528eb8b1607278595cfc7bab88d19c066987099779114eaf310df50f1",
+        "accounting": {
+          "bound": "encoded_share_postprocessing",
+          "delta": 1e-06,
+          "epsilon": 76.25265385912027,
+          "releases": 2,
+          "research_only": false,
+          "rho": 33.333333333333336,
+          "sampler_assumption": "ideal Gaussian; finite-precision sampler is not exact-DP certified"
+        },
+        "masked_ring_sum_reconstructs_returned_noisy_aggregate": true,
+        "frozen_tensors_unchanged": 12
+      },
+      {
+        "round": 3,
+        "masked_contributions": 3,
+        "dimension": 65793,
+        "aggregate_sha256": "c3632af92845cd0dfbfa5fde0db24041a3a727e964fec27bb484fc02673d5e5f",
+        "accounting": {
+          "bound": "encoded_share_postprocessing",
+          "delta": 1e-06,
+          "epsilon": 102.56521769756932,
+          "releases": 3,
+          "research_only": false,
+          "rho": 50.0,
+          "sampler_assumption": "ideal Gaussian; finite-precision sampler is not exact-DP certified"
+        },
+        "masked_ring_sum_reconstructs_returned_noisy_aggregate": true,
+        "frozen_tensors_unchanged": 12
+      },
+      {
+        "round": 4,
+        "masked_contributions": 3,
+        "dimension": 65793,
+        "aggregate_sha256": "abb151efea1ebb73a9aecea5ed80fc88a28f132e6b1239550a3656cef396acf7",
+        "accounting": {
+          "bound": "encoded_share_postprocessing",
+          "delta": 1e-06,
+          "epsilon": 127.36375184207253,
+          "releases": 4,
+          "research_only": false,
+          "rho": 66.66666666666667,
+          "sampler_assumption": "ideal Gaussian; finite-precision sampler is not exact-DP certified"
+        },
+        "masked_ring_sum_reconstructs_returned_noisy_aggregate": true,
+        "frozen_tensors_unchanged": 12
+      }
+    ],
+    "model_selections": {
+      "Key_Bank": {
+        "sha256": "abb151efea1ebb73a9aecea5ed80fc88a28f132e6b1239550a3656cef396acf7",
+        "model_kind": "federated_single"
+      },
+      "Wells_Fargo": {
+        "sha256": "abb151efea1ebb73a9aecea5ed80fc88a28f132e6b1239550a3656cef396acf7",
+        "model_kind": "federated_single"
+      },
+      "JPMorgan_Chase": {
+        "sha256": "abb151efea1ebb73a9aecea5ed80fc88a28f132e6b1239550a3656cef396acf7",
+        "model_kind": "federated_single"
+      }
+    },
+    "result": "PASS: all four single-model rounds; three masked contributions per round; identical verified returns and frozen non-decoders"
+  },
+  "acceptance_central_reservations_composed": {
+    "reservations": 4,
+    "rho": 66.66666666666667,
+    "epsilon": 127.36375184207253,
+    "delta": 1e-06,
+    "scope": "Acceptance roots in this report combined; excludes prior development ledgers"
+  }
+}

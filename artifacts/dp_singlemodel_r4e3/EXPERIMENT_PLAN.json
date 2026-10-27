@@ -1,0 +1,25 @@
+{
+  "architecture": "one CausalTemporalGraphSAGE; decoder only",
+  "warm_seed": 42,
+  "continuation_seeds": [
+    42,
+    52,
+    62
+  ],
+  "rounds": 4,
+  "local_epochs": 3,
+  "multiplier": 0.3,
+  "privacy_floor_epsilon": 127.36375184207253,
+  "delta": 1e-06,
+  "max_screen_candidates": 7,
+  "max_robustness_candidates": 2,
+  "maximum_initial_research_runs": 11,
+  "primary_endpoint": "Round 4 equal-bank August average precision",
+  "selection": "Prefer 3-seed mean >=.90 and worst >=.88 to give production margin; at minimum require mean >=.85. Prefer largest nonzero server adaptation rate among robust candidates.",
+  "production_confirmations": 1,
+  "forbidden_splits": [
+    "testing",
+    "September"
+  ],
+  "push_allowed": false
+}

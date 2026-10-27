@@ -34,7 +34,7 @@ class PrivateRoundTrip(unittest.TestCase):
     def run_mode(self,mode,m):
         with tempfile.TemporaryDirectory() as temp:
             raw=json.loads((Path(__file__).resolve().parents[1]/'configs/privacy_distributed_dp.json').read_text())
-            raw.update(dataset_dir=temp,output_dir=str(Path(temp)/'out'),feature_schema=str(Path(temp)/'schema.json'),rounds=2,round_timeout_seconds=10,training_protocol='adaptive_ensemble')
+            raw.update(dataset_dir=temp,output_dir=str(Path(temp)/'out'),feature_schema=str(Path(temp)/'schema.json'),rounds=2,round_timeout_seconds=10,training_protocol='adaptive_single')
             raw['privacy']['mode']=mode;raw['privacy']['multiplier']=m
             path=Path(temp)/'config.json';path.write_text(json.dumps(raw));cfg=load_config(path)
             upstream=queue.Queue();queues={c.client_id:queue.Queue() for c in cfg.clients}

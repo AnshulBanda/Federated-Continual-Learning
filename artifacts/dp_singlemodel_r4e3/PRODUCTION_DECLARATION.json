@@ -1,0 +1,95 @@
+{
+  "production_runs": 1,
+  "run_id": "single-r4e3-confirmation-20261027",
+  "primary_round": 4,
+  "architecture": "ONE seed-42 CausalTemporalGraphSAGE, decoder only",
+  "settings": {
+    "training_protocol": "adaptive_single",
+    "rounds": 4,
+    "local_epochs": 3,
+    "hidden_channels": 128,
+    "dropout": 0.25,
+    "batch_size": 1024,
+    "negative_ratio": 20,
+    "learning_rate": 0.0003,
+    "weight_decay": 0.0001,
+    "seed": 42,
+    "return_aggregate": true,
+    "aggregation": "equal",
+    "rng_policy": "per_client",
+    "replay": "risk_context",
+    "replay_size": 2000,
+    "private_subset": "decoder",
+    "max_chunk_bytes": 524288
+  },
+  "privacy": {
+    "mode": "distributed_dp",
+    "clip": 0.875,
+    "multiplier": 0.3,
+    "delta": 1e-06,
+    "expected_clients": 3,
+    "min_noise_contributors": 3,
+    "scale": 16777216,
+    "entropy": "production"
+  },
+  "server_optimizer": {
+    "name": "fedavg",
+    "learning_rate": 0.1,
+    "beta1": 0.9,
+    "beta2": 0.99,
+    "epsilon": 0.001
+  },
+  "private_dimension": 65793,
+  "initialization": {
+    "clients": [
+      {
+        "client_id": "bank-1",
+        "bank": "Key_Bank"
+      },
+      {
+        "client_id": "bank-2",
+        "bank": "Wells_Fargo"
+      },
+      {
+        "client_id": "bank-3",
+        "bank": "JPMorgan_Chase"
+      }
+    ],
+    "schema_banks": [
+      "Key_Bank",
+      "Wells_Fargo",
+      "JPMorgan_Chase"
+    ],
+    "initial_checkpoint": "artifacts/research_adaptive_fcl/warm_start/federated/context_harmonized/seed_42/global_model.pt",
+    "warm_checkpoint_sha256": "d650af6959d1da46888f30fb79bbfd888a6ec20743d14d447ea078dc351536f5",
+    "feature_schema": "distributed_federation/feature_schema.json"
+  },
+  "accounting": {
+    "releases": 4,
+    "rho": 66.66666666666667,
+    "epsilon": 127.36375184207253,
+    "delta": 1e-06,
+    "bound": "encoded_share_postprocessing",
+    "research_only": false,
+    "sampler_assumption": "ideal Gaussian; finite-precision sampler is not exact-DP certified"
+  },
+  "selection": "Fixed chosen configuration and final round4; no retries for utility; no September/test",
+  "finalist_sha256": "d1a6f929f05a7a756521f6bfa34c67aa1667411d99c071fb462206641b5006ee",
+  "source_sha256": {
+    "distributed_federation/common/config.py": "275fd1d8760ed17333fcaec4e6f86dd8fdd4a4ea52bed998edd9617ef054378b",
+    "distributed_federation/common/model_runtime.py": "f3a0bfd763fbc312a7bc18f26ded2feb62e178cf6b2ec8012ab06af9557017c5",
+    "distributed_federation/privacy/mechanism.py": "6ed1d4c70e4a984d70131b9bcb0a61332b92d3f4ad290f9bb5cf36b8dd133bff",
+    "distributed_federation/privacy/secagg.py": "31d5604ed074d5508fb7e4d652b3137937d9073450ca54807066dfbc888aeb86",
+    "distributed_federation/privacy/subset.py": "7ab50dac1497b4b21b91ffbfe4afdf7a01159f8c9e656c7011181bfd026c8a63",
+    "distributed_federation/privacy/server_optimizer.py": "827bde537b026cf564823df2b2150f8f52013e9b7e41c616d845cbd0a8e15068",
+    "distributed_federation/privacy/transport.py": "ebae660035e3635900c99af5a33399e283daa6534f3d502f4f86eee7a8b6a8c6",
+    "src/gnn/adaptive_continual_federated.py": "7d85b0e64fd31ccf472392afd2b58d89b18513b268309e63ab0438286dc915f0",
+    "src/gnn/causal_temporal_graphsage.py": "77ec113dd6b16ed0bf6956d1ce9fa7d9da5b300b672f085c76830b203ea2e2eb",
+    "streaming/app/final_federation.py": "6802bc30f8282aa15b68dcd8b88e58d9218e18a661e99ad174f6134aa8d66bb3",
+    "streaming/app/collaboration.py": "eeeb709027e1c380d2305368230f61f2a22180970f76b0f05175db6f8ffd5f58",
+    "streaming/app/controller.py": "c636b784d9f27969ab1b3c2fec447ce58ec66fa25c414ba91f006bdbb4277ed4",
+    "streaming/app/runner.py": "d14a5fe251059522f53c991e4c11b38409770310d245b86c32a8812ff05d572d",
+    "scripts/operational_level3_acceptance.py": "861d70ff90ef602f6fe7b18bceb26962bc332d6dc1a40c65813065b44a062d8b",
+    "scripts/evaluate_single_decoder_r4e3.py": "c350c93493b1af0b69dc1ef44a57a4e1d814d0b9580cd17714d619aab74ee710"
+  }
+}

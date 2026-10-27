@@ -1,0 +1,35 @@
+{
+  "tracks": [
+    {
+      "id": "base",
+      "training": {}
+    },
+    {
+      "id": "low_lr",
+      "training": {
+        "learning_rate": 0.0001
+      }
+    },
+    {
+      "id": "smaller_replay",
+      "training": {
+        "replay_size": 1000
+      }
+    }
+  ],
+  "max_local_train_calls": 36,
+  "continuation_seed": 42,
+  "rounds": 4,
+  "epochs": 3,
+  "splits": [
+    "training"
+  ],
+  "C_rule": "25% headroom over maximum training-only whole-decoder norm; round up to .25",
+  "candidate_C_rules": [
+    "max_bound",
+    "half_max_bound"
+  ],
+  "nonprivate_research": true,
+  "validation_loaded": false,
+  "test_loaded": false
+}

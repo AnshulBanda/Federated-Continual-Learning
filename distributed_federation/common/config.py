@@ -160,8 +160,10 @@ def load_config(path: str | Path, broker_override: str | None = None) -> Federat
     if private_subset not in PREFIXES or (private_subset != "all" and not privacy.secure):
         raise ValueError("Parameter subsets require secure aggregation and a known subset")
 
-    if raw.get("training_protocol", "legacy") not in ("legacy", "adaptive_ensemble"):
+    if raw.get("training_protocol", "legacy") not in ("legacy", "adaptive_single", "adaptive_ensemble"):
         raise ValueError("Unknown training protocol")
+    if raw.get('training_protocol')=='adaptive_ensemble' and privacy.mode!='none':
+        raise ValueError('Private ensemble federation is retired; use the single-model decoder continuation')
     if raw.get("training_protocol") == "adaptive_ensemble" and not raw.get("feature_schema"):
         raise ValueError("Adaptive ensemble requires a frozen public feature schema")
 

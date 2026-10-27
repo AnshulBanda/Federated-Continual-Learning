@@ -1,0 +1,28 @@
+{
+  "model_kind": "federated_single",
+  "reference": false,
+  "checkpoint": "artifacts/dp_singlemodel_r4e3/production_confirmation/single-r4e3-confirmation-20261027/global_round_004.safetensors",
+  "sha256": "abb151efea1ebb73a9aecea5ed80fc88a28f132e6b1239550a3656cef396acf7",
+  "version": "Private single-model r4e3 confirmation",
+  "warm_checkpoint_sha256": "d650af6959d1da46888f30fb79bbfd888a6ec20743d14d447ea078dc351536f5",
+  "privacy": {
+    "mode": "distributed_dp",
+    "differential_privacy": true,
+    "accounting": {
+      "bound": "encoded_share_postprocessing",
+      "delta": 1e-06,
+      "epsilon": 127.36375184207253,
+      "releases": 4,
+      "research_only": false,
+      "rho": 66.66666666666667,
+      "sampler_assumption": "ideal Gaussian; finite-precision sampler is not exact-DP certified"
+    }
+  },
+  "August_validation": {
+    "pr_auc": 0.9135646317452175,
+    "precision": 0.4368286190834219,
+    "recall": 0.9372294372294373,
+    "f1": 0.5354796803072666,
+    "roc_auc": 0.9994081454796818
+  }
+}

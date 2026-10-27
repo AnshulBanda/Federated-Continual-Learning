@@ -150,6 +150,8 @@ def train_local(runtime: RuntimeData, config: FederationConfig, round_id: int, c
     from distributed_federation.privacy.subset import configure_trainable
     configure_trainable(runtime.model,getattr(config,"private_subset","all"))
     if getattr(config, 'training_protocol', 'legacy') == 'adaptive_ensemble':
+        if config.privacy.mode!='none':
+            raise ValueError('Private ensemble training is retired; use adaptive_single')
         from types import SimpleNamespace
         from adaptive_continual_federated import train_client, calendar_boundary
         cfg = SimpleNamespace(local_epochs=config.local_epochs, learning_rate=config.learning_rate,
@@ -250,6 +252,8 @@ def prepare_frozen_runtime(config, bank=None):
         if node_columns != contract['node_columns'] or edge_columns != contract['edge_columns']:
             raise ValueError('Local approved feature columns differ from the shared schema')
     if getattr(config, 'training_protocol', 'legacy') == 'adaptive_ensemble':
+        if config.privacy.mode!='none':
+            raise ValueError('Private ensemble initialization is retired; use adaptive_single')
         from streaming.app.final_model import build_ensemble
         model = build_ensemble(contract)
     else:
@@ -269,6 +273,10 @@ def prepare_frozen_runtime(config, bank=None):
         schema['privacy'] = dict(differential_privacy=config.privacy.mode!='none',
             mode=config.privacy.mode, accounting=config.privacy.accounting(config.rounds) if config.privacy.mode!='none' else None,
             scope='Incremental releases conditional on nonprivate frozen ensemble')
+    elif config.privacy.mode!='none':
+        schema['privacy']=dict(differential_privacy=True,mode=config.privacy.mode,
+            accounting=config.privacy.accounting(config.rounds),
+            scope='Single-model incremental releases conditional on nonprivate seed-42 warm checkpoint and fixed calibration')
     encoded=json.dumps(schema, sort_keys=True, separators=(',',':')).encode()
     return RuntimeData(model, static, streams, schema, hashlib.sha256(encoded).hexdigest())
 

@@ -1,6 +1,6 @@
 """Real Kafka acceptance through the browser's Collaboration.start boundary.
 
-Uses existing prepared data and approved ensemble assets. No utility tuning.
+Uses existing prepared data and approved single-model assets. No utility tuning.
 Runtime models/ledgers stay local; only public hashes and protocol evidence are
 written to the report. The caller owns broker lifecycle.
 """
@@ -147,7 +147,9 @@ def run_case(root,dataset,broker,missing=False,run_id=None):
             cfg=load_config(central.root/'launch-config.json')
             runtime=prepare_frozen_runtime(cfg);load_initial_checkpoint(runtime.model,cfg.initial_checkpoint)
             warm=runtime.model.state_dict();checkpoints={};rounds=[]
-            private_keys=parameter_keys(warm,'ensemble_decoder')
+            private_keys=parameter_keys(warm,FIXED['private_subset'])
+            from distributed_federation.privacy.server_optimizer import ServerOptimizer
+            postprocess=ServerOptimizer(cfg.server_optimizer)
             frozen=[k for k in warm if k not in private_keys]
             for rid in range(1,cfg.rounds+1):
                 round_messages=[m for m in masked if m['round_id']==rid]
@@ -165,12 +167,12 @@ def run_case(root,dataset,broker,missing=False,run_id=None):
                 assert all(payload==payloads[0] for payload in payloads)
                 released=deserialize_state(payloads[0])
                 assert all(warm[k].equal(released[k]) for k in frozen)
-                for seed in ('42','52','62'):
-                    assert any(not warm[k].equal(released[k]) for k in private_keys if k.startswith(seed+'.'))
+                assert any(not warm[k].equal(released[k]) for k in private_keys)
                 total=np.zeros(PRIVATE_DIMENSION,dtype=np.uint64)
                 for ring in rings[rid].values():total=np.add(total,ring,dtype=np.uint64)
-                private_base=extract(public_bases[rid],'ensemble_decoder')
+                private_base=extract(public_bases[rid],FIXED['private_subset'])
                 reconstructed=restore(vector(private_base)+decode(total,cfg.privacy.scale)/3,private_base)
+                reconstructed=postprocess.apply(private_base,reconstructed)
                 assert all(reconstructed[k].equal(released[k]) for k in reconstructed)
                 manifest=json.loads((cfg.output_dir/run_id/f'global_round_{rid:03d}.json').read_text())
                 assert manifest['mechanism_parameters']['dimension']==PRIVATE_DIMENSION
@@ -184,10 +186,10 @@ def run_case(root,dataset,broker,missing=False,run_id=None):
                 run=managers[actor].controller.status()[0]
                 selected=managers[actor].select_model(run['id'],cfg.rounds,bank)
                 assert selected['sha256']==rounds[-1]['aggregate_sha256']
-                assert selected['model_kind']=='federated_ensemble'
+                assert selected['model_kind']=='federated_single'
                 selections[bank]=dict(sha256=selected['sha256'],model_kind=selected['model_kind'])
             result.update(checkpoints=checkpoints,rounds=rounds,model_selections=selections,
-                          result='PASS: all four ensemble rounds; three masked contributions per round; identical verified returns and frozen non-decoders')
+                          result='PASS: all four single-model rounds; three masked contributions per round; identical verified returns and frozen non-decoders')
         print(result['result'],flush=True)
         return result
     finally:

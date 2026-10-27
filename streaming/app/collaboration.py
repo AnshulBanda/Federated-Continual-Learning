@@ -15,8 +15,8 @@ from .final_federation import (CLIENTS, LABEL, POLICY, PRIVACY, build_config,
                                public_privacy, validate_operational_config)
 
 SCHEMA=REPO/'distributed_federation/feature_schema.json'
-GLOBAL_TOPIC='fcl.collaboration.global.v1'
-UPDATE_TOPIC='fcl.collaboration.updates.v1'
+GLOBAL_TOPIC='fcl.private.single.global.v1'
+UPDATE_TOPIC='fcl.private.single.updates.v1'
 
 class Collaboration:
     def __init__(self, root):
@@ -159,15 +159,22 @@ class Collaboration:
         kind='Federated sample-weighted FedAvg' if weighting=='samples' else 'Federated equal mean'
         if mode!='none':kind+='; '+mode
         if configuration.get('training_protocol')=='adaptive_ensemble':
+            if mode!='none':
+                raise ValueError('The private ensemble experiment is retired. Start a single-model private run.')
             manifest=read_json(checkpoint.with_suffix('.json'),{})
             if manifest.get('schema',{}).get('training_protocol',{}).get('protocol')!='adaptive_ensemble':
                 raise ValueError('Checkpoint does not have the final ensemble contract.')
             kind='federated_ensemble'
+        elif configuration.get('training_protocol')=='adaptive_single':
+            manifest=read_json(checkpoint.with_suffix('.json'),{})
+            if manifest.get('schema',{}).get('training_protocol',{}).get('protocol')!='adaptive_single':
+                raise ValueError('Checkpoint does not have the private single-model contract.')
+            kind='federated_single'
         model=dict(bank=bank,version=f"fed-{run['run_id']}-r{round_id}",sha256=digest,
             checkpoint=str(checkpoint),trained_at=event['time'],selected_at=now(),
             model_kind=kind,validation=None,job='federation:'+str(run_id),
             privacy=dict(differential_privacy=mode!='none',mode=mode,
-                accounting_scope='Incremental releases conditional on nonprivate warm ensemble' if mode!='none' else None))
+                accounting_scope='Single-model incremental releases conditional on nonprivate seed-42 warm checkpoint' if mode!='none' else None))
         write_json(self.root.parent/'local-training'/('active-'+bank+'.json'),model)
         return model
     def status(self, bank):
@@ -262,7 +269,7 @@ class Collaboration:
         final_policy=config.get('operational_policy')==POLICY and all(privacy.get(k)==v for k,v in PRIVACY.items())
         historical=config.get('operational_policy')=='level3_final_v1'
         label=LABEL if final_policy else 'Previous single-model decoder-private continuation (historical)' if historical else 'Non-private federation (research/debug history)' if privacy_status['mode']=='none' else 'Research/debug privacy mode: '+str(privacy_status['mode'])
-        model_scope='Three-member ensemble continuation' if config.get('training_protocol')=='adaptive_ensemble' or not active else 'Historical single-model continuation'
+        model_scope='Single-model decoder-private continuation' if config.get('training_protocol')=='adaptive_single' or not active else 'Historical ensemble continuation' if config.get('training_protocol')=='adaptive_ensemble' else 'Historical single-model continuation'
         return dict(privacy=privacy_status,privacy_label=label,epsilon_scope=scope,privacy_accounting=ledger_status,model_scope=model_scope,
             setup_error=setup_error,profile=profile,roster=roster,current_round=latest_round,rounds=config['rounds'],runs=runs,
             process_running=busy,launch_pending=busy and (not active or active['status']!='Running'),launch_error=launch_error,

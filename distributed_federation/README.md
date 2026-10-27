@@ -15,14 +15,14 @@ read only their own training graph at runtime; central reads no bank transaction
 Every round returns the signed aggregate to each bank for verification and atomic
 checkpoint saving. The final browser path enforces Level-3 distributed DP and
 Secure Aggregation, the approved frozen warm checkpoint, three distinct banks,
-equal weights, four releases and adaptation of all three decoders as one clipped bank contribution (ensemble_decoder, 197379 coordinates). See the backend guide
+equal weights, four releases and adaptation of one decoder (private_subset=decoder, 65793 coordinates) from the frozen seed-42 warm model. See the backend guide
 for exact settings, privacy scope and real Kafka acceptance evidence.
 
 Legacy CLI configs without feature_schema retain the older shared-data preparation
 behavior. Use the browser-generated configuration for the bank-local workflow.
 Do not run legacy configs while claiming that clients need only their own data.
 
-In the final private mode, banks clip and noise their decoder deltas before
+In the final private mode, banks clip and noise their single-model decoder deltas before
 fixed-point encoding and pair masking. Kafka carries authenticated key exchange
 and masked bank contributions. Central receives no individual clean model update
 or clean aggregate; it reconstructs only the noisy equal aggregate after complete

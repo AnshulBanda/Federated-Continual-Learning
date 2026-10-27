@@ -83,7 +83,20 @@ def load_runtime(selected, dataset, bank):
             model = g.CausalTemporalGraphSAGE(static.shape[1], streams['training'].edge_attr.shape[1], 128, .25)
             model.load_state_dict(saved['state_dict'], strict=True)
             model.eval(); models.append(model)
+    elif selected.get('model_kind') == 'federated_single':
+        from distributed_federation.common.model_runtime import deserialize_state
+        from distributed_federation.common.checkpoints import verify_checkpoint
+        checkpoint=Path(selected['checkpoint'])
+        manifest=json.loads(checkpoint.with_suffix('.json').read_text())
+        verify_checkpoint(checkpoint.parent,manifest['round_id'])
+        if manifest['schema']['feature_contract']!=schema or manifest['schema']['training_protocol']['protocol']!='adaptive_single':
+            raise ValueError('Shared single-model checkpoint contract differs')
+        model=g.CausalTemporalGraphSAGE(static.shape[1],streams['training'].edge_attr.shape[1],128,.25)
+        model.load_state_dict(deserialize_state(checkpoint.read_bytes()),strict=True)
+        model.eval();models=[model]
     elif selected.get('model_kind') == 'federated_ensemble':
+        if selected.get('privacy',{}).get('differential_privacy'):
+            raise ValueError('Private ensemble checkpoints are historical; select the reference or a private single model')
         from distributed_federation.common.model_runtime import deserialize_state
         from distributed_federation.common.checkpoints import verify_checkpoint
         checkpoint = Path(selected['checkpoint'])
@@ -112,6 +125,8 @@ def score_models(models, static, streams, check=lambda: None, progress=lambda _:
             _, _, state = score_stream(model, state, streams['training'], 1024, check_cancel=check)
             probabilities, labels, _ = score_stream(model, state, streams['validation'], 1024, check_cancel=check)
             members.append(probabilities)
+    if len(members)==1:
+        return np.asarray(members[0],dtype=np.float64),labels,members
     return np.mean(np.asarray(members, dtype=np.float64), axis=0), labels, members
 
 

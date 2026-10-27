@@ -6,16 +6,16 @@ adaptation, local validation, explanations and opaque file transfers do not beco
 private merely because the application also supports private federation.
 
 The **Operational federated collaboration** is a new Level-3 distributed-DP
-ensemble continuation. It has separate configuration, ledger, validation evidence
+single-model continuation. It has separate configuration, ledger, validation evidence
 and release scope. Its performance must not be replaced by either the reference
 90.68% or the historical single-model decoder-private 90.281% August result.
 
 | Control | Operational private ensemble | Reference/research scope |
 |---|---|---|
-| Initialization | Three frozen Sia checkpoints, hash verified | Same nonprivate warm members |
-| Local training | Adaptive ensemble, 4 rounds, 3 epochs per phase, risk-context replay 2000, lr=.001 | Reference/ordinary local training is nonprivate |
-| Private subset | All three decoders, 197379 actual coordinates; other tensors frozen | Full model adaptation may be used explicitly |
-| Bank update clipping | One global concatenated-vector L2 clip, C=6.5 | Optimizer gradient clipping alone is not DP |
+| Initialization | One frozen Sia seed-42 checkpoint, hash verified | Nonprivate three-member reference remains separate |
+| Local training | Adaptive single model, 4 rounds, 3 epochs per phase, risk-context replay 2000, lr=.0003 | Reference/ordinary local training is nonprivate |
+| Private subset | One decoder, 65793 actual coordinates; other tensors frozen | Full model adaptation may be used explicitly |
+| Bank update clipping | One global decoder-vector L2 clip, C=.875 | Optimizer gradient clipping alone is not DP |
 | Noise | Independent bank Gaussian shares, m=.30, production entropy, before masking | None in reference models |
 | Accounting | Conservative encoded-share postprocessing; 4 releases, epsilon=127.363751842, delta=1e-6 | No DP guarantee for reference checkpoints |
 | Secure aggregation | X25519/HKDF-SHA256/ChaCha20, exact uint64 ring, complete 3-bank cohort | Plaintext temporal harmonization allowed only in explicit nonprivate research |
@@ -26,8 +26,8 @@ and release scope. Its performance must not be replaced by either the reference
 
 ## Private data flow
 
-Each bank receives the entire global ensemble, completes authenticated ephemeral
-key exchange, trains its three decoder members, computes one concatenated bank
+Each bank receives the single global model, completes authenticated ephemeral
+key exchange, trains its one decoder, computes one bank
 delta, globally clips it and adds independent noise before masking. The retained
 mechanism separately rounds the clipped delta and Gaussian share into fixed-point
 ring values. It does not independently clip each member to C.
@@ -36,10 +36,10 @@ The coordinator receives authenticated public-key messages and masked bank
 contributions. It sums all three in the uint64 ring and recovers only the noisy
 equal aggregate. It never deserializes individual clean bank ensemble states,
 recovers separate member deltas or reconstructs a clean aggregate in distributed
-DP mode. It does not call `aggregate_adaptive` in the private path. The private
-ensemble uses Sia's adaptive local ensemble training but replaces plaintext
-temporal harmonization with secure equal aggregation because SecAgg hides
-individual client directions.
+DP mode. It does not call `aggregate_adaptive` in the private path. The private path is a single-model continuation. Its server applies only
+FedAvg lr=.1 postprocessing of the already-noisy equal aggregate. It never uses
+individual client directions or plaintext temporal harmonization. Private
+three-member ensemble federation is retired; only the reference ensemble remains.
 
 ## Sensitivity, accounting and scope
 
@@ -58,17 +58,17 @@ reserved spending and cumulative local-ledger scope. Across retained ledgers,
 all releases compose. Deleting/rolling back a ledger invalidates that scope.
 
 The guarantee covers incremental private continuation conditional on the
-**nonprivate frozen warm ensemble and public preprocessing contract**. It is not
+**nonprivate fixed seed-42 warm model and public preprocessing contract**. It is not
 end-to-end DP pretraining. Training-only C calibration is a nonprivate research
 disclosure, and so are validation metrics/threshold selection. Their releases
 are not claimed to be covered by the model-release accountant.
 
 ## Evidence and explanations
 
-The previous single-model DP evidence remains unchanged. New ensemble evidence,
+The previous single-model DP evidence remains unchanged. New single-model evidence,
 calibration, production declaration, actual Kafka acceptance and August-only
 validation are retained separately in
-[artifacts/dp_level3_ensemble](../artifacts/dp_level3_ensemble/).
+[artifacts/dp_singlemodel_r4e3](../artifacts/dp_singlemodel_r4e3/).
 
 Transaction explanations contain scores, fields and attributions. They stay in
 the local workspace and are not published through automatic federation. A strict

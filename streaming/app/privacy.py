@@ -3,7 +3,7 @@
 def privacy_status(collaboration=None):
     from .final_federation import public_privacy, LABEL
     private=collaboration['privacy'] if collaboration else public_privacy()
-    model_scope=collaboration.get('model_scope','Three-member ensemble continuation') if collaboration else 'Three-member ensemble continuation'
+    model_scope=collaboration.get('model_scope','Single-model decoder-private continuation') if collaboration else 'Single-model decoder-private continuation'
     reference=dict(label='Reference Sia ensemble',differential_privacy=False,
         status='Non-private frozen three-member reference ensemble',
         exploratory_september_pr_auc=.9067783483397621,epsilon=None,delta=None,accounting=None)

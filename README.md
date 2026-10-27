@@ -64,7 +64,7 @@ Their hashes are checked against [`FREEZE.json`](artifacts/research_seed_ensembl
 
 **Local adaptation:** each member starts from its final checkpoint, trains three June epochs and three July-plus-context-replay epochs, then competes against its initial checkpoint using August PR-AUC. Each member keeps the better validation checkpoint. The dashboard reports the resulting ensemble's measured validation score. This bank-local adaptation is separate from the original three-bank training study.
 
-**Federated training:** each bank receives all three members and trains them locally with context replay. The private coordinator performs secure equal aggregation of all three decoder deltas as one bank contribution, saves one safetensors ensemble, and returns it to participating banks. Plaintext temporal harmonization is retained only for explicit nonprivate research. New rounds can improve or worsen performance; returned versions must be evaluated. The workflow does not claim to reproduce 90.68% after arbitrary updates.
+**Private federated training:** each bank receives ONE seed-42 warm CausalTemporalGraphSAGE and trains its decoder locally with context replay. The coordinator securely aggregates the noisy decoder contributions, applies noisy-only FedAvg postprocessing (server lr=.1), saves one global single-model checkpoint, and returns it to all banks. Plaintext temporal harmonization is retained only for explicit nonprivate research. New rounds can improve or worsen performance; returned versions must be evaluated. The workflow does not claim to reproduce 90.68% after arbitrary updates.
 
 ## Architecture
 
@@ -74,7 +74,8 @@ flowchart TD
     Schema --> Members[Three temporal GraphSAGE models: 42 / 52 / 62]
     Members --> Train[June then July plus risk/account-context replay]
     Train --> Local[Local validation selects each member]
-    Train --> Clip[One global bank clip across all three decoders]
+    Warm[One frozen seed-42 warm model] --> PrivateTrain[Private single-model decoder adaptation]
+    PrivateTrain --> Clip[One global bank clip across 65793 decoder coordinates]
     Clip --> Noise[Independent distributed Gaussian bank share]
     Noise --> Send[Signed masked ring contribution through Kafka]
     Send --> Central[Complete-cohort secure equal aggregation]
@@ -103,21 +104,29 @@ Manual file transfers use a separate topic and `FCL_TRANSFER_SECRET` environment
 The **90.68% frozen Sia reference ensemble is nonprivate**. Ordinary local adaptation,
 manual file transfers, transaction scores and explanations make no DP claim.
 
-The **operational federated ensemble** uses bank-level Level-3 distributed DP and
-Secure Aggregation: four rounds, three local epochs per phase, lr=.001,
-risk/context replay=2000, all three decoder subsets (197,379 coordinates), one
-global bank clip C=6.5, multiplier=.30, delta=1e-6, three mandatory contributors
+The **operational private single model** uses bank-level Level-3 distributed DP and
+Secure Aggregation: four rounds, three local epochs per phase, lr=.0003,
+risk/context replay=2000, one decoder subset (65,793 coordinates), one
+global bank clip C=.875, multiplier=.30, delta=1e-6, three mandatory contributors
 and production entropy. Conservative encoded-share accounting gives per-run
 epsilon=127.363751842; all reserved runs/releases compose. Privacy is conditional
-on the nonprivate frozen three-member initialization, not end-to-end pretraining.
+on the nonprivate frozen seed-42 initialization, not end-to-end pretraining.
 Calibration statistics and validation metrics are nonprivate research disclosures.
 
-The private ensemble uses Sia's adaptive local ensemble training but replaces
-plaintext temporal harmonization with secure equal aggregation because SecAgg
-hides individual client directions. There is no plaintext fallback. The earlier
+The private path uses the successful original single-model adaptive continuation,
+with four real communication rounds and three local epochs per phase. Seeds 52/62
+are separate experiment RNG seeds, never private ensemble members. No plaintext
+temporal harmonization is used. Noisy-only FedAvg server lr=.1 attenuates both
+signal and noise without changing accounting. There is no plaintext fallback. The earlier
 90.281% result remains historical single-model decoder-private evidence and is not
 the performance of this new architecture. See the [current privacy audit](docs/PRIVACY_AUDIT.md)
-and [new ensemble evidence](artifacts/dp_level3_ensemble/).
+and [new single-model evidence](artifacts/dp_singlemodel_r4e3/).
+
+The local single-model repair records **0.913431 ± 0.010928 macro August PR-AUC**
+across continuation seeds 42/52/62, all from the same seed-42 warm checkpoint.
+One predeclared production-entropy Kafka confirmation scored **0.913565** at
+round four. These are August validation results, separate from the frozen
+nonprivate September headline. See the [local repair report](artifacts/dp_singlemodel_r4e3/FINAL_REPORT.md).
 
 Kafka TLS is not configured by the app; ZeroTier is networking only. Team-shared
 HMAC authentication retains the existing honest-but-curious/noncolluding threat

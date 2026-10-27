@@ -58,8 +58,10 @@ class Overview:
             try:
                 active = json.loads((local / ('active-'+bank+'.json')).read_text(encoding='utf-8'))
                 validate_selected(active)
-                if active.get('model_kind') not in ('adaptive_probability_ensemble', 'federated_ensemble'):
+                if active.get('model_kind') not in ('adaptive_probability_ensemble', 'federated_ensemble', 'federated_single'):
                     raise ValueError()
+                if active.get('model_kind')=='federated_ensemble' and active.get('privacy',{}).get('differential_privacy'):
+                    raise ValueError('Private ensemble mode is retired')
                 result['active_model'] = active
             except FileNotFoundError:
                 pass

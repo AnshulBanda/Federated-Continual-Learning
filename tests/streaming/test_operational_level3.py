@@ -34,12 +34,11 @@ class OperationalLevel3Tests(unittest.TestCase):
         self.assertEqual(self.raw['server_optimizer'], final.SERVER)
         reference = final.approved_template()
         self.assertEqual(self.raw['initial_checkpoint'], reference['initial_checkpoint'])
-        self.assertIsNone(self.raw['initial_checkpoint'])
-        self.assertEqual([m['seed'] for m in self.raw['ensemble_initialization']],[42,52,62])
-        self.assertTrue(all(not Path(m['checkpoint']).is_absolute() for m in self.raw['ensemble_initialization']))
+        self.assertFalse(Path(self.raw['initial_checkpoint']).is_absolute())
+        self.assertEqual(self.raw['warm_checkpoint_sha256'],final.WARM_SHA256)
         self.assertEqual(self.raw['broker'], self.profile['broker'])
         self.assertEqual([c['bank'] for c in self.raw['clients']], list(final.BANK_ORDER))
-        self.assertEqual(final.validate_operational_config(self.raw, self.config(self.raw)), 197379)
+        self.assertEqual(final.validate_operational_config(self.raw, self.config(self.raw)), 65793)
 
     def test_incomplete_duplicate_or_downgraded_setup_rejected(self):
         changes = [dict(banks=list(final.BANK_ORDER)[:n]) for n in (1, 2)]
@@ -50,14 +49,14 @@ class OperationalLevel3Tests(unittest.TestCase):
                 self.manager.config(dict(self.profile, **change))
 
     def test_controller_rejects_missing_or_tampered_policy_before_spawn(self):
-        mutations = [(key, None) for key in ('privacy','operational_policy','initial_checkpoint','replay','ensemble_initialization')]
+        mutations = [(key, None) for key in ('privacy','operational_policy','initial_checkpoint','replay','warm_checkpoint_sha256')]
         mutations += [('aggregation','samples'), ('private_subset','all'), ('initial_checkpoint','other.pt'),
                       ('privacy',dict(final.PRIVACY, entropy='research')),
                       ('privacy',dict(final.PRIVACY, multiplier=.2)), ('local_epochs',2), ('rounds',1.4),
                       ('clients',self.raw['clients'][:2]), ('replay_size',0)]
-        mutations += [('private_subset','decoder'),('training_protocol','legacy'),
+        mutations += [('private_subset','ensemble_decoder'),('training_protocol','legacy'),
                       ('privacy',dict(final.PRIVACY,multiplier=.15)),('privacy',dict(final.PRIVACY,multiplier=.29)),
-                      ('ensemble_initialization',self.raw['ensemble_initialization'][:2])]
+                      ('warm_checkpoint_sha256','wrong-hash'),('training_protocol','adaptive_ensemble')]
         for key, value in mutations:
             raw = copy.deepcopy(self.raw)
             if value is None: raw.pop(key)
@@ -77,7 +76,7 @@ class OperationalLevel3Tests(unittest.TestCase):
         snapshot = Path(command[command.index('--config')+1])
         raw = json.loads(snapshot.read_text())
         self.assertEqual(raw['operational_policy'], final.POLICY)
-        self.assertEqual(final.validate_operational_config(raw, load_config(snapshot)),197379)
+        self.assertEqual(final.validate_operational_config(raw, load_config(snapshot)),65793)
 
     def test_runner_forced_flag_rejects_removed_marker_and_privacy(self):
         raw = copy.deepcopy(self.raw)
@@ -90,14 +89,14 @@ class OperationalLevel3Tests(unittest.TestCase):
     def test_missing_or_changed_approved_warm_asset_fails_closed(self):
         # Copy public metadata only; never alter the retained experiment assets.
         alternate = self.root/'repository'
-        for relative in (final.EVIDENCE/'CALIBRATION.json', final.FREEZE):
+        for relative in (final.EVIDENCE/'CALIBRATION.json',final.EVIDENCE/'FINALIST.json', final.FREEZE):
             target = alternate/relative; target.parent.mkdir(parents=True,exist_ok=True)
             shutil.copyfile(final.ROOT/relative,target)
-        warm = alternate/self.raw['ensemble_initialization'][0]['checkpoint']
+        warm = alternate/self.raw['initial_checkpoint']
         with patch.object(final,'ROOT',alternate):
-            with self.assertRaisesRegex(ValueError,'warm ensemble seed-42 checkpoint is missing'): final.approved_template()
+            with self.assertRaisesRegex(ValueError,'seed-42 warm checkpoint is missing'): final.approved_template()
             warm.parent.mkdir(parents=True,exist_ok=True); warm.write_bytes(b'wrong model')
-            with self.assertRaisesRegex(ValueError,'warm ensemble seed-42 checkpoint hash differs'): final.approved_template()
+            with self.assertRaisesRegex(ValueError,'seed-42 warm checkpoint hash differs'): final.approved_template()
 
     def test_private_status_drops_diagnostics_and_exposes_budget(self):
         self.manager.save(self.profile)
@@ -179,4 +178,4 @@ class OperationalLevel3Tests(unittest.TestCase):
         self.assertRegex(html,r'id="fedepochs"[^>]*value="3" readonly')
         self.assertIn(final.LABEL,html)
         self.assertIn("privacy.epsilon",html)
-        self.assertIn('nonprivate warm ensemble',html)
+        self.assertIn('nonprivate warm checkpoint',html)

@@ -1,0 +1,7 @@
+{
+  "reservations": 5,
+  "rho": 83.33333333333334,
+  "epsilon": 151.19473757748446,
+  "delta": 1e-06,
+  "scope": "New four-round production run plus missing-bank coordinator reservation only; prior development excluded"
+}

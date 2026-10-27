@@ -1,0 +1,57 @@
+{
+  "candidates": [
+    {
+      "id": "half_C",
+      "training": {},
+      "clip": 0.875,
+      "server": {
+        "learning_rate": 0.1
+      }
+    },
+    {
+      "id": "server_0p05",
+      "training": {},
+      "clip": 1.75,
+      "server": {
+        "learning_rate": 0.05
+      }
+    }
+  ],
+  "seeds": [
+    42,
+    52,
+    62
+  ],
+  "architecture": "Same one-model seed-42 initialization in every run",
+  "selection": "Screen top two by seed-42 final-round AP; then prefer mean>=.90, worst>=.88, largest server rate",
+  "screen_scores": [
+    {
+      "id": "half_C",
+      "round4": 0.9044426389118883
+    },
+    {
+      "id": "server_0p05",
+      "round4": 0.903788907312553
+    },
+    {
+      "id": "low_lr",
+      "round4": 0.8986814538512814
+    },
+    {
+      "id": "server_0p1",
+      "round4": 0.890784065457841
+    },
+    {
+      "id": "smaller_replay",
+      "round4": 0.8893601062181831
+    },
+    {
+      "id": "server_0p25",
+      "round4": 0.8313333774615154
+    },
+    {
+      "id": "baseline",
+      "round4": 0.6298948852290231
+    }
+  ]
+}

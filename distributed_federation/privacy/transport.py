@@ -67,6 +67,8 @@ def publish(producer,cfg,runtime,round_id,base,kind,sender,payload,key,global_to
 
 
 def _guard(cfg):
+    if cfg.privacy.mode!='none' and getattr(cfg,'training_protocol','legacy')=='adaptive_ensemble':
+        raise ValueError('Private ensemble federation is retired; use one decoder-private model')
     if cfg.privacy.mode!='none' and cfg.privacy.entropy!='production':
         raise ValueError('Deterministic research noise is forbidden in the operational private pipeline')
     if cfg.privacy.secure and (not cfg.feature_schema or len(cfg.clients)!=cfg.privacy.expected_clients):

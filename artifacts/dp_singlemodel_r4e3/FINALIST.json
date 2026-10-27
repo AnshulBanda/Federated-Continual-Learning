@@ -1,0 +1,70 @@
+{
+  "id": "half_C",
+  "fixed": {
+    "training_protocol": "adaptive_single",
+    "rounds": 4,
+    "local_epochs": 3,
+    "hidden_channels": 128,
+    "dropout": 0.25,
+    "batch_size": 1024,
+    "negative_ratio": 20,
+    "learning_rate": 0.0003,
+    "weight_decay": 0.0001,
+    "seed": 42,
+    "return_aggregate": true,
+    "aggregation": "equal",
+    "rng_policy": "per_client",
+    "replay": "risk_context",
+    "replay_size": 2000,
+    "private_subset": "decoder",
+    "max_chunk_bytes": 524288
+  },
+  "privacy": {
+    "mode": "distributed_dp",
+    "clip": 0.875,
+    "multiplier": 0.3,
+    "delta": 1e-06,
+    "expected_clients": 3,
+    "min_noise_contributors": 3,
+    "scale": 16777216,
+    "entropy": "production"
+  },
+  "server_optimizer": {
+    "name": "fedavg",
+    "learning_rate": 0.1,
+    "beta1": 0.9,
+    "beta2": 0.99,
+    "epsilon": 0.001
+  },
+  "single_model": true,
+  "private_dimension": 65793,
+  "warm_checkpoint": "artifacts/research_adaptive_fcl/warm_start/federated/context_harmonized/seed_42/global_model.pt",
+  "warm_sha256": "d650af6959d1da46888f30fb79bbfd888a6ec20743d14d447ea078dc351536f5",
+  "seeds": [
+    42,
+    52,
+    62
+  ],
+  "seed_role": "Continuation/randomness only; each run loads the same seed-42 checkpoint",
+  "round4_scores": [
+    0.9044426389118883,
+    0.9255953694489244,
+    0.9102559556622593
+  ],
+  "mean": 0.913431321341024,
+  "sample_sd": 0.010928024189601844,
+  "worst": 0.9044426389118883,
+  "calibration_sha256": "5ed6da9bddaa3a5397a66c0bf1f29bb2a4cd8c0d20479105075515cb0dcad42b",
+  "C_rule": "half of base track max-bound derived from training only: .5 * ceil(1.25 * max_norm * 4)/4",
+  "selection": "Predeclared robust mean>=.90, worst>=.88; choose larger server rate among qualifying finalists",
+  "accounting": {
+    "releases": 4,
+    "rho": 66.66666666666667,
+    "epsilon": 127.36375184207253,
+    "delta": 1e-06,
+    "bound": "encoded_share_postprocessing",
+    "research_only": false,
+    "sampler_assumption": "ideal Gaussian; finite-precision sampler is not exact-DP certified"
+  },
+  "production_confirmations_planned": 1
+}

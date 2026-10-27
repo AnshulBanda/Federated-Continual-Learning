@@ -1,10 +1,10 @@
 # Final review: demonstration and verified status
 
-Current private-ensemble integration: see [the new evidence](../artifacts/dp_level3_ensemble/)
+Current private single-model integration: see [the new evidence](../artifacts/dp_singlemodel_r4e3/)
 and [scope-aware privacy audit](PRIVACY_AUDIT.md). The recorded acceptance results
 below describe the earlier nonprivate reference implementation; they are retained
 as historical evidence. The current browser collaboration requires four rounds,
-three epochs, C=6.5, m=.30 and secure equal aggregation.
+three epochs, C=.875, m=.30 and secure equal aggregation.
 
 
 Prepared 27 October 2026. This checklist describes the integrated local application and the checks completed during implementation. It does not certify external networks or production deployment.
