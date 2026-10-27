@@ -1,0 +1,84 @@
+{
+  "integration": "Fast-forward; exact successful repair tree preserved",
+  "repair_commit": "f1e7c5ddc0673efd7e7b7c62cccce03daef879e1",
+  "main": "1760f95f19b3411c3cb5ae3bcef356f8f7d23c60",
+  "same_computational_tree": true,
+  "production_source_files_checked": 15,
+  "new_production_noise_draws": 0,
+  "production_acceptance_reused": true,
+  "reason": "User forbids new production noise unless computational behavior changes; hashes and exact tree are unchanged",
+  "actual_original_run_id": "single-r4e3-confirmation-20261027",
+  "rounds": [
+    {
+      "round": 1,
+      "identical_actor_checkpoints": 4,
+      "masked_contributions": 3,
+      "private_dimension": 65793,
+      "sha256": "7af220d4c23b4214673b5e63250c1df7bd89acfddb2015e61b8ca4554cfba855",
+      "accounting": {
+        "bound": "encoded_share_postprocessing",
+        "delta": 1e-06,
+        "epsilon": 47.015209254369594,
+        "releases": 1,
+        "research_only": false,
+        "rho": 16.666666666666668,
+        "sampler_assumption": "ideal Gaussian; finite-precision sampler is not exact-DP certified"
+      },
+      "original_mask_cancellation_reconstruction_verified": true
+    },
+    {
+      "round": 2,
+      "identical_actor_checkpoints": 4,
+      "masked_contributions": 3,
+      "private_dimension": 65793,
+      "sha256": "54c2e46528eb8b1607278595cfc7bab88d19c066987099779114eaf310df50f1",
+      "accounting": {
+        "bound": "encoded_share_postprocessing",
+        "delta": 1e-06,
+        "epsilon": 76.25265385912027,
+        "releases": 2,
+        "research_only": false,
+        "rho": 33.333333333333336,
+        "sampler_assumption": "ideal Gaussian; finite-precision sampler is not exact-DP certified"
+      },
+      "original_mask_cancellation_reconstruction_verified": true
+    },
+    {
+      "round": 3,
+      "identical_actor_checkpoints": 4,
+      "masked_contributions": 3,
+      "private_dimension": 65793,
+      "sha256": "c3632af92845cd0dfbfa5fde0db24041a3a727e964fec27bb484fc02673d5e5f",
+      "accounting": {
+        "bound": "encoded_share_postprocessing",
+        "delta": 1e-06,
+        "epsilon": 102.56521769756932,
+        "releases": 3,
+        "research_only": false,
+        "rho": 50.0,
+        "sampler_assumption": "ideal Gaussian; finite-precision sampler is not exact-DP certified"
+      },
+      "original_mask_cancellation_reconstruction_verified": true
+    },
+    {
+      "round": 4,
+      "identical_actor_checkpoints": 4,
+      "masked_contributions": 3,
+      "private_dimension": 65793,
+      "sha256": "abb151efea1ebb73a9aecea5ed80fc88a28f132e6b1239550a3656cef396acf7",
+      "accounting": {
+        "bound": "encoded_share_postprocessing",
+        "delta": 1e-06,
+        "epsilon": 127.36375184207253,
+        "releases": 4,
+        "research_only": false,
+        "rho": 66.66666666666667,
+        "sampler_assumption": "ideal Gaussian; finite-precision sampler is not exact-DP certified"
+      },
+      "original_mask_cancellation_reconstruction_verified": true
+    }
+  ],
+  "kafka_io_identical_to_main": true,
+  "kafka_io_sha256": "2df6378e7f1f4184c6f6bad2ce02e71a973ebdb656813829cf64fef02855be5c",
+  "retained_performance_evidence_unchanged": true
+}

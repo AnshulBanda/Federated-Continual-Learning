@@ -1,0 +1,26 @@
+{
+  "new_production_noise_draws": 0,
+  "per_production_run": {
+    "bound": "encoded_share_postprocessing",
+    "delta": 1e-06,
+    "epsilon": 127.36375184207253,
+    "releases": 4,
+    "research_only": false,
+    "rho": 66.66666666666667,
+    "sampler_assumption": "ideal Gaussian; finite-precision sampler is not exact-DP certified"
+  },
+  "new_missing_reservation": {
+    "reservations": 1,
+    "rho": 16.666666666666668,
+    "epsilon": 47.015209254369594,
+    "delta": 1e-06,
+    "scope": "all runs retained in this local ledger; deletion/rollback invalidates composition"
+  },
+  "retained_production_plus_both_missing_tests": {
+    "reservations": 6,
+    "rho": 100.0,
+    "epsilon": 174.33844377699677,
+    "delta": 1e-06
+  },
+  "scope": "Production four-round bound is unchanged; failed key exchanges reserve conservatively; this total excludes prior development ledgers"
+}

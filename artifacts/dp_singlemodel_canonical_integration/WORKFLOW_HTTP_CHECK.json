@@ -1,0 +1,49 @@
+{
+  "result": "PASS",
+  "saved_profile_roundtrip": true,
+  "bank_and_central_roles_preserved": true,
+  "broker_and_ZeroTier_IP_preserved": true,
+  "controls_present": true,
+  "privacy_scopes": {
+    "reference_ensemble": {
+      "label": "Reference Sia ensemble",
+      "differential_privacy": false,
+      "status": "Non-private frozen three-member reference ensemble",
+      "exploratory_september_pr_auc": 0.9067783483397621,
+      "epsilon": null,
+      "delta": null,
+      "accounting": null
+    },
+    "operational_collaboration": {
+      "label": "Operational federated collaboration",
+      "mode": "distributed_dp",
+      "secagg": true,
+      "required_cohort": 3,
+      "multiplier": 0.3,
+      "epsilon": 127.36375184207253,
+      "delta": 1e-06,
+      "phase": "idle",
+      "differential_privacy": true,
+      "status": "Level-3 Distributed DP + Secure Aggregation",
+      "accounting": "encoded_share_postprocessing",
+      "accounting_scope": "Configured per-run bound; all reserved runs/releases compose",
+      "scope": "Single-model decoder-private continuation conditional on nonprivate frozen checkpoints and fixed public calibration; local validation/XAI are not private releases"
+    }
+  },
+  "collaboration_privacy": {
+    "mode": "distributed_dp",
+    "secagg": true,
+    "required_cohort": 3,
+    "multiplier": 0.3,
+    "epsilon": 127.36375184207253,
+    "delta": 1e-06,
+    "phase": "idle"
+  },
+  "collaboration_label": "Level-3 Distributed DP + Secure Aggregation",
+  "topics": {
+    "global_model": "fcl.private.single.global.v1",
+    "client_updates": "fcl.private.single.updates.v1"
+  },
+  "secret_persisted": false,
+  "no_training_started": true
+}

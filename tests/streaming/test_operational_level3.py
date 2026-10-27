@@ -57,6 +57,10 @@ class OperationalLevel3Tests(unittest.TestCase):
         mutations += [('private_subset','ensemble_decoder'),('training_protocol','legacy'),
                       ('privacy',dict(final.PRIVACY,multiplier=.15)),('privacy',dict(final.PRIVACY,multiplier=.29)),
                       ('warm_checkpoint_sha256','wrong-hash'),('training_protocol','adaptive_ensemble')]
+        mutations += [('privacy',dict(final.PRIVACY,mode='none')),
+                      ('privacy',dict(final.PRIVACY,clip=6.5)),
+                      ('server_optimizer',dict(final.SERVER,learning_rate=1.)),
+                      ('ensemble_initialization',[])]
         for key, value in mutations:
             raw = copy.deepcopy(self.raw)
             if value is None: raw.pop(key)
