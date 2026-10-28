@@ -57,7 +57,7 @@ class DashboardIntegrationTests(unittest.TestCase):
                 policy=response.headers['Content-Security-Policy']
                 self.assertIn("script-src 'nonce-",policy);self.assertNotIn('unsafe-eval',policy)
                 self.assertIn("style-src 'self' 'unsafe-inline'",policy)
-                for name in ('dashboard.js','dashboard.css','explanation_summary.js','replay_investigator.js'):
+                for name in ('dashboard.js','dashboard.css','explanation_summary.js','bank_display.js','replay_investigator.js'):
                     asset=urllib.request.urlopen(base+'/assets/xai/'+name)
                     self.assertEqual(asset.status,200)
                     self.assertTrue(asset.read())

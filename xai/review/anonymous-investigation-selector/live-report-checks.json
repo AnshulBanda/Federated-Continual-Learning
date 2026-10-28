@@ -1,0 +1,114 @@
+[
+  {
+    "bank": "JPMorgan_Chase",
+    "transaction": "3400463",
+    "model": "Final ensemble \u00b7 42 / 52 / 62",
+    "model_sha256": "1fa493177c5c7998256f77b6ead3570d42549f4543ab2608d9030331ad0fcff0",
+    "score": 0.9999833504358927,
+    "threshold": 0.018216599960190167,
+    "evaluation_label": "fraud",
+    "parity_errors": {
+      "saved_vs_direct": 1.6934869728757462e-08,
+      "saved_vs_target": 1.6934869728757462e-08
+    },
+    "report_cache": "75537be52ff5a449fb0e782493c5886d10c55b0ea3c46323b0bf79f9a3fca0be"
+  },
+  {
+    "bank": "Wells_Fargo",
+    "transaction": "2794670",
+    "model": "Final ensemble \u00b7 42 / 52 / 62",
+    "model_sha256": "1fa493177c5c7998256f77b6ead3570d42549f4543ab2608d9030331ad0fcff0",
+    "score": 0.04597613091270129,
+    "threshold": 0.2648376809991874,
+    "evaluation_label": "fraud",
+    "parity_errors": {
+      "saved_vs_direct": 1.1572406047322126e-08,
+      "saved_vs_target": 1.1572406047322126e-08
+    },
+    "report_cache": "eed9c182086deea86e87d800c44dd69a9803f57ac848a2a54c3c52a59b275a99"
+  },
+  {
+    "bank": "Key_Bank",
+    "transaction": "3135307",
+    "model": "Final ensemble \u00b7 42 / 52 / 62",
+    "model_sha256": "1fa493177c5c7998256f77b6ead3570d42549f4543ab2608d9030331ad0fcff0",
+    "score": 0.621405671040217,
+    "threshold": 0.4178731579879904,
+    "evaluation_label": "not_fraud",
+    "parity_errors": {
+      "saved_vs_direct": 6.694395904283112e-08,
+      "saved_vs_target": 6.694395904283112e-08
+    },
+    "report_cache": "484fc1caf60e5d6e035949f32480fcd2a048512abb449a414bc53989d6286a32"
+  },
+  {
+    "bank": "Key_Bank",
+    "transaction": "3262326",
+    "model": "Final ensemble \u00b7 42 / 52 / 62",
+    "model_sha256": "1fa493177c5c7998256f77b6ead3570d42549f4543ab2608d9030331ad0fcff0",
+    "score": 0.9999829530715942,
+    "threshold": 0.4178731579879904,
+    "evaluation_label": "fraud",
+    "parity_errors": {
+      "saved_vs_direct": 2.8321371026152065e-08,
+      "saved_vs_target": 2.8321371026152065e-08
+    },
+    "report_cache": "8bb79d13456067f762d038cf087ae18c306c619a34d7b46bc38f0e0e5f631c45"
+  },
+  {
+    "bank": "JPMorgan_Chase",
+    "transaction": "3565491",
+    "model": "Final ensemble \u00b7 42 / 52 / 62",
+    "model_sha256": "1fa493177c5c7998256f77b6ead3570d42549f4543ab2608d9030331ad0fcff0",
+    "score": 0.5718277245759964,
+    "threshold": 0.018216599960190167,
+    "evaluation_label": "not_fraud",
+    "parity_errors": {
+      "saved_vs_direct": 2.1472160383062544e-08,
+      "saved_vs_target": 2.1472160383062544e-08
+    },
+    "report_cache": "25925ab0cb6355aad362d578791f480d3f9525129c13f1bf92f94be7812c979e"
+  },
+  {
+    "bank": "Wells_Fargo",
+    "transaction": "3400471",
+    "model": "Private single-model r4e3 confirmation",
+    "model_sha256": "abb151efea1ebb73a9aecea5ed80fc88a28f132e6b1239550a3656cef396acf7",
+    "score": 0.9999845027923584,
+    "threshold": 0.5,
+    "evaluation_label": "fraud",
+    "parity_errors": {
+      "saved_vs_direct": 4.14234495593746e-08,
+      "saved_vs_target": 4.14234495593746e-08
+    },
+    "report_cache": "153b213a507ac5311d103b11e02f43bd13e3596452c02075f7cab44aa53b63b9"
+  },
+  {
+    "bank": "Key_Bank",
+    "transaction": "3007762",
+    "model": "Final ensemble \u00b7 42 / 52 / 62",
+    "model_sha256": "1fa493177c5c7998256f77b6ead3570d42549f4543ab2608d9030331ad0fcff0",
+    "score": 0.006046057038474828,
+    "threshold": 0.4178731579879904,
+    "evaluation_label": "fraud",
+    "parity_errors": {
+      "saved_vs_direct": 2.740282810560768e-09,
+      "saved_vs_target": 2.7402828114281297e-09
+    },
+    "report_cache": "859f98a8dc8abadb57899b79c4d2080bd92e76a937bf9388cb4be7be2cd248b3"
+  },
+  {
+    "bank": "Key_Bank",
+    "transaction": "3538025",
+    "model": "Final ensemble \u00b7 42 / 52 / 62",
+    "model_sha256": "1fa493177c5c7998256f77b6ead3570d42549f4543ab2608d9030331ad0fcff0",
+    "score": 0.0,
+    "threshold": 0.4178731579879904,
+    "evaluation_label": "not_fraud",
+    "parity_errors": {
+      "saved_vs_direct": 4.248354255291589e-18,
+      "saved_vs_target": 9.999999999999992e-13
+    },
+    "report_cache": "c04667746799c66dedfa59f636a2a8f26a5910ed21c0612e48a0163891fc5ffa"
+  }
+]

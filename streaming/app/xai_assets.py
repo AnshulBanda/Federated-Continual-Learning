@@ -36,7 +36,7 @@ def scoped_css(source):
 def asset(name):
     if name=='replay_investigator.js':
         return (STATIC.parents[1]/'streaming/web/replay_investigator.js').read_bytes(),'text/javascript; charset=utf-8'
-    if name not in ('dashboard.js','explanation_summary.js','dashboard.css'):
+    if name not in ('dashboard.js','explanation_summary.js','bank_display.js','dashboard.css'):
         return None
     path=STATIC/name
     if name.endswith('.css'):

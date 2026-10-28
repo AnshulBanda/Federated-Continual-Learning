@@ -322,9 +322,9 @@ def handler_for(app):
             url = urlparse(self.path)
             params = parse_qs(url.query)
             try:
-                if url.path in {"/", "/dashboard.js", "/explanation_summary.js", "/dashboard.css"}:
+                if url.path in {"/", "/dashboard.js", "/explanation_summary.js", "/bank_display.js", "/dashboard.css"}:
                     name = "dashboard.html" if url.path == "/" else url.path.lstrip("/")
-                    content_type = {"dashboard.html": "text/html", "dashboard.js": "text/javascript", "explanation_summary.js": "text/javascript", "dashboard.css": "text/css"}[name]
+                    content_type = {"dashboard.html": "text/html", "dashboard.js": "text/javascript", "explanation_summary.js": "text/javascript", "bank_display.js": "text/javascript", "dashboard.css": "text/css"}[name]
                     self.send_data((XAI_ROOT / "static" / name).read_bytes(), content_type + "; charset=utf-8")
                 elif url.path == "/api/meta":
                     self.send_data({"banks": BANKS, "manifest": app.manifest})

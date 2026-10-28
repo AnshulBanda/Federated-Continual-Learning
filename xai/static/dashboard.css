@@ -223,3 +223,5 @@ code { overflow-wrap: anywhere; color: #48615d; font-size: 11px; }
 }
 /* Short callout leaders keep crowded historical labels legible without moving evidence. */
 .badge-leader { stroke: #a9b8bf; stroke-width: 1; pointer-events: none; }
+
+.case-comparison{background:#fff;border:1px solid var(--line);border-left:3px solid var(--green);border-radius:10px;padding:16px 22px;margin:0 0 18px}.case-comparison h3{font-size:14px;margin:6px 0}.case-comparison p{margin:5px 0}.case-comparison small{color:var(--muted)}

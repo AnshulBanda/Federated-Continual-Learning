@@ -7,7 +7,8 @@ const all=selector=>scope.querySelectorAll(selector);
 const bank=$('#bank'),view=$('#view'),query=$('#query'),body=$('#rows');
 let currentPage=0,total=0,selected=null,requestSequence=0,catalogSequence=0,debounce,currentManifest=null;
 const pageSize=75;
-const esc=value=>String(value??'—').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+const escapeHTML=value=>String(value??'—').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+const esc=value=>escapeHTML(BankDisplay.text(value??'—'));
 const score=value=>Number(value).toFixed(4);
 const amount=event=>event.amount==null?'Amount unavailable':`${Number(event.amount).toLocaleString(undefined,{minimumFractionDigits:2,maximumFractionDigits:2})} ${esc(event.currency||'')}`;
 const time=value=>esc(String(value||'').replace('T',' '));
@@ -265,15 +266,21 @@ function readableTechnicalDetails(x){
  <h3>F. Constrained counterfactuals</h3><p>All retained tested amount alternatives and exact scores follow. This is a model-sensitivity test, not a recommendation for transaction behavior. Account memory and event history stay fixed.</p>${!cf.tested_alternatives?'<p>Legacy report: only threshold-crossing alternatives were retained. Other tested candidate values were not saved.</p>':''}${evidence({method:cf.method,status:cf.status,threshold:cf.threshold,candidates_evaluated:cf.candidates_evaluated,tested_alternatives:tested,limitations:cf.limitations})}
  <h3>G. Verification</h3><p>Strict XAI parity guard: 1e-6. Saved, direct and explanation scores must agree within this tolerance. Missing checks are not passes. Reference stability, feature faithfulness and numerical agreement answer different questions.</p>${evidence(v)}${evidence({grouped_explanation_target_score:f.target_probability,saved_catalog_score:p.probability,stability:x.evaluation_checks?.stability,temporal_replay:x.evaluation_checks?.temporal_replay,coverage:x.evaluation_checks?.coverage,engine_evaluation:x.evaluation,configuration:x.config})}
  <h3>H. Model provenance</h3><p>${esc(ExplanationSummary.modelScope(x))}. Local explanations do not inherit a model’s DP guarantee. The selected catalog supports only the model identified here.</p>${evidence({model:x.model,source:provenance,engine_provenance:x.provenance,limitations:x.limitations})}
- <h3>I. Raw audit record</h3><details class="raw-audit"><summary>View raw audit record</summary><pre>${esc(JSON.stringify(x,null,2))}</pre></details></details>`;
+ <h3>I. Raw audit record</h3><details class="raw-audit"><summary>View raw audit record</summary><p>Bank names use display aliases here. Saved provenance retains canonical identifiers.</p><pre>${esc(JSON.stringify(x,null,2))}</pre></details></details>`;
+}
+function renderCaseComparison(summary){
+ const known=summary.evaluation.label!=='Not recorded';
+ const title=summary.evaluation.status.replace(' (false negative)','').toUpperCase();
+ const sentence=known?`Model ${summary.decision.flagged?'flagged':'did not flag'} this transaction${['True positive','True negative'].includes(summary.evaluation.status)?' and':', but'} the dataset label is ${summary.evaluation.label}.`:'The independent dataset label is unavailable.';
+ return `<section class="case-comparison" aria-label="Independent evaluation comparison"><p class="eyebrow">INDEPENDENT EVALUATION COMPARISON</p><h3>${esc(title)}</h3><p>${esc(sentence)}</p><small>The dataset label did not determine the model prediction.</small></section>`;
 }
 function render(x){
  const s=ExplanationSummary.summarize(x),event=x.transaction_story.selected_transfer;
- $('#detail').innerHTML=`<div class="transaction-heading"><div><p class="eyebrow bank">${esc(x.bank.replaceAll('_',' '))}</p><h2>Transaction ${esc(x.transaction_id)}</h2></div><a class="picker-link" href="${options.embedded?'#xaibank':'#bank'}">Find another transaction</a><a class="depth-link" href="#technical-explanation" id="open-technical">In-depth explanation ↗</a></div><p class="intro">Account ${esc(event.source_account_id)} sent ${amount(event)} to account ${esc(event.target_account_id)} using ${esc(event.payment_method)}.</p>${renderSimpleExplanation(x,s)}${readableTechnicalDetails(x)}`;
+ $('#detail').innerHTML=`<div class="transaction-heading"><div><p class="eyebrow bank">${esc(BankDisplay.label(x.bank))}</p><h2>Transaction ${esc(x.transaction_id)}</h2></div><a class="picker-link" href="${options.embedded?'#xaibank':'#bank'}">Find another transaction</a><a class="depth-link" href="#technical-explanation" id="open-technical">In-depth explanation ↗</a></div><p class="intro">Account ${esc(event.source_account_id)} sent ${amount(event)} to account ${esc(event.target_account_id)} using ${esc(event.payment_method)}.</p>${renderCaseComparison(s)}${renderSimpleExplanation(x,s)}${readableTechnicalDetails(x)}`;
  attachGraphInteractions(x.transaction_story,x.prediction);
  if(typeof matchMedia==='function'&&matchMedia('(max-width:1000px)').matches)$('#detail').scrollIntoView({block:'start'});
  if(options.embedded){
-  const context=document.createElement('p');context.className='model-context';context.textContent=`Replay model: ${x.xai_provenance.selected_model.version} · ${x.model.model_count} ${x.model.model_count===1?'model':'models'}`;
+  const context=document.createElement('p');context.className='model-context';context.textContent=BankDisplay.text(`Replay model: ${x.xai_provenance.selected_model.version} · ${x.model.model_count} ${x.model.model_count===1?'model':'models'}`);
   $('#detail').querySelector('.intro').after(context);
   $('.picker-link')?.addEventListener('click',()=>options.onBrowse?.());
  }
@@ -320,7 +327,7 @@ query.addEventListener('input',()=>{clearTimeout(debounce);debounce=setTimeout(r
 $('#prev').addEventListener('click',()=>{if(currentPage){currentPage--;loadRows()}});
 $('#next').addEventListener('click',()=>{if((currentPage+1)*pageSize<total){currentPage++;loadRows()}});
 }
-async function init(){try{const data=await json('/api/meta');currentManifest=data.manifest;bank.innerHTML=data.banks.map(value=>`<option value="${esc(value)}">${esc(value.replaceAll('_',' '))}</option>`).join('');const params=new URLSearchParams(location.search);if(params.has('bank')&&!data.banks.includes(params.get('bank')))throw Error('Unknown bank in transaction link.');if(data.banks.includes(params.get('bank')))bank.value=params.get('bank');const id=params.get('transaction_id');if(id){query.value=id;view.value='all'}await loadRows();if(id)await loadExplanation(id)}catch(error){$('#detail').innerHTML=`<p class="error">${esc(error.message)}</p>`}}
+async function init(){try{const data=await json('/api/meta');currentManifest=data.manifest;bank.innerHTML=data.banks.map(value=>`<option value="${escapeHTML(value)}">${esc(BankDisplay.label(value))}</option>`).join('');const params=new URLSearchParams(location.search);if(params.has('bank')&&!data.banks.includes(params.get('bank')))throw Error('Unknown bank in transaction link.');if(data.banks.includes(params.get('bank')))bank.value=params.get('bank');const id=params.get('transaction_id');if(id){query.value=id;view.value='all'}await loadRows();if(id)await loadExplanation(id)}catch(error){$('#detail').innerHTML=`<p class="error">${esc(error.message)}</p>`}}
 function validateReplay(x,selection){
  const fail=message=>{throw Error('Explanation refused: '+message)};
  if(!selection||x.replay_id!==selection.replay_id||x.bank!==selection.bank||String(x.transaction_id)!==String(selection.transaction_id))fail('the report belongs to another replay or transaction.');
@@ -328,9 +335,10 @@ function validateReplay(x,selection){
  if((x.xai_provenance.privacy_mode!=='none')!==selection.private_model)fail('the selected replay privacy scope differs.');
  if(!Number.isFinite(selection.score)||Math.abs(x.prediction.probability-selection.score)>1e-6||Math.abs(x.feature_explanation.target_probability-selection.score)>1e-6)fail('the explanation score differs from the saved replay by more than 1e-6. Rescore this model.');
  if(x.prediction.threshold!==selection.threshold)fail('the saved replay cutoff differs.');
+ if(selection.evaluation_label&&x.evaluation_label!==selection.evaluation_label)fail('the independent dataset label differs.');
 }
 return {render,validateExplanation,loadRows,loadExplanation,graphEdgeDetails,readableTechnicalDetails,observedPatterns,renderSimpleExplanation,
- networkLayout,networkEdgeClass,flowDiagram,renderNetwork,attachGraphInteractions,setManifest:value=>currentManifest=value,
+ networkLayout,networkEdgeClass,flowDiagram,renderNetwork,renderCaseComparison,attachGraphInteractions,setManifest:value=>currentManifest=value,
  init:()=>{bindStandalone();return init()},
  renderVerified:(report,selection)=>{validateExplanation(report,selection.bank,selection.transaction_id);validateReplay(report,selection);render(report)},validateReplay};
 }
