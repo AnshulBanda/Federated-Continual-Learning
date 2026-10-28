@@ -1,0 +1,1322 @@
+{
+  "schema_version": 4,
+  "bank": "JPMorgan_Chase",
+  "transaction_id": "66943",
+  "replay_id": "2257cb2acbc241b6b3f745a58be29ed7",
+  "split": "validation",
+  "prediction": {
+    "probability": 0.0009164763784307676,
+    "threshold": 0.018216599960190167,
+    "class": "not_fraud",
+    "threshold_selection": "saved selected-model cutoff captured in this completed replay; no threshold fitting"
+  },
+  "evaluation_label": "not_fraud",
+  "feature_explanation": {
+    "method": "exact_empirical_group_interventional_shap_v1",
+    "units": "raw_logit",
+    "scope": "transaction_groups_given_fixed_account_memory",
+    "base_logit": -8.757256932915153,
+    "target_logit": -6.994057182552597,
+    "target_probability": 0.0009164765483135097,
+    "additivity_residual": 1.7312385569567823e-07,
+    "features": [
+      {
+        "feature": "payment_method",
+        "label": "Payment method",
+        "columns": [
+          "payment_format"
+        ],
+        "value": "ACH",
+        "shap_logit": 1.829263888985306,
+        "ablation_logit_drop": 1.827805536920275
+      },
+      {
+        "feature": "transfer_terms",
+        "label": "Amount and currencies (joint)",
+        "columns": [
+          "amount",
+          "Amount_Received",
+          "currency",
+          "Receiving_Currency"
+        ],
+        "value": "amount: 89.78 / Amount_Received: 89.78 / currency: USD / Receiving_Currency: USD",
+        "shap_logit": -0.06606431174660532,
+        "ablation_logit_drop": -0.06752266381163619
+      }
+    ],
+    "groups": {
+      "payment_method": [
+        "payment_format"
+      ],
+      "transfer_terms": [
+        "amount",
+        "Amount_Received",
+        "currency",
+        "Receiving_Currency"
+      ]
+    },
+    "seed": 42,
+    "background_size": 32,
+    "background_txn_ids": [
+      "2298329",
+      "2821858",
+      "2836988",
+      "2892684",
+      "2308257",
+      "2219945",
+      "2324099",
+      "2877533",
+      "2022866",
+      "1823973",
+      "1835800",
+      "1908444",
+      "2856059",
+      "2776030",
+      "2074543",
+      "2495997",
+      "2041081",
+      "2363625",
+      "2540477",
+      "2645704",
+      "2398357",
+      "2085998",
+      "1981898",
+      "2437723",
+      "2471333",
+      "2267216",
+      "1852532",
+      "2643305",
+      "1618083",
+      "2211547",
+      "2303647",
+      "2723143"
+    ],
+    "limitations": [
+      "Joint transfer attribution cannot be split into separate amount and currency effects.",
+      "Other dependencies between groups and reference sensitivity remain; this is not causal evidence."
+    ]
+  },
+  "graph_explanation": {
+    "method": "bounded_chronological_replay_of_selected_predictor",
+    "window_batches": 8,
+    "window_event_count": 7639,
+    "selection": "up to eight most recent eligible endpoint transfers within the last eight completed model batches",
+    "important_edges": [
+      {
+        "transaction_id": "66940",
+        "source": 730,
+        "target": 25609,
+        "timestamp": "2025-08-01 12:42:06.700000",
+        "probability_without": 0.0005146884724246521,
+        "delta_probability": -0.0004017880758888576,
+        "importance": 0.0004017880758888576,
+        "member_probabilities_without": [
+          0.0005992490753413262,
+          0.0008763711548807074,
+          6.844518705192256e-05
+        ],
+        "verified_model_count": 3
+      },
+      {
+        "transaction_id": "66942",
+        "source": 730,
+        "target": 24970,
+        "timestamp": "2025-08-01 11:06:20.600000",
+        "probability_without": 0.0005376226267465306,
+        "delta_probability": -0.00037885392156697915,
+        "importance": 0.00037885392156697915,
+        "member_probabilities_without": [
+          0.0005975873483856967,
+          0.0009546748606575079,
+          6.060567119638709e-05
+        ],
+        "verified_model_count": 3
+      },
+      {
+        "transaction_id": "66941",
+        "source": 730,
+        "target": 12644,
+        "timestamp": "2025-08-01 06:15:41.400000",
+        "probability_without": 0.0008252300412518739,
+        "delta_probability": -9.124650706163586e-05,
+        "importance": 9.124650706163586e-05,
+        "member_probabilities_without": [
+          0.0009348285304352924,
+          0.0014758783683798888,
+          6.498322494044012e-05
+        ],
+        "verified_model_count": 3
+      }
+    ],
+    "important_nodes": [],
+    "fidelity": {
+      "original_probability": 0.0009164765483135098,
+      "unperturbed_replay_error": 0.0,
+      "baseline_member_probabilities": [
+        0.0009983092060025526,
+        0.001688177300978491,
+        6.294313795948543e-05
+      ]
+    },
+    "limitations": "One update suppressed per test; pre-window memory retained. Not GNNExplainer or causal proof."
+  },
+  "model": {
+    "family": "adaptive_probability_ensemble",
+    "seed": "42/52/62",
+    "model_count": 3,
+    "checkpoint_sha256": "1fa493177c5c7998256f77b6ead3570d42549f4543ab2608d9030331ad0fcff0",
+    "best_round": null
+  },
+  "counterfactual_explanation": {
+    "method": "training_supported_constrained_amount_search",
+    "status": "no_threshold_flip_found",
+    "threshold": 0.018216599960190167,
+    "original_class": "non_fraud",
+    "original_probability": 0.0009164765483135097,
+    "candidates_evaluated": 9,
+    "counterfactuals": [],
+    "tested_alternatives": [
+      {
+        "changed_features": {
+          "amount": 122.77,
+          "Amount_Received": 122.77
+        },
+        "original_probability": 0.0009164765483135097,
+        "counterfactual_probability": 0.000921537777426899,
+        "score_change": 5.061229113389283e-06,
+        "valid": true,
+        "constraint_notes": [
+          "candidate amounts come from training rows only",
+          "matched known categorical context",
+          "amount aliases changed together"
+        ],
+        "amount_change_absolute": 32.989999999999995,
+        "threshold_crossed": false
+      },
+      {
+        "changed_features": {
+          "amount": 30.88,
+          "Amount_Received": 30.88
+        },
+        "original_probability": 0.0009164765483135097,
+        "counterfactual_probability": 0.0009074993117042363,
+        "score_change": -8.977236609273372e-06,
+        "valid": true,
+        "constraint_notes": [
+          "candidate amounts come from training rows only",
+          "matched known categorical context",
+          "amount aliases changed together"
+        ],
+        "amount_change_absolute": 58.900000000000006,
+        "threshold_crossed": false
+      },
+      {
+        "changed_features": {
+          "amount": 11.72,
+          "Amount_Received": 11.72
+        },
+        "original_probability": 0.0009164765483135097,
+        "counterfactual_probability": 0.0009045987253280706,
+        "score_change": -1.187782298543911e-05,
+        "valid": true,
+        "constraint_notes": [
+          "candidate amounts come from training rows only",
+          "matched known categorical context",
+          "amount aliases changed together"
+        ],
+        "amount_change_absolute": 78.06,
+        "threshold_crossed": false
+      },
+      {
+        "changed_features": {
+          "amount": 7.83,
+          "Amount_Received": 7.83
+        },
+        "original_probability": 0.0009164765483135097,
+        "counterfactual_probability": 0.0009040107043295682,
+        "score_change": -1.246584398394146e-05,
+        "valid": true,
+        "constraint_notes": [
+          "candidate amounts come from training rows only",
+          "matched known categorical context",
+          "amount aliases changed together"
+        ],
+        "amount_change_absolute": 81.95,
+        "threshold_crossed": false
+      },
+      {
+        "changed_features": {
+          "amount": 0.08,
+          "Amount_Received": 0.08
+        },
+        "original_probability": 0.0009164765483135097,
+        "counterfactual_probability": 0.0009028406582949995,
+        "score_change": -1.3635890018510186e-05,
+        "valid": true,
+        "constraint_notes": [
+          "candidate amounts come from training rows only",
+          "matched known categorical context",
+          "amount aliases changed together"
+        ],
+        "amount_change_absolute": 89.7,
+        "threshold_crossed": false
+      },
+      {
+        "changed_features": {
+          "amount": 484.57,
+          "Amount_Received": 484.57
+        },
+        "original_probability": 0.0009164765483135097,
+        "counterfactual_probability": 0.0009788067190345956,
+        "score_change": 6.23301707210859e-05,
+        "valid": true,
+        "constraint_notes": [
+          "candidate amounts come from training rows only",
+          "matched known categorical context",
+          "amount aliases changed together"
+        ],
+        "amount_change_absolute": 394.78999999999996,
+        "threshold_crossed": false
+      },
+      {
+        "changed_features": {
+          "amount": 1748.8519999999994,
+          "Amount_Received": 1748.8519999999994
+        },
+        "original_probability": 0.0009164765483135097,
+        "counterfactual_probability": 0.0012102032200276944,
+        "score_change": 0.0002937266717141847,
+        "valid": true,
+        "constraint_notes": [
+          "candidate amounts come from training rows only",
+          "matched known categorical context",
+          "amount aliases changed together"
+        ],
+        "amount_change_absolute": 1659.0719999999994,
+        "threshold_crossed": false
+      },
+      {
+        "changed_features": {
+          "amount": 4115.527999999995,
+          "Amount_Received": 4115.527999999995
+        },
+        "original_probability": 0.0009164765483135097,
+        "counterfactual_probability": 0.0017890615003379059,
+        "score_change": 0.0008725849520243962,
+        "valid": true,
+        "constraint_notes": [
+          "candidate amounts come from training rows only",
+          "matched known categorical context",
+          "amount aliases changed together"
+        ],
+        "amount_change_absolute": 4025.7479999999946,
+        "threshold_crossed": false
+      },
+      {
+        "changed_features": {
+          "amount": 9255068.58,
+          "Amount_Received": 9255068.58
+        },
+        "original_probability": 0.0009164765483135097,
+        "counterfactual_probability": 9.999999999999992e-13,
+        "score_change": -0.0009164765473135097,
+        "valid": true,
+        "constraint_notes": [
+          "candidate amounts come from training rows only",
+          "matched known categorical context",
+          "amount aliases changed together"
+        ],
+        "amount_change_absolute": 9254978.8,
+        "threshold_crossed": false
+      }
+    ],
+    "interpretation": "Model sensitivity only; not advice to evade controls or evidence of real-world intent.",
+    "limitations": [
+      "only amount fields were varied",
+      "account memory and event history were held fixed",
+      "training-supported values do not guarantee real-world plausibility"
+    ]
+  },
+  "cache_key": "07d1060970c3ee6fac21a19b7cddb34731e5ef7aada5f976cf4d65a9a8ad934a",
+  "cache_key_inputs": {
+    "schema": "aml-investigator-replay-v1",
+    "bank": "JPMorgan_Chase",
+    "transaction_id": "66943",
+    "replay_id": "2257cb2acbc241b6b3f745a58be29ed7",
+    "seed": "42/52/62",
+    "checkpoint_sha256": "1fa493177c5c7998256f77b6ead3570d42549f4543ab2608d9030331ad0fcff0",
+    "model_descriptor_sha256": "a368c59d30c6a6143fc2a3207538185fda01a0584be6b7a7406795d292cb3355",
+    "model_count": 3,
+    "privacy_mode": "none",
+    "preprocessing_sha256": "ae6fabba8641da6f835b6ea9eb946f6ec9dc2713f50e3bf82446740b0f07dd35",
+    "reference_prediction_sha256": "7d29a851a32a7ca313bbb45b4fdf9c588c50bf14ef8706d32792b9703d10168e",
+    "dataset_fingerprint": "6fd8bcb2879a4faa306c86b8dfd36361267df1a0c5290b47b3af257f52d1824d",
+    "threshold": 0.018216599960190167,
+    "expected_score": 0.0009164763784307676,
+    "background_size": 32,
+    "history_batches": 8,
+    "max_history_tests": 8,
+    "implementation_sha256": {
+      "streaming/app/investigator.py": "7f12d8a157c244e2a6ca6f7aedb0be6eb4498e9ee89deaab57f7e290dc822be5",
+      "streaming/app/explanations.py": "5d347928b8a55ba5a46415660225c6ef3f514dc8e7f96e1534f3649f5bb3366d",
+      "xai/src/grouped_features.py": "9c3d43476355b8e810ab66051d15f9ddec136088815fc335b27e7898c5a3611c",
+      "xai/src/ensemble_explainer.py": "4c5ac1dab12e8e36c22a634a658820a21eafeefe1ce2c16e3a261122be2a67e7",
+      "xai/src/transaction_story.py": "4fa35cc28c31e1c8463c17bb4a1aad8e1672eaab9d1d066d82cb4b15a2ab9253",
+      "xai/src/counterfactuals.py": "f8bdb7d6fbec0454149ddb221caa3bd317eff88b31b88c867af34914f1bfc0f9"
+    }
+  },
+  "verification": {
+    "existing_evaluation_probability": 0.0009164763784307676,
+    "direct_model_probability": 0.0009164765483135098,
+    "xai_probability": 0.0009164765483135097,
+    "tolerance": 1e-06,
+    "passed": true,
+    "explained_checkpoint_sha256": "1fa493177c5c7998256f77b6ead3570d42549f4543ab2608d9030331ad0fcff0",
+    "absolute_errors": {
+      "saved_vs_direct": 1.6988274220523791e-10,
+      "saved_vs_target": 1.698827420968177e-10
+    },
+    "saved_threshold_used": true,
+    "model_count": 3
+  },
+  "replay_provenance": {
+    "replay_id": "2257cb2acbc241b6b3f745a58be29ed7",
+    "dataset_fingerprint": "6fd8bcb2879a4faa306c86b8dfd36361267df1a0c5290b47b3af257f52d1824d",
+    "saved_rows_sha256": "7d29a851a32a7ca313bbb45b4fdf9c588c50bf14ef8706d32792b9703d10168e",
+    "member_probabilities": [
+      0.0009983092060025526,
+      0.001688177300978491,
+      6.294313795948543e-05
+    ],
+    "batch_size": 1024,
+    "target_index": 5885,
+    "completed_validation_rows": 5120
+  },
+  "limitations": [
+    "Model scores are uncalibrated; explanations do not prove fraud or transaction purpose.",
+    "Local transaction explanations and histories do not inherit a model DP guarantee.",
+    "Grouped attribution holds pre-batch account memory fixed; replay suppresses bounded historical updates only."
+  ],
+  "transaction_story": {
+    "schema_version": 2,
+    "selected_transfer": {
+      "transaction_id": "66943",
+      "source": 732,
+      "target": 730,
+      "timestamp": "2025-08-02 02:39:07.400",
+      "amount": 89.78,
+      "currency": "USD",
+      "payment_method": "ACH",
+      "source_alias": "A",
+      "target_alias": "B",
+      "source_account_id": "268523948",
+      "target_account_id": "268523945",
+      "kind": "selected"
+    },
+    "accounts": [
+      {
+        "alias": "A",
+        "node_id": 732,
+        "account_id": "268523948",
+        "role": "sender"
+      },
+      {
+        "alias": "B",
+        "node_id": 730,
+        "account_id": "268523945",
+        "role": "receiver"
+      },
+      {
+        "alias": "C",
+        "node_id": 603,
+        "account_id": "268436060",
+        "role": "connected account"
+      },
+      {
+        "alias": "D",
+        "node_id": 21738,
+        "account_id": "3489661249",
+        "role": "connected account"
+      },
+      {
+        "alias": "E",
+        "node_id": 12644,
+        "account_id": "939524681",
+        "role": "connected account"
+      },
+      {
+        "alias": "F",
+        "node_id": 24970,
+        "account_id": "268562117",
+        "role": "connected account"
+      },
+      {
+        "alias": "G",
+        "node_id": 25609,
+        "account_id": "2415919728",
+        "role": "connected account"
+      }
+    ],
+    "transfers": [
+      {
+        "transaction_id": "66911",
+        "source": 730,
+        "target": 603,
+        "timestamp": "2025-07-09 09:42:24.700000",
+        "amount": 20.0,
+        "currency": "USD",
+        "payment_method": "Debit Non-Prepaid",
+        "kind": "earlier",
+        "ensemble_effect": null,
+        "source_alias": "B",
+        "target_alias": "C",
+        "source_account_id": "268523945",
+        "target_account_id": "268436060"
+      },
+      {
+        "transaction_id": "66929",
+        "source": 730,
+        "target": 21738,
+        "timestamp": "2025-07-22 16:02:13",
+        "amount": 33.28,
+        "currency": "USD",
+        "payment_method": "Debit Non-Prepaid",
+        "kind": "earlier",
+        "ensemble_effect": null,
+        "source_alias": "B",
+        "target_alias": "D",
+        "source_account_id": "268523945",
+        "target_account_id": "3489661249"
+      },
+      {
+        "transaction_id": "66930",
+        "source": 730,
+        "target": 21738,
+        "timestamp": "2025-07-24 05:46:51.800000",
+        "amount": 41.51,
+        "currency": "USD",
+        "payment_method": "Debit Non-Prepaid",
+        "kind": "earlier",
+        "ensemble_effect": null,
+        "source_alias": "B",
+        "target_alias": "D",
+        "source_account_id": "268523945",
+        "target_account_id": "3489661249"
+      },
+      {
+        "transaction_id": "66936",
+        "source": 603,
+        "target": 732,
+        "timestamp": "2025-07-31 02:30:53.600000",
+        "amount": 0.11,
+        "currency": "USD",
+        "payment_method": "Interest",
+        "kind": "earlier",
+        "ensemble_effect": null,
+        "source_alias": "C",
+        "target_alias": "A",
+        "source_account_id": "268436060",
+        "target_account_id": "268523948"
+      },
+      {
+        "transaction_id": "66939",
+        "source": 730,
+        "target": 603,
+        "timestamp": "2025-07-31 09:50:52.200000",
+        "amount": 20.0,
+        "currency": "USD",
+        "payment_method": "Debit Non-Prepaid",
+        "kind": "earlier",
+        "ensemble_effect": null,
+        "source_alias": "B",
+        "target_alias": "C",
+        "source_account_id": "268523945",
+        "target_account_id": "268436060"
+      },
+      {
+        "transaction_id": "66941",
+        "source": 730,
+        "target": 12644,
+        "timestamp": "2025-08-01 06:15:41.400000",
+        "amount": 31.32,
+        "currency": "USD",
+        "payment_method": "Debit Non-Prepaid",
+        "kind": "earlier",
+        "ensemble_effect": {
+          "original_model_score": 0.0009164763784307676,
+          "model_score_without_event": 0.0008252300412518739,
+          "score_support": 9.124633717889365e-05,
+          "verified_model_count": 1,
+          "scope": "one historical update suppressed in the selected global model's bounded replay; pre-window account memory retained"
+        },
+        "source_alias": "B",
+        "target_alias": "E",
+        "source_account_id": "268523945",
+        "target_account_id": "939524681"
+      },
+      {
+        "transaction_id": "66942",
+        "source": 730,
+        "target": 24970,
+        "timestamp": "2025-08-01 11:06:20.600000",
+        "amount": 23.16,
+        "currency": "USD",
+        "payment_method": "Debit Non-Prepaid",
+        "kind": "earlier",
+        "ensemble_effect": {
+          "original_model_score": 0.0009164763784307676,
+          "model_score_without_event": 0.0005376226267465306,
+          "score_support": 0.00037885375168423695,
+          "verified_model_count": 1,
+          "scope": "one historical update suppressed in the selected global model's bounded replay; pre-window account memory retained"
+        },
+        "source_alias": "B",
+        "target_alias": "F",
+        "source_account_id": "268523945",
+        "target_account_id": "268562117"
+      },
+      {
+        "transaction_id": "66940",
+        "source": 730,
+        "target": 25609,
+        "timestamp": "2025-08-01 12:42:06.700000",
+        "amount": 761.0,
+        "currency": "USD",
+        "payment_method": "Cheque",
+        "kind": "earlier",
+        "ensemble_effect": {
+          "original_model_score": 0.0009164763784307676,
+          "model_score_without_event": 0.0005146884724246521,
+          "score_support": 0.0004017879060061154,
+          "verified_model_count": 1,
+          "scope": "one historical update suppressed in the selected global model's bounded replay; pre-window account memory retained"
+        },
+        "source_alias": "B",
+        "target_alias": "G",
+        "source_account_id": "268523945",
+        "target_account_id": "2415919728"
+      },
+      {
+        "transaction_id": "66943",
+        "source": 732,
+        "target": 730,
+        "timestamp": "2025-08-02 02:39:07.400",
+        "amount": 89.78,
+        "currency": "USD",
+        "payment_method": "ACH",
+        "source_alias": "A",
+        "target_alias": "B",
+        "source_account_id": "268523948",
+        "target_account_id": "268523945",
+        "kind": "selected"
+      }
+    ],
+    "eligible_earlier_transfers": [
+      {
+        "transaction_id": "66843",
+        "source": 730,
+        "target": 21746,
+        "timestamp": "2025-06-01 09:25:59.700000",
+        "amount": 2204.0,
+        "currency": "USD",
+        "payment_method": "Cheque",
+        "kind": "earlier",
+        "source_account_id": "268523945",
+        "target_account_id": "3489661535"
+      },
+      {
+        "transaction_id": "66845",
+        "source": 730,
+        "target": 21738,
+        "timestamp": "2025-06-02 11:04:01.900000",
+        "amount": 16.67,
+        "currency": "USD",
+        "payment_method": "Debit Non-Prepaid",
+        "kind": "earlier",
+        "source_account_id": "268523945",
+        "target_account_id": "3489661249"
+      },
+      {
+        "transaction_id": "66852",
+        "source": 730,
+        "target": 876,
+        "timestamp": "2025-06-09 12:01:44.400000",
+        "amount": 6.46,
+        "currency": "USD",
+        "payment_method": "Debit Non-Prepaid",
+        "kind": "earlier",
+        "source_account_id": "268523945",
+        "target_account_id": "268562120"
+      },
+      {
+        "transaction_id": "66855",
+        "source": 731,
+        "target": 732,
+        "timestamp": "2025-06-11 02:21:55.400000",
+        "amount": 6.67,
+        "currency": "USD",
+        "payment_method": "ACH",
+        "kind": "earlier",
+        "source_account_id": "268523947",
+        "target_account_id": "268523948"
+      },
+      {
+        "transaction_id": "66857",
+        "source": 730,
+        "target": 732,
+        "timestamp": "2025-06-11 03:28:08.900000",
+        "amount": 177.04,
+        "currency": "USD",
+        "payment_method": "ACH",
+        "kind": "earlier",
+        "source_account_id": "268523945",
+        "target_account_id": "268523948"
+      },
+      {
+        "transaction_id": "66860",
+        "source": 730,
+        "target": 23678,
+        "timestamp": "2025-06-12 19:04:57.900000",
+        "amount": 80.9,
+        "currency": "USD",
+        "payment_method": "Debit Non-Prepaid",
+        "kind": "earlier",
+        "source_account_id": "268523945",
+        "target_account_id": "3758097400"
+      },
+      {
+        "transaction_id": "66863",
+        "source": 730,
+        "target": 603,
+        "timestamp": "2025-06-14 09:40:23.900000",
+        "amount": 20.0,
+        "currency": "USD",
+        "payment_method": "Debit Non-Prepaid",
+        "kind": "earlier",
+        "source_account_id": "268523945",
+        "target_account_id": "268436060"
+      },
+      {
+        "transaction_id": "66866",
+        "source": 730,
+        "target": 878,
+        "timestamp": "2025-06-15 11:22:05.700000",
+        "amount": 11.56,
+        "currency": "USD",
+        "payment_method": "Debit Non-Prepaid",
+        "kind": "earlier",
+        "source_account_id": "268523945",
+        "target_account_id": "268562145"
+      },
+      {
+        "transaction_id": "66870",
+        "source": 730,
+        "target": 17808,
+        "timestamp": "2025-06-16 22:40:16.600000",
+        "amount": 40.56,
+        "currency": "USD",
+        "payment_method": "Debit Non-Prepaid",
+        "kind": "earlier",
+        "source_account_id": "268523945",
+        "target_account_id": "2416007579"
+      },
+      {
+        "transaction_id": "66871",
+        "source": 730,
+        "target": 13112,
+        "timestamp": "2025-06-17 22:21:25.900000",
+        "amount": 53.52,
+        "currency": "USD",
+        "payment_method": "Debit Non-Prepaid",
+        "kind": "earlier",
+        "source_account_id": "268523945",
+        "target_account_id": "1140851232"
+      },
+      {
+        "transaction_id": "66875",
+        "source": 730,
+        "target": 19991,
+        "timestamp": "2025-06-20 19:00:41.200000",
+        "amount": 114.15,
+        "currency": "USD",
+        "payment_method": "Debit Non-Prepaid",
+        "kind": "earlier",
+        "source_account_id": "268523945",
+        "target_account_id": "2751464441"
+      },
+      {
+        "transaction_id": "66876",
+        "source": 730,
+        "target": 13112,
+        "timestamp": "2025-06-20 22:22:53.700000",
+        "amount": 32.71,
+        "currency": "USD",
+        "payment_method": "Debit Non-Prepaid",
+        "kind": "earlier",
+        "source_account_id": "268523945",
+        "target_account_id": "1140851232"
+      },
+      {
+        "transaction_id": "66877",
+        "source": 730,
+        "target": 603,
+        "timestamp": "2025-06-22 09:37:30",
+        "amount": 20.0,
+        "currency": "USD",
+        "payment_method": "Debit Non-Prepaid",
+        "kind": "earlier",
+        "source_account_id": "268523945",
+        "target_account_id": "268436060"
+      },
+      {
+        "transaction_id": "66878",
+        "source": 730,
+        "target": 878,
+        "timestamp": "2025-06-22 11:27:47.700000",
+        "amount": 17.51,
+        "currency": "USD",
+        "payment_method": "Debit Non-Prepaid",
+        "kind": "earlier",
+        "source_account_id": "268523945",
+        "target_account_id": "268562145"
+      },
+      {
+        "transaction_id": "66879",
+        "source": 730,
+        "target": 23550,
+        "timestamp": "2025-06-22 14:56:05.100000",
+        "amount": 34.11,
+        "currency": "USD",
+        "payment_method": "Debit Non-Prepaid",
+        "kind": "earlier",
+        "source_account_id": "268523945",
+        "target_account_id": "3690988298"
+      },
+      {
+        "transaction_id": "66880",
+        "source": 730,
+        "target": 877,
+        "timestamp": "2025-06-24 05:06:24",
+        "amount": 21.09,
+        "currency": "USD",
+        "payment_method": "Debit Non-Prepaid",
+        "kind": "earlier",
+        "source_account_id": "268523945",
+        "target_account_id": "268562124"
+      },
+      {
+        "transaction_id": "66881",
+        "source": 730,
+        "target": 20907,
+        "timestamp": "2025-06-24 06:13:00.700000",
+        "amount": 35.68,
+        "currency": "USD",
+        "payment_method": "Debit Non-Prepaid",
+        "kind": "earlier",
+        "source_account_id": "268523945",
+        "target_account_id": "3154117190"
+      },
+      {
+        "transaction_id": "66882",
+        "source": 730,
+        "target": 12644,
+        "timestamp": "2025-06-25 06:25:27.400000",
+        "amount": 38.36,
+        "currency": "USD",
+        "payment_method": "Debit Non-Prepaid",
+        "kind": "earlier",
+        "source_account_id": "268523945",
+        "target_account_id": "939524681"
+      },
+      {
+        "transaction_id": "66883",
+        "source": 730,
+        "target": 880,
+        "timestamp": "2025-06-25 08:14:19.900000",
+        "amount": 6.52,
+        "currency": "USD",
+        "payment_method": "Debit Non-Prepaid",
+        "kind": "earlier",
+        "source_account_id": "268523945",
+        "target_account_id": "268562198"
+      },
+      {
+        "transaction_id": "66886",
+        "source": 730,
+        "target": 21738,
+        "timestamp": "2025-06-27 10:46:52.600000",
+        "amount": 17.26,
+        "currency": "USD",
+        "payment_method": "Debit Non-Prepaid",
+        "kind": "earlier",
+        "source_account_id": "268523945",
+        "target_account_id": "3489661249"
+      },
+      {
+        "transaction_id": "66887",
+        "source": 730,
+        "target": 614,
+        "timestamp": "2025-06-28 16:15:40.400000",
+        "amount": 1229.66,
+        "currency": "USD",
+        "payment_method": "ACH",
+        "kind": "earlier",
+        "source_account_id": "268523945",
+        "target_account_id": "268436210"
+      },
+      {
+        "transaction_id": "66894",
+        "source": 604,
+        "target": 732,
+        "timestamp": "2025-06-30 01:52:17.500000",
+        "amount": 0.11,
+        "currency": "USD",
+        "payment_method": "Interest",
+        "kind": "earlier",
+        "source_account_id": "268436061",
+        "target_account_id": "268523948"
+      },
+      {
+        "transaction_id": "66898",
+        "source": 730,
+        "target": 16064,
+        "timestamp": "2025-07-01 22:22:16.900000",
+        "amount": 60.07,
+        "currency": "USD",
+        "payment_method": "Debit Non-Prepaid",
+        "kind": "earlier",
+        "source_account_id": "268523945",
+        "target_account_id": "1677722160"
+      },
+      {
+        "transaction_id": "66902",
+        "source": 730,
+        "target": 17348,
+        "timestamp": "2025-07-02 09:42:13.300000",
+        "amount": 20.0,
+        "currency": "USD",
+        "payment_method": "Debit Non-Prepaid",
+        "kind": "earlier",
+        "source_account_id": "268523945",
+        "target_account_id": "2214719264"
+      },
+      {
+        "transaction_id": "66903",
+        "source": 730,
+        "target": 13574,
+        "timestamp": "2025-07-03 09:57:29.300000",
+        "amount": 20.0,
+        "currency": "USD",
+        "payment_method": "Debit Non-Prepaid",
+        "kind": "earlier",
+        "source_account_id": "268523945",
+        "target_account_id": "1342177902"
+      },
+      {
+        "transaction_id": "66904",
+        "source": 730,
+        "target": 317,
+        "timestamp": "2025-07-03 22:22:40.300000",
+        "amount": 40.87,
+        "currency": "USD",
+        "payment_method": "Debit Non-Prepaid",
+        "kind": "earlier",
+        "source_account_id": "268523945",
+        "target_account_id": "134218279"
+      },
+      {
+        "transaction_id": "66907",
+        "source": 730,
+        "target": 169,
+        "timestamp": "2025-07-06 10:36:47.300000",
+        "amount": 80.24,
+        "currency": "USD",
+        "payment_method": "ACH",
+        "kind": "earlier",
+        "source_account_id": "268523945",
+        "target_account_id": "12345210"
+      },
+      {
+        "transaction_id": "66906",
+        "source": 730,
+        "target": 17795,
+        "timestamp": "2025-07-06 10:55:48.900000",
+        "amount": 732.0,
+        "currency": "USD",
+        "payment_method": "Cheque",
+        "kind": "earlier",
+        "source_account_id": "268523945",
+        "target_account_id": "2415919727"
+      },
+      {
+        "transaction_id": "66909",
+        "source": 730,
+        "target": 17793,
+        "timestamp": "2025-07-07 09:46:33.700000",
+        "amount": 20.0,
+        "currency": "USD",
+        "payment_method": "Debit Non-Prepaid",
+        "kind": "earlier",
+        "source_account_id": "268523945",
+        "target_account_id": "2415919722"
+      },
+      {
+        "transaction_id": "66911",
+        "source": 730,
+        "target": 603,
+        "timestamp": "2025-07-09 09:42:24.700000",
+        "amount": 20.0,
+        "currency": "USD",
+        "payment_method": "Debit Non-Prepaid",
+        "kind": "earlier",
+        "source_account_id": "268523945",
+        "target_account_id": "268436060"
+      },
+      {
+        "transaction_id": "66913",
+        "source": 730,
+        "target": 13563,
+        "timestamp": "2025-07-09 11:25:31.200000",
+        "amount": 12.49,
+        "currency": "USD",
+        "payment_method": "Debit Non-Prepaid",
+        "kind": "earlier",
+        "source_account_id": "268523945",
+        "target_account_id": "1342177596"
+      },
+      {
+        "transaction_id": "66914",
+        "source": 730,
+        "target": 20316,
+        "timestamp": "2025-07-10 02:59:25",
+        "amount": 251.95,
+        "currency": "USD",
+        "payment_method": "ACH",
+        "kind": "earlier",
+        "source_account_id": "268523945",
+        "target_account_id": "2885769642"
+      },
+      {
+        "transaction_id": "66915",
+        "source": 730,
+        "target": 13112,
+        "timestamp": "2025-07-10 22:14:59.200000",
+        "amount": 46.66,
+        "currency": "USD",
+        "payment_method": "Debit Non-Prepaid",
+        "kind": "earlier",
+        "source_account_id": "268523945",
+        "target_account_id": "1140851232"
+      },
+      {
+        "transaction_id": "66916",
+        "source": 730,
+        "target": 879,
+        "timestamp": "2025-07-12 11:24:42.800000",
+        "amount": 9.25,
+        "currency": "USD",
+        "payment_method": "Debit Non-Prepaid",
+        "kind": "earlier",
+        "source_account_id": "268523945",
+        "target_account_id": "268562197"
+      },
+      {
+        "transaction_id": "66920",
+        "source": 730,
+        "target": 20319,
+        "timestamp": "2025-07-16 06:03:50.700000",
+        "amount": 34.01,
+        "currency": "USD",
+        "payment_method": "Debit Non-Prepaid",
+        "kind": "earlier",
+        "source_account_id": "268523945",
+        "target_account_id": "2885807822"
+      },
+      {
+        "transaction_id": "66922",
+        "source": 730,
+        "target": 634,
+        "timestamp": "2025-07-18 11:53:06.800000",
+        "amount": 1791.42,
+        "currency": "USD",
+        "payment_method": "Cheque",
+        "kind": "earlier",
+        "source_account_id": "268523945",
+        "target_account_id": "268515208"
+      },
+      {
+        "transaction_id": "66925",
+        "source": 730,
+        "target": 604,
+        "timestamp": "2025-07-19 09:48:20.400000",
+        "amount": 20.0,
+        "currency": "USD",
+        "payment_method": "Debit Non-Prepaid",
+        "kind": "earlier",
+        "source_account_id": "268523945",
+        "target_account_id": "268436061"
+      },
+      {
+        "transaction_id": "66926",
+        "source": 730,
+        "target": 21742,
+        "timestamp": "2025-07-19 22:18:52",
+        "amount": 25.7,
+        "currency": "USD",
+        "payment_method": "Debit Non-Prepaid",
+        "kind": "earlier",
+        "source_account_id": "268523945",
+        "target_account_id": "3489661487"
+      },
+      {
+        "transaction_id": "66928",
+        "source": 730,
+        "target": 20320,
+        "timestamp": "2025-07-22 11:18:44",
+        "amount": 18.31,
+        "currency": "USD",
+        "payment_method": "Debit Non-Prepaid",
+        "kind": "earlier",
+        "source_account_id": "268523945",
+        "target_account_id": "2885807857"
+      },
+      {
+        "transaction_id": "66929",
+        "source": 730,
+        "target": 21738,
+        "timestamp": "2025-07-22 16:02:13",
+        "amount": 33.28,
+        "currency": "USD",
+        "payment_method": "Debit Non-Prepaid",
+        "kind": "earlier",
+        "source_account_id": "268523945",
+        "target_account_id": "3489661249"
+      },
+      {
+        "transaction_id": "66930",
+        "source": 730,
+        "target": 21738,
+        "timestamp": "2025-07-24 05:46:51.800000",
+        "amount": 41.51,
+        "currency": "USD",
+        "payment_method": "Debit Non-Prepaid",
+        "kind": "earlier",
+        "source_account_id": "268523945",
+        "target_account_id": "3489661249"
+      },
+      {
+        "transaction_id": "66936",
+        "source": 603,
+        "target": 732,
+        "timestamp": "2025-07-31 02:30:53.600000",
+        "amount": 0.11,
+        "currency": "USD",
+        "payment_method": "Interest",
+        "kind": "earlier",
+        "source_account_id": "268436060",
+        "target_account_id": "268523948"
+      },
+      {
+        "transaction_id": "66939",
+        "source": 730,
+        "target": 603,
+        "timestamp": "2025-07-31 09:50:52.200000",
+        "amount": 20.0,
+        "currency": "USD",
+        "payment_method": "Debit Non-Prepaid",
+        "kind": "earlier",
+        "source_account_id": "268523945",
+        "target_account_id": "268436060"
+      },
+      {
+        "transaction_id": "66941",
+        "source": 730,
+        "target": 12644,
+        "timestamp": "2025-08-01 06:15:41.400000",
+        "amount": 31.32,
+        "currency": "USD",
+        "payment_method": "Debit Non-Prepaid",
+        "kind": "earlier",
+        "source_account_id": "268523945",
+        "target_account_id": "939524681"
+      },
+      {
+        "transaction_id": "66942",
+        "source": 730,
+        "target": 24970,
+        "timestamp": "2025-08-01 11:06:20.600000",
+        "amount": 23.16,
+        "currency": "USD",
+        "payment_method": "Debit Non-Prepaid",
+        "kind": "earlier",
+        "source_account_id": "268523945",
+        "target_account_id": "268562117"
+      },
+      {
+        "transaction_id": "66940",
+        "source": 730,
+        "target": 25609,
+        "timestamp": "2025-08-01 12:42:06.700000",
+        "amount": 761.0,
+        "currency": "USD",
+        "payment_method": "Cheque",
+        "kind": "earlier",
+        "source_account_id": "268523945",
+        "target_account_id": "2415919728"
+      }
+    ],
+    "observation": "Earlier transfers and the selected transfer form the time-ordered account path 268523945 \u2192 268436060 \u2192 268523948 \u2192 268523945. Transaction IDs in that order: 66911 \u2192 66936 \u2192 66943.",
+    "pattern": "observed_return_path",
+    "known_labels_explain_paths": false,
+    "path_is_not_a_fraud_classification": true,
+    "earlier_related_transfers_considered": 46,
+    "model_link_effects": [
+      {
+        "transaction_id": "66940",
+        "original_model_score": 0.0009164763784307676,
+        "model_score_without_event": 0.0005146884724246521,
+        "score_support": 0.0004017879060061154,
+        "verified_model_count": 3,
+        "scope": "one earlier update suppressed separately in every selected model member; pre-window account memory retained"
+      },
+      {
+        "transaction_id": "66942",
+        "original_model_score": 0.0009164763784307676,
+        "model_score_without_event": 0.0005376226267465306,
+        "score_support": 0.00037885375168423695,
+        "verified_model_count": 3,
+        "scope": "one earlier update suppressed separately in every selected model member; pre-window account memory retained"
+      },
+      {
+        "transaction_id": "66941",
+        "original_model_score": 0.0009164763784307676,
+        "model_score_without_event": 0.0008252300412518739,
+        "score_support": 9.124633717889365e-05,
+        "verified_model_count": 3,
+        "scope": "one earlier update suppressed separately in every selected model member; pre-window account memory retained"
+      }
+    ],
+    "strongest_feature": {
+      "label": "payment method",
+      "value": "ACH",
+      "contribution": 1.829263888985306
+    },
+    "history_scope": "training history and completed validation batches before the selected prediction; current-batch and later transactions excluded; up to 256 recent endpoint-related transfers considered",
+    "display_limit": 9
+  },
+  "evaluation_checks": {
+    "faithfulness": {
+      "groups": [
+        {
+          "group": "payment_method",
+          "shap_logit": 1.829263888985306,
+          "reference_ablation_logit_drop": 1.827805536920275,
+          "direction_agrees": true
+        },
+        {
+          "group": "transfer_terms",
+          "shap_logit": -0.06606431174660532,
+          "reference_ablation_logit_drop": -0.06752266381163619,
+          "direction_agrees": true
+        }
+      ]
+    },
+    "stability": null,
+    "temporal_replay": {
+      "baseline_error": 0.0,
+      "tested_events": 3,
+      "member_count": 3,
+      "scope": "up to eight most recent eligible endpoint transfers within the last eight completed model batches"
+    },
+    "coverage": {
+      "displayed_history_edges": 8,
+      "verified_displayed_edges": 3
+    }
+  },
+  "xai_provenance": {
+    "family": "adaptive_probability_ensemble",
+    "seed": "42/52/62",
+    "model_count": 3,
+    "checkpoint_sha256": "1fa493177c5c7998256f77b6ead3570d42549f4543ab2608d9030331ad0fcff0",
+    "checkpoint_members": [
+      {
+        "seed": 42,
+        "checkpoint": "/Users/pj/Desktop/college/capstone/Capstone/artifacts/research_adaptive_fcl/warm_start/federated/context_harmonized/seed_42/global_model.pt",
+        "sha256": "d650af6959d1da46888f30fb79bbfd888a6ec20743d14d447ea078dc351536f5"
+      },
+      {
+        "seed": 52,
+        "checkpoint": "/Users/pj/Desktop/college/capstone/Capstone/artifacts/research_adaptive_fcl/warm_start/federated/context_harmonized/seed_52/global_model.pt",
+        "sha256": "98b6c782a27013e4b1917669b2a5ae48d3a7e44ce6a9aa0149aef446473ab0e2"
+      },
+      {
+        "seed": 62,
+        "checkpoint": "/Users/pj/Desktop/college/capstone/Capstone/artifacts/research_adaptive_fcl/warm_start/federated/context_harmonized/seed_62/global_model.pt",
+        "sha256": "4cd0854f6740f99a9f9ef7f1ba3360c06b5178846394feb73033da718ac715fe"
+      }
+    ],
+    "preprocessing_sha256": "ae6fabba8641da6f835b6ea9eb946f6ec9dc2713f50e3bf82446740b0f07dd35",
+    "privacy_mode": "none",
+    "model_role": "reference",
+    "best_round": null,
+    "selected_model": {
+      "bank": "JPMorgan_Chase",
+      "version": "Final ensemble \u00b7 42 / 52 / 62",
+      "model_kind": "adaptive_probability_ensemble",
+      "members": [
+        {
+          "seed": 42,
+          "checkpoint": "/Users/pj/Desktop/college/capstone/Capstone/artifacts/research_adaptive_fcl/warm_start/federated/context_harmonized/seed_42/global_model.pt",
+          "sha256": "d650af6959d1da46888f30fb79bbfd888a6ec20743d14d447ea078dc351536f5"
+        },
+        {
+          "seed": 52,
+          "checkpoint": "/Users/pj/Desktop/college/capstone/Capstone/artifacts/research_adaptive_fcl/warm_start/federated/context_harmonized/seed_52/global_model.pt",
+          "sha256": "98b6c782a27013e4b1917669b2a5ae48d3a7e44ce6a9aa0149aef446473ab0e2"
+        },
+        {
+          "seed": 62,
+          "checkpoint": "/Users/pj/Desktop/college/capstone/Capstone/artifacts/research_adaptive_fcl/warm_start/federated/context_harmonized/seed_62/global_model.pt",
+          "sha256": "4cd0854f6740f99a9f9ef7f1ba3360c06b5178846394feb73033da718ac715fe"
+        }
+      ],
+      "sha256": "1fa493177c5c7998256f77b6ead3570d42549f4543ab2608d9030331ad0fcff0",
+      "reference": true,
+      "checkpoint": null,
+      "validation": {
+        "pr_auc": 0.8300817557164852,
+        "roc_auc": 0.9998623412076748,
+        "precision": 0.12403100775193798,
+        "recall": 1.0,
+        "f1": 0.2206896551724138
+      },
+      "threshold": 0.018216599960190167,
+      "privacy": {
+        "differential_privacy": false,
+        "accounting": null
+      }
+    },
+    "checkpoint_manifest": {},
+    "evaluation_split": "validation",
+    "test_loaded": false,
+    "source_ref": "operational selected replay",
+    "model_source_sha256": "77ec113dd6b16ed0bf6956d1ce9fa7d9da5b300b672f085c76830b203ea2e2eb",
+    "banks": {
+      "JPMorgan_Chase": {
+        "threshold": 0.018216599960190167
+      }
+    },
+    "threshold_policy": "saved selected-model cutoff captured in this completed replay; no threshold fitting",
+    "reference_prediction_sha256": {
+      "JPMorgan_Chase": "7d29a851a32a7ca313bbb45b4fdf9c588c50bf14ef8706d32792b9703d10168e"
+    },
+    "implementation_sha256": {
+      "streaming/app/investigator.py": "7f12d8a157c244e2a6ca6f7aedb0be6eb4498e9ee89deaab57f7e290dc822be5",
+      "streaming/app/explanations.py": "5d347928b8a55ba5a46415660225c6ef3f514dc8e7f96e1534f3649f5bb3366d",
+      "xai/src/grouped_features.py": "9c3d43476355b8e810ab66051d15f9ddec136088815fc335b27e7898c5a3611c",
+      "xai/src/ensemble_explainer.py": "4c5ac1dab12e8e36c22a634a658820a21eafeefe1ce2c16e3a261122be2a67e7",
+      "xai/src/transaction_story.py": "4fa35cc28c31e1c8463c17bb4a1aad8e1672eaab9d1d066d82cb4b15a2ab9253",
+      "xai/src/counterfactuals.py": "f8bdb7d6fbec0454149ddb221caa3bd317eff88b31b88c867af34914f1bfc0f9"
+    }
+  }
+}

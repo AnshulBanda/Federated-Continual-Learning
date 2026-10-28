@@ -1,0 +1,52 @@
+{
+  "desktop": {
+    "clientWidth": 1665,
+    "scrollWidth": 1665,
+    "graphWidth": 743.921875,
+    "explanationWidth": 551.078125,
+    "h1": "FCL for Anti-Money Laundering",
+    "deepOpenInitially": false
+  },
+  "narrow": {
+    "clientWidth": 885,
+    "deepOpen": false,
+    "hero": [
+      {
+        "box": {
+          "width": 641,
+          "x": 219,
+          "y": 1137.4375
+        },
+        "name": "hero-network"
+      },
+      {
+        "box": {
+          "width": 641,
+          "x": 219,
+          "y": 492.78125
+        },
+        "name": "hero-explanation"
+      }
+    ],
+    "scrollWidth": 885,
+    "width": 900
+  },
+  "phone": {
+    "clientWidth": 375,
+    "hero": [
+      {
+        "name": "hero-network",
+        "width": 341,
+        "y": 1450
+      },
+      {
+        "name": "hero-explanation",
+        "width": 341,
+        "y": 722.15625
+      }
+    ],
+    "scrollWidth": 375,
+    "width": 390
+  },
+  "consoleErrors": []
+}

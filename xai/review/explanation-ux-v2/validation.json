@@ -1,0 +1,43 @@
+{
+  "review_date": "2026-10-28",
+  "branch": "xai/explanation-ux-v2",
+  "starting_main_sha": "6db498730f36f112ea89d183b4bec6b1178f80f7",
+  "main_sha_after_work": "6db498730f36f112ea89d183b4bec6b1178f80f7",
+  "origin_main_sha_after_work": "6db498730f36f112ea89d183b4bec6b1178f80f7",
+  "incorporated_upstream_commit": "44c6b23eacc191e054aea1e14306027c069a75b1",
+  "cherry_pick_commit": "9860367a31dff898a564be8784396ca16a423f4c",
+  "python_tests": {
+    "command": "python -m unittest discover -s xai/tests -v",
+    "passed": 35,
+    "failed": 0
+  },
+  "frontend_tests": {
+    "command": "node --test xai/tests/test_dashboard_frontend.cjs",
+    "passed": 17,
+    "failed": 0
+  },
+  "runtime": {
+    "python": "3.12.16",
+    "torch": "2.14.1",
+    "numpy": "2.5.4",
+    "pandas": "3.1.0"
+  },
+  "parity_guard": 1e-06,
+  "evaluation_cases": 16,
+  "max_target_score_error": 7.81343665323675e-08,
+  "independent_history_interventions": 49,
+  "max_independent_replay_error": 1.1102230246251565e-16,
+  "feature_direction_agreement": {
+    "agree": 31,
+    "total": 32
+  },
+  "stable_largest_group_cases": 15,
+  "all_directions_stable_cases": 12,
+  "git_diff_check_passed": true,
+  "canonical_pipeline_changed": false,
+  "main_merged_or_pushed": false,
+  "reference_artifacts_changed_in_commit": false,
+  "unsupported_fraud_claims_generated": false,
+  "technical_evidence_preserved": true,
+  "dp_support_fabricated": false
+}

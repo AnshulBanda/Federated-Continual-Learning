@@ -1,0 +1,114 @@
+[
+  {
+    "bank": "Wells_Fargo",
+    "transaction_id": "2954161",
+    "case": "false-positive-no-history-desktop",
+    "checks": {
+      "height": 842,
+      "networkOpen": false,
+      "overflow": false,
+      "rawOpen": false,
+      "simple": "MODEL DECISION\n\nFlagged for review\n\nScore 0.2051 — 0.0183 above the review cutoff of 0.1869\n\nNon-private reference model\nMODEL SCORE\n0.2051\nBANK REVIEW CUTOFF\n0.1869\nMARGIN ABOVE CUTOFF\n+0.0183\nWhy was this flagged?\nMAIN REASON\n\nThe payment method was the strongest measured factor pushing the model score higher.\n\nEarlier activity\nNo earlier eligible transfers involving these accounts were available to the model before this prediction.\n\nAccount activity\nNo fan-in, fan-out or cycle in the displayed transfers.\n\nTop factors\n↑ Payment method\nStrong upward effect\n\nObserved: ACH\n\n↓ Amount and currencies\nSmall downward effect\n\nObserved: Sent 522.7 USD; received 522.7 USD\n\nStrength and bar lengths are relative to this explanation’s largest measured feature effect. They are visual comparisons, not probabilities.\n\nEarlier activity\n\nNo earlier eligible transfers involving these accounts were available to the model before this prediction.\n\nAccount activity patterns\n\nNo fan-in, fan-out or chronological cycle found in the displayed transfers.\n\nThese describe observed account relationships. They do not prove fraud and do not automatically mean they affected the model score.\n\nWhat would have changed the result?\n\nIn the tested model-sensitivity check, changing the transfer amount to approximately 3,134,976.03 USD moved the score below the review cutoff.\n\nCurrent amount / score / decision\n522.70 USD\n\n0.2051 · Flagged\n\n→\nTested alternative / score / decision\n3,134,976.03 USD\n\n4.248e-18 · Not flagged\n\nThis is a model-sensitivity test, not a recommendation for transaction behavior.\n\nDataset label: Not fraud · False positive. Dataset labels are evaluation evidence, separate from the model decision.\n\nThe score is not a calibrated probability of fraud. This explanation describes measured model behavior.",
+      "technicalOpen": false,
+      "width": 1230
+    }
+  },
+  {
+    "bank": "JPMorgan_Chase",
+    "transaction_id": "2580817",
+    "case": "true-positive-untested-fan-out",
+    "checks": {
+      "height": 842,
+      "networkOpen": false,
+      "overflow": false,
+      "rawOpen": false,
+      "simple": "MODEL DECISION\n\nFlagged for review\n\nScore 0.9308 — 0.9130 above the review cutoff of 0.0178\n\nNon-private reference model\nMODEL SCORE\n0.9308\nBANK REVIEW CUTOFF\n0.0178\nMARGIN ABOVE CUTOFF\n+0.9130\nWhy was this flagged?\nMAIN REASON\n\nThe payment method was the strongest measured factor pushing the model score higher.\n\nEarlier activity\nEarlier transfers were observed, but their effect on this prediction was not measured.\n\nAccount activity\nFan-out observed in the displayed transfers. Score effects of these patterns were not measured.\n\nTop factors\n↑ Payment method\nStrong upward effect\n\nObserved: ACH\n\n↓ Amount and currencies\nSmall downward effect\n\nObserved: Sent 0.47 USD; received 0.47 USD\n\nStrength and bar lengths are relative to this explanation’s largest measured feature effect. They are visual comparisons, not probabilities.\n\nEarlier activity\n\nEarlier transfers were observed, but their effect on this prediction was not measured.\n\nAccount activity patterns\n\nFan-out\nThe sending account transferred to 4 different counterparties in the displayed history, including this transaction.\n\nThese describe observed account relationships. They do not prove fraud and do not automatically mean they affected the model score.\n\nWhat would have changed the result?\n\nIn the tested model-sensitivity check, changing the transfer amount to approximately 9,255,068.58 USD moved the score below the review cutoff.\n\nCurrent amount / score / decision\n0.47 USD\n\n0.9308 · Flagged\n\n→\nTested alternative / score / decision\n9,255,068.58 USD\n\n4.248e-18 · Not flagged\n\nThis is a model-sensitivity test, not a recommendation for transaction behavior.\n\nDataset label: Fraud · True positive. Dataset labels are evaluation evidence, separate from the model decision.\n\nThe score is not a calibrated probability of fraud. This explanation describes measured model behavior.",
+      "technicalOpen": false,
+      "width": 1230
+    }
+  },
+  {
+    "bank": "JPMorgan_Chase",
+    "transaction_id": "3008974",
+    "case": "true-positive-fan-in",
+    "checks": {
+      "height": 842,
+      "networkOpen": false,
+      "overflow": false,
+      "rawOpen": false,
+      "simple": "MODEL DECISION\n\nFlagged for review\n\nScore 0.5321 — 0.5143 above the review cutoff of 0.0178\n\nNon-private reference model\nMODEL SCORE\n0.5321\nBANK REVIEW CUTOFF\n0.0178\nMARGIN ABOVE CUTOFF\n+0.5143\nWhy was this flagged?\nMAIN REASON\n\nThe payment method was the strongest measured factor pushing the model score higher.\n\nEarlier activity\nEarlier transfers were observed, but their effect on this prediction was not measured.\n\nAccount activity\nFan-in observed in the displayed transfers. Score effects of these patterns were not measured.\n\nTop factors\n↑ Payment method\nStrong upward effect\n\nObserved: ACH\n\n↑ Amount and currencies\nStrong upward effect\n\nObserved: Sent 86,122.71 USD; received 86,122.71 USD\n\nStrength and bar lengths are relative to this explanation’s largest measured feature effect. They are visual comparisons, not probabilities.\n\nEarlier activity\n\nEarlier transfers were observed, but their effect on this prediction was not measured.\n\nAccount activity patterns\n\nFan-in\nThe receiving account received transfers from 5 different counterparties in the displayed history, including this transaction.\n\nThese describe observed account relationships. They do not prove fraud and do not automatically mean they affected the model score.\n\nWhat would have changed the result?\n\nIn the tested model-sensitivity check, changing the transfer amount to approximately 9,255,068.58 USD moved the score below the review cutoff.\n\nCurrent amount / score / decision\n86,122.71 USD\n\n0.5321 · Flagged\n\n→\nTested alternative / score / decision\n9,255,068.58 USD\n\n4.248e-18 · Not flagged\n\nThis is a model-sensitivity test, not a recommendation for transaction behavior.\n\nDataset label: Fraud · True positive. Dataset labels are evaluation evidence, separate from the model decision.\n\nThe score is not a calibrated probability of fraud. This explanation describes measured model behavior.",
+      "technicalOpen": false,
+      "width": 1230
+    }
+  },
+  {
+    "bank": "Wells_Fargo",
+    "transaction_id": "2965480",
+    "case": "true-negative",
+    "checks": {
+      "height": 842,
+      "networkOpen": false,
+      "overflow": false,
+      "rawOpen": false,
+      "simple": "MODEL DECISION\n\nNot flagged\n\nScore 2.116e-9 — 0.1869 below the review cutoff of 0.1869\n\nNon-private reference model\nMODEL SCORE\n2.116e-9\nBANK REVIEW CUTOFF\n0.1869\nMARGIN BELOW CUTOFF\n−0.1869\nWhy was this not flagged?\nMAIN REASON\n\nThe amount and currency combination was the strongest measured factor pushing the model score lower.\n\nEarlier activity\nTX 2865351: this earlier transfer helped push the current score higher.\n\nAccount activity\nFan-out observed in the displayed transfers. Score effects of these patterns were not measured.\n\nTop factors\n↑ Payment method\nStrong upward effect\n\nObserved: ACH\n\n↓ Amount and currencies\nSmall downward effect\n\nObserved: Sent 21.7 USD; received 21.7 USD\n\nStrength and bar lengths are relative to this explanation’s largest measured feature effect. They are visual comparisons, not probabilities.\n\nEarlier activity\n\nTX 2865351: this earlier transfer helped push the current score higher.\n\nWith this history\n2.116e-9\n→\nWithout this history update\n2.094e-9\n\n10 earlier transfers have a verified score test. The strongest effect is shown.\n\nSee all tested earlier transfers\nAccount activity patterns\n\nFan-out\nThe sending account transferred to 7 different counterparties in the displayed history, including this transaction.\n\nThese describe observed account relationships. They do not prove fraud and do not automatically mean they affected the model score.\n\nWhat would have changed the result?\n\nNone of the tested amount changes moved the model across the review cutoff.\n\nThis is a model-sensitivity test, not a recommendation for transaction behavior.\n\nDataset label: Not fraud · True negative. Dataset labels are evaluation evidence, separate from the model decision.\n\nThe score is not a calibrated probability of fraud. This explanation describes measured model behavior.",
+      "technicalOpen": false,
+      "width": 1230
+    }
+  },
+  {
+    "bank": "Wells_Fargo",
+    "transaction_id": "2794670",
+    "case": "missed-fraud",
+    "checks": {
+      "height": 842,
+      "networkOpen": false,
+      "overflow": false,
+      "rawOpen": false,
+      "simple": "MODEL DECISION\n\nNot flagged\n\nScore 0.0340 — 0.1529 below the review cutoff of 0.1869\n\nNon-private reference model\nMODEL SCORE\n0.0340\nBANK REVIEW CUTOFF\n0.1869\nMARGIN BELOW CUTOFF\n−0.1529\nWhy was this not flagged?\nMAIN REASON\n\nThe amount and currency combination was the strongest measured factor pushing the model score lower.\n\nEarlier activity\nNo earlier eligible transfers involving these accounts were available to the model before this prediction.\n\nAccount activity\nNo fan-in, fan-out or cycle in the displayed transfers.\n\nTop factors\n↑ Payment method\nStrong upward effect\n\nObserved: ACH\n\n↓ Amount and currencies\nSmall downward effect\n\nObserved: Sent 664.94 USD; received 664.94 USD\n\nStrength and bar lengths are relative to this explanation’s largest measured feature effect. They are visual comparisons, not probabilities.\n\nEarlier activity\n\nNo earlier eligible transfers involving these accounts were available to the model before this prediction.\n\nAccount activity patterns\n\nNo fan-in, fan-out or chronological cycle found in the displayed transfers.\n\nThese describe observed account relationships. They do not prove fraud and do not automatically mean they affected the model score.\n\nWhat would have changed the result?\n\nNone of the tested amount changes moved the model across the review cutoff.\n\nThis is a model-sensitivity test, not a recommendation for transaction behavior.\n\nDataset label: Fraud · Missed fraud (false negative). Dataset labels are evaluation evidence, separate from the model decision.\n\nThe score is not a calibrated probability of fraud. This explanation describes measured model behavior.",
+      "technicalOpen": false,
+      "width": 1230
+    }
+  },
+  {
+    "bank": "Key_Bank",
+    "transaction_id": "2974317",
+    "case": "verified-positive-history",
+    "checks": {
+      "height": 842,
+      "networkOpen": false,
+      "overflow": false,
+      "rawOpen": false,
+      "simple": "MODEL DECISION\n\nFlagged for review\n\nScore 0.4101 — 0.0342 above the review cutoff of 0.3759\n\nNon-private reference model\nMODEL SCORE\n0.4101\nBANK REVIEW CUTOFF\n0.3759\nMARGIN ABOVE CUTOFF\n+0.0342\nWhy was this flagged?\nMAIN REASON\n\nThe payment method was the strongest measured factor pushing the model score higher.\n\nEarlier activity\nTX 2627867: this earlier transfer helped push the current score higher.\n\nAccount activity\nNo fan-in, fan-out or cycle in the displayed transfers.\n\nTop factors\n↑ Payment method\nStrong upward effect\n\nObserved: ACH\n\n↑ Amount and currencies\nStrong upward effect\n\nObserved: Sent 66,528.69 USD; received 66,528.69 USD\n\nStrength and bar lengths are relative to this explanation’s largest measured feature effect. They are visual comparisons, not probabilities.\n\nEarlier activity\n\nTX 2627867: this earlier transfer helped push the current score higher.\n\nWith this history\n0.4101\n→\nWithout this history update\n0.2704\n\n1 earlier transfer has a verified score test. The strongest effect is shown.\n\nSee all tested earlier transfers\nAccount activity patterns\n\nNo fan-in, fan-out or chronological cycle found in the displayed transfers.\n\nThese describe observed account relationships. They do not prove fraud and do not automatically mean they affected the model score.\n\nWhat would have changed the result?\n\nIn the tested model-sensitivity check, changing the transfer amount to approximately 5,165.77 USD moved the score below the review cutoff.\n\nCurrent amount / score / decision\n66,528.69 USD\n\n0.4101 · Flagged\n\n→\nTested alternative / score / decision\n5,165.77 USD\n\n0.1561 · Not flagged\n\nThis is a model-sensitivity test, not a recommendation for transaction behavior.\n\nDataset label: Not fraud · False positive. Dataset labels are evaluation evidence, separate from the model decision.\n\nThe score is not a calibrated probability of fraud. This explanation describes measured model behavior.",
+      "technicalOpen": false,
+      "width": 1230
+    }
+  },
+  {
+    "bank": "JPMorgan_Chase",
+    "transaction_id": "180245",
+    "case": "verified-negative-history",
+    "checks": {
+      "height": 842,
+      "networkOpen": false,
+      "overflow": false,
+      "rawOpen": false,
+      "simple": "MODEL DECISION\n\nFlagged for review\n\nScore 0.0862 — 0.0684 above the review cutoff of 0.0178\n\nNon-private reference model\nMODEL SCORE\n0.0862\nBANK REVIEW CUTOFF\n0.0178\nMARGIN ABOVE CUTOFF\n+0.0684\nWhy was this flagged?\nMAIN REASON\n\nThe payment method was the strongest measured factor pushing the model score higher.\n\nEarlier activity\nTX 180238: this earlier transfer helped keep the current score lower.\n\nAccount activity\nFan-out observed in the displayed transfers. Score effects of these patterns were not measured.\n\nTop factors\n↑ Payment method\nStrong upward effect\n\nObserved: ACH\n\n↓ Amount and currencies\nSmall downward effect\n\nObserved: Sent 31.36 USD; received 31.36 USD\n\nStrength and bar lengths are relative to this explanation’s largest measured feature effect. They are visual comparisons, not probabilities.\n\nEarlier activity\n\nTX 180238: this earlier transfer helped keep the current score lower.\n\nWith this history\n0.0862\n→\nWithout this history update\n0.2785\n\n1 earlier transfer has a verified score test. The strongest effect is shown.\n\nSee all tested earlier transfers\nAccount activity patterns\n\nFan-out\nThe sending account transferred to 4 different counterparties in the displayed history, including this transaction.\n\nThese describe observed account relationships. They do not prove fraud and do not automatically mean they affected the model score.\n\nWhat would have changed the result?\n\nIn the tested model-sensitivity check, changing the transfer amount to approximately 9,255,068.58 USD moved the score below the review cutoff.\n\nCurrent amount / score / decision\n31.36 USD\n\n0.0862 · Flagged\n\n→\nTested alternative / score / decision\n9,255,068.58 USD\n\n4.248e-18 · Not flagged\n\nThis is a model-sensitivity test, not a recommendation for transaction behavior.\n\nDataset label: Not fraud · False positive. Dataset labels are evaluation evidence, separate from the model decision.\n\nThe score is not a calibrated probability of fraud. This explanation describes measured model behavior.",
+      "technicalOpen": false,
+      "width": 1230
+    }
+  },
+  {
+    "bank": "JPMorgan_Chase",
+    "transaction_id": "66943",
+    "case": "chronological-cycle",
+    "checks": {
+      "height": 842,
+      "networkOpen": false,
+      "overflow": false,
+      "rawOpen": false,
+      "simple": "MODEL DECISION\n\nNot flagged\n\nScore 0.0010 — 0.0168 below the review cutoff of 0.0178\n\nNon-private reference model\nMODEL SCORE\n0.0010\nBANK REVIEW CUTOFF\n0.0178\nMARGIN BELOW CUTOFF\n−0.0168\nWhy was this not flagged?\nMAIN REASON\n\nThe amount and currency combination was the strongest measured factor pushing the model score lower.\n\nEarlier activity\nTX 66942: this earlier transfer helped push the current score higher.\n\nAccount activity\nCycle observed in the displayed transfers. Score effects of these patterns were not measured.\n\nTop factors\n↑ Payment method\nStrong upward effect\n\nObserved: ACH\n\n↓ Amount and currencies\nSmall downward effect\n\nObserved: Sent 89.78 USD; received 89.78 USD\n\nStrength and bar lengths are relative to this explanation’s largest measured feature effect. They are visual comparisons, not probabilities.\n\nEarlier activity\n\nTX 66942: this earlier transfer helped push the current score higher.\n\nWith this history\n0.0010\n→\nWithout this history update\n0.0006\n\n3 earlier transfers have a verified score test. The strongest effect is shown.\n\nSee all tested earlier transfers\nAccount activity patterns\n\nCycle\nEarlier transfers form a chronological return path that closes with this transaction.\n\nThese describe observed account relationships. They do not prove fraud and do not automatically mean they affected the model score.\n\nWhat would have changed the result?\n\nNone of the tested amount changes moved the model across the review cutoff.\n\nThis is a model-sensitivity test, not a recommendation for transaction behavior.\n\nDataset label: Not fraud · True negative. Dataset labels are evaluation evidence, separate from the model decision.\n\nThe score is not a calibrated probability of fraud. This explanation describes measured model behavior.",
+      "technicalOpen": false,
+      "width": 1230
+    }
+  }
+]

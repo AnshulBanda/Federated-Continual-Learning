@@ -1,0 +1,247 @@
+[
+  {
+    "bank": "JPMorgan_Chase",
+    "transaction": "3008974",
+    "model": "Final ensemble \u00b7 42 / 52 / 62",
+    "model_sha256": "1fa493177c5c7998256f77b6ead3570d42549f4543ab2608d9030331ad0fcff0",
+    "models": 3,
+    "replay": "2257cb2acbc241b6b3f745a58be29ed7",
+    "score": 0.4320921003818512,
+    "cutoff": 0.018216599960190167,
+    "flagged": true,
+    "errors": {
+      "saved_vs_direct": 6.505367411424601e-09,
+      "saved_vs_target": 6.505367411424601e-09
+    },
+    "history_tests": 0,
+    "patterns": null,
+    "report": "JPMorgan_Chase_3008974_reference.json",
+    "guard_probes": [
+      {
+        "probe": "score_over_tolerance",
+        "result": "refused",
+        "message": "Explanation score differs from the saved replay by more than 1e-6. Rescore this model."
+      },
+      {
+        "probe": "wrong_model",
+        "result": "refused",
+        "message": "Explanation identity, model, data or saved cutoff differs from the selected replay."
+      },
+      {
+        "probe": "wrong_replay",
+        "result": "refused",
+        "message": "Explanation identity, model, data or saved cutoff differs from the selected replay."
+      }
+    ]
+  },
+  {
+    "bank": "JPMorgan_Chase",
+    "transaction": "66943",
+    "model": "Final ensemble \u00b7 42 / 52 / 62",
+    "model_sha256": "1fa493177c5c7998256f77b6ead3570d42549f4543ab2608d9030331ad0fcff0",
+    "models": 3,
+    "replay": "2257cb2acbc241b6b3f745a58be29ed7",
+    "score": 0.0009164763784307676,
+    "cutoff": 0.018216599960190167,
+    "flagged": false,
+    "errors": {
+      "saved_vs_direct": 1.6988274220523791e-10,
+      "saved_vs_target": 1.698827420968177e-10
+    },
+    "history_tests": 3,
+    "patterns": null,
+    "report": "JPMorgan_Chase_66943_reference.json",
+    "guard_probes": [
+      {
+        "probe": "score_over_tolerance",
+        "result": "refused",
+        "message": "Explanation score differs from the saved replay by more than 1e-6. Rescore this model."
+      },
+      {
+        "probe": "wrong_model",
+        "result": "refused",
+        "message": "Explanation identity, model, data or saved cutoff differs from the selected replay."
+      },
+      {
+        "probe": "wrong_replay",
+        "result": "refused",
+        "message": "Explanation identity, model, data or saved cutoff differs from the selected replay."
+      }
+    ]
+  },
+  {
+    "bank": "Wells_Fargo",
+    "transaction": "2954161",
+    "model": "Final ensemble \u00b7 42 / 52 / 62",
+    "model_sha256": "1fa493177c5c7998256f77b6ead3570d42549f4543ab2608d9030331ad0fcff0",
+    "models": 3,
+    "replay": "497b38e71b0e49ad9c050b3496b1634a",
+    "score": 0.21664444357156754,
+    "cutoff": 0.2648376809991874,
+    "flagged": false,
+    "errors": {
+      "saved_vs_direct": 8.39589092693771e-10,
+      "saved_vs_target": 8.39589092693771e-10
+    },
+    "history_tests": 0,
+    "patterns": null,
+    "report": "Wells_Fargo_2954161_reference.json",
+    "guard_probes": [
+      {
+        "probe": "score_over_tolerance",
+        "result": "refused",
+        "message": "Explanation score differs from the saved replay by more than 1e-6. Rescore this model."
+      },
+      {
+        "probe": "wrong_model",
+        "result": "refused",
+        "message": "Explanation identity, model, data or saved cutoff differs from the selected replay."
+      },
+      {
+        "probe": "wrong_replay",
+        "result": "refused",
+        "message": "Explanation identity, model, data or saved cutoff differs from the selected replay."
+      }
+    ]
+  },
+  {
+    "bank": "JPMorgan_Chase",
+    "transaction": "180245",
+    "model": "Final ensemble \u00b7 42 / 52 / 62",
+    "model_sha256": "1fa493177c5c7998256f77b6ead3570d42549f4543ab2608d9030331ad0fcff0",
+    "models": 3,
+    "replay": "2257cb2acbc241b6b3f745a58be29ed7",
+    "score": 0.028827516090435285,
+    "cutoff": 0.018216599960190167,
+    "flagged": true,
+    "errors": {
+      "saved_vs_direct": 1.1682228691356489e-09,
+      "saved_vs_target": 1.168222865666202e-09
+    },
+    "history_tests": 1,
+    "patterns": null,
+    "report": "JPMorgan_Chase_180245_reference.json",
+    "guard_probes": [
+      {
+        "probe": "score_over_tolerance",
+        "result": "refused",
+        "message": "Explanation score differs from the saved replay by more than 1e-6. Rescore this model."
+      },
+      {
+        "probe": "wrong_model",
+        "result": "refused",
+        "message": "Explanation identity, model, data or saved cutoff differs from the selected replay."
+      },
+      {
+        "probe": "wrong_replay",
+        "result": "refused",
+        "message": "Explanation identity, model, data or saved cutoff differs from the selected replay."
+      }
+    ]
+  },
+  {
+    "bank": "Wells_Fargo",
+    "transaction": "2965480",
+    "model": "Final ensemble \u00b7 42 / 52 / 62",
+    "model_sha256": "1fa493177c5c7998256f77b6ead3570d42549f4543ab2608d9030331ad0fcff0",
+    "models": 3,
+    "replay": "497b38e71b0e49ad9c050b3496b1634a",
+    "score": 2.598657305637649e-07,
+    "cutoff": 0.2648376809991874,
+    "flagged": false,
+    "errors": {
+      "saved_vs_direct": 3.0060566469152314e-13,
+      "saved_vs_target": 3.0060566479740225e-13
+    },
+    "history_tests": 8,
+    "patterns": null,
+    "report": "Wells_Fargo_2965480_reference.json",
+    "guard_probes": [
+      {
+        "probe": "score_over_tolerance",
+        "result": "refused",
+        "message": "Explanation score differs from the saved replay by more than 1e-6. Rescore this model."
+      },
+      {
+        "probe": "wrong_model",
+        "result": "refused",
+        "message": "Explanation identity, model, data or saved cutoff differs from the selected replay."
+      },
+      {
+        "probe": "wrong_replay",
+        "result": "refused",
+        "message": "Explanation identity, model, data or saved cutoff differs from the selected replay."
+      }
+    ]
+  },
+  {
+    "bank": "Wells_Fargo",
+    "transaction": "2954161",
+    "model": "Private single-model r4e3 confirmation",
+    "model_sha256": "abb151efea1ebb73a9aecea5ed80fc88a28f132e6b1239550a3656cef396acf7",
+    "models": 1,
+    "replay": "b7db621609d54dfd87491d96890557c1",
+    "score": 0.14525170624256134,
+    "cutoff": 0.5,
+    "flagged": false,
+    "errors": {
+      "saved_vs_direct": 4.7199375380335695e-08,
+      "saved_vs_target": 4.7199375380335695e-08
+    },
+    "history_tests": 0,
+    "patterns": null,
+    "report": "Wells_Fargo_2954161_private.json",
+    "guard_probes": [
+      {
+        "probe": "score_over_tolerance",
+        "result": "refused",
+        "message": "Explanation score differs from the saved replay by more than 1e-6. Rescore this model."
+      },
+      {
+        "probe": "wrong_model",
+        "result": "refused",
+        "message": "Explanation identity, model, data or saved cutoff differs from the selected replay."
+      },
+      {
+        "probe": "wrong_replay",
+        "result": "refused",
+        "message": "Explanation identity, model, data or saved cutoff differs from the selected replay."
+      }
+    ]
+  },
+  {
+    "bank": "Wells_Fargo",
+    "transaction": "2788586",
+    "model": "Final ensemble \u00b7 42 / 52 / 62",
+    "model_sha256": "1fa493177c5c7998256f77b6ead3570d42549f4543ab2608d9030331ad0fcff0",
+    "models": 3,
+    "replay": "497b38e71b0e49ad9c050b3496b1634a",
+    "score": 0.9104695518811544,
+    "cutoff": 0.2648376809991874,
+    "flagged": true,
+    "errors": {
+      "saved_vs_direct": 3.7265208252534876e-08,
+      "saved_vs_target": 3.726520836355718e-08
+    },
+    "history_tests": 0,
+    "patterns": null,
+    "report": "Wells_Fargo_2788586_reference.json",
+    "guard_probes": [
+      {
+        "probe": "score_over_tolerance",
+        "result": "refused",
+        "message": "Explanation score differs from the saved replay by more than 1e-6. Rescore this model."
+      },
+      {
+        "probe": "wrong_model",
+        "result": "refused",
+        "message": "Explanation identity, model, data or saved cutoff differs from the selected replay."
+      },
+      {
+        "probe": "wrong_replay",
+        "result": "refused",
+        "message": "Explanation identity, model, data or saved cutoff differs from the selected replay."
+      }
+    ]
+  }
+]

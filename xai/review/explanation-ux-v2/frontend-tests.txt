@@ -1,0 +1,25 @@
+✔ every cached bank/transaction renders feature directions from its own SHAP (52.224416ms)
+✔ empty eligible history renders an accurate message and no history table (1.434834ms)
+✔ untested existing history is not described as absent (1.895084ms)
+✔ mixed identities, scores, feature values, decisions and stale graph effects are rejected (1.174542ms)
+✔ out-of-order catalog responses cannot overwrite the current bank threshold (0.586084ms)
+✔ out-of-order explanation responses cannot overwrite the selected transaction (1.660042ms)
+✔ selected transfer cards across every bank show model score without historical-test wording (1.450625ms)
+✔ technical threshold is bank-specific and a different bank threshold is rejected (3.698125ms)
+✔ plain-language technical details adapt to selected score, directions, history and available checks (3.6675ms)
+✔ observed pattern labels count distinct peers and require a chronological cycle (0.918916ms)
+✔ all cached summaries deterministically select the measured primary direction, rank factors and compute margins (42.47275ms)
+✔ top three factors, ties, neutral values and relative strength boundaries remain deterministic (5.150584ms)
+✔ only independently verified replay effects create positive or negative history claims (4.189167ms)
+✔ counterfactual decision changes require actual crossing with matching baseline and cutoff (0.603208ms)
+✔ evaluation labels remain independent of the four possible model outcomes (0.372583ms)
+✔ privacy scope is explicit and model evidence or a relaxed parity tolerance is rejected (3.805875ms)
+✔ a self-consistent report from another checkpoint is rejected against the active catalog (0.399375ms)
+ℹ tests 17
+ℹ suites 0
+ℹ pass 17
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 166.86225

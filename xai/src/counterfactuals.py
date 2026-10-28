@@ -82,19 +82,22 @@ def constrained_amount_counterfactuals(
     probs = 1.0 / (1.0 + np.exp(-np.clip(logits, -40.0, 40.0)))
     base_probability = float(1.0 / (1.0 + np.exp(-np.clip(base_logit, -40.0, 40.0))))
     original_flag = base_probability >= threshold
-    # Keep only threshold-flipping candidates; smallest absolute amount change wins.
-    selected = []
+    # Retain every test for audit; the summary still ranks threshold flips by amount change.
+    selected, tested = [], []
     for value, probability in zip(ordered, probs):
-        if (bool(probability >= threshold) != original_flag):
-            selected.append({
-                "changed_features": {field: float(value) for field in fields},
-                "original_probability": base_probability,
-                "counterfactual_probability": float(probability),
-                "score_change": float(probability - base_probability),
-                "valid": True,
-                "constraint_notes": notes + ["matched known categorical context", "amount aliases changed together"],
-                "amount_change_absolute": abs(float(value) - amount),
-            })
+        candidate = {
+            "changed_features": {field: float(value) for field in fields},
+            "original_probability": base_probability,
+            "counterfactual_probability": float(probability),
+            "score_change": float(probability - base_probability),
+            "valid": True,
+            "constraint_notes": notes + ["matched known categorical context", "amount aliases changed together"],
+            "amount_change_absolute": abs(float(value) - amount),
+        }
+        candidate["threshold_crossed"] = bool(probability >= threshold) != original_flag
+        tested.append(candidate)
+        if candidate["threshold_crossed"]:
+            selected.append(candidate)
     selected.sort(key=lambda item: (item["amount_change_absolute"], abs(item["score_change"])))
     return {
         "method": "training_supported_constrained_amount_search",
@@ -104,6 +107,7 @@ def constrained_amount_counterfactuals(
         "original_probability": base_probability,
         "candidates_evaluated": len(ordered),
         "counterfactuals": selected[:5],
+        "tested_alternatives": tested,
         "interpretation": "Model sensitivity only; not advice to evade controls or evidence of real-world intent.",
         "limitations": ["only amount fields were varied", "account memory and event history were held fixed", "training-supported values do not guarantee real-world plausibility"],
     }

@@ -34,6 +34,16 @@ def report():
 
 
 class TransactionStoryTests(unittest.TestCase):
+    def test_all_eligible_history_is_retained_separately_from_bounded_graph(self):
+        row = pd.Series(event("selected", 1, 2, 10))
+        history = pd.DataFrame([event(f"h{day}", 1, day + 2, day) for day in range(1, 7)]
+                               + [event("future", 1, 2, 11)])
+        result = build_transaction_story(row, history, report(), max_edges=3)
+        self.assertEqual(len(result["transfers"]), 3)
+        self.assertEqual(len(result["eligible_earlier_transfers"]), 6)
+        self.assertEqual(result["earlier_related_transfers_considered"], 6)
+        self.assertNotIn("future", [e["transaction_id"] for e in result["eligible_earlier_transfers"]])
+
     def test_split_local_node_ids_do_not_connect_different_accounts(self):
         adapter = SimpleNamespace(
             frames={"training": pd.DataFrame([event("train", 1, 2, 1)]),
@@ -73,6 +83,8 @@ class TransactionStoryTests(unittest.TestCase):
         self.assertIn("2 → 3 → 1 → 2", story["observation"])
         self.assertEqual(story["selected_transfer"]["source_alias"], "A")
         self.assertTrue(story["path_is_not_a_fraud_classification"])
+        self.assertEqual([event["transaction_id"] for event in story["eligible_earlier_transfers"]], ["h1", "h2"])
+        self.assertEqual(story["eligible_earlier_transfers"][0]["source_account_id"], "2")
         history.loc[0, "timestamp"] = "2025-08-03 10:00:00"
         unordered = build_transaction_story(row, history, report())
         self.assertNotEqual(unordered["pattern"], "observed_return_path")

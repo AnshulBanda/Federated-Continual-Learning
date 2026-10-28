@@ -39,6 +39,11 @@ class XaiExtensionTests(unittest.TestCase):
         self.assertEqual(candidate["changed_features"]["amount"], candidate["changed_features"]["Amount_Received"])
         self.assertGreaterEqual(candidate["counterfactual_probability"], 0.7)
         self.assertEqual(candidate["valid"], True)
+        self.assertEqual(len(result["tested_alternatives"]), result["candidates_evaluated"])
+        self.assertTrue(any(not item["threshold_crossed"] for item in result["tested_alternatives"]))
+        for tested in result["tested_alternatives"]:
+            self.assertEqual(tested["threshold_crossed"], tested["counterfactual_probability"] >= .7)
+            self.assertEqual(tested["changed_features"]["amount"], tested["changed_features"]["Amount_Received"])
 
     def test_exact_ensemble_shap_targets_mean_probability(self):
         first = lambda frame: frame["x"].to_numpy(dtype=float)

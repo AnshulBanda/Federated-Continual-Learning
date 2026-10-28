@@ -1,0 +1,48 @@
+{
+  "explanation": {
+    "bottom": 137.8671875,
+    "height": 667.8828125,
+    "left": 13,
+    "right": 362,
+    "top": -530.015625,
+    "width": 349,
+    "x": 13,
+    "y": -530.015625
+  },
+  "graph": {
+    "bottom": 766.1875,
+    "height": 628.3203125,
+    "left": 13,
+    "right": 362,
+    "top": 137.8671875,
+    "width": 349,
+    "x": 13,
+    "y": 137.8671875
+  },
+  "heroColumns": "349px",
+  "lower": {
+    "bottom": 1915.8515625,
+    "height": 1128.6640625,
+    "left": 12,
+    "right": 363,
+    "top": 787.1875,
+    "width": 351,
+    "x": 12,
+    "y": 787.1875
+  },
+  "overflow": false,
+  "picker": {
+    "bottom": 2666.2421875,
+    "height": 654.890625,
+    "left": 12,
+    "right": 363,
+    "top": 2011.3515625,
+    "width": 351,
+    "x": 12,
+    "y": 2011.3515625
+  },
+  "viewport": {
+    "height": 844,
+    "width": 390
+  }
+}

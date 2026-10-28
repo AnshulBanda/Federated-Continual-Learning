@@ -1,0 +1,17 @@
+{
+  "exactEquation": "Base logit -4.446221098303795\n+ grouped SHAP contributions (2.158666353672743 + -0.07377719506621361)\n= reconstructed logit -2.3613319396972656\nTarget logit: -2.3613319396972656\nAdditivity residual: 0\nsigmoid(reconstructed logit) = 0.0861692542574232\nExplanation target score: 0.0861692542574232",
+  "overflow": false,
+  "rawOpen": false,
+  "sections": [
+    "A. Exact decision",
+    "B. Feature attribution",
+    "C. Feature faithfulness",
+    "D. Historical replay",
+    "E. Graph / network details",
+    "F. Constrained counterfactuals",
+    "G. Verification",
+    "H. Model provenance",
+    "I. Raw audit record"
+  ],
+  "technicalOpen": true
+}

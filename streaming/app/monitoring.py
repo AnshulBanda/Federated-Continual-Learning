@@ -46,7 +46,9 @@ class Monitoring:
         return dict(requested=True)
     def rows(self,key,bank):
         if not any(j['id']==key and j['status']=='Completed' for j in self.status(bank)['jobs']):raise ValueError('Choose a completed replay for this bank.')
-        return read_json(self.root/key/'transactions.json',{})
+        data=read_json(self.root/key/'transactions.json',{})
+        job=next(j for j in self.status(bank)['jobs'] if j['id']==key)
+        return dict(data,replay_id=key,dataset_fingerprint=job.get('dataset_fingerprint'))
     def close(self):
         if self.process and self.process.poll() is None:
             for path in self.root.glob('*/job.json'):
