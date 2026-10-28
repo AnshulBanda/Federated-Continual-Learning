@@ -19,7 +19,7 @@ function harness(fetch, graphItems = []) {
   }
   const context = vm.createContext({document: {querySelector: element, querySelectorAll: selector => selector === '[data-edge],[data-account]' ? graphItems : []},
     URLSearchParams, location: {search: ''}, history: {replaceState() {}}, fetch,
-    setTimeout, clearTimeout, ExplanationSummary: require('../static/explanation_summary.js')});
+    setTimeout, clearTimeout, BankDisplay: require('../static/bank_display.js'), ExplanationSummary: require('../static/explanation_summary.js')});
   const source = fs.readFileSync(path.join(root, 'static/dashboard.js'), 'utf8');
   vm.runInContext(source, context);
   context.api=context.InvestigatorXAI.create();

@@ -1,0 +1,58 @@
+[
+  {
+    "bank": "Wells_Fargo",
+    "replay": "497b38e71b0e49ad9c050b3496b1634a",
+    "model": "Final ensemble \u00b7 42 / 52 / 62",
+    "threshold": 0.2648376809991874,
+    "counts": {
+      "true_positive": 21,
+      "false_positive": 31,
+      "true_negative": 25539,
+      "missed_fraud": 1
+    },
+    "saved_rows_sha256": "a3c75dde411d40cf166d7c837a4cb67ea3647371b57f1bad3fae6409dc036242",
+    "feed_has_no_evaluation_labels": true
+  },
+  {
+    "bank": "Wells_Fargo",
+    "replay": "b7db621609d54dfd87491d96890557c1",
+    "model": "Private single-model r4e3 confirmation",
+    "threshold": 0.5,
+    "counts": {
+      "true_positive": 20,
+      "false_positive": 1,
+      "true_negative": 25569,
+      "missed_fraud": 2
+    },
+    "saved_rows_sha256": "3c7949fae1da5b1406f3420c6949e584fab8b1ac752e7e266b09035f668da8db",
+    "feed_has_no_evaluation_labels": true
+  },
+  {
+    "bank": "JPMorgan_Chase",
+    "replay": "2257cb2acbc241b6b3f745a58be29ed7",
+    "model": "Final ensemble \u00b7 42 / 52 / 62",
+    "threshold": 0.018216599960190167,
+    "counts": {
+      "true_positive": 16,
+      "false_positive": 113,
+      "true_negative": 64358,
+      "missed_fraud": 0
+    },
+    "saved_rows_sha256": "7d29a851a32a7ca313bbb45b4fdf9c588c50bf14ef8706d32792b9703d10168e",
+    "feed_has_no_evaluation_labels": true
+  },
+  {
+    "bank": "Key_Bank",
+    "replay": "4cc3e4fe6b364fefb2efdc563d211cce",
+    "model": "Final ensemble \u00b7 42 / 52 / 62",
+    "threshold": 0.4178731579879904,
+    "counts": {
+      "true_positive": 17,
+      "false_positive": 6,
+      "true_negative": 11391,
+      "missed_fraud": 4
+    },
+    "saved_rows_sha256": "09a78ff68e9f26c53e9c729cde5b1e1d0b697f691515df976565c0ba76dec88d",
+    "feed_has_no_evaluation_labels": true
+  }
+]

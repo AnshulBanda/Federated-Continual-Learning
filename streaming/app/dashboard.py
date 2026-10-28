@@ -21,6 +21,7 @@ from .results import research_results
 from .explanations import Explanations
 from .privacy import privacy_status
 from .xai_assets import asset as xai_asset
+from .explanation_cases import replay_cases
 from .final_model import reference_evidence, reference_model
 
 WEB = Path(__file__).resolve().parents[1] / 'web' / 'index.html'
@@ -81,6 +82,9 @@ def server(root, port=8765):
                 found=xai_asset(path.removeprefix('/assets/xai/'))
                 if found:self.respond(200,found[0],found[1])
                 else:self.respond(404,{'error':'Not found.'})
+            elif path.startswith('/api/explanations/cases/'):
+                try:self.respond(200,replay_cases(monitoring,path.rsplit('/',1)[-1],overview.load()['bank']))
+                except (ValueError, OSError, KeyError) as exc:self.respond(400,{'error':str(exc)})
             elif path.startswith('/api/explanations/report/'):
                 try:self.respond(200,explanations.report(path.rsplit('/',1)[-1],overview.load()['bank']))
                 except ValueError as exc:self.respond(400,{'error':str(exc)})

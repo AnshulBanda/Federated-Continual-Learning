@@ -1,0 +1,357 @@
+{
+  "sections": [
+    {
+      "section": "overview",
+      "realNamesPresent": false,
+      "labels": [
+        {
+          "label": "Choose your bank",
+          "value": ""
+        },
+        {
+          "label": "Bank A",
+          "value": "Key_Bank"
+        },
+        {
+          "label": "Bank B",
+          "value": "Wells_Fargo"
+        },
+        {
+          "label": "Bank C",
+          "value": "JPMorgan_Chase"
+        }
+      ],
+      "scrollWidth": 1665,
+      "visibleText": "BANK RISK & COLLABORATION\nFCL for Anti-Money Laundering\n\nMonitor transactions, review decisions and collaborate across banks.\n\nLocal workspace\nOverview\nData & training\nCollaboration\nTransactions\nResults & history\nWeight transfers\nExplanations\nFINAL THREE-MODEL ENSEMBLE\nLatest recorded evaluation\n\nBank-macro average precision · September 2025. This saved exploratory result belongs to the original ensemble; new runs report their own scores.\n\n90.68%\n\nPR-AUC · 3 banks\n\n1\nChoose your bank\n2\nCheck local data\n3\nScore transactions\n4\nReview explanations\nLOCAL IDENTITY\nBank workspace\nBank name\nChoose your bank\nBank A\nBank B\nBank C\nSave bank\n\nSaved workspace: Bank A\n\nThis workspace label is not authenticated bank identity.\nCONNECTIVITY\nNot checked\n\nCheck the Kafka broker and peer from Weight transfers.\n\nOpen connection checks\n\nResults describe the last explicit check. Connectivity can change.\n\nCURRENT MODEL\nFinal ensemble · 42 / 52 / 62\n\nThree verified members · SHA-256 1fa493177c5c7998256f77b6ead3570d42549f4543ab2608d9030331ad0fcff0\n\nAdaptive probability ensemble · seeds 42 / 52 / 62 · available locally\n\nUse final ensemble\nOpen transactions\nLAST TRAINING TIME\nNot recorded\n\nCompleted local training will record its completion time here.\n\nSAVED ENSEMBLE EVALUATION\nLatest available evaluation\n\nBank A · September 2025 · exploratory · Saved final three-model ensemble\n\nPR-AUC\n0.770\nPrecision\n89.3%\nRecall\n55.6%\n\nResults identify their model and split. Validation scores from new training are separate from the frozen September test results.",
+      "width": 1665,
+      "invalidNumbers": false
+    },
+    {
+      "section": "training",
+      "realNamesPresent": false,
+      "labels": [
+        {
+          "label": "Choose your bank",
+          "value": ""
+        },
+        {
+          "label": "Bank A",
+          "value": "Key_Bank"
+        },
+        {
+          "label": "Bank B",
+          "value": "Wells_Fargo"
+        },
+        {
+          "label": "Bank C",
+          "value": "JPMorgan_Chase"
+        }
+      ],
+      "scrollWidth": 1680,
+      "visibleText": "BANK RISK & COLLABORATION\nFCL for Anti-Money Laundering\n\nMonitor transactions, review decisions and collaborate across banks.\n\nLocal workspace\nOverview\nData & training\nCollaboration\nTransactions\nResults & history\nWeight transfers\nExplanations\nSTEP 1 / CONNECT LOCAL DATA\nLocal Data & Training\n\nSelected bank: Bank A\n\nPrepared dataset root on this laptop\n\nConnect the folder containing configuration/, training/, and validation/. Each split needs your bank's edge_list.csv.gz, ground_truth.csv.gz, node_map.csv.gz and node_features.csv.gz. Raw transaction data stays on this laptop.\n\nCheck data quality\n\nML environment ready: PyTorch, pandas, NumPy, scikit-learn.\n\nSTEP 2 / TRAIN LOCALLY\nAdapt the final ensemble\n\nEach of the three final models trains on June, then July with 2,000 historical context events. Three epochs per task, 18 total. August validation selects each member against its starting checkpoint.\n\nStart local adaptation\n\nRequires a passed quality check for the saved bank and folder. Data is checked again before training. Training uses only training/validation; September test data is not loaded.\n\nLocal adaptation stays on this laptop. Use Collaboration to train across banks.\n\nLOCAL WORKSPACE / PERSISTENT RUNS\nData checks & training history\n\nNo local checks or training runs for this bank yet.",
+      "width": 1680,
+      "invalidNumbers": false
+    },
+    {
+      "section": "collaboration",
+      "realNamesPresent": false,
+      "labels": [
+        {
+          "label": "Choose your bank",
+          "value": ""
+        },
+        {
+          "label": "Bank A",
+          "value": "Key_Bank"
+        },
+        {
+          "label": "Bank B",
+          "value": "Wells_Fargo"
+        },
+        {
+          "label": "Bank C",
+          "value": "JPMorgan_Chase"
+        }
+      ],
+      "scrollWidth": 1665,
+      "visibleText": "BANK RISK & COLLABORATION\nFCL for Anti-Money Laundering\n\nMonitor transactions, review decisions and collaborate across banks.\n\nLocal workspace\nOverview\nData & training\nCollaboration\nTransactions\nResults & history\nWeight transfers\nExplanations\nSHARED RUN / LOCAL ROLE\nFederated Collaboration\nThis laptop's role\nBank / client\nCentral coordinator\n\nSaved bank: Bank A · bank-1\n\nKafka broker\nShared run ID · fresh for every new attempt\nGenerate new run ID\nLocal prepared dataset root\n\nBanks read their own training graph. The coordinator uses the fixed feature schema without reading bank transactions. This path stays local and may differ across laptops.\n\nParticipating banks · same roster on every laptop\nBank A\n/ bank-1\nBank B\n/ bank-2\nBank C\n/ bank-3\nRounds\nLocal epochs / round\nRound timeout (seconds)\nShared federation secret\n\nKept only in worker memory. Never saved in setup/history or returned by the API. A shared secret proves team membership; it does not independently authenticate each bank. Match the secret on all laptops.\n\nSave collaboration setup\nCheck local readiness\nPrepare topics (coordinator)\nStart this laptop\n\nLIVE LOCAL EVIDENCE\n\nLevel-3 Distributed DP + Secure Aggregation\n\nCohort: 3 | SecAgg: true | m: 0.3 | epsilon: 127.36375 | delta: 0.000001 | phase: idle | Configured per-run bound; all reserved runs/releases compose\n\nNo collaboration run yet\n\nRound — / 4\n\nNo local readiness check this session.\n\nFixed feature-schema SHA-256: ae6fabba8641da6f835b6ea9eb946f6ec9dc2713f50e3bf82446740b0f07dd35\n\nStop after this round\nCancel local run\n\nStart all bank workers, then the coordinator, using matching run ID, roster, rounds, epochs, timeout, broker and secret. The fixed schema must match on every laptop. Waiting for missing banks is bounded by the round timeout.\n\nStop/cancel affects this laptop only. Update published means broker delivery; coordinator verification and a bank's verified shared-model receipt are separate events. A coordinator completing a broadcast does not prove every bank received it.\n\nEach private run uses ONE CausalTemporalGraphSAGE initialized from Sia's frozen seed-42 checkpoint. Only its 65,793 decoder coordinates adapt; all backbone coordinates stay frozen. Three banks perform four real private rounds, with three local epochs per June/July phase, lr=0.0003 and risk-context replay=2000. C=0.875, production multiplier=0.30, delta=1e-6; noisy-only FedAvg postprocessing uses server lr=0.1. Secure equal aggregation is mandatory; missing banks abort without plaintext fallback. No private ensemble or plaintext temporal harmonization is used. Reference ensemble training/scoring remains separate and nonprivate. Research seeds 42/52/62 are separate single-model runs, never ensemble members. Privacy is conditional on the nonprivate warm checkpoint and fixed public calibration; validation metrics are nonprivate disclosures.\n\nTeam setup to compare\nParticipating banks\nBank A / bank-1\n\nNot observed on this laptop\n\nBank B / bank-2\n\nNot observed on this laptop\n\nBank C / bank-3\n\nNot observed on this laptop\n\nRound & experiment history\n\nNo federation runs recorded on this laptop.\n\nWeight file transfers\n\nManual transfer tools remain available for diagnostic or checkpoint delivery. They do not start training or aggregation. Automatic federation above uses its own signed model/update messages.\n\nOpen weight transfer tools\n\nNo manual file transfers recorded.",
+      "width": 1665,
+      "invalidNumbers": false
+    },
+    {
+      "section": "monitoring",
+      "realNamesPresent": false,
+      "labels": [
+        {
+          "label": "Choose your bank",
+          "value": ""
+        },
+        {
+          "label": "Bank A",
+          "value": "Key_Bank"
+        },
+        {
+          "label": "Bank B",
+          "value": "Wells_Fargo"
+        },
+        {
+          "label": "Bank C",
+          "value": "JPMorgan_Chase"
+        }
+      ],
+      "scrollWidth": 1665,
+      "visibleText": "BANK RISK & COLLABORATION\nFCL for Anti-Money Laundering\n\nMonitor transactions, review decisions and collaborate across banks.\n\nLocal workspace\nOverview\nData & training\nCollaboration\nTransactions\nResults & history\nWeight transfers\nExplanations\nRECORDED TRANSACTIONS / MODEL SCORES\nTransaction Monitoring\n\nReplay August validation transactions from your bank's prepared dataset. Scores come from the selected model after warming account memory on earlier training events. This is a recorded-data demonstration, not a live bank feed.\n\nPrepared dataset root\nScore validation replay\nCancel scoring\n\nCompleted · Validation replay scored; no training or test data scoring performed.\n\nRisk scores are uncalibrated model outputs. The adjustable alert cutoff is a demo control, not a validated operational threshold. Ground-truth labels are excluded from the transaction feed.\n\nReplay controls\nSaved replay\n28/10/2026, 10:07:12 · Final ensemble · 42 / 52 / 62\nLoad replay\n\nAlert cutoff (0–1)\nPlay replay\nNext 25\nReset\nNext alert\nReview all scored transactions\n\n0 / 0 replayed · 0 alerts · paused\n\n Show alerts only\nTransaction feed · newest replayed first\nFind a transaction or account\nTIME / TRANSACTION\tACCOUNTS\tRISK SCORE\tREVIEW\nAccount investigation\n\nSelect a transaction to inspect its account connections.",
+      "width": 1665,
+      "invalidNumbers": false
+    },
+    {
+      "section": "results",
+      "realNamesPresent": false,
+      "labels": [
+        {
+          "label": "Choose your bank",
+          "value": ""
+        },
+        {
+          "label": "Bank A",
+          "value": "Key_Bank"
+        },
+        {
+          "label": "Bank B",
+          "value": "Wells_Fargo"
+        },
+        {
+          "label": "Bank C",
+          "value": "JPMorgan_Chase"
+        }
+      ],
+      "scrollWidth": 1665,
+      "visibleText": "BANK RISK & COLLABORATION\nFCL for Anti-Money Laundering\n\nMonitor transactions, review decisions and collaborate across banks.\n\nLocal workspace\nOverview\nData & training\nCollaboration\nTransactions\nResults & history\nWeight transfers\nExplanations\nSAVED EVIDENCE / NO NEW TEST EVALUATION\nResults & History\n\nCompare the final ensemble with earlier baselines, then review validation results from your own training and collaboration runs.\n\nRefresh results\nExport displayed evidence (JSON)\n\nSaved bank: Bank A · refreshed 10:07:41\n\nFrozen research split\nSeptember 2025 test · saved results\nAugust 2025 validation · saved results\n\nBaseline rows show mean ± standard deviation across three seeds. The final ensemble is one combined prediction system. September results are exploratory; August is used for validation.\n\nLocal Temporal GNN · PR-AUC 0.604 ± 0.029\n\nContinual + replay · PR-AUC 0.568 ± 0.087\n\nFedAvg + continual replay · PR-AUC 0.608 ± 0.028\n\nFinal adaptive ensemble · PR-AUC 0.770\n\nMETHOD\tMODELS / RUNS\tPR-AUC\tPRECISION\tRECALL\nLocal Temporal GNN\t3\t0.604 ± 0.029\t0.799 ± 0.020\t0.437 ± 0.034\nContinual + replay\t3\t0.568 ± 0.087\t0.659 ± 0.099\t0.385 ± 0.105\nFedAvg + continual replay\t3\t0.608 ± 0.028\t0.857 ± 0.041\t0.437 ± 0.013\nFinal adaptive ensemble\t3 members\t0.770\t0.893\t0.556\nSelected model & versions\n\nSelected: Final ensemble · 42 / 52 / 62\n\nSHA-256 1fa493177c5c7998256f77b6ead3570d42549f4543ab2608d9030331ad0fcff0\nLocal training & replay evaluations\nReplay · Final ensemble · 42 / 52 / 62\n\nCompleted · Validation replay scored; no training or test data scoring performed.\n\nAugust validation · PR-AUC 0.865 · precision 0.739 · recall 0.810 · cutoff 0.418\n\nFederation rounds & transfer history on this laptop\n\nNo federation or transfers recorded on this laptop.",
+      "width": 1665,
+      "invalidNumbers": false
+    },
+    {
+      "section": "transfer",
+      "realNamesPresent": false,
+      "labels": [
+        {
+          "label": "Choose your bank",
+          "value": ""
+        },
+        {
+          "label": "Bank A",
+          "value": "Key_Bank"
+        },
+        {
+          "label": "Bank B",
+          "value": "Wells_Fargo"
+        },
+        {
+          "label": "Bank C",
+          "value": "JPMorgan_Chase"
+        }
+      ],
+      "scrollWidth": 1665,
+      "visibleText": "BANK RISK & COLLABORATION\nFCL for Anti-Money Laundering\n\nMonitor transactions, review decisions and collaborate across banks.\n\nLocal workspace\nOverview\nData & training\nCollaboration\nTransactions\nResults & history\nWeight transfers\nExplanations\nNew transfer\nAction\nSend weight file\nReceive weight file\nKafka broker\nTransfer ID · use the same ID at both ends\nUse a new ID for each file. Retained Kafka messages can be received again.\nSender ID\nRecipient ID\nModel-weight file\nUp to 100 MB. Files transfer as bytes; model contents are not executed or validated.\nStart transfer\nSave setup\n\nConnection checklist\nCheck connection\n\nNo broker check run yet.\n\n✓ Kafka client installed\n○ Set FCL_TRANSFER_SECRET before launch\n○ Use Check connection to verify broker and peer\n\nBoth teammates click Check connection after entering matching sender/recipient IDs and choosing their send/receive action. Retry if the first check times out. Leave both dashboards running to answer checks. Authentication uses the shared team secret, not independent device credentials.\n\nStart this dashboard on each laptop. Match the broker, transfer ID, sender and recipient. Both sides need the same transfer secret.\n\nPublished means Kafka accepted the file. Delivered means a signed receiver receipt confirms the matching file was saved. The receiver shows Verified.\n\nReceiving waits for up to two minutes. Cancellation is local and cannot retract messages already published.\n\nKafka topic: fcl.weight-files.v1\nCreate this topic on your broker before transferring. Existing training topics are separate.\n\nTransfer history",
+      "width": 1665,
+      "invalidNumbers": false
+    }
+  ],
+  "cases": [
+    {
+      "actualFilter": "not_fraud",
+      "bank": "Key_Bank",
+      "bankLabel": "Bank A",
+      "caseType": "FALSE POSITIVE",
+      "choices": 6,
+      "heroY": 1021.765625,
+      "hidden": false,
+      "modelFilter": "flagged",
+      "notice": "Verified transaction 3135307 · replay model Final ensemble · 42 / 52 / 62 · saved replay cutoff 0.4179. This view uses that replay, even if a different model is now selected.",
+      "overflow": false,
+      "rawNamesPresent": false,
+      "realNamesPresent": false,
+      "replay": "4cc3e4fe6b364fefb2efdc563d211cce",
+      "transaction": "3135307",
+      "transactionLabel": "TX 3135307 · Flagged · Actual not fraud · 0.6214"
+    },
+    {
+      "actualFilter": "not_fraud",
+      "bank": "Key_Bank",
+      "bankLabel": "Bank A",
+      "caseType": "TRUE NEGATIVE",
+      "choices": 11391,
+      "heroY": 591.375,
+      "hidden": false,
+      "modelFilter": "not_flagged",
+      "notice": "Verified transaction 3538025 · replay model Final ensemble · 42 / 52 / 62 · saved replay cutoff 0.4179. This view uses that replay, even if a different model is now selected.",
+      "overflow": false,
+      "rawNamesPresent": false,
+      "realNamesPresent": false,
+      "replay": "4cc3e4fe6b364fefb2efdc563d211cce",
+      "transaction": "3538025",
+      "transactionLabel": "TX 3538025 · Not flagged · Actual not fraud · 0.0000"
+    },
+    {
+      "actualFilter": "fraud",
+      "bank": "Key_Bank",
+      "bankLabel": "Bank A",
+      "caseType": "MISSED FRAUD",
+      "choices": 4,
+      "heroY": 591.375,
+      "hidden": false,
+      "modelFilter": "not_flagged",
+      "notice": "Verified transaction 3007762 · replay model Final ensemble · 42 / 52 / 62 · saved replay cutoff 0.4179. This view uses that replay, even if a different model is now selected.",
+      "overflow": false,
+      "rawNamesPresent": false,
+      "realNamesPresent": false,
+      "replay": "4cc3e4fe6b364fefb2efdc563d211cce",
+      "transaction": "3007762",
+      "transactionLabel": "TX 3007762 · Not flagged · Actual fraud · 0.0060"
+    },
+    {
+      "actualFilter": "fraud",
+      "bank": "Wells_Fargo",
+      "bankLabel": "Bank B",
+      "caseType": "TRUE POSITIVE",
+      "choices": 20,
+      "heroY": 591.375,
+      "hidden": false,
+      "modelFilter": "flagged",
+      "notice": "Verified transaction 3400471 · replay model Private single-model r4e3 confirmation · saved replay cutoff 0.5000. This view uses that replay, even if a different model is now selected.",
+      "overflow": false,
+      "rawNamesPresent": false,
+      "realNamesPresent": false,
+      "replay": "b7db621609d54dfd87491d96890557c1",
+      "transaction": "3400471",
+      "transactionLabel": "TX 3400471 · Flagged · Actual fraud · 1.0000"
+    },
+    {
+      "actualFilter": "fraud",
+      "bank": "Wells_Fargo",
+      "bankLabel": "Bank B",
+      "caseType": "MISSED FRAUD",
+      "choices": 1,
+      "heroY": 591.375,
+      "hidden": false,
+      "modelFilter": "not_flagged",
+      "notice": "Verified transaction 2794670 · replay model Final ensemble · 42 / 52 / 62 · saved replay cutoff 0.2648. This view uses that replay, even if a different model is now selected.",
+      "overflow": false,
+      "rawNamesPresent": false,
+      "realNamesPresent": false,
+      "replay": "497b38e71b0e49ad9c050b3496b1634a",
+      "transaction": "2794670",
+      "transactionLabel": "TX 2794670 · Not flagged · Actual fraud · 0.0460"
+    },
+    {
+      "actualFilter": "fraud",
+      "bank": "JPMorgan_Chase",
+      "bankLabel": "Bank C",
+      "caseType": "TRUE POSITIVE",
+      "choices": 16,
+      "heroY": 591.375,
+      "hidden": false,
+      "modelFilter": "flagged",
+      "notice": "Verified transaction 3400463 · replay model Final ensemble · 42 / 52 / 62 · saved replay cutoff 0.0182. This view uses that replay, even if a different model is now selected.",
+      "overflow": false,
+      "rawNamesPresent": false,
+      "realNamesPresent": false,
+      "replay": "2257cb2acbc241b6b3f745a58be29ed7",
+      "transaction": "3400463",
+      "transactionLabel": "TX 3400463 · Flagged · Actual fraud · 1.0000"
+    },
+    {
+      "actualFilter": "not_fraud",
+      "bank": "JPMorgan_Chase",
+      "bankLabel": "Bank C",
+      "caseType": "FALSE POSITIVE",
+      "choices": 113,
+      "heroY": 1679.8125,
+      "hidden": false,
+      "modelFilter": "flagged",
+      "notice": "Verified transaction 3565491 · replay model Final ensemble · 42 / 52 / 62 · saved replay cutoff 0.0182. This view uses that replay, even if a different model is now selected.",
+      "overflow": false,
+      "rawNamesPresent": false,
+      "realNamesPresent": false,
+      "replay": "2257cb2acbc241b6b3f745a58be29ed7",
+      "transaction": "3565491",
+      "transactionLabel": "TX 3565491 · Flagged · Actual not fraud · 0.5718"
+    },
+    {
+      "actualFilter": "fraud",
+      "bank": "Key_Bank",
+      "bankLabel": "Bank A",
+      "caseType": "TRUE POSITIVE",
+      "choices": 17,
+      "heroY": 591.375,
+      "hidden": false,
+      "modelFilter": "flagged",
+      "notice": "Verified transaction 3262326 · replay model Final ensemble · 42 / 52 / 62 · saved replay cutoff 0.4179. This view uses that replay, even if a different model is now selected.",
+      "overflow": false,
+      "rawNamesPresent": false,
+      "realNamesPresent": false,
+      "replay": "4cc3e4fe6b364fefb2efdc563d211cce",
+      "transaction": "3262326",
+      "transactionLabel": "TX 3262326 · Flagged · Actual fraud · 1.0000"
+    }
+  ],
+  "emptyBankC": {
+    "actualFilter": "fraud",
+    "bank": "JPMorgan_Chase",
+    "bankLabel": "Bank C",
+    "choices": 0,
+    "hidden": true,
+    "modelFilter": "not_flagged",
+    "notice": "No transactions match these filters.",
+    "overflow": false,
+    "rawNamesPresent": false,
+    "realNamesPresent": false,
+    "replay": "2257cb2acbc241b6b3f745a58be29ed7",
+    "transaction": ""
+  },
+  "mobileSelectorAudit": {
+    "actualLabel": "Not fraud",
+    "bank": "Bank C",
+    "choices": 113,
+    "modelResult": "Flagged for fraud",
+    "scrollWidth": 375,
+    "width": 375
+  },
+  "mobileHeroAudit": {
+    "deepOpen": false,
+    "hero": [
+      {
+        "className": "hero-network",
+        "width": 341,
+        "y": 2425.15625
+      },
+      {
+        "className": "hero-explanation",
+        "width": 341,
+        "y": 1680.8125
+      }
+    ],
+    "scrollWidth": 375,
+    "width": 375
+  },
+  "graphKeyboardAudit": "Transaction 3565491\n\nAccount 268720694 → 2416204335\n\n2025-08-31 09:40:44.300\n15,448.35 USD\nACH\n\nModel score: 0.5718",
+  "rawAliasAudit": {
+    "bankAliasPresent": true,
+    "deepOpen": true,
+    "rawOpen": true,
+    "realBankNamePresent": false
+  },
+  "console": [
+    {
+      "level": "error",
+      "message": "NotSupportedError: Failed to load because no supported source was found.",
+      "timestamp": "2026-10-28T04:36:54.782Z",
+      "url": "http://127.0.0.1:8767/"
+    }
+  ],
+  "mediaAudit": {
+    "audioOrVideoElements": 0,
+    "visibleRealNames": false
+  },
+  "eventsAfterReviewedReplayStarted": []
+}
