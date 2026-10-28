@@ -18,7 +18,7 @@
  }
  function modelScope(x){
   const p=x.xai_provenance||{},mode=p.privacy_mode??x.model?.privacy_mode;
-  if(mode==='none')return 'Non-private reference model';
+  if(mode==='none')return p.model_role==='verified_selected'?'Non-private selected model':'Non-private reference model';
   if(['level3','level_3','level3_decoder_private'].includes(mode)&&p.model_count===1)return 'Level-3 DP federated model';
   return 'Model privacy scope not established';
  }

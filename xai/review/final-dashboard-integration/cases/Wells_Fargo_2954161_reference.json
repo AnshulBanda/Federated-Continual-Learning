@@ -1,0 +1,548 @@
+{
+  "schema_version": 4,
+  "bank": "Wells_Fargo",
+  "transaction_id": "2954161",
+  "replay_id": "497b38e71b0e49ad9c050b3496b1634a",
+  "split": "validation",
+  "prediction": {
+    "probability": 0.21664444357156754,
+    "threshold": 0.2648376809991874,
+    "class": "not_fraud",
+    "threshold_selection": "saved selected-model cutoff captured in this completed replay; no threshold fitting"
+  },
+  "evaluation_label": "not_fraud",
+  "feature_explanation": {
+    "method": "exact_empirical_group_interventional_shap_v1",
+    "units": "raw_logit",
+    "scope": "transaction_groups_given_fixed_account_memory",
+    "base_logit": -2.6361845624600133,
+    "target_logit": -1.2853291821992285,
+    "target_probability": 0.21664444441115663,
+    "additivity_residual": 5.529647850721631e-10,
+    "features": [
+      {
+        "feature": "payment_method",
+        "label": "Payment method",
+        "columns": [
+          "payment_format"
+        ],
+        "value": "ACH",
+        "shap_logit": 1.3843385394212047,
+        "ablation_logit_drop": 1.3869125996946567
+      },
+      {
+        "feature": "transfer_terms",
+        "label": "Amount and currencies (joint)",
+        "columns": [
+          "amount",
+          "Amount_Received",
+          "currency",
+          "Receiving_Currency"
+        ],
+        "value": "amount: 522.7 / Amount_Received: 522.7 / currency: USD / Receiving_Currency: USD",
+        "shap_logit": -0.03348315971338456,
+        "ablation_logit_drop": -0.030909099439932586
+      }
+    ],
+    "groups": {
+      "payment_method": [
+        "payment_format"
+      ],
+      "transfer_terms": [
+        "amount",
+        "Amount_Received",
+        "currency",
+        "Receiving_Currency"
+      ]
+    },
+    "seed": 42,
+    "background_size": 32,
+    "background_txn_ids": [
+      "2128077",
+      "2688773",
+      "1852070",
+      "1810243",
+      "1938817",
+      "2864541",
+      "2769007",
+      "2649313",
+      "1752968",
+      "2266973",
+      "1820266",
+      "1771926",
+      "2710913",
+      "2465942",
+      "2620914",
+      "1989843",
+      "1618756",
+      "2252632",
+      "2445932",
+      "2177959",
+      "2192445",
+      "2052881",
+      "2535041",
+      "2565270",
+      "1605999",
+      "2144506",
+      "2601332",
+      "1980109",
+      "2183600",
+      "2623416",
+      "1895948",
+      "1741322"
+    ],
+    "limitations": [
+      "Joint transfer attribution cannot be split into separate amount and currency effects.",
+      "Other dependencies between groups and reference sensitivity remain; this is not causal evidence."
+    ]
+  },
+  "graph_explanation": {
+    "method": "bounded_chronological_replay_of_selected_predictor",
+    "window_batches": 8,
+    "window_event_count": 7338,
+    "selection": "up to eight most recent eligible endpoint transfers within the last eight completed model batches",
+    "important_edges": [],
+    "important_nodes": [],
+    "fidelity": {
+      "original_probability": 0.21664444441115663,
+      "unperturbed_replay_error": 0.0,
+      "baseline_member_probabilities": [
+        0.20514994805494127,
+        0.02561492615967469,
+        0.4191684590188539
+      ]
+    },
+    "limitations": "One update suppressed per test; pre-window memory retained. Not GNNExplainer or causal proof."
+  },
+  "model": {
+    "family": "adaptive_probability_ensemble",
+    "seed": "42/52/62",
+    "model_count": 3,
+    "checkpoint_sha256": "1fa493177c5c7998256f77b6ead3570d42549f4543ab2608d9030331ad0fcff0",
+    "best_round": null
+  },
+  "counterfactual_explanation": {
+    "method": "training_supported_constrained_amount_search",
+    "status": "found",
+    "threshold": 0.2648376809991874,
+    "original_class": "non_fraud",
+    "original_probability": 0.21664444441115663,
+    "candidates_evaluated": 9,
+    "counterfactuals": [
+      {
+        "changed_features": {
+          "amount": 4471.969999999997,
+          "Amount_Received": 4471.969999999997
+        },
+        "original_probability": 0.21664444441115663,
+        "counterfactual_probability": 0.27654210205455404,
+        "score_change": 0.05989765764339741,
+        "valid": true,
+        "constraint_notes": [
+          "candidate amounts come from training rows only",
+          "matched known categorical context",
+          "amount aliases changed together"
+        ],
+        "amount_change_absolute": 3949.269999999997,
+        "threshold_crossed": true
+      }
+    ],
+    "tested_alternatives": [
+      {
+        "changed_features": {
+          "amount": 517.61,
+          "Amount_Received": 517.61
+        },
+        "original_probability": 0.21664444441115663,
+        "counterfactual_probability": 0.21656798311424447,
+        "score_change": -7.646129691216141e-05,
+        "valid": true,
+        "constraint_notes": [
+          "candidate amounts come from training rows only",
+          "matched known categorical context",
+          "amount aliases changed together"
+        ],
+        "amount_change_absolute": 5.090000000000032,
+        "threshold_crossed": false
+      },
+      {
+        "changed_features": {
+          "amount": 136.04,
+          "Amount_Received": 136.04
+        },
+        "original_probability": 0.21664444441115663,
+        "counterfactual_probability": 0.21086815156213892,
+        "score_change": -0.005776292849017706,
+        "valid": true,
+        "constraint_notes": [
+          "candidate amounts come from training rows only",
+          "matched known categorical context",
+          "amount aliases changed together"
+        ],
+        "amount_change_absolute": 386.6600000000001,
+        "threshold_crossed": false
+      },
+      {
+        "changed_features": {
+          "amount": 36.87,
+          "Amount_Received": 36.87
+        },
+        "original_probability": 0.21664444441115663,
+        "counterfactual_probability": 0.20939185320381895,
+        "score_change": -0.0072525912073376775,
+        "valid": true,
+        "constraint_notes": [
+          "candidate amounts come from training rows only",
+          "matched known categorical context",
+          "amount aliases changed together"
+        ],
+        "amount_change_absolute": 485.83000000000004,
+        "threshold_crossed": false
+      },
+      {
+        "changed_features": {
+          "amount": 14.98,
+          "Amount_Received": 14.98
+        },
+        "original_probability": 0.21664444441115663,
+        "counterfactual_probability": 0.20906669173004003,
+        "score_change": -0.007577752681116601,
+        "valid": true,
+        "constraint_notes": [
+          "candidate amounts come from training rows only",
+          "matched known categorical context",
+          "amount aliases changed together"
+        ],
+        "amount_change_absolute": 507.72,
+        "threshold_crossed": false
+      },
+      {
+        "changed_features": {
+          "amount": 9.48,
+          "Amount_Received": 9.48
+        },
+        "original_probability": 0.21664444441115663,
+        "counterfactual_probability": 0.2089850086945885,
+        "score_change": -0.00765943571656813,
+        "valid": true,
+        "constraint_notes": [
+          "candidate amounts come from training rows only",
+          "matched known categorical context",
+          "amount aliases changed together"
+        ],
+        "amount_change_absolute": 513.22,
+        "threshold_crossed": false
+      },
+      {
+        "changed_features": {
+          "amount": 0.02,
+          "Amount_Received": 0.02
+        },
+        "original_probability": 0.21664444441115663,
+        "counterfactual_probability": 0.20884461431637102,
+        "score_change": -0.007799830094785604,
+        "valid": true,
+        "constraint_notes": [
+          "candidate amounts come from training rows only",
+          "matched known categorical context",
+          "amount aliases changed together"
+        ],
+        "amount_change_absolute": 522.6800000000001,
+        "threshold_crossed": false
+      },
+      {
+        "changed_features": {
+          "amount": 1982.9019999999991,
+          "Amount_Received": 1982.9019999999991
+        },
+        "original_probability": 0.21664444441115663,
+        "counterfactual_probability": 0.23875533468931276,
+        "score_change": 0.02211089027815613,
+        "valid": true,
+        "constraint_notes": [
+          "candidate amounts come from training rows only",
+          "matched known categorical context",
+          "amount aliases changed together"
+        ],
+        "amount_change_absolute": 1460.201999999999,
+        "threshold_crossed": false
+      },
+      {
+        "changed_features": {
+          "amount": 4471.969999999997,
+          "Amount_Received": 4471.969999999997
+        },
+        "original_probability": 0.21664444441115663,
+        "counterfactual_probability": 0.27654210205455404,
+        "score_change": 0.05989765764339741,
+        "valid": true,
+        "constraint_notes": [
+          "candidate amounts come from training rows only",
+          "matched known categorical context",
+          "amount aliases changed together"
+        ],
+        "amount_change_absolute": 3949.269999999997,
+        "threshold_crossed": true
+      },
+      {
+        "changed_features": {
+          "amount": 3134976.03,
+          "Amount_Received": 3134976.03
+        },
+        "original_probability": 0.21664444441115663,
+        "counterfactual_probability": 9.999999999999992e-13,
+        "score_change": -0.21664444441015662,
+        "valid": true,
+        "constraint_notes": [
+          "candidate amounts come from training rows only",
+          "matched known categorical context",
+          "amount aliases changed together"
+        ],
+        "amount_change_absolute": 3134453.3299999996,
+        "threshold_crossed": false
+      }
+    ],
+    "interpretation": "Model sensitivity only; not advice to evade controls or evidence of real-world intent.",
+    "limitations": [
+      "only amount fields were varied",
+      "account memory and event history were held fixed",
+      "training-supported values do not guarantee real-world plausibility"
+    ]
+  },
+  "cache_key": "27c2b307f9fa016ecdffa0a7ca629bef0d2ebdc7070265adc45b3fe2dff8f031",
+  "cache_key_inputs": {
+    "schema": "aml-investigator-replay-v1",
+    "bank": "Wells_Fargo",
+    "transaction_id": "2954161",
+    "replay_id": "497b38e71b0e49ad9c050b3496b1634a",
+    "seed": "42/52/62",
+    "checkpoint_sha256": "1fa493177c5c7998256f77b6ead3570d42549f4543ab2608d9030331ad0fcff0",
+    "model_descriptor_sha256": "b6e64b935f5abfc66b923302743768056a18402fa4933934f9c6465a89c0b12c",
+    "model_count": 3,
+    "privacy_mode": "none",
+    "preprocessing_sha256": "ae6fabba8641da6f835b6ea9eb946f6ec9dc2713f50e3bf82446740b0f07dd35",
+    "reference_prediction_sha256": "a3c75dde411d40cf166d7c837a4cb67ea3647371b57f1bad3fae6409dc036242",
+    "dataset_fingerprint": "5d10deefdcfca1dc771184dd8ae8282ae79521a943600c9ebe5b244433b3f29f",
+    "threshold": 0.2648376809991874,
+    "expected_score": 0.21664444357156754,
+    "background_size": 32,
+    "history_batches": 8,
+    "max_history_tests": 8,
+    "implementation_sha256": {
+      "streaming/app/investigator.py": "7f12d8a157c244e2a6ca6f7aedb0be6eb4498e9ee89deaab57f7e290dc822be5",
+      "streaming/app/explanations.py": "5d347928b8a55ba5a46415660225c6ef3f514dc8e7f96e1534f3649f5bb3366d",
+      "xai/src/grouped_features.py": "9c3d43476355b8e810ab66051d15f9ddec136088815fc335b27e7898c5a3611c",
+      "xai/src/ensemble_explainer.py": "4c5ac1dab12e8e36c22a634a658820a21eafeefe1ce2c16e3a261122be2a67e7",
+      "xai/src/transaction_story.py": "4fa35cc28c31e1c8463c17bb4a1aad8e1672eaab9d1d066d82cb4b15a2ab9253",
+      "xai/src/counterfactuals.py": "f8bdb7d6fbec0454149ddb221caa3bd317eff88b31b88c867af34914f1bfc0f9"
+    }
+  },
+  "verification": {
+    "existing_evaluation_probability": 0.21664444357156754,
+    "direct_model_probability": 0.21664444441115663,
+    "xai_probability": 0.21664444441115663,
+    "tolerance": 1e-06,
+    "passed": true,
+    "explained_checkpoint_sha256": "1fa493177c5c7998256f77b6ead3570d42549f4543ab2608d9030331ad0fcff0",
+    "absolute_errors": {
+      "saved_vs_direct": 8.39589092693771e-10,
+      "saved_vs_target": 8.39589092693771e-10
+    },
+    "saved_threshold_used": true,
+    "model_count": 3
+  },
+  "replay_provenance": {
+    "replay_id": "497b38e71b0e49ad9c050b3496b1634a",
+    "dataset_fingerprint": "5d10deefdcfca1dc771184dd8ae8282ae79521a943600c9ebe5b244433b3f29f",
+    "saved_rows_sha256": "a3c75dde411d40cf166d7c837a4cb67ea3647371b57f1bad3fae6409dc036242",
+    "member_probabilities": [
+      0.20514994805494127,
+      0.02561492615967469,
+      0.4191684590188539
+    ],
+    "batch_size": 1024,
+    "target_index": 948,
+    "completed_validation_rows": 0
+  },
+  "limitations": [
+    "Model scores are uncalibrated; explanations do not prove fraud or transaction purpose.",
+    "Local transaction explanations and histories do not inherit a model DP guarantee.",
+    "Grouped attribution holds pre-batch account memory fixed; replay suppresses bounded historical updates only."
+  ],
+  "transaction_story": {
+    "schema_version": 2,
+    "selected_transfer": {
+      "transaction_id": "2954161",
+      "source": 11651,
+      "target": 11510,
+      "timestamp": "2025-08-01 09:12:04.200",
+      "amount": 522.7,
+      "currency": "USD",
+      "payment_method": "ACH",
+      "source_alias": "A",
+      "target_alias": "B",
+      "source_account_id": "2416248392",
+      "target_account_id": "2013595203",
+      "kind": "selected"
+    },
+    "accounts": [
+      {
+        "alias": "A",
+        "node_id": 11651,
+        "account_id": "2416248392",
+        "role": "sender"
+      },
+      {
+        "alias": "B",
+        "node_id": 11510,
+        "account_id": "2013595203",
+        "role": "receiver"
+      }
+    ],
+    "transfers": [
+      {
+        "transaction_id": "2954161",
+        "source": 11651,
+        "target": 11510,
+        "timestamp": "2025-08-01 09:12:04.200",
+        "amount": 522.7,
+        "currency": "USD",
+        "payment_method": "ACH",
+        "source_alias": "A",
+        "target_alias": "B",
+        "source_account_id": "2416248392",
+        "target_account_id": "2013595203",
+        "kind": "selected"
+      }
+    ],
+    "eligible_earlier_transfers": [],
+    "observation": "No earlier transfers involving these account IDs were available before this prediction. Transaction 2954161 goes from account 2416248392 to account 2013595203.",
+    "pattern": "single_transfer",
+    "known_labels_explain_paths": false,
+    "path_is_not_a_fraud_classification": true,
+    "earlier_related_transfers_considered": 0,
+    "model_link_effects": [],
+    "strongest_feature": {
+      "label": "payment method",
+      "value": "ACH",
+      "contribution": 1.3843385394212047
+    },
+    "history_scope": "training history and completed validation batches before the selected prediction; current-batch and later transactions excluded; up to 256 recent endpoint-related transfers considered",
+    "display_limit": 9
+  },
+  "evaluation_checks": {
+    "faithfulness": {
+      "groups": [
+        {
+          "group": "payment_method",
+          "shap_logit": 1.3843385394212047,
+          "reference_ablation_logit_drop": 1.3869125996946567,
+          "direction_agrees": true
+        },
+        {
+          "group": "transfer_terms",
+          "shap_logit": -0.03348315971338456,
+          "reference_ablation_logit_drop": -0.030909099439932586,
+          "direction_agrees": true
+        }
+      ]
+    },
+    "stability": null,
+    "temporal_replay": {
+      "baseline_error": 0.0,
+      "tested_events": 0,
+      "member_count": 3,
+      "scope": "up to eight most recent eligible endpoint transfers within the last eight completed model batches"
+    },
+    "coverage": {
+      "displayed_history_edges": 0,
+      "verified_displayed_edges": 0
+    }
+  },
+  "xai_provenance": {
+    "family": "adaptive_probability_ensemble",
+    "seed": "42/52/62",
+    "model_count": 3,
+    "checkpoint_sha256": "1fa493177c5c7998256f77b6ead3570d42549f4543ab2608d9030331ad0fcff0",
+    "checkpoint_members": [
+      {
+        "seed": 42,
+        "checkpoint": "/Users/pj/Desktop/college/capstone/Capstone/artifacts/research_adaptive_fcl/warm_start/federated/context_harmonized/seed_42/global_model.pt",
+        "sha256": "d650af6959d1da46888f30fb79bbfd888a6ec20743d14d447ea078dc351536f5"
+      },
+      {
+        "seed": 52,
+        "checkpoint": "/Users/pj/Desktop/college/capstone/Capstone/artifacts/research_adaptive_fcl/warm_start/federated/context_harmonized/seed_52/global_model.pt",
+        "sha256": "98b6c782a27013e4b1917669b2a5ae48d3a7e44ce6a9aa0149aef446473ab0e2"
+      },
+      {
+        "seed": 62,
+        "checkpoint": "/Users/pj/Desktop/college/capstone/Capstone/artifacts/research_adaptive_fcl/warm_start/federated/context_harmonized/seed_62/global_model.pt",
+        "sha256": "4cd0854f6740f99a9f9ef7f1ba3360c06b5178846394feb73033da718ac715fe"
+      }
+    ],
+    "preprocessing_sha256": "ae6fabba8641da6f835b6ea9eb946f6ec9dc2713f50e3bf82446740b0f07dd35",
+    "privacy_mode": "none",
+    "model_role": "reference",
+    "best_round": null,
+    "selected_model": {
+      "bank": "Wells_Fargo",
+      "version": "Final ensemble \u00b7 42 / 52 / 62",
+      "model_kind": "adaptive_probability_ensemble",
+      "members": [
+        {
+          "seed": 42,
+          "checkpoint": "/Users/pj/Desktop/college/capstone/Capstone/artifacts/research_adaptive_fcl/warm_start/federated/context_harmonized/seed_42/global_model.pt",
+          "sha256": "d650af6959d1da46888f30fb79bbfd888a6ec20743d14d447ea078dc351536f5"
+        },
+        {
+          "seed": 52,
+          "checkpoint": "/Users/pj/Desktop/college/capstone/Capstone/artifacts/research_adaptive_fcl/warm_start/federated/context_harmonized/seed_52/global_model.pt",
+          "sha256": "98b6c782a27013e4b1917669b2a5ae48d3a7e44ce6a9aa0149aef446473ab0e2"
+        },
+        {
+          "seed": 62,
+          "checkpoint": "/Users/pj/Desktop/college/capstone/Capstone/artifacts/research_adaptive_fcl/warm_start/federated/context_harmonized/seed_62/global_model.pt",
+          "sha256": "4cd0854f6740f99a9f9ef7f1ba3360c06b5178846394feb73033da718ac715fe"
+        }
+      ],
+      "sha256": "1fa493177c5c7998256f77b6ead3570d42549f4543ab2608d9030331ad0fcff0",
+      "reference": true,
+      "checkpoint": null,
+      "validation": {
+        "pr_auc": 0.9622832604116025,
+        "roc_auc": 0.999856010239272,
+        "precision": 0.40384615384615385,
+        "recall": 0.9545454545454546,
+        "f1": 0.5675675675675675
+      },
+      "threshold": 0.2648376809991874,
+      "privacy": {
+        "differential_privacy": false,
+        "accounting": null
+      }
+    },
+    "checkpoint_manifest": {},
+    "evaluation_split": "validation",
+    "test_loaded": false,
+    "source_ref": "operational selected replay",
+    "model_source_sha256": "77ec113dd6b16ed0bf6956d1ce9fa7d9da5b300b672f085c76830b203ea2e2eb",
+    "banks": {
+      "Wells_Fargo": {
+        "threshold": 0.2648376809991874
+      }
+    },
+    "threshold_policy": "saved selected-model cutoff captured in this completed replay; no threshold fitting",
+    "reference_prediction_sha256": {
+      "Wells_Fargo": "a3c75dde411d40cf166d7c837a4cb67ea3647371b57f1bad3fae6409dc036242"
+    },
+    "implementation_sha256": {
+      "streaming/app/investigator.py": "7f12d8a157c244e2a6ca6f7aedb0be6eb4498e9ee89deaab57f7e290dc822be5",
+      "streaming/app/explanations.py": "5d347928b8a55ba5a46415660225c6ef3f514dc8e7f96e1534f3649f5bb3366d",
+      "xai/src/grouped_features.py": "9c3d43476355b8e810ab66051d15f9ddec136088815fc335b27e7898c5a3611c",
+      "xai/src/ensemble_explainer.py": "4c5ac1dab12e8e36c22a634a658820a21eafeefe1ce2c16e3a261122be2a67e7",
+      "xai/src/transaction_story.py": "4fa35cc28c31e1c8463c17bb4a1aad8e1672eaab9d1d066d82cb4b15a2ab9253",
+      "xai/src/counterfactuals.py": "f8bdb7d6fbec0454149ddb221caa3bd317eff88b31b88c867af34914f1bfc0f9"
+    }
+  }
+}

@@ -1,5 +1,9 @@
+(function(global){
 'use strict';
-const $=selector=>document.querySelector(selector);
+function create(options={}){
+const document=options.document||global.document,scope=options.scope||document;
+const $=selector=>selector==='#detail'&&options.detail?options.detail:scope.querySelector(selector);
+const all=selector=>scope.querySelectorAll(selector);
 const bank=$('#bank'),view=$('#view'),query=$('#query'),body=$('#rows');
 let currentPage=0,total=0,selected=null,requestSequence=0,catalogSequence=0,debounce,currentManifest=null;
 const pageSize=75;
@@ -265,9 +269,14 @@ function readableTechnicalDetails(x){
 }
 function render(x){
  const s=ExplanationSummary.summarize(x),event=x.transaction_story.selected_transfer;
- $('#detail').innerHTML=`<div class="transaction-heading"><div><p class="eyebrow bank">${esc(x.bank.replaceAll('_',' '))}</p><h2>Transaction ${esc(x.transaction_id)}</h2></div><a class="picker-link" href="#bank">Find another transaction</a><a class="depth-link" href="#technical-explanation" id="open-technical">In-depth explanation ↗</a></div><p class="intro">Account ${esc(event.source_account_id)} sent ${amount(event)} to account ${esc(event.target_account_id)} using ${esc(event.payment_method)}.</p>${renderSimpleExplanation(x,s)}${readableTechnicalDetails(x)}`;
+ $('#detail').innerHTML=`<div class="transaction-heading"><div><p class="eyebrow bank">${esc(x.bank.replaceAll('_',' '))}</p><h2>Transaction ${esc(x.transaction_id)}</h2></div><a class="picker-link" href="${options.embedded?'#xaibank':'#bank'}">Find another transaction</a><a class="depth-link" href="#technical-explanation" id="open-technical">In-depth explanation ↗</a></div><p class="intro">Account ${esc(event.source_account_id)} sent ${amount(event)} to account ${esc(event.target_account_id)} using ${esc(event.payment_method)}.</p>${renderSimpleExplanation(x,s)}${readableTechnicalDetails(x)}`;
  attachGraphInteractions(x.transaction_story,x.prediction);
  if(typeof matchMedia==='function'&&matchMedia('(max-width:1000px)').matches)$('#detail').scrollIntoView({block:'start'});
+ if(options.embedded){
+  const context=document.createElement('p');context.className='model-context';context.textContent=`Replay model: ${x.xai_provenance.selected_model.version} · ${x.model.model_count} ${x.model.model_count===1?'model':'models'}`;
+  $('#detail').querySelector('.intro').after(context);
+  $('.picker-link')?.addEventListener('click',()=>options.onBrowse?.());
+ }
  const open=()=>{$('#technical-explanation').open=true};
  $('#open-technical').addEventListener('click',open);
  $('#see-history')?.addEventListener('click',()=>{open();$('#technical-history').scrollIntoView({behavior:'smooth',block:'start'})});
@@ -282,7 +291,7 @@ function attachGraphInteractions(story,prediction){
  const panel=$('#graph-inspector');
  const effects=new Map((story.model_link_effects||[]).map(effect=>[String(effect.transaction_id),effect]));
  function markSelected(kind,id){
-  document.querySelectorAll('[data-edge],[data-account]').forEach(element=>element.setAttribute('aria-pressed',String(element.dataset[kind]===String(id))));
+  all('[data-edge],[data-account]').forEach(element=>element.setAttribute('aria-pressed',String(element.dataset[kind]===String(id))));
  }
  function inspectEdge(id){
   const event=story.transfers.find(event=>String(event.transaction_id)===String(id));
@@ -298,16 +307,33 @@ function attachGraphInteractions(story,prediction){
   panel.innerHTML=`<h4>Account ${esc(id)}</h4><p>${esc(account?.role)} · ${related.length} displayed transfers</p><p>Connections describe recorded activity; they do not identify account ownership, payment purpose, or fraud.</p>${related.map(event=>`<button class="inspect-transfer" data-inspect-edge="${esc(event.transaction_id)}">Inspect TX ${esc(event.transaction_id)}</button>`).join('')}`;
   panel.querySelectorAll('[data-inspect-edge]').forEach(button=>button.addEventListener('click',()=>inspectEdge(button.dataset.inspectEdge)));
  }
- document.querySelectorAll('[data-edge],[data-account]').forEach(element=>{
+ all('[data-edge],[data-account]').forEach(element=>{
   const activate=()=>element.dataset.edge?inspectEdge(element.dataset.edge):inspectAccount(element.dataset.account);
   element.addEventListener('click',activate);
   element.addEventListener('keydown',event=>{if(event.key==='Enter'||event.key===' '){event.preventDefault();activate()}});
  });
 }
+function bindStandalone(){
 function reset(){currentPage=0;loadRows()}
 bank.addEventListener('change',()=>{requestSequence++;selected=null;query.value='';history.replaceState(null,'','?bank='+encodeURIComponent(bank.value));$('#detail').innerHTML='<div class="empty"><h2>Select a transaction from this bank</h2></div>';reset()});view.addEventListener('change',reset);
 query.addEventListener('input',()=>{clearTimeout(debounce);debounce=setTimeout(reset,220)});
 $('#prev').addEventListener('click',()=>{if(currentPage){currentPage--;loadRows()}});
 $('#next').addEventListener('click',()=>{if((currentPage+1)*pageSize<total){currentPage++;loadRows()}});
+}
 async function init(){try{const data=await json('/api/meta');currentManifest=data.manifest;bank.innerHTML=data.banks.map(value=>`<option value="${esc(value)}">${esc(value.replaceAll('_',' '))}</option>`).join('');const params=new URLSearchParams(location.search);if(params.has('bank')&&!data.banks.includes(params.get('bank')))throw Error('Unknown bank in transaction link.');if(data.banks.includes(params.get('bank')))bank.value=params.get('bank');const id=params.get('transaction_id');if(id){query.value=id;view.value='all'}await loadRows();if(id)await loadExplanation(id)}catch(error){$('#detail').innerHTML=`<p class="error">${esc(error.message)}</p>`}}
-init();
+function validateReplay(x,selection){
+ const fail=message=>{throw Error('Explanation refused: '+message)};
+ if(!selection||x.replay_id!==selection.replay_id||x.bank!==selection.bank||String(x.transaction_id)!==String(selection.transaction_id))fail('the report belongs to another replay or transaction.');
+ if(x.model.checkpoint_sha256!==selection.model_sha256||x.model.model_count!==selection.model_count||x.model.family!==selection.model_family||x.replay_provenance?.dataset_fingerprint!==selection.dataset_fingerprint)fail('the selected replay model or data differs.');
+ if((x.xai_provenance.privacy_mode!=='none')!==selection.private_model)fail('the selected replay privacy scope differs.');
+ if(!Number.isFinite(selection.score)||Math.abs(x.prediction.probability-selection.score)>1e-6||Math.abs(x.feature_explanation.target_probability-selection.score)>1e-6)fail('the explanation score differs from the saved replay by more than 1e-6. Rescore this model.');
+ if(x.prediction.threshold!==selection.threshold)fail('the saved replay cutoff differs.');
+}
+return {render,validateExplanation,loadRows,loadExplanation,graphEdgeDetails,readableTechnicalDetails,observedPatterns,renderSimpleExplanation,
+ networkLayout,networkEdgeClass,flowDiagram,renderNetwork,attachGraphInteractions,setManifest:value=>currentManifest=value,
+ init:()=>{bindStandalone();return init()},
+ renderVerified:(report,selection)=>{validateExplanation(report,selection.bank,selection.transaction_id);validateReplay(report,selection);render(report)},validateReplay};
+}
+global.InvestigatorXAI={create};
+if(global.document?.currentScript?.hasAttribute('data-standalone'))create().init();
+})(globalThis);

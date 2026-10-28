@@ -20,8 +20,9 @@ function harness(fetch, graphItems = []) {
   const context = vm.createContext({document: {querySelector: element, querySelectorAll: selector => selector === '[data-edge],[data-account]' ? graphItems : []},
     URLSearchParams, location: {search: ''}, history: {replaceState() {}}, fetch,
     setTimeout, clearTimeout, ExplanationSummary: require('../static/explanation_summary.js')});
-  const source = fs.readFileSync(path.join(root, 'static/dashboard.js'), 'utf8').replace(/\ninit\(\);\s*$/, '\n');
-  vm.runInContext(source + '\nthis.api={render,validateExplanation,loadRows,loadExplanation,graphEdgeDetails,readableTechnicalDetails,observedPatterns,renderSimpleExplanation,setManifest:value=>currentManifest=value,networkLayout,networkEdgeClass,flowDiagram,renderNetwork,attachGraphInteractions};', context);
+  const source = fs.readFileSync(path.join(root, 'static/dashboard.js'), 'utf8');
+  vm.runInContext(source, context);
+  context.api=context.InvestigatorXAI.create();
   return {api: context.api, element};
 }
 
@@ -478,3 +479,6 @@ test('network accounts and transfers retain Enter/Space interaction and active i
  const svg=h.api.flowDiagram(x.transaction_story);
  assert.equal((svg.match(/tabindex="0" role="button"/g)||[]).length,x.transaction_story.accounts.length+x.transaction_story.transfers.length);
 });
+
+// Integration regressions run with the existing required frontend command.
+require('./test_operations_frontend.cjs');

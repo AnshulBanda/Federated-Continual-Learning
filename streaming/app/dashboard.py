@@ -20,6 +20,7 @@ from .monitoring import Monitoring
 from .results import research_results
 from .explanations import Explanations
 from .privacy import privacy_status
+from .xai_assets import asset as xai_asset
 from .final_model import reference_evidence, reference_model
 
 WEB = Path(__file__).resolve().parents[1] / 'web' / 'index.html'
@@ -55,7 +56,7 @@ def server(root, port=8765):
             self.send_header('Content-Length', str(len(body)))
             self.send_header('Cache-Control', 'no-store')
             self.send_header('X-Content-Type-Options', 'nosniff')
-            self.send_header('Content-Security-Policy', "default-src 'self'; script-src 'nonce-" + token + "'; style-src 'unsafe-inline'; frame-ancestors 'none'; base-uri 'none'")
+            self.send_header('Content-Security-Policy', "default-src 'self'; script-src 'nonce-" + token + "'; style-src 'self' 'unsafe-inline'; frame-ancestors 'none'; base-uri 'none'")
             self.end_headers()
             self.wfile.write(body)
 
@@ -76,6 +77,13 @@ def server(root, port=8765):
             path = urlparse(self.path).path
             if path == '/':
                 self.respond(200, WEB.read_text(encoding='utf-8').replace('__TOKEN__', token).encode(), 'text/html; charset=utf-8')
+            elif path.startswith('/assets/xai/'):
+                found=xai_asset(path.removeprefix('/assets/xai/'))
+                if found:self.respond(200,found[0],found[1])
+                else:self.respond(404,{'error':'Not found.'})
+            elif path.startswith('/api/explanations/report/'):
+                try:self.respond(200,explanations.report(path.rsplit('/',1)[-1],overview.load()['bank']))
+                except ValueError as exc:self.respond(400,{'error':str(exc)})
             elif path == '/api/privacy':
                 self.respond(200, privacy_status(collaboration.status(overview.load()['bank'])))
             elif path == '/api/explanations':

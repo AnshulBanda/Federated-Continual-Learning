@@ -1,0 +1,47 @@
+[
+  {
+    "path": "streaming/app/privacy.py",
+    "sha256": "0681589c335eb2a1ba5a2fc5a8f02050023ec574fe9dfee8257198632fc5bb55",
+    "identical_to_main_6db4987": true
+  },
+  {
+    "path": "streaming/app/collaboration.py",
+    "sha256": "eeeb709027e1c380d2305368230f61f2a22180970f76b0f05175db6f8ffd5f58",
+    "identical_to_main_6db4987": true
+  },
+  {
+    "path": "streaming/app/final_federation.py",
+    "sha256": "6802bc30f8282aa15b68dcd8b88e58d9218e18a661e99ad174f6134aa8d66bb3",
+    "identical_to_main_6db4987": true
+  },
+  {
+    "path": "streaming/app/final_model.py",
+    "sha256": "d0d8469d588261aa68d45aca73aa5120c8c5f83b7020b0511d488f4e663d6a6a",
+    "identical_to_main_6db4987": true
+  },
+  {
+    "path": "streaming/app/local_training.py",
+    "sha256": "64e76d75d314c1feddaa9fb2852ef17f256dbabf9f467c4767943b26717fbd0c",
+    "identical_to_main_6db4987": true
+  },
+  {
+    "path": "src/gnn/causal_temporal_graphsage.py",
+    "sha256": "77ec113dd6b16ed0bf6956d1ce9fa7d9da5b300b672f085c76830b203ea2e2eb",
+    "identical_to_main_6db4987": true
+  },
+  {
+    "path": "distributed_federation/feature_schema.json",
+    "sha256": "ae6fabba8641da6f835b6ea9eb946f6ec9dc2713f50e3bf82446740b0f07dd35",
+    "identical_to_main_6db4987": true
+  },
+  {
+    "path": "artifacts/dp_singlemodel_r4e3/PRODUCTION_MODEL.json",
+    "sha256": "92cbfe4627e575e74735cc26ec9fa337e2330f8c65561fe086f831813acb23b1",
+    "identical_to_main_6db4987": true
+  },
+  {
+    "path": "artifacts/dp_singlemodel_r4e3/production_confirmation/single-r4e3-confirmation-20261027/global_round_004.safetensors",
+    "sha256": "abb151efea1ebb73a9aecea5ed80fc88a28f132e6b1239550a3656cef396acf7",
+    "identical_to_main_6db4987": true
+  }
+]
